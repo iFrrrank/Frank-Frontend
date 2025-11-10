@@ -1,0 +1,15 @@
+**/.git
+**/.svn
+**/.hg
+**/.DS_Store
+/node_modules/**
+/dist/
+/dist*
+/public/*
+/docs/*
+/mock/*
+/src/types/env.d.ts
+/src/types/auto-components.d.ts
+/src/types/auto-imports.d.ts
+/docs/**/*
+CHANGELOG
