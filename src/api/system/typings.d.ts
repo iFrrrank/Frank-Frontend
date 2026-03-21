@@ -1,4 +1,22 @@
 declare namespace API {
+  type AdminUserRespDTO = {
+    /** 用户 ID */
+    id: number
+    /** 用户昵称 */
+    nickname: string
+    /** 帐号状态，参见 CommonStatusEnum 枚举 */
+    status: number
+    /** 部门 Id */
+    deptId: number
+    /** 岗位编号数组 */
+    postIds: number[]
+    /** 手机号码 */
+    mobile: string
+    /** 用户头像 */
+    avatar: string
+    transMap?: Record<string, any>
+  }
+
   type approveOrDenyParams = {
     /** 响应类型 */
     response_type: string
@@ -13,76 +31,9 @@ declare namespace API {
     state?: string
   }
 
-  type AreaNodeRespVO = {
-    /** 编号 */
-    id: number
-    /** 名字 */
-    name: string
-  }
-
-  type AuthLoginReqVO = {
-    /** 账号 */
-    username: string
-    /** 密码 */
-    password: string
-    /** 验证码，验证码开启时，需要传递 */
-    captchaVerification: string
-    /** 社交平台的类型，参见 SocialTypeEnum 枚举值 */
-    socialType: number
-    /** 授权码 */
-    socialCode: string
-    /** state */
-    socialState: string
-    socialCodeValid?: boolean
-  }
-
-  type AuthLoginRespVO = {
-    /** 用户编号 */
-    userId: number
-    /** 访问令牌 */
-    accessToken: string
-    /** 刷新令牌 */
-    refreshToken: string
-    /** 过期时间 */
-    expiresTime: string
-  }
-
   type authorizeParams = {
     /** 客户端编号 */
     clientId: string
-  }
-
-  type AuthPermissionInfoRespVO = {
-    user: UserVO
-    /** 角色标识数组 */
-    roles: string[]
-    /** 操作权限数组 */
-    permissions: string[]
-    /** 菜单树 */
-    menus: MenuVO[]
-  }
-
-  type AuthSmsLoginReqVO = {
-    /** 手机号 */
-    mobile: string
-    /** 短信验证码 */
-    code: string
-  }
-
-  type AuthSmsSendReqVO = {
-    /** 手机号 */
-    mobile: string
-    /** 短信场景 */
-    scene: number
-  }
-
-  type AuthSocialLoginReqVO = {
-    /** 社交平台的类型，参见 UserSocialTypeEnum 枚举值 */
-    type: number
-    /** 授权码 */
-    code: string
-    /** state */
-    state: string
   }
 
   type CaptchaVO = {
@@ -107,6 +58,11 @@ declare namespace API {
     browserInfo?: string
   }
 
+  type checkAccessTokenParams = {
+    /** 访问令牌 */
+    accessToken: string
+  }
+
   type checkTokenParams = {
     /** 访问令牌 */
     token: string
@@ -119,15 +75,9 @@ declare namespace API {
     logo: string
   }
 
-  type CommonResultAuthLoginRespVO = {
+  type CommonResultAdminUserRespDTO = {
     code?: number
-    data?: AuthLoginRespVO
-    msg?: string
-  }
-
-  type CommonResultAuthPermissionInfoRespVO = {
-    code?: number
-    data?: AuthPermissionInfoRespVO
+    data?: AdminUserRespDTO
     msg?: string
   }
 
@@ -137,105 +87,135 @@ declare namespace API {
     msg?: string
   }
 
-  type CommonResultDeptRespVO = {
+  type CommonResultByteArray = {
     code?: number
-    data?: DeptRespVO
+    data?: string[]
     msg?: string
   }
 
-  type CommonResultDictDataRespVO = {
+  type CommonResultDeptDataPermissionRespDTO = {
     code?: number
-    data?: DictDataRespVO
+    data?: DeptDataPermissionRespDTO
     msg?: string
   }
 
-  type CommonResultDictTypeRespVO = {
+  type CommonResultDeptRespDTO = {
     code?: number
-    data?: DictTypeRespVO
+    data?: DeptRespDTO
     msg?: string
   }
 
-  type CommonResultListAreaNodeRespVO = {
+  type CommonResultListAdminUserRespDTO = {
     code?: number
-    data?: AreaNodeRespVO[]
+    data?: AdminUserRespDTO[]
     msg?: string
   }
 
-  type CommonResultListDeptRespVO = {
+  type CommonResultListDeptRespDTO = {
     code?: number
-    data?: DeptRespVO[]
+    data?: DeptRespDTO[]
     msg?: string
   }
 
-  type CommonResultListDeptSimpleRespVO = {
+  type CommonResultListDictDataRespDTO = {
     code?: number
-    data?: DeptSimpleRespVO[]
+    data?: DictDataRespDTO[]
     msg?: string
   }
 
-  type CommonResultListDictDataSimpleRespVO = {
+  type CommonResultListPostRespDTO = {
     code?: number
-    data?: DictDataSimpleRespVO[]
+    data?: PostRespDTO[]
     msg?: string
   }
 
-  type CommonResultListDictTypeSimpleRespVO = {
+  type CommonResultListSocialWxaSubscribeTemplateRespDTO = {
     code?: number
-    data?: DictTypeSimpleRespVO[]
+    data?: SocialWxaSubscribeTemplateRespDTO[]
     msg?: string
   }
 
-  type CommonResultListMailAccountSimpleRespVO = {
+  type CommonResultListSystemAreaNodeRespVO = {
     code?: number
-    data?: MailAccountSimpleRespVO[]
+    data?: SystemAreaNodeRespVO[]
     msg?: string
   }
 
-  type CommonResultListMailTemplateSimpleRespVO = {
+  type CommonResultListSystemDeptRespVO = {
     code?: number
-    data?: MailTemplateSimpleRespVO[]
+    data?: SystemDeptRespVO[]
     msg?: string
   }
 
-  type CommonResultListMenuRespVO = {
+  type CommonResultListSystemDeptSimpleRespVO = {
     code?: number
-    data?: MenuRespVO[]
+    data?: SystemDeptSimpleRespVO[]
     msg?: string
   }
 
-  type CommonResultListMenuSimpleRespVO = {
+  type CommonResultListSystemDictDataSimpleRespVO = {
     code?: number
-    data?: MenuSimpleRespVO[]
+    data?: SystemDictDataSimpleRespVO[]
     msg?: string
   }
 
-  type CommonResultListNotifyMessageRespVO = {
+  type CommonResultListSystemDictTypeSimpleRespVO = {
     code?: number
-    data?: NotifyMessageRespVO[]
+    data?: SystemDictTypeSimpleRespVO[]
     msg?: string
   }
 
-  type CommonResultListPostSimpleRespVO = {
+  type CommonResultListSystemMailAccountSimpleRespVO = {
     code?: number
-    data?: PostSimpleRespVO[]
+    data?: SystemMailAccountSimpleRespVO[]
     msg?: string
   }
 
-  type CommonResultListRoleRespVO = {
+  type CommonResultListSystemMailTemplateSimpleRespVO = {
     code?: number
-    data?: RoleRespVO[]
+    data?: SystemMailTemplateSimpleRespVO[]
     msg?: string
   }
 
-  type CommonResultListSmsChannelSimpleRespVO = {
+  type CommonResultListSystemMenuRespVO = {
     code?: number
-    data?: SmsChannelSimpleRespVO[]
+    data?: SystemMenuRespVO[]
     msg?: string
   }
 
-  type CommonResultListUserSimpleRespVO = {
+  type CommonResultListSystemMenuSimpleRespVO = {
     code?: number
-    data?: UserSimpleRespVO[]
+    data?: SystemMenuSimpleRespVO[]
+    msg?: string
+  }
+
+  type CommonResultListSystemNotifyMessageRespVO = {
+    code?: number
+    data?: SystemNotifyMessageRespVO[]
+    msg?: string
+  }
+
+  type CommonResultListSystemPostSimpleRespVO = {
+    code?: number
+    data?: SystemPostSimpleRespVO[]
+    msg?: string
+  }
+
+  type CommonResultListSystemRoleRespVO = {
+    code?: number
+    data?: SystemRoleRespVO[]
+    msg?: string
+  }
+
+  type CommonResultListSystemSmsChannelSimpleRespVO = {
+    code?: number
+    data?: SystemSmsChannelSimpleRespVO[]
+    msg?: string
+  }
+
+  type CommonResultListSystemUserSimpleRespVO = {
+    code?: number
+    data?: SystemUserSimpleRespVO[]
     msg?: string
   }
 
@@ -245,207 +225,135 @@ declare namespace API {
     msg?: string
   }
 
-  type CommonResultMailAccountRespVO = {
+  type CommonResultOAuth2AccessTokenCheckRespDTO = {
     code?: number
-    data?: MailAccountRespVO
+    data?: OAuth2AccessTokenCheckRespDTO
     msg?: string
   }
 
-  type CommonResultMailLogRespVO = {
+  type CommonResultPageResultRPCfuwuxitongcaozuorizhiResponseDTO = {
     code?: number
-    data?: MailLogRespVO
+    data?: PageResultRPCfuwuxitongcaozuorizhiResponseDTO
     msg?: string
   }
 
-  type CommonResultMailTemplateRespVO = {
+  type CommonResultPageResultSystemDictDataRespVO = {
     code?: number
-    data?: MailTemplateRespVO
+    data?: PageResultSystemDictDataRespVO
     msg?: string
   }
 
-  type CommonResultMenuRespVO = {
+  type CommonResultPageResultSystemDictTypeRespVO = {
     code?: number
-    data?: MenuRespVO
+    data?: PageResultSystemDictTypeRespVO
     msg?: string
   }
 
-  type CommonResultNoticeRespVO = {
+  type CommonResultPageResultSystemLoginLogRespVO = {
     code?: number
-    data?: NoticeRespVO
+    data?: PageResultSystemLoginLogRespVO
     msg?: string
   }
 
-  type CommonResultNotifyMessageRespVO = {
+  type CommonResultPageResultSystemMailAccountRespVO = {
     code?: number
-    data?: NotifyMessageRespVO
+    data?: PageResultSystemMailAccountRespVO
     msg?: string
   }
 
-  type CommonResultNotifyTemplateRespVO = {
+  type CommonResultPageResultSystemMailLogRespVO = {
     code?: number
-    data?: NotifyTemplateRespVO
+    data?: PageResultSystemMailLogRespVO
     msg?: string
   }
 
-  type CommonResultOAuth2ClientRespVO = {
+  type CommonResultPageResultSystemMailTemplateRespVO = {
     code?: number
-    data?: OAuth2ClientRespVO
+    data?: PageResultSystemMailTemplateRespVO
     msg?: string
   }
 
-  type CommonResultOAuth2OpenAccessTokenRespVO = {
+  type CommonResultPageResultSystemNoticeRespVO = {
     code?: number
-    data?: OAuth2OpenAccessTokenRespVO
+    data?: PageResultSystemNoticeRespVO
     msg?: string
   }
 
-  type CommonResultOAuth2OpenAuthorizeInfoRespVO = {
+  type CommonResultPageResultSystemNotifyMessageRespVO = {
     code?: number
-    data?: OAuth2OpenAuthorizeInfoRespVO
+    data?: PageResultSystemNotifyMessageRespVO
     msg?: string
   }
 
-  type CommonResultOAuth2OpenCheckTokenRespVO = {
+  type CommonResultPageResultSystemNotifyTemplateRespVO = {
     code?: number
-    data?: OAuth2OpenCheckTokenRespVO
+    data?: PageResultSystemNotifyTemplateRespVO
     msg?: string
   }
 
-  type CommonResultOAuth2UserInfoRespVO = {
+  type CommonResultPageResultSystemOAuth2AccessTokenRespVO = {
     code?: number
-    data?: OAuth2UserInfoRespVO
+    data?: PageResultSystemOAuth2AccessTokenRespVO
     msg?: string
   }
 
-  type CommonResultPageResultDictDataRespVO = {
+  type CommonResultPageResultSystemOAuth2ClientRespVO = {
     code?: number
-    data?: PageResultDictDataRespVO
+    data?: PageResultSystemOAuth2ClientRespVO
     msg?: string
   }
 
-  type CommonResultPageResultDictTypeRespVO = {
+  type CommonResultPageResultSystemOperateLogRespVO = {
     code?: number
-    data?: PageResultDictTypeRespVO
+    data?: PageResultSystemOperateLogRespVO
     msg?: string
   }
 
-  type CommonResultPageResultLoginLogRespVO = {
+  type CommonResultPageResultSystemPostRespVO = {
     code?: number
-    data?: PageResultLoginLogRespVO
+    data?: PageResultSystemPostRespVO
     msg?: string
   }
 
-  type CommonResultPageResultMailAccountRespVO = {
+  type CommonResultPageResultSystemRoleRespVO = {
     code?: number
-    data?: PageResultMailAccountRespVO
+    data?: PageResultSystemRoleRespVO
     msg?: string
   }
 
-  type CommonResultPageResultMailLogRespVO = {
+  type CommonResultPageResultSystemSmsChannelRespVO = {
     code?: number
-    data?: PageResultMailLogRespVO
+    data?: PageResultSystemSmsChannelRespVO
     msg?: string
   }
 
-  type CommonResultPageResultMailTemplateRespVO = {
+  type CommonResultPageResultSystemSmsLogRespVO = {
     code?: number
-    data?: PageResultMailTemplateRespVO
+    data?: PageResultSystemSmsLogRespVO
     msg?: string
   }
 
-  type CommonResultPageResultNoticeRespVO = {
+  type CommonResultPageResultSystemSmsTemplateRespVO = {
     code?: number
-    data?: PageResultNoticeRespVO
+    data?: PageResultSystemSmsTemplateRespVO
     msg?: string
   }
 
-  type CommonResultPageResultNotifyMessageRespVO = {
+  type CommonResultPageResultSystemSocialClientRespVO = {
     code?: number
-    data?: PageResultNotifyMessageRespVO
+    data?: PageResultSystemSocialClientRespVO
     msg?: string
   }
 
-  type CommonResultPageResultNotifyTemplateRespVO = {
+  type CommonResultPageResultSystemSocialUserRespVO = {
     code?: number
-    data?: PageResultNotifyTemplateRespVO
+    data?: PageResultSystemSocialUserRespVO
     msg?: string
   }
 
-  type CommonResultPageResultOAuth2AccessTokenRespVO = {
+  type CommonResultPageResultSystemUserRespVO = {
     code?: number
-    data?: PageResultOAuth2AccessTokenRespVO
-    msg?: string
-  }
-
-  type CommonResultPageResultOAuth2ClientRespVO = {
-    code?: number
-    data?: PageResultOAuth2ClientRespVO
-    msg?: string
-  }
-
-  type CommonResultPageResultOperateLogRespVO = {
-    code?: number
-    data?: PageResultOperateLogRespVO
-    msg?: string
-  }
-
-  type CommonResultPageResultPostRespVO = {
-    code?: number
-    data?: PageResultPostRespVO
-    msg?: string
-  }
-
-  type CommonResultPageResultRoleRespVO = {
-    code?: number
-    data?: PageResultRoleRespVO
-    msg?: string
-  }
-
-  type CommonResultPageResultSmsChannelRespVO = {
-    code?: number
-    data?: PageResultSmsChannelRespVO
-    msg?: string
-  }
-
-  type CommonResultPageResultSmsLogRespVO = {
-    code?: number
-    data?: PageResultSmsLogRespVO
-    msg?: string
-  }
-
-  type CommonResultPageResultSmsTemplateRespVO = {
-    code?: number
-    data?: PageResultSmsTemplateRespVO
-    msg?: string
-  }
-
-  type CommonResultPageResultSocialClientRespVO = {
-    code?: number
-    data?: PageResultSocialClientRespVO
-    msg?: string
-  }
-
-  type CommonResultPageResultSocialUserRespVO = {
-    code?: number
-    data?: PageResultSocialUserRespVO
-    msg?: string
-  }
-
-  type CommonResultPageResultUserRespVO = {
-    code?: number
-    data?: PageResultUserRespVO
-    msg?: string
-  }
-
-  type CommonResultPostRespVO = {
-    code?: number
-    data?: PostRespVO
-    msg?: string
-  }
-
-  type CommonResultRoleRespVO = {
-    code?: number
-    data?: RoleRespVO
+    data?: PageResultSystemUserRespVO
     msg?: string
   }
 
@@ -455,27 +363,15 @@ declare namespace API {
     msg?: string
   }
 
-  type CommonResultSmsChannelRespVO = {
+  type CommonResultSocialWxJsapiSignatureRespDTO = {
     code?: number
-    data?: SmsChannelRespVO
+    data?: SocialWxJsapiSignatureRespDTO
     msg?: string
   }
 
-  type CommonResultSmsTemplateRespVO = {
+  type CommonResultSocialWxPhoneNumberInfoRespDTO = {
     code?: number
-    data?: SmsTemplateRespVO
-    msg?: string
-  }
-
-  type CommonResultSocialClientRespVO = {
-    code?: number
-    data?: SocialClientRespVO
-    msg?: string
-  }
-
-  type CommonResultSocialUserRespVO = {
-    code?: number
-    data?: SocialUserRespVO
+    data?: SocialWxPhoneNumberInfoRespDTO
     msg?: string
   }
 
@@ -485,22 +381,167 @@ declare namespace API {
     msg?: string
   }
 
-  type CommonResultUserImportRespVO = {
+  type CommonResultSystemAuthLoginRespVO = {
     code?: number
-    data?: UserImportRespVO
+    data?: SystemAuthLoginRespVO
     msg?: string
   }
 
-  type CommonResultUserProfileRespVO = {
+  type CommonResultSystemAuthPermissionInfoRespVO = {
     code?: number
-    data?: UserProfileRespVO
+    data?: SystemAuthPermissionInfoRespVO
     msg?: string
   }
 
-  type CommonResultUserRespVO = {
+  type CommonResultSystemDeptRespVO = {
     code?: number
-    data?: UserRespVO
+    data?: SystemDeptRespVO
     msg?: string
+  }
+
+  type CommonResultSystemDictDataRespVO = {
+    code?: number
+    data?: SystemDictDataRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemDictTypeRespVO = {
+    code?: number
+    data?: SystemDictTypeRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemMailAccountRespVO = {
+    code?: number
+    data?: SystemMailAccountRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemMailLogRespVO = {
+    code?: number
+    data?: SystemMailLogRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemMailTemplateRespVO = {
+    code?: number
+    data?: SystemMailTemplateRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemMenuRespVO = {
+    code?: number
+    data?: SystemMenuRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemNoticeRespVO = {
+    code?: number
+    data?: SystemNoticeRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemNotifyMessageRespVO = {
+    code?: number
+    data?: SystemNotifyMessageRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemNotifyTemplateRespVO = {
+    code?: number
+    data?: SystemNotifyTemplateRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemOAuth2ClientRespVO = {
+    code?: number
+    data?: SystemOAuth2ClientRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemOAuth2OpenAccessTokenRespVO = {
+    code?: number
+    data?: SystemOAuth2OpenAccessTokenRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemOAuth2OpenAuthorizeInfoRespVO = {
+    code?: number
+    data?: SystemOAuth2OpenAuthorizeInfoRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemOAuth2OpenCheckTokenRespVO = {
+    code?: number
+    data?: SystemOAuth2OpenCheckTokenRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemOAuth2UserInfoRespVO = {
+    code?: number
+    data?: SystemOAuth2UserInfoRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemPostRespVO = {
+    code?: number
+    data?: SystemPostRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemRoleRespVO = {
+    code?: number
+    data?: SystemRoleRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemSmsChannelRespVO = {
+    code?: number
+    data?: SystemSmsChannelRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemSmsTemplateRespVO = {
+    code?: number
+    data?: SystemSmsTemplateRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemSocialClientRespVO = {
+    code?: number
+    data?: SystemSocialClientRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemSocialUserRespVO = {
+    code?: number
+    data?: SystemSocialUserRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemUserImportRespVO = {
+    code?: number
+    data?: SystemUserImportRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemUserProfileRespVO = {
+    code?: number
+    data?: SystemUserProfileRespVO
+    msg?: string
+  }
+
+  type CommonResultSystemUserRespVO = {
+    code?: number
+    data?: SystemUserRespVO
+    msg?: string
+  }
+
+  type createWxMpJsapiSignatureParams = {
+    /** 用户类型 */
+    userType: number
+    /** 访问 URL */
+    url: string
   }
 
   type deleteAccessTokenParams = {
@@ -509,12 +550,12 @@ declare namespace API {
   }
 
   type deleteDeptParams = {
-    /** 编号 */
+    /** 部门 Id */
     id: number
   }
 
   type deleteDictDataParams = {
-    /** 编号 */
+    /** 字典数据 Id */
     id: number
   }
 
@@ -524,7 +565,7 @@ declare namespace API {
   }
 
   type deleteMailAccountParams = {
-    /** 编号 */
+    /** 邮箱账号 Id */
     id: number
   }
 
@@ -534,17 +575,17 @@ declare namespace API {
   }
 
   type deleteMenuParams = {
-    /** 菜单编号 */
+    /** 菜单 Id */
     id: number
   }
 
   type deleteNoticeParams = {
-    /** 编号 */
+    /** 通知公告 Id */
     id: number
   }
 
   type deleteNotifyTemplateParams = {
-    /** 编号 */
+    /** 站内信模版 Id */
     id: number
   }
 
@@ -563,17 +604,17 @@ declare namespace API {
   }
 
   type deleteSmsChannelParams = {
-    /** 编号 */
+    /** 短信渠道 Id */
     id: number
   }
 
   type deleteSmsTemplateParams = {
-    /** 编号 */
+    /** 短信模板 Id */
     id: number
   }
 
   type deleteSocialClientParams = {
-    /** 编号 */
+    /** 社交客户端 Id */
     id: number
   }
 
@@ -589,211 +630,73 @@ declare namespace API {
     name: string
   }
 
-  type DeptRespVO = {
-    /** 部门编号 */
-    id?: number
-    /** 部门名称 */
-    name: string
-    /** 父部门 ID */
-    parentId?: number
-    /** 显示顺序 */
-    sort: number
-    /** 负责人的用户编号 */
-    leaderUserId?: number
-    /** 联系电话 */
-    phone?: string
-    /** 邮箱 */
-    email?: string
-    /** 状态,见 CommonStatusEnum 枚举 */
-    status: number
-    /** 创建时间 */
-    createTime: string
+  type DeptDataPermissionRespDTO = {
+    /** 是否可查看全部数据 */
+    all: boolean
+    /** 是否可查看自己的数据 */
+    self: boolean
+    /** 可查看的部门编号数组 */
+    deptIds: number[]
   }
 
-  type DeptSaveReqVO = {
-    /** 部门编号 */
-    id?: number
-    /** 部门名称 */
-    name: string
-    /** 父部门 ID */
-    parentId?: number
-    /** 显示顺序 */
-    sort: number
-    /** 负责人的用户编号 */
-    leaderUserId?: number
-    /** 联系电话 */
-    phone?: string
-    /** 邮箱 */
-    email?: string
-    /** 状态,见 CommonStatusEnum 枚举 */
-    status: number
-  }
-
-  type DeptSimpleRespVO = {
-    /** 部门编号 */
+  type DeptRespDTO = {
+    /** 部门 Id */
     id: number
     /** 部门名称 */
     name: string
-    /** 父部门 ID */
+    /** 父部门 Id */
     parentId: number
+    /** 负责人用户 Id */
+    leaderUserId: number
+    /** 部门状态，参见 CommonStatusEnum 枚举 */
+    status: number
   }
 
-  type DictDataPageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 字典标签 */
-    label?: string
-    /** 字典类型，模糊匹配 */
-    dictType?: string
-    /** 展示状态，参见 CommonStatusEnum 枚举类 */
-    status?: number
-  }
-
-  type DictDataRespVO = {
-    /** 字典数据编号 */
-    id: number
-    /** 显示顺序 */
-    sort: number
+  type DictDataRespDTO = {
     /** 字典标签 */
     label: string
     /** 字典值 */
     value: string
     /** 字典类型 */
     dictType: string
-    /** 状态,见 CommonStatusEnum 枚举 */
+    /** 状态 */
     status: number
-    /** 颜色类型,default、primary、success、info、warning、danger */
-    colorType?: string
-    /** css 样式 */
-    cssClass?: string
-    /** 备注 */
-    remark?: string
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type DictDataSaveReqVO = {
-    /** 字典数据编号 */
-    id?: number
-    /** 显示顺序 */
-    sort: number
-    /** 字典标签 */
-    label: string
-    /** 字典值 */
-    value: string
-    /** 字典类型 */
-    dictType: string
-    /** 状态,见 CommonStatusEnum 枚举 */
-    status: number
-    /** 颜色类型,default、primary、success、info、warning、danger */
-    colorType?: string
-    /** css 样式 */
-    cssClass?: string
-    /** 备注 */
-    remark?: string
-  }
-
-  type DictDataSimpleRespVO = {
-    /** 字典类型 */
-    dictType: string
-    /** 字典键值 */
-    value: string
-    /** 字典标签 */
-    label: string
-    /** 颜色类型，default、primary、success、info、warning、danger */
-    colorType?: string
-    /** css 样式 */
-    cssClass?: string
-  }
-
-  type DictTypePageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 字典类型名称，模糊匹配 */
-    name?: string
-    /** 字典类型，模糊匹配 */
-    type?: string
-    /** 展示状态，参见 CommonStatusEnum 枚举类 */
-    status?: number
-    /** 创建时间 */
-    createTime?: string[]
-  }
-
-  type DictTypeRespVO = {
-    /** 字典类型编号 */
-    id: number
-    /** 字典名称 */
-    name: string
-    /** 字典类型 */
-    type: string
-    /** 状态，参见 CommonStatusEnum 枚举类 */
-    status: number
-    /** 备注 */
-    remark?: string
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type DictTypeSaveReqVO = {
-    /** 字典类型编号 */
-    id?: number
-    /** 字典名称 */
-    name: string
-    /** 字典类型 */
-    type: string
-    /** 状态，参见 CommonStatusEnum 枚举类 */
-    status: number
-    /** 备注 */
-    remark?: string
-  }
-
-  type DictTypeSimpleRespVO = {
-    /** 字典类型编号 */
-    id: number
-    /** 字典类型名称 */
-    name: string
-    /** 字典类型 */
-    type: string
   }
 
   type export1Params = {
-    reqVO: PostPageReqVO
+    reqVO: SystemPostPageReqVO
   }
 
   type export2Params = {
-    exportReqVO: DictTypePageReqVO
+    exportReqVO: SystemDictTypePageReqVO
   }
 
   type export3Params = {
-    exportReqVO: DictDataPageReqVO
+    exportReqVO: SystemDictDataPageReqVO
   }
 
   type exportLoginLogParams = {
-    exportReqVO: LoginLogPageReqVO
+    exportReqVO: SystemLoginLogPageReqVO
   }
 
   type exportOperateLogParams = {
-    exportReqVO: OperateLogPageReqVO
+    exportReqVO: SystemOperateLogPageReqVO
   }
 
   type exportSmsLogExcelParams = {
-    exportReqVO: SmsLogPageReqVO
+    exportReqVO: SystemSmsLogPageReqVO
   }
 
   type exportSmsTemplateExcelParams = {
-    exportReqVO: SmsTemplatePageReqVO
+    exportReqVO: SystemSmsTemplatePageReqVO
   }
 
   type exportUserListParams = {
-    exportReqVO: UserPageReqVO
+    exportReqVO: SystemUserPageReqVO
   }
 
   type exportUsingGETParams = {
-    exportReqVO: RolePageReqVO
+    exportReqVO: SystemRolePageReqVO
   }
 
   type findByIdParams = {
@@ -814,12 +717,41 @@ declare namespace API {
   }
 
   type getAccessTokenPageParams = {
-    reqVO: OAuth2AccessTokenPageReqVO
+    reqVO: SystemOAuth2AccessTokenPageReqVO
   }
 
   type getAreaByIpParams = {
     /** IP */
     ip: string
+  }
+
+  type getAuthorizeUrlParams = {
+    /** 社交平台类型 */
+    socialType: number
+    /** 用户类型 */
+    userType: number
+    /** 重定向 URL */
+    redirectUri: string
+  }
+
+  type getChildDeptListParams = {
+    /** 部门 Id */
+    id: number
+  }
+
+  type getDept1Params = {
+    /** 部门 Id */
+    id: number
+  }
+
+  type getDeptDataPermissionParams = {
+    /** 用户 Id */
+    userId: number
+  }
+
+  type getDeptList1Params = {
+    /** 部门 Ids */
+    ids: number[]
   }
 
   type getDeptListParams = {
@@ -834,13 +766,18 @@ declare namespace API {
     id: number
   }
 
+  type getDictDataListParams = {
+    /** 字典类型 */
+    dictType: string
+  }
+
   type getDictDataParams = {
     /** 字典数据 Id */
     id: number
   }
 
   type getDictTypePageParams = {
-    pageReqVO: DictDataPageReqVO
+    pageReqVO: SystemDictDataPageReqVO
   }
 
   type getDictTypeParams = {
@@ -849,29 +786,29 @@ declare namespace API {
   }
 
   type getLoginLogPageParams = {
-    pageReqVO: LoginLogPageReqVO
+    pageReqVO: SystemLoginLogPageReqVO
   }
 
   type getMailAccountPageParams = {
-    pageReqVO: MailAccountPageReqVO
+    pageReqVO: SystemMailAccountPageReqVO
   }
 
   type getMailAccountParams = {
-    /** 编号 */
+    /** 邮箱账号 Id */
     id: number
   }
 
   type getMailLogPageParams = {
-    pageVO: MailLogPageReqVO
+    pageVO: SystemMailLogPageReqVO
   }
 
-  type getMailTemplate1Params = {
-    /** 编号 */
+  type getMailLogParams = {
+    /** 邮箱日志 Id */
     id: number
   }
 
   type getMailTemplatePageParams = {
-    pageReqVO: MailTemplatePageReqVO
+    pageReqVO: SystemMailTemplatePageReqVO
   }
 
   type getMailTemplateParams = {
@@ -891,20 +828,20 @@ declare namespace API {
   }
 
   type getMyMyNotifyMessagePageParams = {
-    pageVO: NotifyMessageMyPageReqVO
+    pageVO: SystemNotifyMessageMyPageReqVO
   }
 
   type getNoticePageParams = {
-    pageReqVO: NoticePageReqVO
+    pageReqVO: SystemNoticePageReqVO
   }
 
   type getNoticeParams = {
-    /** 编号 */
+    /** 通知公告 Id */
     id: number
   }
 
   type getNotifyMessagePageParams = {
-    pageVO: NotifyMessagePageReqVO
+    pageVO: SystemNotifyMessagePageReqVO
   }
 
   type getNotifyMessageParams = {
@@ -913,7 +850,7 @@ declare namespace API {
   }
 
   type getNotifyTemplatePageParams = {
-    pageVO: NotifyTemplatePageReqVO
+    pageVO: SystemNotifyTemplatePageReqVO
   }
 
   type getNotifyTemplateParams = {
@@ -922,7 +859,7 @@ declare namespace API {
   }
 
   type getOAuth2ClientPageParams = {
-    pageVO: OAuth2ClientPageReqVO
+    pageVO: SystemOAuth2ClientPageReqVO
   }
 
   type getOAuth2ClientParams = {
@@ -930,8 +867,13 @@ declare namespace API {
     id: number
   }
 
+  type getPostListParams = {
+    /** 岗位 Id 数组 */
+    ids: number[]
+  }
+
   type getPostPageParams = {
-    pageReqVO: PostPageReqVO
+    pageReqVO: SystemPostPageReqVO
   }
 
   type getPostParams = {
@@ -964,20 +906,20 @@ declare namespace API {
   }
 
   type getSmsChannelPageParams = {
-    pageVO: SmsChannelPageReqVO
+    pageVO: SystemSmsChannelPageReqVO
   }
 
   type getSmsChannelParams = {
-    /** 编号 */
+    /** 短信渠道 Id */
     id: number
   }
 
   type getSmsLogPageParams = {
-    pageReqVO: SmsLogPageReqVO
+    pageReqVO: SystemSmsLogPageReqVO
   }
 
   type getSmsTemplatePageParams = {
-    pageVO: SmsTemplatePageReqVO
+    pageVO: SystemSmsTemplatePageReqVO
   }
 
   type getSmsTemplateParams = {
@@ -986,20 +928,20 @@ declare namespace API {
   }
 
   type getSocialClientPageParams = {
-    pageVO: SocialClientPageReqVO
+    pageVO: SystemSocialClientPageReqVO
   }
 
   type getSocialClientParams = {
-    /** 编号 */
+    /** 社交客户端 Id */
     id: number
   }
 
   type getSocialUserPageParams = {
-    pageVO: SocialUserPageReqVO
+    pageVO: SystemSocialUserPageReqVO
   }
 
   type getSocialUserParams = {
-    /** 编号 */
+    /** 社交用户 Id */
     id: number
   }
 
@@ -1008,13 +950,72 @@ declare namespace API {
     size?: number
   }
 
+  type getUser1Params = {
+    /** 用户 Id */
+    id: number
+  }
+
+  type getUserListByDeptIdsParams = {
+    /** 部门 Ids */
+    deptIds: number[]
+  }
+
+  type getUserListByPostIdsParams = {
+    /** 岗位 Ids */
+    postIds: number[]
+  }
+
+  type getUserListBySubordinateParams = {
+    /** 用户 Id */
+    id: number
+  }
+
+  type getUserListParams = {
+    /** 部门 Ids */
+    ids: number[]
+  }
+
   type getUserPageParams = {
-    pageReqVO: UserPageReqVO
+    pageReqVO: SystemUserPageReqVO
   }
 
   type getUserParams = {
-    /** 编号 */
+    /** 用户 Id */
     id: number
+  }
+
+  type getUserRoleIdListByRoleIdsParams = {
+    /** 角色 Id 集合 */
+    roleIds: number[]
+  }
+
+  type getWxaQrcodeParams = {
+    reqVO: SocialWxQrcodeReqDTO
+  }
+
+  type getWxaSubscribeTemplateListParams = {
+    userType: number
+  }
+
+  type getWxMaPhoneNumberInfoParams = {
+    /** 用户类型 */
+    userType: number
+    /** 手机授权码 */
+    phoneCode: string
+  }
+
+  type hasAnyPermissionsParams = {
+    /** 用户 Id */
+    userId: number
+    /** 权限 */
+    permissions: string[]
+  }
+
+  type hasAnyRolesParams = {
+    /** 用户 Id */
+    userId: number
+    /** 角色数组 */
+    roles: string[]
   }
 
   type importExcelParams = {
@@ -1034,916 +1035,176 @@ declare namespace API {
     userId: number
   }
 
-  type LoginLogPageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 用户 IP，模拟匹配 */
-    userIp?: string
-    /** 用户账号，模拟匹配 */
-    username?: string
-    /** 操作状态 */
-    status?: boolean
-    /** 登录时间 */
-    createTime?: string[]
-  }
-
-  type LoginLogRespVO = {
-    /** 日志编号 */
-    id: number
-    /** 日志类型，参见 LoginLogTypeEnum 枚举类 */
-    logType: number
-    /** 用户编号 */
-    userId?: number
-    /** 用户类型，参见 UserTypeEnum 枚举 */
+  type notifyWxaOrderConfirmReceiveParams = {
     userType: number
-    /** 链路追踪编号 */
-    traceId?: string
-    /** 用户账号 */
-    username: string
-    /** 登录结果，参见 LoginResultEnum 枚举类 */
-    result: number
-    /** 用户 IP */
-    userIp: string
-    /** 浏览器 UserAgent */
-    userAgent?: string
-    /** 登录时间 */
-    createTime: string
   }
 
-  type MailAccountPageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 邮箱 */
-    mail: string
-    /** 用户名 */
-    username: string
-  }
-
-  type MailAccountRespVO = {
-    /** 编号 */
-    id: number
-    /** 邮箱 */
-    mail: string
-    /** 用户名 */
-    username: string
-    /** 密码 */
-    password: string
-    /** SMTP 服务器域名 */
-    host: string
-    /** SMTP 服务器端口 */
-    port: number
-    /** 是否开启 ssl */
-    sslEnable: boolean
-    /** 是否开启 starttls */
-    starttlsEnable: boolean
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type MailAccountSaveReqVO = {
-    /** 编号 */
-    id?: number
-    /** 邮箱 */
-    mail: string
-    /** 用户名 */
-    username: string
-    /** 密码 */
-    password: string
-    /** SMTP 服务器域名 */
-    host: string
-    /** SMTP 服务器端口 */
-    port: number
-    /** 是否开启 ssl */
-    sslEnable: boolean
-    /** 是否开启 starttls */
-    starttlsEnable: boolean
-  }
-
-  type MailAccountSimpleRespVO = {
-    /** 邮箱编号 */
-    id: number
-    /** 邮箱 */
-    mail: string
-  }
-
-  type MailLogPageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 用户编号 */
-    userId?: number
-    /** 用户类型，参见 UserTypeEnum 枚举 */
-    userType?: number
-    /** 接收邮箱地址，模糊匹配 */
-    toMail?: string
-    /** 邮箱账号编号 */
-    accountId?: number
-    /** 模板编号 */
-    templateId?: number
-    /** 发送状态，参见 MailSendStatusEnum 枚举 */
-    sendStatus?: number
-    /** 发送时间 */
-    sendTime?: string[]
-  }
-
-  type MailLogRespVO = {
-    /** 编号 */
-    id: number
-    /** 用户编号 */
-    userId?: number
-    /** 用户类型，参见 UserTypeEnum 枚举 */
-    userType?: string
-    /** 接收邮箱地址 */
-    toMail: string
-    /** 邮箱账号编号 */
-    accountId: number
-    /** 发送邮箱地址 */
-    fromMail: string
-    /** 模板编号 */
-    templateId: number
-    /** 模板编码 */
-    templateCode: string
-    /** 模版发送人名称 */
-    templateNickname?: string
-    /** 邮件标题 */
-    templateTitle: string
-    /** 邮件内容 */
-    templateContent: string
-    /** 邮件参数 */
-    templateParams: Record<string, any>
-    /** 发送状态，参见 MailSendStatusEnum 枚举 */
-    sendStatus: string
-    /** 发送时间 */
-    sendTime?: string
-    /** 发送返回的消息 ID */
-    sendMessageId?: string
-    /** 发送异常 */
-    sendException?: string
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type MailTemplatePageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 状态，参见 CommonStatusEnum 枚举 */
-    status?: number
-    /** 标识，模糊匹配 */
-    code?: string
-    /** 名称，模糊匹配 */
-    name?: string
-    /** 账号编号 */
-    accountId?: number
-    /** 创建时间 */
-    createTime?: string[]
-  }
-
-  type MailTemplateRespVO = {
-    /** 编号 */
-    id: number
-    /** 模版名称 */
-    name: string
-    /** 模版编号 */
-    code: string
-    /** 发送的邮箱账号编号 */
-    accountId: number
-    /** 发送人名称 */
-    nickname?: string
-    /** 标题 */
-    title: string
-    /** 内容 */
-    content: string
-    /** 参数数组 */
-    params?: string[]
-    /** 状态，参见 CommonStatusEnum 枚举 */
-    status: number
-    /** 备注 */
-    remark?: string
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type MailTemplateSaveReqVO = {
-    /** 编号 */
-    id?: number
-    /** 模版名称 */
-    name: string
-    /** 模版编号 */
-    code: string
-    /** 发送的邮箱账号编号 */
-    accountId: number
-    /** 发送人名称 */
-    nickname?: string
-    /** 标题 */
-    title: string
-    /** 内容 */
-    content: string
-    /** 状态，参见 CommonStatusEnum 枚举 */
-    status: number
-    /** 备注 */
-    remark?: string
-  }
-
-  type MailTemplateSendReqVO = {
-    /** 接收邮箱 */
-    mail: string
-    /** 模板编码 */
-    templateCode: string
-    /** 模板参数 */
-    templateParams?: Record<string, any>
-  }
-
-  type MailTemplateSimpleRespVO = {
-    /** 模版编号 */
-    id: number
-    /** 模版名字 */
-    name: string
-  }
-
-  type MenuRespVO = {
-    /** 菜单编号 */
-    id: number
-    /** 菜单名称 */
-    name: string
-    /** 权限标识,仅菜单类型为按钮时，才需要传递 */
-    permission?: string
-    /** 类型，参见 MenuTypeEnum 枚举类 */
-    type: number
-    /** 显示顺序 */
-    sort: number
-    /** 父菜单 ID */
-    parentId: number
-    /** 路由地址,仅菜单类型为菜单或者目录时，才需要传 */
-    path?: string
-    /** 菜单图标,仅菜单类型为菜单或者目录时，才需要传 */
-    icon?: string
-    /** 组件路径,仅菜单类型为菜单时，才需要传 */
-    component?: string
-    /** 组件名 */
-    componentName?: string
-    /** 状态,见 CommonStatusEnum 枚举 */
-    status: number
-    /** 是否可见 */
-    visible?: boolean
-    /** 是否缓存 */
-    keepAlive?: boolean
-    /** 是否总是显示 */
-    alwaysShow?: boolean
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type MenuSaveVO = {
-    /** 菜单编号 */
-    id?: number
-    /** 菜单名称 */
-    name: string
-    /** 权限标识,仅菜单类型为按钮时，才需要传递 */
-    permission?: string
-    /** 类型，参见 MenuTypeEnum 枚举类 */
-    type: number
-    /** 显示顺序 */
-    sort: number
-    /** 父菜单 ID */
-    parentId: number
-    /** 路由地址,仅菜单类型为菜单或者目录时，才需要传 */
-    path?: string
-    /** 菜单图标,仅菜单类型为菜单或者目录时，才需要传 */
-    icon?: string
-    /** 组件路径,仅菜单类型为菜单时，才需要传 */
-    component?: string
-    /** 组件名 */
-    componentName?: string
-    /** 状态,见 CommonStatusEnum 枚举 */
-    status: number
-    /** 是否可见 */
-    visible?: boolean
-    /** 是否缓存 */
-    keepAlive?: boolean
-    /** 是否总是显示 */
-    alwaysShow?: boolean
-  }
-
-  type MenuSimpleRespVO = {
-    /** 菜单编号 */
-    id: number
-    /** 菜单名称 */
-    name: string
-    /** 父菜单 ID */
-    parentId: number
-    /** 类型，参见 MenuTypeEnum 枚举类 */
-    type: number
-  }
-
-  type MenuVO = {
-    /** 菜单名称 */
-    id: number
-    /** 父菜单 ID */
-    parentId: number
-    /** 菜单名称 */
-    name: string
-    /** 路由地址,仅菜单类型为菜单或者目录时，才需要传 */
-    path?: string
-    /** 组件路径,仅菜单类型为菜单时，才需要传 */
-    component?: string
-    /** 组件名 */
-    componentName?: string
-    /** 菜单图标,仅菜单类型为菜单或者目录时，才需要传 */
-    icon?: string
-    /** 是否可见 */
-    visible: boolean
-    /** 是否缓存 */
-    keepAlive: boolean
-    /** 是否总是显示 */
-    alwaysShow?: boolean
-    children?: MenuVO[]
-  }
-
-  type NoticePageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 通知公告名称，模糊匹配 */
-    title?: string
-    /** 展示状态，参见 CommonStatusEnum 枚举类 */
-    status?: number
-  }
-
-  type NoticeRespVO = {
-    /** 通知公告序号 */
-    id: number
-    /** 公告标题 */
-    title: string
-    /** 公告类型 */
-    type: number
-    /** 公告内容 */
-    content: string
-    /** 状态，参见 CommonStatusEnum 枚举类 */
-    status: number
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type NoticeSaveReqVO = {
-    /** 岗位公告编号 */
-    id?: number
-    /** 公告标题 */
-    title: string
-    /** 公告类型 */
-    type: number
-    /** 公告内容 */
-    content: string
-    /** 状态，参见 CommonStatusEnum 枚举类 */
-    status: number
-  }
-
-  type NotifyMessageMyPageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 是否已读 */
-    readStatus?: boolean
-    /** 创建时间 */
-    createTime?: string[]
-  }
-
-  type NotifyMessagePageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 用户编号 */
-    userId?: number
-    /** 用户类型 */
-    userType?: number
-    /** 模板编码 */
-    templateCode?: string
-    /** 模版类型 */
-    templateType?: number
-    /** 创建时间 */
-    createTime?: string[]
-  }
-
-  type NotifyMessageRespVO = {
-    /** ID */
-    id: number
-    /** 用户编号 */
-    userId: number
-    /** 用户类型，参见 UserTypeEnum 枚举 */
-    userType: string
-    /** 模版编号 */
-    templateId: number
-    /** 模板编码 */
-    templateCode: string
-    /** 模版发送人名称 */
-    templateNickname: string
-    /** 模版内容 */
-    templateContent: string
-    /** 模版类型 */
-    templateType: number
-    /** 模版参数 */
-    templateParams: Record<string, any>
-    /** 是否已读 */
-    readStatus: boolean
-    /** 阅读时间 */
-    readTime?: string
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type NotifyTemplatePageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 模版编码 */
-    code?: string
-    /** 模版名称 */
-    name?: string
-    /** 状态，参见 CommonStatusEnum 枚举类 */
-    status?: number
-    /** 创建时间 */
-    createTime?: string[]
-  }
-
-  type NotifyTemplateRespVO = {
-    /** ID */
-    id: number
-    /** 模版名称 */
-    name: string
-    /** 模版编码 */
-    code: string
-    /** 模版类型，对应 system_notify_template_type 字典 */
-    type: number
-    /** 发送人名称 */
-    nickname: string
-    /** 模版内容 */
-    content: string
-    /** 参数数组 */
-    params?: string[]
-    /** 状态，参见 CommonStatusEnum 枚举 */
-    status: number
-    /** 备注 */
-    remark?: string
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type NotifyTemplateSaveReqVO = {
-    /** ID */
-    id?: number
-    /** 模版名称 */
-    name: string
-    /** 模版编码 */
-    code: string
-    /** 模版类型，对应 system_notify_template_type 字典 */
-    type: number
-    /** 发送人名称 */
-    nickname: string
-    /** 模版内容 */
-    content: string
-    /** 状态，参见 CommonStatusEnum 枚举 */
-    status: number
-    /** 备注 */
-    remark?: string
-  }
-
-  type NotifyTemplateSendReqVO = {
-    /** 用户id */
-    userId: number
-    /** 用户类型 */
-    userType: number
-    /** 模板编码 */
-    templateCode: string
-    /** 模板参数 */
-    templateParams?: Record<string, any>
-  }
-
-  type OAuth2AccessTokenPageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 用户编号 */
+  type OAuth2AccessTokenCheckRespDTO = {
+    /** 用户 Id */
     userId: number
     /** 用户类型，参见 UserTypeEnum 枚举 */
     userType: number
-    /** 客户端编号 */
-    clientId: string
-  }
-
-  type OAuth2AccessTokenRespVO = {
-    /** 编号 */
-    id: number
-    /** 访问令牌 */
-    accessToken: string
-    /** 刷新令牌 */
-    refreshToken: string
-    /** 用户编号 */
-    userId: number
-    /** 用户类型，参见 UserTypeEnum 枚举 */
-    userType: number
-    /** 客户端编号 */
-    clientId: string
-    /** 创建时间 */
-    createTime: string
+    /** 用户信息 */
+    userInfo?: Record<string, any>
+    /** 授权范围的数组 */
+    scopes?: string[]
     /** 过期时间 */
     expiresTime: string
   }
 
-  type OAuth2ClientPageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 应用名，模糊匹配 */
-    name?: string
-    /** 状态，参见 CommonStatusEnum 枚举 */
-    status?: number
-  }
-
-  type OAuth2ClientRespVO = {
-    /** 编号 */
-    id: number
-    /** 客户端编号 */
-    clientId: string
-    /** 客户端密钥 */
-    secret: string
-    /** 应用名 */
-    name: string
-    /** 应用图标 */
-    logo: string
-    /** 应用描述 */
-    description?: string
-    /** 状态，参见 CommonStatusEnum 枚举 */
-    status: number
-    /** 访问令牌的有效期 */
-    accessTokenValiditySeconds: number
-    /** 刷新令牌的有效期 */
-    refreshTokenValiditySeconds: number
-    /** 可重定向的 URI 地址 */
-    redirectUris: string[]
-    /** 授权类型，参见 OAuth2GrantTypeEnum 枚举 */
-    authorizedGrantTypes: string[]
-    /** 授权范围 */
-    scopes?: string[]
-    /** 自动通过的授权范围 */
-    autoApproveScopes?: string[]
-    /** 权限 */
-    authorities?: string[]
-    /** 资源 */
-    resourceIds?: string[]
-    /** 附加信息 */
-    additionalInformation?: string
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type OAuth2ClientSaveReqVO = {
-    /** 编号 */
-    id?: number
-    /** 客户端编号 */
-    clientId: string
-    /** 客户端密钥 */
-    secret: string
-    /** 应用名 */
-    name: string
-    /** 应用图标 */
-    logo: string
-    /** 应用描述 */
-    description?: string
-    /** 状态，参见 CommonStatusEnum 枚举 */
-    status: number
-    /** 访问令牌的有效期 */
-    accessTokenValiditySeconds: number
-    /** 刷新令牌的有效期 */
-    refreshTokenValiditySeconds: number
-    /** 可重定向的 URI 地址 */
-    redirectUris: string[]
-    /** 授权类型，参见 OAuth2GrantTypeEnum 枚举 */
-    authorizedGrantTypes: string[]
-    /** 授权范围 */
-    scopes?: string[]
-    /** 自动通过的授权范围 */
-    autoApproveScopes?: string[]
-    /** 权限 */
-    authorities?: string[]
-    /** 资源 */
-    resourceIds?: string[]
-    /** 附加信息 */
-    additionalInformation?: string
-    additionalInformationJson?: boolean
-  }
-
-  type OAuth2OpenAccessTokenRespVO = {
-    /** 授权范围,如果多个授权范围，使用空格分隔 */
-    scope?: string
-    /** 访问令牌 */
-    access_token: string
-    /** 刷新令牌 */
-    refresh_token: string
-    /** 令牌类型 */
-    token_type: string
-    /** 过期时间,单位：秒 */
-    expires_in: number
-  }
-
-  type OAuth2OpenAuthorizeInfoRespVO = {
-    client?: Client
-    /** scope 的选中信息,使用 List 保证有序性，Key 是 scope，Value 为是否选中 */
-    scopes: KeyValueStringBoolean[]
-  }
-
-  type OAuth2OpenCheckTokenRespVO = {
-    /** 授权范围 */
-    scopes: string[]
-    /** 过期时间，时间戳 / 1000，即单位：秒 */
-    exp: number
-    /** 用户编号 */
-    user_id: number
-    /** 用户类型，参见 UserTypeEnum 枚举 */
-    user_type: number
-    /** 租户编号 */
-    tenant_id: number
-    /** 客户端编号 */
-    client_id: string
-    /** 访问令牌 */
-    access_token: string
-  }
-
-  type OAuth2UserInfoRespVO = {
-    /** 用户编号 */
-    id: number
-    /** 用户账号 */
-    username: string
-    /** 用户昵称 */
-    nickname: string
-    /** 用户邮箱 */
-    email?: string
-    /** 手机号码 */
-    mobile?: string
-    /** 用户性别，参见 SexEnum 枚举类 */
-    sex?: number
-    /** 用户头像 */
-    avatar?: string
-    dept?: Dept
-    posts?: Post[]
-  }
-
-  type OAuth2UserUpdateReqVO = {
-    /** 用户昵称 */
-    nickname: string
-    /** 用户邮箱 */
-    email?: string
-    /** 手机号码 */
-    mobile?: string
-    /** 用户性别，参见 SexEnum 枚举类 */
-    sex?: number
-  }
-
-  type OperateLogPageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 用户编号 */
-    userId?: number
-    /** 操作模块业务编号 */
-    bizId?: number
-    /** 操作模块，模拟匹配 */
-    type?: string
-    /** 操作名，模拟匹配 */
-    subType?: string
-    /** 操作明细，模拟匹配 */
-    action?: string
-    /** 开始时间 */
-    createTime?: string[]
-  }
-
-  type OperateLogRespVO = {
-    /** 日志编号 */
-    id: number
-    /** 链路追踪编号 */
-    traceId: string
-    /** 用户编号 */
-    userId: number
-    /** 用户昵称 */
-    userName: string
-    /** 用户类型 */
-    userType: string
-    /** 操作模块类型 */
-    type: string
-    /** 操作名 */
-    subType: string
-    /** 操作模块业务编号 */
-    bizId: number
-    /** 操作明细 */
-    action?: string
-    /** 拓展字段 */
-    extra?: string
-    /** 请求方法名 */
-    requestMethod: string
-    /** 请求地址 */
-    requestUrl: string
-    /** 用户 IP */
-    userIp: string
-    /** 浏览器 UserAgent */
-    userAgent: string
-    /** 创建时间 */
-    createTime: string
-    /** 操作类型 */
-    operateType: number
-    /** Java 请求方法 */
-    javaMethod: string
-    /** Java 请求参数 */
-    javaMethodArgs: string
-    /** 执行时长，单位：毫秒 */
-    duration: number
-    /** 结果码 */
-    resultCode: number
-    /** 结果提示 */
-    resultMsg: string
-    transMap?: Record<string, any>
-  }
-
   type pageDictTypesParams = {
-    pageReqVO: DictTypePageReqVO
+    pageReqVO: SystemDictTypePageReqVO
   }
 
   type pageOperateLogParams = {
-    pageReqVO: OperateLogPageReqVO
+    pageReqVO: SystemOperateLogPageReqVO
   }
 
-  type PageResultDictDataRespVO = {
+  type PageResultRPCfuwuxitongcaozuorizhiResponseDTO = {
     /** 数据 */
-    list: DictDataRespVO[]
+    list: RPCfuwuxitongcaozuorizhiResponseDTO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultDictTypeRespVO = {
+  type PageResultSystemDictDataRespVO = {
     /** 数据 */
-    list: DictTypeRespVO[]
+    list: SystemDictDataRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultLoginLogRespVO = {
+  type PageResultSystemDictTypeRespVO = {
     /** 数据 */
-    list: LoginLogRespVO[]
+    list: SystemDictTypeRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultMailAccountRespVO = {
+  type PageResultSystemLoginLogRespVO = {
     /** 数据 */
-    list: MailAccountRespVO[]
+    list: SystemLoginLogRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultMailLogRespVO = {
+  type PageResultSystemMailAccountRespVO = {
     /** 数据 */
-    list: MailLogRespVO[]
+    list: SystemMailAccountRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultMailTemplateRespVO = {
+  type PageResultSystemMailLogRespVO = {
     /** 数据 */
-    list: MailTemplateRespVO[]
+    list: SystemMailLogRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultNoticeRespVO = {
+  type PageResultSystemMailTemplateRespVO = {
     /** 数据 */
-    list: NoticeRespVO[]
+    list: SystemMailTemplateRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultNotifyMessageRespVO = {
+  type PageResultSystemNoticeRespVO = {
     /** 数据 */
-    list: NotifyMessageRespVO[]
+    list: SystemNoticeRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultNotifyTemplateRespVO = {
+  type PageResultSystemNotifyMessageRespVO = {
     /** 数据 */
-    list: NotifyTemplateRespVO[]
+    list: SystemNotifyMessageRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultOAuth2AccessTokenRespVO = {
+  type PageResultSystemNotifyTemplateRespVO = {
     /** 数据 */
-    list: OAuth2AccessTokenRespVO[]
+    list: SystemNotifyTemplateRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultOAuth2ClientRespVO = {
+  type PageResultSystemOAuth2AccessTokenRespVO = {
     /** 数据 */
-    list: OAuth2ClientRespVO[]
+    list: SystemOAuth2AccessTokenRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultOperateLogRespVO = {
+  type PageResultSystemOAuth2ClientRespVO = {
     /** 数据 */
-    list: OperateLogRespVO[]
+    list: SystemOAuth2ClientRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultPostRespVO = {
+  type PageResultSystemOperateLogRespVO = {
     /** 数据 */
-    list: PostRespVO[]
+    list: SystemOperateLogRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultRoleRespVO = {
+  type PageResultSystemPostRespVO = {
     /** 数据 */
-    list: RoleRespVO[]
+    list: SystemPostRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultSmsChannelRespVO = {
+  type PageResultSystemRoleRespVO = {
     /** 数据 */
-    list: SmsChannelRespVO[]
+    list: SystemRoleRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultSmsLogRespVO = {
+  type PageResultSystemSmsChannelRespVO = {
     /** 数据 */
-    list: SmsLogRespVO[]
+    list: SystemSmsChannelRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultSmsTemplateRespVO = {
+  type PageResultSystemSmsLogRespVO = {
     /** 数据 */
-    list: SmsTemplateRespVO[]
+    list: SystemSmsLogRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultSocialClientRespVO = {
+  type PageResultSystemSmsTemplateRespVO = {
     /** 数据 */
-    list: SocialClientRespVO[]
+    list: SystemSmsTemplateRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultSocialUserRespVO = {
+  type PageResultSystemSocialClientRespVO = {
     /** 数据 */
-    list: SocialUserRespVO[]
+    list: SystemSocialClientRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PageResultUserRespVO = {
+  type PageResultSystemSocialUserRespVO = {
     /** 数据 */
-    list: UserRespVO[]
+    list: SystemSocialUserRespVO[]
     /** 总量 */
     total: number
   }
 
-  type PermissionAssignRoleDataScopeReqVO = {
-    /** 角色编号 */
-    roleId: number
-    /** 数据范围，参见 DataScopeEnum 枚举类 */
-    dataScope: number
-    /** 部门编号列表，只有范围类型为 DEPT_CUSTOM 时，该字段才需要 */
-    dataScopeDeptIds?: number[]
-  }
-
-  type PermissionAssignRoleMenuReqVO = {
-    /** 角色编号 */
-    roleId: number
-    /** 菜单编号列表 */
-    menuIds?: number[]
-  }
-
-  type PermissionAssignUserRoleReqVO = {
-    /** 用户编号 */
-    userId: number
-    /** 角色编号列表 */
-    roleIds?: number[]
+  type PageResultSystemUserRespVO = {
+    /** 数据 */
+    list: SystemUserRespVO[]
+    /** 总量 */
+    total: number
   }
 
   type PointVO = {
@@ -1974,60 +1235,21 @@ declare namespace API {
     refresh_token?: string
   }
 
-  type PostPageReqVO = {
-    /** 页码，从 1 开始 */
-    pageNo: number
-    /** 每页条数，最大值为 100 */
-    pageSize: number
-    /** 岗位编码，模糊匹配 */
-    code?: string
-    /** 岗位名称，模糊匹配 */
-    name?: string
-    /** 展示状态，参见 CommonStatusEnum 枚举类 */
-    status?: number
-  }
-
-  type PostRespVO = {
-    /** 岗位序号 */
+  type PostRespDTO = {
+    /** 岗位 Id */
     id: number
     /** 岗位名称 */
     name: string
     /** 岗位编码 */
     code: string
-    /** 显示顺序 */
+    /** 岗位排序 */
     sort: number
-    /** 状态，参见 CommonStatusEnum 枚举类 */
+    /** 状态，参见 CommonStatusEnum 枚举 */
     status: number
-    /** 备注 */
-    remark?: string
-    /** 创建时间 */
-    createTime: string
-  }
-
-  type PostSaveReqVO = {
-    /** 岗位编号 */
-    id?: number
-    /** 岗位名称 */
-    name: string
-    /** 岗位编码 */
-    code: string
-    /** 显示顺序 */
-    sort: number
-    /** 状态 */
-    status: number
-    /** 备注 */
-    remark?: string
-  }
-
-  type PostSimpleRespVO = {
-    /** 岗位序号 */
-    id: number
-    /** 岗位名称 */
-    name: string
   }
 
   type pushParams = {
-    /** 编号 */
+    /** 通知公告 Id */
     id: number
   }
 
@@ -2068,7 +1290,1267 @@ declare namespace API {
     token: string
   }
 
-  type RolePageReqVO = {
+  type RPCfuwucaozuorizhifenyeRequestDTO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 模块类型 */
+    type: string
+    /** 模块数据编号 */
+    bizId: number
+    /** 用户编号 */
+    userId: number
+  }
+
+  type RPCfuwuxitongcaozuorizhiCreateRequestDTO = {
+    /** 链路追踪编号 */
+    traceId: string
+    /** 用户编号 */
+    userId: number
+    /** 用户类型，参见 UserTypeEnum 枚举 */
+    userType: number
+    /** 操作模块类型 */
+    type: string
+    /** 操作名 */
+    subType: string
+    /** 操作模块业务编号 */
+    bizId: number
+    /** 操作内容 */
+    action: string
+    /** 拓展字段 */
+    extra?: string
+    /** 请求方法名 */
+    requestMethod: string
+    /** 请求地址 */
+    requestUrl: string
+    /** 用户 IP */
+    userIp: string
+    /** 浏览器 UserAgent */
+    userAgent: string
+    /** 结果码 */
+    resultCode: number
+    /** 结果提示 */
+    resultMsg?: string
+    /** 操作类型 */
+    operateType: number
+    /** 执行时长，单位：毫秒 */
+    duration: number
+    /** Java 请求方法 */
+    javaMethod: string
+    /** Java 请求参数 */
+    javaMethodArgs: string
+  }
+
+  type RPCfuwuxitongcaozuorizhiResponseDTO = {
+    /** 日志编号 */
+    id: number
+    /** 链路追踪编号 */
+    traceId: string
+    /** 用户编号 */
+    userId: number
+    /** 用户名称 */
+    userName: string
+    /** 用户类型，参见 UserTypeEnum 枚举 */
+    userType: number
+    /** 操作模块类型 */
+    type: string
+    /** 操作名 */
+    subType: string
+    /** 操作模块业务编号 */
+    bizId: number
+    /** 操作内容 */
+    action: string
+    /** 拓展字段 */
+    extra?: string
+    /** 请求方法名 */
+    requestMethod: string
+    /** 请求地址 */
+    requestUrl: string
+    /** 用户 IP */
+    userIp: string
+    /** 浏览器 UserAgent */
+    userAgent: string
+    /** 创建时间 */
+    createTime: string
+    transMap?: Record<string, any>
+  }
+
+  type selectByIdParams = {
+    id: Record<string, any>
+  }
+
+  type selectByIdsParams = {
+    ids: Record<string, any>[]
+  }
+
+  type SmsCodeSendReqDTO = {
+    /** 手机号 */
+    mobile: string
+    /** 发送场景 */
+    scene: number
+    /** 发送 IP */
+    createIp: string
+  }
+
+  type SmsCodeUseReqDTO = {
+    /** 手机号 */
+    mobile: string
+    /** 发送场景 */
+    scene: number
+    /** 验证码 */
+    code: string
+    /** 发送 IP */
+    usedIp: string
+  }
+
+  type SmsCodeValidateReqDTO = {
+    /** 手机号 */
+    mobile: string
+    /** 发送场景 */
+    scene: number
+    /** 验证码 */
+    code: string
+  }
+
+  type socialLoginParams = {
+    /** 社交类型 */
+    type: number
+    /** 回调路径 */
+    redirectUri: string
+  }
+
+  type SocialUser = {
+    /** 社交平台的类型，参见 SocialTypeEnum 枚举类 */
+    type: number
+    /** 社交用户的 openid */
+    openid: string
+  }
+
+  type SocialWxaOrderNotifyConfirmReceiveReqDTO = {
+    transactionId: string
+    receivedTime: string
+  }
+
+  type SocialWxaOrderUploadShippingInfoReqDTO = {
+    openid: string
+    transactionId: string
+    logisticsType: number
+    logisticsNo?: string
+    expressCompany?: string
+    itemDesc: string
+    receiverContact: string
+  }
+
+  type SocialWxaSubscribeMessageSendReqDTO = {
+    /** 用户 Id */
+    userId: number
+    /** 用户类型 */
+    userType: number
+    /** 消息模版标题 */
+    templateTitle: string
+    /** 点击模板卡片后的跳转页面，仅限本小程序内的页面 */
+    page?: string
+    /** 模板内容的参数 */
+    messages?: Record<string, any>
+  }
+
+  type SocialWxaSubscribeTemplateRespDTO = {
+    /** 模版 Id */
+    id: string
+    /** 模版标题 */
+    title: string
+    /** 模版内容 */
+    content: string
+    /** 模板内容示例 */
+    example: string
+    /** 模版类型，2：为一次性订阅；3：为长期订阅 */
+    type: number
+  }
+
+  type SocialWxJsapiSignatureRespDTO = {
+    /** 微信公众号的 appId */
+    appId: string
+    /** 匿名串 */
+    nonceStr: string
+    /** 时间戳 */
+    timestamp: number
+    /** URL */
+    url: string
+    /** 签名 */
+    signature: string
+  }
+
+  type SocialWxPhoneNumberInfoRespDTO = {
+    /** 用户绑定的手机号（国外手机号会有区号） */
+    phoneNumber: string
+    /** 没有区号的手机号 */
+    purePhoneNumber: string
+    /** 区号 */
+    countryCode: string
+  }
+
+  type SocialWxQrcodeReqDTO = {
+    /** 场景 */
+    scene: string
+    /** 页面路径 */
+    path: string
+    /** 二维码宽度 */
+    width?: number
+    /** 是否需要透明底色 */
+    autoColor?: boolean
+    /** 是否检查 page 是否存在 */
+    checkPath?: boolean
+    /** 是否需要透明底色 */
+    hyaline?: boolean
+  }
+
+  type SystemAreaNodeRespVO = {
+    /** 地区节点 Id */
+    id: number
+    /** 名字 */
+    name: string
+  }
+
+  type SystemAuthLoginReqVO = {
+    /** 账号 */
+    username: string
+    /** 密码 */
+    password: string
+    /** 验证码，验证码开启时，需要传递 */
+    captchaVerification: string
+    /** 社交平台的类型，参见 SocialTypeEnum 枚举值 */
+    socialType: number
+    /** 授权码 */
+    socialCode: string
+    /** state */
+    socialState: string
+    socialCodeValid?: boolean
+  }
+
+  type SystemAuthLoginRespVO = {
+    /** 用户 Id */
+    userId: number
+    /** 访问令牌 */
+    accessToken: string
+    /** 刷新令牌 */
+    refreshToken: string
+    /** 过期时间 */
+    expiresTime: string
+  }
+
+  type SystemAuthPermissionInfoRespVO = {
+    user: SystemUserVO
+    /** 角色标识数组 */
+    roles: string[]
+    /** 操作权限数组 */
+    permissions: string[]
+    /** 菜单树 */
+    menus: SystemMenuVO[]
+  }
+
+  type SystemAuthSmsLoginReqVO = {
+    /** 手机号 */
+    mobile: string
+    /** 短信验证码 */
+    code: string
+  }
+
+  type SystemAuthSocialLoginReqVO = {
+    /** 社交平台的类型，参见 UserSocialTypeEnum 枚举值 */
+    type: number
+    /** 授权码 */
+    code: string
+    /** state */
+    state: string
+  }
+
+  type SystemDeptRespVO = {
+    /** 部门 Id */
+    id?: number
+    /** 部门名称 */
+    name: string
+    /** 父部门 Id */
+    parentId?: number
+    /** 显示顺序 */
+    sort: number
+    /** 负责人的用户 Id */
+    leaderUserId?: number
+    /** 联系电话 */
+    phone?: string
+    /** 邮箱 */
+    email?: string
+    /** 状态，参见 CommonStatusEnum 枚举 */
+    status: number
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemDeptSaveReqVO = {
+    /** 部门编号 */
+    id?: number
+    /** 部门名称 */
+    name: string
+    /** 父部门 ID */
+    parentId?: number
+    /** 显示顺序 */
+    sort: number
+    /** 负责人的用户编号 */
+    leaderUserId?: number
+    /** 联系电话 */
+    phone?: string
+    /** 邮箱 */
+    email?: string
+    /** 状态，参见 CommonStatusEnum 枚举 */
+    status: number
+  }
+
+  type SystemDeptSimpleRespVO = {
+    /** 部门编号 */
+    id: number
+    /** 部门名称 */
+    name: string
+    /** 父部门 ID */
+    parentId: number
+  }
+
+  type SystemDictDataPageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 字典标签 */
+    label?: string
+    /** 字典类型，模糊匹配 */
+    dictType?: string
+    /** 展示状态，参见 CommonStatusEnum 枚举类 */
+    status?: number
+  }
+
+  type SystemDictDataRespVO = {
+    /** 字典数据 Id */
+    id: number
+    /** 显示顺序 */
+    sort: number
+    /** 字典标签 */
+    label: string
+    /** 字典值 */
+    value: string
+    /** 字典类型 */
+    dictType: string
+    /** 状态，见 CommonStatusEnum 枚举 */
+    status: number
+    /** 颜色类型，default、primary、success、info、warning、danger */
+    colorType?: string
+    /** css 样式 */
+    cssClass?: string
+    /** 备注 */
+    remark?: string
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemDictDataSaveReqVO = {
+    /** 字典数据 Id */
+    id?: number
+    /** 显示顺序 */
+    sort: number
+    /** 字典标签 */
+    label: string
+    /** 字典值 */
+    value: string
+    /** 字典类型 */
+    dictType: string
+    /** 状态，见 CommonStatusEnum 枚举 */
+    status: number
+    /** 颜色类型，default、primary、success、info、warning、danger */
+    colorType?: string
+    /** css 样式 */
+    cssClass?: string
+    /** 备注 */
+    remark?: string
+  }
+
+  type SystemDictDataSimpleRespVO = {
+    /** 字典类型 */
+    dictType: string
+    /** 字典键值 */
+    value: string
+    /** 字典标签 */
+    label: string
+    /** 颜色类型，default、primary、success、info、warning、danger */
+    colorType?: string
+    /** css 样式 */
+    cssClass?: string
+  }
+
+  type SystemDictTypePageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 字典类型名称，模糊匹配 */
+    name?: string
+    /** 字典类型，模糊匹配 */
+    type?: string
+    /** 展示状态，参见 CommonStatusEnum 枚举类 */
+    status?: number
+    /** 创建时间 */
+    createTime?: string[]
+  }
+
+  type SystemDictTypeRespVO = {
+    /** 字典类型 Id */
+    id: number
+    /** 字典名称 */
+    name: string
+    /** 字典类型 */
+    type: string
+    /** 状态，参见 CommonStatusEnum 枚举类 */
+    status: number
+    /** 备注 */
+    remark?: string
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemDictTypeSaveReqVO = {
+    /** 字典类型 Id */
+    id?: number
+    /** 字典名称 */
+    name: string
+    /** 字典类型 */
+    type: string
+    /** 状态，参见 CommonStatusEnum 枚举类 */
+    status: number
+    /** 备注 */
+    remark?: string
+  }
+
+  type SystemDictTypeSimpleRespVO = {
+    /** 字典类型 Id */
+    id: number
+    /** 字典类型名称 */
+    name: string
+    /** 字典类型 */
+    type: string
+  }
+
+  type SystemLoginLogPageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 用户 IP，模拟匹配 */
+    userIp?: string
+    /** 用户账号，模拟匹配 */
+    username?: string
+    /** 操作状态 */
+    status?: boolean
+    /** 登录时间 */
+    createTime?: string[]
+  }
+
+  type SystemLoginLogRespVO = {
+    /** 日志 Id */
+    id: number
+    /** 日志类型，参见 LoginLogTypeEnum 枚举类 */
+    logType: number
+    /** 用户 Id */
+    userId?: number
+    /** 用户类型，参见 UserTypeEnum 枚举 */
+    userType: number
+    /** 链路追踪编号 */
+    traceId?: string
+    /** 用户账号 */
+    username: string
+    /** 登录结果，参见 LoginResultEnum 枚举类 */
+    result: number
+    /** 用户 IP */
+    userIp: string
+    /** 浏览器 UserAgent */
+    userAgent?: string
+    /** 登录时间 */
+    createTime: string
+  }
+
+  type SystemMailAccountPageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 邮箱 */
+    mail: string
+    /** 用户名 */
+    username: string
+  }
+
+  type SystemMailAccountRespVO = {
+    /** 邮箱账号 Id */
+    id: number
+    /** 邮箱 */
+    mail: string
+    /** 用户名 */
+    username: string
+    /** 密码 */
+    password: string
+    /** SMTP 服务器域名 */
+    host: string
+    /** SMTP 服务器端口 */
+    port: number
+    /** 是否开启 ssl */
+    sslEnable: boolean
+    /** 是否开启 starttls */
+    starttlsEnable: boolean
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemMailAccountSaveReqVO = {
+    /** 邮箱账号 Id */
+    id?: number
+    /** 邮箱 */
+    mail: string
+    /** 用户名 */
+    username: string
+    /** 密码 */
+    password: string
+    /** SMTP 服务器域名 */
+    host: string
+    /** SMTP 服务器端口 */
+    port: number
+    /** 是否开启 ssl */
+    sslEnable: boolean
+    /** 是否开启 starttls */
+    starttlsEnable: boolean
+  }
+
+  type SystemMailAccountSimpleRespVO = {
+    /** 邮箱账号 Id */
+    id: number
+    /** 邮箱 */
+    mail: string
+  }
+
+  type SystemMailLogPageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 用户 Id */
+    userId?: number
+    /** 用户类型，参见 UserTypeEnum 枚举 */
+    userType?: number
+    /** 接收邮箱地址，模糊匹配 */
+    toMail?: string
+    /** 邮箱账号 Id */
+    accountId?: number
+    /** 邮箱模板 Id */
+    templateId?: number
+    /** 发送状态，参见 MailSendStatusEnum 枚举 */
+    sendStatus?: number
+    /** 发送时间 */
+    sendTime?: string[]
+  }
+
+  type SystemMailLogRespVO = {
+    /** 邮件日志 Id */
+    id: number
+    /** 用户 Id */
+    userId?: number
+    /** 用户类型，参见 UserTypeEnum 枚举 */
+    userType?: string
+    /** 接收邮箱地址 */
+    toMail: string
+    /** 邮箱账号 Id */
+    accountId: number
+    /** 发送邮箱地址 */
+    fromMail: string
+    /** 邮件模板 Id */
+    templateId: number
+    /** 邮件模板编码 */
+    templateCode: string
+    /** 邮件模版发送人名称 */
+    templateNickname?: string
+    /** 邮件标题 */
+    templateTitle: string
+    /** 邮件内容 */
+    templateContent: string
+    /** 邮件参数 */
+    templateParams: Record<string, any>
+    /** 发送状态，参见 MailSendStatusEnum 枚举 */
+    sendStatus: string
+    /** 发送时间 */
+    sendTime?: string
+    /** 发送返回的消息 ID */
+    sendMessageId?: string
+    /** 发送异常 */
+    sendException?: string
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemMailTemplatePageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 状态，参见 CommonStatusEnum 枚举 */
+    status?: number
+    /** 邮件模板编码，模糊匹配 */
+    code?: string
+    /** 邮件模板名称，模糊匹配 */
+    name?: string
+    /** 邮件账号 Id */
+    accountId?: number
+    /** 创建时间 */
+    createTime?: string[]
+  }
+
+  type SystemMailTemplateRespVO = {
+    /** 邮件模板 Id */
+    id: number
+    /** 邮件模版名称 */
+    name: string
+    /** 邮件模版编码 */
+    code: string
+    /** 发送的邮箱账号编号 */
+    accountId: number
+    /** 发送人名称 */
+    nickname?: string
+    /** 标题 */
+    title: string
+    /** 内容 */
+    content: string
+    /** 参数数组 */
+    params?: string[]
+    /** 状态，参见 CommonStatusEnum 枚举 */
+    status: number
+    /** 备注 */
+    remark?: string
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemMailTemplateSaveReqVO = {
+    /** 邮件模板 Id */
+    id?: number
+    /** 邮件模版名称 */
+    name: string
+    /** 邮件模版 Id */
+    code: string
+    /** 发送的邮箱账号 Id */
+    accountId: number
+    /** 发送人名称 */
+    nickname?: string
+    /** 标题 */
+    title: string
+    /** 内容 */
+    content: string
+    /** 状态，参见 CommonStatusEnum 枚举 */
+    status: number
+    /** 备注 */
+    remark?: string
+  }
+
+  type SystemMailTemplateSendReqVO = {
+    /** 接收邮箱 */
+    mail: string
+    /** 邮件模板编码 */
+    templateCode: string
+    /** 邮件模板参数 */
+    templateParams?: Record<string, any>
+  }
+
+  type SystemMailTemplateSimpleRespVO = {
+    /** 邮件模版 Id */
+    id: number
+    /** 邮件模版名称 */
+    name: string
+  }
+
+  type SystemMenuRespVO = {
+    /** 菜单 Id */
+    id: number
+    /** 菜单名称 */
+    name: string
+    /** 权限标识，仅菜单类型为按钮时，才需要传递 */
+    permission?: string
+    /** 类型，参见 MenuTypeEnum 枚举类 */
+    type: number
+    /** 显示顺序 */
+    sort: number
+    /** 父菜单 ID */
+    parentId: number
+    /** 路由地址，仅菜单类型为菜单或者目录时，才需要传 */
+    path?: string
+    /** 菜单图标，仅菜单类型为菜单或者目录时，才需要传 */
+    icon?: string
+    /** 组件路径，仅菜单类型为菜单时，才需要传 */
+    component?: string
+    /** 组件名 */
+    componentName?: string
+    /** 状态，见 CommonStatusEnum 枚举 */
+    status: number
+    /** 是否可见 */
+    visible?: boolean
+    /** 是否缓存 */
+    keepAlive?: boolean
+    /** 是否总是显示 */
+    alwaysShow?: boolean
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemMenuSaveVO = {
+    /** 菜单 Id */
+    id?: number
+    /** 菜单名称 */
+    name: string
+    /** 权限标识，仅菜单类型为按钮时，才需要传递 */
+    permission?: string
+    /** 类型，参见 MenuTypeEnum 枚举类 */
+    type: number
+    /** 显示顺序 */
+    sort: number
+    /** 父菜单 ID */
+    parentId: number
+    /** 路由地址，仅菜单类型为菜单或者目录时，才需要传 */
+    path?: string
+    /** 菜单图标，仅菜单类型为菜单或者目录时，才需要传 */
+    icon?: string
+    /** 组件路径，仅菜单类型为菜单时，才需要传 */
+    component?: string
+    /** 组件名 */
+    componentName?: string
+    /** 状态，见 CommonStatusEnum 枚举 */
+    status: number
+    /** 是否可见 */
+    visible?: boolean
+    /** 是否缓存 */
+    keepAlive?: boolean
+    /** 是否总是显示 */
+    alwaysShow?: boolean
+  }
+
+  type SystemMenuSimpleRespVO = {
+    /** 菜单 Id */
+    id: number
+    /** 菜单名称 */
+    name: string
+    /** 父菜单 ID */
+    parentId: number
+    /** 类型，参见 MenuTypeEnum 枚举类 */
+    type: number
+  }
+
+  type SystemMenuVO = {
+    /** 菜单 Id */
+    id: number
+    /** 父菜单 Id */
+    parentId: number
+    /** 菜单名称 */
+    name: string
+    /** 路由地址，仅菜单类型为菜单或者目录时，才需要传 */
+    path?: string
+    /** 组件路径，仅菜单类型为菜单时，才需要传 */
+    component?: string
+    /** 组件名 */
+    componentName?: string
+    /** 菜单图标，仅菜单类型为菜单或者目录时，才需要传 */
+    icon?: string
+    /** 是否可见 */
+    visible: boolean
+    /** 是否缓存 */
+    keepAlive: boolean
+    /** 是否总是显示 */
+    alwaysShow?: boolean
+    children?: SystemMenuVO[]
+  }
+
+  type SystemNoticePageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 通知公告名称，模糊匹配 */
+    title?: string
+    /** 展示状态，参见 CommonStatusEnum 枚举类 */
+    status?: number
+  }
+
+  type SystemNoticeRespVO = {
+    /** 通知公告 Id */
+    id: number
+    /** 公告标题 */
+    title: string
+    /** 公告类型 */
+    type: number
+    /** 公告内容 */
+    content: string
+    /** 状态，参见 CommonStatusEnum 枚举类 */
+    status: number
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemNoticeSaveReqVO = {
+    /** 公告 Id */
+    id?: number
+    /** 公告标题 */
+    title: string
+    /** 公告类型 */
+    type: number
+    /** 公告内容 */
+    content: string
+    /** 状态，参见 CommonStatusEnum 枚举类 */
+    status: number
+  }
+
+  type SystemNotifyMessageMyPageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 是否已读 */
+    readStatus?: boolean
+    /** 创建时间 */
+    createTime?: string[]
+  }
+
+  type SystemNotifyMessagePageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 用户 Id */
+    userId?: number
+    /** 用户类型 */
+    userType?: number
+    /** 模板编码 */
+    templateCode?: string
+    /** 模版类型 */
+    templateType?: number
+    /** 创建时间 */
+    createTime?: string[]
+  }
+
+  type SystemNotifyMessageRespVO = {
+    /** 站内信 Id */
+    id: number
+    /** 用户 Id */
+    userId: number
+    /** 用户类型，参见 UserTypeEnum 枚举 */
+    userType: string
+    /** 模版编号 */
+    templateId: number
+    /** 模板编码 */
+    templateCode: string
+    /** 模版发送人名称 */
+    templateNickname: string
+    /** 模版内容 */
+    templateContent: string
+    /** 模版类型 */
+    templateType: number
+    /** 模版参数 */
+    templateParams: Record<string, any>
+    /** 是否已读 */
+    readStatus: boolean
+    /** 阅读时间 */
+    readTime?: string
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemNotifyTemplatePageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 站内信模版编码 */
+    code?: string
+    /** 站内信模版名称 */
+    name?: string
+    /** 状态，参见 CommonStatusEnum 枚举类 */
+    status?: number
+    /** 创建时间 */
+    createTime?: string[]
+  }
+
+  type SystemNotifyTemplateRespVO = {
+    /** 站内信模版 Id */
+    id: number
+    /** 站内信模版名称 */
+    name: string
+    /** 站内信模版编码 */
+    code: string
+    /** 站内信模版类型，对应 system_notify_template_type 字典 */
+    type: number
+    /** 发送人名称 */
+    nickname: string
+    /** 站内信模版内容 */
+    content: string
+    /** 参数数组 */
+    params?: string[]
+    /** 状态，参见 CommonStatusEnum 枚举 */
+    status: number
+    /** 备注 */
+    remark?: string
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemNotifyTemplateSaveReqVO = {
+    /** 站内信模版 Id */
+    id?: number
+    /** 站内信模版名称 */
+    name: string
+    /** 站内信模版编码 */
+    code: string
+    /** 站内信模版类型，对应 system_notify_template_type 字典 */
+    type: number
+    /** 发送人名称 */
+    nickname: string
+    /** 站内信模版内容 */
+    content: string
+    /** 站内信状态，参见 CommonStatusEnum 枚举 */
+    status: number
+    /** 备注 */
+    remark?: string
+  }
+
+  type SystemNotifyTemplateSendReqVO = {
+    /** 用户 Id */
+    userId: number
+    /** 用户类型 */
+    userType: number
+    /** 站内信模板编码 */
+    templateCode: string
+    /** 站内信模板参数 */
+    templateParams?: Record<string, any>
+  }
+
+  type SystemOAuth2AccessTokenPageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 用户编号 */
+    userId: number
+    /** 用户类型，参见 UserTypeEnum 枚举 */
+    userType: number
+    /** 客户端编号 */
+    clientId: string
+  }
+
+  type SystemOAuth2AccessTokenRespVO = {
+    /** 编号 */
+    id: number
+    /** 访问令牌 */
+    accessToken: string
+    /** 刷新令牌 */
+    refreshToken: string
+    /** 用户编号 */
+    userId: number
+    /** 用户类型，参见 UserTypeEnum 枚举 */
+    userType: number
+    /** 客户端编号 */
+    clientId: string
+    /** 创建时间 */
+    createTime: string
+    /** 过期时间 */
+    expiresTime: string
+  }
+
+  type SystemOAuth2ClientPageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 应用名，模糊匹配 */
+    name?: string
+    /** 状态，参见 CommonStatusEnum 枚举 */
+    status?: number
+  }
+
+  type SystemOAuth2ClientRespVO = {
+    /** 编号 */
+    id: number
+    /** 客户端编号 */
+    clientId: string
+    /** 客户端密钥 */
+    secret: string
+    /** 应用名 */
+    name: string
+    /** 应用图标 */
+    logo: string
+    /** 应用描述 */
+    description?: string
+    /** 状态，参见 CommonStatusEnum 枚举 */
+    status: number
+    /** 访问令牌的有效期 */
+    accessTokenValiditySeconds: number
+    /** 刷新令牌的有效期 */
+    refreshTokenValiditySeconds: number
+    /** 可重定向的 URI 地址 */
+    redirectUris: string[]
+    /** 授权类型，参见 OAuth2GrantTypeEnum 枚举 */
+    authorizedGrantTypes: string[]
+    /** 授权范围 */
+    scopes?: string[]
+    /** 自动通过的授权范围 */
+    autoApproveScopes?: string[]
+    /** 权限 */
+    authorities?: string[]
+    /** 资源 */
+    resourceIds?: string[]
+    /** 附加信息 */
+    additionalInformation?: string
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemOAuth2ClientSaveReqVO = {
+    /** 编号 */
+    id?: number
+    /** 客户端编号 */
+    clientId: string
+    /** 客户端密钥 */
+    secret: string
+    /** 应用名 */
+    name: string
+    /** 应用图标 */
+    logo: string
+    /** 应用描述 */
+    description?: string
+    /** 状态，参见 CommonStatusEnum 枚举 */
+    status: number
+    /** 访问令牌的有效期 */
+    accessTokenValiditySeconds: number
+    /** 刷新令牌的有效期 */
+    refreshTokenValiditySeconds: number
+    /** 可重定向的 URI 地址 */
+    redirectUris: string[]
+    /** 授权类型，参见 OAuth2GrantTypeEnum 枚举 */
+    authorizedGrantTypes: string[]
+    /** 授权范围 */
+    scopes?: string[]
+    /** 自动通过的授权范围 */
+    autoApproveScopes?: string[]
+    /** 权限 */
+    authorities?: string[]
+    /** 资源 */
+    resourceIds?: string[]
+    /** 附加信息 */
+    additionalInformation?: string
+    additionalInformationJson?: boolean
+  }
+
+  type SystemOAuth2OpenAccessTokenRespVO = {
+    /** 授权范围，如果多个授权范围，使用空格分隔 */
+    scope?: string
+    /** 访问令牌 */
+    access_token: string
+    /** 刷新令牌 */
+    refresh_token: string
+    /** 令牌类型 */
+    token_type: string
+    /** 过期时间，单位：秒 */
+    expires_in: number
+  }
+
+  type SystemOAuth2OpenAuthorizeInfoRespVO = {
+    client?: Client
+    /** scope 的选中信息，使用 List 保证有序性，Key 是 scope，Value 为是否选中 */
+    scopes: KeyValueStringBoolean[]
+  }
+
+  type SystemOAuth2OpenCheckTokenRespVO = {
+    /** 授权范围 */
+    scopes: string[]
+    /** 过期时间，时间戳 / 1000，单位：秒 */
+    exp: number
+    /** 用户编号 */
+    user_id: number
+    /** 用户类型，参见 UserTypeEnum 枚举 */
+    user_type: number
+    /** 客户端编号 */
+    client_id: string
+    /** 访问令牌 */
+    access_token: string
+  }
+
+  type SystemOAuth2UserInfoRespVO = {
+    /** 用户编号 */
+    id: number
+    /** 用户账号 */
+    username: string
+    /** 用户昵称 */
+    nickname: string
+    /** 用户邮箱 */
+    email?: string
+    /** 手机号码 */
+    mobile?: string
+    /** 用户性别，参见 SexEnum 枚举类 */
+    sex?: number
+    /** 用户头像 */
+    avatar?: string
+    dept?: Dept
+    posts?: Post[]
+  }
+
+  type SystemOAuth2UserUpdateReqVO = {
+    /** 用户昵称 */
+    nickname: string
+    /** 用户邮箱 */
+    email?: string
+    /** 手机号码 */
+    mobile?: string
+    /** 用户性别，参见 SexEnum 枚举类 */
+    sex?: number
+  }
+
+  type SystemOperateLogPageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 用户 Id */
+    userId?: number
+    /** 操作模块业务编号 */
+    bizId?: number
+    /** 操作模块，模拟匹配 */
+    type?: string
+    /** 操作名，模拟匹配 */
+    subType?: string
+    /** 操作明细，模拟匹配 */
+    action?: string
+    /** 开始时间 */
+    createTime?: string[]
+  }
+
+  type SystemOperateLogRespVO = {
+    /** 日志 Id */
+    id: number
+    /** 链路追踪编号 */
+    traceId: string
+    /** 用户编号 */
+    userId: number
+    /** 用户昵称 */
+    userName: string
+    /** 用户类型 */
+    userType: string
+    /** 操作模块类型 */
+    type: string
+    /** 操作名 */
+    subType: string
+    /** 操作模块业务编号 */
+    bizId: number
+    /** 操作明细 */
+    action?: string
+    /** 拓展字段 */
+    extra?: string
+    /** 请求方法名 */
+    requestMethod: string
+    /** 请求地址 */
+    requestUrl: string
+    /** 用户 IP */
+    userIp: string
+    /** 浏览器 UserAgent */
+    userAgent: string
+    /** 创建时间 */
+    createTime: string
+    /** 操作类型，参见 OperateTypeEnum 枚举 */
+    operateType: number
+    /** Java 请求方法 */
+    javaMethod: string
+    /** Java 请求参数 */
+    javaMethodArgs: string
+    /** 执行时长，单位：毫秒 */
+    duration: number
+    /** 结果码 */
+    resultCode: number
+    /** 结果提示 */
+    resultMsg: string
+    transMap?: Record<string, any>
+  }
+
+  type SystemPermissionAssignRoleDataScopeReqVO = {
+    /** 角色编号 */
+    roleId: number
+    /** 数据范围，参见 DataScopeEnum 枚举类 */
+    dataScope: number
+    /** 部门编号列表，只有范围类型为 DEPT_CUSTOM 时，该字段才需要 */
+    dataScopeDeptIds?: number[]
+  }
+
+  type SystemPermissionAssignRoleMenuReqVO = {
+    /** 角色编号 */
+    roleId: number
+    /** 菜单编号列表 */
+    menuIds?: number[]
+  }
+
+  type SystemPermissionAssignUserRoleReqVO = {
+    /** 用户编号 */
+    userId: number
+    /** 角色编号列表 */
+    roleIds?: number[]
+  }
+
+  type SystemPostPageReqVO = {
+    /** 页码，从 1 开始 */
+    pageNo: number
+    /** 每页条数，最大值为 100 */
+    pageSize: number
+    /** 岗位编码，模糊匹配 */
+    code?: string
+    /** 岗位名称，模糊匹配 */
+    name?: string
+    /** 展示状态，参见 CommonStatusEnum 枚举类 */
+    status?: number
+  }
+
+  type SystemPostRespVO = {
+    /** 岗位序号 */
+    id: number
+    /** 岗位名称 */
+    name: string
+    /** 岗位编码 */
+    code: string
+    /** 显示顺序 */
+    sort: number
+    /** 状态，参见 CommonStatusEnum 枚举类 */
+    status: number
+    /** 备注 */
+    remark?: string
+    /** 创建时间 */
+    createTime: string
+  }
+
+  type SystemPostSaveReqVO = {
+    /** 岗位编号 */
+    id?: number
+    /** 岗位名称 */
+    name: string
+    /** 岗位编码 */
+    code: string
+    /** 显示顺序 */
+    sort: number
+    /** 状态 */
+    status: number
+    /** 备注 */
+    remark?: string
+  }
+
+  type SystemPostSimpleRespVO = {
+    /** 岗位序号 */
+    id: number
+    /** 岗位名称 */
+    name: string
+  }
+
+  type SystemRolePageReqVO = {
     /** 页码，从 1 开始 */
     pageNo: number
     /** 每页条数，最大值为 100 */
@@ -2083,7 +2565,7 @@ declare namespace API {
     createTime?: string[]
   }
 
-  type RoleRespVO = {
+  type SystemRoleRespVO = {
     /** 角色编号 */
     id: number
     /** 角色名称 */
@@ -2100,13 +2582,13 @@ declare namespace API {
     remark?: string
     /** 数据范围，参见 DataScopeEnum 枚举类 */
     dataScope: number
-    /** 数据范围(指定部门数组) */
+    /** 数据范围（指定部门数组） */
     dataScopeDeptIds?: number[]
     /** 创建时间 */
     createTime: string
   }
 
-  type RoleSaveReqVO = {
+  type SystemRoleSaveReqVO = {
     /** 角色编号 */
     id?: number
     /** 角色名称 */
@@ -2119,14 +2601,14 @@ declare namespace API {
     remark?: string
   }
 
-  type RoleSimpleRespVO = {
-    /** 角色编号 */
+  type SystemRoleSimpleRespVO = {
+    /** 角色 Id */
     id: number
     /** 角色名称 */
     name: string
   }
 
-  type SmsChannelPageReqVO = {
+  type SystemSmsChannelPageReqVO = {
     /** 页码，从 1 开始 */
     pageNo: number
     /** 每页条数，最大值为 100 */
@@ -2139,12 +2621,12 @@ declare namespace API {
     createTime?: string[]
   }
 
-  type SmsChannelRespVO = {
-    /** 编号 */
+  type SystemSmsChannelRespVO = {
+    /** 短信渠道 Id */
     id: number
     /** 短信签名 */
     signature: string
-    /** 渠道编码，参见 SmsChannelEnum 枚举类 */
+    /** 短信渠道编码，参见 SystemSmsChannelEnum 枚举类 */
     code: string
     /** 启用状态 */
     status: number
@@ -2160,12 +2642,12 @@ declare namespace API {
     createTime: string
   }
 
-  type SmsChannelSaveReqVO = {
-    /** 编号 */
+  type SystemSmsChannelSaveReqVO = {
+    /** 短信渠道 Id */
     id?: number
     /** 短信签名 */
     signature: string
-    /** 渠道编码，参见 SmsChannelEnum 枚举类 */
+    /** 短信渠道编码，参见 SystemSmsChannelEnum 枚举类 */
     code: string
     /** 启用状态 */
     status: number
@@ -2179,23 +2661,23 @@ declare namespace API {
     callbackUrl?: string
   }
 
-  type SmsChannelSimpleRespVO = {
-    /** 编号 */
+  type SystemSmsChannelSimpleRespVO = {
+    /** 短信渠道 Id */
     id: number
     /** 短信签名 */
     signature: string
-    /** 渠道编码，参见 SmsChannelEnum 枚举类 */
+    /** 短信渠道编码，参见 SystemSmsChannelEnum 枚举类 */
     code: string
   }
 
-  type SmsLogPageReqVO = {
+  type SystemSmsLogPageReqVO = {
     /** 页码，从 1 开始 */
     pageNo: number
     /** 每页条数，最大值为 100 */
     pageSize: number
-    /** 短信渠道编号 */
+    /** 短信渠道 Id */
     channelId?: number
-    /** 模板编号 */
+    /** 短信模板 Id */
     templateId?: number
     /** 手机号 */
     mobile?: string
@@ -2209,16 +2691,16 @@ declare namespace API {
     receiveTime?: string[]
   }
 
-  type SmsLogRespVO = {
-    /** 编号 */
+  type SystemSmsLogRespVO = {
+    /** 短信日志 Id */
     id: number
-    /** 短信渠道编号 */
+    /** 短信渠道 Id */
     channelId: number
     /** 短信渠道编码 */
     channelCode: string
-    /** 模板编号 */
+    /** 短信模板 Id */
     templateId: number
-    /** 模板编码 */
+    /** 短信模板编码 */
     templateCode: string
     /** 短信类型 */
     templateType: number
@@ -2226,11 +2708,11 @@ declare namespace API {
     templateContent: string
     /** 短信参数 */
     templateParams: Record<string, any>
-    /** 短信 API 的模板编号 */
+    /** 短信 API 的模板 Id */
     apiTemplateId: string
     /** 手机号 */
     mobile: string
-    /** 用户编号 */
+    /** 用户 Id */
     userId?: number
     /** 用户类型 */
     userType?: number
@@ -2258,7 +2740,7 @@ declare namespace API {
     createTime: string
   }
 
-  type SmsTemplatePageReqVO = {
+  type SystemSmsTemplatePageReqVO = {
     /** 页码，从 1 开始 */
     pageNo: number
     /** 每页条数，最大值为 100 */
@@ -2267,38 +2749,38 @@ declare namespace API {
     type?: number
     /** 开启状态 */
     status?: number
-    /** 模板编码，模糊匹配 */
+    /** 短信模板编码，模糊匹配 */
     code?: string
-    /** 模板内容，模糊匹配 */
+    /** 短信模板内容，模糊匹配 */
     content?: string
-    /** 短信 API 的模板编号，模糊匹配 */
+    /** 短信 API 的模板 Id，模糊匹配 */
     apiTemplateId?: string
-    /** 短信渠道编号 */
+    /** 短信渠道 Id */
     channelId?: number
     /** 创建时间 */
     createTime?: string[]
   }
 
-  type SmsTemplateRespVO = {
-    /** 编号 */
+  type SystemSmsTemplateRespVO = {
+    /** 短信模板 Id */
     id: number
     /** 短信类型，参见 SmsTemplateTypeEnum 枚举类 */
     type: number
     /** 开启状态，参见 CommonStatusEnum 枚举类 */
     status: number
-    /** 模板编码 */
+    /** 短信模板编码 */
     code: string
-    /** 模板名称 */
+    /** 短信模板名称 */
     name: string
-    /** 模板内容 */
+    /** 短信模板内容 */
     content: string
     /** 参数数组 */
     params?: string[]
     /** 备注 */
     remark?: string
-    /** 短信 API 的模板编号 */
+    /** 短信 API 的模板 Id */
     apiTemplateId: string
-    /** 短信渠道编号 */
+    /** 短信渠道 Id */
     channelId: number
     /** 短信渠道编码 */
     channelCode: string
@@ -2306,18 +2788,18 @@ declare namespace API {
     createTime: string
   }
 
-  type SmsTemplateSaveReqVO = {
-    /** 编号 */
+  type SystemSmsTemplateSaveReqVO = {
+    /** 短信模板 Id */
     id?: number
     /** 短信类型，参见 SmsTemplateTypeEnum 枚举类 */
     type: number
     /** 开启状态，参见 CommonStatusEnum 枚举类 */
     status: number
-    /** 模板编码 */
+    /** 短信模板编码 */
     code: string
-    /** 模板名称 */
+    /** 短信模板名称 */
     name: string
-    /** 模板内容 */
+    /** 短信模板内容 */
     content: string
     /** 备注 */
     remark?: string
@@ -2327,16 +2809,16 @@ declare namespace API {
     channelId: number
   }
 
-  type SmsTemplateSendReqVO = {
+  type SystemSmsTemplateSendReqVO = {
     /** 手机号 */
     mobile: string
-    /** 模板编码 */
+    /** 短信模板编码 */
     templateCode: string
-    /** 模板参数 */
+    /** 短信模板参数 */
     templateParams?: Record<string, any>
   }
 
-  type SocialClientPageReqVO = {
+  type SystemSocialClientPageReqVO = {
     /** 页码，从 1 开始 */
     pageNo: number
     /** 每页条数，最大值为 100 */
@@ -2347,14 +2829,14 @@ declare namespace API {
     socialType?: number
     /** 用户类型 */
     userType?: number
-    /** 客户端编号 */
+    /** 客户端 Id */
     clientId?: string
     /** 状态 */
     status?: number
   }
 
-  type SocialClientRespVO = {
-    /** 编号 */
+  type SystemSocialClientRespVO = {
+    /** Id */
     id: number
     /** 应用名 */
     name: string
@@ -2362,7 +2844,7 @@ declare namespace API {
     socialType: number
     /** 用户类型 */
     userType: number
-    /** 客户端编号 */
+    /** 客户端 Id */
     clientId: string
     /** 客户端密钥 */
     clientSecret: string
@@ -2374,8 +2856,8 @@ declare namespace API {
     createTime: string
   }
 
-  type SocialClientSaveReqVO = {
-    /** 编号 */
+  type SystemSocialClientSaveReqVO = {
+    /** Id */
     id?: number
     /** 应用名 */
     name: string
@@ -2383,31 +2865,17 @@ declare namespace API {
     socialType: number
     /** 用户类型 */
     userType: number
-    /** 客户端编号 */
+    /** 客户端 Id */
     clientId: string
     /** 客户端密钥 */
     clientSecret: string
-    /** 授权方的网页应用编号 */
+    /** 授权方的网页应用 Id */
     agentId: string
     /** 状态 */
     status: number
   }
 
-  type socialLoginParams = {
-    /** 社交类型 */
-    type: number
-    /** 回调路径 */
-    redirectUri: string
-  }
-
-  type SocialUser = {
-    /** 社交平台的类型，参见 SocialTypeEnum 枚举类 */
-    type: number
-    /** 社交用户的 openid */
-    openid: string
-  }
-
-  type SocialUserBindReqVO = {
+  type SystemSocialUserBindReqVO = {
     /** 社交平台的类型，参见 UserSocialTypeEnum 枚举值 */
     type: number
     /** 授权码 */
@@ -2416,7 +2884,7 @@ declare namespace API {
     state: string
   }
 
-  type SocialUserPageReqVO = {
+  type SystemSocialUserPageReqVO = {
     /** 页码，从 1 开始 */
     pageNo: number
     /** 每页条数，最大值为 100 */
@@ -2431,8 +2899,8 @@ declare namespace API {
     createTime?: string[]
   }
 
-  type SocialUserRespVO = {
-    /** 主键(自增策略) */
+  type SystemSocialUserRespVO = {
+    /** 用户 Id */
     id: number
     /** 社交平台的类型 */
     type: number
@@ -2458,19 +2926,14 @@ declare namespace API {
     updateTime: string
   }
 
-  type SocialUserUnbindReqVO = {
+  type SystemSocialUserUnbindReqVO = {
     /** 社交平台的类型，参见 UserSocialTypeEnum 枚举值 */
     type: number
     /** 社交用户的 openid */
     openid: string
   }
 
-  type updateNotifyMessageReadParams = {
-    /** 站内信 Ids */
-    ids: number[]
-  }
-
-  type UserImportRespVO = {
+  type SystemUserImportRespVO = {
     /** 创建成功的用户名数组 */
     createUsernames: string[]
     /** 更新成功的用户名数组 */
@@ -2479,7 +2942,7 @@ declare namespace API {
     failureUsernames: Record<string, any>
   }
 
-  type UserPageReqVO = {
+  type SystemUserPageReqVO = {
     /** 页码，从 1 开始 */
     pageNo: number
     /** 每页条数，最大值为 100 */
@@ -2496,8 +2959,8 @@ declare namespace API {
     deptId?: number
   }
 
-  type UserProfileRespVO = {
-    /** 用户编号 */
+  type SystemUserProfileRespVO = {
+    /** 用户 Id */
     id: number
     /** 用户账号 */
     username: string
@@ -2517,20 +2980,20 @@ declare namespace API {
     loginDate: string
     /** 创建时间 */
     createTime: string
-    roles?: RoleSimpleRespVO[]
-    dept?: DeptSimpleRespVO
-    posts?: PostSimpleRespVO[]
+    roles?: SystemRoleSimpleRespVO[]
+    dept?: SystemDeptSimpleRespVO
+    posts?: SystemPostSimpleRespVO[]
     socialUsers?: SocialUser[]
   }
 
-  type UserProfileUpdatePasswordReqVO = {
+  type SystemUserProfileUpdatePasswordReqVO = {
     /** 旧密码 */
     oldPassword: string
     /** 新密码 */
     newPassword: string
   }
 
-  type UserProfileUpdateReqVO = {
+  type SystemUserProfileUpdateReqVO = {
     /** 用户昵称 */
     nickname: string
     /** 用户邮箱 */
@@ -2541,7 +3004,7 @@ declare namespace API {
     sex?: number
   }
 
-  type UserRespVO = {
+  type SystemUserRespVO = {
     /** 用户编号 */
     id: number
     /** 用户账号 */
@@ -2550,7 +3013,7 @@ declare namespace API {
     nickname: string
     /** 备注 */
     remark?: string
-    /** 部门ID */
+    /** 部门 Id */
     deptId?: number
     /** 部门名称 */
     deptName?: string
@@ -2574,7 +3037,7 @@ declare namespace API {
     createTime: string
   }
 
-  type UserSaveReqVO = {
+  type SystemUserSaveReqVO = {
     /** 用户编号 */
     id?: number
     /** 用户账号 */
@@ -2599,32 +3062,32 @@ declare namespace API {
     password: string
   }
 
-  type UserSimpleRespVO = {
+  type SystemUserSimpleRespVO = {
     /** 用户编号 */
     id: number
     /** 用户昵称 */
     nickname: string
-    /** 部门ID */
+    /** 部门 ID */
     deptId?: number
     /** 部门名称 */
     deptName?: string
   }
 
-  type UserUpdatePasswordReqVO = {
+  type SystemUserUpdatePasswordReqVO = {
     /** 用户编号 */
     id: number
     /** 密码 */
     password: string
   }
 
-  type UserUpdateStatusReqVO = {
+  type SystemUserUpdateStatusReqVO = {
     /** 用户编号 */
     id: number
-    /** 状态，见 CommonStatusEnum 枚举 */
+    /** 状态，参见 CommonStatusEnum 枚举 */
     status: number
   }
 
-  type UserVO = {
+  type SystemUserVO = {
     /** 用户编号 */
     id: number
     /** 用户昵称 */
@@ -2635,35 +3098,31 @@ declare namespace API {
     deptId: number
   }
 
-  type FakeCaptcha = {
-    code?: number
-    status?: string
+  type updateNotifyMessageReadParams = {
+    /** 站内信 Ids */
+    ids: number[]
   }
 
-    type LoginResult = {
-    status?: string
-    type?: string
-    currentAuthority?: string
+  type uploadWxaOrderShippingInfoParams = {
+    userType: number
   }
 
-  type CurrentUser = {
-    name?: string
-    avatar?: string
-    userid?: string
-    email?: string
-    signature?: string
-    title?: string
-    group?: string
-    tags?: { key?: string; label?: string }[]
-    notifyCount?: number
-    unreadCount?: number
-    country?: string
-    access?: string
-    geographic?: {
-      province?: { label?: string; key?: string }
-      city?: { label?: string; key?: string }
-    }
-    address?: string
-    phone?: string
+  type validateDeptListParams = {
+    /** 部门 Ids */
+    ids: number[]
+  }
+
+  type validateSmsCodeParams = {
+    reqDTO: SmsCodeValidateReqDTO
+  }
+
+  type validateUserListParams = {
+    /** 用户 Ids */
+    ids: number[]
+  }
+
+  type validPostListParams = {
+    /** 岗位 Id 数组 */
+    ids: number[]
   }
 }
