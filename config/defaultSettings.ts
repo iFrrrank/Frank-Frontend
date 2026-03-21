@@ -11,6 +11,7 @@ const Settings: ProLayoutProps & {
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
+  siderWidth: 150,
   colorWeak: false,
   title: 'Frank Design Pro',
   pwa: true,

@@ -136,3 +136,4 @@ export const request: RequestConfig = {
   baseURL: 'http://localhost:9001',
   ...errorConfig
 }
+
