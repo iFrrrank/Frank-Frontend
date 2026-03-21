@@ -1,31 +1,38 @@
 import React, { useRef, useState } from 'react'
-import { Button, Col, Row, message, Upload, Switch, Modal, Input, Dropdown } from 'antd'
 import type { MenuProps } from 'antd'
+import { Button, Col, Dropdown, Input, message, Modal, Row, Switch, Upload } from 'antd'
 import {
   DeleteOutlined,
+  DoubleRightOutlined,
   DownloadOutlined,
+  EditOutlined,
+  ExclamationCircleOutlined,
+  InboxOutlined,
+  KeyOutlined,
   PlusOutlined,
   UploadOutlined,
-  InboxOutlined,
-  ExclamationCircleOutlined,
-  EditOutlined,
-  KeyOutlined,
-  UserSwitchOutlined,
-  DoubleRightOutlined
+  UserSwitchOutlined
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable, ModalForm, ProFormText, ProFormSelect, ProFormTreeSelect, ProFormTextArea } from '@ant-design/pro-components'
+import {
+  ModalForm,
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea,
+  ProFormTreeSelect,
+  ProTable
+} from '@ant-design/pro-components'
 import DeptTree from '@/pages/system/user/DeptTree'
 import {
-  getUserPage,
-  getUser,
   createUser,
-  updateUser,
   deleteUser,
-  updateUserPassword,
   exportUserList,
+  getUser,
+  getUserPage,
   importExcel,
-  importTemplate
+  importTemplate,
+  updateUser,
+  updateUserPassword
 } from '@/api/system/user'
 import { getSimpleDeptList } from '@/api/system/dept'
 import { getSimplePostList } from '@/api/system/post'
@@ -331,7 +338,9 @@ const App_: React.FC = () => {
               deptId: selectedDeptId
             }
           })
-          const blob = new Blob([resp], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+          const blob = new Blob([resp], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          })
           const url = window.URL.createObjectURL(blob)
           const link = document.createElement('a')
           link.href = url
@@ -350,7 +359,9 @@ const App_: React.FC = () => {
   const handleDownloadTemplate = async () => {
     try {
       const resp = await importTemplate()
-      const blob = new Blob([resp], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+      const blob = new Blob([resp], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      })
       const url = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
@@ -372,10 +383,7 @@ const App_: React.FC = () => {
     try {
       const formData = new FormData()
       formData.append('file', importFile)
-      const resp = await importExcel(
-        { updateSupport, file: importFile } as any,
-        formData as any
-      )
+      const resp = await importExcel({ updateSupport, file: importFile } as any, formData as any)
       if (resp.code === 0) {
         const data = resp.data
         const msgs: string[] = []
@@ -534,17 +542,21 @@ const App_: React.FC = () => {
             setEditingUser(null)
           }
         }}
-        initialValues={editingUser ? {
-          id: editingUser.id,
-          nickname: editingUser.nickname,
-          deptId: editingUser.deptId,
-          mobile: editingUser.mobile,
-          email: editingUser.email,
-          username: editingUser.username,
-          sex: editingUser.sex,
-          postIds: editingUser.postIds,
-          remark: editingUser.remark
-        } : undefined}
+        initialValues={
+          editingUser
+            ? {
+                id: editingUser.id,
+                nickname: editingUser.nickname,
+                deptId: editingUser.deptId,
+                mobile: editingUser.mobile,
+                email: editingUser.email,
+                username: editingUser.username,
+                sex: editingUser.sex,
+                postIds: editingUser.postIds,
+                remark: editingUser.remark
+              }
+            : undefined
+        }
         layout="horizontal"
         labelCol={{ span: 7 }}
         wrapperCol={{ span: 17 }}
@@ -771,10 +783,7 @@ const App_: React.FC = () => {
         </Dragger>
         <div style={{ marginTop: 16 }}>
           <span style={{ marginRight: 8 }}>是否覆盖更新已有用户：</span>
-          <Switch
-            checked={updateSupport}
-            onChange={setUpdateSupport}
-          />
+          <Switch checked={updateSupport} onChange={setUpdateSupport} />
         </div>
       </Modal>
     </Row>

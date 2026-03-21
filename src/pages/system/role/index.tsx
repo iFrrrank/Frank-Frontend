@@ -1,30 +1,24 @@
-import React, { useRef, useState, useMemo } from 'react'
-import { Button, message, Modal, Switch, Tooltip, Dropdown, Space, Tree } from 'antd'
-import type { MenuProps, DataNode } from 'antd'
+import React, { useRef, useState } from 'react'
+import { Button, message, Modal, Space, Switch, Tree } from 'antd'
+import type { DataNode } from 'antd/es/tree'
 import {
-  PlusOutlined,
-  DownloadOutlined,
   DeleteOutlined,
+  DownloadOutlined,
   ExclamationCircleOutlined,
-  EditOutlined,
-  SettingOutlined,
-  CheckCircleOutlined
+  PlusOutlined
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable, ModalForm, ProFormText, ProFormDigit, ProFormSelect, ProFormTextArea } from '@ant-design/pro-components'
 import {
-  getRolePage,
-  createRole,
-  updateRole,
-  deleteRole,
-  exportUsingGet
-} from '@/api/system/role'
-import {
-  assignRoleMenu,
-  assignRoleDataScope,
-  getRoleMenuList
-} from '@/api/system/permission'
-import { getSimpleMenuList } from '@/api/system/menu'
+  ModalForm,
+  ProFormDigit,
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea,
+  ProTable
+} from '@ant-design/pro-components'
+import { createRole, deleteRole, exportUsingGet, getRolePage, updateRole } from '@/api/system/role'
+import { assignRoleDataScope, assignRoleMenu, getRoleMenuList } from '@/api/system/permission'
+import { getSimpleMenuList } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
 
 // 将扁平菜单数据转换为树形结构
 const buildMenuTreeData = (list: { id: number; name: string; parentId: number }[]): DataNode[] => {
@@ -97,9 +91,27 @@ const Role: React.FC = () => {
       hideInSearch: true,
       render: (_, record) => {
         return record.type === 1 ? (
-          <span style={{ color: '#ff4d4f', background: '#fff1f0', padding: '2px 8px', borderRadius: '4px' }}>内置</span>
+          <span
+            style={{
+              color: '#ff4d4f',
+              background: '#fff1f0',
+              padding: '2px 8px',
+              borderRadius: '4px'
+            }}
+          >
+            内置
+          </span>
         ) : (
-          <span style={{ color: '#1890ff', background: '#e6f7ff', padding: '2px 8px', borderRadius: '4px' }}>自定义</span>
+          <span
+            style={{
+              color: '#1890ff',
+              background: '#e6f7ff',
+              padding: '2px 8px',
+              borderRadius: '4px'
+            }}
+          >
+            自定义
+          </span>
         )
       }
     },
@@ -240,7 +252,9 @@ const Role: React.FC = () => {
           const resp = await exportUsingGet({
             exportReqVO: formValues
           })
-          const blob = new Blob([resp], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+          const blob = new Blob([resp], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          })
           const url = window.URL.createObjectURL(blob)
           const link = document.createElement('a')
           link.href = url
@@ -269,7 +283,7 @@ const Role: React.FC = () => {
         const list = resp.data as any[]
         const tree = buildMenuTreeData(list)
         setMenuTreeData(tree)
-        setAllMenuKeys(list.map(item => item.id))
+        setAllMenuKeys(list.map((item) => item.id))
       }
     } catch (e) {
       console.error(e)
@@ -418,7 +432,11 @@ const Role: React.FC = () => {
             danger
             disabled={selectedRowKeys.length === 0}
             onClick={handleBatchDelete}
-            style={selectedRowKeys.length > 0 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' } : {}}
+            style={
+              selectedRowKeys.length > 0
+                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
+                : {}
+            }
           >
             批量删除
           </Button>
@@ -436,14 +454,18 @@ const Role: React.FC = () => {
             setEditingRole(null)
           }
         }}
-        initialValues={editingRole ? {
-          id: editingRole.id,
-          name: editingRole.name,
-          code: editingRole.code,
-          sort: editingRole.sort,
-          status: editingRole.status,
-          remark: editingRole.remark
-        } : { sort: 0, status: 0 }}
+        initialValues={
+          editingRole
+            ? {
+                id: editingRole.id,
+                name: editingRole.name,
+                code: editingRole.code,
+                sort: editingRole.sort,
+                status: editingRole.status,
+                remark: editingRole.remark
+              }
+            : { sort: 0, status: 0 }
+        }
         layout="horizontal"
         labelCol={{ span: 5 }}
         wrapperCol={{ span: 19 }}
@@ -530,13 +552,27 @@ const Role: React.FC = () => {
           <Space size={32}>
             <div>
               <span style={{ color: '#888', marginRight: 8 }}>角色名称</span>
-              <span style={{ color: '#1890ff', background: '#e6f7ff', padding: '2px 8px', borderRadius: '4px' }}>
+              <span
+                style={{
+                  color: '#1890ff',
+                  background: '#e6f7ff',
+                  padding: '2px 8px',
+                  borderRadius: '4px'
+                }}
+              >
                 {currentRole?.name}
               </span>
             </div>
             <div>
               <span style={{ color: '#888', marginRight: 8 }}>角色标识</span>
-              <span style={{ color: '#1890ff', background: '#e6f7ff', padding: '2px 8px', borderRadius: '4px' }}>
+              <span
+                style={{
+                  color: '#1890ff',
+                  background: '#e6f7ff',
+                  padding: '2px 8px',
+                  borderRadius: '4px'
+                }}
+              >
                 {currentRole?.code}
               </span>
             </div>
@@ -549,7 +585,15 @@ const Role: React.FC = () => {
             <span style={{ marginLeft: 16 }}>全部展开/折叠：</span>
             <Switch checked={isExpandAll} onChange={handleExpandAllChange} size="small" />
           </Space>
-          <div style={{ height: 350, overflowY: 'auto', border: '1px solid #d9d9d9', borderRadius: '4px', padding: 8 }}>
+          <div
+            style={{
+              height: 350,
+              overflowY: 'auto',
+              border: '1px solid #d9d9d9',
+              borderRadius: '4px',
+              padding: 8
+            }}
+          >
             <Tree
               checkable
               checkedKeys={checkedMenuKeys}
@@ -600,13 +644,27 @@ const Role: React.FC = () => {
           <Space size={32}>
             <div>
               <span style={{ color: '#555', marginRight: 16 }}>角色名称</span>
-              <span style={{ color: '#1890ff', background: '#e6f7ff', padding: '2px 8px', borderRadius: '4px' }}>
+              <span
+                style={{
+                  color: '#1890ff',
+                  background: '#e6f7ff',
+                  padding: '2px 8px',
+                  borderRadius: '4px'
+                }}
+              >
                 {dataScopeRole?.name}
               </span>
             </div>
             <div style={{ marginTop: 12 }}>
               <span style={{ color: '#555', marginRight: 16 }}>角色标识</span>
-              <span style={{ color: '#1890ff', background: '#e6f7ff', padding: '2px 8px', borderRadius: '4px' }}>
+              <span
+                style={{
+                  color: '#1890ff',
+                  background: '#e6f7ff',
+                  padding: '2px 8px',
+                  borderRadius: '4px'
+                }}
+              >
                 {dataScopeRole?.code}
               </span>
             </div>
