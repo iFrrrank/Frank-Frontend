@@ -6,6 +6,7 @@ export default [
   },
   { path: '/welcome', name: '欢迎', icon: 'smile', component: './Welcome' },
   { path: '/system/user', name: '用户管理', icon: 'user', component: './system/user' },
+  { path: '/system/role', name: '角色管理', icon: 'team', component: './system/role' },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]

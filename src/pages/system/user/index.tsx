@@ -525,7 +525,7 @@ const App_: React.FC = () => {
 
       {/* ========== 新增/编辑用户弹窗 ========== */}
       <ModalForm<API.SystemUserSaveReqVO>
-        title={editingUser ? '编辑用户' : '新增'}
+        title={editingUser ? '修改用户' : '新增'}
         width={600}
         open={createModalVisible}
         onOpenChange={(visible) => {
@@ -545,6 +545,9 @@ const App_: React.FC = () => {
           postIds: editingUser.postIds,
           remark: editingUser.remark
         } : undefined}
+        layout="horizontal"
+        labelCol={{ span: 7 }}
+        wrapperCol={{ span: 17 }}
         autoFocusFirstInput
         grid={true}
         rowProps={{ gutter: [16, 0] }}
@@ -633,7 +636,7 @@ const App_: React.FC = () => {
           name="sex"
           label="用户性别"
           colProps={{ span: 12 }}
-          placeholder="请选择"
+          placeholder="请选择性别"
           options={[
             { label: '男', value: 1 },
             { label: '女', value: 2 }
@@ -643,7 +646,7 @@ const App_: React.FC = () => {
           name="postIds"
           label="岗位"
           colProps={{ span: 12 }}
-          placeholder="请选择"
+          placeholder="请选择岗位"
           fieldProps={{ mode: 'multiple' }}
           request={async () => {
             const resp = await getSimplePostList()
@@ -660,7 +663,9 @@ const App_: React.FC = () => {
           name="remark"
           label="备注"
           colProps={{ span: 24 }}
-          placeholder="请输入内容"
+          labelCol={{ span: 3 }}
+          wrapperCol={{ span: 21 }}
+          placeholder="请输入备注内容"
         />
       </ModalForm>
 
