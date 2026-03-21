@@ -1,4 +1,10 @@
 declare namespace API {
+  type LoginResult = {
+    status?: string
+    type?: string
+    currentAuthority?: string
+  }
+
   type AdminUserRespDTO = {
     /** 用户 ID */
     id: number

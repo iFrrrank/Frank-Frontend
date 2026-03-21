@@ -1,4 +1,4 @@
-import { getFakeCaptcha, login } from '@/api/system/auth'
+import { login } from '@/api/system/auth'
 import { Footer } from '@/components'
 import {
   AlipayCircleOutlined,
@@ -15,6 +15,7 @@ import { createStyles } from 'antd-style'
 import React, { useState } from 'react'
 import { flushSync } from 'react-dom'
 import Settings from '../../../../config/defaultSettings'
+
 const useStyles = createStyles(({ token }) => {
   return {
     action: {
@@ -96,10 +97,15 @@ const Login: React.FC = () => {
       })
     }
   }
-  const handleSubmit = async (values: API.AuthLoginReqVO) => {
+  const handleSubmit = async (values: API.SystemAuthLoginReqVO) => {
     try {
       const resp = await login({ ...values })
       if (resp.code === 0) {
+        // 登录成功，将 accessToken 存储到 localStorage
+        const accessToken = resp.data?.accessToken
+        if (accessToken) {
+          localStorage.setItem('accessToken', accessToken)
+        }
         message.success('登录成功！')
         await fetchUserInfo()
         const urlParams = new URL(window.location.href).searchParams
@@ -141,7 +147,7 @@ const Login: React.FC = () => {
           }}
           actions={['其他登录方式 :', <ActionIcons key="icons" />]}
           onFinish={async (values) => {
-            await handleSubmit(values as API.AuthLoginReqVO)
+            await handleSubmit(values as API.SystemAuthLoginReqVO)
           }}
         >
           <Tabs
@@ -240,9 +246,7 @@ const Login: React.FC = () => {
                   }
                 ]}
                 onGetCaptcha={async (phone) => {
-                  const result = await getFakeCaptcha({
-                    phone
-                  })
+                  const result = '1234'
                   if (!result) {
                     return
                   }

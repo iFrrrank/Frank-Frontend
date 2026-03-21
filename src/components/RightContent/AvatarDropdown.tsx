@@ -43,6 +43,8 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
    */
   const loginOut = async () => {
     await logout()
+    // 退出登录时，清除 localStorage 中的 accessToken
+    localStorage.removeItem('accessToken')
     const { search, pathname } = window.location
     const urlParams = new URL(window.location.href).searchParams
     const searchParams = new URLSearchParams({
