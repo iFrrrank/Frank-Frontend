@@ -38,6 +38,26 @@ const RichEditor = ({ value, onChange, readonly = false, height = 'auto' }: { va
 
   return (
     <div style={{ border: '1px solid #e8e8e8', zIndex: 100 }}>
+      <style>
+        {`
+          .w-e-toolbar {
+            padding: 0 5px !important;
+          }
+          .w-e-bar-item {
+            padding: 2px !important;
+          }
+          .w-e-bar-item button {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .w-e-bar-item i {
+            font-size: 14px !important;
+          }
+          .w-e-select-list {
+            font-size: 12px !important;
+          }
+        `}
+      </style>
       {!readonly && (
         <Toolbar
           editor={editor}
@@ -431,9 +451,9 @@ const MailTemplateConfig: React.FC = () => {
           name="content"
           label="模板内容"
           rules={[{ required: true, message: '请输入模板内容' }]}
-          wrapperCol={{ span: 20 }}
+          wrapperCol={{ span: 18 }}
         >
-          <RichEditor />
+          <RichEditor height="200px" />
         </ProForm.Item>
         <ProFormRadio.Group
           name="status"
@@ -495,7 +515,7 @@ const MailTemplateConfig: React.FC = () => {
           }
         }}
       >
-        <ProForm.Item label="模板内容" wrapperCol={{ span: 20 }}>
+        <ProForm.Item label="模板内容" wrapperCol={{ span: 18 }}>
           <RichEditor value={testingTemplate?.content} readonly={true} />
         </ProForm.Item>
         <ProFormTextArea
