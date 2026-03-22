@@ -2,7 +2,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Badge, Button, message, Modal, Space, Typography } from 'antd'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ModalForm, ProFormText, ProFormSelect, ProFormRadio, ProTable, ProFormTextArea, ProForm } from '@ant-design/pro-components'
+import {
+  ModalForm,
+  ProFormText,
+  ProFormSelect,
+  ProFormRadio,
+  ProTable,
+  ProFormTextArea,
+  ProForm
+} from '@ant-design/pro-components'
+import { Editor } from '@/components/Editor'
 import {
   createMailTemplate,
   deleteMailTemplate,
@@ -12,71 +21,7 @@ import {
 } from '@/api/system/mailTemplate'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
 
-// WangEditor imports
 import '@wangeditor/editor/dist/css/style.css'
-import { Editor, Toolbar } from '@wangeditor/editor-for-react'
-import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
-
-// 富文本修改器组件
-const RichEditor = ({ value, onChange, readonly = false, height = 'auto' }: { value?: string; onChange?: (val: string) => void; readonly?: boolean; height?: string | number }) => {
-  const [editor, setEditor] = useState<IDomEditor | null>(null)
-
-  const toolbarConfig: Partial<IToolbarConfig> = {}
-  const editorConfig: Partial<IEditorConfig> = {
-    placeholder: '请输入内容...',
-    readOnly: readonly,
-  }
-
-  // 及时销毁 editor
-  useEffect(() => {
-    return () => {
-      if (editor == null) return
-      editor.destroy()
-      setEditor(null)
-    }
-  }, [editor])
-
-  return (
-    <div style={{ border: '1px solid #e8e8e8', zIndex: 100 }}>
-      <style>
-        {`
-          .w-e-toolbar {
-            padding: 0 5px !important;
-          }
-          .w-e-bar-item {
-            padding: 2px !important;
-          }
-          .w-e-bar-item button {
-            width: 28px !important;
-            height: 28px !important;
-          }
-          .w-e-bar-item i {
-            font-size: 14px !important;
-          }
-          .w-e-select-list {
-            font-size: 12px !important;
-          }
-        `}
-      </style>
-      {!readonly && (
-        <Toolbar
-          editor={editor}
-          defaultConfig={toolbarConfig}
-          mode="default"
-          style={{ borderBottom: '1px solid #e8e8e8' }}
-        />
-      )}
-      <Editor
-        defaultConfig={editorConfig}
-        value={value}
-        onCreated={setEditor}
-        onChange={(editor: IDomEditor) => onChange && onChange(editor.getHtml())}
-        mode="default"
-        style={{ height, minHeight: '120px', overflowY: 'hidden' }}
-      />
-    </div>
-  )
-}
 
 const MailTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -84,7 +29,8 @@ const MailTemplateConfig: React.FC = () => {
 
   // 模态框状态
   const [createModalVisible, setCreateModalVisible] = useState(false)
-  const [editingMailTemplate, setEditingMailTemplate] = useState<API.SystemMailTemplateRespVO | null>(null)
+  const [editingMailTemplate, setEditingMailTemplate] =
+    useState<API.SystemMailTemplateRespVO | null>(null)
 
   const [testModalVisible, setTestModalVisible] = useState(false)
   const [testingTemplate, setTestingTemplate] = useState<API.SystemMailTemplateRespVO | null>(null)
@@ -92,7 +38,9 @@ const MailTemplateConfig: React.FC = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   // ===== 获取邮箱账号下拉列表 =====
-  const [accountOptions, setAccountOptions] = useState<{ label: string; value: number; mailString?: string }[]>([])
+  const [accountOptions, setAccountOptions] = useState<
+    { label: string; value: number; mailString?: string }[]
+  >([])
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
@@ -152,13 +100,14 @@ const MailTemplateConfig: React.FC = () => {
       align: 'center',
       width: 200,
       hideInSearch: true,
-      render: (_, record) => (
+      render: (_, record) =>
         record.content ? (
           <Typography.Text ellipsis={{ tooltip: record.content }} style={{ width: 180 }}>
             {record.content.replace(/<[^>]+>/g, '')}
           </Typography.Text>
-        ) : '-'
-      )
+        ) : (
+          '-'
+        )
     },
     {
       title: '邮箱账号',
@@ -370,7 +319,7 @@ const MailTemplateConfig: React.FC = () => {
 
       <ModalForm<API.SystemMailTemplateSaveReqVO>
         title={editingMailTemplate ? '修改' : '新增'}
-        width={800}
+        width={900}
         open={createModalVisible}
         onOpenChange={(visible) => {
           setCreateModalVisible(visible)
@@ -378,16 +327,10 @@ const MailTemplateConfig: React.FC = () => {
             setEditingMailTemplate(null)
           }
         }}
-        initialValues={
-          editingMailTemplate
-            ? { ...editingMailTemplate }
-            : {
-              status: 0 // 默认开启
-            }
-        }
+        initialValues={editingMailTemplate ? { ...editingMailTemplate } : { status: 0 }}
         layout="horizontal"
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 18 }}
+        labelCol={{ span: 3 }}
+        wrapperCol={{ span: 20 }}
         colon={false}
         modalProps={{
           destroyOnClose: true,
@@ -436,11 +379,7 @@ const MailTemplateConfig: React.FC = () => {
           placeholder="请输入模板名称"
           rules={[{ required: true, message: '请输入模板名称' }]}
         />
-        <ProFormText
-          name="nickname"
-          label="发送人名称"
-          placeholder="请输入发送人名称"
-        />
+        <ProFormText name="nickname" label="发送人名称" placeholder="请输入发送人名称" />
         <ProFormText
           name="title"
           label="模板标题"
@@ -451,9 +390,9 @@ const MailTemplateConfig: React.FC = () => {
           name="content"
           label="模板内容"
           rules={[{ required: true, message: '请输入模板内容' }]}
-          wrapperCol={{ span: 18 }}
+          wrapperCol={{ span: 20 }}
         >
-          <RichEditor height="200px" />
+          <Editor height={100} />
         </ProForm.Item>
         <ProFormRadio.Group
           name="status"
@@ -464,17 +403,13 @@ const MailTemplateConfig: React.FC = () => {
             { label: '关闭', value: 1 }
           ]}
         />
-        <ProFormTextArea
-          name="remark"
-          label="备注"
-          placeholder="请输入备注"
-        />
+        <ProFormTextArea name="remark" label="备注" placeholder="请输入备注" />
       </ModalForm>
 
       {/* 测试模板的弹窗*/}
       <ModalForm<{ mail: string; ccMail?: string; bccMail?: string }>
         title="测试"
-        width={800}
+        width={900}
         open={testModalVisible}
         onOpenChange={(visible) => {
           setTestModalVisible(visible)
@@ -484,8 +419,8 @@ const MailTemplateConfig: React.FC = () => {
         }}
         initialValues={{}}
         layout="horizontal"
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 18 }}
+        labelCol={{ span: 3 }}
+        wrapperCol={{ span: 20 }}
         colon={false}
         modalProps={{
           destroyOnClose: true,
@@ -515,8 +450,8 @@ const MailTemplateConfig: React.FC = () => {
           }
         }}
       >
-        <ProForm.Item label="模板内容" wrapperCol={{ span: 18 }}>
-          <RichEditor value={testingTemplate?.content} readonly={true} />
+        <ProForm.Item label="模板内容" wrapperCol={{ span: 20 }}>
+          <Editor value={testingTemplate?.content} readonly={true} height={100} />
         </ProForm.Item>
         <ProFormTextArea
           name="mail"
@@ -543,3 +478,4 @@ const MailTemplateConfig: React.FC = () => {
 }
 
 export default MailTemplateConfig
+

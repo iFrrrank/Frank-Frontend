@@ -20,6 +20,7 @@ export default [
   { path: '/system/messages/mail/mail-log', name: '邮件日志', icon: 'profile', component: './system/mail/log' },
   { path: '/system/messages/notify/notify-template', name: '模板管理', icon: 'profile', component: './system/notify/template' },
   { path: '/system/messages/notify/notify-message', name: '消息记录', icon: 'profile', component: './system/notify/message' },
+  { path: '/system/messages/notice', name: '通知公告', icon: 'notification', component: './system/notice' },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]
