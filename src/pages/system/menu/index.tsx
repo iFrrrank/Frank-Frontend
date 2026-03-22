@@ -202,6 +202,7 @@ const MenuManagement: React.FC = () => {
     <>
       <ProTable<any>
         columns={columns}
+        scroll={{ x: 'max-content' }}
         actionRef={actionRef}
         formRef={formRef}
         cardBordered

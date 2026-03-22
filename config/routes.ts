@@ -10,6 +10,8 @@ export default [
   { path: '/system/dept', name: '部门管理', icon: 'apartment', component: './system/dept' },
   { path: '/system/menu', name: '菜单管理', icon: 'menu', component: './system/menu' },
   { path: '/system/post', name: '岗位管理', icon: 'solution', component: './system/post' },
+  { path: '/system/dict', name: '字典管理', icon: 'book', component: './system/dict' },
+  { path: '/system/dict/data/:dictType', name: '字典数据', component: './system/dict/data', hideInMenu: true },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]

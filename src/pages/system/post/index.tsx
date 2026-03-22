@@ -211,6 +211,7 @@ const PostManagement: React.FC = () => {
     <>
       <ProTable<API.SystemPostRespVO>
         columns={columns}
+        scroll={{ x: 'max-content' }}
         actionRef={actionRef}
         formRef={formRef}
         cardBordered

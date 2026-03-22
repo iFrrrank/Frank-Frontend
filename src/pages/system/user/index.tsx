@@ -422,6 +422,7 @@ const App_: React.FC = () => {
       <Col span={20}>
         <ProTable<API.SystemUserRespVO>
           columns={columns}
+          scroll={{ x: 'max-content' }}
           actionRef={actionRef}
           formRef={formRef}
           cardBordered

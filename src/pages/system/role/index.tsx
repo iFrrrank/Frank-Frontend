@@ -365,6 +365,7 @@ const Role: React.FC = () => {
     <>
       <ProTable<API.SystemRoleRespVO>
         columns={columns}
+        scroll={{ x: 'max-content' }}
         actionRef={actionRef}
         formRef={formRef}
         cardBordered
