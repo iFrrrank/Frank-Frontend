@@ -101,12 +101,15 @@ const Login: React.FC = () => {
     try {
       const resp = await login({ ...values })
       if (resp.code === 0) {
-        // 登录成功，将 accessToken 存储到 localStorage
-        const accessToken = resp.data?.accessToken
+        // 登录成功，将 accessToken 和 refreshToken 存储到 localStorage
+        const { accessToken, refreshToken } = resp.data || {}
         if (accessToken) {
           localStorage.setItem('accessToken', accessToken)
         }
-        message.success('登录成功！')
+        if (refreshToken) {
+          localStorage.setItem('refreshToken', refreshToken)
+        }
+        message.success('登录成功')
         await fetchUserInfo()
         const urlParams = new URL(window.location.href).searchParams
         window.location.href = urlParams.get('redirect') || '/'
@@ -115,7 +118,7 @@ const Login: React.FC = () => {
         setUserLoginState({ type })
       }
     } catch (error) {
-      message.error('登录失败，请重试！')
+      message.error('登录失败，请重试')
     }
   }
   const { status, type: loginType } = userLoginState
