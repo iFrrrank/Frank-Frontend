@@ -18,6 +18,7 @@ export default [
   { path: '/system/messages/mail/mail-account', name: '邮箱账号', icon: 'mail', component: './system/mail/account' },
   { path: '/system/messages/mail/mail-template', name: '邮件模板', icon: 'profile', component: './system/mail/template' },
   { path: '/system/messages/mail/mail-log', name: '邮件日志', icon: 'profile', component: './system/mail/log' },
+  { path: '/system/messages/notify/notify-template', name: '模板管理', icon: 'profile', component: './system/notify/template' },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]
