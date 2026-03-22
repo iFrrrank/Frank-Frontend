@@ -139,15 +139,9 @@ const MailTemplateConfig: React.FC = () => {
         placeholder: '请选择开启状态'
       },
       valueEnum: {
-        0: { text: '开启', status: 'Processing' }, // ProTable success uses processing blue badge/tag
-        1: { text: '关闭', status: 'Default' }
-      },
-      render: (_, record) => (
-        <Badge
-          status={record.status === 0 ? 'processing' : 'default'}
-          text={record.status === 0 ? '开启' : '关闭'}
-        />
-      )
+        0: { text: '开启', status: 'Success' },
+        1: { text: '关闭', status: 'Error' }
+      }
     },
     {
       title: '创建时间',
