@@ -368,6 +368,7 @@ const Role: React.FC = () => {
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
         formRef={formRef}
+        form={{ colon: false }}
         cardBordered
         request={async (params: Record<string, any>) => {
           const { current, pageSize, name, code, status, createTime, ...rest } = params

@@ -256,6 +256,7 @@ const DictDataList: React.FC = () => {
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
         formRef={formRef}
+        form={{ colon: false }}
         cardBordered
         request={async (params: Record<string, any>) => {
           const { current, pageSize, dictType, label, status, ...rest } = params

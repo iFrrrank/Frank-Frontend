@@ -222,6 +222,7 @@ const DeptManagement: React.FC = () => {
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
         formRef={formRef}
+        form={{ colon: false }}
         cardBordered
         pagination={false} // 树形不分页
         rowKey="id"

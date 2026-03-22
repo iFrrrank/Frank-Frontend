@@ -14,6 +14,7 @@ export default [
   { path: '/system/dict/data/:dictType', name: '字典数据', component: './system/dict/data', hideInMenu: true },
   { path: '/system/messages/sms/channel', name: '短信渠道', icon: 'message', component: './system/sms/channel' },
   { path: '/system/messages/sms/sms-template', name: '短信模板', icon: 'mail', component: './system/sms/template' },
+  { path: '/system/messages/sms/sms-log', name: '短信日志', icon: 'profile', component: './system/sms/log' },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]

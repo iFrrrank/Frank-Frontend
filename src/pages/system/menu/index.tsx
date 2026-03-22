@@ -205,6 +205,7 @@ const MenuManagement: React.FC = () => {
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
         formRef={formRef}
+        form={{ colon: false }}
         cardBordered
         pagination={false} // 树形菜单通常不分页
         rowKey="id"

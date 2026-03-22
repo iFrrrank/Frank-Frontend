@@ -425,6 +425,7 @@ const App_: React.FC = () => {
           scroll={{ x: 'max-content' }}
           actionRef={actionRef}
           formRef={formRef}
+          form={{ colon: false }}
           cardBordered
           params={{ deptId: selectedDeptId }}
           request={async (params: Record<string, any>) => {
