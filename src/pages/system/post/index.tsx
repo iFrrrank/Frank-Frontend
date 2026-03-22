@@ -113,7 +113,7 @@ const PostManagement: React.FC = () => {
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
           <a key="edit" onClick={() => handleEdit(record)}>
-            编辑
+            修改
           </a>
           <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
             删除
@@ -201,7 +201,7 @@ const PostManagement: React.FC = () => {
     })
   }
 
-  // ===== 编辑岗位 =====
+  // ===== 修改岗位 =====
   const handleEdit = (record: API.SystemPostRespVO) => {
     setEditingPost(record)
     setCreateModalVisible(true)
@@ -291,9 +291,9 @@ const PostManagement: React.FC = () => {
         ]}
       />
 
-      {/* ========== 新增/编辑岗位弹窗 ========== */}
+      {/* ========== 新增/修改岗位弹窗 ========== */}
       <ModalForm<API.SystemPostSaveReqVO>
-        title={editingPost ? '编辑' : '新增'}
+        title={editingPost ? '修改' : '新增'}
         width={600}
         open={createModalVisible}
         onOpenChange={(visible) => {

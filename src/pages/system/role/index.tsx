@@ -269,7 +269,7 @@ const Role: React.FC = () => {
     })
   }
 
-  // ===== 编辑角色 =====
+  // ===== 修改角色 =====
   const handleEdit = (record: API.SystemRoleRespVO) => {
     setEditingRole(record)
     setCreateModalVisible(true)
@@ -445,7 +445,7 @@ const Role: React.FC = () => {
         ]}
       />
 
-      {/* ========== 新增/编辑角色弹窗 ========== */}
+      {/* ========== 新增/修改角色弹窗 ========== */}
       <ModalForm<API.SystemRoleSaveReqVO>
         title={editingRole ? '修改' : '新增'}
         width={500}
@@ -459,18 +459,19 @@ const Role: React.FC = () => {
         initialValues={
           editingRole
             ? {
-                id: editingRole.id,
-                name: editingRole.name,
-                code: editingRole.code,
-                sort: editingRole.sort,
-                status: editingRole.status,
-                remark: editingRole.remark
-              }
+              id: editingRole.id,
+              name: editingRole.name,
+              code: editingRole.code,
+              sort: editingRole.sort,
+              status: editingRole.status,
+              remark: editingRole.remark
+            }
             : { sort: 0, status: 0 }
         }
         layout="horizontal"
         labelCol={{ span: 5 }}
         wrapperCol={{ span: 19 }}
+        colon={false}
         modalProps={{
           destroyOnClose: true,
           bodyStyle: { paddingBottom: 0 }
@@ -618,6 +619,7 @@ const Role: React.FC = () => {
           if (!visible) setDataScopeRole(null)
         }}
         initialValues={{ dataScope: 1 }} // 默认全部数据权限
+        colon={false}
         modalProps={{
           destroyOnClose: true
         }}

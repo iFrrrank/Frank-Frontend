@@ -69,7 +69,7 @@ const DeptManagement: React.FC = () => {
   const [allKeys, setAllKeys] = useState<React.Key[]>([])
   const [hasInitExpanded, setHasInitExpanded] = useState(false)
 
-  // 全量扁平数据（用于在新建弹窗里选择父级）
+  // 全量扁平数据（用于在新增弹窗里选择父级）
   const [flatDeptData, setFlatDeptData] = useState<any[]>([])
 
   // 用户选项缓存，用于匹配表格的负责人显示
@@ -146,7 +146,7 @@ const DeptManagement: React.FC = () => {
         setUserList(resp.data)
         return resp.data
       }
-    } catch {}
+    } catch { }
     return []
   }
 
@@ -334,7 +334,7 @@ const DeptManagement: React.FC = () => {
         ]}
       />
 
-      {/* ========== 新增/编辑部门弹窗 ========== */}
+      {/* ========== 新增/修改部门弹窗 ========== */}
       <ModalForm
         title={editingDept?.id ? '修改部门' : '新增部门'}
         width={500}
@@ -347,13 +347,13 @@ const DeptManagement: React.FC = () => {
         initialValues={
           editingDept?.id
             ? {
-                ...editingDept
-              }
+              ...editingDept
+            }
             : {
-                parentId: editingDept?.parentId || 0,
-                sort: 0,
-                status: 0
-              }
+              parentId: editingDept?.parentId || 0,
+              sort: 0,
+              status: 0
+            }
         }
         layout="horizontal"
         labelCol={{ span: 5 }}

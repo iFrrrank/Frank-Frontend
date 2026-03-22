@@ -207,7 +207,7 @@ const SmsChannelConfig: React.FC = () => {
     })
   }
 
-  // ===== 编辑 =====
+  // ===== 修改 =====
   const handleEdit = (record: API.SystemSmsChannelRespVO) => {
     setEditingSmsChannel(record)
     setCreateModalVisible(true)
@@ -288,7 +288,7 @@ const SmsChannelConfig: React.FC = () => {
         ]}
       />
 
-      {/* ========== 新增/编辑弹窗 ========== */}
+      {/* ========== 新增/修改弹窗 ========== */}
       <ModalForm<API.SystemSmsChannelSaveReqVO>
         title={editingSmsChannel ? '修改' : '新增'}
         width={700}

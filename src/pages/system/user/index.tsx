@@ -73,7 +73,7 @@ const App_: React.FC = () => {
   const [importLoading, setImportLoading] = useState(false)
   // 批量删除相关
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
-  // 编辑相关
+  // 修改相关
   const [editingUser, setEditingUser] = useState<API.SystemUserRespVO | null>(null)
   // 重置密码相关
   const [resetPwdVisible, setResetPwdVisible] = useState(false)
@@ -196,7 +196,7 @@ const App_: React.FC = () => {
     }
   ]
 
-  // ===== 编辑用户 =====
+  // ===== 修改用户 =====
   const handleEdit = async (record: API.SystemUserRespVO) => {
     try {
       const resp = await getUser({ id: record.id })
@@ -502,7 +502,7 @@ const App_: React.FC = () => {
               }}
               type="primary"
             >
-              新建
+              新增
             </Button>,
             <Button
               key="batchDelete"
@@ -533,7 +533,7 @@ const App_: React.FC = () => {
         />
       </Col>
 
-      {/* ========== 新增/编辑用户弹窗 ========== */}
+      {/* ========== 新增/修改用户弹窗 ========== */}
       <ModalForm<API.SystemUserSaveReqVO>
         title={editingUser ? '修改用户' : '新增'}
         width={600}
@@ -547,16 +547,16 @@ const App_: React.FC = () => {
         initialValues={
           editingUser
             ? {
-                id: editingUser.id,
-                nickname: editingUser.nickname,
-                deptId: editingUser.deptId,
-                mobile: editingUser.mobile,
-                email: editingUser.email,
-                username: editingUser.username,
-                sex: editingUser.sex,
-                postIds: editingUser.postIds,
-                remark: editingUser.remark
-              }
+              id: editingUser.id,
+              nickname: editingUser.nickname,
+              deptId: editingUser.deptId,
+              mobile: editingUser.mobile,
+              email: editingUser.email,
+              username: editingUser.username,
+              sex: editingUser.sex,
+              postIds: editingUser.postIds,
+              remark: editingUser.remark
+            }
             : undefined
         }
         layout="horizontal"
@@ -564,6 +564,7 @@ const App_: React.FC = () => {
         wrapperCol={{ span: 17 }}
         autoFocusFirstInput
         grid={true}
+        colon={false}
         rowProps={{ gutter: [16, 0] }}
         modalProps={{
           destroyOnClose: true,
@@ -573,7 +574,7 @@ const App_: React.FC = () => {
           try {
             let resp
             if (editingUser) {
-              // 编辑模式
+              // 修改模式
               resp = await updateUser({ ...values, id: editingUser.id })
             } else {
               // 新增模式
@@ -707,6 +708,7 @@ const App_: React.FC = () => {
       <ModalForm
         title="分配角色"
         width={500}
+        colon={false}
         open={assignRoleVisible}
         onOpenChange={(visible) => {
           setAssignRoleVisible(visible)

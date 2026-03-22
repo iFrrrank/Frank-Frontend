@@ -60,7 +60,7 @@ const MenuManagement: React.FC = () => {
   const [isExpandAll, setIsExpandAll] = useState(false)
   const [allKeys, setAllKeys] = useState<React.Key[]>([])
 
-  // 全量扁平数据（用于在新建弹窗里选择父级）
+  // 全量扁平数据（用于在新增弹窗里选择父级）
   const [flatMenuData, setFlatMenuData] = useState<any[]>([])
 
   // 展开折叠切换
@@ -280,7 +280,7 @@ const MenuManagement: React.FC = () => {
         ]}
       />
 
-      {/* ========== 新增/编辑菜单弹窗 ========== */}
+      {/* ========== 新增/修改菜单弹窗 ========== */}
       <ModalForm
         title={editingMenu?.id ? '修改菜单' : '新增菜单'}
         width={680}
@@ -293,17 +293,17 @@ const MenuManagement: React.FC = () => {
         initialValues={
           editingMenu?.id
             ? {
-                ...editingMenu
-              }
+              ...editingMenu
+            }
             : {
-                parentId: editingMenu?.parentId || 0,
-                type: 1, // 默认菜单
-                sort: 0,
-                status: 0,
-                visible: true,
-                alwaysShow: true,
-                keepAlive: true
-              }
+              parentId: editingMenu?.parentId || 0,
+              type: 1, // 默认菜单
+              sort: 0,
+              status: 0,
+              visible: true,
+              alwaysShow: true,
+              keepAlive: true
+            }
         }
         layout="horizontal"
         labelCol={{ span: 5 }}

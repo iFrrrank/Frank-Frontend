@@ -394,7 +394,7 @@ const SmsTemplateConfig: React.FC = () => {
         ]}
       />
 
-      {/* ========== 新增/编辑弹窗 ========== */}
+      {/* ========== 新增/修改弹窗 ========== */}
       <ModalForm<API.SystemSmsTemplateSaveReqVO>
         title={editingSmsTemplate ? '修改' : '新增'}
         width={700}

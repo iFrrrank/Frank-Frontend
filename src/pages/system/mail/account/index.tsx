@@ -238,7 +238,7 @@ const MailAccountConfig: React.FC = () => {
       />
 
       <ModalForm<API.SystemMailAccountSaveReqVO>
-        title={editingMailAccount ? '修改' : '新建'}
+        title={editingMailAccount ? '修改' : '新增'}
         width={600}
         open={createModalVisible}
         onOpenChange={(visible) => {
@@ -258,6 +258,7 @@ const MailAccountConfig: React.FC = () => {
         layout="horizontal"
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 16 }}
+        colon={false}
         modalProps={{
           destroyOnClose: true,
           maskClosable: false

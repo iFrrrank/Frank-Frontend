@@ -386,7 +386,7 @@ const DictDataList: React.FC = () => {
           label="字典类型"
           colProps={{ span: 24 }}
           placeholder="请输入字典类型"
-          readonly // 页面上一般是不可编辑或者就是下拉选择
+          readonly // 页面上一般是不可修改或者就是下拉选择
         />
         <ProFormText
           name="label"
