@@ -77,6 +77,12 @@ export default [
     icon: 'profile',
     component: './system/log/operatelog'
   },
+  {
+    path: '/system/log/login-log',
+    name: '登录日志',
+    icon: 'profile',
+    component: './system/log/loginlog'
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]

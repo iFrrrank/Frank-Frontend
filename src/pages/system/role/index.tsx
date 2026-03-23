@@ -153,9 +153,6 @@ const Role: React.FC = () => {
           text: '关闭',
           status: 'Error'
         }
-      },
-      fieldProps: {
-        placeholder: '请选择状态'
       }
     },
     {
@@ -459,13 +456,13 @@ const Role: React.FC = () => {
         initialValues={
           editingRole
             ? {
-              id: editingRole.id,
-              name: editingRole.name,
-              code: editingRole.code,
-              sort: editingRole.sort,
-              status: editingRole.status,
-              remark: editingRole.remark
-            }
+                id: editingRole.id,
+                name: editingRole.name,
+                code: editingRole.code,
+                sort: editingRole.sort,
+                status: editingRole.status,
+                remark: editingRole.remark
+              }
             : { sort: 0, status: 0 }
         }
         layout="horizontal"
