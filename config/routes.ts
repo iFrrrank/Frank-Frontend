@@ -95,6 +95,12 @@ export default [
     icon: 'key',
     component: './system/oauth2/token'
   },
+  {
+    path: '/system/social/client',
+    name: '三方应用',
+    icon: 'api',
+    component: './system/social/client'
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]

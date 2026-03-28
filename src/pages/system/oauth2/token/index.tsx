@@ -129,16 +129,15 @@ const TokenPage: React.FC = () => {
       form={{ colon: false }}
       cardBordered
       request={async (params: Record<string, any>) => {
-        const { current, pageSize, userId, userType, clientId, ...rest } = params
+        const { current, pageSize, userId, userType, clientId } = params
         const resp = await getAccessTokenPage({
           reqVO: {
             pageNo: current || 1,
             pageSize: pageSize || 10,
             ...(userId ? { userId: Number(userId) } : {}),
             ...(userType !== undefined && userType !== '' ? { userType: Number(userType) } : {}),
-            ...(clientId ? { clientId } : {}),
-            ...rest
-          }
+            ...(clientId ? { clientId } : {})
+          } as API.SystemOAuth2AccessTokenPageReqVO
         })
         return {
           data: resp.data?.list,
