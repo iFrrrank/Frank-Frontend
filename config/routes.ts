@@ -89,6 +89,12 @@ export default [
     icon: 'appstore',
     component: './system/oauth2/client'
   },
+  {
+    path: '/system/oauth2/token',
+    name: '令牌管理',
+    icon: 'key',
+    component: './system/oauth2/token'
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]
