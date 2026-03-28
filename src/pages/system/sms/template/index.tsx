@@ -1,0 +1,509 @@
+import React, { useRef, useState, useEffect } from 'react'
+import { Button, message, Modal, Tag, Typography } from 'antd'
+import {
+  DeleteOutlined,
+  DownloadOutlined,
+  ExclamationCircleOutlined,
+  PlusOutlined
+} from '@ant-design/icons'
+import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
+import {
+  ModalForm,
+  ProFormRadio,
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea,
+  ProTable
+} from '@ant-design/pro-components'
+import {
+  createSmsTemplate,
+  deleteSmsTemplate,
+  exportSmsTemplateExcel,
+  getSmsTemplatePage,
+  updateSmsTemplate
+} from '@/api/system/smsTemplate'
+import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
+
+const SmsTemplateConfig: React.FC = () => {
+  const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
+
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingSmsTemplate, setEditingSmsTemplate] = useState<API.SystemSmsTemplateRespVO | null>(
+    null
+  )
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+  const [channelOptions, setChannelOptions] = useState<{ label: string; value: number }[]>([])
+
+  // ===== 加载短信渠道下拉列表 =====
+  useEffect(() => {
+    const fetchChannels = async () => {
+      try {
+        const res = await getSimpleSmsChannelList()
+        if (res.code === 0 && res.data) {
+          const options = res.data.map((item: any) => ({
+            label: item.signature || item.code, // 一般以标签或者编码为渠道说明
+            value: item.id
+          }))
+          setChannelOptions(options)
+        }
+      } catch (e) {
+        console.error('加载短信渠道失败', e)
+      }
+    }
+    fetchChannels()
+  }, [])
+
+  // 短信类型枚举
+  const smsTypeEnum = {
+    1: { text: '验证码', color: 'blue' },
+    2: { text: '通知', color: 'green' },
+    3: { text: '营销', color: 'orange' }
+  }
+
+  // ===== 数据列定义 =====
+  const columns: ProColumns<API.SystemSmsTemplateRespVO>[] = [
+    {
+      title: '短信类型',
+      dataIndex: 'type',
+      align: 'center',
+      hideInTable: true,
+      valueType: 'select',
+      valueEnum: smsTypeEnum,
+      fieldProps: {
+        placeholder: '请选择短信类型'
+      }
+    },
+    {
+      title: '开启状态',
+      dataIndex: 'status',
+      align: 'center',
+      hideInTable: true,
+      valueType: 'select',
+      valueEnum: {
+        0: { text: '开启', status: 'Success' },
+        1: { text: '关闭', status: 'Error' }
+      },
+      fieldProps: {
+        placeholder: '请选择开启状态'
+      }
+    },
+    {
+      title: '模板编码',
+      dataIndex: 'code',
+      align: 'center',
+      width: 150,
+      fieldProps: {
+        placeholder: '请输入模板编码'
+      }
+    },
+    {
+      title: '短信 API 模板 ID',
+      dataIndex: 'apiTemplateId',
+      align: 'center',
+      hideInTable: true,
+      fieldProps: {
+        placeholder: '请输入短信 API 模板 ID'
+      }
+    },
+    {
+      title: '短信渠道',
+      dataIndex: 'channelId',
+      align: 'center',
+      hideInTable: true,
+      valueType: 'select',
+      fieldProps: {
+        options: channelOptions,
+        placeholder: '请选择短信渠道',
+        showSearch: true
+      }
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createTime',
+      valueType: 'dateRange',
+      align: 'center',
+      hideInTable: true,
+      fieldProps: {
+        placeholder: ['开始日期', '结束日期']
+      }
+    },
+    {
+      title: '模板名称',
+      dataIndex: 'name',
+      align: 'center',
+      width: 150,
+      hideInSearch: true,
+      ellipsis: true
+    },
+    {
+      title: '模板内容',
+      dataIndex: 'content',
+      align: 'center',
+      width: 250,
+      hideInSearch: true,
+      render: (_, record) => (
+        record.content ? (
+          <Typography.Text style={{ width: 220, margin: 0 }} ellipsis={{ tooltip: record.content }}>
+            {record.content}
+          </Typography.Text>
+        ) : <span>-</span>
+      )
+    },
+    {
+      title: '短信类型', // 作为表格列展示
+      dataIndex: 'type',
+      align: 'center',
+      width: 100,
+      hideInSearch: true,
+      render: (_, record) => {
+        const conf = smsTypeEnum[record.type as keyof typeof smsTypeEnum]
+        return conf ? <Tag color={conf.color}>{conf.text}</Tag> : <Tag>{record.type}</Tag>
+      }
+    },
+    {
+      title: '状态', // 作为表格列展示
+      dataIndex: 'status',
+      align: 'center',
+      width: 100,
+      hideInSearch: true,
+      valueEnum: {
+        0: { text: '开启', status: 'Success' },
+        1: { text: '关闭', status: 'Error' }
+      }
+    },
+    {
+      title: '备注',
+      dataIndex: 'remark',
+      align: 'center',
+      width: 150,
+      hideInSearch: true,
+      ellipsis: true
+    },
+    {
+      title: '短信 API 模板 ID', // 作为表格列展示
+      dataIndex: 'apiTemplateId',
+      align: 'center',
+      width: 180,
+      hideInSearch: true,
+      render: (_, record) => (
+        record.apiTemplateId ? (
+          <Typography.Text style={{ width: 150, margin: 0 }} ellipsis={{ tooltip: record.apiTemplateId }}>
+            {record.apiTemplateId}
+          </Typography.Text>
+        ) : <span>-</span>
+      )
+    },
+    {
+      title: '短信渠道', // 作为表格列展示
+      dataIndex: 'channelId',
+      align: 'center',
+      width: 150,
+      hideInSearch: true,
+      render: (_, record) => {
+        const match = channelOptions.find((o) => o.value === record.channelId)
+        return <Tag color="blue">{match ? match.label : record.channelId}</Tag> // 根据实际UI需要可不加颜色
+      }
+    },
+    {
+      title: '操作',
+      valueType: 'option',
+      align: 'center',
+      width: 150,
+      key: 'option',
+      fixed: 'right',
+      render: (_, record) => (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+          <a key="edit" onClick={() => handleEdit(record)}>
+            修改
+          </a>
+          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+            删除
+          </a>
+        </div>
+      )
+    }
+  ]
+
+  // ===== 删除短信模板 =====
+  const handleDelete = (record: API.SystemSmsTemplateRespVO) => {
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+      content: '是否确认删除选中数据？',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          await deleteSmsTemplate({ id: record.id })
+          message.success('删除成功')
+          actionRef.current?.reload()
+        } catch {
+          message.error('删除失败')
+        }
+      }
+    })
+  }
+
+  // ===== 批量删除 =====
+  const handleBatchDelete = () => {
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+      content: '是否确认删除选中数据?',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          await Promise.all(selectedRowKeys.map((id) => deleteSmsTemplate({ id: Number(id) })))
+          message.success('批量删除成功')
+          setSelectedRowKeys([])
+          actionRef.current?.reload()
+        } catch {
+          message.error('批量删除失败')
+        }
+      }
+    })
+  }
+
+  // ===== 导出短信模板 =====
+  const handleExport = () => {
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+      content: '确认导出所有短信模板数据项?',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          const formValues = formRef.current?.getFieldsValue?.() || {}
+          if (formValues.createTime && formValues.createTime.length === 2) {
+            formValues.beginCreateTime = formValues.createTime[0] + ' 00:00:00'
+            formValues.endCreateTime = formValues.createTime[1] + ' 23:59:59'
+            delete formValues.createTime
+          }
+          const resp = await exportSmsTemplateExcel(formValues as any)
+          if (!resp) return
+          // 处理为 Blob 下载
+          const blob = new Blob([resp as any], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          })
+          const url = window.URL.createObjectURL(blob)
+          const link = document.createElement('a')
+          link.href = url
+          link.download = '短信模板数据.xlsx'
+          link.click()
+          window.URL.revokeObjectURL(url)
+          message.success('导出成功')
+        } catch {
+          message.error('导出失败')
+        }
+      }
+    })
+  }
+
+  // ===== 修改 =====
+  const handleEdit = (record: API.SystemSmsTemplateRespVO) => {
+    setEditingSmsTemplate(record)
+    setCreateModalVisible(true)
+  }
+
+  return (
+    <>
+      <ProTable<API.SystemSmsTemplateRespVO>
+        columns={columns}
+        scroll={{ x: 'max-content' }}
+        actionRef={actionRef}
+        formRef={formRef}
+        form={{ colon: false }}
+        cardBordered
+        request={async (params: Record<string, any>) => {
+          const { current, pageSize, type, status, code, apiTemplateId, channelId, createTime, ...rest } = params
+          let beginCreateTime, endCreateTime
+          if (createTime && createTime.length === 2) {
+            beginCreateTime = createTime[0] + ' 00:00:00'
+            endCreateTime = createTime[1] + ' 23:59:59'
+          }
+          const resp = await getSmsTemplatePage({
+            pageNo: current || 1,
+            pageSize: pageSize || 10,
+            ...(type !== undefined && type !== '' ? { type: Number(type) } : {}),
+            ...(status !== undefined && status !== '' ? { status: Number(status) } : {}),
+            ...(code ? { code } : {}),
+            ...(apiTemplateId ? { apiTemplateId } : {}),
+            ...(channelId !== undefined && channelId !== '' ? { channelId: Number(channelId) } : {}),
+            ...(beginCreateTime ? { beginCreateTime } : {}),
+            ...(endCreateTime ? { endCreateTime } : {}),
+            ...rest
+          } as any)
+          return {
+            data: resp.data?.list || [],
+            success: true,
+            total: resp.data?.total || 0
+          }
+        }}
+        rowSelection={{
+          selectedRowKeys,
+          onChange: (keys) => setSelectedRowKeys(keys)
+        }}
+        rowKey="id"
+        search={{
+          labelWidth: 'auto',
+          defaultCollapsed: false
+        }}
+        options={false}
+        pagination={{
+          align: 'center',
+          showSizeChanger: true
+        }}
+        headerTitle={false}
+        toolBarRender={() => [
+          <Button
+            key="create"
+            icon={<PlusOutlined />}
+            onClick={() => {
+              setEditingSmsTemplate(null)
+              setCreateModalVisible(true)
+            }}
+            type="primary"
+          >
+            新增
+          </Button>,
+          <Button
+            key="batchDelete"
+            icon={<DeleteOutlined />}
+            danger
+            disabled={selectedRowKeys.length === 0}
+            onClick={handleBatchDelete}
+            style={
+              selectedRowKeys.length > 0
+                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
+                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
+            }
+          >
+            批量删除
+          </Button>,
+          <Button
+            key="export"
+            icon={<DownloadOutlined />}
+            onClick={handleExport}
+            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
+          >
+            导出
+          </Button>
+        ]}
+      />
+
+      {/* ========== 新增/修改弹窗 ========== */}
+      <ModalForm<API.SystemSmsTemplateSaveReqVO>
+        title={editingSmsTemplate ? '修改' : '新增'}
+        width={700}
+        open={createModalVisible}
+        onOpenChange={(visible) => {
+          setCreateModalVisible(visible)
+          if (!visible) {
+            setEditingSmsTemplate(null)
+          }
+        }}
+        initialValues={
+          editingSmsTemplate
+            ? {
+              ...editingSmsTemplate
+            }
+            : { status: 0 }
+        }
+        layout="horizontal"
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 17 }}
+        colon={false}
+        modalProps={{
+          destroyOnClose: true,
+          bodyStyle: { paddingBottom: 0 }
+        }}
+        onFinish={async (values) => {
+          try {
+            let resp
+            if (editingSmsTemplate) {
+              resp = await updateSmsTemplate({ ...values, id: editingSmsTemplate.id } as any)
+            } else {
+              resp = await createSmsTemplate(values as any)
+            }
+            if (resp.code === 0) {
+              message.success(editingSmsTemplate ? '修改成功' : '创建成功')
+              actionRef.current?.reload()
+              return true
+            } else {
+              message.error(resp.msg || (editingSmsTemplate ? '修改失败' : '创建失败'))
+              return false
+            }
+          } catch {
+            message.error(editingSmsTemplate ? '修改失败' : '创建失败')
+            return false
+          }
+        }}
+      >
+        <ProFormSelect
+          name="channelId"
+          label="短信渠道 ID"
+          placeholder="请选择短信渠道 ID"
+          rules={[{ required: true, message: '请选择短信渠道 ID' }]}
+          options={channelOptions}
+          showSearch
+        />
+        <ProFormSelect
+          name="type"
+          label="短信类型"
+          placeholder="请选择短信类型"
+          rules={[{ required: true, message: '请选择短信类型' }]}
+          options={[
+            { label: '验证码', value: 1 },
+            { label: '通知', value: 2 },
+            { label: '营销', value: 3 }
+          ]}
+        />
+        <ProFormText
+          name="code"
+          label="模板编码"
+          placeholder="请输入模板编码"
+          rules={[{ required: true, message: '请输入模板编码' }]}
+        />
+        <ProFormText
+          name="name"
+          label="模板名称"
+          placeholder="请输入模板名称"
+          rules={[{ required: true, message: '请输入模板名称' }]}
+        />
+        <ProFormTextArea
+          name="content"
+          label="模板内容"
+          placeholder="请输入模板内容"
+          rules={[{ required: true, message: '请输入模板内容' }]}
+          fieldProps={{ rows: 3 }}
+        />
+        <ProFormRadio.Group
+          name="status"
+          label="开启状态"
+          options={[
+            { label: '开启', value: 0 },
+            { label: '关闭', value: 1 }
+          ]}
+          rules={[{ required: true, message: '请选择开启状态' }]}
+        />
+        <ProFormText
+          name="apiTemplateId"
+          label="短信 API 模板 ID"
+          placeholder="请输入短信 API 的模板ID"
+          rules={[{ required: true, message: '请输入短信 API 的模板 ID' }]}
+        />
+        <ProFormTextArea
+          name="remark"
+          label="备注"
+          placeholder="请输入备注"
+          fieldProps={{ rows: 2 }}
+        />
+      </ModalForm>
+    </>
+  )
+}
+
+export default SmsTemplateConfig

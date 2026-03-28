@@ -1,0 +1,366 @@
+import React, { useRef, useState } from 'react'
+import { Badge, Button, message, Modal, Space, Typography } from 'antd'
+import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
+import { ModalForm, ProFormRadio, ProFormSelect, ProFormText, ProFormTextArea, ProTable } from '@ant-design/pro-components'
+import {
+  createNotifyTemplate,
+  deleteNotifyTemplate,
+  getNotifyTemplatePage,
+  updateNotifyTemplate
+} from '@/api/system/notifyTemplate'
+
+const NotifyTemplateConfig: React.FC = () => {
+  const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
+
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingTemplate, setEditingTemplate] = useState<API.SystemNotifyTemplateRespVO | null>(null)
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+
+  // 状态枚举
+  const statusEnum = {
+    0: { text: '开启', status: 'Success' },
+    1: { text: '关闭', status: 'Error' }
+  }
+
+  // 类型枚举 (这里假设1和2为常用类型，由于没有具体字典值，先使用这俩)
+  const typeEnum = {
+    1: { text: '系统通知' },
+    2: { text: '业务通知' },
+    3: { text: '会议通知' }
+  }
+
+  // ===== 数据列定义 =====
+  const columns: ProColumns<API.SystemNotifyTemplateRespVO>[] = [
+    {
+      title: '模板编码',
+      dataIndex: 'code',
+      align: 'center',
+      width: 150,
+      fieldProps: {
+        placeholder: '请输入模板编码'
+      },
+      order: 2
+    },
+    {
+      title: '模板名称',
+      dataIndex: 'name',
+      align: 'center',
+      width: 150,
+      fieldProps: {
+        placeholder: '请输入模板名称'
+      },
+      order: 3
+    },
+    {
+      title: '类型',
+      dataIndex: 'type',
+      align: 'center',
+      width: 120,
+      hideInSearch: true,
+      valueType: 'select',
+      valueEnum: typeEnum
+    },
+    {
+      title: '发送人名称',
+      dataIndex: 'nickname',
+      align: 'center',
+      width: 150,
+      hideInSearch: true
+    },
+    {
+      title: '模板内容',
+      dataIndex: 'content',
+      align: 'center',
+      width: 250,
+      hideInSearch: true,
+      render: (_, record) => (
+        record.content ? (
+          <Typography.Text style={{ width: 220, margin: 0 }} ellipsis={{ tooltip: record.content }}>
+            {record.content}
+          </Typography.Text>
+        ) : <span>-</span>
+      )
+    },
+    {
+      title: '开启状态',
+      dataIndex: 'status',
+      align: 'center',
+      width: 100,
+      valueType: 'select',
+      valueEnum: statusEnum,
+      fieldProps: {
+        placeholder: '请选择开启状态'
+      },
+      order: 1
+    },
+    {
+      title: '备注',
+      dataIndex: 'remark',
+      align: 'center',
+      width: 150,
+      hideInSearch: true,
+      ellipsis: true
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createTime',
+      align: 'center',
+      width: 180,
+      valueType: 'dateRange',
+      render: (_, record) => <span>{record.createTime as any}</span>,
+      fieldProps: {
+        placeholder: ['开始日期', '结束日期']
+      },
+      order: 0
+    },
+    {
+      title: '操作',
+      valueType: 'option',
+      align: 'center',
+      width: 120,
+      key: 'option',
+      fixed: 'right',
+      render: (_, record) => (
+        <Space size={12}>
+          <a key="edit" onClick={() => handleEdit(record)}>
+            修改
+          </a>
+          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+            删除
+          </a>
+        </Space>
+      )
+    }
+  ]
+
+  // ===== 删除 =====
+  const handleDelete = (record: API.SystemNotifyTemplateRespVO) => {
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+      content: `是否确认删除编号为"${record.id}"的数据项?`,
+      okText: '确定',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          await deleteNotifyTemplate({ id: record.id })
+          message.success('删除成功')
+          actionRef.current?.reload()
+        } catch {
+          message.error('删除失败')
+        }
+      }
+    })
+  }
+
+  // ===== 批量删除 =====
+  const handleBatchDelete = () => {
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+      content: `是否确认删除选中的 ${selectedRowKeys.length} 条数据?`,
+      okText: '确定',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          await Promise.all(selectedRowKeys.map((id) => deleteNotifyTemplate({ id: Number(id) })))
+          message.success('批量删除成功')
+          setSelectedRowKeys([])
+          actionRef.current?.reload()
+        } catch {
+          message.error('批量删除失败')
+        }
+      }
+    })
+  }
+
+  // ===== Edit =====
+  const handleEdit = (record: API.SystemNotifyTemplateRespVO) => {
+    setEditingTemplate(record)
+    setCreateModalVisible(true)
+  }
+
+  return (
+    <>
+      <ProTable<API.SystemNotifyTemplateRespVO>
+        columns={columns}
+        scroll={{ x: 'max-content' }}
+        actionRef={actionRef}
+        formRef={formRef}
+        form={{ colon: false }}
+        cardBordered
+        request={async (params: Record<string, any>) => {
+          const { current, pageSize, name, code, status, createTime, ...rest } = params
+          let beginCreateTime, endCreateTime
+          if (createTime && createTime.length === 2) {
+            beginCreateTime = createTime[0] + ' 00:00:00'
+            endCreateTime = createTime[1] + ' 23:59:59'
+          }
+
+          const resp = await getNotifyTemplatePage({
+            pageNo: current || 1,
+            pageSize: pageSize || 10,
+            ...(name ? { name } : {}),
+            ...(code ? { code } : {}),
+            ...(status !== undefined && status !== '' ? { status: Number(status) } : {}),
+            ...(beginCreateTime ? { beginCreateTime } : {}),
+            ...(endCreateTime ? { endCreateTime } : {}),
+            ...rest
+          } as any)
+
+          return {
+            data: resp.data?.list || [],
+            success: true,
+            total: resp.data?.total || 0
+          }
+        }}
+        rowSelection={{
+          selectedRowKeys,
+          onChange: (keys) => setSelectedRowKeys(keys)
+        }}
+        rowKey="id"
+        search={{
+          labelWidth: 'auto',
+          defaultCollapsed: false,
+          optionRender: (searchConfig, formProps, dom) => [
+            ...dom.reverse()
+          ]
+        }}
+        options={false}
+        pagination={{
+          align: 'center',
+          showSizeChanger: true
+        }}
+        headerTitle={false}
+        toolBarRender={() => [
+          <Button
+            key="create"
+            icon={<PlusOutlined />}
+            type="primary"
+            onClick={() => {
+              setEditingTemplate(null)
+              setCreateModalVisible(true)
+            }}
+          >
+            新增
+          </Button>,
+          <Button
+            key="batchDelete"
+            icon={<DeleteOutlined />}
+            danger
+            disabled={selectedRowKeys.length === 0}
+            style={
+              selectedRowKeys.length > 0
+                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
+                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
+            }
+            onClick={handleBatchDelete}
+          >
+            批量删除
+          </Button>
+        ]}
+      />
+
+      <ModalForm<API.SystemNotifyTemplateSaveReqVO>
+        title={editingTemplate ? '修改' : '新增'}
+        width={600}
+        open={createModalVisible}
+        onOpenChange={(visible) => {
+          setCreateModalVisible(visible)
+          if (!visible) {
+            setEditingTemplate(null)
+          }
+        }}
+        initialValues={
+          editingTemplate
+            ? { ...editingTemplate }
+            : { status: 0 } // default layout: open
+        }
+        layout="horizontal"
+        labelCol={{ span: 5 }}
+        wrapperCol={{ span: 18 }}
+        colon={false}
+        modalProps={{
+          destroyOnClose: true,
+          maskClosable: false
+        }}
+        onFinish={async (values) => {
+          try {
+            let resp
+            if (editingTemplate) {
+              resp = await updateNotifyTemplate({ ...values, id: editingTemplate.id } as any)
+            } else {
+              resp = await createNotifyTemplate(values as any)
+            }
+            if (resp.code === 0) {
+              message.success(editingTemplate ? '修改成功' : '创建成功')
+              actionRef.current?.reload()
+              return true
+            } else {
+              message.error(resp.msg || (editingTemplate ? '修改失败' : '创建失败'))
+              return false
+            }
+          } catch {
+            message.error(editingTemplate ? '修改失败' : '创建失败')
+            return false
+          }
+        }}
+      >
+        <ProFormText
+          name="code"
+          label="模板编码"
+          placeholder="请输入模板编码"
+          rules={[{ required: true, message: '请输入模板编码' }]}
+        />
+        <ProFormText
+          name="name"
+          label="模板名称"
+          placeholder="请输入模板名称"
+          rules={[{ required: true, message: '请输入模板名称' }]}
+        />
+        <ProFormText
+          name="nickname"
+          label="发件人名称"
+          placeholder="请输入发件人名称"
+          rules={[{ required: true, message: '请输入发件人名称' }]}
+        />
+        <ProFormTextArea
+          name="content"
+          label="模板内容"
+          placeholder="请输入模板内容"
+          rules={[{ required: true, message: '请输入模板内容' }]}
+          fieldProps={{ rows: 3 }}
+        />
+        <ProFormSelect
+          name="type"
+          label="类型"
+          placeholder="请选择类型"
+          rules={[{ required: true, message: '请选择类型' }]}
+          options={[
+            { label: '系统通知', value: 1 },
+            { label: '业务通知', value: 2 },
+            { label: '会议通知', value: 3 }
+          ]}
+        />
+        <ProFormRadio.Group
+          name="status"
+          label="开启状态"
+          rules={[{ required: true, message: '请选择开启状态' }]}
+          options={[
+            { label: '开启', value: 0 },
+            { label: '关闭', value: 1 }
+          ]}
+        />
+        <ProFormText
+          name="remark"
+          label="备注"
+          placeholder="请输入备注"
+        />
+      </ModalForm>
+    </>
+  )
+}
+
+export default NotifyTemplateConfig

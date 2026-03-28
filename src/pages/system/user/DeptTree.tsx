@@ -1,6 +1,6 @@
-import React, { useMemo, useState, useEffect } from 'react'
-import { Input, Tree, message } from 'antd'
+import React, { useEffect, useMemo, useState } from 'react'
 import type { TreeDataNode } from 'antd'
+import { Input, message, Tree } from 'antd'
 import { getSimpleDeptList } from '@/api/system/dept'
 
 const { Search } = Input
