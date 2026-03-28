@@ -178,6 +178,12 @@ export default [
             name: 'API访问日志',
             icon: 'api',
             component: './infra/apiAccessLog'
+          },
+          {
+            path: '/infra/log/api-error-log',
+            name: '错误日志',
+            icon: 'exception',
+            component: './infra/apiErrorLog'
           }
         ]
       }
