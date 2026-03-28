@@ -83,6 +83,12 @@ export default [
     icon: 'profile',
     component: './system/log/loginlog'
   },
+  {
+    path: '/system/oauth2/oauth2/application',
+    name: '应用管理',
+    icon: 'appstore',
+    component: './system/oauth2/client'
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]
