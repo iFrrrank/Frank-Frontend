@@ -20,7 +20,7 @@ const ApiErrorLogPage: React.FC = () => {
     Modal.confirm({
       title: '系统提示',
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `确认标记为${statusText}?`,
+      content: `确认标记为${statusText}？`,
       okText: '确定',
       cancelText: '取消',
       onOk: async () => {
