@@ -163,6 +163,26 @@ export default [
       }
     ]
   },
+  {
+    path: '/infra',
+    name: '基础设施',
+    icon: 'tool',
+    routes: [
+      {
+        path: '/infra/log',
+        name: '日志管理',
+        icon: 'profile',
+        routes: [
+          {
+            path: '/infra/log/api-access-log',
+            name: 'API访问日志',
+            icon: 'api',
+            component: './infra/apiAccessLog'
+          }
+        ]
+      }
+    ]
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]
