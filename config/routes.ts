@@ -217,6 +217,19 @@ export default [
         name: '数据源配置',
         icon: 'database',
         component: './infra/dataSourceConfig'
+      },
+      {
+        path: '/infra/monitors',
+        name: '系统监控',
+        icon: 'dashboard',
+        routes: [
+          {
+            path: '/infra/monitors/redis',
+            name: 'Redis 监控',
+            icon: 'fund',
+            component: './infra/monitors/redis'
+          }
+        ]
       }
     ]
   },
