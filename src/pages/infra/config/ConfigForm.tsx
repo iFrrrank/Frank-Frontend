@@ -57,7 +57,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
         }
       }}
       request={async () => {
-        if (id) {
+        if (id !== undefined) {
           const resp = await getConfig({ id })
           return resp.data as Record<string, any>
         }

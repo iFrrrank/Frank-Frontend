@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import { deleteFile, deleteFileList, getFilePage, uploadFile } from '@/api/infra/file'
+import { deleteFile, deleteFileList, getFilePage, uploadFile } from '@/api/infra/fileList'
 
 const { Dragger } = Upload
 

@@ -211,6 +211,12 @@ export default [
         name: '配置管理',
         icon: 'setting',
         component: './infra/config'
+      },
+      {
+        path: '/infra/data-source-config',
+        name: '数据源配置',
+        icon: 'database',
+        component: './infra/dataSourceConfig'
       }
     ]
   },
