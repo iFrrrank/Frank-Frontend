@@ -89,13 +89,13 @@ const App_: React.FC = () => {
   // 列定义
   const columns: ProColumns<API.SystemUserRespVO>[] = [
     {
-      title: '员工ID',
+      title: '员工 ID',
       dataIndex: 'id',
       align: 'center',
       width: 80,
       valueType: 'text',
       fieldProps: {
-        placeholder: '请输入员工ID'
+        placeholder: '请输入员工 ID'
       }
     },
     {
@@ -253,6 +253,7 @@ const App_: React.FC = () => {
     setResetPwdVisible(true)
   }
 
+  // 提交重置密码
   const handleResetPwdSubmit = async () => {
     if (!newPassword) {
       message.warning('请输入新密码')
@@ -300,6 +301,7 @@ const App_: React.FC = () => {
     }
   }
 
+  // 提交分配角色
   const handleAssignRoleSubmit = async () => {
     try {
       const resp = await assignUserRole({
@@ -431,7 +433,7 @@ const App_: React.FC = () => {
           request={async (params: Record<string, any>) => {
             const { current, pageSize, id, username, email, status, deptId, ...rest } = params
 
-            // 如果输入了员工ID，则精确查询该用户
+            // 如果输入了员工 ID，则精确查询该用户
             if (id) {
               try {
                 const resp = await getUser({ id: Number(id) })
@@ -547,16 +549,16 @@ const App_: React.FC = () => {
         initialValues={
           editingUser
             ? {
-              id: editingUser.id,
-              nickname: editingUser.nickname,
-              deptId: editingUser.deptId,
-              mobile: editingUser.mobile,
-              email: editingUser.email,
-              username: editingUser.username,
-              sex: editingUser.sex,
-              postIds: editingUser.postIds,
-              remark: editingUser.remark
-            }
+                id: editingUser.id,
+                nickname: editingUser.nickname,
+                deptId: editingUser.deptId,
+                mobile: editingUser.mobile,
+                email: editingUser.email,
+                username: editingUser.username,
+                sex: editingUser.sex,
+                postIds: editingUser.postIds,
+                remark: editingUser.remark
+              }
             : undefined
         }
         layout="horizontal"

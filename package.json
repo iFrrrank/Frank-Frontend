@@ -48,8 +48,10 @@
     "dayjs": "^1.11.13",
     "echarts": "^6.0.0",
     "echarts-for-react": "^3.0.6",
+    "jsencrypt": "^3.5.4",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "web-storage-cache": "^1.1.1"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^3.3.0",
