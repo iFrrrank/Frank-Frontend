@@ -163,6 +163,99 @@ export default [
       }
     ]
   },
+  {
+    path: '/infra',
+    name: '基础设施',
+    icon: 'tool',
+    routes: [
+      {
+        path: '/infra/log',
+        name: 'API 日志',
+        icon: 'profile',
+        routes: [
+          {
+            path: '/infra/log/api-access-log',
+            name: '访问日志',
+            icon: 'api',
+            component: './infra/log/apiAccessLog'
+          },
+          {
+            path: '/infra/log/api-error-log',
+            name: '错误日志',
+            icon: 'exception',
+            component: './infra/log/apiErrorLog'
+          }
+        ]
+      },
+      {
+        path: '/infra/file',
+        name: '文件管理',
+        icon: 'folder',
+        routes: [
+          {
+            path: '/infra/file/list',
+            name: '文件列表',
+            icon: 'fileText',
+            component: './infra/file/list'
+          },
+          {
+            path: '/infra/file/config',
+            name: '文件配置',
+            icon: 'setting',
+            component: './infra/file/config'
+          }
+        ]
+      },
+      {
+        path: '/infra/config',
+        name: '配置管理',
+        icon: 'setting',
+        component: './infra/config'
+      },
+      {
+        path: '/infra/data-source-config',
+        name: '数据源配置',
+        icon: 'database',
+        component: './infra/dataSourceConfig'
+      },
+      {
+        path: '/infra/monitors',
+        name: '系统监控',
+        icon: 'dashboard',
+        routes: [
+          {
+            path: '/infra/monitors/redis',
+            name: 'Redis 监控',
+            icon: 'fund',
+            component: './infra/monitors/redis'
+          }
+        ]
+      },
+      {
+        path: '/infra/job',
+        name: '定时任务',
+        icon: 'schedule',
+        routes: [
+          {
+            path: '/infra/job',
+            redirect: '/infra/job/index'
+          },
+          {
+            path: '/infra/job/index',
+            name: '任务管理',
+            icon: 'schedule',
+            component: './infra/job/index'
+          },
+          {
+            path: '/infra/job/job-log',
+            name: '任务日志',
+            icon: 'unorderedList',
+            component: './infra/job/jobLog/index'
+          }
+        ]
+      }
+    ]
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]

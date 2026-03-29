@@ -22,7 +22,6 @@ import * as permission from './permission'
 import * as oAuth2Open from './oAuth2Open'
 import * as captcha from './captcha'
 import * as auth from './auth'
-import * as transProxy from './transProxy'
 import * as smsLog from './smsLog'
 import * as operateLog from './operateLog'
 import * as oAuth2Token from './oAuth2Token'
@@ -55,7 +54,6 @@ export default {
   oAuth2Open,
   captcha,
   auth,
-  transProxy,
   smsLog,
   operateLog,
   oAuth2Token,
