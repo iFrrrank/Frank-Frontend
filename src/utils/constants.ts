@@ -12,26 +12,20 @@ export const UserTypeEnum = {
 }
 
 // ========== SYSTEM 模块 ==========
-/**
- * 菜单的类型枚举
- */
+// 菜单的类型枚举
 export const SystemMenuTypeEnum = {
   DIR: 1, // 目录
   MENU: 2, // 菜单
   BUTTON: 3 // 按钮
 }
 
-/**
- * 角色的类型枚举
- */
+// 角色的类型枚举
 export const SystemRoleTypeEnum = {
   SYSTEM: 1, // 内置角色
   CUSTOM: 2 // 自定义角色
 }
 
-/**
- * 数据权限的范围枚举
- */
+// 数据权限的范围枚举
 export const SystemDataScopeEnum = {
   ALL: 1, // 全部数据权限
   DEPT_CUSTOM: 2, // 指定部门数据权限
@@ -40,9 +34,7 @@ export const SystemDataScopeEnum = {
   DEPT_SELF: 5 // 仅本人数据权限
 }
 
-/**
- * 用户的社交平台的类型枚举
- */
+// 用户的社交平台的类型枚举
 export const SystemUserSocialTypeEnum = {
   DINGTALK: {
     title: '钉钉',
@@ -59,27 +51,21 @@ export const SystemUserSocialTypeEnum = {
 }
 
 // ========== INFRA 模块 ==========
-/**
- * 代码生成模板类型
- */
+// 代码生成模板类型枚举
 export const InfraCodegenTemplateTypeEnum = {
   CRUD: 1, // 基础 CRUD
   TREE: 2, // 树形 CRUD
   SUB: 15 // 主子表 CRUD
 }
 
-/**
- * 任务状态的枚举
- */
+// 任务状态的枚举
 export const InfraJobStatusEnum = {
   INIT: 0, // 初始化中
   NORMAL: 1, // 运行中
   STOP: 2 // 暂停运行
 }
 
-/**
- * API 异常数据的处理状态
- */
+// API 异常数据的处理状态枚举
 export const InfraApiErrorLogProcessStatusEnum = {
   INIT: 0, // 未处理
   DONE: 1, // 已处理
@@ -87,9 +73,7 @@ export const InfraApiErrorLogProcessStatusEnum = {
 }
 
 // ========== PAY 模块 ==========
-/**
- * 支付渠道枚举
- */
+// 支付渠道枚举
 export const PayChannelEnum = {
   WX_PUB: {
     code: 'wx_pub',
@@ -145,9 +129,7 @@ export const PayChannelEnum = {
   }
 }
 
-/**
- * 支付的展示模式每局
- */
+// 支付的展示模式枚举
 export const PayDisplayModeEnum = {
   URL: {
     mode: 'url'
@@ -166,18 +148,14 @@ export const PayDisplayModeEnum = {
   }
 }
 
-/**
- * 支付类型枚举
- */
+// 支付类型枚举
 export const PayType = {
   WECHAT: 'WECHAT',
   ALIPAY: 'ALIPAY',
   MOCK: 'MOCK'
 }
 
-/**
- * 支付订单状态枚举
- */
+// 支付订单状态枚举
 export const PayOrderStatusEnum = {
   WAITING: {
     status: 0,
@@ -194,9 +172,7 @@ export const PayOrderStatusEnum = {
 }
 
 // ========== MALL - 商品模块 ==========
-/**
- * 商品 SPU 状态
- */
+// 商品 SPU 状态枚举
 export const ProductSpuStatusEnum = {
   RECYCLE: {
     status: -1,
@@ -213,9 +189,7 @@ export const ProductSpuStatusEnum = {
 }
 
 // ========== MALL - 营销模块 ==========
-/**
- * 优惠劵模板的有限期类型的枚举
- */
+// 优惠劵模板的有限期类型的枚举
 export const CouponTemplateValidityTypeEnum = {
   DATE: {
     type: 1,
@@ -227,9 +201,7 @@ export const CouponTemplateValidityTypeEnum = {
   }
 }
 
-/**
- * 优惠劵模板的领取方式的枚举
- */
+// 优惠劵模板的领取方式的枚举
 export const CouponTemplateTakeTypeEnum = {
   USER: {
     type: 1,
@@ -245,9 +217,7 @@ export const CouponTemplateTakeTypeEnum = {
   }
 }
 
-/**
- * 营销的商品范围枚举
- */
+// 营销的商品范围枚举
 export const PromotionProductScopeEnum = {
   ALL: {
     scope: 1,
@@ -263,9 +233,7 @@ export const PromotionProductScopeEnum = {
   }
 }
 
-/**
- * 营销的条件类型枚举
- */
+// 营销的条件类型枚举
 export const PromotionConditionTypeEnum = {
   PRICE: {
     type: 10,
@@ -277,9 +245,7 @@ export const PromotionConditionTypeEnum = {
   }
 }
 
-/**
- * 优惠类型枚举
- */
+// 优惠类型枚举
 export const PromotionDiscountTypeEnum = {
   PRICE: {
     type: 1,
@@ -292,9 +258,7 @@ export const PromotionDiscountTypeEnum = {
 }
 
 // ========== MALL - 交易模块 ==========
-/**
- * 分销关系绑定模式枚举
- */
+// 分销关系绑定模式枚举
 export const BrokerageBindModeEnum = {
   ANYTIME: {
     mode: 1,
@@ -309,9 +273,8 @@ export const BrokerageBindModeEnum = {
     name: '覆盖绑定'
   }
 }
-/**
- * 分佣模式枚举
- */
+
+// 分佣模式枚举
 export const BrokerageEnabledConditionEnum = {
   ALL: {
     condition: 1,
@@ -322,9 +285,8 @@ export const BrokerageEnabledConditionEnum = {
     name: '指定分销'
   }
 }
-/**
- * 佣金记录业务类型枚举
- */
+
+// 佣金记录业务类型枚举
 export const BrokerageRecordBizTypeEnum = {
   ORDER: {
     type: 1,
@@ -335,9 +297,8 @@ export const BrokerageRecordBizTypeEnum = {
     name: '提现申请'
   }
 }
-/**
- * 佣金提现状态枚举
- */
+
+// 佣金提现状态枚举
 export const BrokerageWithdrawStatusEnum = {
   AUDITING: {
     status: 0,
@@ -360,9 +321,8 @@ export const BrokerageWithdrawStatusEnum = {
     name: '提现失败'
   }
 }
-/**
- * 佣金提现类型枚举
- */
+
+// 佣金提现类型枚举
 export const BrokerageWithdrawTypeEnum = {
   WALLET: {
     type: 1,
@@ -382,9 +342,7 @@ export const BrokerageWithdrawTypeEnum = {
   }
 }
 
-/**
- * 配送方式枚举
- */
+// 配送方式枚举
 export const DeliveryTypeEnum = {
   EXPRESS: {
     type: 1,
@@ -395,9 +353,8 @@ export const DeliveryTypeEnum = {
     name: '到店自提'
   }
 }
-/**
- * 交易订单 - 状态
- */
+
+// 交易订单 - 状态枚举
 export const TradeOrderStatusEnum = {
   UNPAID: {
     status: 0,
@@ -421,7 +378,7 @@ export const TradeOrderStatusEnum = {
   }
 }
 
-// ========== ERP - 企业资源计划 ==========
+// ========== ERP 模块 ==========
 export const ErpBizType = {
   PURCHASE_ORDER: 10,
   PURCHASE_IN: 11,

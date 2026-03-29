@@ -2,52 +2,12 @@ import React, { useEffect, useMemo, useState } from 'react'
 import type { TreeDataNode } from 'antd'
 import { Input, message, Tree } from 'antd'
 import { getSimpleDeptList } from '@/api/system/dept'
+import { buildTreeData, getParentKey } from '@/utils/tree'
 
 const { Search } = Input
 
 interface DeptTreeProps {
   onSelect?: (deptId: number | undefined) => void
-}
-
-// 将后端返回的扁平数据转换为树形结构
-const buildTreeData = (list: { id: number; name: string; parentId: number }[]): TreeDataNode[] => {
-  const map = new Map<number, TreeDataNode>()
-  const tree: TreeDataNode[] = []
-
-  list.forEach((item) => {
-    const node: TreeDataNode = { key: item.id, title: item.name, children: [] }
-    map.set(item.id, node)
-  })
-
-  list.forEach((item) => {
-    const node = map.get(item.id)!
-    if (item.parentId === 0) {
-      tree.push(node)
-    } else {
-      const parent = map.get(item.parentId)
-      if (parent) {
-        parent.children = parent.children || []
-        parent.children.push(node)
-      }
-    }
-  })
-
-  return tree
-}
-
-const getParentKey = (key: React.Key, tree: TreeDataNode[]): React.Key => {
-  let parentKey: React.Key
-  for (let i = 0; i < tree.length; i++) {
-    const node = tree[i]
-    if (node.children) {
-      if (node.children.some((item) => item.key === key)) {
-        parentKey = node.key
-      } else if (getParentKey(key, node.children)) {
-        parentKey = getParentKey(key, node.children)
-      }
-    }
-  }
-  return parentKey!
 }
 
 const DeptTree: React.FC<DeptTreeProps> = ({ onSelect }) => {
