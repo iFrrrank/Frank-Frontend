@@ -177,13 +177,13 @@ export default [
             path: '/infra/log/api-access-log',
             name: '访问日志',
             icon: 'api',
-            component: './infra/apiAccessLog'
+            component: './infra/log/apiAccessLog'
           },
           {
             path: '/infra/log/api-error-log',
             name: '错误日志',
             icon: 'exception',
-            component: './infra/apiErrorLog'
+            component: './infra/log/apiErrorLog'
           }
         ]
       },
@@ -193,10 +193,16 @@ export default [
         icon: 'folder',
         routes: [
           {
-            path: '/infra/file/file-config',
+            path: '/infra/file/list',
+            name: '文件列表',
+            icon: 'fileText',
+            component: './infra/file/list'
+          },
+          {
+            path: '/infra/file/config',
             name: '文件配置',
             icon: 'setting',
-            component: './infra/fileConfig'
+            component: './infra/file/config'
           }
         ]
       }
