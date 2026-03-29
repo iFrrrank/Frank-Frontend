@@ -230,6 +230,29 @@ export default [
             component: './infra/monitors/redis'
           }
         ]
+      },
+      {
+        path: '/infra/job',
+        name: '定时任务',
+        icon: 'schedule',
+        routes: [
+          {
+            path: '/infra/job',
+            redirect: '/infra/job/index'
+          },
+          {
+            path: '/infra/job/index',
+            name: '任务管理',
+            icon: 'schedule',
+            component: './infra/job/index'
+          },
+          {
+            path: '/infra/job/job-log',
+            name: '任务日志',
+            icon: 'unorderedList',
+            component: './infra/job/jobLog/index'
+          }
+        ]
       }
     ]
   },
