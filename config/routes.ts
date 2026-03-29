@@ -205,6 +205,12 @@ export default [
             component: './infra/file/config'
           }
         ]
+      },
+      {
+        path: '/infra/config',
+        name: '配置管理',
+        icon: 'setting',
+        component: './infra/config'
       }
     ]
   },

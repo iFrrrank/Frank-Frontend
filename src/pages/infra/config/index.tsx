@@ -1,0 +1,305 @@
+import React, { useRef, useState } from 'react'
+import { Button, message, Modal, Space, Tag } from 'antd'
+import {
+  PlusOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+  DownloadOutlined
+} from '@ant-design/icons'
+import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
+import { ProTable } from '@ant-design/pro-components'
+import {
+  deleteConfig,
+  deleteConfigList,
+  getConfigPage,
+  exportConfig
+} from '@/api/infra/config'
+import ConfigForm from './ConfigForm'
+
+/** 系统内置选项 */
+const CONFIG_TYPE_OPTIONS = [
+  { label: '是', value: 1 },
+  { label: '否', value: 2 }
+]
+
+const ConfigPage: React.FC = () => {
+  const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+
+  const [formVisible, setFormVisible] = useState(false)
+  const [currentId, setCurrentId] = useState<number | undefined>(undefined)
+
+  const handleCreate = () => {
+    setCurrentId(undefined)
+    setFormVisible(true)
+  }
+
+  const handleUpdate = (id: number) => {
+    setCurrentId(id)
+    setFormVisible(true)
+  }
+
+  const handleDelete = (id: number) => {
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+      content: '确认删除该参数配置？',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          await deleteConfig({ id })
+          message.success('删除成功')
+          actionRef.current?.reload()
+        } catch {
+          message.error('删除失败')
+        }
+      }
+    })
+  }
+
+  const handleDeleteBatch = () => {
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+      content: '是否删除所选中的数据？',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          await deleteConfigList({ ids: selectedRowKeys as number[] })
+          message.success('删除成功')
+          setSelectedRowKeys([])
+          actionRef.current?.reloadAndRest?.()
+        } catch {
+          message.error('删除失败')
+        }
+      }
+    })
+  }
+
+  /** 导出 */
+  const handleExport = async () => {
+    try {
+      const params = formRef.current?.getFieldsValue() || {}
+      const { createTime, ...rest } = params
+      let beginTimeStr, endTimeStr
+      if (createTime && createTime.length === 2) {
+        beginTimeStr = createTime[0] + ' 00:00:00'
+        endTimeStr = createTime[1] + ' 23:59:59'
+      }
+      const resp = await exportConfig({
+        ...(beginTimeStr && endTimeStr ? { createTime: [beginTimeStr, endTimeStr] } : {}),
+        ...rest,
+        pageNo: '1',
+        pageSize: '100'
+      } as any)
+      // 处理文件下载
+      const blob = new Blob([resp], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = '参数配置.xlsx'
+      link.click()
+      window.URL.revokeObjectURL(url)
+      message.success('导出成功')
+    } catch {
+      message.error('导出失败')
+    }
+  }
+
+  const columns: ProColumns<API.InfraConfigRespVO>[] = [
+    {
+      title: '参数名称',
+      dataIndex: 'name',
+      align: 'center',
+      fieldProps: { placeholder: '请输入参数名称' },
+      hideInTable: true
+    },
+    {
+      title: '参数键名',
+      dataIndex: 'key',
+      align: 'center',
+      fieldProps: { placeholder: '请输入参数键名' },
+      hideInTable: true
+    },
+    {
+      title: '系统内置',
+      dataIndex: 'type',
+      align: 'center',
+      valueType: 'select',
+      fieldProps: { placeholder: '请选择系统内置', options: CONFIG_TYPE_OPTIONS },
+      hideInTable: true
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createTime',
+      align: 'center',
+      valueType: 'dateRange',
+      hideInTable: true,
+      fieldProps: { placeholder: ['开始日期', '结束日期'] }
+    },
+    {
+      title: '参数主键',
+      dataIndex: 'id',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '参数分类',
+      dataIndex: 'category',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '参数名称',
+      dataIndex: 'name',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '参数键名',
+      dataIndex: 'key',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '参数键值',
+      dataIndex: 'value',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '是否可见',
+      dataIndex: 'visible',
+      align: 'center',
+      hideInSearch: true,
+      render: (_, record) =>
+        record.visible ? <Tag color="success">是</Tag> : <Tag color="error">否</Tag>
+    },
+    {
+      title: '系统内置',
+      dataIndex: 'type',
+      align: 'center',
+      hideInSearch: true,
+      render: (_, record) =>
+        record.type === 1 ? <Tag color="error">是</Tag> : <Tag color="success">否</Tag>
+    },
+    {
+      title: '备注',
+      dataIndex: 'remark',
+      align: 'center',
+      hideInSearch: true,
+      ellipsis: true
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createTime',
+      align: 'center',
+      hideInSearch: true,
+      render: (_, record) => <span>{record.createTime}</span>
+    },
+    {
+      title: '操作',
+      valueType: 'option',
+      align: 'center',
+      width: 120,
+      fixed: 'right',
+      render: (_, record) => (
+        <Space size={12}>
+          <a key="edit" onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
+            编辑
+          </a>
+          <a key="delete" onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>
+            删除
+          </a>
+        </Space>
+      )
+    }
+  ]
+
+  return (
+    <>
+      <ProTable<API.InfraConfigRespVO>
+        rowSelection={{
+          selectedRowKeys,
+          onChange: setSelectedRowKeys
+        }}
+        columns={columns}
+        scroll={{ x: 'max-content' }}
+        actionRef={actionRef}
+        formRef={formRef}
+        form={{ colon: false }}
+        cardBordered
+        request={async (params) => {
+          const { current, pageSize, createTime, ...rest } = params
+          let beginTimeStr, endTimeStr
+          if (createTime && createTime.length === 2) {
+            beginTimeStr = createTime[0] + ' 00:00:00'
+            endTimeStr = createTime[1] + ' 23:59:59'
+          }
+          try {
+            const resp = await getConfigPage({
+              pageNo: current || 1,
+              pageSize: pageSize || 10,
+              ...(beginTimeStr && endTimeStr ? { createTime: [beginTimeStr, endTimeStr] } : {}),
+              ...rest
+            } as any)
+            return {
+              data: resp.data?.list || [],
+              success: true,
+              total: resp.data?.total || 0
+            }
+          } catch (e) {
+            console.error('获取参数配置列表失败', e)
+            message.error('获取数据失败')
+            return { data: [], success: false, total: 0 }
+          }
+        }}
+        rowKey="id"
+        search={{ labelWidth: 'auto', defaultCollapsed: false }}
+        options={false}
+        pagination={{ align: 'center', showSizeChanger: true }}
+        headerTitle={false}
+        toolBarRender={() => [
+          <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
+            新增
+          </Button>,
+          <Button
+            key="delete"
+            danger
+            icon={<DeleteOutlined />}
+            disabled={selectedRowKeys.length === 0}
+            onClick={handleDeleteBatch}
+            style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
+          >
+            批量删除
+          </Button>,
+          <Button
+            key="export"
+            icon={<DownloadOutlined />}
+            onClick={handleExport}
+            style={{ color: '#e6a23c', borderColor: '#e6a23c', background: '#fdf6ec' }}
+          >
+            导出
+          </Button>
+        ]}
+      />
+
+      {formVisible && (
+        <ConfigForm
+          visible={formVisible}
+          setVisible={setFormVisible}
+          id={currentId}
+          onSuccess={() => {
+            setFormVisible(false)
+            actionRef.current?.reload()
+          }}
+        />
+      )}
+    </>
+  )
+}
+
+export default ConfigPage
