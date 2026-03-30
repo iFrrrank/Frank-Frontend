@@ -129,7 +129,6 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         }}
         rules={[{ required: true, message: '请选择上级部门' }]}
       />
-
       <ProFormText
         name="name"
         label="部门名称"
@@ -137,7 +136,6 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         placeholder="请输入部门名称"
         rules={[{ required: true, message: '请输入部门名称' }]}
       />
-
       <ProFormDigit
         name="sort"
         label="显示排序"
@@ -146,7 +144,6 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         rules={[{ required: true, message: '请输入显示排序' }]}
         fieldProps={{ min: 0 }}
       />
-
       <ProFormSelect
         name="leaderUserId"
         label="负责人"
