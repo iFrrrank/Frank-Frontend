@@ -9,8 +9,7 @@ export default {
     loginOut: '退出系统',
     document: '项目文档',
     profile: '个人中心',
-    reminder: '温馨提示',
-    loginOutMessage: '是否退出本系统？',
+    loginOutMsg: '是否退出本系统？',
     back: '返回',
     ok: '确定',
     save: '保存',
@@ -18,6 +17,7 @@ export default {
     close: '关闭',
     reload: '重新加载',
     success: '成功',
+    fail: '失败',
     closeTab: '关闭标签页',
     closeTheLeftTab: '关闭左侧标签页',
     closeTheRightTab: '关闭右侧标签页',
@@ -34,20 +34,12 @@ export default {
     tagsView: '标签页',
     tagsViewDes: '用于记录路由历史记录',
     tool: '工具',
-    toolDes: '用于设置定制系统',
-    query: '查询',
-    reset: '重置',
-    shrink: '收起',
-    expand: '展开',
-    confirmTitle: '系统提示',
-    exportMessage: '是否确认导出数据项？',
-    importMessage: '是否确认导入数据项？',
-    createSuccess: '新增成功',
-    updateSuccess: '修改成功',
-    delMessage: '是否删除所选中数据？',
-    delDataMessage: '是否删除数据？',
-    delNoData: '请选择需要删除的数据',
-    delSuccess: '删除成功',
+    toolDes: '用于设置定制系统'
+  },
+  columns: {
+    id: 'ID',
+    name: '名称',
+    title: '标题',
     index: '序号',
     status: '状态',
     createTime: '创建时间',
@@ -55,6 +47,29 @@ export default {
     copy: '复制',
     copySuccess: '复制成功',
     copyError: '复制失败'
+  },
+  msg: {
+    reminder: '温馨提示',
+    confirmTitle: '系统提示',
+    createSuccess: '新增成功',
+    createFail: '新增失败',
+    updateSuccess: '修改成功',
+    updateFail: '修改失败',
+    delSuccess: '删除成功',
+    delFail: '删除失败',
+    batchDelSuccess: '批量删除成功',
+    batchDelFail: '批量删除失败',
+    delDataMsg: '是否删除所选中的数据？',
+    delOneMsg: '是否删除该条数据？',
+    delNoData: '请选择需要删除的数据',
+    exportMsg: '是否确认导出数据项？',
+    importMsg: '是否确认导入数据项？',
+    exportSuccess: '导出成功',
+    exportFail: '导出失败',
+    importSuccess: '导入成功',
+    importFail: '导入失败',
+    resetPwdSuccess: '重置密码成功',
+    resetPwdFail: '重置密码失败'
   },
   lock: {
     lockScreen: '锁定屏幕',
@@ -296,11 +311,13 @@ export default {
   },
   action: {
     create: '新增',
-    add: '新增',
-    del: '删除',
     delete: '删除',
-    edit: '编辑',
-    update: '编辑',
+    batchDelete: '批量删除',
+    update: '修改',
+    query: '查询',
+    reset: '重置',
+    shrink: '收起',
+    expand: '展开',
     preview: '预览',
     more: '更多',
     sync: '同步',
@@ -314,7 +331,9 @@ export default {
     typeCreate: '字典类型新增',
     typeUpdate: '字典类型编辑',
     dataCreate: '字典数据新增',
-    dataUpdate: '字典数据编辑'
+    dataUpdate: '字典数据编辑',
+    resetPwd: '重置密码',
+    assignRole: '分配角色'
   },
   dialog: {
     dialog: '弹窗',
@@ -325,9 +344,9 @@ export default {
     api: {
       operationFailed: '操作失败',
       errorTip: '错误提示',
-      errorMessage: '操作失败,系统异常!',
-      timeoutMessage: '登录超时,请重新登录!',
-      apiTimeoutMessage: '接口请求超时,请刷新页面重试!',
+      errorMsg: '操作失败,系统异常!',
+      timeoutMsg: '登录超时,请重新登录!',
+      apiTimeoutMsg: '接口请求超时,请刷新页面重试!',
       apiRequestFailed: '请求出错，请稍候重试',
       networkException: '网络异常',
       networkExceptionMsg: '网络异常，请检查您的网络连接是否正常!',
@@ -346,7 +365,7 @@ export default {
     },
     app: {
       logoutTip: '温馨提醒',
-      logoutMessage: '是否确认退出系统?',
+      logoutMsg: '是否确认退出系统?',
       menuLoading: '菜单加载中...'
     },
     exception: {
@@ -453,6 +472,5 @@ export default {
     btn_zoom_in: '放大',
     btn_zoom_out: '缩小',
     preview: '预览'
-  },
-  'OAuth 2.0': 'OAuth 2.0' // 避免菜单名是 OAuth 2.0 时，一直 warn 报错
+  }
 }

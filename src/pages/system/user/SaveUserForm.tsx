@@ -12,6 +12,7 @@ import { createUser, updateUser, getUser } from '@/api/system/user'
 import { getSimpleDeptList } from '@/api/system/dept'
 import { getSimplePostList } from '@/api/system/post'
 import { buildTreeData } from '@/utils/tree'
+import textConstants from '@/locales/zh-CN'
 
 export let handleEditUser: (record: API.SystemUserRespVO) => void
 export let handleCreateUser: () => void
@@ -42,7 +43,7 @@ const SaveUserModal: React.FC = () => {
 
   return (
     <ModalForm<API.SystemUserSaveReqVO>
-      title={editingUser ? '修改用户' : '新增'}
+      title={editingUser ? '修改用户' : '新增用户'}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -88,15 +89,20 @@ const SaveUserModal: React.FC = () => {
             resp = await createUser(values)
           }
           if (resp.code === 0) {
-            message.success(editingUser ? '修改成功' : '创建成功')
+            message.success(
+              editingUser ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             actionRef.current?.reload()
             return true
           } else {
-            message.error(resp.msg || (editingUser ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingUser ? textConstants.msg.updateFail : textConstants.msg.createFail)
+            )
             return false
           }
         } catch {
-          message.error(editingUser ? '修改失败' : '创建失败')
+          message.error(editingUser ? textConstants.msg.updateFail : textConstants.msg.createFail)
           return false
         }
       }}

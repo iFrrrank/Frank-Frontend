@@ -3,6 +3,7 @@ import { Modal, message, Upload, Switch } from 'antd'
 import type { ActionType } from '@ant-design/pro-components'
 import { InboxOutlined } from '@ant-design/icons'
 import { importExcel, importTemplate } from '@/api/system/user'
+import textConstants from '@/locales/zh-CN'
 
 const { Dragger } = Upload
 
@@ -42,15 +43,15 @@ const ImportUserModal: React.FC = () => {
             msgs.push(`导入失败用户: ${failKeys.join(', ')}`)
           }
         }
-        message.success(msgs.join('；') || '导入成功')
+        message.success(msgs.join('；') || textConstants.msg.exportSuccess)
         setImportModalVisible(false)
         setImportFile(null)
         actionRef.current?.reload()
       } else {
-        message.error(resp.msg || '导入失败')
+        message.error(resp.msg || textConstants.msg.exportFail)
       }
     } catch {
-      message.error('导入失败')
+      message.error(textConstants.msg.exportFail)
     } finally {
       setImportLoading(false)
     }

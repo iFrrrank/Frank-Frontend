@@ -21,6 +21,7 @@ import ResetPwdModal, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
 import AssignRoleModal, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
 import ImportUserModal, { handleImportUser } from '@/pages/system/user/ImportUserForm'
 import SaveUserModal, { handleEditUser, handleCreateUser } from '@/pages/system/user/SaveUserForm'
+import textConstants from '@/locales/zh-CN'
 
 const SystemUser: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -38,7 +39,7 @@ const SystemUser: React.FC = () => {
       width: 80,
       valueType: 'text',
       fieldProps: {
-        placeholder: '请输入员工 ID'
+        placeholder: `${textConstants.common.inputText}员工 ID`
       }
     },
     {
@@ -48,7 +49,7 @@ const SystemUser: React.FC = () => {
       width: 120,
       valueType: 'text',
       fieldProps: {
-        placeholder: '请输入用户名'
+        placeholder: `${textConstants.common.inputText}用户名`
       }
     },
     {
@@ -58,7 +59,7 @@ const SystemUser: React.FC = () => {
       width: 200,
       valueType: 'text',
       fieldProps: {
-        placeholder: '请输入邮箱'
+        placeholder: `${textConstants.common.inputText}邮箱`
       }
     },
     {
@@ -76,11 +77,11 @@ const SystemUser: React.FC = () => {
       valueType: 'select',
       valueEnum: COMMON_STATUS_VALUE_ENUM,
       fieldProps: {
-        placeholder: '请选择状态'
+        placeholder: `${textConstants.common.selectText}状态`
       }
     },
     {
-      title: '创建时间',
+      title: textConstants.table.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',
@@ -88,7 +89,7 @@ const SystemUser: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '操作',
+      title: textConstants.table.action,
       valueType: 'option',
       align: 'center',
       width: 160,
@@ -98,30 +99,30 @@ const SystemUser: React.FC = () => {
           {
             key: 'delete',
             icon: <DeleteOutlined />,
-            label: '删除',
+            label: textConstants.action.delete,
             onClick: () => handleDelete(record)
           },
           {
             key: 'resetPwd',
             icon: <KeyOutlined />,
-            label: '重置密码',
+            label: textConstants.action.resetPwd,
             onClick: () => handleResetPwd(record)
           },
           {
             key: 'assignRole',
             icon: <UserSwitchOutlined />,
-            label: '分配角色',
+            label: textConstants.action.assignRole,
             onClick: () => handleAssignRole(record)
           }
         ]
         return (
           <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
             <a key="edit" onClick={() => handleEditUser(record)}>
-              <EditOutlined /> 修改
+              <EditOutlined /> textConstants.action.update
             </a>
             <Dropdown menu={{ items: moreMenuItems }} placement="bottomRight">
               <a onClick={(e) => e.preventDefault()}>
-                <DoubleRightOutlined /> 更多
+                <DoubleRightOutlined /> textConstants.action.more
               </a>
             </Dropdown>
           </div>
@@ -133,16 +134,16 @@ const SystemUser: React.FC = () => {
   // ===== 删除单个用户 =====
   const handleDelete = (record: API.SystemUserRespVO) => {
     Modal.confirm({
-      title: '温馨提示',
+      title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: `确定要删除用户"${record.username}"吗？`,
+      content: textConstants.msg.delOneMsg,
       onOk: async () => {
         try {
           await deleteUser({ id: record.id })
-          message.success('删除成功')
+          message.success(`${textConstants.action.delete}${textConstants.common.success}`)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(`${textConstants.action.delete}${textConstants.common.fail}`)
         }
       }
     })
@@ -151,17 +152,17 @@ const SystemUser: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: '温馨提示',
+      title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: `确定要删除选中的 ${selectedRowKeys.length} 个用户吗？`,
+      content: textConstants.msg.delDataMsg,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteUser({ id: Number(id) })))
-          message.success('批量删除成功')
+          message.success(textConstants.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error('批量删除失败')
+          message.error(textConstants.msg.batchDelFail)
         }
       }
     })
@@ -176,9 +177,9 @@ const SystemUser: React.FC = () => {
   // 导出用户
   const handleExport = () => {
     Modal.confirm({
-      title: '温馨提示',
+      title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: '确定要导出用户数据吗？',
+      content: textConstants.msg.exportMsg,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -197,9 +198,9 @@ const SystemUser: React.FC = () => {
           link.download = '用户数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConstants.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error(textConstants.msg.exportFail)
         }
       }
     })
@@ -285,7 +286,7 @@ const SystemUser: React.FC = () => {
           headerTitle="用户管理"
           toolBarRender={() => [
             <Button key="create" icon={<PlusOutlined />} onClick={handleCreateUser} type="primary">
-              新增
+              textConstants.action.create
             </Button>,
             <Button
               key="batchDelete"
@@ -294,7 +295,7 @@ const SystemUser: React.FC = () => {
               disabled={selectedRowKeys.length === 0}
               onClick={handleBatchDelete}
             >
-              批量删除
+              textConstants.action.batchDelete
             </Button>,
             <Button
               key="import"
@@ -302,7 +303,7 @@ const SystemUser: React.FC = () => {
               style={{ backgroundColor: '#52c41a', borderColor: '#52c41a', color: '#fff' }}
               onClick={handleImportUser}
             >
-              导入
+              textConstants.action.import
             </Button>,
             <Button
               key="export"
@@ -310,7 +311,7 @@ const SystemUser: React.FC = () => {
               style={{ backgroundColor: '#faad14', borderColor: '#faad14', color: '#fff' }}
               onClick={handleExport}
             >
-              导出
+              textConstants.action.export
             </Button>
           ]}
         />
