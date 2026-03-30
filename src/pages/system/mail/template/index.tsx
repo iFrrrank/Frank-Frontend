@@ -2,23 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Badge, Button, message, Modal, Space, Typography } from 'antd'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
+import { ProTable } from '@ant-design/pro-components'
 import {
-  ModalForm,
-  ProFormText,
-  ProFormSelect,
-  ProFormRadio,
-  ProTable,
-  ProFormTextArea,
-  ProForm
-} from '@ant-design/pro-components'
-import { Editor } from '@/components/Editor'
-import {
-  createMailTemplate,
   deleteMailTemplate,
-  getMailTemplatePage,
-  updateMailTemplate,
-  sendMail
+  getMailTemplatePage
 } from '@/api/system/mailTemplate'
+import SaveMailTemplateModal, { handleCreateMailTemplate, handleEditMailTemplate } from './SaveMailTemplateModal'
+import SendMailModal, { handleTestMailTemplate } from './SendMailModal'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
 
 import '@wangeditor/editor/dist/css/style.css'
@@ -27,13 +17,6 @@ const MailTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
 
-  // 模态框状态
-  const [createModalVisible, setCreateModalVisible] = useState(false)
-  const [editingMailTemplate, setEditingMailTemplate] =
-    useState<API.SystemMailTemplateRespVO | null>(null)
-
-  const [testModalVisible, setTestModalVisible] = useState(false)
-  const [testingTemplate, setTestingTemplate] = useState<API.SystemMailTemplateRespVO | null>(null)
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
@@ -163,10 +146,10 @@ const MailTemplateConfig: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <Space size={12}>
-          <a key="edit" onClick={() => handleEdit(record)}>
+          <a key="edit" onClick={() => handleEditMailTemplate(record)}>
             修改
           </a>
-          <a key="test" onClick={() => handleTest(record)}>
+          <a key="test" onClick={() => handleTestMailTemplate(record)}>
             测试
           </a>
           <a key="delete" onClick={() => handleDelete(record)} style={{ color: '#ff4d4f' }}>
@@ -177,17 +160,6 @@ const MailTemplateConfig: React.FC = () => {
     }
   ]
 
-  // ===== 修改操作 =====
-  const handleEdit = (record: API.SystemMailTemplateRespVO) => {
-    setEditingMailTemplate(record)
-    setCreateModalVisible(true)
-  }
-
-  // ===== 测试操作 =====
-  const handleTest = (record: API.SystemMailTemplateRespVO) => {
-    setTestingTemplate(record)
-    setTestModalVisible(true)
-  }
 
   // ===== 单个删除 =====
   const handleDelete = (record: API.SystemMailTemplateRespVO) => {
@@ -287,10 +259,7 @@ const MailTemplateConfig: React.FC = () => {
             key="create"
             icon={<PlusOutlined />}
             type="primary"
-            onClick={() => {
-              setEditingMailTemplate(null)
-              setCreateModalVisible(true)
-            }}
+            onClick={() => handleCreateMailTemplate()}
           >
             新增
           </Button>,
@@ -311,162 +280,8 @@ const MailTemplateConfig: React.FC = () => {
         ]}
       />
 
-      <ModalForm<API.SystemMailTemplateSaveReqVO>
-        title={editingMailTemplate ? '修改' : '新增'}
-        width={900}
-        open={createModalVisible}
-        onOpenChange={(visible) => {
-          setCreateModalVisible(visible)
-          if (!visible) {
-            setEditingMailTemplate(null)
-          }
-        }}
-        initialValues={editingMailTemplate ? { ...editingMailTemplate } : { status: 0 }}
-        layout="horizontal"
-        labelCol={{ span: 3 }}
-        wrapperCol={{ span: 20 }}
-        colon={false}
-        modalProps={{
-          destroyOnClose: true,
-          maskClosable: false
-        }}
-        onFinish={async (values) => {
-          try {
-            let resp
-            if (editingMailTemplate) {
-              resp = await updateMailTemplate({ ...values, id: editingMailTemplate.id })
-            } else {
-              resp = await createMailTemplate(values)
-            }
-
-            if (resp.code === 0) {
-              message.success(editingMailTemplate ? '修改成功' : '新增成功')
-              actionRef.current?.reload()
-              return true
-            } else {
-              message.error(resp.msg || (editingMailTemplate ? '修改失败' : '新增失败'))
-              return false
-            }
-          } catch {
-            message.error(editingMailTemplate ? '修改失败' : '新增失败')
-            return false
-          }
-        }}
-      >
-        <ProFormSelect
-          name="accountId"
-          label="邮箱账号"
-          placeholder="请选择邮箱账号"
-          rules={[{ required: true, message: '请选择邮箱账号' }]}
-          options={accountOptions}
-          showSearch
-        />
-        <ProFormText
-          name="code"
-          label="模板编码"
-          placeholder="请输入模板编码"
-          rules={[{ required: true, message: '请输入模板编码' }]}
-        />
-        <ProFormText
-          name="name"
-          label="模板名称"
-          placeholder="请输入模板名称"
-          rules={[{ required: true, message: '请输入模板名称' }]}
-        />
-        <ProFormText name="nickname" label="发送人名称" placeholder="请输入发送人名称" />
-        <ProFormText
-          name="title"
-          label="模板标题"
-          placeholder="请输入模板标题"
-          rules={[{ required: true, message: '请输入模板标题' }]}
-        />
-        <ProForm.Item
-          name="content"
-          label="模板内容"
-          rules={[{ required: true, message: '请输入模板内容' }]}
-          wrapperCol={{ span: 20 }}
-        >
-          <Editor height={100} />
-        </ProForm.Item>
-        <ProFormRadio.Group
-          name="status"
-          label="开启状态"
-          rules={[{ required: true, message: '请选择开启状态' }]}
-          options={[
-            { label: '开启', value: 0 },
-            { label: '关闭', value: 1 }
-          ]}
-        />
-        <ProFormTextArea name="remark" label="备注" placeholder="请输入备注" />
-      </ModalForm>
-
-      {/* 测试模板的弹窗*/}
-      <ModalForm<{ mail: string; ccMail?: string; bccMail?: string }>
-        title="测试"
-        width={900}
-        open={testModalVisible}
-        onOpenChange={(visible) => {
-          setTestModalVisible(visible)
-          if (!visible) {
-            setTestingTemplate(null)
-          }
-        }}
-        initialValues={{}}
-        layout="horizontal"
-        labelCol={{ span: 3 }}
-        wrapperCol={{ span: 20 }}
-        colon={false}
-        modalProps={{
-          destroyOnClose: true,
-          maskClosable: false
-        }}
-        onFinish={async (values) => {
-          if (!testingTemplate) return false
-          try {
-            // 目前 API 只发送 mail 字段，可以根据需要扩充
-            const reqVO: API.SystemMailTemplateSendReqVO = {
-              mail: values.mail,
-              templateCode: testingTemplate.code,
-              templateParams: {} // 可以根据需要让用户填参，此图里并没有参数表单，只填入基础占位
-            }
-            const resp = await sendMail(reqVO)
-
-            if (resp.code === 0) {
-              message.success('测试邮件发送成功')
-              return true
-            } else {
-              message.error(resp.msg || '测试邮件发送失败')
-              return false
-            }
-          } catch {
-            message.error('测试邮件发送失败')
-            return false
-          }
-        }}
-      >
-        <ProForm.Item label="模板内容" wrapperCol={{ span: 20 }}>
-          <Editor value={testingTemplate?.content} readonly={true} height={100} />
-        </ProForm.Item>
-        <ProFormTextArea
-          name="mail"
-          label="收件邮箱"
-          placeholder="请输入收件邮箱，多个邮箱用回车分隔"
-          rules={[{ required: true, message: '请输入收件邮箱' }]}
-          fieldProps={{ rows: 2 }}
-        />
-        <ProFormTextArea
-          name="ccMail"
-          label="抄送邮箱"
-          placeholder="请输入抄送邮箱，多个邮箱用回车分隔"
-          fieldProps={{ rows: 2 }}
-        />
-        <ProFormTextArea
-          name="bccMail"
-          label="密送邮箱"
-          placeholder="请输入密送邮箱，多个邮箱用回车分隔"
-          fieldProps={{ rows: 2 }}
-        />
-      </ModalForm>
+      <SaveMailTemplateModal onSuccess={() => actionRef.current?.reload()} accountOptions={accountOptions} />
+      <SendMailModal />
     </>
   )
 }

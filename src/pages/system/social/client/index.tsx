@@ -9,14 +9,12 @@ import {
   PlusOutlined
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ModalForm, ProFormSelect, ProFormText, ProTable } from '@ant-design/pro-components'
+import { ProTable } from '@ant-design/pro-components'
 import {
-  createSocialClient,
   deleteSocialClient,
-  getSocialClient,
-  getSocialClientPage,
-  updateSocialClient
+  getSocialClientPage
 } from '@/api/system/socialClient'
+import SaveSocialClientModal, { handleCreateSocialClient, handleEditSocialClient } from './SaveSocialClientModal'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {
@@ -37,8 +35,6 @@ const USER_TYPE_MAP: Record<number, { text: string; color: string }> = {
 const SocialClientPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
-  const [createModalVisible, setCreateModalVisible] = useState(false)
-  const [editingClient, setEditingClient] = useState<API.SystemSocialClientRespVO | null>(null)
 
   // 列定义
   const columns: ProColumns<API.SystemSocialClientRespVO>[] = [
@@ -145,7 +141,7 @@ const SocialClientPage: React.FC = () => {
         ]
         return (
           <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
-            <a key="edit" onClick={() => handleEdit(record)}>
+            <a key="edit" onClick={() => handleEditSocialClient(record)}>
               <EditOutlined /> 修改
             </a>
             <Dropdown menu={{ items: moreMenuItems }} placement="bottomRight">
@@ -159,18 +155,6 @@ const SocialClientPage: React.FC = () => {
     }
   ]
 
-  // ===== 修改 =====
-  const handleEdit = async (record: API.SystemSocialClientRespVO) => {
-    try {
-      const resp = await getSocialClient({ id: record.id })
-      if (resp.code === 0 && resp.data) {
-        setEditingClient(resp.data)
-        setCreateModalVisible(true)
-      }
-    } catch {
-      message.error('获取社交客户端信息失败')
-    }
-  }
 
   // ===== 删除 =====
   const handleDelete = (record: API.SystemSocialClientRespVO) => {
@@ -251,10 +235,7 @@ const SocialClientPage: React.FC = () => {
             <Button
               key="create"
               icon={<PlusOutlined />}
-              onClick={() => {
-                setEditingClient(null)
-                setCreateModalVisible(true)
-              }}
+              onClick={() => handleCreateSocialClient()}
               type="primary"
             >
               新增
@@ -263,116 +244,7 @@ const SocialClientPage: React.FC = () => {
         />
       </Col>
 
-      {/* ========== 新增/修改社交客户端弹窗 ========== */}
-      <ModalForm<API.SystemSocialClientSaveReqVO>
-        title={editingClient ? '修改' : '新增'}
-        width={600}
-        open={createModalVisible}
-        onOpenChange={(visible) => {
-          setCreateModalVisible(visible)
-          if (!visible) {
-            setEditingClient(null)
-          }
-        }}
-        initialValues={
-          editingClient
-            ? {
-              id: editingClient.id,
-              name: editingClient.name,
-              socialType: editingClient.socialType,
-              userType: editingClient.userType,
-              clientId: editingClient.clientId,
-              clientSecret: editingClient.clientSecret,
-              agentId: editingClient.agentId,
-              status: editingClient.status
-            }
-            : {
-              status: 0
-            }
-        }
-        layout="horizontal"
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 18 }}
-        autoFocusFirstInput
-        modalProps={{
-          destroyOnClose: true,
-          bodyStyle: { paddingBottom: 0 }
-        }}
-        onFinish={async (values) => {
-          try {
-            let resp: any
-            if (editingClient) {
-              resp = await updateSocialClient({ ...values, id: editingClient.id })
-            } else {
-              resp = await createSocialClient(values)
-            }
-            if (resp.code === 0) {
-              message.success(editingClient ? '修改成功' : '创建成功')
-              actionRef.current?.reload()
-              return true
-            } else {
-              message.error(resp.msg || (editingClient ? '修改失败' : '创建失败'))
-              return false
-            }
-          } catch {
-            message.error(editingClient ? '修改失败' : '创建失败')
-            return false
-          }
-        }}
-      >
-        <ProFormText
-          name="name"
-          label="应用名"
-          placeholder="请输入应用名"
-          rules={[{ required: true, message: '请输入应用名' }]}
-        />
-        <ProFormSelect
-          name="socialType"
-          label="社交平台"
-          placeholder="请选择社交平台"
-          options={[
-            { label: 'Gitee', value: 5 },
-            { label: '钉钉', value: 10 },
-            { label: '企业微信', value: 20 },
-            { label: '微信公众平台', value: 31 },
-            { label: '微信开放平台', value: 32 },
-            { label: '微信小程序', value: 30 }
-          ]}
-          rules={[{ required: true, message: '请选择社交平台' }]}
-        />
-        <ProFormSelect
-          name="userType"
-          label="用户类型"
-          placeholder="请选择用户类型"
-          options={[
-            { label: '会员', value: 2 },
-            { label: '管理员', value: 1 }
-          ]}
-          rules={[{ required: true, message: '请选择用户类型' }]}
-        />
-        <ProFormText
-          name="clientId"
-          label="客户端 ID"
-          placeholder="请输入客户端 ID,对应各平台的appKey"
-          rules={[{ required: true, message: '请输入客户端 ID' }]}
-        />
-        <ProFormText
-          name="clientSecret"
-          label="客户端密钥"
-          placeholder="请输入客户端密钥,对应各平台的appSecret"
-          rules={[{ required: true, message: '请输入客户端密钥' }]}
-        />
-        <ProFormSelect
-          name="status"
-          label="状态"
-          placeholder="请选择状态"
-          options={[
-            { label: '开启', value: 0 },
-            { label: '关闭', value: 1 }
-          ]}
-          rules={[{ required: true, message: '请选择状态' }]}
-        />
-      </ModalForm>
+      <SaveSocialClientModal onSuccess={() => actionRef.current?.reload()} />
     </Row>
   )
 }

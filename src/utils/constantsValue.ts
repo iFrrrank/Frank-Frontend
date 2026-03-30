@@ -1,4 +1,5 @@
 import { CommonStatusEnum } from './constants'
+import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 
 export interface OptionItem {
   label: string
@@ -12,13 +13,13 @@ export const AUTO_APPROVE_SCOPES: OptionItem[] = [
   { label: '全部', value: 'all' }
 ]
 
-export const STATUS_VALUE_ENUM = {
-  [CommonStatusEnum.ENABLE]: {
-    text: '开启',
+export const COMMON_STATUS_VALUE_ENUM: Record<string | number, ProSchemaValueEnumType> = {
+  [CommonStatusEnum.ENABLE.status]: {
+    text: CommonStatusEnum.ENABLE.name,
     status: 'Success'
   },
-  [CommonStatusEnum.DISABLE]: {
-    text: '关闭',
+  [CommonStatusEnum.DISABLE.status]: {
+    text: CommonStatusEnum.DISABLE.name,
     status: 'Error'
   }
 }
