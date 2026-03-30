@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
+import React, { useState } from 'react'
+import { message } from 'antd'
 import {
   ModalForm,
   ProFormDependency,
@@ -7,45 +7,45 @@ import {
   ProFormRadio,
   ProFormText,
   ProFormTreeSelect
-} from '@ant-design/pro-components';
-import * as AntdIcons from '@ant-design/icons';
-import { createMenu, updateMenu, getMenuList } from '@/api/system/menu';
+} from '@ant-design/pro-components'
+import * as AntdIcons from '@ant-design/icons'
+import { createMenu, updateMenu, getMenuList } from '@/api/system/menu'
 
-export let handleCreateMenu: (parentId?: number) => void;
-export let handleEditMenu: (record: any) => void;
+export let handleCreateMenu: (parentId?: number) => void
+export let handleEditMenu: (record: any) => void
 
 interface SaveMenuModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 // 将扁平菜单数据转换为树形结构
 const handleTreeData = (data: any[], parentId: number = 0): any[] => {
-  const tree: any[] = [];
+  const tree: any[] = []
   data.forEach((item) => {
     if (item.parentId === parentId) {
-      const children = handleTreeData(data, item.id);
+      const children = handleTreeData(data, item.id)
       if (children.length > 0) {
-        item.children = children;
+        item.children = children
       }
-      tree.push(item);
+      tree.push(item)
     }
-  });
-  return tree.sort((a, b) => a.sort - b.sort); // 排序
-};
+  })
+  return tree.sort((a, b) => a.sort - b.sort) // 排序
+}
 
 const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingMenu, setEditingMenu] = useState<any>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingMenu, setEditingMenu] = useState<any>(null)
 
   handleCreateMenu = (parentId?: number) => {
-    setEditingMenu({ parentId: parentId || 0 });
-    setCreateModalVisible(true);
-  };
+    setEditingMenu({ parentId: parentId || 0 })
+    setCreateModalVisible(true)
+  }
 
   handleEditMenu = (record: any) => {
-    setEditingMenu(record);
-    setCreateModalVisible(true);
-  };
+    setEditingMenu(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm
@@ -53,8 +53,8 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
       width={680}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
-        if (!visible) setEditingMenu(null);
+        setCreateModalVisible(visible)
+        if (!visible) setEditingMenu(null)
       }}
       // 处理回显数据
       initialValues={
@@ -84,24 +84,24 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
       colon={false}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingMenu?.id) {
-            resp = await updateMenu({ ...values, id: editingMenu.id } as any);
+            resp = await updateMenu({ ...values, id: editingMenu.id } as any)
           } else {
-            resp = await createMenu(values as any);
+            resp = await createMenu(values as any)
           }
 
           if (resp.code === 0) {
-            message.success(editingMenu?.id ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingMenu?.id ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingMenu?.id ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingMenu?.id ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingMenu?.id ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingMenu?.id ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -112,10 +112,10 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
         placeholder="请选择上级菜单"
         request={async () => {
           // 拉取全量菜单用于树形选择
-          const resp = await getMenuList({} as any);
-          const list = resp.code === 0 ? resp.data || [] : [];
-          const tree = handleTreeData(list, 0);
-          return [{ value: 0, title: '主类目', children: tree }];
+          const resp = await getMenuList({} as any)
+          const list = resp.code === 0 ? resp.data || [] : []
+          const tree = handleTreeData(list, 0)
+          return [{ value: 0, title: '主类目', children: tree }]
         }}
         fieldProps={{
           fieldNames: { label: 'name', value: 'id' },
@@ -261,11 +261,12 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                 />
               )}
             </>
-          );
+          )
         }}
       </ProFormDependency>
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveMenuModal;
+export default SaveMenuModal
+

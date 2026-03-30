@@ -8,13 +8,9 @@ import {
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import { useParams, history } from '@umijs/max'
+import { useParams } from '@umijs/max'
 
-import {
-  deleteDictData,
-  export3,
-  getDictTypePage
-} from '@/api/system/dictData'
+import { deleteDictData, export3, getDictTypePage } from '@/api/system/dictData'
 
 import SaveDictDataModal, { handleCreateDictData, handleEditDictData } from './SaveDictDataModal'
 import { getSimpleDictTypeList } from '@/api/system/dictType'
@@ -25,7 +21,6 @@ const DictDataList: React.FC = () => {
 
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
-
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
@@ -234,7 +229,6 @@ const DictDataList: React.FC = () => {
     })
   }
 
-
   return (
     <>
       <ProTable<any>
@@ -282,7 +276,9 @@ const DictDataList: React.FC = () => {
           <Button
             key="create"
             icon={<PlusOutlined />}
-            onClick={() => handleCreateDictData(formRef.current?.getFieldValue('dictType') || defaultDictType)}
+            onClick={() =>
+              handleCreateDictData(formRef.current?.getFieldValue('dictType') || defaultDictType)
+            }
             type="primary"
           >
             新增

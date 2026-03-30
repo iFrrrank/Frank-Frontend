@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Badge, Button, message, Modal, Space, Tag, Typography } from 'antd'
+import React, { useRef, useState } from 'react'
+import { Button, message, Modal, Space, Typography } from 'antd'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
@@ -9,7 +9,6 @@ import SaveNoticeModal, { handleCreateNotice, handleEditNotice } from './SaveNot
 const NoticeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
-
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
@@ -98,7 +97,6 @@ const NoticeConfig: React.FC = () => {
       )
     }
   ]
-
 
   const handleDelete = (record: API.SystemNoticeRespVO) => {
     Modal.confirm({
@@ -229,4 +227,3 @@ const NoticeConfig: React.FC = () => {
 }
 
 export default NoticeConfig
-

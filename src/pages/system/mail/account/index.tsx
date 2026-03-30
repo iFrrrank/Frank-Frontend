@@ -1,14 +1,19 @@
 import React, { useRef, useState } from 'react'
 import { Badge, Button, message, Modal, Tag } from 'antd'
-import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  EditOutlined,
+  ExclamationCircleOutlined,
+  PlusOutlined
+} from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import {
-  deleteMailAccount,
-  getMailAccountPage
-} from '@/api/system/mailAccount'
+import { deleteMailAccount, getMailAccountPage } from '@/api/system/mailAccount'
 
-import SaveMailAccountModal, { handleCreateMailAccount, handleEditMailAccount } from './SaveMailAccountModal'
+import SaveMailAccountModal, {
+  handleCreateMailAccount,
+  handleEditMailAccount
+} from './SaveMailAccountModal'
 
 const MailAccountConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -108,7 +113,6 @@ const MailAccountConfig: React.FC = () => {
       )
     }
   ]
-
 
   // ===== 单个删除 =====
   const handleDelete = (record: API.SystemMailAccountRespVO) => {

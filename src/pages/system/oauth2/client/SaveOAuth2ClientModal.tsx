@@ -1,41 +1,41 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
+import React, { useState } from 'react'
+import { message } from 'antd'
 import {
   ModalForm,
   ProFormDigit,
   ProFormSelect,
   ProFormText,
   ProFormTextArea
-} from '@ant-design/pro-components';
-import { createOAuth2Client, updateOAuth2Client, getOAuth2Client } from '@/api/system/oAuth2Client';
+} from '@ant-design/pro-components'
+import { createOAuth2Client, updateOAuth2Client, getOAuth2Client } from '@/api/system/oAuth2Client'
 
-export let handleCreateOAuth2Client: () => void;
-export let handleEditOAuth2Client: (record: API.SystemOAuth2ClientRespVO) => void;
+export let handleCreateOAuth2Client: () => void
+export let handleEditOAuth2Client: (record: API.SystemOAuth2ClientRespVO) => void
 
 interface SaveOAuth2ClientModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingClient, setEditingClient] = useState<API.SystemOAuth2ClientRespVO | null>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingClient, setEditingClient] = useState<API.SystemOAuth2ClientRespVO | null>(null)
 
   handleCreateOAuth2Client = () => {
-    setEditingClient(null);
-    setCreateModalVisible(true);
-  };
+    setEditingClient(null)
+    setCreateModalVisible(true)
+  }
 
   handleEditOAuth2Client = async (record: API.SystemOAuth2ClientRespVO) => {
     try {
-      const resp = await getOAuth2Client({ id: record.id });
+      const resp = await getOAuth2Client({ id: record.id })
       if (resp.code === 0 && resp.data) {
-        setEditingClient(resp.data);
-        setCreateModalVisible(true);
+        setEditingClient(resp.data)
+        setCreateModalVisible(true)
       }
     } catch {
-      message.error('获取客户端信息失败');
+      message.error('获取客户端信息失败')
     }
-  };
+  }
 
   return (
     <ModalForm<API.SystemOAuth2ClientSaveReqVO>
@@ -43,9 +43,9 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
       width={800}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingClient(null);
+          setEditingClient(null)
         }
       }}
       initialValues={
@@ -61,8 +61,7 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
               accessTokenValiditySeconds: editingClient.accessTokenValiditySeconds,
               refreshTokenValiditySeconds: editingClient.refreshTokenValiditySeconds,
               redirectUris: editingClient.redirectUris || [],
-              authorizedGrantTypes:
-                editingClient.authorizedGrantTypes?.[0] || 'authorization_code',
+              authorizedGrantTypes: editingClient.authorizedGrantTypes?.[0] || 'authorization_code',
               scopes: editingClient.scopes || [],
               autoApproveScopes: editingClient.autoApproveScopes || [],
               authorities: editingClient.authorities || [],
@@ -100,27 +99,27 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
             autoApproveScopes: values.autoApproveScopes || [],
             authorities: values.authorities || [],
             resourceIds: values.resourceIds || []
-          };
+          }
 
-          let resp: any;
+          let resp: any
           if (editingClient) {
             // 修改模式
-            resp = await updateOAuth2Client({ ...processedValues, id: editingClient.id });
+            resp = await updateOAuth2Client({ ...processedValues, id: editingClient.id })
           } else {
             // 新增模式
-            resp = await createOAuth2Client(processedValues);
+            resp = await createOAuth2Client(processedValues)
           }
           if (resp.code === 0) {
-            message.success(editingClient ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingClient ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingClient ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingClient ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingClient ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingClient ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -247,14 +246,11 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
           { pattern: /^\d+$/, message: '请输入有效的数字' }
         ]}
       />
-      <ProFormTextArea
-        name="additionalInformation"
-        label="附加信息"
-        placeholder="请输入附加信息"
-      />
+      <ProFormTextArea name="additionalInformation" label="附加信息" placeholder="请输入附加信息" />
       <ProFormTextArea name="description" label="应用描述" placeholder="请输入应用描述" />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveOAuth2ClientModal;
+export default SaveOAuth2ClientModal
+

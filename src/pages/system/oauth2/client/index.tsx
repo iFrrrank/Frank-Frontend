@@ -11,12 +11,11 @@ import {
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import {
-  deleteOAuth2Client,
-  getOAuth2Client,
-  getOAuth2ClientPage
-} from '@/api/system/oAuth2Client'
-import SaveOAuth2ClientModal, { handleCreateOAuth2Client, handleEditOAuth2Client } from './SaveOAuth2ClientModal'
+import { deleteOAuth2Client, getOAuth2Client, getOAuth2ClientPage } from '@/api/system/oAuth2Client'
+import SaveOAuth2ClientModal, {
+  handleCreateOAuth2Client,
+  handleEditOAuth2Client
+} from './SaveOAuth2ClientModal'
 
 const App_: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -148,7 +147,6 @@ const App_: React.FC = () => {
       }
     }
   ]
-
 
   // ===== 删除单个客户端 =====
   const handleDelete = (record: API.SystemOAuth2ClientRespVO) => {
@@ -359,4 +357,3 @@ const App_: React.FC = () => {
 }
 
 export default App_
-

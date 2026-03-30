@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal, Space, Switch, Tree } from 'antd'
+import { Button, message, Modal } from 'antd'
 import {
   DeleteOutlined,
   DownloadOutlined,
@@ -222,8 +222,6 @@ const Role: React.FC = () => {
     })
   }
 
-
-
   return (
     <>
       <ProTable<API.SystemRoleRespVO>
@@ -272,12 +270,7 @@ const Role: React.FC = () => {
         }}
         headerTitle={false}
         toolBarRender={() => [
-          <Button
-            key="create"
-            icon={<PlusOutlined />}
-            onClick={handleCreateRole}
-            type="primary"
-          >
+          <Button key="create" icon={<PlusOutlined />} onClick={handleCreateRole} type="primary">
             新增
           </Button>,
           <Button

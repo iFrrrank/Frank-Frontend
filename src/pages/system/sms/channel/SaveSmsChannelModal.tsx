@@ -1,34 +1,36 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
+import React, { useState } from 'react'
+import { message } from 'antd'
 import {
   ModalForm,
   ProFormRadio,
   ProFormSelect,
   ProFormText,
   ProFormTextArea
-} from '@ant-design/pro-components';
-import { createSmsChannel, updateSmsChannel } from '@/api/system/smsChannel';
+} from '@ant-design/pro-components'
+import { createSmsChannel, updateSmsChannel } from '@/api/system/smsChannel'
 
-export let handleCreateSmsChannel: () => void;
-export let handleEditSmsChannel: (record: API.SystemSmsChannelRespVO) => void;
+export let handleCreateSmsChannel: () => void
+export let handleEditSmsChannel: (record: API.SystemSmsChannelRespVO) => void
 
 interface SaveSmsChannelModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingSmsChannel, setEditingSmsChannel] = useState<API.SystemSmsChannelRespVO | null>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingSmsChannel, setEditingSmsChannel] = useState<API.SystemSmsChannelRespVO | null>(
+    null
+  )
 
   handleCreateSmsChannel = () => {
-    setEditingSmsChannel(null);
-    setCreateModalVisible(true);
-  };
+    setEditingSmsChannel(null)
+    setCreateModalVisible(true)
+  }
 
   handleEditSmsChannel = (record: API.SystemSmsChannelRespVO) => {
-    setEditingSmsChannel(record);
-    setCreateModalVisible(true);
-  };
+    setEditingSmsChannel(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm<API.SystemSmsChannelSaveReqVO>
@@ -36,9 +38,9 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
       width={700}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingSmsChannel(null);
+          setEditingSmsChannel(null)
         }
       }}
       initialValues={
@@ -58,23 +60,23 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
       }}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingSmsChannel) {
-            resp = await updateSmsChannel({ ...values, id: editingSmsChannel.id } as any);
+            resp = await updateSmsChannel({ ...values, id: editingSmsChannel.id } as any)
           } else {
-            resp = await createSmsChannel(values as any);
+            resp = await createSmsChannel(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingSmsChannel ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingSmsChannel ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingSmsChannel ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingSmsChannel ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingSmsChannel ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingSmsChannel ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -117,18 +119,15 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
         placeholder="请输入短信 API 的账号"
         rules={[{ required: true, message: '请输入短信 API 的账号' }]}
       />
-      <ProFormText
-        name="apiSecret"
-        label="短信 API 的密钥"
-        placeholder="请输入短信 API 的密钥"
-      />
+      <ProFormText name="apiSecret" label="短信 API 的密钥" placeholder="请输入短信 API 的密钥" />
       <ProFormText
         name="callbackUrl"
         label="短信发送回调 URL"
         placeholder="请输入短信发送回调 URL"
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveSmsChannelModal;
+export default SaveSmsChannelModal
+

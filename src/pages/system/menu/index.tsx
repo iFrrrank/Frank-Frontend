@@ -12,21 +12,7 @@ import {
 
 import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
 import SaveMenuModal, { handleCreateMenu, handleEditMenu } from './SaveMenuModal'
-
-// 将扁平菜单数据转换为树形结构
-const handleTreeData = (data: any[], parentId: number = 0): any[] => {
-  const tree: any[] = []
-  data.forEach((item) => {
-    if (item.parentId === parentId) {
-      const children = handleTreeData(data, item.id)
-      if (children.length > 0) {
-        item.children = children
-      }
-      tree.push(item)
-    }
-  })
-  return tree.sort((a, b) => a.sort - b.sort) // 排序
-}
+import { handleTreeData } from '@/utils/tree'
 
 // 动态渲染图标
 const IconFont = ({ type }: { type?: string }) => {
@@ -44,7 +30,6 @@ const IconFont = ({ type }: { type?: string }) => {
 const MenuManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
-
 
   // 树表格展开控制
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.Key[]>([])
@@ -84,7 +69,6 @@ const MenuManagement: React.FC = () => {
       }
     })
   }
-
 
   // 状态切换 (Mock 快捷切换，调用 Update)
   const handleStatusChange = async (checked: boolean, record: any) => {

@@ -1,33 +1,28 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
-import {
-  ModalForm,
-  ProFormRadio,
-  ProFormText,
-  ProFormTextArea
-} from '@ant-design/pro-components';
-import { createDictType, updateDictType } from '@/api/system/dictType';
+import React, { useState } from 'react'
+import { message } from 'antd'
+import { ModalForm, ProFormRadio, ProFormText, ProFormTextArea } from '@ant-design/pro-components'
+import { createDictType, updateDictType } from '@/api/system/dictType'
 
-export let handleCreateDictType: () => void;
-export let handleEditDictType: (record: API.SystemDictTypeRespVO) => void;
+export let handleCreateDictType: () => void
+export let handleEditDictType: (record: API.SystemDictTypeRespVO) => void
 
 interface SaveDictTypeModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingDictType, setEditingDictType] = useState<API.SystemDictTypeRespVO | null>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingDictType, setEditingDictType] = useState<API.SystemDictTypeRespVO | null>(null)
 
   handleCreateDictType = () => {
-    setEditingDictType(null);
-    setCreateModalVisible(true);
-  };
+    setEditingDictType(null)
+    setCreateModalVisible(true)
+  }
 
   handleEditDictType = (record: API.SystemDictTypeRespVO) => {
-    setEditingDictType(record);
-    setCreateModalVisible(true);
-  };
+    setEditingDictType(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm<API.SystemDictTypeSaveReqVO>
@@ -35,9 +30,9 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingDictType(null);
+          setEditingDictType(null)
         }
       }}
       initialValues={
@@ -57,23 +52,23 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
       }}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingDictType) {
-            resp = await updateDictType({ ...values, id: editingDictType.id } as any);
+            resp = await updateDictType({ ...values, id: editingDictType.id } as any)
           } else {
-            resp = await createDictType(values as any);
+            resp = await createDictType(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingDictType ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingDictType ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingDictType ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingDictType ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingDictType ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingDictType ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -112,7 +107,8 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveDictTypeModal;
+export default SaveDictTypeModal
+

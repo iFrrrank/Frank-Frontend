@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import type { MenuProps } from 'antd'
 import { Button, Col, Dropdown, message, Modal, Row, Tag } from 'antd'
 import {
@@ -10,11 +10,11 @@ import {
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import {
-  deleteSocialClient,
-  getSocialClientPage
-} from '@/api/system/socialClient'
-import SaveSocialClientModal, { handleCreateSocialClient, handleEditSocialClient } from './SaveSocialClientModal'
+import { deleteSocialClient, getSocialClientPage } from '@/api/system/socialClient'
+import SaveSocialClientModal, {
+  handleCreateSocialClient,
+  handleEditSocialClient
+} from './SaveSocialClientModal'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {
@@ -154,7 +154,6 @@ const SocialClientPage: React.FC = () => {
       }
     }
   ]
-
 
   // ===== 删除 =====
   const handleDelete = (record: API.SystemSocialClientRespVO) => {

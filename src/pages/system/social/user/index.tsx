@@ -66,9 +66,12 @@ const SocialUserPage: React.FC = () => {
       align: 'center',
       width: 100,
       hideInSearch: true,
-      render: (_, record) => (
-        record.avatar ? <Image src={record.avatar} width={40} height={40} style={{ borderRadius: '50%' }} /> : '-'
-      )
+      render: (_, record) =>
+        record.avatar ? (
+          <Image src={record.avatar} width={40} height={40} style={{ borderRadius: '50%' }} />
+        ) : (
+          '-'
+        )
     },
     {
       title: '创建时间',
@@ -100,7 +103,9 @@ const SocialUserPage: React.FC = () => {
       render: () => {
         return (
           <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
-            <a key="detail" onClick={() => message.info('详情功能尚未实现')}>详情</a>
+            <a key="detail" onClick={() => message.info('详情功能尚未实现')}>
+              详情
+            </a>
           </div>
         )
       }
@@ -122,9 +127,7 @@ const SocialUserPage: React.FC = () => {
               pageVO: {
                 pageNo: current || 1,
                 pageSize: pageSize || 10,
-                ...(type !== undefined && type !== ''
-                  ? { type: Number(type) }
-                  : {}),
+                ...(type !== undefined && type !== '' ? { type: Number(type) } : {}),
                 ...(nickname ? { nickname } : {}),
                 ...(openid ? { openid } : {}),
                 ...(createTime && createTime.length === 2
@@ -132,7 +135,7 @@ const SocialUserPage: React.FC = () => {
                   : {}),
                 ...rest
               }
-            } as any;
+            } as any
 
             // Handle date range format usually expected by the backend
             if (createTime && createTime.length === 2) {

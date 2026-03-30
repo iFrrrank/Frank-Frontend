@@ -28,6 +28,21 @@ export const buildTreeData = (
   return tree
 }
 
+// 将扁平菜单数据转换为树形结构
+export const handleTreeData = (data: any[], parentId: number = 0): any[] => {
+  const tree: any[] = []
+  data.forEach((item) => {
+    if (item.parentId === parentId) {
+      const children = handleTreeData(data, item.id)
+      if (children.length > 0) {
+        item.children = children
+      }
+      tree.push(item)
+    }
+  })
+  return tree.sort((a, b) => a.sort - b.sort) // 排序
+}
+
 // 递归查找父节点的 key
 export const getParentKey = (key: React.Key, tree: TreeDataNode[]): React.Key => {
   let parentKey: React.Key

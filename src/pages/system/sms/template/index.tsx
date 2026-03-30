@@ -13,7 +13,10 @@ import {
   exportSmsTemplateExcel,
   getSmsTemplatePage
 } from '@/api/system/smsTemplate'
-import SaveSmsTemplateModal, { handleCreateSmsTemplate, handleEditSmsTemplate } from './SaveSmsTemplateModal'
+import SaveSmsTemplateModal, {
+  handleCreateSmsTemplate,
+  handleEditSmsTemplate
+} from './SaveSmsTemplateModal'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
 
 const SmsTemplateConfig: React.FC = () => {
@@ -130,13 +133,14 @@ const SmsTemplateConfig: React.FC = () => {
       align: 'center',
       width: 250,
       hideInSearch: true,
-      render: (_, record) => (
+      render: (_, record) =>
         record.content ? (
           <Typography.Text style={{ width: 220, margin: 0 }} ellipsis={{ tooltip: record.content }}>
             {record.content}
           </Typography.Text>
-        ) : <span>-</span>
-      )
+        ) : (
+          <span>-</span>
+        )
     },
     {
       title: '短信类型', // 作为表格列展示
@@ -174,13 +178,17 @@ const SmsTemplateConfig: React.FC = () => {
       align: 'center',
       width: 180,
       hideInSearch: true,
-      render: (_, record) => (
+      render: (_, record) =>
         record.apiTemplateId ? (
-          <Typography.Text style={{ width: 150, margin: 0 }} ellipsis={{ tooltip: record.apiTemplateId }}>
+          <Typography.Text
+            style={{ width: 150, margin: 0 }}
+            ellipsis={{ tooltip: record.apiTemplateId }}
+          >
             {record.apiTemplateId}
           </Typography.Text>
-        ) : <span>-</span>
-      )
+        ) : (
+          <span>-</span>
+        )
     },
     {
       title: '短信渠道', // 作为表格列展示
@@ -290,7 +298,6 @@ const SmsTemplateConfig: React.FC = () => {
     })
   }
 
-
   return (
     <>
       <ProTable<API.SystemSmsTemplateRespVO>
@@ -301,7 +308,17 @@ const SmsTemplateConfig: React.FC = () => {
         form={{ colon: false }}
         cardBordered
         request={async (params: Record<string, any>) => {
-          const { current, pageSize, type, status, code, apiTemplateId, channelId, createTime, ...rest } = params
+          const {
+            current,
+            pageSize,
+            type,
+            status,
+            code,
+            apiTemplateId,
+            channelId,
+            createTime,
+            ...rest
+          } = params
           let beginCreateTime, endCreateTime
           if (createTime && createTime.length === 2) {
             beginCreateTime = createTime[0] + ' 00:00:00'
@@ -314,7 +331,9 @@ const SmsTemplateConfig: React.FC = () => {
             ...(status !== undefined && status !== '' ? { status: Number(status) } : {}),
             ...(code ? { code } : {}),
             ...(apiTemplateId ? { apiTemplateId } : {}),
-            ...(channelId !== undefined && channelId !== '' ? { channelId: Number(channelId) } : {}),
+            ...(channelId !== undefined && channelId !== ''
+              ? { channelId: Number(channelId) }
+              : {}),
             ...(beginCreateTime ? { beginCreateTime } : {}),
             ...(endCreateTime ? { endCreateTime } : {}),
             ...rest
@@ -374,7 +393,10 @@ const SmsTemplateConfig: React.FC = () => {
         ]}
       />
 
-      <SaveSmsTemplateModal onSuccess={() => actionRef.current?.reload()} channelOptions={channelOptions} />
+      <SaveSmsTemplateModal
+        onSuccess={() => actionRef.current?.reload()}
+        channelOptions={channelOptions}
+      />
     </>
   )
 }

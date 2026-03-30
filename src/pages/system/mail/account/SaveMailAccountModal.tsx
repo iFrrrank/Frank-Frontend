@@ -1,28 +1,30 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
-import { ModalForm, ProFormDigit, ProFormRadio, ProFormText } from '@ant-design/pro-components';
-import { createMailAccount, updateMailAccount } from '@/api/system/mailAccount';
+import React, { useState } from 'react'
+import { message } from 'antd'
+import { ModalForm, ProFormDigit, ProFormRadio, ProFormText } from '@ant-design/pro-components'
+import { createMailAccount, updateMailAccount } from '@/api/system/mailAccount'
 
-export let handleCreateMailAccount: () => void;
-export let handleEditMailAccount: (record: API.SystemMailAccountRespVO) => void;
+export let handleCreateMailAccount: () => void
+export let handleEditMailAccount: (record: API.SystemMailAccountRespVO) => void
 
 interface SaveMailAccountModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingMailAccount, setEditingMailAccount] = useState<API.SystemMailAccountRespVO | null>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingMailAccount, setEditingMailAccount] = useState<API.SystemMailAccountRespVO | null>(
+    null
+  )
 
   handleCreateMailAccount = () => {
-    setEditingMailAccount(null);
-    setCreateModalVisible(true);
-  };
+    setEditingMailAccount(null)
+    setCreateModalVisible(true)
+  }
 
   handleEditMailAccount = (record: API.SystemMailAccountRespVO) => {
-    setEditingMailAccount(record);
-    setCreateModalVisible(true);
-  };
+    setEditingMailAccount(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm<API.SystemMailAccountSaveReqVO>
@@ -30,18 +32,18 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingMailAccount(null);
+          setEditingMailAccount(null)
         }
       }}
       initialValues={
         editingMailAccount
           ? { ...editingMailAccount }
           : {
-            sslEnable: true,
-            starttlsEnable: false
-          }
+              sslEnable: true,
+              starttlsEnable: false
+            }
       }
       layout="horizontal"
       labelCol={{ span: 6 }}
@@ -53,24 +55,24 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
       }}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingMailAccount) {
-            resp = await updateMailAccount({ ...values, id: editingMailAccount.id });
+            resp = await updateMailAccount({ ...values, id: editingMailAccount.id })
           } else {
-            resp = await createMailAccount(values);
+            resp = await createMailAccount(values)
           }
 
           if (resp.code === 0) {
-            message.success(editingMailAccount ? '修改成功' : '新增成功');
-            onSuccess();
-            return true;
+            message.success(editingMailAccount ? '修改成功' : '新增成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingMailAccount ? '修改失败' : '新增失败'));
-            return false;
+            message.error(resp.msg || (editingMailAccount ? '修改失败' : '新增失败'))
+            return false
           }
         } catch {
-          message.error(editingMailAccount ? '修改失败' : '新增失败');
-          return false;
+          message.error(editingMailAccount ? '修改失败' : '新增失败')
+          return false
         }
       }}
     >
@@ -78,7 +80,10 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
         name="mail"
         label="邮箱"
         placeholder="请输入邮箱"
-        rules={[{ required: true, message: '请输入邮箱' }, { type: 'email', message: '请输入正确的邮箱格式' }]}
+        rules={[
+          { required: true, message: '请输入邮箱' },
+          { type: 'email', message: '请输入正确的邮箱格式' }
+        ]}
       />
       <ProFormText
         name="username"
@@ -124,7 +129,8 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
         ]}
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveMailAccountModal;
+export default SaveMailAccountModal
+

@@ -1,121 +1,121 @@
-import React, { useState } from 'react';
-import { Modal, Space, Switch, Tree, message } from 'antd';
-import type { DataNode } from 'antd/es/tree';
-import { assignRoleMenu, getRoleMenuList } from '@/api/system/permission';
-import { getSimpleMenuList } from '@/api/system/menu';
+import React, { useState } from 'react'
+import { Modal, Space, Switch, Tree, message } from 'antd'
+import type { DataNode } from 'antd/es/tree'
+import { assignRoleMenu, getRoleMenuList } from '@/api/system/permission'
+import { getSimpleMenuList } from '@/api/system/menu'
 
-export let handleOpenMenuAssign: (record: API.SystemRoleRespVO) => void;
+export let handleOpenMenuAssign: (record: API.SystemRoleRespVO) => void
 
 // 将扁平菜单数据转换为树形结构
 const buildMenuTreeData = (list: { id: number; name: string; parentId: number }[]): DataNode[] => {
-  const map = new Map<number, any>();
-  const tree: DataNode[] = [];
+  const map = new Map<number, any>()
+  const tree: DataNode[] = []
   list.forEach((item) => {
-    map.set(item.id, { title: item.name, key: item.id, children: [] });
-  });
+    map.set(item.id, { title: item.name, key: item.id, children: [] })
+  })
   list.forEach((item) => {
-    const node = map.get(item.id)!;
+    const node = map.get(item.id)!
     if (item.parentId === 0) {
-      tree.push(node);
+      tree.push(node)
     } else {
-      const parent = map.get(item.parentId);
+      const parent = map.get(item.parentId)
       if (parent) {
-        parent.children.push(node);
+        parent.children.push(node)
       }
     }
-  });
-  return tree;
-};
+  })
+  return tree
+}
 
 const AssignMenuModal: React.FC = () => {
-  const [menuModalVisible, setMenuModalVisible] = useState(false);
-  const [currentRole, setCurrentRole] = useState<API.SystemRoleRespVO | null>(null);
-  const [menuTreeData, setMenuTreeData] = useState<DataNode[]>([]);
-  const [allMenuKeys, setAllMenuKeys] = useState<React.Key[]>([]);
-  const [checkedMenuKeys, setCheckedMenuKeys] = useState<React.Key[]>([]);
-  const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([]);
-  const [isExpandAll, setIsExpandAll] = useState(false);
-  const [isSelectAll, setIsSelectAll] = useState(false);
-  const [menuSubmitLoading, setMenuSubmitLoading] = useState(false);
+  const [menuModalVisible, setMenuModalVisible] = useState(false)
+  const [currentRole, setCurrentRole] = useState<API.SystemRoleRespVO | null>(null)
+  const [menuTreeData, setMenuTreeData] = useState<DataNode[]>([])
+  const [allMenuKeys, setAllMenuKeys] = useState<React.Key[]>([])
+  const [checkedMenuKeys, setCheckedMenuKeys] = useState<React.Key[]>([])
+  const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([])
+  const [isExpandAll, setIsExpandAll] = useState(false)
+  const [isSelectAll, setIsSelectAll] = useState(false)
+  const [menuSubmitLoading, setMenuSubmitLoading] = useState(false)
 
   const loadMenuData = async () => {
     try {
-      const resp = await getSimpleMenuList();
+      const resp = await getSimpleMenuList()
       if (resp.code === 0 && resp.data) {
-        const list = resp.data as any[];
-        const tree = buildMenuTreeData(list);
-        setMenuTreeData(tree);
-        setAllMenuKeys(list.map((item) => item.id));
+        const list = resp.data as any[]
+        const tree = buildMenuTreeData(list)
+        setMenuTreeData(tree)
+        setAllMenuKeys(list.map((item) => item.id))
       }
     } catch (e) {
-      console.error(e);
+      console.error(e)
     }
-  };
+  }
 
   handleOpenMenuAssign = async (record: API.SystemRoleRespVO) => {
-    setCurrentRole(record);
-    setMenuModalVisible(true);
-    setIsSelectAll(false);
-    setIsExpandAll(false);
-    setExpandedKeys([]);
-    setCheckedMenuKeys([]);
+    setCurrentRole(record)
+    setMenuModalVisible(true)
+    setIsSelectAll(false)
+    setIsExpandAll(false)
+    setExpandedKeys([])
+    setCheckedMenuKeys([])
 
     // 加载全部菜单
     if (menuTreeData.length === 0) {
-      await loadMenuData();
+      await loadMenuData()
     }
 
     // 获取当前角色已有菜单
     try {
-      const resp = await getRoleMenuList({ roleId: record.id });
+      const resp = await getRoleMenuList({ roleId: record.id })
       if (resp.code === 0 && resp.data) {
-        setCheckedMenuKeys(resp.data as number[]);
+        setCheckedMenuKeys(resp.data as number[])
       }
     } catch {
-      message.error('获取角色菜单权限失败');
+      message.error('获取角色菜单权限失败')
     }
-  };
+  }
 
   const handleMenuSubmit = async () => {
-    if (!currentRole) return;
-    setMenuSubmitLoading(true);
+    if (!currentRole) return
+    setMenuSubmitLoading(true)
     try {
       const resp = await assignRoleMenu({
         roleId: currentRole.id,
         menuIds: checkedMenuKeys as number[]
-      });
+      })
       if (resp.code === 0) {
-        message.success('菜单权限分配成功');
-        setMenuModalVisible(false);
+        message.success('菜单权限分配成功')
+        setMenuModalVisible(false)
       } else {
-        message.error(resp.msg || '分配失败');
+        message.error(resp.msg || '分配失败')
       }
     } catch {
-      message.error('分配失败');
+      message.error('分配失败')
     } finally {
-      setMenuSubmitLoading(false);
+      setMenuSubmitLoading(false)
     }
-  };
+  }
 
   // 全选/全不选
   const handleSelectAllChange = (checked: boolean) => {
-    setIsSelectAll(checked);
+    setIsSelectAll(checked)
     if (checked) {
-      setCheckedMenuKeys(allMenuKeys);
+      setCheckedMenuKeys(allMenuKeys)
     } else {
-      setCheckedMenuKeys([]);
+      setCheckedMenuKeys([])
     }
-  };
+  }
 
   // 展开/折叠
   const handleExpandAllChange = (checked: boolean) => {
-    setIsExpandAll(checked);
+    setIsExpandAll(checked)
     if (checked) {
-      setExpandedKeys(allMenuKeys);
+      setExpandedKeys(allMenuKeys)
     } else {
-      setExpandedKeys([]);
+      setExpandedKeys([])
     }
-  };
+  }
 
   return (
     <Modal
@@ -186,7 +186,8 @@ const AssignMenuModal: React.FC = () => {
         </div>
       </div>
     </Modal>
-  );
-};
+  )
+}
 
-export default AssignMenuModal;
+export default AssignMenuModal
+

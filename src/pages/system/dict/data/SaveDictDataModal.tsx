@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
+import React, { useState } from 'react'
+import { message } from 'antd'
 import {
   ModalForm,
   ProFormDigit,
@@ -7,29 +7,29 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormTextArea
-} from '@ant-design/pro-components';
-import { createDictData, updateDictData } from '@/api/system/dictData';
+} from '@ant-design/pro-components'
+import { createDictData, updateDictData } from '@/api/system/dictData'
 
-export let handleCreateDictData: (dictType: string) => void;
-export let handleEditDictData: (record: any) => void;
+export let handleCreateDictData: (dictType: string) => void
+export let handleEditDictData: (record: any) => void
 
 interface SaveDictDataModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingDictData, setEditingDictData] = useState<any | null>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingDictData, setEditingDictData] = useState<any | null>(null)
 
   handleCreateDictData = (dictType: string) => {
-    setEditingDictData({ dictType });
-    setCreateModalVisible(true);
-  };
+    setEditingDictData({ dictType })
+    setCreateModalVisible(true)
+  }
 
   handleEditDictData = (record: any) => {
-    setEditingDictData(record);
-    setCreateModalVisible(true);
-  };
+    setEditingDictData(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm<any>
@@ -37,9 +37,9 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingDictData(null);
+          setEditingDictData(null)
         }
       }}
       initialValues={
@@ -63,23 +63,23 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
       }}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingDictData?.id) {
-            resp = await updateDictData({ ...values, id: editingDictData.id } as any);
+            resp = await updateDictData({ ...values, id: editingDictData.id } as any)
           } else {
-            resp = await createDictData({ ...values, dictType: editingDictData?.dictType } as any);
+            resp = await createDictData({ ...values, dictType: editingDictData?.dictType } as any)
           }
           if (resp.code === 0) {
-            message.success(editingDictData?.id ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingDictData?.id ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingDictData?.id ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingDictData?.id ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingDictData?.id ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingDictData?.id ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -150,7 +150,8 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveDictDataModal;
+export default SaveDictDataModal
+

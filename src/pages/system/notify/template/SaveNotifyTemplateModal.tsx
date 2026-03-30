@@ -1,28 +1,36 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
-import { ModalForm, ProFormRadio, ProFormSelect, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
-import { createNotifyTemplate, updateNotifyTemplate } from '@/api/system/notifyTemplate';
+import React, { useState } from 'react'
+import { message } from 'antd'
+import {
+  ModalForm,
+  ProFormRadio,
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea
+} from '@ant-design/pro-components'
+import { createNotifyTemplate, updateNotifyTemplate } from '@/api/system/notifyTemplate'
 
-export let handleCreateNotifyTemplate: () => void;
-export let handleEditNotifyTemplate: (record: API.SystemNotifyTemplateRespVO) => void;
+export let handleCreateNotifyTemplate: () => void
+export let handleEditNotifyTemplate: (record: API.SystemNotifyTemplateRespVO) => void
 
 interface SaveNotifyTemplateModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingTemplate, setEditingTemplate] = useState<API.SystemNotifyTemplateRespVO | null>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingTemplate, setEditingTemplate] = useState<API.SystemNotifyTemplateRespVO | null>(
+    null
+  )
 
   handleCreateNotifyTemplate = () => {
-    setEditingTemplate(null);
-    setCreateModalVisible(true);
-  };
+    setEditingTemplate(null)
+    setCreateModalVisible(true)
+  }
 
   handleEditNotifyTemplate = (record: API.SystemNotifyTemplateRespVO) => {
-    setEditingTemplate(record);
-    setCreateModalVisible(true);
-  };
+    setEditingTemplate(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm<API.SystemNotifyTemplateSaveReqVO>
@@ -30,15 +38,13 @@ const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuc
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingTemplate(null);
+          setEditingTemplate(null)
         }
       }}
       initialValues={
-        editingTemplate
-          ? { ...editingTemplate }
-          : { status: 0 } // default layout: open
+        editingTemplate ? { ...editingTemplate } : { status: 0 } // default layout: open
       }
       layout="horizontal"
       labelCol={{ span: 5 }}
@@ -50,23 +56,23 @@ const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuc
       }}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingTemplate) {
-            resp = await updateNotifyTemplate({ ...values, id: editingTemplate.id } as any);
+            resp = await updateNotifyTemplate({ ...values, id: editingTemplate.id } as any)
           } else {
-            resp = await createNotifyTemplate(values as any);
+            resp = await createNotifyTemplate(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingTemplate ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingTemplate ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingTemplate ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingTemplate ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingTemplate ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingTemplate ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -115,13 +121,10 @@ const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuc
           { label: '关闭', value: 1 }
         ]}
       />
-      <ProFormText
-        name="remark"
-        label="备注"
-        placeholder="请输入备注"
-      />
+      <ProFormText name="remark" label="备注" placeholder="请输入备注" />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveNotifyTemplateModal;
+export default SaveNotifyTemplateModal
+

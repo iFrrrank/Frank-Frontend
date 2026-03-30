@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Badge, Button, message, Modal, Space, Typography } from 'antd'
+import { Button, message, Modal, Space, Typography } from 'antd'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import {
-  deleteMailTemplate,
-  getMailTemplatePage
-} from '@/api/system/mailTemplate'
-import SaveMailTemplateModal, { handleCreateMailTemplate, handleEditMailTemplate } from './SaveMailTemplateModal'
+import { deleteMailTemplate, getMailTemplatePage } from '@/api/system/mailTemplate'
+import SaveMailTemplateModal, {
+  handleCreateMailTemplate,
+  handleEditMailTemplate
+} from './SaveMailTemplateModal'
 import SendMailModal, { handleTestMailTemplate } from './SendMailModal'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
 
@@ -16,7 +16,6 @@ import '@wangeditor/editor/dist/css/style.css'
 const MailTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
-
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
@@ -160,7 +159,6 @@ const MailTemplateConfig: React.FC = () => {
     }
   ]
 
-
   // ===== 单个删除 =====
   const handleDelete = (record: API.SystemMailTemplateRespVO) => {
     Modal.confirm({
@@ -280,11 +278,13 @@ const MailTemplateConfig: React.FC = () => {
         ]}
       />
 
-      <SaveMailTemplateModal onSuccess={() => actionRef.current?.reload()} accountOptions={accountOptions} />
+      <SaveMailTemplateModal
+        onSuccess={() => actionRef.current?.reload()}
+        accountOptions={accountOptions}
+      />
       <SendMailModal />
     </>
   )
 }
 
 export default MailTemplateConfig
-

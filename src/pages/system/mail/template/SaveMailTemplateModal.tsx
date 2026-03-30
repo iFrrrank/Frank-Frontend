@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
+import React, { useState } from 'react'
+import { message } from 'antd'
 import {
   ModalForm,
   ProFormText,
@@ -7,34 +7,35 @@ import {
   ProFormRadio,
   ProFormTextArea,
   ProForm
-} from '@ant-design/pro-components';
-import { Editor } from '@/components/Editor';
-import { createMailTemplate, updateMailTemplate } from '@/api/system/mailTemplate';
+} from '@ant-design/pro-components'
+import { Editor } from '@/components/Editor'
+import { createMailTemplate, updateMailTemplate } from '@/api/system/mailTemplate'
 
-export let handleCreateMailTemplate: () => void;
-export let handleEditMailTemplate: (record: API.SystemMailTemplateRespVO) => void;
+export let handleCreateMailTemplate: () => void
+export let handleEditMailTemplate: (record: API.SystemMailTemplateRespVO) => void
 
 interface SaveMailTemplateModalProps {
-  onSuccess: () => void;
-  accountOptions: { label: string; value: number }[];
+  onSuccess: () => void
+  accountOptions: { label: string; value: number }[]
 }
 
 const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
   onSuccess,
   accountOptions
 }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingMailTemplate, setEditingMailTemplate] = useState<API.SystemMailTemplateRespVO | null>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingMailTemplate, setEditingMailTemplate] =
+    useState<API.SystemMailTemplateRespVO | null>(null)
 
   handleCreateMailTemplate = () => {
-    setEditingMailTemplate(null);
-    setCreateModalVisible(true);
-  };
+    setEditingMailTemplate(null)
+    setCreateModalVisible(true)
+  }
 
   handleEditMailTemplate = (record: API.SystemMailTemplateRespVO) => {
-    setEditingMailTemplate(record);
-    setCreateModalVisible(true);
-  };
+    setEditingMailTemplate(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm<API.SystemMailTemplateSaveReqVO>
@@ -42,9 +43,9 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
       width={900}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingMailTemplate(null);
+          setEditingMailTemplate(null)
         }
       }}
       initialValues={editingMailTemplate ? { ...editingMailTemplate } : { status: 0 }}
@@ -58,24 +59,24 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
       }}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingMailTemplate) {
-            resp = await updateMailTemplate({ ...values, id: editingMailTemplate.id });
+            resp = await updateMailTemplate({ ...values, id: editingMailTemplate.id })
           } else {
-            resp = await createMailTemplate(values);
+            resp = await createMailTemplate(values)
           }
 
           if (resp.code === 0) {
-            message.success(editingMailTemplate ? '修改成功' : '新增成功');
-            onSuccess();
-            return true;
+            message.success(editingMailTemplate ? '修改成功' : '新增成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingMailTemplate ? '修改失败' : '新增失败'));
-            return false;
+            message.error(resp.msg || (editingMailTemplate ? '修改失败' : '新增失败'))
+            return false
           }
         } catch {
-          message.error(editingMailTemplate ? '修改失败' : '新增失败');
-          return false;
+          message.error(editingMailTemplate ? '修改失败' : '新增失败')
+          return false
         }
       }}
     >
@@ -125,7 +126,8 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
       />
       <ProFormTextArea name="remark" label="备注" placeholder="请输入备注" />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveMailTemplateModal;
+export default SaveMailTemplateModal
+

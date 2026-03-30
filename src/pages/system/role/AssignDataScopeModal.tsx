@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { message, Space } from 'antd';
-import { ModalForm, ProFormSelect } from '@ant-design/pro-components';
-import { assignRoleDataScope } from '@/api/system/permission';
+import React, { useState } from 'react'
+import { message, Space } from 'antd'
+import { ModalForm, ProFormSelect } from '@ant-design/pro-components'
+import { assignRoleDataScope } from '@/api/system/permission'
 
-export let handleOpenDataScope: (record: API.SystemRoleRespVO) => void;
+export let handleOpenDataScope: (record: API.SystemRoleRespVO) => void
 
 const AssignDataScopeModal: React.FC = () => {
-  const [dataScopeVisible, setDataScopeVisible] = useState(false);
-  const [dataScopeRole, setDataScopeRole] = useState<API.SystemRoleRespVO | null>(null);
+  const [dataScopeVisible, setDataScopeVisible] = useState(false)
+  const [dataScopeRole, setDataScopeRole] = useState<API.SystemRoleRespVO | null>(null)
 
   handleOpenDataScope = (record: API.SystemRoleRespVO) => {
-    setDataScopeRole(record);
-    setDataScopeVisible(true);
-  };
+    setDataScopeRole(record)
+    setDataScopeVisible(true)
+  }
 
   return (
     <ModalForm
@@ -20,8 +20,8 @@ const AssignDataScopeModal: React.FC = () => {
       width={500}
       open={dataScopeVisible}
       onOpenChange={(visible) => {
-        setDataScopeVisible(visible);
-        if (!visible) setDataScopeRole(null);
+        setDataScopeVisible(visible)
+        if (!visible) setDataScopeRole(null)
       }}
       initialValues={{ dataScope: 1 }} // 默认全部数据权限
       colon={false}
@@ -35,17 +35,17 @@ const AssignDataScopeModal: React.FC = () => {
               roleId: dataScopeRole.id,
               dataScope: values.dataScope,
               dataScopeDeptIds: [] // TODO: 处理自定义部门
-            });
+            })
             if (resp.code === 0) {
-              message.success('数据权限分配成功');
-              return true;
+              message.success('数据权限分配成功')
+              return true
             }
-            message.error(resp.msg || '数据权限分配失败');
+            message.error(resp.msg || '数据权限分配失败')
           }
-          return false;
+          return false
         } catch {
-          message.error('数据权限分配失败');
-          return false;
+          message.error('数据权限分配失败')
+          return false
         }
       }}
     >
@@ -92,7 +92,8 @@ const AssignDataScopeModal: React.FC = () => {
         ]}
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default AssignDataScopeModal;
+export default AssignDataScopeModal
+

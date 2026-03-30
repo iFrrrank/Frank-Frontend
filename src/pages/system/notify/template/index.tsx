@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react'
-import { Badge, Button, message, Modal, Space, Typography } from 'antd'
+import { Button, message, Modal, Space, Typography } from 'antd'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import {
-  deleteNotifyTemplate,
-  getNotifyTemplatePage
-} from '@/api/system/notifyTemplate'
-import SaveNotifyTemplateModal, { handleCreateNotifyTemplate, handleEditNotifyTemplate } from './SaveNotifyTemplateModal'
+import { deleteNotifyTemplate, getNotifyTemplatePage } from '@/api/system/notifyTemplate'
+import SaveNotifyTemplateModal, {
+  handleCreateNotifyTemplate,
+  handleEditNotifyTemplate
+} from './SaveNotifyTemplateModal'
 
 const NotifyTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -72,13 +72,14 @@ const NotifyTemplateConfig: React.FC = () => {
       align: 'center',
       width: 250,
       hideInSearch: true,
-      render: (_, record) => (
+      render: (_, record) =>
         record.content ? (
           <Typography.Text style={{ width: 220, margin: 0 }} ellipsis={{ tooltip: record.content }}>
             {record.content}
           </Typography.Text>
-        ) : <span>-</span>
-      )
+        ) : (
+          <span>-</span>
+        )
     },
     {
       title: '开启状态',
@@ -173,7 +174,6 @@ const NotifyTemplateConfig: React.FC = () => {
     })
   }
 
-
   return (
     <>
       <ProTable<API.SystemNotifyTemplateRespVO>
@@ -216,9 +216,7 @@ const NotifyTemplateConfig: React.FC = () => {
         search={{
           labelWidth: 'auto',
           defaultCollapsed: false,
-          optionRender: (searchConfig, formProps, dom) => [
-            ...dom.reverse()
-          ]
+          optionRender: (searchConfig, formProps, dom) => [...dom.reverse()]
         }}
         options={false}
         pagination={{

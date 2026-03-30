@@ -1,36 +1,22 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
+import React, { useState } from 'react'
+import { message } from 'antd'
 import {
   ModalForm,
   ProFormDigit,
   ProFormSelect,
   ProFormText,
   ProFormTreeSelect
-} from '@ant-design/pro-components';
-import { createDept, updateDept, getSimpleDeptList } from '@/api/system/dept';
-import { getSimpleUserList } from '@/api/system/user';
+} from '@ant-design/pro-components'
+import { createDept, updateDept, getSimpleDeptList } from '@/api/system/dept'
+import { getSimpleUserList } from '@/api/system/user'
+import { handleTreeData } from '@/utils/tree'
 
-export let handleCreateDept: (parentId?: number) => void;
-export let handleEditDept: (record: any) => void;
+export let handleCreateDept: (parentId?: number) => void
+export let handleEditDept: (record: any) => void
 
 interface SaveDeptModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
-
-// 将扁平部门数据转换为树形结构
-const handleTreeData = (data: any[], parentId: number = 0): any[] => {
-  const tree: any[] = [];
-  data.forEach((item) => {
-    if (item.parentId === parentId) {
-      const children = handleTreeData(data, item.id);
-      if (children.length > 0) {
-        item.children = children;
-      }
-      tree.push(item);
-    }
-  });
-  return tree.sort((a, b) => a.sort - b.sort); // 排序
-};
 
 // 供 TreeSelect 使用的节点转换
 const buildDeptTreeSelectData = (data: any[]): any[] => {
@@ -38,38 +24,38 @@ const buildDeptTreeSelectData = (data: any[]): any[] => {
     const node: any = {
       title: item.name,
       value: item.id
-    };
-    if (item.children && item.children.length > 0) {
-      node.children = buildDeptTreeSelectData(item.children);
     }
-    return node;
-  });
-};
+    if (item.children && item.children.length > 0) {
+      node.children = buildDeptTreeSelectData(item.children)
+    }
+    return node
+  })
+}
 
 const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingDept, setEditingDept] = useState<any>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingDept, setEditingDept] = useState<any>(null)
 
   // 获取用户列表（负责人字典）
   const fetchUserList = async () => {
     try {
-      const resp = await getSimpleUserList();
+      const resp = await getSimpleUserList()
       if (resp.code === 0 && resp.data) {
-        return resp.data;
+        return resp.data
       }
     } catch {}
-    return [];
-  };
+    return []
+  }
 
   handleCreateDept = (parentId?: number) => {
-    setEditingDept({ parentId: parentId || 0 });
-    setCreateModalVisible(true);
-  };
+    setEditingDept({ parentId: parentId || 0 })
+    setCreateModalVisible(true)
+  }
 
   handleEditDept = (record: any) => {
-    setEditingDept(record);
-    setCreateModalVisible(true);
-  };
+    setEditingDept(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm
@@ -77,8 +63,8 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
       width={500}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
-        if (!visible) setEditingDept(null);
+        setCreateModalVisible(visible)
+        if (!visible) setEditingDept(null)
       }}
       // 处理回显数据
       initialValues={
@@ -104,24 +90,24 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
       colon={false}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingDept?.id) {
-            resp = await updateDept({ ...values, id: editingDept.id } as any);
+            resp = await updateDept({ ...values, id: editingDept.id } as any)
           } else {
-            resp = await createDept(values as any);
+            resp = await createDept(values as any)
           }
 
           if (resp.code === 0) {
-            message.success(editingDept?.id ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingDept?.id ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingDept?.id ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingDept?.id ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingDept?.id ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingDept?.id ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -132,10 +118,10 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         placeholder="请选择上级部门"
         request={async () => {
           // 拉取精简的树形部门数据作为上级选择
-          const resp = await getSimpleDeptList();
-          const list = resp.code === 0 ? resp.data || [] : [];
-          const tree = buildDeptTreeSelectData(handleTreeData(list, 0));
-          return [{ value: 0, title: '顶级部门', children: tree }];
+          const resp = await getSimpleDeptList()
+          const list = resp.code === 0 ? resp.data || [] : []
+          const tree = buildDeptTreeSelectData(handleTreeData(list, 0))
+          return [{ value: 0, title: '顶级部门', children: tree }]
         }}
         fieldProps={{
           fieldNames: { label: 'title', value: 'value' },
@@ -168,11 +154,11 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         placeholder="请选择负责人"
         showSearch
         request={async () => {
-          const list = await fetchUserList();
+          const list = await fetchUserList()
           return list.map((item: any) => ({
             label: item.nickname,
             value: item.id
-          }));
+          }))
         }}
       />
 
@@ -203,7 +189,8 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         allowClear
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveDeptModal;
+export default SaveDeptModal
+

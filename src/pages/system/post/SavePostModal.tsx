@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
+import React, { useState } from 'react'
+import { message } from 'antd'
 import {
   ModalForm,
   ProFormDigit,
   ProFormSelect,
   ProFormText,
   ProFormTextArea
-} from '@ant-design/pro-components';
-import { createPost, updatePost } from '@/api/system/post';
+} from '@ant-design/pro-components'
+import { createPost, updatePost } from '@/api/system/post'
 
-export let handleCreatePost: () => void;
-export let handleEditPost: (record: API.SystemPostRespVO) => void;
+export let handleCreatePost: () => void
+export let handleEditPost: (record: API.SystemPostRespVO) => void
 
 interface SavePostModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingPost, setEditingPost] = useState<API.SystemPostRespVO | null>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingPost, setEditingPost] = useState<API.SystemPostRespVO | null>(null)
 
   handleCreatePost = () => {
-    setEditingPost(null);
-    setCreateModalVisible(true);
-  };
+    setEditingPost(null)
+    setCreateModalVisible(true)
+  }
 
   handleEditPost = (record: API.SystemPostRespVO) => {
-    setEditingPost(record);
-    setCreateModalVisible(true);
-  };
+    setEditingPost(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm<API.SystemPostSaveReqVO>
@@ -36,9 +36,9 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingPost(null);
+          setEditingPost(null)
         }
       }}
       initialValues={
@@ -58,23 +58,23 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
       }}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingPost) {
-            resp = await updatePost({ ...values, id: editingPost.id } as any);
+            resp = await updatePost({ ...values, id: editingPost.id } as any)
           } else {
-            resp = await createPost(values as any);
+            resp = await createPost(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingPost ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingPost ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingPost ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingPost ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingPost ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingPost ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -118,7 +118,8 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SavePostModal;
+export default SavePostModal
+

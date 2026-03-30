@@ -8,11 +8,7 @@ import {
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import {
-  deletePost,
-  export1,
-  getPostPage
-} from '@/api/system/post'
+import { deletePost, export1, getPostPage } from '@/api/system/post'
 
 import SavePostModal, { handleCreatePost, handleEditPost } from './SavePostModal'
 
@@ -192,7 +188,6 @@ const PostManagement: React.FC = () => {
     })
   }
 
-
   return (
     <>
       <ProTable<API.SystemPostRespVO>
@@ -241,12 +236,7 @@ const PostManagement: React.FC = () => {
         }}
         headerTitle={false}
         toolBarRender={() => [
-          <Button
-            key="create"
-            icon={<PlusOutlined />}
-            onClick={handleCreatePost}
-            type="primary"
-          >
+          <Button key="create" icon={<PlusOutlined />} onClick={handleCreatePost} type="primary">
             新增
           </Button>,
           <Button

@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
+import React, { useState } from 'react'
+import { message } from 'antd'
 import {
   ModalForm,
   ProForm,
   ProFormSelect,
   ProFormText,
   ProFormTextArea
-} from '@ant-design/pro-components';
-import { Editor } from '@/components/Editor';
-import { createNotice, updateNotice } from '@/api/system/notice';
+} from '@ant-design/pro-components'
+import { Editor } from '@/components/Editor'
+import { createNotice, updateNotice } from '@/api/system/notice'
 
-export let handleCreateNotice: () => void;
-export let handleEditNotice: (record: API.SystemNoticeRespVO) => void;
+export let handleCreateNotice: () => void
+export let handleEditNotice: (record: API.SystemNoticeRespVO) => void
 
 interface SaveNoticeModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [editingNotice, setEditingNotice] = useState<API.SystemNoticeRespVO | null>(null);
+  const [modalVisible, setModalVisible] = useState(false)
+  const [editingNotice, setEditingNotice] = useState<API.SystemNoticeRespVO | null>(null)
 
   handleCreateNotice = () => {
-    setEditingNotice(null);
-    setModalVisible(true);
-  };
+    setEditingNotice(null)
+    setModalVisible(true)
+  }
 
   handleEditNotice = (record: API.SystemNoticeRespVO) => {
-    setEditingNotice(record);
-    setModalVisible(true);
-  };
+    setEditingNotice(record)
+    setModalVisible(true)
+  }
 
   return (
     <ModalForm<API.SystemNoticeSaveReqVO>
@@ -37,8 +37,8 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
       width={900}
       open={modalVisible}
       onOpenChange={(visible) => {
-        setModalVisible(visible);
-        if (!visible) setEditingNotice(null);
+        setModalVisible(visible)
+        if (!visible) setEditingNotice(null)
       }}
       initialValues={editingNotice ? { ...editingNotice } : { status: 0, type: 1 }}
       layout="horizontal"
@@ -51,23 +51,23 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
       }}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingNotice) {
-            resp = await updateNotice({ ...values, id: editingNotice.id } as any);
+            resp = await updateNotice({ ...values, id: editingNotice.id } as any)
           } else {
-            resp = await createNotice(values as any);
+            resp = await createNotice(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingNotice ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingNotice ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingNotice ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingNotice ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingNotice ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingNotice ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -111,7 +111,8 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveNoticeModal;
+export default SaveNoticeModal
+

@@ -9,32 +9,10 @@ import {
   PlusOutlined,
   SwapOutlined
 } from '@ant-design/icons'
-
-import {
-  deleteDept,
-  getDeptList,
-  getSimpleDeptList,
-} from '@/api/system/dept'
-
-import SaveDeptModal, { handleCreateDept, handleEditDept } from './SaveDeptModal'
-
+import { deleteDept, getDeptList } from '@/api/system/dept'
 import { getSimpleUserList } from '@/api/system/user'
-
-// 将扁平部门数据转换为树形结构
-const handleTreeData = (data: any[], parentId: number = 0): any[] => {
-  const tree: any[] = []
-  data.forEach((item) => {
-    if (item.parentId === parentId) {
-      const children = handleTreeData(data, item.id)
-      if (children.length > 0) {
-        item.children = children
-      }
-      tree.push(item)
-    }
-  })
-  return tree.sort((a, b) => a.sort - b.sort) // 排序
-}
-
+import SaveDeptModal, { handleCreateDept, handleEditDept } from './SaveDeptModal'
+import { handleTreeData } from '@/utils/tree'
 
 const DeptManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -109,7 +87,6 @@ const DeptManagement: React.FC = () => {
     })
   }
 
-
   // 获取用户列表（负责人字典）
   const fetchUserList = async () => {
     if (userList.length > 0) return userList
@@ -119,7 +96,7 @@ const DeptManagement: React.FC = () => {
         setUserList(resp.data)
         return resp.data
       }
-    } catch { }
+    } catch {}
     return []
   }
 

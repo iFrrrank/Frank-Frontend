@@ -1,28 +1,34 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
-import { ModalForm, ProFormText, ProFormDigit, ProFormSelect, ProFormTextArea } from '@ant-design/pro-components';
-import { createRole, updateRole } from '@/api/system/role';
+import React, { useState } from 'react'
+import { message } from 'antd'
+import {
+  ModalForm,
+  ProFormText,
+  ProFormDigit,
+  ProFormSelect,
+  ProFormTextArea
+} from '@ant-design/pro-components'
+import { createRole, updateRole } from '@/api/system/role'
 
-export let handleCreateRole: () => void;
-export let handleEditRole: (record: API.SystemRoleRespVO) => void;
+export let handleCreateRole: () => void
+export let handleEditRole: (record: API.SystemRoleRespVO) => void
 
 interface SaveRoleModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingRole, setEditingRole] = useState<API.SystemRoleRespVO | null>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingRole, setEditingRole] = useState<API.SystemRoleRespVO | null>(null)
 
   handleCreateRole = () => {
-    setEditingRole(null);
-    setCreateModalVisible(true);
-  };
+    setEditingRole(null)
+    setCreateModalVisible(true)
+  }
 
   handleEditRole = (record: API.SystemRoleRespVO) => {
-    setEditingRole(record);
-    setCreateModalVisible(true);
-  };
+    setEditingRole(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm<API.SystemRoleSaveReqVO>
@@ -30,9 +36,9 @@ const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
       width={500}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingRole(null);
+          setEditingRole(null)
         }
       }}
       initialValues={
@@ -57,23 +63,23 @@ const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
       }}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingRole) {
-            resp = await updateRole({ ...values, id: editingRole.id });
+            resp = await updateRole({ ...values, id: editingRole.id })
           } else {
-            resp = await createRole(values);
+            resp = await createRole(values)
           }
           if (resp.code === 0) {
-            message.success(editingRole ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingRole ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingRole ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingRole ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingRole ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingRole ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -117,7 +123,8 @@ const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
         placeholder="请输入备注内容"
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveRoleModal;
+export default SaveRoleModal
+

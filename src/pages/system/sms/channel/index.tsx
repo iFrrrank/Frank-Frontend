@@ -3,12 +3,12 @@ import { Button, message, Modal, Tag, Typography } from 'antd'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import {
-  deleteSmsChannel,
-  getSmsChannelPage
-} from '@/api/system/smsChannel'
+import { deleteSmsChannel, getSmsChannelPage } from '@/api/system/smsChannel'
 
-import SaveSmsChannelModal, { handleCreateSmsChannel, handleEditSmsChannel } from './SaveSmsChannelModal'
+import SaveSmsChannelModal, {
+  handleCreateSmsChannel,
+  handleEditSmsChannel
+} from './SaveSmsChannelModal'
 
 const SmsChannelConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -88,13 +88,14 @@ const SmsChannelConfig: React.FC = () => {
       align: 'center',
       width: 180,
       hideInSearch: true,
-      render: (_, record) => (
+      render: (_, record) =>
         record.apiKey ? (
           <Typography.Text style={{ width: 150, margin: 0 }} ellipsis={{ tooltip: record.apiKey }}>
             {record.apiKey}
           </Typography.Text>
-        ) : <span>-</span>
-      )
+        ) : (
+          <span>-</span>
+        )
     },
     {
       title: '短信 API 密钥',
@@ -102,13 +103,17 @@ const SmsChannelConfig: React.FC = () => {
       align: 'center',
       hideInSearch: true,
       width: 180,
-      render: (_, record) => (
+      render: (_, record) =>
         record.apiSecret ? (
-          <Typography.Text style={{ width: 150, margin: 0 }} ellipsis={{ tooltip: record.apiSecret }}>
+          <Typography.Text
+            style={{ width: 150, margin: 0 }}
+            ellipsis={{ tooltip: record.apiSecret }}
+          >
             {record.apiSecret}
           </Typography.Text>
-        ) : <span>-</span>
-      )
+        ) : (
+          <span>-</span>
+        )
     },
     {
       title: '短信发送回调 URL',
@@ -116,13 +121,17 @@ const SmsChannelConfig: React.FC = () => {
       align: 'center',
       hideInSearch: true,
       width: 100,
-      render: (_, record) => (
+      render: (_, record) =>
         record.callbackUrl ? (
-          <Typography.Text style={{ width: 180, margin: 0 }} ellipsis={{ tooltip: record.callbackUrl }}>
+          <Typography.Text
+            style={{ width: 180, margin: 0 }}
+            ellipsis={{ tooltip: record.callbackUrl }}
+          >
             {record.callbackUrl}
           </Typography.Text>
-        ) : <span>-</span>
-      )
+        ) : (
+          <span>-</span>
+        )
     },
     {
       title: '创建时间',
@@ -195,7 +204,6 @@ const SmsChannelConfig: React.FC = () => {
       }
     })
   }
-
 
   return (
     <>

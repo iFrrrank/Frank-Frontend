@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
-import { ModalForm, ProFormSelect, ProFormText } from '@ant-design/pro-components';
-import { createSocialClient, updateSocialClient, getSocialClient } from '@/api/system/socialClient';
+import React, { useState } from 'react'
+import { message } from 'antd'
+import { ModalForm, ProFormSelect, ProFormText } from '@ant-design/pro-components'
+import { createSocialClient, updateSocialClient, getSocialClient } from '@/api/system/socialClient'
 
-export let handleCreateSocialClient: () => void;
-export let handleEditSocialClient: (record: API.SystemSocialClientRespVO) => void;
+export let handleCreateSocialClient: () => void
+export let handleEditSocialClient: (record: API.SystemSocialClientRespVO) => void
 
 interface SaveSocialClientModalProps {
-  onSuccess: () => void;
+  onSuccess: () => void
 }
 
 const SaveSocialClientModal: React.FC<SaveSocialClientModalProps> = ({ onSuccess }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingClient, setEditingClient] = useState<API.SystemSocialClientRespVO | null>(null);
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingClient, setEditingClient] = useState<API.SystemSocialClientRespVO | null>(null)
 
   handleCreateSocialClient = () => {
-    setEditingClient(null);
-    setCreateModalVisible(true);
-  };
+    setEditingClient(null)
+    setCreateModalVisible(true)
+  }
 
   handleEditSocialClient = async (record: API.SystemSocialClientRespVO) => {
     try {
-      const resp = await getSocialClient({ id: record.id });
+      const resp = await getSocialClient({ id: record.id })
       if (resp.code === 0 && resp.data) {
-        setEditingClient(resp.data);
-        setCreateModalVisible(true);
+        setEditingClient(resp.data)
+        setCreateModalVisible(true)
       }
     } catch {
-      message.error('获取社交客户端信息失败');
+      message.error('获取社交客户端信息失败')
     }
-  };
+  }
 
   return (
     <ModalForm<API.SystemSocialClientSaveReqVO>
@@ -37,26 +37,26 @@ const SaveSocialClientModal: React.FC<SaveSocialClientModalProps> = ({ onSuccess
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingClient(null);
+          setEditingClient(null)
         }
       }}
       initialValues={
         editingClient
           ? {
-            id: editingClient.id,
-            name: editingClient.name,
-            socialType: editingClient.socialType,
-            userType: editingClient.userType,
-            clientId: editingClient.clientId,
-            clientSecret: editingClient.clientSecret,
-            agentId: editingClient.agentId,
-            status: editingClient.status
-          }
+              id: editingClient.id,
+              name: editingClient.name,
+              socialType: editingClient.socialType,
+              userType: editingClient.userType,
+              clientId: editingClient.clientId,
+              clientSecret: editingClient.clientSecret,
+              agentId: editingClient.agentId,
+              status: editingClient.status
+            }
           : {
-            status: 0
-          }
+              status: 0
+            }
       }
       layout="horizontal"
       labelCol={{ span: 6 }}
@@ -68,23 +68,23 @@ const SaveSocialClientModal: React.FC<SaveSocialClientModalProps> = ({ onSuccess
       }}
       onFinish={async (values) => {
         try {
-          let resp: any;
+          let resp: any
           if (editingClient) {
-            resp = await updateSocialClient({ ...values, id: editingClient.id });
+            resp = await updateSocialClient({ ...values, id: editingClient.id })
           } else {
-            resp = await createSocialClient(values);
+            resp = await createSocialClient(values)
           }
           if (resp.code === 0) {
-            message.success(editingClient ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingClient ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingClient ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingClient ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingClient ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingClient ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -141,7 +141,8 @@ const SaveSocialClientModal: React.FC<SaveSocialClientModalProps> = ({ onSuccess
         rules={[{ required: true, message: '请选择状态' }]}
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveSocialClientModal;
+export default SaveSocialClientModal
+

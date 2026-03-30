@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
-import { ModalForm, ProForm, ProFormTextArea } from '@ant-design/pro-components';
-import { Editor } from '@/components/Editor';
-import { sendMail } from '@/api/system/mailTemplate';
+import React, { useState } from 'react'
+import { message } from 'antd'
+import { ModalForm, ProForm, ProFormTextArea } from '@ant-design/pro-components'
+import { Editor } from '@/components/Editor'
+import { sendMail } from '@/api/system/mailTemplate'
 
-export let handleTestMailTemplate: (record: API.SystemMailTemplateRespVO) => void;
+export let handleTestMailTemplate: (record: API.SystemMailTemplateRespVO) => void
 
 const SendMailModal: React.FC = () => {
-  const [testModalVisible, setTestModalVisible] = useState(false);
-  const [testingTemplate, setTestingTemplate] = useState<API.SystemMailTemplateRespVO | null>(null);
+  const [testModalVisible, setTestModalVisible] = useState(false)
+  const [testingTemplate, setTestingTemplate] = useState<API.SystemMailTemplateRespVO | null>(null)
 
   handleTestMailTemplate = (record: API.SystemMailTemplateRespVO) => {
-    setTestingTemplate(record);
-    setTestModalVisible(true);
-  };
+    setTestingTemplate(record)
+    setTestModalVisible(true)
+  }
 
   return (
     <ModalForm<{ mail: string; ccMail?: string; bccMail?: string }>
@@ -21,9 +21,9 @@ const SendMailModal: React.FC = () => {
       width={900}
       open={testModalVisible}
       onOpenChange={(visible) => {
-        setTestModalVisible(visible);
+        setTestModalVisible(visible)
         if (!visible) {
-          setTestingTemplate(null);
+          setTestingTemplate(null)
         }
       }}
       initialValues={{}}
@@ -36,26 +36,26 @@ const SendMailModal: React.FC = () => {
         maskClosable: false
       }}
       onFinish={async (values) => {
-        if (!testingTemplate) return false;
+        if (!testingTemplate) return false
         try {
           // 目前 API 只发送 mail 字段，可以根据需要扩充
           const reqVO: API.SystemMailTemplateSendReqVO = {
             mail: values.mail,
             templateCode: testingTemplate.code,
             templateParams: {} // 可以根据需要让用户填参，此图里并没有参数表单，只填入基础占位
-          };
-          const resp = await sendMail(reqVO);
+          }
+          const resp = await sendMail(reqVO)
 
           if (resp.code === 0) {
-            message.success('测试邮件发送成功');
-            return true;
+            message.success('测试邮件发送成功')
+            return true
           } else {
-            message.error(resp.msg || '测试邮件发送失败');
-            return false;
+            message.error(resp.msg || '测试邮件发送失败')
+            return false
           }
         } catch {
-          message.error('测试邮件发送失败');
-          return false;
+          message.error('测试邮件发送失败')
+          return false
         }
       }}
     >
@@ -82,7 +82,8 @@ const SendMailModal: React.FC = () => {
         fieldProps={{ rows: 2 }}
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SendMailModal;
+export default SendMailModal
+

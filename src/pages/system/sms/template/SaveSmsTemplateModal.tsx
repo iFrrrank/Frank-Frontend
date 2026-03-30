@@ -1,35 +1,40 @@
-import React, { useState } from 'react';
-import { message } from 'antd';
+import React, { useState } from 'react'
+import { message } from 'antd'
 import {
   ModalForm,
   ProFormRadio,
   ProFormSelect,
   ProFormText,
   ProFormTextArea
-} from '@ant-design/pro-components';
-import { createSmsTemplate, updateSmsTemplate } from '@/api/system/smsTemplate';
+} from '@ant-design/pro-components'
+import { createSmsTemplate, updateSmsTemplate } from '@/api/system/smsTemplate'
 
-export let handleCreateSmsTemplate: () => void;
-export let handleEditSmsTemplate: (record: API.SystemSmsTemplateRespVO) => void;
+export let handleCreateSmsTemplate: () => void
+export let handleEditSmsTemplate: (record: API.SystemSmsTemplateRespVO) => void
 
 interface SaveSmsTemplateModalProps {
-  onSuccess: () => void;
-  channelOptions: { label: string; value: number }[];
+  onSuccess: () => void
+  channelOptions: { label: string; value: number }[]
 }
 
-const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({ onSuccess, channelOptions }) => {
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [editingSmsTemplate, setEditingSmsTemplate] = useState<API.SystemSmsTemplateRespVO | null>(null);
+const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({
+  onSuccess,
+  channelOptions
+}) => {
+  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [editingSmsTemplate, setEditingSmsTemplate] = useState<API.SystemSmsTemplateRespVO | null>(
+    null
+  )
 
   handleCreateSmsTemplate = () => {
-    setEditingSmsTemplate(null);
-    setCreateModalVisible(true);
-  };
+    setEditingSmsTemplate(null)
+    setCreateModalVisible(true)
+  }
 
   handleEditSmsTemplate = (record: API.SystemSmsTemplateRespVO) => {
-    setEditingSmsTemplate(record);
-    setCreateModalVisible(true);
-  };
+    setEditingSmsTemplate(record)
+    setCreateModalVisible(true)
+  }
 
   return (
     <ModalForm<API.SystemSmsTemplateSaveReqVO>
@@ -37,9 +42,9 @@ const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({ onSuccess, 
       width={700}
       open={createModalVisible}
       onOpenChange={(visible) => {
-        setCreateModalVisible(visible);
+        setCreateModalVisible(visible)
         if (!visible) {
-          setEditingSmsTemplate(null);
+          setEditingSmsTemplate(null)
         }
       }}
       initialValues={
@@ -59,23 +64,23 @@ const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({ onSuccess, 
       }}
       onFinish={async (values) => {
         try {
-          let resp;
+          let resp
           if (editingSmsTemplate) {
-            resp = await updateSmsTemplate({ ...values, id: editingSmsTemplate.id } as any);
+            resp = await updateSmsTemplate({ ...values, id: editingSmsTemplate.id } as any)
           } else {
-            resp = await createSmsTemplate(values as any);
+            resp = await createSmsTemplate(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingSmsTemplate ? '修改成功' : '创建成功');
-            onSuccess();
-            return true;
+            message.success(editingSmsTemplate ? '修改成功' : '创建成功')
+            onSuccess()
+            return true
           } else {
-            message.error(resp.msg || (editingSmsTemplate ? '修改失败' : '创建失败'));
-            return false;
+            message.error(resp.msg || (editingSmsTemplate ? '修改失败' : '创建失败'))
+            return false
           }
         } catch {
-          message.error(editingSmsTemplate ? '修改失败' : '创建失败');
-          return false;
+          message.error(editingSmsTemplate ? '修改失败' : '创建失败')
+          return false
         }
       }}
     >
@@ -139,7 +144,8 @@ const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({ onSuccess, 
         fieldProps={{ rows: 2 }}
       />
     </ModalForm>
-  );
-};
+  )
+}
 
-export default SaveSmsTemplateModal;
+export default SaveSmsTemplateModal
+

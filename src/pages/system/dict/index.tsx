@@ -9,11 +9,7 @@ import {
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { history } from '@umijs/max'
-import {
-  deleteDictType,
-  export2,
-  pageDictTypes
-} from '@/api/system/dictType'
+import { deleteDictType, export2, pageDictTypes } from '@/api/system/dictType'
 import SaveDictTypeModal, { handleCreateDictType, handleEditDictType } from './SaveDictTypeModal'
 
 const DictTypeConfig: React.FC = () => {
@@ -186,7 +182,6 @@ const DictTypeConfig: React.FC = () => {
       }
     })
   }
-
 
   // ===== 字典数据维护页 =====
   const handleData = (record: API.SystemDictTypeRespVO) => {
