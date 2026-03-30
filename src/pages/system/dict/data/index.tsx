@@ -12,7 +12,7 @@ import { useParams } from '@umijs/max'
 
 import { deleteDictData, export3, getDictTypePage } from '@/api/system/dictData'
 
-import SaveDictDataModal, { handleCreateDictData, handleEditDictData } from './SaveDictDataModal'
+import SaveDictDataModal, { handleCreateDictData, handleEditDictData } from './SaveDictDataForm'
 import { getSimpleDictTypeList } from '@/api/system/dictType'
 
 const DictDataList: React.FC = () => {

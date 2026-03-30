@@ -16,7 +16,7 @@ import {
 import SaveSmsTemplateModal, {
   handleCreateSmsTemplate,
   handleEditSmsTemplate
-} from './SaveSmsTemplateModal'
+} from './SaveSmsTemplateForm'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
 
 const SmsTemplateConfig: React.FC = () => {

@@ -4,7 +4,7 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-de
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteNotice, getNoticePage, push } from '@/api/system/notice'
-import SaveNoticeModal, { handleCreateNotice, handleEditNotice } from './SaveNoticeModal'
+import SaveNoticeModal, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
 
 const NoticeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)

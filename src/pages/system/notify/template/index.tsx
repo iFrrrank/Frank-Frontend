@@ -7,7 +7,7 @@ import { deleteNotifyTemplate, getNotifyTemplatePage } from '@/api/system/notify
 import SaveNotifyTemplateModal, {
   handleCreateNotifyTemplate,
   handleEditNotifyTemplate
-} from './SaveNotifyTemplateModal'
+} from './SaveNotifyTemplateForm'
 
 const NotifyTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)

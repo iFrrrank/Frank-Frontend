@@ -8,7 +8,7 @@ import { deleteSmsChannel, getSmsChannelPage } from '@/api/system/smsChannel'
 import SaveSmsChannelModal, {
   handleCreateSmsChannel,
   handleEditSmsChannel
-} from './SaveSmsChannelModal'
+} from './SaveSmsChannelForm'
 
 const SmsChannelConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)

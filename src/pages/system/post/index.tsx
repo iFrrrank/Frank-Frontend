@@ -10,7 +10,7 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { deletePost, export1, getPostPage } from '@/api/system/post'
 
-import SavePostModal, { handleCreatePost, handleEditPost } from './SavePostModal'
+import SavePostModal, { handleCreatePost, handleEditPost } from './SavePostForm'
 
 const PostManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)

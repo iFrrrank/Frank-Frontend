@@ -161,14 +161,12 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           }))
         }}
       />
-
       <ProFormText
         name="phone"
         label="联系电话"
         colProps={{ span: 24 }}
         placeholder="请输入联系电话"
       />
-
       <ProFormText
         name="email"
         label="邮箱"
@@ -176,7 +174,6 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         placeholder="请输入邮箱"
         rules={[{ type: 'email', message: '请输入正确的邮箱格式' }]}
       />
-
       <ProFormSelect
         name="status"
         label="状态"

@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons'
 
 import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
-import SaveMenuModal, { handleCreateMenu, handleEditMenu } from './SaveMenuModal'
+import SaveMenuModal, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
 import { handleTreeData } from '@/utils/tree'
 
 // 动态渲染图标

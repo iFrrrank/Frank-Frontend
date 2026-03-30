@@ -10,9 +10,9 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { deleteRole, exportUsingGet, getRolePage } from '@/api/system/role'
 
-import SaveRoleModal, { handleCreateRole, handleEditRole } from './SaveRoleModal'
-import AssignMenuModal, { handleOpenMenuAssign } from './AssignMenuModal'
-import AssignDataScopeModal, { handleOpenDataScope } from './AssignDataScopeModal'
+import SaveRoleModal, { handleCreateRole, handleEditRole } from './SaveRoleForm'
+import AssignMenuModal, { handleOpenMenuAssign } from './AssignMenuForm'
+import AssignDataScopeModal, { handleOpenDataScope } from './AssignDataScopeForm'
 
 const Role: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)

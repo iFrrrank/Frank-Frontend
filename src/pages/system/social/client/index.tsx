@@ -14,7 +14,7 @@ import { deleteSocialClient, getSocialClientPage } from '@/api/system/socialClie
 import SaveSocialClientModal, {
   handleCreateSocialClient,
   handleEditSocialClient
-} from './SaveSocialClientModal'
+} from './SaveSocialClientForm'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {

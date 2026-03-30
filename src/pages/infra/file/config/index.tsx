@@ -15,7 +15,6 @@ import FileConfigForm, { STORAGE_OPTIONS } from './FileConfigForm'
 const FileConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
-
   const [formVisible, setFormVisible] = useState(false)
   const [currentId, setCurrentId] = useState<number | undefined>(undefined)
 
@@ -124,25 +123,28 @@ const FileConfigPage: React.FC = () => {
       dataIndex: 'storage',
       align: 'center',
       valueType: 'select',
-      valueEnum: STORAGE_OPTIONS.reduce((acc, cur) => {
-        let color = 'default'
-        switch (cur.value) {
-          case 10:
-            color = 'processing'
-            break
-          case 11:
-            color = 'warning'
-            break
-          case 12:
-            color = 'error'
-            break
-          case 20:
-            color = 'success' // or blue since image shows blue tag for S3
-            break
-        }
-        acc[cur.value] = { text: cur.label, status: cur.value === 20 ? 'Processing' : color }
-        return acc
-      }, {} as Record<string, any>),
+      valueEnum: STORAGE_OPTIONS.reduce(
+        (acc, cur) => {
+          let color = 'default'
+          switch (cur.value) {
+            case 10:
+              color = 'processing'
+              break
+            case 11:
+              color = 'warning'
+              break
+            case 12:
+              color = 'error'
+              break
+            case 20:
+              color = 'success' // or blue since image shows blue tag for S3
+              break
+          }
+          acc[cur.value] = { text: cur.label, status: cur.value === 20 ? 'Processing' : color }
+          return acc
+        },
+        {} as Record<string, any>
+      ),
       fieldProps: { placeholder: '请选择存储器' }
     },
     {

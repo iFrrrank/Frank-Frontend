@@ -13,7 +13,7 @@ import { deleteMailAccount, getMailAccountPage } from '@/api/system/mailAccount'
 import SaveMailAccountModal, {
   handleCreateMailAccount,
   handleEditMailAccount
-} from './SaveMailAccountModal'
+} from './SaveMailAccountForm'
 
 const MailAccountConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)

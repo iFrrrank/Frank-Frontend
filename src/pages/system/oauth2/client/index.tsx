@@ -15,7 +15,7 @@ import { deleteOAuth2Client, getOAuth2Client, getOAuth2ClientPage } from '@/api/
 import SaveOAuth2ClientModal, {
   handleCreateOAuth2Client,
   handleEditOAuth2Client
-} from './SaveOAuth2ClientModal'
+} from './SaveOAuth2ClientForm'
 
 const App_: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)

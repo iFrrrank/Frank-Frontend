@@ -7,8 +7,8 @@ import { deleteMailTemplate, getMailTemplatePage } from '@/api/system/mailTempla
 import SaveMailTemplateModal, {
   handleCreateMailTemplate,
   handleEditMailTemplate
-} from './SaveMailTemplateModal'
-import SendMailModal, { handleTestMailTemplate } from './SendMailModal'
+} from './SaveMailTemplateForm'
+import SendMailModal, { handleTestMailTemplate } from './SendMailForm'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
 
 import '@wangeditor/editor/dist/css/style.css'

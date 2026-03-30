@@ -17,10 +17,10 @@ import { ProTable } from '@ant-design/pro-components'
 import { deleteUser, exportUserList, getUser, getUserPage } from '@/api/system/user'
 import DeptTree from '@/pages/system/user/DeptTree'
 import { COMMON_STATUS_VALUE_ENUM } from '@/utils/constantsValue'
-import ResetPwdModal, { handleResetPwd } from '@/pages/system/user/ResetPwdModal'
-import AssignRoleModal, { handleAssignRole } from '@/pages/system/user/AssignRoleModal'
-import ImportUserModal, { handleImportUser } from '@/pages/system/user/ImportUserModal'
-import SaveUserModal, { handleEditUser, handleCreateUser } from '@/pages/system/user/SaveUserModal'
+import ResetPwdModal, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
+import AssignRoleModal, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
+import ImportUserModal, { handleImportUser } from '@/pages/system/user/ImportUserForm'
+import SaveUserModal, { handleEditUser, handleCreateUser } from '@/pages/system/user/SaveUserForm'
 
 const SystemUser: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -284,12 +284,7 @@ const SystemUser: React.FC = () => {
           dateFormatter="string"
           headerTitle="用户管理"
           toolBarRender={() => [
-            <Button
-              key="create"
-              icon={<PlusOutlined />}
-              onClick={handleCreateUser}
-              type="primary"
-            >
+            <Button key="create" icon={<PlusOutlined />} onClick={handleCreateUser} type="primary">
               新增
             </Button>,
             <Button

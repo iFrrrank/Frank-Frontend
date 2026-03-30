@@ -10,7 +10,7 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { history } from '@umijs/max'
 import { deleteDictType, export2, pageDictTypes } from '@/api/system/dictType'
-import SaveDictTypeModal, { handleCreateDictType, handleEditDictType } from './SaveDictTypeModal'
+import SaveDictTypeModal, { handleCreateDictType, handleEditDictType } from './SaveDictTypeForm'
 
 const DictTypeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
