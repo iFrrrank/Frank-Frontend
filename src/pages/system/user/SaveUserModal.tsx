@@ -11,6 +11,7 @@ import type { ActionType } from '@ant-design/pro-components'
 import { createUser, updateUser, getUser } from '@/api/system/user'
 import { getSimpleDeptList } from '@/api/system/dept'
 import { getSimplePostList } from '@/api/system/post'
+import { buildTreeData } from '@/utils/tree'
 
 export let handleEditUser: (record: API.SystemUserRespVO) => void
 export let handleCreateUser: () => void
@@ -37,29 +38,6 @@ const SaveUserModal: React.FC = () => {
     } catch {
       message.error('获取用户信息失败')
     }
-  }
-
-  // 将扁平部门数据转换为 TreeSelect 树形结构
-  const buildDeptTreeSelectData = (
-    list: { id: number; name: string; parentId: number }[]
-  ): any[] => {
-    const map = new Map<number, any>()
-    const tree: any[] = []
-    list.forEach((item) => {
-      map.set(item.id, { title: item.name, value: item.id, children: [] })
-    })
-    list.forEach((item) => {
-      const node = map.get(item.id)!
-      if (item.parentId === 0) {
-        tree.push(node)
-      } else {
-        const parent = map.get(item.parentId)
-        if (parent) {
-          parent.children.push(node)
-        }
-      }
-    })
-    return tree
   }
 
   return (
@@ -138,7 +116,7 @@ const SaveUserModal: React.FC = () => {
         request={async () => {
           const resp = await getSimpleDeptList()
           if (resp.code === 0) {
-            return buildDeptTreeSelectData(resp.data || [])
+            return buildTreeData(resp.data || [])
           }
           return []
         }}
