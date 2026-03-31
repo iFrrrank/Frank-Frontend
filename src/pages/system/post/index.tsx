@@ -1,6 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal } from 'antd'
-import { DeleteOutlined, DownloadOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  DownloadOutlined,
+  ExclamationCircleOutlined,
+  PlusOutlined
+} from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deletePost, export1, getPostPage } from '@/api/system/post'

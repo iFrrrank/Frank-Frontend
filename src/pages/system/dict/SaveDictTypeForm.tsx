@@ -105,7 +105,7 @@ const SaveDictTypeForm: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
       />
       <ProFormTextArea
         name="remark"

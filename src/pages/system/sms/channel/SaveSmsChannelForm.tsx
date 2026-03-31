@@ -98,7 +98,7 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
         name="code"
         label="渠道编码"
         placeholder="textConstants.common.selectText渠道编码"
-        rules={[{ required: true, message: 'textConstants.common.selectText渠道编码' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}渠道编码` }]}
         options={[
           { label: '阿里云', value: 'ALIYUN' },
           { label: '腾讯云', value: 'TENCENT' },

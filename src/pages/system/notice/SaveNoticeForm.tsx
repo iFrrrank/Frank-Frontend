@@ -96,7 +96,7 @@ const SaveNoticeForm: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
         name="type"
         label="公告类型"
         placeholder="textConstants.common.selectText公告类型"
-        rules={[{ required: true, message: 'textConstants.common.selectText公告类型' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}公告类型` }]}
         options={[
           { label: '通知', value: 1 },
           { label: '公告', value: 2 }
@@ -106,7 +106,7 @@ const SaveNoticeForm: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
         name="status"
         label="状态"
         placeholder="textConstants.common.selectText状态"
-        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }

@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import { message } from 'antd'
-import { ModalForm, ProFormDigit, ProFormSelect, ProFormText, ProFormTextArea } from '@ant-design/pro-components'
+import {
+  ModalForm,
+  ProFormDigit,
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea
+} from '@ant-design/pro-components'
 import { createPost, updatePost } from '@/api/system/post'
 import { textConstants } from '@/locales/zh-CN'
 
@@ -108,7 +114,7 @@ const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
       />
       <ProFormTextArea
         name="remark"

@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import { message } from 'antd'
-import { ModalForm, ProFormRadio, ProFormSelect, ProFormText, ProFormTextArea } from '@ant-design/pro-components'
+import {
+  ModalForm,
+  ProFormRadio,
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea
+} from '@ant-design/pro-components'
 import { createSmsTemplate, updateSmsTemplate } from '@/api/system/smsTemplate'
 import { textConstants } from '@/locales/zh-CN'
 
@@ -90,7 +96,7 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
         name="channelId"
         label="短信渠道 ID"
         placeholder="textConstants.common.selectText短信渠道 ID"
-        rules={[{ required: true, message: 'textConstants.common.selectText短信渠道 ID' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}短信渠道 ID` }]}
         options={channelOptions}
         showSearch
       />
@@ -98,7 +104,7 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
         name="type"
         label="短信类型"
         placeholder="textConstants.common.selectText短信类型"
-        rules={[{ required: true, message: 'textConstants.common.selectText短信类型' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}短信类型` }]}
         options={[
           { label: '验证码', value: 1 },
           { label: '通知', value: 2 },
@@ -131,7 +137,7 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: 'textConstants.common.selectText开启状态' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}开启状态` }]}
       />
       <ProFormText
         name="apiTemplateId"

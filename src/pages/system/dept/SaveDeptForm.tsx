@@ -135,7 +135,7 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           fieldNames: { label: 'title', value: 'value' },
           treeDefaultExpandAll: true
         }}
-        rules={[{ required: true, message: 'textConstants.common.selectText上级部门' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}上级部门` }]}
       />
       <ProFormText
         name="name"
@@ -187,7 +187,7 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
         allowClear
       />
     </ModalForm>

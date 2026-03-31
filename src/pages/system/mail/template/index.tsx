@@ -4,7 +4,10 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-de
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailTemplate, getMailTemplatePage } from '@/api/system/mailTemplate'
-import SaveMailTemplateForm, { handleCreateMailTemplate, handleEditMailTemplate } from './SaveMailTemplateForm'
+import SaveMailTemplateForm, {
+  handleCreateMailTemplate,
+  handleEditMailTemplate
+} from './SaveMailTemplateForm'
 import SendMailForm, { handleTestMailTemplate } from './SendMailForm'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
 
@@ -96,7 +99,7 @@ const MailTemplateConfig: React.FC = () => {
       width: 200,
       valueType: 'select',
       fieldProps: {
-        placeholder: 'textConstants.common.selectText邮箱账号',
+        placeholder: `${textConstants.common.inputText}邮箱账号`,
         options: accountOptions,
         showSearch: true
       },
@@ -116,7 +119,7 @@ const MailTemplateConfig: React.FC = () => {
       width: 120,
       valueType: 'select',
       fieldProps: {
-        placeholder: 'textConstants.common.selectText开启状态'
+        placeholder: `${textConstants.common.inputText}开启状态`
       },
       valueEnum: {
         0: { text: '开启', status: 'Success' },

@@ -128,7 +128,7 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
           fieldNames: { label: 'name', value: 'id' },
           treeDefaultExpandAll: true
         }}
-        rules={[{ required: true, message: 'textConstants.common.selectText上级菜单' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}上级菜单` }]}
       />
 
       <ProFormText

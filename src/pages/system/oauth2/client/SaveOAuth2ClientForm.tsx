@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import { message } from 'antd'
-import { ModalForm, ProFormDigit, ProFormSelect, ProFormText, ProFormTextArea } from '@ant-design/pro-components'
+import {
+  ModalForm,
+  ProFormDigit,
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea
+} from '@ant-design/pro-components'
 import { createOAuth2Client, getOAuth2Client, updateOAuth2Client } from '@/api/system/oAuth2Client'
 import { textConstants } from '@/locales/zh-CN'
 
@@ -139,7 +145,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
       />
       <ProFormText
         name="clientId"
@@ -170,7 +176,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
           { label: '客户端凭证', value: 'client_credentials' },
           { label: '刷新令牌', value: 'refresh_token' }
         ]}
-        rules={[{ required: true, message: 'textConstants.common.selectText授权类型' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}授权类型` }]}
       />
       <ProFormSelect
         name="scopes"

@@ -66,7 +66,7 @@ const ApiErrorLogPage: React.FC = () => {
         1: { text: '会员', status: 'Default' },
         2: { text: '管理员', status: 'Processing' }
       },
-      fieldProps: { placeholder: 'textConstants.common.selectText用户类型' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}用户类型` }
     },
     {
       title: '应用名称',
@@ -160,7 +160,7 @@ const ApiErrorLogPage: React.FC = () => {
         1: { text: '已处理', status: 'Success' },
         2: { text: '已忽略', status: 'Default' }
       },
-      fieldProps: { placeholder: 'textConstants.common.selectText处理状态' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}处理状态` }
     },
     {
       title: '操作',

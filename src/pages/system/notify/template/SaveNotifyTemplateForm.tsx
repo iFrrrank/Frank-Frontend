@@ -113,7 +113,7 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
         name="type"
         label="类型"
         placeholder="textConstants.common.selectText类型"
-        rules={[{ required: true, message: 'textConstants.common.selectText类型' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}类型` }]}
         options={[
           { label: '系统通知', value: 1 },
           { label: '业务通知', value: 2 },
@@ -123,7 +123,7 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
       <ProFormRadio.Group
         name="status"
         label="开启状态"
-        rules={[{ required: true, message: 'textConstants.common.selectText开启状态' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}开启状态` }]}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }

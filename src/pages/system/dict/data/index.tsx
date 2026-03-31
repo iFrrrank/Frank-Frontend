@@ -55,7 +55,7 @@ const DictDataList: React.FC = () => {
       fieldProps: {
         options: dictTypeOptions,
         showSearch: true,
-        placeholder: 'textConstants.common.selectText字典名称'
+        placeholder: `${textConstants.common.inputText}字典名称`
       }
     },
     {

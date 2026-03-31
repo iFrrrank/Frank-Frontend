@@ -2,7 +2,12 @@ import React, { useRef, useState } from 'react'
 import { Button, message, Modal, Switch } from 'antd'
 import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import * as AntdIcons from '@ant-design/icons'
-import { ExclamationCircleOutlined, PlusOutlined, SwapOutlined, SyncOutlined } from '@ant-design/icons'
+import {
+  ExclamationCircleOutlined,
+  PlusOutlined,
+  SwapOutlined,
+  SyncOutlined
+} from '@ant-design/icons'
 
 import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
 import { textConstants } from '@/locales/zh-CN'
@@ -133,7 +138,7 @@ const MenuManagement: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: 'textConstants.common.selectText菜单状态'
+        placeholder: `${textConstants.common.inputText}菜单状态`
       },
       render: (_, record) => (
         <Switch

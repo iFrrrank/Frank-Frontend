@@ -145,7 +145,7 @@ const FileConfigPage: React.FC = () => {
         },
         {} as Record<string, any>
       ),
-      fieldProps: { placeholder: 'textConstants.common.selectText存储器' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}存储器` }
     },
     {
       title: '备注',

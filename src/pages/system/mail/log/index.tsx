@@ -121,7 +121,7 @@ const MailLog: React.FC = () => {
       valueType: 'select',
       valueEnum: userTypeEnum,
       fieldProps: {
-        placeholder: 'textConstants.common.selectText用户类型'
+        placeholder: `${textConstants.common.inputText}用户类型`
       },
       order: 2
     },
@@ -168,7 +168,7 @@ const MailLog: React.FC = () => {
       valueType: 'select',
       valueEnum: sendStatusEnum,
       fieldProps: {
-        placeholder: 'textConstants.common.selectText发送状态'
+        placeholder: `${textConstants.common.inputText}发送状态`
       },
       order: 4 // 第二排左
     },
@@ -179,7 +179,7 @@ const MailLog: React.FC = () => {
       width: 200,
       valueType: 'select',
       fieldProps: {
-        placeholder: 'textConstants.common.selectText邮箱账号',
+        placeholder: `${textConstants.common.inputText}邮箱账号`,
         options: accountOptions,
         showSearch: true
       },

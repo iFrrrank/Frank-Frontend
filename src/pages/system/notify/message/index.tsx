@@ -41,7 +41,7 @@ const NotifyMessage: React.FC = () => {
       width: 100,
       valueType: 'select',
       fieldProps: {
-        placeholder: 'textConstants.common.selectText用户类型'
+        placeholder: `${textConstants.common.inputText}用户类型`
       },
       valueEnum: {
         1: { text: '管理员' },
@@ -123,7 +123,7 @@ const NotifyMessage: React.FC = () => {
       width: 120,
       valueType: 'select',
       fieldProps: {
-        placeholder: 'textConstants.common.selectText模版类型'
+        placeholder: `${textConstants.common.inputText}模版类型`
       },
       valueEnum: {
         1: { text: '系统消息' },

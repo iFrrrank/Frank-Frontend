@@ -4,7 +4,10 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-de
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteNotifyTemplate, getNotifyTemplatePage } from '@/api/system/notifyTemplate'
-import SaveNotifyTemplateForm, { handleCreateNotifyTemplate, handleEditNotifyTemplate } from './SaveNotifyTemplateForm'
+import SaveNotifyTemplateForm, {
+  handleCreateNotifyTemplate,
+  handleEditNotifyTemplate
+} from './SaveNotifyTemplateForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const NotifyTemplateConfig: React.FC = () => {
@@ -87,7 +90,7 @@ const NotifyTemplateConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: statusEnum,
       fieldProps: {
-        placeholder: 'textConstants.common.selectText开启状态'
+        placeholder: `${textConstants.common.inputText}开启状态`
       },
       order: 1
     },

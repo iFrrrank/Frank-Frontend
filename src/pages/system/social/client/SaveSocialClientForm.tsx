@@ -114,7 +114,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
           { label: '微信开放平台', value: 32 },
           { label: '微信小程序', value: 30 }
         ]}
-        rules={[{ required: true, message: 'textConstants.common.selectText社交平台' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}社交平台` }]}
       />
       <ProFormSelect
         name="userType"
@@ -124,7 +124,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
           { label: '会员', value: 2 },
           { label: '管理员', value: 1 }
         ]}
-        rules={[{ required: true, message: 'textConstants.common.selectText用户类型' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}用户类型` }]}
       />
       <ProFormText
         name="clientId"
@@ -146,7 +146,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
       />
     </ModalForm>
   )

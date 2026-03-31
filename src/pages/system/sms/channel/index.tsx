@@ -2,7 +2,10 @@ import React, { useRef, useState } from 'react'
 import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import { textConstants } from '@/locales/zh-CN'
 import { Button, message, Modal, Tag, Typography } from 'antd'
-import SaveSmsChannelForm, { handleCreateSmsChannel, handleEditSmsChannel } from './SaveSmsChannelForm'
+import SaveSmsChannelForm, {
+  handleCreateSmsChannel,
+  handleEditSmsChannel
+} from './SaveSmsChannelForm'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { deleteSmsChannel, getSmsChannelPage } from '@/api/system/smsChannel'
 
@@ -67,7 +70,7 @@ const SmsChannelConfig: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: 'textConstants.common.selectText启用状态'
+        placeholder: `${textConstants.common.inputText}启用状态`
       }
     },
     {

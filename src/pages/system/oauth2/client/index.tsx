@@ -12,7 +12,10 @@ import {
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteOAuth2Client, getOAuth2Client, getOAuth2ClientPage } from '@/api/system/oAuth2Client'
-import SaveOAuth2ClientForm, { handleCreateOAuth2Client, handleEditOAuth2Client } from './SaveOAuth2ClientForm'
+import SaveOAuth2ClientForm, {
+  handleCreateOAuth2Client,
+  handleEditOAuth2Client
+} from './SaveOAuth2ClientForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const App_: React.FC = () => {
@@ -80,7 +83,7 @@ const App_: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: 'textConstants.common.selectText状态'
+        placeholder: `${textConstants.common.inputText}状态`
       }
     },
     {

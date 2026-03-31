@@ -1,10 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Button, message, Modal, Tag, Typography } from 'antd'
-import { DeleteOutlined, DownloadOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  DownloadOutlined,
+  ExclamationCircleOutlined,
+  PlusOutlined
+} from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import { deleteSmsTemplate, exportSmsTemplateExcel, getSmsTemplatePage } from '@/api/system/smsTemplate'
-import SaveSmsTemplateForm, { handleCreateSmsTemplate, handleEditSmsTemplate } from './SaveSmsTemplateForm'
+import {
+  deleteSmsTemplate,
+  exportSmsTemplateExcel,
+  getSmsTemplatePage
+} from '@/api/system/smsTemplate'
+import SaveSmsTemplateForm, {
+  handleCreateSmsTemplate,
+  handleEditSmsTemplate
+} from './SaveSmsTemplateForm'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
 import { textConstants } from '@/locales/zh-CN'
 
@@ -51,7 +63,7 @@ const SmsTemplateConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: smsTypeEnum,
       fieldProps: {
-        placeholder: 'textConstants.common.selectText短信类型'
+        placeholder: `${textConstants.common.inputText}短信类型`
       }
     },
     {
@@ -65,7 +77,7 @@ const SmsTemplateConfig: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: 'textConstants.common.selectText开启状态'
+        placeholder: `${textConstants.common.inputText}开启状态`
       }
     },
     {
@@ -94,7 +106,7 @@ const SmsTemplateConfig: React.FC = () => {
       valueType: 'select',
       fieldProps: {
         options: channelOptions,
-        placeholder: 'textConstants.common.selectText短信渠道',
+        placeholder: `${textConstants.common.inputText}短信渠道`,
         showSearch: true
       }
     },

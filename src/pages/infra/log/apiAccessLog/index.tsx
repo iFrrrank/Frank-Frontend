@@ -38,7 +38,7 @@ const ApiAccessLogPage: React.FC = () => {
         1: { text: '会员', status: 'Default' },
         2: { text: '管理员', status: 'Processing' }
       },
-      fieldProps: { placeholder: 'textConstants.common.selectText用户类型' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}用户类型` }
     },
     {
       title: '应用名称',

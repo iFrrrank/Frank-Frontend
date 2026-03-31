@@ -128,7 +128,7 @@ const ConfigPage: React.FC = () => {
       align: 'center',
       valueType: 'select',
       fieldProps: {
-        placeholder: 'textConstants.common.selectText系统内置',
+        placeholder: `${textConstants.common.inputText}系统内置`,
         options: CONFIG_TYPE_OPTIONS
       },
       hideInTable: true

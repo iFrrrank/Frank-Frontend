@@ -91,7 +91,7 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
         name="accountId"
         label="邮箱账号"
         placeholder="textConstants.common.selectText邮箱账号"
-        rules={[{ required: true, message: 'textConstants.common.selectText邮箱账号' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}邮箱账号` }]}
         options={accountOptions}
         showSearch
       />
@@ -129,7 +129,7 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
       <ProFormRadio.Group
         name="status"
         label="开启状态"
-        rules={[{ required: true, message: 'textConstants.common.selectText开启状态' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}开启状态` }]}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }

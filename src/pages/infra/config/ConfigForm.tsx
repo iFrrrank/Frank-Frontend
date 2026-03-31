@@ -108,7 +108,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
       <ProFormRadio.Group
         name="visible"
         label="是否可见"
-        rules={[{ required: true, message: 'textConstants.common.selectText是否可见' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}是否可见` }]}
         options={[
           { label: '是', value: true },
           { label: '否', value: false }

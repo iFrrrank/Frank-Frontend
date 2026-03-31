@@ -74,7 +74,7 @@ const TokenPage: React.FC = () => {
         2: { text: '会员' }
       },
       fieldProps: {
-        placeholder: 'textConstants.common.selectText用户类型'
+        placeholder: `${textConstants.common.inputText}用户类型`
       },
       render: (_text, record) => {
         const item = USER_TYPE_MAP[record.userType]

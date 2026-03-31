@@ -174,7 +174,7 @@ const JobPage: React.FC = () => {
         },
         {} as Record<string, any>
       ),
-      fieldProps: { placeholder: 'textConstants.common.selectText任务状态' },
+      fieldProps: { placeholder: `${textConstants.common.inputText}任务状态` },
       render: (_, record) => (
         <Switch
           checked={record.status === 0}
