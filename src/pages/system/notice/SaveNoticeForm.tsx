@@ -9,6 +9,7 @@ import {
 } from '@ant-design/pro-components'
 import { Editor } from '@/components/Editor'
 import { createNotice, updateNotice } from '@/api/system/notice'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleCreateNotice: () => void
 export let handleEditNotice: (record: API.SystemNoticeRespVO) => void
@@ -33,7 +34,7 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemNoticeSaveReqVO>
-      title={editingNotice ? '修改' : '新增'}
+      title={editingNotice ? textConstants.action.update : textConstants.action.create}
       width={900}
       open={modalVisible}
       onOpenChange={(visible) => {
@@ -58,7 +59,7 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
             resp = await createNotice(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingNotice ? '修改成功' : '创建成功')
+            message.success(editingNotice ? '修改成功' : textConstants.msg.createSuccess)
             onSuccess()
             return true
           } else {
@@ -74,21 +75,21 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
       <ProFormText
         name="title"
         label="公告标题"
-        placeholder="请输入公告标题"
-        rules={[{ required: true, message: '请输入公告标题' }]}
+        placeholder="textConstants.common.inputText公告标题"
+        rules={[{ required: true, message: `${textConstants.common.inputText}公告标题` }]}
       />
       <ProForm.Item
         name="content"
         label="公告内容"
-        rules={[{ required: true, message: '请输入公告内容' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}公告内容` }]}
       >
         <Editor height={75} />
       </ProForm.Item>
       <ProFormSelect
         name="type"
         label="公告类型"
-        placeholder="请选择公告类型"
-        rules={[{ required: true, message: '请选择公告类型' }]}
+        placeholder="textConstants.common.selectText公告类型"
+        rules={[{ required: true, message: 'textConstants.common.selectText公告类型' }]}
         options={[
           { label: '通知', value: 1 },
           { label: '公告', value: 2 }
@@ -97,8 +98,8 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
       <ProFormSelect
         name="status"
         label="状态"
-        placeholder="请选择状态"
-        rules={[{ required: true, message: '请选择状态' }]}
+        placeholder="textConstants.common.selectText状态"
+        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
@@ -107,7 +108,7 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
       <ProFormTextArea
         name="remark"
         label="备注"
-        placeholder="请输入备注"
+        placeholder="textConstants.common.inputText备注"
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>
@@ -115,4 +116,3 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
 }
 
 export default SaveNoticeModal
-

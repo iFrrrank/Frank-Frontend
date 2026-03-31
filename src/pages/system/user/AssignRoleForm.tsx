@@ -3,6 +3,7 @@ import { message } from 'antd'
 import { ModalForm, ProFormSelect, ProFormText } from '@ant-design/pro-components'
 import { assignUserRole, listAdminRoles } from '@/api/system/permission'
 import { getSimpleRoleList } from '@/api/system/role'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleAssignRole: (record: API.SystemUserRespVO) => void
 
@@ -78,7 +79,10 @@ const AssignRoleModal: React.FC = () => {
         bodyStyle: { paddingBottom: 0 }
       }}
       submitter={{
-        searchConfig: { submitText: '确定', resetText: '取消' },
+        searchConfig: {
+          submitText: textConstants.common.ok,
+          resetText: textConstants.common.cancel
+        },
         submitButtonProps: { type: 'primary' }
       }}
       onFinish={async () => {
@@ -102,7 +106,7 @@ const AssignRoleModal: React.FC = () => {
         name="roleIds"
         label="角色"
         initialValue={assignRoleIds}
-        placeholder="请选择角色"
+        placeholder="textConstants.common.selectText角色"
         fieldProps={{
           mode: 'multiple',
           options: roleOptions,

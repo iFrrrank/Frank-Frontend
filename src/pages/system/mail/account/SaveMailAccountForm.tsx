@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import { ModalForm, ProFormDigit, ProFormRadio, ProFormText } from '@ant-design/pro-components'
 import { createMailAccount, updateMailAccount } from '@/api/system/mailAccount'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleCreateMailAccount: () => void
 export let handleEditMailAccount: (record: API.SystemMailAccountRespVO) => void
@@ -28,7 +29,7 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
 
   return (
     <ModalForm<API.SystemMailAccountSaveReqVO>
-      title={editingMailAccount ? '修改' : '新增'}
+      title={editingMailAccount ? textConstants.action.update : textConstants.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -79,35 +80,35 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
       <ProFormText
         name="mail"
         label="邮箱"
-        placeholder="请输入邮箱"
+        placeholder="textConstants.common.inputText邮箱"
         rules={[
-          { required: true, message: '请输入邮箱' },
-          { type: 'email', message: '请输入正确的邮箱格式' }
+          { required: true, message: `${textConstants.common.inputText}邮箱` },
+          { type: 'email', message: `${textConstants.common.inputText}正确的邮箱格式` }
         ]}
       />
       <ProFormText
         name="username"
         label="用户名"
-        placeholder="请输入用户名"
-        rules={[{ required: true, message: '请输入用户名' }]}
+        placeholder="textConstants.common.inputText用户名"
+        rules={[{ required: true, message: `${textConstants.common.inputText}用户名` }]}
       />
       <ProFormText.Password
         name="password"
         label="密码"
-        placeholder="请输入密码"
-        rules={[{ required: true, message: '请输入密码' }]}
+        placeholder="textConstants.common.inputText密码"
+        rules={[{ required: true, message: `${textConstants.common.inputText}密码` }]}
       />
       <ProFormText
         name="host"
         label="SMTP 服务器域名"
-        placeholder="请输入 SMTP 服务器域名"
-        rules={[{ required: true, message: '请输入 SMTP 服务器域名' }]}
+        placeholder="textConstants.common.inputText SMTP 服务器域名"
+        rules={[{ required: true, message: `${textConstants.common.inputText} SMTP 服务器域名` }]}
       />
       <ProFormDigit
         name="port"
         label="SMTP 服务器端口"
-        placeholder="请输入 SMTP 服务器端口"
-        rules={[{ required: true, message: '请输入 SMTP 服务器端口' }]}
+        placeholder="textConstants.common.inputText SMTP 服务器端口"
+        rules={[{ required: true, message: `${textConstants.common.inputText} SMTP 服务器端口` }]}
         fieldProps={{
           precision: 0
         }}
@@ -133,4 +134,3 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
 }
 
 export default SaveMailAccountModal
-

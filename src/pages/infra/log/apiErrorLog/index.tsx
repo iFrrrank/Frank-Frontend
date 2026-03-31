@@ -8,6 +8,7 @@ import {
   getApiErrorLogPage,
   updateApiErrorLogProcess
 } from '@/api/infra/apiErrorLog'
+import { textConstants } from '@/locales/zh-CN'
 
 const ApiErrorLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -18,11 +19,11 @@ const ApiErrorLogPage: React.FC = () => {
 
   const handleUpdateStatus = (id: number, processStatus: number, statusText: string) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `确认标记为${statusText}？`,
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           const resp = await updateApiErrorLogProcess({ id, processStatus })
@@ -30,11 +31,11 @@ const ApiErrorLogPage: React.FC = () => {
             message.success(`已标记为${statusText}`)
             actionRef.current?.reload()
           } else {
-            message.error('操作失败')
+            message.error(textConstants.error.operationFail)
           }
         } catch (e) {
           console.error(e)
-          message.error('操作失败')
+          message.error(textConstants.error.operationFail)
         }
       }
     })
@@ -53,7 +54,7 @@ const ApiErrorLogPage: React.FC = () => {
       dataIndex: 'userId',
       align: 'center',
       width: 100,
-      fieldProps: { placeholder: '请输入用户编号' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}用户编号` }
     },
     {
       title: '用户类型',
@@ -65,14 +66,14 @@ const ApiErrorLogPage: React.FC = () => {
         1: { text: '会员', status: 'Default' },
         2: { text: '管理员', status: 'Processing' }
       },
-      fieldProps: { placeholder: '请选择用户类型' }
+      fieldProps: { placeholder: 'textConstants.common.selectText用户类型' }
     },
     {
       title: '应用名称',
       dataIndex: 'applicationName',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: '请输入应用名称' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}应用名称` }
     },
     {
       title: '请求方法',
@@ -159,7 +160,7 @@ const ApiErrorLogPage: React.FC = () => {
         1: { text: '已处理', status: 'Success' },
         2: { text: '已忽略', status: 'Default' }
       },
-      fieldProps: { placeholder: '请选择处理状态' }
+      fieldProps: { placeholder: 'textConstants.common.selectText处理状态' }
     },
     {
       title: '操作',
@@ -181,16 +182,10 @@ const ApiErrorLogPage: React.FC = () => {
           </a>
           {record.processStatus === 0 && (
             <>
-              <a
-                key="process"
-                onClick={() => handleUpdateStatus(record.id, 1, '已处理')}
-              >
+              <a key="process" onClick={() => handleUpdateStatus(record.id, 1, '已处理')}>
                 已处理
               </a>
-              <a
-                key="ignore"
-                onClick={() => handleUpdateStatus(record.id, 2, '已忽略')}
-              >
+              <a key="ignore" onClick={() => handleUpdateStatus(record.id, 2, '已忽略')}>
                 已忽略
               </a>
             </>
@@ -202,11 +197,11 @@ const ApiErrorLogPage: React.FC = () => {
 
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有API错误日志?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -288,7 +283,7 @@ const ApiErrorLogPage: React.FC = () => {
         options={{
           reload: true,
           setting: true,
-          density: true,
+          density: true
         }}
         pagination={{
           align: 'center',
@@ -380,7 +375,15 @@ const DetailItem: React.FC<{ label: string; value: any; isLong?: boolean }> = ({
       paddingTop: '4px'
     }}
   >
-    <div style={{ fontWeight: 500, width: '120px', flexShrink: 0, textAlign: 'right', paddingRight: '16px' }}>
+    <div
+      style={{
+        fontWeight: 500,
+        width: '120px',
+        flexShrink: 0,
+        textAlign: 'right',
+        paddingRight: '16px'
+      }}
+    >
       {label}
     </div>
     <div

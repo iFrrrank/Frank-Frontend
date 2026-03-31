@@ -1,16 +1,9 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal, Space, Tag } from 'antd'
-import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
+import { message, Modal } from 'antd'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
-import {
-  deleteFileConfig,
-  deleteFileConfigList,
-  getFileConfigPage,
-  testFileConfig,
-  updateFileConfigMaster
-} from '@/api/infra/fileConfig'
-import FileConfigForm, { STORAGE_OPTIONS } from './FileConfigForm'
+import { deleteFileConfig, deleteFileConfigList, testFileConfig, updateFileConfigMaster } from '@/api/infra/fileConfig'
+import { textConstants } from '@/locales/zh-CN'
 
 const FileConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -30,18 +23,18 @@ const FileConfigPage: React.FC = () => {
 
   const handleDelete = (id: number) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认删除该数据？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteFileConfig({ id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -49,19 +42,19 @@ const FileConfigPage: React.FC = () => {
 
   const handleDeleteBatch = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否删除所选中数据？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteFileConfigList({ ids: selectedRowKeys as number[] })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reloadAndRest?.()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -69,18 +62,18 @@ const FileConfigPage: React.FC = () => {
 
   const handleMaster = (id: number) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `是否确认修改配置 ID 为 ${id} 的数据项为主配置？`,
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await updateFileConfigMaster({ id })
           message.success('操作成功')
           actionRef.current?.reload()
         } catch {
-          message.error('操作失败')
+          message.error(textConstants.error.operationFail)
         }
       }
     })
@@ -93,8 +86,8 @@ const FileConfigPage: React.FC = () => {
         Modal.confirm({
           title: '测试上传成功',
           content: '是否要访问该文件？',
-          okText: '确定',
-          cancelText: '取消',
+          okText: textConstants.common.ok,
+          cancelText: textConstants.common.cancel,
           onOk: () => {
             window.open(resp.data, '_blank')
           }
@@ -116,7 +109,7 @@ const FileConfigPage: React.FC = () => {
       title: '配置名称',
       dataIndex: 'name',
       align: 'center',
-      fieldProps: { placeholder: '请输入配置名称' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}配置名称' }
     },
     {
       title: '存储器',
@@ -145,7 +138,7 @@ const FileConfigPage: React.FC = () => {
         },
         {} as Record<string, any>
       ),
-      fieldProps: { placeholder: '请选择存储器' }
+      fieldProps: { placeholder: 'textConstants.common.selectText存储器' }
     },
     {
       title: '备注',
@@ -163,7 +156,7 @@ const FileConfigPage: React.FC = () => {
       }
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       valueType: 'dateRange',
@@ -171,7 +164,7 @@ const FileConfigPage: React.FC = () => {
       fieldProps: { placeholder: ['开始日期', '结束日期'] }
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       hideInSearch: true,

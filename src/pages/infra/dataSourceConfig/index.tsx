@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal, Space, Typography } from 'antd'
-import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
+import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import {
@@ -9,6 +9,7 @@ import {
   getDataSourceConfigList
 } from '@/api/infra/dataSourceConfig'
 import DataSourceConfigForm from './DataSourceConfigForm'
+import { textConstants } from '@/locales/zh-CN'
 
 const DataSourceConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -29,18 +30,18 @@ const DataSourceConfigPage: React.FC = () => {
 
   const handleDelete = (id: number) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认删除该数据源配置？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteDataSourceConfig({ id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -48,19 +49,19 @@ const DataSourceConfigPage: React.FC = () => {
 
   const handleDeleteBatch = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否删除所选中的数据？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteDataSourceConfigList({ ids: selectedRowKeys as number[] })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reloadAndRest?.()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -96,7 +97,7 @@ const DataSourceConfigPage: React.FC = () => {
       align: 'center'
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       render: (_, record) => <span>{record.createTime}</span>

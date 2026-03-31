@@ -8,6 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createNotifyTemplate, updateNotifyTemplate } from '@/api/system/notifyTemplate'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleCreateNotifyTemplate: () => void
 export let handleEditNotifyTemplate: (record: API.SystemNotifyTemplateRespVO) => void
@@ -34,7 +35,7 @@ const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuc
 
   return (
     <ModalForm<API.SystemNotifyTemplateSaveReqVO>
-      title={editingTemplate ? '修改' : '新增'}
+      title={editingTemplate ? textConstants.action.update : textConstants.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -63,7 +64,7 @@ const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuc
             resp = await createNotifyTemplate(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingTemplate ? '修改成功' : '创建成功')
+            message.success(editingTemplate ? '修改成功' : textConstants.msg.createSuccess)
             onSuccess()
             return true
           } else {
@@ -79,33 +80,33 @@ const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuc
       <ProFormText
         name="code"
         label="模板编码"
-        placeholder="请输入模板编码"
-        rules={[{ required: true, message: '请输入模板编码' }]}
+        placeholder="textConstants.common.inputText模板编码"
+        rules={[{ required: true, message: `${textConstants.common.inputText}模板编码` }]}
       />
       <ProFormText
         name="name"
         label="模板名称"
-        placeholder="请输入模板名称"
-        rules={[{ required: true, message: '请输入模板名称' }]}
+        placeholder="textConstants.common.inputText模板名称"
+        rules={[{ required: true, message: `${textConstants.common.inputText}模板名称` }]}
       />
       <ProFormText
         name="nickname"
         label="发件人名称"
-        placeholder="请输入发件人名称"
-        rules={[{ required: true, message: '请输入发件人名称' }]}
+        placeholder="textConstants.common.inputText发件人名称"
+        rules={[{ required: true, message: `${textConstants.common.inputText}发件人名称` }]}
       />
       <ProFormTextArea
         name="content"
         label="模板内容"
-        placeholder="请输入模板内容"
-        rules={[{ required: true, message: '请输入模板内容' }]}
+        placeholder="textConstants.common.inputText模板内容"
+        rules={[{ required: true, message: `${textConstants.common.inputText}模板内容` }]}
         fieldProps={{ rows: 3 }}
       />
       <ProFormSelect
         name="type"
         label="类型"
-        placeholder="请选择类型"
-        rules={[{ required: true, message: '请选择类型' }]}
+        placeholder="textConstants.common.selectText类型"
+        rules={[{ required: true, message: 'textConstants.common.selectText类型' }]}
         options={[
           { label: '系统通知', value: 1 },
           { label: '业务通知', value: 2 },
@@ -115,16 +116,15 @@ const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuc
       <ProFormRadio.Group
         name="status"
         label="开启状态"
-        rules={[{ required: true, message: '请选择开启状态' }]}
+        rules={[{ required: true, message: 'textConstants.common.selectText开启状态' }]}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
       />
-      <ProFormText name="remark" label="备注" placeholder="请输入备注" />
+      <ProFormText name="remark" label="备注" placeholder="textConstants.common.inputText备注" />
     </ModalForm>
   )
 }
 
 export default SaveNotifyTemplateModal
-

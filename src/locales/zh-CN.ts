@@ -44,9 +44,7 @@ export const textConstants = {
     status: '状态',
     createTime: '创建时间',
     updateTime: '更新时间',
-    copy: '复制',
-    copySuccess: '复制成功',
-    copyError: '复制失败'
+    copy: '复制'
   },
   msg: {
     reminder: '温馨提示',
@@ -69,7 +67,9 @@ export const textConstants = {
     importSuccess: '导入成功',
     importFail: '导入失败',
     resetPwdSuccess: '重置密码成功',
-    resetPwdFail: '重置密码失败'
+    resetPwdFail: '重置密码失败',
+    copySuccess: '复制成功',
+    copyFail: '复制失败'
   },
   lock: {
     lockScreen: '锁定屏幕',
@@ -79,13 +79,35 @@ export const textConstants = {
     backToLogin: '返回登录',
     entrySystem: '进入系统',
     placeholder: '请输入锁屏密码',
-    message: '锁屏密码错误'
+    alert: '锁屏密码错误'
   },
   error: {
-    noPermission: `抱歉，您无权访问此页面。`,
-    pageError: '抱歉，您访问的页面不存在。',
-    networkError: '抱歉，服务器报告错误。',
-    returnToHome: '返回首页'
+    noPermission: `抱歉，您无权访问此页面`, // 403
+    pageError: '抱歉，您访问的页面不存在', // 404
+    networkError: '抱歉，服务器报告错误', // 500
+    noDataError: '当前页无数据',
+    backHome: '返回首页',
+    operationFail: '操作失败',
+    errorTip: '错误提示',
+    errorMsg: '操作失败，系统异常',
+    timeoutMsg: '登录超时，请重新登录',
+    apiTimeoutMsg: '接口请求超时，请刷新页面重试',
+    apiRequestFailed: '请求出错，请稍候重试',
+    networkException: '网络异常', // 502
+    networkExceptionMsg: '网络异常，请检查您的网络连接是否正常',
+    errMsg401: '用户没有权限（令牌、用户名、密码错误）',
+    errMsg403: '用户得到授权，但是访问是被禁止的',
+    errMsg404: '网络请求错误，未找到该资源',
+    errMsg405: '网络请求错误，请求方法未允许',
+    errMsg408: '网络请求超时',
+    errMsg500: '服务器错误,请联系管理员',
+    errMsg501: '网络未实现',
+    errMsg502: '网络错误',
+    errMsg503: '服务不可用，服务器暂时过载或维护',
+    errMsg504: '网络超时',
+    errMsg505: 'http版本不支持该请求',
+    errMsg901: '演示模式，无法进行写操作',
+    backLogin: '返回登录'
   },
   permission: {
     hasPermission: `请设置操作权限标签值`,
@@ -102,7 +124,7 @@ export const textConstants = {
     breadcrumbIcon: '面包屑图标',
     collapseMenu: '折叠菜单',
     hamburgerIcon: '折叠图标',
-    screenfullIcon: '全屏图标',
+    screenFullIcon: '全屏图标',
     sizeIcon: '尺寸图标',
     localeIcon: '多语言图标',
     messageIcon: '消息图标',
@@ -121,7 +143,9 @@ export const textConstants = {
     uniqueOpened: '菜单手风琴',
     tagsViewIcon: '标签页图标',
     reExperienced: '请重新退出登录体验',
-    fixedMenu: '固定菜单'
+    fixedMenu: '固定菜单',
+    logoutMsg: '是否确认退出系统？',
+    menuLoading: '菜单加载中...'
   },
   size: {
     default: '默认',
@@ -129,37 +153,47 @@ export const textConstants = {
     small: '小'
   },
   login: {
+    // text
     welcome: '欢迎使用本系统',
     message: '开箱即用的中后台管理系统',
-    tenantname: '租户名称',
-    username: '用户名',
-    password: '密码',
-    code: '验证码',
+    register: '注册',
     login: '登录',
     relogin: '重新登录',
     otherLogin: '其他登录方式',
-    register: '注册',
-    checkPassword: '确认密码',
     remember: '记住我',
     hasUser: '已有账号？去登录',
-    forgetPassword: '忘记密码?',
-    tenantNamePlaceholder: '请输入租户名称',
-    usernamePlaceholder: '请输入用户名',
-    passwordPlaceholder: '请输入密码',
-    codePlaceholder: '请输入验证码',
-    mobileTitle: '手机登录',
-    mobileNumber: '手机号码',
-    mobileNumberPlaceholder: '请输入手机号码',
-    backLogin: '返回',
-    getSmsCode: '获取验证码',
+    forgetPassword: '忘记密码？',
+    resetPassword: '重置密码',
     btnMobile: '手机登录',
     btnQRCode: '二维码登录',
     qrcode: '扫描二维码登录',
-    btnRegister: '注册',
+    rememberMe: '记住我',
+    otherSignIn: '其他登录方式',
+    ssoFormTitle: '三方授权',
+    // message
+    getSmsCode: '获取验证码',
     SmsSendMsg: '验证码已发送',
-    resetPassword: '重置密码',
+    loginSuccessTitle: '登录成功',
+    loginSuccessDesc: '欢迎回来',
     resetPasswordSuccess: '重置密码成功',
-    invalidTenantName: '无效的租户名称'
+    policy: '我同意xxx隐私政策',
+    scanSign: `扫码后点击"确认"，即可完成登录`,
+    policyPlaceholder: '勾选后才能注册',
+    diffPwd: '两次输入密码不一致',
+    // formColumns
+    username: '用户名',
+    password: '密码',
+    confirmPassword: '确认密码',
+    mobile: '手机号码',
+    code: '验证码',
+    email: '邮箱',
+    smsCode: '短信验证码',
+    // placeholder
+    usernamePlaceholder: '请输入用户名',
+    passwordPlaceholder: '请输入密码',
+    confirmPasswordPlaceholder: '请输入确认密码',
+    smsPlaceholder: '请输入验证码',
+    mobilePlaceholder: '请输入手机号码'
   },
   captcha: {
     verify: '验证',
@@ -215,7 +249,7 @@ export const textConstants = {
   },
   workplace: {
     welcome: '你好',
-    happyDay: '祝你开心每一天!',
+    happyDay: '祝你开心每一天',
     toady: '今日晴',
     notice: '通知公告',
     project: '项目数',
@@ -267,10 +301,10 @@ export const textConstants = {
     year: '年',
     month: '月',
     dates: '日期',
-    daterange: '日期范围',
-    monthrange: '月份范围',
+    dateRange: '日期范围',
+    monthRange: '月份范围',
     dateTimePicker: '日期时间选择器',
-    dateTimerange: '日期时间范围',
+    dateTimeRange: '日期时间范围',
     timePicker: '时间选择器',
     timeSelect: '时间选择',
     inputPassword: '密码输入框',
@@ -340,86 +374,6 @@ export const textConstants = {
     open: '打开',
     close: '关闭'
   },
-  sys: {
-    api: {
-      operationFailed: '操作失败',
-      errorTip: '错误提示',
-      errorMsg: '操作失败,系统异常!',
-      timeoutMsg: '登录超时,请重新登录!',
-      apiTimeoutMsg: '接口请求超时,请刷新页面重试!',
-      apiRequestFailed: '请求出错，请稍候重试',
-      networkException: '网络异常',
-      networkExceptionMsg: '网络异常，请检查您的网络连接是否正常!',
-      errMsg401: '用户没有权限（令牌、用户名、密码错误）!',
-      errMsg403: '用户得到授权，但是访问是被禁止的。!',
-      errMsg404: '网络请求错误,未找到该资源!',
-      errMsg405: '网络请求错误,请求方法未允许!',
-      errMsg408: '网络请求超时!',
-      errMsg500: '服务器错误,请联系管理员!',
-      errMsg501: '网络未实现!',
-      errMsg502: '网络错误!',
-      errMsg503: '服务不可用，服务器暂时过载或维护!',
-      errMsg504: '网络超时!',
-      errMsg505: 'http版本不支持该请求!',
-      errMsg901: '演示模式，无法进行写操作!'
-    },
-    app: {
-      logoutTip: '温馨提醒',
-      logoutMsg: '是否确认退出系统?',
-      menuLoading: '菜单加载中...'
-    },
-    exception: {
-      backLogin: '返回登录',
-      backHome: '返回首页',
-      subTitle403: '抱歉，您无权访问此页面。',
-      subTitle404: '抱歉，您访问的页面不存在。',
-      subTitle500: '抱歉，服务器报告错误。',
-      noDataTitle: '当前页无数据',
-      networkErrorTitle: '网络错误',
-      networkErrorSubTitle: '抱歉，您的网络连接已断开，请检查您的网络！'
-    },
-    lock: {
-      unlock: '点击解锁',
-      alert: '锁屏密码错误',
-      backToLogin: '返回登录',
-      entry: '进入系统',
-      placeholder: '请输入锁屏密码或者用户密码'
-    },
-    login: {
-      backSignIn: '返回',
-      signInFormTitle: '登录',
-      ssoFormTitle: '三方授权',
-      mobileSignInFormTitle: '手机登录',
-      qrSignInFormTitle: '二维码登录',
-      signUpFormTitle: '注册',
-      forgetFormTitle: '重置密码',
-      signInTitle: '开箱即用的中后台管理系统',
-      signInDesc: '输入您的个人详细信息开始使用！',
-      policy: '我同意xxx隐私政策',
-      scanSign: `扫码后点击"确认"，即可完成登录`,
-      loginButton: '登录',
-      registerButton: '注册',
-      rememberMe: '记住我',
-      forgetPassword: '忘记密码?',
-      otherSignIn: '其他登录方式',
-      // notify
-      loginSuccessTitle: '登录成功',
-      loginSuccessDesc: '欢迎回来',
-      // placeholder
-      accountPlaceholder: '请输入账号',
-      passwordPlaceholder: '请输入密码',
-      smsPlaceholder: '请输入验证码',
-      mobilePlaceholder: '请输入手机号码',
-      policyPlaceholder: '勾选后才能注册',
-      diffPwd: '两次输入密码不一致',
-      userName: '账号',
-      password: '密码',
-      confirmPassword: '确认密码',
-      email: '邮箱',
-      smsCode: '短信验证码',
-      mobile: '手机号码'
-    }
-  },
   profile: {
     user: {
       title: '个人信息',
@@ -444,9 +398,9 @@ export const textConstants = {
     rules: {
       nickname: '请输入用户昵称',
       mail: '请输入邮箱地址',
-      truemail: '请输入正确的邮箱地址',
+      trueMail: '请输入正确的邮箱地址',
       phone: '请输入正确的手机号码',
-      truephone: '请输入正确的手机号码'
+      truePhone: '请输入正确的手机号码'
     },
     password: {
       oldPassword: '旧密码',
@@ -462,6 +416,7 @@ export const textConstants = {
   cropper: {
     selectImage: '选择图片',
     uploadSuccess: '上传成功',
+    uploadFail: '上传失败',
     modalTitle: '头像上传',
     okText: '确认并上传',
     btn_reset: '重置',

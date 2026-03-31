@@ -16,6 +16,7 @@ import SaveOAuth2ClientModal, {
   handleCreateOAuth2Client,
   handleEditOAuth2Client
 } from './SaveOAuth2ClientForm'
+import { textConstants } from '@/locales/zh-CN'
 
 const App_: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -36,7 +37,7 @@ const App_: React.FC = () => {
       width: 80,
       valueType: 'text',
       fieldProps: {
-        placeholder: '请输入 ID'
+        placeholder: `${textConstants.common.inputText} ID`
       }
     },
     {
@@ -46,7 +47,7 @@ const App_: React.FC = () => {
       width: 150,
       valueType: 'text',
       fieldProps: {
-        placeholder: '请输入应用名称'
+        placeholder: `${textConstants.common.inputText}应用名称`
       }
     },
     {
@@ -82,7 +83,7 @@ const App_: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: '请选择状态'
+        placeholder: 'textConstants.common.selectText状态'
       }
     },
     {
@@ -104,7 +105,7 @@ const App_: React.FC = () => {
       render: (text) => (text ? `${text}秒` : '-')
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',
@@ -151,16 +152,16 @@ const App_: React.FC = () => {
   // ===== 删除单个客户端 =====
   const handleDelete = (record: API.SystemOAuth2ClientRespVO) => {
     Modal.confirm({
-      title: '温馨提示',
+      title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
       content: `确定要删除应用"${record.name}"吗？`,
       onOk: async () => {
         try {
           await deleteOAuth2Client({ id: record.id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -169,17 +170,17 @@ const App_: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: '温馨提示',
+      title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
       content: `确定要删除选中的 ${selectedRowKeys.length} 个应用吗？`,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteOAuth2Client({ id: Number(id) })))
-          message.success('批量删除成功')
+          message.success(textConstants.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error('批量删除失败')
+          message.error(textConstants.msg.batchDelFail)
         }
       }
     })
@@ -199,10 +200,10 @@ const App_: React.FC = () => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        message.success('复制成功')
+        message.success(textConstants.msg.copySuccess)
       })
       .catch(() => {
-        message.error('复制失败')
+        message.error(textConstants.msg.copyFail)
       })
   }
 

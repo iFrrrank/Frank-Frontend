@@ -7,9 +7,10 @@ import {
   ProFormText,
   ProFormTreeSelect
 } from '@ant-design/pro-components'
-import { createDept, updateDept, getSimpleDeptList } from '@/api/system/dept'
+import { createDept, getSimpleDeptList, updateDept } from '@/api/system/dept'
 import { getSimpleUserList } from '@/api/system/user'
 import { handleTreeData } from '@/utils/tree'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleCreateDept: (parentId?: number) => void
 export let handleEditDept: (record: any) => void
@@ -32,7 +33,7 @@ const buildDeptTreeSelectData = (data: any[]): any[] => {
   })
 }
 
-const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
+const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingDept, setEditingDept] = useState<any>(null)
 
@@ -98,7 +99,7 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           }
 
           if (resp.code === 0) {
-            message.success(editingDept?.id ? '修改成功' : '创建成功')
+            message.success(editingDept?.id ? '修改成功' : textConstants.msg.createSuccess)
             onSuccess()
             return true
           } else {
@@ -115,7 +116,7 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         name="parentId"
         label="上级部门"
         colProps={{ span: 24 }}
-        placeholder="请选择上级部门"
+        placeholder="textConstants.common.selectText上级部门"
         request={async () => {
           // 拉取精简的树形部门数据作为上级选择
           const resp = await getSimpleDeptList()
@@ -127,28 +128,28 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           fieldNames: { label: 'title', value: 'value' },
           treeDefaultExpandAll: true
         }}
-        rules={[{ required: true, message: '请选择上级部门' }]}
+        rules={[{ required: true, message: 'textConstants.common.selectText上级部门' }]}
       />
       <ProFormText
         name="name"
         label="部门名称"
         colProps={{ span: 24 }}
-        placeholder="请输入部门名称"
-        rules={[{ required: true, message: '请输入部门名称' }]}
+        placeholder={`${textConstants.common.inputText}部门名称`}
+        rules={[{ required: true, message: `${textConstants.common.inputText}部门名称` }]}
       />
       <ProFormDigit
         name="sort"
         label="显示排序"
         colProps={{ span: 24 }}
-        placeholder="请输入显示排序"
-        rules={[{ required: true, message: '请输入显示排序' }]}
+        placeholder={`${textConstants.common.inputText}显示排序`}
+        rules={[{ required: true, message: `${textConstants.common.inputText}显示排序` }]}
         fieldProps={{ min: 0 }}
       />
       <ProFormSelect
         name="leaderUserId"
         label="负责人"
         colProps={{ span: 24 }}
-        placeholder="请选择负责人"
+        placeholder={`${textConstants.common.selectText}负责人`}
         showSearch
         request={async () => {
           const list = await fetchUserList()
@@ -162,14 +163,14 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         name="phone"
         label="联系电话"
         colProps={{ span: 24 }}
-        placeholder="请输入联系电话"
+        placeholder={`${textConstants.common.inputText}联系电话`}
       />
       <ProFormText
         name="email"
         label="邮箱"
         colProps={{ span: 24 }}
-        placeholder="请输入邮箱"
-        rules={[{ type: 'email', message: '请输入正确的邮箱格式' }]}
+        placeholder="textConstants.common.inputText邮箱"
+        rules={[{ type: 'email', message: `${textConstants.common.inputText}正确的邮箱格式` }]}
       />
       <ProFormSelect
         name="status"
@@ -179,12 +180,11 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
         allowClear
       />
     </ModalForm>
   )
 }
 
-export default SaveDeptModal
-
+export default SaveDeptForm

@@ -1,20 +1,16 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal, Space, Tag } from 'antd'
 import {
-  PlusOutlined,
   DeleteOutlined,
+  DownloadOutlined,
   ExclamationCircleOutlined,
-  DownloadOutlined
+  PlusOutlined
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import {
-  deleteConfig,
-  deleteConfigList,
-  getConfigPage,
-  exportConfig
-} from '@/api/infra/config'
+import { deleteConfig, deleteConfigList, exportConfig, getConfigPage } from '@/api/infra/config'
 import ConfigForm from './ConfigForm'
+import { textConstants } from '@/locales/zh-CN'
 
 /** 系统内置选项 */
 const CONFIG_TYPE_OPTIONS = [
@@ -42,18 +38,18 @@ const ConfigPage: React.FC = () => {
 
   const handleDelete = (id: number) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认删除该参数配置？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteConfig({ id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -61,19 +57,19 @@ const ConfigPage: React.FC = () => {
 
   const handleDeleteBatch = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否删除所选中的数据？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteConfigList({ ids: selectedRowKeys as number[] })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reloadAndRest?.()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -96,7 +92,9 @@ const ConfigPage: React.FC = () => {
         pageSize: '100'
       } as any)
       // 处理文件下载
-      const blob = new Blob([resp], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+      const blob = new Blob([resp], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      })
       const url = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
@@ -114,14 +112,14 @@ const ConfigPage: React.FC = () => {
       title: '参数名称',
       dataIndex: 'name',
       align: 'center',
-      fieldProps: { placeholder: '请输入参数名称' },
+      fieldProps: { placeholder: `${textConstants.common.inputText}参数名称` },
       hideInTable: true
     },
     {
       title: '参数键名',
       dataIndex: 'key',
       align: 'center',
-      fieldProps: { placeholder: '请输入参数键名' },
+      fieldProps: { placeholder: `${textConstants.common.inputText}参数键名` },
       hideInTable: true
     },
     {
@@ -129,11 +127,14 @@ const ConfigPage: React.FC = () => {
       dataIndex: 'type',
       align: 'center',
       valueType: 'select',
-      fieldProps: { placeholder: '请选择系统内置', options: CONFIG_TYPE_OPTIONS },
+      fieldProps: {
+        placeholder: 'textConstants.common.selectText系统内置',
+        options: CONFIG_TYPE_OPTIONS
+      },
       hideInTable: true
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       valueType: 'dateRange',
@@ -194,7 +195,7 @@ const ConfigPage: React.FC = () => {
       ellipsis: true
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       hideInSearch: true,

@@ -11,6 +11,7 @@ import { ProTable } from '@ant-design/pro-components'
 import { history } from '@umijs/max'
 import { deleteDictType, export2, pageDictTypes } from '@/api/system/dictType'
 import SaveDictTypeModal, { handleCreateDictType, handleEditDictType } from './SaveDictTypeForm'
+import { textConstants } from '@/locales/zh-CN'
 
 const DictTypeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -33,7 +34,7 @@ const DictTypeConfig: React.FC = () => {
       align: 'center',
       width: 160,
       fieldProps: {
-        placeholder: '请输入字典名称'
+        placeholder: `${textConstants.common.inputText}字典名称`
       }
     },
     {
@@ -42,7 +43,7 @@ const DictTypeConfig: React.FC = () => {
       align: 'center',
       width: 200,
       fieldProps: {
-        placeholder: '请输入字典类型'
+        placeholder: `${textConstants.common.inputText}字典类型`
       }
     },
     {
@@ -62,7 +63,7 @@ const DictTypeConfig: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: '请选择字典状态'
+        placeholder: `${textConstants.common.selectText}字典状态`
       }
     },
     {
@@ -74,7 +75,7 @@ const DictTypeConfig: React.FC = () => {
       ellipsis: true
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
@@ -109,18 +110,18 @@ const DictTypeConfig: React.FC = () => {
   // ===== 删除字典类型 =====
   const handleDelete = (record: API.SystemDictTypeRespVO) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteDictType({ id: record.id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -129,19 +130,19 @@ const DictTypeConfig: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteDictType({ id: Number(id) })))
-          message.success('批量删除成功')
+          message.success(textConstants.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error('批量删除失败')
+          message.error(textConstants.msg.batchDelFail)
         }
       }
     })
@@ -150,11 +151,11 @@ const DictTypeConfig: React.FC = () => {
   // ===== 导出字典类型 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有字典类型数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}

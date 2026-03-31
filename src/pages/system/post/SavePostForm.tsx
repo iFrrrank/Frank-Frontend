@@ -8,6 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createPost, updatePost } from '@/api/system/post'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleCreatePost: () => void
 export let handleEditPost: (record: API.SystemPostRespVO) => void
@@ -32,7 +33,7 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemPostSaveReqVO>
-      title={editingPost ? '修改' : '新增'}
+      title={editingPost ? textConstants.action.update : textConstants.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -65,7 +66,7 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
             resp = await createPost(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingPost ? '修改成功' : '创建成功')
+            message.success(editingPost ? '修改成功' : textConstants.msg.createSuccess)
             onSuccess()
             return true
           } else {
@@ -82,39 +83,39 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
         name="name"
         label="岗位标题"
         colProps={{ span: 24 }}
-        placeholder="请输入岗位名称"
-        rules={[{ required: true, message: '请输入岗位标题' }]}
+        placeholder="textConstants.common.inputText岗位名称"
+        rules={[{ required: true, message: `${textConstants.common.inputText}岗位标题` }]}
       />
       <ProFormText
         name="code"
         label="岗位编码"
         colProps={{ span: 24 }}
-        placeholder="请输入岗位编码"
-        rules={[{ required: true, message: '请输入岗位编码' }]}
+        placeholder="textConstants.common.inputText岗位编码"
+        rules={[{ required: true, message: `${textConstants.common.inputText}岗位编码` }]}
       />
       <ProFormDigit
         name="sort"
         label="岗位顺序"
         colProps={{ span: 24 }}
-        placeholder="请输入岗位顺序"
+        placeholder="textConstants.common.inputText岗位顺序"
         fieldProps={{ min: 0 }}
       />
       <ProFormSelect
         name="status"
         label="状态"
         colProps={{ span: 24 }}
-        placeholder="请选择状态"
+        placeholder="textConstants.common.selectText状态"
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
       />
       <ProFormTextArea
         name="remark"
         label="备注"
         colProps={{ span: 24 }}
-        placeholder="请输入备注内容"
+        placeholder="textConstants.common.inputText备注内容"
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>
@@ -122,4 +123,3 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
 }
 
 export default SavePostModal
-

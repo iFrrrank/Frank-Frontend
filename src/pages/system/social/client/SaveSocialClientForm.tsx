@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { message } from 'antd'
 import { ModalForm, ProFormSelect, ProFormText } from '@ant-design/pro-components'
-import { createSocialClient, updateSocialClient, getSocialClient } from '@/api/system/socialClient'
+import { createSocialClient, getSocialClient, updateSocialClient } from '@/api/system/socialClient'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleCreateSocialClient: () => void
 export let handleEditSocialClient: (record: API.SystemSocialClientRespVO) => void
@@ -10,7 +11,7 @@ interface SaveSocialClientModalProps {
   onSuccess: () => void
 }
 
-const SaveSocialClientModal: React.FC<SaveSocialClientModalProps> = ({ onSuccess }) => {
+const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingClient, setEditingClient] = useState<API.SystemSocialClientRespVO | null>(null)
 
@@ -33,7 +34,7 @@ const SaveSocialClientModal: React.FC<SaveSocialClientModalProps> = ({ onSuccess
 
   return (
     <ModalForm<API.SystemSocialClientSaveReqVO>
-      title={editingClient ? '修改' : '新增'}
+      title={editingClient ? textConstants.action.update : textConstants.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -75,7 +76,7 @@ const SaveSocialClientModal: React.FC<SaveSocialClientModalProps> = ({ onSuccess
             resp = await createSocialClient(values)
           }
           if (resp.code === 0) {
-            message.success(editingClient ? '修改成功' : '创建成功')
+            message.success(editingClient ? '修改成功' : textConstants.msg.createSuccess)
             onSuccess()
             return true
           } else {
@@ -91,13 +92,13 @@ const SaveSocialClientModal: React.FC<SaveSocialClientModalProps> = ({ onSuccess
       <ProFormText
         name="name"
         label="应用名"
-        placeholder="请输入应用名"
-        rules={[{ required: true, message: '请输入应用名' }]}
+        placeholder="textConstants.common.inputText应用名"
+        rules={[{ required: true, message: `${textConstants.common.inputText}应用名` }]}
       />
       <ProFormSelect
         name="socialType"
         label="社交平台"
-        placeholder="请选择社交平台"
+        placeholder="textConstants.common.selectText社交平台"
         options={[
           { label: 'Gitee', value: 5 },
           { label: '钉钉', value: 10 },
@@ -106,43 +107,42 @@ const SaveSocialClientModal: React.FC<SaveSocialClientModalProps> = ({ onSuccess
           { label: '微信开放平台', value: 32 },
           { label: '微信小程序', value: 30 }
         ]}
-        rules={[{ required: true, message: '请选择社交平台' }]}
+        rules={[{ required: true, message: 'textConstants.common.selectText社交平台' }]}
       />
       <ProFormSelect
         name="userType"
         label="用户类型"
-        placeholder="请选择用户类型"
+        placeholder="textConstants.common.selectText用户类型"
         options={[
           { label: '会员', value: 2 },
           { label: '管理员', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择用户类型' }]}
+        rules={[{ required: true, message: 'textConstants.common.selectText用户类型' }]}
       />
       <ProFormText
         name="clientId"
         label="客户端 ID"
-        placeholder="请输入客户端 ID,对应各平台的appKey"
-        rules={[{ required: true, message: '请输入客户端 ID' }]}
+        placeholder="textConstants.common.inputText客户端 ID,对应各平台的appKey"
+        rules={[{ required: true, message: `${textConstants.common.inputText}客户端 ID` }]}
       />
       <ProFormText
         name="clientSecret"
         label="客户端密钥"
-        placeholder="请输入客户端密钥,对应各平台的appSecret"
-        rules={[{ required: true, message: '请输入客户端密钥' }]}
+        placeholder="textConstants.common.inputText客户端密钥,对应各平台的appSecret"
+        rules={[{ required: true, message: `${textConstants.common.inputText}客户端密钥` }]}
       />
       <ProFormSelect
         name="status"
         label="状态"
-        placeholder="请选择状态"
+        placeholder="textConstants.common.selectText状态"
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
       />
     </ModalForm>
   )
 }
 
-export default SaveSocialClientModal
-
+export default SaveSocialClientForm

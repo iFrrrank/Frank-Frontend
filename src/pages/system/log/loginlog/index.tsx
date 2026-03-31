@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
-import { Button, Drawer, Modal, Space, Typography, message } from 'antd'
+import { Button, Drawer, message, Modal, Space, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import { getLoginLogPage, exportLoginLog } from '@/api/system/loginLog'
+import { exportLoginLog, getLoginLogPage } from '@/api/system/loginLog'
+import { textConstants } from '@/locales/zh-CN'
 
 const LoginLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -48,14 +49,14 @@ const LoginLogPage: React.FC = () => {
       dataIndex: 'username',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: '请输入用户名' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}用户名` }
     },
     {
       title: '登录地址',
       dataIndex: 'userIp',
       align: 'center',
       width: 160,
-      fieldProps: { placeholder: '请输入登录地址' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}登录地址` }
     },
     {
       title: '浏览器',
@@ -133,11 +134,11 @@ const LoginLogPage: React.FC = () => {
 
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有登录日志数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}

@@ -1,18 +1,11 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal, Switch } from 'antd'
+import { message, Modal } from 'antd'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
 import * as AntdIcons from '@ant-design/icons'
-import {
-  ExclamationCircleOutlined,
-  PlusOutlined,
-  SwapOutlined,
-  SyncOutlined
-} from '@ant-design/icons'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
 
-import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
-import SaveMenuModal, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
-import { handleTreeData } from '@/utils/tree'
+import { deleteMenu, updateMenu } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
+import { textConstants } from '@/locales/zh-CN'
 
 // 动态渲染图标
 const IconFont = ({ type }: { type?: string }) => {
@@ -53,18 +46,18 @@ const MenuManagement: React.FC = () => {
   // ===== 基础操作 =====
   const handleDelete = (record: any) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteMenu({ id: record.id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -88,7 +81,7 @@ const MenuManagement: React.FC = () => {
       dataIndex: 'name',
       width: 250,
       fieldProps: {
-        placeholder: '请输入菜单名称'
+        placeholder: `${textConstants.common.inputText}菜单名称'
       }
     },
     {
@@ -138,7 +131,7 @@ const MenuManagement: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: '请选择菜单状态'
+        placeholder: 'textConstants.common.selectText菜单状态'
       },
       render: (_, record) => (
         <Switch

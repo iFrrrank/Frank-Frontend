@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
-import { Col, message, Row, Image } from 'antd'
+import { Col, Image, message, Row } from 'antd'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { getSocialUserPage } from '@/api/system/socialUser'
+import { textConstants } from '@/locales/zh-CN'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {
@@ -34,7 +35,7 @@ const SocialUserPage: React.FC = () => {
         32: { text: '微信开放平台' }
       },
       fieldProps: {
-        placeholder: '请选择社交平台'
+        placeholder: 'textConstants.common.selectText社交平台'
       },
       render: (_text, record) => SOCIAL_TYPE_MAP[record.type] || record.type
     },
@@ -46,7 +47,7 @@ const SocialUserPage: React.FC = () => {
       valueType: 'text',
       order: 2,
       fieldProps: {
-        placeholder: '请输入社交 openid'
+        placeholder: `${textConstants.common.inputText}社交 openid`
       }
     },
     {
@@ -57,7 +58,7 @@ const SocialUserPage: React.FC = () => {
       valueType: 'text',
       order: 3,
       fieldProps: {
-        placeholder: '请输入用户昵称'
+        placeholder: `${textConstants.common.inputText}用户昵称`
       }
     },
     {
@@ -74,7 +75,7 @@ const SocialUserPage: React.FC = () => {
         )
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTimeRange',
       align: 'center',

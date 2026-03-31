@@ -1,10 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, message, Modal, Tag, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { exportSmsLogExcel, getSmsLogPage } from '@/api/system/smsLog'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
+import { textConstants } from '@/locales/zh-CN'
 
 const SmsLogConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -55,7 +56,7 @@ const SmsLogConfig: React.FC = () => {
       width: 80
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       hideInSearch: true,
@@ -68,12 +69,12 @@ const SmsLogConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: '请输入手机号码'
+        placeholder: `${textConstants.common.inputText}手机号码`
       }
     },
     {
       title: '短信内容',
-      dataIndex: 'templateContent', // API 中可能是 templateContent
+      dataIndex: 'templateContent',
       align: 'center',
       hideInSearch: true,
       width: 300,
@@ -97,7 +98,7 @@ const SmsLogConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: sendStatusEnum,
       fieldProps: {
-        placeholder: '请选择发送状态'
+        placeholder: `${textConstants.common.selectText}发送状态`
       }
     },
     {
@@ -108,7 +109,7 @@ const SmsLogConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: receiveStatusEnum,
       fieldProps: {
-        placeholder: '请选择接收状态'
+        placeholder: `${textConstants.common.selectText}接收状态`
       }
     },
     {
@@ -119,7 +120,7 @@ const SmsLogConfig: React.FC = () => {
       valueType: 'select',
       fieldProps: {
         options: channelOptions,
-        placeholder: '请选择短信渠道',
+        placeholder: `${textConstants.common.selectText}短信渠道`,
         showSearch: true
       },
       render: (_, record) => {
@@ -133,7 +134,7 @@ const SmsLogConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: '请输入模板 ID'
+        placeholder: `${textConstants.common.inputText}模板 ID`
       }
     },
     {
@@ -172,11 +173,11 @@ const SmsLogConfig: React.FC = () => {
   // ===== 导出短信日志 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有短信日志数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}

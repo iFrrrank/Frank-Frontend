@@ -11,6 +11,7 @@ import { ProTable } from '@ant-design/pro-components'
 import { deletePost, export1, getPostPage } from '@/api/system/post'
 
 import SavePostModal, { handleCreatePost, handleEditPost } from './SavePostForm'
+import { textConstants } from '@/locales/zh-CN'
 
 const PostManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -33,7 +34,7 @@ const PostManagement: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: '请输入岗位名称'
+        placeholder: `${textConstants.common.inputText}岗位名称`
       }
     },
     {
@@ -42,7 +43,7 @@ const PostManagement: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: '请输入岗位编码'
+        placeholder: `${textConstants.common.inputText}岗位编码`
       }
     },
     {
@@ -77,11 +78,11 @@ const PostManagement: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: '请选择状态'
+        placeholder: `textConstants.common.selectText状态`
       }
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
@@ -113,18 +114,18 @@ const PostManagement: React.FC = () => {
   // ===== 删除岗位 =====
   const handleDelete = (record: API.SystemPostRespVO) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否删除所选中数据？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deletePost({ id: record.id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -133,20 +134,20 @@ const PostManagement: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除所选中数据?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           // 假设后端支持批量或者前端循环请求
           await Promise.all(selectedRowKeys.map((id) => deletePost({ id: Number(id) })))
-          message.success('批量删除成功')
+          message.success(textConstants.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error('批量删除失败')
+          message.error(textConstants.msg.batchDelFail)
         }
       }
     })
@@ -155,11 +156,11 @@ const PostManagement: React.FC = () => {
   // ===== 导出岗位 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有岗位数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}

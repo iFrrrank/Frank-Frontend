@@ -1,9 +1,14 @@
 import React, { useRef, useState } from 'react'
-import { Button, Drawer, Modal, Space, Typography, message } from 'antd'
+import {
+  type ActionType,
+  type ProColumns,
+  type ProFormInstance,
+  ProTable
+} from '@ant-design/pro-components'
+import { textConstants } from '@/locales/zh-CN'
+import { Button, Drawer, message, Modal, Space, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
-import { pageOperateLog, exportOperateLog } from '@/api/system/operateLog'
+import { exportOperateLog, pageOperateLog } from '@/api/system/operateLog'
 
 const OperateLogConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -27,21 +32,21 @@ const OperateLogConfig: React.FC = () => {
       dataIndex: 'userName',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: '请输入操作人' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}操作人` }
     },
     {
       title: '操作模块',
       dataIndex: 'type',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: '请输入操作模块' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}操作模块` }
     },
     {
       title: '操作名',
       dataIndex: 'subType',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: '请输入操作名' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}操作名` }
     },
     {
       title: '操作内容',
@@ -82,14 +87,14 @@ const OperateLogConfig: React.FC = () => {
       dataIndex: 'bizId',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: '请输入业务 ID' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}业务 ID` }
     },
     {
       title: '操作 IP',
       dataIndex: 'userIp',
       align: 'center',
       width: 140,
-      fieldProps: { placeholder: '请输入操作 IP' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}操作 IP` }
     },
     {
       title: '操作',
@@ -117,11 +122,11 @@ const OperateLogConfig: React.FC = () => {
   // ===== 导出操作日志 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有操作日志数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}

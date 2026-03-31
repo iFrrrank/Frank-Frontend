@@ -1,11 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Button, message, Space } from 'antd'
-import { DownloadOutlined } from '@ant-design/icons'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
-import { useLocation } from '@umijs/max'
-import { getJobLogPage, exportJobLog, JobLogVO } from '@/api/infra/jobLog'
-import JobLogDetail from './JobLogDetail'
+import React, {useEffect, useRef, useState} from 'react'
+import {message} from 'antd'
+import type {ActionType, ProColumns, ProFormInstance} from '@ant-design/pro-components'
+import {useLocation} from '@umijs/max'
+import {exportJobLog, JobLogVO} from '@/api/infra/jobLog'
 
 export const JOB_LOG_STATUS_OPTIONS = [
   { label: '成功', value: 0 },
@@ -43,7 +40,9 @@ const JobLogPage: React.FC = () => {
         pageNo: '1',
         pageSize: '100'
       })
-      const blob = new Blob([resp], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+      const blob = new Blob([resp], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      })
       const url = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
@@ -73,7 +72,7 @@ const JobLogPage: React.FC = () => {
       title: '处理器的名字',
       dataIndex: 'handlerName',
       align: 'center',
-      fieldProps: { placeholder: '请输入处理器的名字' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}处理器的名字' }
     },
     {
       title: '处理器的参数',
@@ -119,11 +118,14 @@ const JobLogPage: React.FC = () => {
       dataIndex: 'status',
       align: 'center',
       valueType: 'select',
-      valueEnum: JOB_LOG_STATUS_OPTIONS.reduce((acc, cur) => {
-        acc[cur.value] = { text: cur.label, status: cur.value === 0 ? 'Success' : 'Error' }
-        return acc
-      }, {} as Record<string, any>),
-      fieldProps: { placeholder: '请选择任务状态' }
+      valueEnum: JOB_LOG_STATUS_OPTIONS.reduce(
+        (acc, cur) => {
+          acc[cur.value] = { text: cur.label, status: cur.value === 0 ? 'Success' : 'Error' }
+          return acc
+        },
+        {} as Record<string, any>
+      ),
+      fieldProps: { placeholder: 'textConstants.common.selectText任务状态' }
     },
     {
       title: '操作',
@@ -132,7 +134,9 @@ const JobLogPage: React.FC = () => {
       width: 100,
       render: (_, record) => (
         <Space size={12}>
-          <a onClick={() => handleDetail(record.id)} style={{ color: '#1677ff' }}>详情</a>
+          <a onClick={() => handleDetail(record.id)} style={{ color: '#1677ff' }}>
+            详情
+          </a>
         </Space>
       )
     }
@@ -158,7 +162,9 @@ const JobLogPage: React.FC = () => {
             const resp = await getJobLogPage({
               pageNo: current || 1,
               pageSize: pageSize || 10,
-              ...(beginTimeStr && endTimeStr ? { beginTime: beginTimeStr, endTime: endTimeStr } : {}),
+              ...(beginTimeStr && endTimeStr
+                ? { beginTime: beginTimeStr, endTime: endTimeStr }
+                : {}),
               ...rest
             })
             return {
@@ -189,11 +195,7 @@ const JobLogPage: React.FC = () => {
       />
 
       {detailVisible && (
-        <JobLogDetail
-          visible={detailVisible}
-          setVisible={setDetailVisible}
-          id={detailId}
-        />
+        <JobLogDetail visible={detailVisible} setVisible={setDetailVisible} id={detailId} />
       )}
     </>
   )

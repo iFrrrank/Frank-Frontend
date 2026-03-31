@@ -1,11 +1,12 @@
 import React from 'react'
-import { message, Button } from 'antd'
+import { Button, message } from 'antd'
+import { ModalForm, ProFormInstance, ProFormText } from '@ant-design/pro-components'
 import {
-  ModalForm,
-  ProFormText,
-  ProFormInstance
-} from '@ant-design/pro-components'
-import { getDataSourceConfig, createDataSourceConfig, updateDataSourceConfig } from '@/api/infra/dataSourceConfig'
+  createDataSourceConfig,
+  getDataSourceConfig,
+  updateDataSourceConfig
+} from '@/api/infra/dataSourceConfig'
+import { textConstants } from '@/locales/zh-CN'
 
 interface DataSourceConfigFormProps {
   visible: boolean
@@ -14,13 +15,18 @@ interface DataSourceConfigFormProps {
   id?: number
 }
 
-const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({ visible, setVisible, onSuccess, id }) => {
+const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({
+  visible,
+  setVisible,
+  onSuccess,
+  id
+}) => {
   const isUpdate = id !== undefined
   const formRef = React.useRef<ProFormInstance>(undefined)
 
   return (
     <ModalForm
-      title={isUpdate ? '编辑' : '新增'}
+      title={isUpdate ? textConstants.action.update : textConstants.action.create}
       open={visible}
       onOpenChange={setVisible}
       formRef={formRef}
@@ -65,15 +71,15 @@ const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({ visible, se
         try {
           if (isUpdate) {
             await updateDataSourceConfig({ id, ...values } as any)
-            message.success('更新成功')
+            message.success(textConstants.msg.updateSuccess)
           } else {
             await createDataSourceConfig(values as any)
-            message.success('创建成功')
+            message.success(textConstants.msg.createSuccess)
           }
           onSuccess()
           return true
         } catch (e) {
-          message.error('操作失败')
+          message.error(textConstants.error.operationFail)
           return false
         }
       }}
@@ -81,26 +87,26 @@ const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({ visible, se
       <ProFormText
         name="name"
         label="数据源名称"
-        rules={[{ required: true, message: '请输入参数名称' }]}
-        placeholder="请输入参数名称"
+        rules={[{ required: true, message: `${textConstants.common.inputText}参数名称` }]}
+        placeholder="textConstants.common.inputText参数名称"
       />
       <ProFormText
         name="url"
         label="数据源连接"
-        rules={[{ required: true, message: '请输入数据源连接' }]}
-        placeholder="请输入数据源连接"
+        rules={[{ required: true, message: `${textConstants.common.inputText}数据源连接` }]}
+        placeholder="textConstants.common.inputText数据源连接"
       />
       <ProFormText
         name="username"
         label="用户名"
-        rules={[{ required: true, message: '请输入用户名' }]}
-        placeholder="请输入用户名"
+        rules={[{ required: true, message: `${textConstants.common.inputText}用户名` }]}
+        placeholder="textConstants.common.inputText用户名"
       />
       <ProFormText.Password
         name="password"
         label="密码"
-        rules={[{ required: true, message: '请输入密码' }]}
-        placeholder="请输入密码"
+        rules={[{ required: true, message: `${textConstants.common.inputText}密码` }]}
+        placeholder="textConstants.common.inputText密码"
       />
     </ModalForm>
   )

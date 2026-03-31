@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Badge, Button, Descriptions, Modal, Space, Tag, Typography } from 'antd'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
-import { getMailLogPage, getMailLog } from '@/api/system/mailLog'
+import { App, Badge, Button, Descriptions, Modal, Tag, Typography } from 'antd'
+import {
+  type ActionType,
+  type ProColumns,
+  type ProFormInstance,
+  ProTable
+} from '@ant-design/pro-components'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
-import { App } from 'antd'
+import { textConstants } from '@/locales/zh-CN'
+import { getMailLog, getMailLogPage } from '@/api/system/mailLog'
 
 const MailLog: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -106,7 +110,7 @@ const MailLog: React.FC = () => {
       dataIndex: 'userId',
       hideInTable: true,
       fieldProps: {
-        placeholder: '请输入用户编号'
+        placeholder: `${textConstants.common.inputText}用户编号`
       },
       order: 3
     },
@@ -117,7 +121,7 @@ const MailLog: React.FC = () => {
       valueType: 'select',
       valueEnum: userTypeEnum,
       fieldProps: {
-        placeholder: '请选择用户类型'
+        placeholder: 'textConstants.common.selectText用户类型'
       },
       order: 2
     },
@@ -127,7 +131,7 @@ const MailLog: React.FC = () => {
       align: 'center',
       width: 180,
       fieldProps: {
-        placeholder: '请输入接收邮箱'
+        placeholder: `${textConstants.common.inputText}接收邮箱`
       },
       order: 7 // 对应图中顺序 第一排左
     },
@@ -152,7 +156,7 @@ const MailLog: React.FC = () => {
       dataIndex: 'templateCode',
       hideInTable: true,
       fieldProps: {
-        placeholder: '请输入模板编号'
+        placeholder: `${textConstants.common.inputText}模板编号`
       },
       order: 5 // 第一排右
     },
@@ -164,7 +168,7 @@ const MailLog: React.FC = () => {
       valueType: 'select',
       valueEnum: sendStatusEnum,
       fieldProps: {
-        placeholder: '请选择发送状态'
+        placeholder: 'textConstants.common.selectText发送状态'
       },
       order: 4 // 第二排左
     },
@@ -175,7 +179,7 @@ const MailLog: React.FC = () => {
       width: 200,
       valueType: 'select',
       fieldProps: {
-        placeholder: '请选择邮箱账号',
+        placeholder: 'textConstants.common.selectText邮箱账号',
         options: accountOptions,
         showSearch: true
       },

@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
-import type { MenuProps } from 'antd'
-import { Button, Col, Dropdown, message, Modal, Row, Tag } from 'antd'
+import { Button, Col, Dropdown, MenuProps, message, Modal, Row, Tag } from 'antd'
 import {
   DeleteOutlined,
   DoubleRightOutlined,
@@ -8,13 +7,13 @@ import {
   ExclamationCircleOutlined,
   PlusOutlined
 } from '@ant-design/icons'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
+import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import { deleteSocialClient, getSocialClientPage } from '@/api/system/socialClient'
-import SaveSocialClientModal, {
+import SaveSocialClientForm, {
   handleCreateSocialClient,
   handleEditSocialClient
 } from './SaveSocialClientForm'
+import { textConstants } from '@/locales/zh-CN'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {
@@ -52,7 +51,7 @@ const SocialClientPage: React.FC = () => {
       width: 150,
       valueType: 'text',
       fieldProps: {
-        placeholder: '请输入应用名'
+        placeholder: `${textConstants.common.inputText}应用名`
       }
     },
     {
@@ -70,7 +69,7 @@ const SocialClientPage: React.FC = () => {
         32: { text: '微信开放平台' }
       },
       fieldProps: {
-        placeholder: '请选择社交平台'
+        placeholder: `${textConstants.common.selectText}社交平台`
       },
       render: (_text, record) => SOCIAL_TYPE_MAP[record.socialType] || record.socialType
     },
@@ -85,7 +84,7 @@ const SocialClientPage: React.FC = () => {
         2: { text: '会员' }
       },
       fieldProps: {
-        placeholder: '请选择用户类型'
+        placeholder: `${textConstants.common.selectText}用户类型`
       },
       render: (_text, record) => {
         const item = USER_TYPE_MAP[record.userType]
@@ -99,7 +98,7 @@ const SocialClientPage: React.FC = () => {
       width: 200,
       valueType: 'text',
       fieldProps: {
-        placeholder: '请输入客户端 ID'
+        placeholder: `${textConstants.common.inputText}客户端 ID`
       }
     },
     {
@@ -113,11 +112,11 @@ const SocialClientPage: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: '请选择状态'
+        placeholder: `${textConstants.common.selectText}状态`
       }
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',
@@ -158,16 +157,16 @@ const SocialClientPage: React.FC = () => {
   // ===== 删除 =====
   const handleDelete = (record: API.SystemSocialClientRespVO) => {
     Modal.confirm({
-      title: '温馨提示',
+      title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
       content: `确定要删除应用"${record.name}"吗？`,
       onOk: async () => {
         try {
           await deleteSocialClient({ id: record.id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -243,7 +242,7 @@ const SocialClientPage: React.FC = () => {
         />
       </Col>
 
-      <SaveSocialClientModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveSocialClientForm onSuccess={() => actionRef.current?.reload()} />
     </Row>
   )
 }

@@ -3,6 +3,7 @@ import type { TreeDataNode } from 'antd'
 import { Input, message, Tree } from 'antd'
 import { getSimpleDeptList } from '@/api/system/dept'
 import { buildTreeData, getParentKey } from '@/utils/tree'
+import { textConstants } from '@/locales/zh-CN'
 
 const { Search } = Input
 
@@ -126,7 +127,7 @@ const DeptTree: React.FC<DeptTreeProps> = ({ onSelect }) => {
     <div>
       <Search
         style={{ marginBottom: 8, marginRight: 8 }}
-        placeholder="请输入部门名称"
+        placeholder={`${textConstants.common.inputText}部门名称`}
         onChange={onChange}
         allowClear
       />

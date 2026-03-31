@@ -1,11 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { Badge, Button, message, Modal, Tag } from 'antd'
-import {
-  DeleteOutlined,
-  EditOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { Badge, Button, message, Modal } from 'antd'
+import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailAccount, getMailAccountPage } from '@/api/system/mailAccount'
@@ -14,6 +9,7 @@ import SaveMailAccountModal, {
   handleCreateMailAccount,
   handleEditMailAccount
 } from './SaveMailAccountForm'
+import { textConstants } from '@/locales/zh-CN'
 
 const MailAccountConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -35,7 +31,7 @@ const MailAccountConfig: React.FC = () => {
       align: 'center',
       width: 200,
       fieldProps: {
-        placeholder: '请输入邮箱'
+        placeholder: `${textConstants.common.inputText}邮箱`
       }
     },
     {
@@ -44,7 +40,7 @@ const MailAccountConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: '请输入用户名'
+        placeholder: `${textConstants.common.inputText}用户名`
       }
     },
     {
@@ -88,7 +84,7 @@ const MailAccountConfig: React.FC = () => {
       )
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       width: 180,
@@ -117,18 +113,18 @@ const MailAccountConfig: React.FC = () => {
   // ===== 单个删除 =====
   const handleDelete = (record: API.SystemMailAccountRespVO) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `是否确认删除 ID 为"${record.id}"的邮箱账号数据项?`,
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteMailAccount({ id: record.id! })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -137,20 +133,20 @@ const MailAccountConfig: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `是否确认删除选中的 ${selectedRowKeys.length} 个邮箱账号数据项?`,
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           // 在实际项目中建议提供后台批量接口，由于这里的 API 中暂时只有单删，通过循环并行发送请求
           await Promise.all(selectedRowKeys.map((id) => deleteMailAccount({ id: Number(id) })))
-          message.success('批量删除成功')
+          message.success(textConstants.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error('批量删除失败')
+          message.error(textConstants.msg.batchDelFail)
         }
       }
     })

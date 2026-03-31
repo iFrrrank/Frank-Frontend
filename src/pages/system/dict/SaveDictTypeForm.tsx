@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import { ModalForm, ProFormRadio, ProFormText, ProFormTextArea } from '@ant-design/pro-components'
 import { createDictType, updateDictType } from '@/api/system/dictType'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleCreateDictType: () => void
 export let handleEditDictType: (record: API.SystemDictTypeRespVO) => void
@@ -26,7 +27,7 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemDictTypeSaveReqVO>
-      title={editingDictType ? '修改' : '新增'}
+      title={editingDictType ? textConstants.action.update : textConstants.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -59,7 +60,7 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
             resp = await createDictType(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingDictType ? '修改成功' : '创建成功')
+            message.success(editingDictType ? '修改成功' : textConstants.msg.createSuccess)
             onSuccess()
             return true
           } else {
@@ -76,16 +77,16 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
         name="name"
         label="字典名称"
         colProps={{ span: 24 }}
-        placeholder="请输入字典名称"
-        rules={[{ required: true, message: '请输入字典名称' }]}
+        placeholder="textConstants.common.inputText字典名称"
+        rules={[{ required: true, message: `${textConstants.common.inputText}字典名称` }]}
       />
       <ProFormText
         name="type"
         label="字典类型"
         colProps={{ span: 24 }}
-        placeholder="请输入字典类型"
+        placeholder="textConstants.common.inputText字典类型"
         rules={[
-          { required: true, message: '请输入字典类型' },
+          { required: true, message: `${textConstants.common.inputText}字典类型` },
           { pattern: /^[a-z_0-9]+$/, message: '字典类型必须以小写字母、数字或下划线组成' } // 根据常见业务规则加入正则表达式体验更佳
         ]}
       />
@@ -97,13 +98,13 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: 'textConstants.common.selectText状态' }]}
       />
       <ProFormTextArea
         name="remark"
         label="备注"
         colProps={{ span: 24 }}
-        placeholder="请输入备注内容"
+        placeholder="textConstants.common.inputText备注内容"
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>
@@ -111,4 +112,3 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
 }
 
 export default SaveDictTypeModal
-

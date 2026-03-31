@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import {
   ModalForm,
-  ProFormText,
-  ProFormSelect,
+  ProForm,
   ProFormRadio,
-  ProFormTextArea,
-  ProForm
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea
 } from '@ant-design/pro-components'
 import { Editor } from '@/components/Editor'
 import { createMailTemplate, updateMailTemplate } from '@/api/system/mailTemplate'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleCreateMailTemplate: () => void
 export let handleEditMailTemplate: (record: API.SystemMailTemplateRespVO) => void
@@ -39,7 +40,7 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
 
   return (
     <ModalForm<API.SystemMailTemplateSaveReqVO>
-      title={editingMailTemplate ? '修改' : '新增'}
+      title={editingMailTemplate ? textConstants.action.update : textConstants.action.create}
       width={900}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -83,34 +84,38 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
       <ProFormSelect
         name="accountId"
         label="邮箱账号"
-        placeholder="请选择邮箱账号"
-        rules={[{ required: true, message: '请选择邮箱账号' }]}
+        placeholder="textConstants.common.selectText邮箱账号"
+        rules={[{ required: true, message: 'textConstants.common.selectText邮箱账号' }]}
         options={accountOptions}
         showSearch
       />
       <ProFormText
         name="code"
         label="模板编码"
-        placeholder="请输入模板编码"
-        rules={[{ required: true, message: '请输入模板编码' }]}
+        placeholder="textConstants.common.inputText模板编码"
+        rules={[{ required: true, message: `${textConstants.common.inputText}模板编码` }]}
       />
       <ProFormText
         name="name"
         label="模板名称"
-        placeholder="请输入模板名称"
-        rules={[{ required: true, message: '请输入模板名称' }]}
+        placeholder="textConstants.common.inputText模板名称"
+        rules={[{ required: true, message: `${textConstants.common.inputText}模板名称` }]}
       />
-      <ProFormText name="nickname" label="发送人名称" placeholder="请输入发送人名称" />
+      <ProFormText
+        name="nickname"
+        label="发送人名称"
+        placeholder="textConstants.common.inputText发送人名称"
+      />
       <ProFormText
         name="title"
         label="模板标题"
-        placeholder="请输入模板标题"
-        rules={[{ required: true, message: '请输入模板标题' }]}
+        placeholder="textConstants.common.inputText模板标题"
+        rules={[{ required: true, message: `${textConstants.common.inputText}模板标题` }]}
       />
       <ProForm.Item
         name="content"
         label="模板内容"
-        rules={[{ required: true, message: '请输入模板内容' }]}
+        rules={[{ required: true, message: `${textConstants.common.inputText}模板内容` }]}
         wrapperCol={{ span: 20 }}
       >
         <Editor height={100} />
@@ -118,16 +123,19 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
       <ProFormRadio.Group
         name="status"
         label="开启状态"
-        rules={[{ required: true, message: '请选择开启状态' }]}
+        rules={[{ required: true, message: 'textConstants.common.selectText开启状态' }]}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
       />
-      <ProFormTextArea name="remark" label="备注" placeholder="请输入备注" />
+      <ProFormTextArea
+        name="remark"
+        label="备注"
+        placeholder="textConstants.common.inputText备注"
+      />
     </ModalForm>
   )
 }
 
 export default SaveMailTemplateModal
-

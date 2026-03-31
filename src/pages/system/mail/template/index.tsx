@@ -12,6 +12,7 @@ import SendMailModal, { handleTestMailTemplate } from './SendMailForm'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
 
 import '@wangeditor/editor/dist/css/style.css'
+import { textConstants } from '@/locales/zh-CN'
 
 const MailTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -57,7 +58,7 @@ const MailTemplateConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: '请输入模板编码'
+        placeholder: `${textConstants.common.inputText}模板编码`
       }
     },
     {
@@ -66,7 +67,7 @@ const MailTemplateConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: '请输入模板名称'
+        placeholder: `${textConstants.common.inputText}模板名称`
       }
     },
     {
@@ -98,7 +99,7 @@ const MailTemplateConfig: React.FC = () => {
       width: 200,
       valueType: 'select',
       fieldProps: {
-        placeholder: '请选择邮箱账号',
+        placeholder: 'textConstants.common.selectText邮箱账号',
         options: accountOptions,
         showSearch: true
       },
@@ -118,7 +119,7 @@ const MailTemplateConfig: React.FC = () => {
       width: 120,
       valueType: 'select',
       fieldProps: {
-        placeholder: '请选择开启状态'
+        placeholder: 'textConstants.common.selectText开启状态'
       },
       valueEnum: {
         0: { text: '开启', status: 'Success' },
@@ -126,7 +127,7 @@ const MailTemplateConfig: React.FC = () => {
       }
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       valueType: 'dateRange',
@@ -162,18 +163,18 @@ const MailTemplateConfig: React.FC = () => {
   // ===== 单个删除 =====
   const handleDelete = (record: API.SystemMailTemplateRespVO) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `是否确认删除编号为"${record.id}"的邮件模板数据项?`,
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteMailTemplate({ id: record.id! })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -182,20 +183,20 @@ const MailTemplateConfig: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `是否确认删除选中的 ${selectedRowKeys.length} 个邮件模板数据项?`,
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           // 当前接口似乎仅支持单删，使用 Promise.all 并行调用
           await Promise.all(selectedRowKeys.map((id) => deleteMailTemplate({ id: Number(id) })))
-          message.success('批量删除成功')
+          message.success(textConstants.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error('批量删除失败')
+          message.error(textConstants.msg.batchDelFail)
         }
       }
     })

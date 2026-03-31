@@ -1,10 +1,15 @@
 import React, { useRef, useState } from 'react'
+import {
+  type ActionType,
+  type ProColumns,
+  type ProFormInstance,
+  ProTable
+} from '@ant-design/pro-components'
+import { textConstants } from '@/locales/zh-CN'
 import { Button, message, Modal, Space, Typography } from 'antd'
-import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
-import { deleteNotice, getNoticePage, push } from '@/api/system/notice'
 import SaveNoticeModal, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
+import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { deleteNotice, getNoticePage, push } from '@/api/system/notice'
 
 const NoticeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -37,7 +42,7 @@ const NoticeConfig: React.FC = () => {
       dataIndex: 'title',
       align: 'center',
       width: 220,
-      fieldProps: { placeholder: '请输入公告标题' },
+      fieldProps: { placeholder: `${textConstants.common.inputText}公告标题` },
       render: (_, record) => (
         <Typography.Text style={{ width: 200, margin: 0 }} ellipsis={{ tooltip: record.title }}>
           {record.title}
@@ -68,7 +73,7 @@ const NoticeConfig: React.FC = () => {
       }
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       width: 180,
@@ -100,18 +105,18 @@ const NoticeConfig: React.FC = () => {
 
   const handleDelete = (record: API.SystemNoticeRespVO) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `是否确认删除 ID 为"${record.id}"的公告？`,
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteNotice({ id: record.id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -119,11 +124,11 @@ const NoticeConfig: React.FC = () => {
 
   const handlePush = (record: API.SystemNoticeRespVO) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否推送所选中通知？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await push({ id: record.id })
@@ -137,19 +142,19 @@ const NoticeConfig: React.FC = () => {
 
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除选中的 ${selectedRowKeys.length} 条公告?`,
-      okText: '确定',
-      cancelText: '取消',
+      content: `是否确认删除选中的 ${selectedRowKeys.length} 条公告？`,
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteNotice({ id: Number(id) })))
-          message.success('批量删除成功')
+          message.success(textConstants.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error('批量删除失败')
+          message.error(textConstants.msg.batchDelFail)
         }
       }
     })

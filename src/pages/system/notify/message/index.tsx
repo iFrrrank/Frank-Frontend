@@ -3,6 +3,7 @@ import { Badge, Button, Descriptions, Modal, Tag, Typography } from 'antd'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { getNotifyMessage, getNotifyMessagePage } from '@/api/system/notifyMessage'
+import { textConstants } from '@/locales/zh-CN'
 
 const NotifyMessage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -40,7 +41,7 @@ const NotifyMessage: React.FC = () => {
       width: 100,
       valueType: 'select',
       fieldProps: {
-        placeholder: '请选择用户类型'
+        placeholder: 'textConstants.common.selectText用户类型'
       },
       valueEnum: {
         1: { text: '管理员' },
@@ -58,7 +59,7 @@ const NotifyMessage: React.FC = () => {
       align: 'center',
       width: 100,
       fieldProps: {
-        placeholder: '请输入用户 ID'
+        placeholder: `${textConstants.common.inputText}用户 ID`
       },
       order: 4
     },
@@ -68,7 +69,7 @@ const NotifyMessage: React.FC = () => {
       align: 'center',
       width: 180,
       fieldProps: {
-        placeholder: '请输入模板编码'
+        placeholder: `${textConstants.common.inputText}模板编码`
       },
       order: 2
     },
@@ -122,7 +123,7 @@ const NotifyMessage: React.FC = () => {
       width: 120,
       valueType: 'select',
       fieldProps: {
-        placeholder: '请选择模版类型'
+        placeholder: 'textConstants.common.selectText模版类型'
       },
       valueEnum: {
         1: { text: '系统消息' },
@@ -157,7 +158,7 @@ const NotifyMessage: React.FC = () => {
       render: (_, record) => <span>{record.readTime || '-'}</span>
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       width: 180,

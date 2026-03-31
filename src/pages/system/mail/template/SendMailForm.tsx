@@ -3,10 +3,11 @@ import { message } from 'antd'
 import { ModalForm, ProForm, ProFormTextArea } from '@ant-design/pro-components'
 import { Editor } from '@/components/Editor'
 import { sendMail } from '@/api/system/mailTemplate'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleTestMailTemplate: (record: API.SystemMailTemplateRespVO) => void
 
-const SendMailModal: React.FC = () => {
+const SendMailForm: React.FC = () => {
   const [testModalVisible, setTestModalVisible] = useState(false)
   const [testingTemplate, setTestingTemplate] = useState<API.SystemMailTemplateRespVO | null>(null)
 
@@ -65,25 +66,24 @@ const SendMailModal: React.FC = () => {
       <ProFormTextArea
         name="mail"
         label="收件邮箱"
-        placeholder="请输入收件邮箱，多个邮箱用回车分隔"
-        rules={[{ required: true, message: '请输入收件邮箱' }]}
+        placeholder="textConstants.common.inputText收件邮箱，多个邮箱用回车分隔"
+        rules={[{ required: true, message: `${textConstants.common.inputText}收件邮箱` }]}
         fieldProps={{ rows: 2 }}
       />
       <ProFormTextArea
         name="ccMail"
         label="抄送邮箱"
-        placeholder="请输入抄送邮箱，多个邮箱用回车分隔"
+        placeholder="textConstants.common.inputText抄送邮箱，多个邮箱用回车分隔"
         fieldProps={{ rows: 2 }}
       />
       <ProFormTextArea
         name="bccMail"
         label="密送邮箱"
-        placeholder="请输入密送邮箱，多个邮箱用回车分隔"
+        placeholder="textConstants.common.inputText密送邮箱，多个邮箱用回车分隔"
         fieldProps={{ rows: 2 }}
       />
     </ModalForm>
   )
 }
 
-export default SendMailModal
-
+export default SendMailForm

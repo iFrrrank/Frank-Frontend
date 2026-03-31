@@ -8,6 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createSmsChannel, updateSmsChannel } from '@/api/system/smsChannel'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleCreateSmsChannel: () => void
 export let handleEditSmsChannel: (record: API.SystemSmsChannelRespVO) => void
@@ -34,7 +35,7 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
 
   return (
     <ModalForm<API.SystemSmsChannelSaveReqVO>
-      title={editingSmsChannel ? '修改' : '新增'}
+      title={editingSmsChannel ? textConstants.action.update : textConstants.action.create}
       width={700}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -67,7 +68,7 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
             resp = await createSmsChannel(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingSmsChannel ? '修改成功' : '创建成功')
+            message.success(editingSmsChannel ? '修改成功' : textConstants.msg.createSuccess)
             onSuccess()
             return true
           } else {
@@ -83,14 +84,14 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
       <ProFormText
         name="signature"
         label="短信签名"
-        placeholder="请输入短信签名"
-        rules={[{ required: true, message: '请输入短信签名' }]}
+        placeholder="textConstants.common.inputText短信签名"
+        rules={[{ required: true, message: `${textConstants.common.inputText}短信签名` }]}
       />
       <ProFormSelect
         name="code"
         label="渠道编码"
-        placeholder="请选择渠道编码"
-        rules={[{ required: true, message: '请选择渠道编码' }]}
+        placeholder="textConstants.common.selectText渠道编码"
+        rules={[{ required: true, message: 'textConstants.common.selectText渠道编码' }]}
         options={[
           { label: '阿里云', value: 'ALIYUN' },
           { label: '腾讯云', value: 'TENCENT' },
@@ -110,24 +111,27 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
       <ProFormTextArea
         name="remark"
         label="备注"
-        placeholder="请输入备注"
+        placeholder="textConstants.common.inputText备注"
         fieldProps={{ rows: 2 }}
       />
       <ProFormText
         name="apiKey"
         label="短信 API 的账号"
-        placeholder="请输入短信 API 的账号"
-        rules={[{ required: true, message: '请输入短信 API 的账号' }]}
+        placeholder="textConstants.common.inputText短信 API 的账号"
+        rules={[{ required: true, message: `${textConstants.common.inputText}短信 API 的账号` }]}
       />
-      <ProFormText name="apiSecret" label="短信 API 的密钥" placeholder="请输入短信 API 的密钥" />
+      <ProFormText
+        name="apiSecret"
+        label="短信 API 的密钥"
+        placeholder="textConstants.common.inputText短信 API 的密钥"
+      />
       <ProFormText
         name="callbackUrl"
         label="短信发送回调 URL"
-        placeholder="请输入短信发送回调 URL"
+        placeholder="textConstants.common.inputText短信发送回调 URL"
       />
     </ModalForm>
   )
 }
 
 export default SaveSmsChannelModal
-

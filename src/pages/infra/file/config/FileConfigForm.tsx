@@ -1,12 +1,8 @@
 import React from 'react'
-import { message, Button } from 'antd'
-import {
-  ModalForm,
-  ProFormText,
-  ProFormSelect,
-  ProFormInstance
-} from '@ant-design/pro-components'
-import { getFileConfig, createFileConfig, updateFileConfig } from '@/api/infra/fileConfig'
+import { Button, message } from 'antd'
+import { ModalForm, ProFormInstance, ProFormSelect, ProFormText } from '@ant-design/pro-components'
+import { createFileConfig, getFileConfig, updateFileConfig } from '@/api/infra/fileConfig'
+import { textConstants } from '@/locales/zh-CN'
 
 interface FileConfigFormProps {
   visible: boolean
@@ -29,7 +25,7 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
 
   return (
     <ModalForm
-      title={isUpdate ? '编辑' : '新增'}
+      title={isUpdate ? textConstants.action.update : textConstants.action.create}
       open={visible}
       onOpenChange={setVisible}
       formRef={formRef}
@@ -74,15 +70,15 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
         try {
           if (isUpdate) {
             await updateFileConfig({ id, ...values } as any)
-            message.success('更新成功')
+            message.success(textConstants.msg.updateSuccess)
           } else {
             await createFileConfig(values as any)
-            message.success('创建成功')
+            message.success(textConstants.msg.createSuccess)
           }
           onSuccess()
           return true
         } catch (e) {
-          message.error('操作失败')
+          message.error(textConstants.error.operationFail)
           return false
         }
       }}
@@ -90,16 +86,20 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
       <ProFormText
         name="name"
         label="配置名称"
-        rules={[{ required: true, message: '请输入配置名称' }]}
-        placeholder="请输入配置名称"
+        rules={[{ required: true, message: `${textConstants.common.inputText}配置名称` }]}
+        placeholder={`${textConstants.common.inputText}配置名称`}
       />
-      <ProFormText name="remark" label="备注" placeholder="请输入备注" />
+      <ProFormText
+        name="remark"
+        label="备注"
+        placeholder={`${textConstants.common.inputText}备注`}
+      />
       <ProFormSelect
         name="storage"
         label="存储器"
         options={STORAGE_OPTIONS}
         disabled={isUpdate}
-        rules={[{ required: true, message: '请选择存储器' }]}
+        rules={[{ required: true, message: `${textConstants.common.selectText}存储器` }]}
       />
     </ModalForm>
   )

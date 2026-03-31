@@ -10,9 +10,10 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { deleteRole, exportUsingGet, getRolePage } from '@/api/system/role'
 
-import SaveRoleModal, { handleCreateRole, handleEditRole } from './SaveRoleForm'
+import SaveRoleForm, { handleCreateRole, handleEditRole } from './SaveRoleForm'
 import AssignMenuModal, { handleOpenMenuAssign } from './AssignMenuForm'
 import AssignDataScopeModal, { handleOpenDataScope } from './AssignDataScopeForm'
+import { textConstants } from '@/locales/zh-CN'
 
 const Role: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -36,7 +37,7 @@ const Role: React.FC = () => {
       align: 'center',
       width: 120,
       fieldProps: {
-        placeholder: '请输入角色名称'
+        placeholder: `${textConstants.common.inputText}角色名称`
       }
     },
     {
@@ -77,7 +78,7 @@ const Role: React.FC = () => {
       align: 'center',
       width: 120,
       fieldProps: {
-        placeholder: '请输入角色标识'
+        placeholder: `${textConstants.common.inputText}角色标识`
       }
     },
     {
@@ -112,7 +113,7 @@ const Role: React.FC = () => {
       }
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
@@ -150,18 +151,18 @@ const Role: React.FC = () => {
   // ===== 删除角色 =====
   const handleDelete = (record: API.SystemRoleRespVO) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否删除所选中数据？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteRole({ id: record.id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -169,19 +170,19 @@ const Role: React.FC = () => {
 
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否删除所选中数据?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteRole({ id: Number(id) })))
-          message.success('批量删除成功')
+          message.success(textConstants.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error('批量删除失败')
+          message.error(textConstants.msg.batchDelFail)
         }
       }
     })
@@ -190,7 +191,7 @@ const Role: React.FC = () => {
   // ===== 导出角色 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '温馨提示',
+      title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
       content: '确定要导出角色数据吗？',
       onOk: async () => {
@@ -299,7 +300,7 @@ const Role: React.FC = () => {
       />
 
       {/* ========== 新增/修改角色弹窗 ========== */}
-      <SaveRoleModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveRoleForm onSuccess={() => actionRef.current?.reload()} />
       <AssignMenuModal />
       <AssignDataScopeModal />
     </>

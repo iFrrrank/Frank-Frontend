@@ -1,13 +1,14 @@
 import React from 'react'
-import { message, Button } from 'antd'
+import { Button, message } from 'antd'
 import {
   ModalForm,
-  ProFormText,
+  ProFormInstance,
   ProFormRadio,
-  ProFormTextArea,
-  ProFormInstance
+  ProFormText,
+  ProFormTextArea
 } from '@ant-design/pro-components'
-import { getConfig, createConfig, updateConfig } from '@/api/infra/config'
+import { createConfig, getConfig, updateConfig } from '@/api/infra/config'
+import { textConstants } from '@/locales/zh-CN'
 
 interface ConfigFormProps {
   visible: boolean
@@ -22,7 +23,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
 
   return (
     <ModalForm
-      title={isUpdate ? '编辑' : '新增'}
+      title={isUpdate ? textConstants.action.update : textConstants.action.create}
       open={visible}
       onOpenChange={setVisible}
       formRef={formRef}
@@ -42,7 +43,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
                 props.submit()
               }}
             >
-              确 定
+              确定
             </Button>,
             <Button
               key="cancel"
@@ -51,7 +52,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
                 setVisible(false)
               }}
             >
-              取 消
+              取消
             </Button>
           ]
         }
@@ -67,15 +68,15 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
         try {
           if (isUpdate) {
             await updateConfig({ id, ...values } as any)
-            message.success('更新成功')
+            message.success(textConstants.msg.updateSuccess)
           } else {
             await createConfig(values as any)
-            message.success('创建成功')
+            message.success(textConstants.msg.createSuccess)
           }
           onSuccess()
           return true
         } catch (e) {
-          message.error('操作失败')
+          message.error(textConstants.error.operationFail)
           return false
         }
       }}
@@ -83,31 +84,31 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
       <ProFormText
         name="category"
         label="参数分类"
-        rules={[{ required: true, message: '请输入参数分类' }]}
-        placeholder="请输入参数分类"
+        rules={[{ required: true, message: `${textConstants.common.inputText}参数分类` }]}
+        placeholder={`${textConstants.common.inputText}参数分类`}
       />
       <ProFormText
         name="name"
         label="参数名称"
-        rules={[{ required: true, message: '请输入参数名称' }]}
-        placeholder="请输入参数名称"
+        rules={[{ required: true, message: `${textConstants.common.inputText}参数名称` }]}
+        placeholder={`${textConstants.common.inputText}参数名称`}
       />
       <ProFormText
         name="key"
         label="参数键名"
-        rules={[{ required: true, message: '请输入参数键名' }]}
-        placeholder="请输入参数键名"
+        rules={[{ required: true, message: `${textConstants.common.inputText}参数键名` }]}
+        placeholder={`${textConstants.common.inputText}参数键名`}
       />
       <ProFormText
         name="value"
         label="参数键值"
-        rules={[{ required: true, message: '请输入参数键值' }]}
-        placeholder="请输入参数键值"
+        rules={[{ required: true, message: `${textConstants.common.inputText}参数键值` }]}
+        placeholder={`${textConstants.common.inputText}参数键值`}
       />
       <ProFormRadio.Group
         name="visible"
         label="是否可见"
-        rules={[{ required: true, message: '请选择是否可见' }]}
+        rules={[{ required: true, message: 'textConstants.common.selectText是否可见' }]}
         options={[
           { label: '是', value: true },
           { label: '否', value: false }
@@ -116,7 +117,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
       <ProFormTextArea
         name="remark"
         label="备注"
-        placeholder="请输入内容"
+        placeholder={`${textConstants.common.inputText}内容`}
       />
     </ModalForm>
   )

@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import {
   ModalForm,
-  ProFormText,
   ProFormDigit,
   ProFormSelect,
+  ProFormText,
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createRole, updateRole } from '@/api/system/role'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleCreateRole: () => void
 export let handleEditRole: (record: API.SystemRoleRespVO) => void
@@ -16,7 +17,7 @@ interface SaveRoleModalProps {
   onSuccess: () => void
 }
 
-const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
+const SaveRoleForm: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingRole, setEditingRole] = useState<API.SystemRoleRespVO | null>(null)
 
@@ -32,7 +33,7 @@ const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemRoleSaveReqVO>
-      title={editingRole ? '修改' : '新增'}
+      title={editingRole ? textConstants.action.update : textConstants.action.create}
       width={500}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -70,7 +71,7 @@ const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
             resp = await createRole(values)
           }
           if (resp.code === 0) {
-            message.success(editingRole ? '修改成功' : '创建成功')
+            message.success(editingRole ? '修改成功' : textConstants.msg.createSuccess)
             onSuccess()
             return true
           } else {
@@ -87,44 +88,43 @@ const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
         name="name"
         label="角色名称"
         colProps={{ span: 24 }}
-        placeholder="请输入角色名称"
-        rules={[{ required: true, message: '请输入角色名称' }]}
+        placeholder="textConstants.common.inputText角色名称"
+        rules={[{ required: true, message: `${textConstants.common.inputText}角色名称` }]}
       />
       <ProFormText
         name="code"
         label="角色标识"
         colProps={{ span: 24 }}
-        placeholder="请输入角色标识"
-        rules={[{ required: true, message: '请输入角色标识' }]}
+        placeholder="textConstants.common.inputText角色标识"
+        rules={[{ required: true, message: `${textConstants.common.inputText}角色标识` }]}
       />
       <ProFormDigit
         name="sort"
         label="显示顺序"
         colProps={{ span: 24 }}
-        placeholder="请输入显示顺序"
-        rules={[{ required: true, message: '请输入显示顺序' }]}
+        placeholder="textConstants.common.inputText显示顺序"
+        rules={[{ required: true, message: `${textConstants.common.inputText}显示顺序` }]}
         fieldProps={{ min: 0 }}
       />
       <ProFormSelect
         name="status"
         label="状态"
         colProps={{ span: 24 }}
-        placeholder="请选择状态"
+        placeholder="textConstants.common.selectText状态"
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: `${textConstants.common.selectText}状态` }]}
       />
       <ProFormTextArea
         name="remark"
         label="备注"
         colProps={{ span: 24 }}
-        placeholder="请输入备注内容"
+        placeholder={`${textConstants.common.inputText}备注内容`}
       />
     </ModalForm>
   )
 }
 
-export default SaveRoleModal
-
+export default SaveRoleForm

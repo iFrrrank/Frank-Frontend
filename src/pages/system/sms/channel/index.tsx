@@ -1,14 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal, Tag, Typography } from 'antd'
-import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
-import { deleteSmsChannel, getSmsChannelPage } from '@/api/system/smsChannel'
-
-import SaveSmsChannelModal, {
-  handleCreateSmsChannel,
-  handleEditSmsChannel
-} from './SaveSmsChannelForm'
+import { textConstants } from '@/locales/zh-CN'
 
 const SmsChannelConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -40,7 +32,7 @@ const SmsChannelConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: '请输入短信签名'
+        placeholder: `${textConstants.common.inputText}短信签名'
       }
     },
     {
@@ -71,7 +63,7 @@ const SmsChannelConfig: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: '请选择启用状态'
+        placeholder: 'textConstants.common.selectText启用状态'
       }
     },
     {
@@ -134,7 +126,7 @@ const SmsChannelConfig: React.FC = () => {
         )
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
@@ -167,18 +159,18 @@ const SmsChannelConfig: React.FC = () => {
   // ===== 删除短信渠道 =====
   const handleDelete = (record: API.SystemSmsChannelRespVO) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteSmsChannel({ id: record.id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -187,19 +179,19 @@ const SmsChannelConfig: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteSmsChannel({ id: Number(id) })))
-          message.success('批量删除成功')
+          message.success(textConstants.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error('批量删除失败')
+          message.error(textConstants.msg.batchDelFail)
         }
       }
     })

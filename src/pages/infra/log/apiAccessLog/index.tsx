@@ -4,6 +4,7 @@ import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { exportApiAccessLogExcel, getApiAccessLogPage } from '@/api/infra/apiAccessLog'
+import { textConstants } from '@/locales/zh-CN'
 
 const ApiAccessLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -25,7 +26,7 @@ const ApiAccessLogPage: React.FC = () => {
       dataIndex: 'userId',
       align: 'center',
       width: 80,
-      fieldProps: { placeholder: '请输入用户 ID' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}用户 ID` }
     },
     {
       title: '用户类型',
@@ -37,14 +38,14 @@ const ApiAccessLogPage: React.FC = () => {
         1: { text: '会员', status: 'Default' },
         2: { text: '管理员', status: 'Processing' }
       },
-      fieldProps: { placeholder: '请选择用户类型' }
+      fieldProps: { placeholder: 'textConstants.common.selectText用户类型' }
     },
     {
       title: '应用名称',
       dataIndex: 'applicationName',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: '请输入应用名称' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}应用名称` }
     },
     {
       title: '请求方法',
@@ -110,14 +111,14 @@ const ApiAccessLogPage: React.FC = () => {
       dataIndex: 'duration',
       align: 'center',
       width: 100,
-      fieldProps: { placeholder: '请输入执行时长' },
+      fieldProps: { placeholder: `${textConstants.common.inputText}执行时长` },
       render: (_, record) => <span>{record.duration}</span>
     },
     {
       title: '结果码',
       dataIndex: 'resultCode',
       hideInTable: true,
-      fieldProps: { placeholder: '请输入结果码' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}结果码` }
     },
     {
       title: '操作结果',
@@ -170,11 +171,11 @@ const ApiAccessLogPage: React.FC = () => {
 
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有访问日志数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}

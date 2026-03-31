@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, message, Modal, Tag, Typography } from 'antd'
 import {
   DeleteOutlined,
@@ -18,6 +18,7 @@ import SaveSmsTemplateModal, {
   handleEditSmsTemplate
 } from './SaveSmsTemplateForm'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
+import { textConstants } from '@/locales/zh-CN'
 
 const SmsTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -62,7 +63,7 @@ const SmsTemplateConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: smsTypeEnum,
       fieldProps: {
-        placeholder: '请选择短信类型'
+        placeholder: 'textConstants.common.selectText短信类型'
       }
     },
     {
@@ -76,7 +77,7 @@ const SmsTemplateConfig: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: '请选择开启状态'
+        placeholder: 'textConstants.common.selectText开启状态'
       }
     },
     {
@@ -85,7 +86,7 @@ const SmsTemplateConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: '请输入模板编码'
+        placeholder: `${textConstants.common.inputText}模板编码`
       }
     },
     {
@@ -94,7 +95,7 @@ const SmsTemplateConfig: React.FC = () => {
       align: 'center',
       hideInTable: true,
       fieldProps: {
-        placeholder: '请输入短信 API 模板 ID'
+        placeholder: `${textConstants.common.inputText}短信 API 模板 ID`
       }
     },
     {
@@ -105,12 +106,12 @@ const SmsTemplateConfig: React.FC = () => {
       valueType: 'select',
       fieldProps: {
         options: channelOptions,
-        placeholder: '请选择短信渠道',
+        placeholder: 'textConstants.common.selectText短信渠道',
         showSearch: true
       }
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
@@ -224,18 +225,18 @@ const SmsTemplateConfig: React.FC = () => {
   // ===== 删除短信模板 =====
   const handleDelete = (record: API.SystemSmsTemplateRespVO) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await deleteSmsTemplate({ id: record.id })
-          message.success('删除成功')
+          message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error('删除失败')
+          message.error(textConstants.msg.delFail)
         }
       }
     })
@@ -244,19 +245,19 @@ const SmsTemplateConfig: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteSmsTemplate({ id: Number(id) })))
-          message.success('批量删除成功')
+          message.success(textConstants.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error('批量删除失败')
+          message.error(textConstants.msg.batchDelFail)
         }
       }
     })
@@ -265,11 +266,11 @@ const SmsTemplateConfig: React.FC = () => {
   // ===== 导出短信模板 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有短信模板数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConstants.common.ok,
+      cancelText: textConstants.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}

@@ -4,6 +4,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteAccessToken, getAccessTokenPage } from '@/api/system/oAuth2Token'
+import { textConstants } from '@/locales/zh-CN'
 
 /** 用户类型枚举 */
 const USER_TYPE_MAP: Record<number, { text: string; color: string }> = {
@@ -17,7 +18,7 @@ const TokenPage: React.FC = () => {
   // ===== 强退（删除令牌） =====
   const handleForceLogout = (record: API.SystemOAuth2AccessTokenRespVO) => {
     Modal.confirm({
-      title: '温馨提示',
+      title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
       content: `确定要强退用户 ID 为 ${record.userId} 的令牌吗？`,
       onOk: async () => {
@@ -59,7 +60,7 @@ const TokenPage: React.FC = () => {
       width: 100,
       valueType: 'text',
       fieldProps: {
-        placeholder: '请输入用户 ID'
+        placeholder: `${textConstants.common.inputText}用户 ID`
       }
     },
     {
@@ -73,7 +74,7 @@ const TokenPage: React.FC = () => {
         2: { text: '会员' }
       },
       fieldProps: {
-        placeholder: '请选择用户类型'
+        placeholder: 'textConstants.common.selectText用户类型'
       },
       render: (_text, record) => {
         const item = USER_TYPE_MAP[record.userType]
@@ -88,7 +89,7 @@ const TokenPage: React.FC = () => {
       valueType: 'text',
       hideInTable: true,
       fieldProps: {
-        placeholder: '请输入客户端 ID'
+        placeholder: `${textConstants.common.inputText}客户端 ID`
       }
     },
     {
@@ -100,7 +101,7 @@ const TokenPage: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '创建时间',
+      title: textConstants.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',

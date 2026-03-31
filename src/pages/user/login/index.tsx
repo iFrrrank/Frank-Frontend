@@ -15,6 +15,7 @@ import { createStyles } from 'antd-style'
 import React, { useState } from 'react'
 import { flushSync } from 'react-dom'
 import Settings from '../../../../config/defaultSettings'
+import { textConstants } from '@/locales/zh-CN'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -214,7 +215,7 @@ const Login: React.FC = () => {
                   prefix: <MobileOutlined />
                 }}
                 name="mobile"
-                placeholder={'请输入手机号！'}
+                placeholder={`${textConstants.common.inputText}手机号！`}
                 rules={[
                   {
                     required: true,
@@ -234,7 +235,7 @@ const Login: React.FC = () => {
                 captchaProps={{
                   size: 'large'
                 }}
-                placeholder={'请输入验证码！'}
+                placeholder={`${textConstants.common.inputText}验证码！`}
                 captchaTextRender={(timing, count) => {
                   if (timing) {
                     return `${count} ${'秒后重新获取'}`
