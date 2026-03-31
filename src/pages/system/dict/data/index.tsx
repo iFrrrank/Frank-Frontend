@@ -55,7 +55,7 @@ const DictDataList: React.FC = () => {
       fieldProps: {
         options: dictTypeOptions,
         showSearch: true,
-        placeholder: `${textConstants.common.inputText}字典名称`
+        placeholder: '请输入字典名称'
       }
     },
     {
@@ -71,7 +71,7 @@ const DictDataList: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}字典标签`
+        placeholder: '请输入字典标签'
       }
     },
     {

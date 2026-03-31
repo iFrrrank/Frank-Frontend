@@ -83,7 +83,7 @@ const AssignDataScopeForm: React.FC = () => {
       <ProFormSelect
         name="dataScope"
         label="权限范围"
-        placeholder={`${textConstants.common.selectText}权限范围`}
+        placeholder="请选择权限范围"
         options={[
           { label: '全部数据权限', value: 1 },
           { label: '自定数据权限', value: 2 },

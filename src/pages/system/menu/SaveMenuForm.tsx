@@ -116,7 +116,7 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
         name="parentId"
         label="上级菜单"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.selectText}上级菜单`}
+        placeholder="请选择上级菜单"
         request={async () => {
           // 拉取全量菜单用于树形选择
           const resp = await getMenuList({} as any)
@@ -128,15 +128,15 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
           fieldNames: { label: 'name', value: 'id' },
           treeDefaultExpandAll: true
         }}
-        rules={[{ required: true, message: `${textConstants.common.inputText}上级菜单` }]}
+        rules={[{ required: true, message: '请输入上级菜单' }]}
       />
 
       <ProFormText
         name="name"
         label="菜单名称"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}菜单名称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}菜单名称` }]}
+        placeholder="请输入菜单名称"
+        rules={[{ required: true, message: '请输入菜单名称' }]}
       />
 
       <ProFormRadio.Group
@@ -161,7 +161,7 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                   name="icon"
                   label="菜单图标"
                   colProps={{ span: 24 }}
-                  placeholder={`${textConstants.common.inputText}菜单图标`}
+                  placeholder="请输入菜单图标"
                   fieldProps={{
                     addonAfter: <AntdIcons.UserOutlined /> // 示意性图标后置
                   }}
@@ -173,9 +173,9 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                   name="path"
                   label="路由地址"
                   colProps={{ span: 24 }}
-                  placeholder={`${textConstants.common.inputText}路由地址`}
+                  placeholder="请输入路由地址"
                   tooltip="访问的路由地址，如：`user`，如外网地址需内链访问则以 `http(s)://` 开头"
-                  rules={[{ required: true, message: `${textConstants.common.inputText}路由地址` }]}
+                  rules={[{ required: true, message: '请输入路由地址' }]}
                 />
               )}
 
@@ -186,13 +186,13 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                     name="component"
                     label="组件地址"
                     colProps={{ span: 24 }}
-                    placeholder={`${textConstants.common.inputText}组件地址`}
+                    placeholder="请输入组件地址"
                   />
                   <ProFormText
                     name="componentName"
                     label="组件名字"
                     colProps={{ span: 24 }}
-                    placeholder={`${textConstants.common.inputText}组件名字`}
+                    placeholder="请输入组件名字"
                   />
                 </>
               )}
@@ -213,8 +213,8 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                 name="sort"
                 label="显示排序"
                 colProps={{ span: 24 }}
-                placeholder={`${textConstants.common.inputText}排序`}
-                rules={[{ required: true, message: `${textConstants.common.inputText}显示排序` }]}
+                placeholder="请输入排序"
+                rules={[{ required: true, message: '请输入显示排序' }]}
                 fieldProps={{ min: 0 }}
               />
 

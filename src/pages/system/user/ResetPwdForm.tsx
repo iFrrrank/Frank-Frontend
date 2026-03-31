@@ -21,7 +21,7 @@ const ResetPwdForm: React.FC = () => {
   // 提交重置密码
   const handleResetPwdSubmit = async () => {
     if (!newPassword) {
-      message.warning(`${textConstants.common.inputText}新密码`)
+      message.warning('请输入新密码')
       return
     }
     try {
@@ -53,7 +53,7 @@ const ResetPwdForm: React.FC = () => {
       <Input.Password
         value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
-        placeholder={`${textConstants.common.inputText}新密码`}
+        placeholder="请输入新密码"
       />
     </Modal>
   )

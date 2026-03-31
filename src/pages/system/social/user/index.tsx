@@ -35,7 +35,7 @@ const SocialUserPage: React.FC = () => {
         32: { text: '微信开放平台' }
       },
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}社交平台`
+        placeholder: '请输入社交平台'
       },
       render: (_text, record) => SOCIAL_TYPE_MAP[record.type] || record.type
     },
@@ -47,7 +47,7 @@ const SocialUserPage: React.FC = () => {
       valueType: 'text',
       order: 2,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}社交 openid`
+        placeholder: '请输入社交 openid'
       }
     },
     {
@@ -58,7 +58,7 @@ const SocialUserPage: React.FC = () => {
       valueType: 'text',
       order: 3,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}用户昵称`
+        placeholder: '请输入用户昵称'
       }
     },
     {

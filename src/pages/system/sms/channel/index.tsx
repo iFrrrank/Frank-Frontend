@@ -39,7 +39,7 @@ const SmsChannelConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}短信签名`
+        placeholder: '请输入短信签名'
       }
     },
     {
@@ -70,7 +70,7 @@ const SmsChannelConfig: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}启用状态`
+        placeholder: '请输入启用状态'
       }
     },
     {

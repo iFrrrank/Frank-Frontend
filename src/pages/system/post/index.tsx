@@ -34,7 +34,7 @@ const PostManagement: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}岗位名称`
+        placeholder: '请输入岗位名称'
       }
     },
     {
@@ -43,7 +43,7 @@ const PostManagement: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}岗位编码`
+        placeholder: '请输入岗位编码'
       }
     },
     {
@@ -78,7 +78,7 @@ const PostManagement: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: `textConstants.common.selectText状态`
+        placeholder: 'textConstants.common.selectText状态'
       }
     },
     {

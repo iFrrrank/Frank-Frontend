@@ -127,7 +127,7 @@ const DeptTree: React.FC<DeptTreeProps> = ({ onSelect }) => {
     <div>
       <Search
         style={{ marginBottom: 8, marginRight: 8 }}
-        placeholder={`${textConstants.common.inputText}部门名称`}
+        placeholder="请输入部门名称"
         onChange={onChange}
         allowClear
       />

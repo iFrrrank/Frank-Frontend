@@ -41,7 +41,7 @@ const NotifyMessage: React.FC = () => {
       width: 100,
       valueType: 'select',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}用户类型`
+        placeholder: '请输入用户类型'
       },
       valueEnum: {
         1: { text: '管理员' },
@@ -59,7 +59,7 @@ const NotifyMessage: React.FC = () => {
       align: 'center',
       width: 100,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}用户 ID`
+        placeholder: '请输入用户 ID'
       },
       order: 4
     },
@@ -69,7 +69,7 @@ const NotifyMessage: React.FC = () => {
       align: 'center',
       width: 180,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}模板编码`
+        placeholder: '请输入模板编码'
       },
       order: 2
     },
@@ -123,7 +123,7 @@ const NotifyMessage: React.FC = () => {
       width: 120,
       valueType: 'select',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}模版类型`
+        placeholder: '请输入模版类型'
       },
       valueEnum: {
         1: { text: '系统消息' },

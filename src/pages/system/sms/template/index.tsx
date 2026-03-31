@@ -63,7 +63,7 @@ const SmsTemplateConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: smsTypeEnum,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}短信类型`
+        placeholder: '请输入短信类型'
       }
     },
     {
@@ -77,7 +77,7 @@ const SmsTemplateConfig: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}开启状态`
+        placeholder: '请输入开启状态'
       }
     },
     {
@@ -86,7 +86,7 @@ const SmsTemplateConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}模板编码`
+        placeholder: '请输入模板编码'
       }
     },
     {
@@ -95,7 +95,7 @@ const SmsTemplateConfig: React.FC = () => {
       align: 'center',
       hideInTable: true,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}短信 API 模板 ID`
+        placeholder: '请输入短信 API 模板 ID'
       }
     },
     {
@@ -106,7 +106,7 @@ const SmsTemplateConfig: React.FC = () => {
       valueType: 'select',
       fieldProps: {
         options: channelOptions,
-        placeholder: `${textConstants.common.inputText}短信渠道`,
+        placeholder: '请输入短信渠道',
         showSearch: true
       }
     },

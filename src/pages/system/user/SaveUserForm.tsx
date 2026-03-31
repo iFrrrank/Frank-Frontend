@@ -111,14 +111,14 @@ const SaveUserForm: React.FC = () => {
         name="nickname"
         label="用户昵称"
         colProps={{ span: 12 }}
-        placeholder={`${textConstants.common.inputText}用户昵称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}用户昵称` }]}
+        placeholder="请输入用户昵称"
+        rules={[{ required: true, message: '请输入用户昵称' }]}
       />
       <ProFormTreeSelect
         name="deptId"
         label="归属部门"
         colProps={{ span: 12 }}
-        placeholder={`${textConstants.common.selectText}归属部门`}
+        placeholder="请选择归属部门"
         request={async () => {
           const resp = await getSimpleDeptList()
           if (resp.code === 0) {
@@ -136,35 +136,35 @@ const SaveUserForm: React.FC = () => {
         name="mobile"
         label="手机号码"
         colProps={{ span: 12 }}
-        placeholder={`${textConstants.common.inputText}手机号码`}
+        placeholder="请输入手机号码"
       />
       <ProFormText
         name="email"
         label="邮箱"
         colProps={{ span: 12 }}
-        placeholder={`${textConstants.common.inputText}邮箱`}
-        rules={[{ type: 'email', message: `${textConstants.common.inputText}有效邮箱` }]}
+        placeholder="请输入邮箱"
+        rules={[{ type: 'email', message: '请输入有效邮箱' }]}
       />
       <ProFormText
         name="username"
         label="用户名称"
         colProps={{ span: 12 }}
-        placeholder={`${textConstants.common.inputText}用户名称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}用户名称` }]}
+        placeholder="请输入用户名称"
+        rules={[{ required: true, message: '请输入用户名称' }]}
         disabled={!!editingUser}
       />
       <ProFormText.Password
         name="password"
         label="用户密码"
         colProps={{ span: 12 }}
-        placeholder={`${textConstants.common.inputText}用户密码`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}用户密码` }]}
+        placeholder="请输入用户密码"
+        rules={[{ required: true, message: '请输入用户密码' }]}
       />
       <ProFormSelect
         name="sex"
         label="用户性别"
         colProps={{ span: 12 }}
-        placeholder={`${textConstants.common.selectText}性别`}
+        placeholder="请选择性别"
         options={[
           { label: '男', value: 1 },
           { label: '女', value: 2 }
@@ -174,7 +174,7 @@ const SaveUserForm: React.FC = () => {
         name="postIds"
         label="岗位"
         colProps={{ span: 12 }}
-        placeholder={`${textConstants.common.selectText}岗位`}
+        placeholder="请选择岗位"
         fieldProps={{ mode: 'multiple' }}
         request={async () => {
           const resp = await getSimplePostList()
@@ -193,7 +193,7 @@ const SaveUserForm: React.FC = () => {
         colProps={{ span: 24 }}
         labelCol={{ span: 3 }}
         wrapperCol={{ span: 21 }}
-        placeholder={`${textConstants.common.inputText}备注内容`}
+        placeholder="请输入备注内容"
       />
     </ModalForm>
   )

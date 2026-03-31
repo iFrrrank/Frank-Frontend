@@ -99,13 +99,13 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
       <ProFormText
         name="name"
         label="应用名"
-        placeholder={`${textConstants.common.inputText}应用名`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}应用名` }]}
+        placeholder="请输入应用名"
+        rules={[{ required: true, message: '请输入应用名' }]}
       />
       <ProFormSelect
         name="socialType"
         label="社交平台"
-        placeholder={`${textConstants.common.selectText}社交平台`}
+        placeholder="请选择社交平台"
         options={[
           { label: 'Gitee', value: 5 },
           { label: '钉钉', value: 10 },
@@ -114,39 +114,39 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
           { label: '微信开放平台', value: 32 },
           { label: '微信小程序', value: 30 }
         ]}
-        rules={[{ required: true, message: `${textConstants.common.inputText}社交平台` }]}
+        rules={[{ required: true, message: '请输入社交平台' }]}
       />
       <ProFormSelect
         name="userType"
         label="用户类型"
-        placeholder={`${textConstants.common.selectText}用户类型`}
+        placeholder="请选择用户类型"
         options={[
           { label: '会员', value: 2 },
           { label: '管理员', value: 1 }
         ]}
-        rules={[{ required: true, message: `${textConstants.common.inputText}用户类型` }]}
+        rules={[{ required: true, message: '请输入用户类型' }]}
       />
       <ProFormText
         name="clientId"
         label="客户端 ID"
-        placeholder={`${textConstants.common.inputText}客户端 ID,对应各平台的appKey`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}客户端 ID` }]}
+        placeholder="请输入客户端 ID,对应各平台的appKey"
+        rules={[{ required: true, message: '请输入客户端 ID' }]}
       />
       <ProFormText
         name="clientSecret"
         label="客户端密钥"
-        placeholder={`${textConstants.common.inputText}客户端密钥,对应各平台的appSecret`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}客户端密钥` }]}
+        placeholder="请输入客户端密钥,对应各平台的appSecret"
+        rules={[{ required: true, message: '请输入客户端密钥' }]}
       />
       <ProFormSelect
         name="status"
         label="状态"
-        placeholder={`${textConstants.common.selectText}状态`}
+        placeholder="请选择状态"
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
+        rules={[{ required: true, message: '请输入状态' }]}
       />
     </ModalForm>
   )

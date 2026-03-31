@@ -93,40 +93,40 @@ const SaveRoleForm: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
         name="name"
         label="角色名称"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}角色名称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}角色名称` }]}
+        placeholder="请输入角色名称"
+        rules={[{ required: true, message: '请输入角色名称' }]}
       />
       <ProFormText
         name="code"
         label="角色标识"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}角色标识`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}角色标识` }]}
+        placeholder="请输入角色标识"
+        rules={[{ required: true, message: '请输入角色标识' }]}
       />
       <ProFormDigit
         name="sort"
         label="显示顺序"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}显示顺序`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}显示顺序` }]}
+        placeholder="请输入显示顺序"
+        rules={[{ required: true, message: '请输入显示顺序' }]}
         fieldProps={{ min: 0 }}
       />
       <ProFormSelect
         name="status"
         label="状态"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.selectText}状态`}
+        placeholder="请选择状态"
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: `${textConstants.common.selectText}状态` }]}
+        rules={[{ required: true, message: '请选择状态' }]}
       />
       <ProFormTextArea
         name="remark"
         label="备注"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}备注内容`}
+        placeholder="请输入备注内容"
       />
     </ModalForm>
   )

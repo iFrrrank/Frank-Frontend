@@ -37,7 +37,7 @@ const NotifyTemplateConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}模板编码`
+        placeholder: '请输入模板编码'
       },
       order: 2
     },
@@ -47,7 +47,7 @@ const NotifyTemplateConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}模板名称`
+        placeholder: '请输入模板名称'
       },
       order: 3
     },
@@ -90,7 +90,7 @@ const NotifyTemplateConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: statusEnum,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}开启状态`
+        placeholder: '请输入开启状态'
       },
       order: 1
     },
@@ -139,7 +139,7 @@ const NotifyTemplateConfig: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除编号为"${record.id}"的数据项?`,
+      content: '是否确认删除编号为"${record.id}"的数据项?',
       okText: textConstants.common.ok,
       cancelText: textConstants.common.cancel,
       onOk: async () => {
@@ -159,7 +159,7 @@ const NotifyTemplateConfig: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除选中的 ${selectedRowKeys.length} 条数据?`,
+      content: '是否确认删除选中的 ${selectedRowKeys.length} 条数据?',
       okText: textConstants.common.ok,
       cancelText: textConstants.common.cancel,
       onOk: async () => {

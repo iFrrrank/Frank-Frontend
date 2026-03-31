@@ -127,7 +127,7 @@ const FileListPage: React.FC = () => {
       title: '文件路径',
       dataIndex: 'path',
       align: 'center',
-      fieldProps: { placeholder: `${textConstants.common.inputText}文件路径` },
+      fieldProps: { placeholder: '请输入文件路径' },
       render: (_, record) => (
         <Typography.Text
           ellipsis={{ tooltip: record.path }}
@@ -141,7 +141,7 @@ const FileListPage: React.FC = () => {
       title: '文件类型',
       dataIndex: 'type',
       align: 'center',
-      fieldProps: { placeholder: `${textConstants.common.inputText}文件类型` },
+      fieldProps: { placeholder: '请输入文件类型' },
       hideInTable: true
     },
     {

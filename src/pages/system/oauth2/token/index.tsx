@@ -20,7 +20,7 @@ const TokenPage: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: `确定要强退用户 ID 为 ${record.userId} 的令牌吗？`,
+      content: '确定要强退用户 ID 为 ${record.userId} 的令牌吗？',
       onOk: async () => {
         try {
           await deleteAccessToken({ accessToken: record.accessToken })
@@ -60,7 +60,7 @@ const TokenPage: React.FC = () => {
       width: 100,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}用户 ID`
+        placeholder: '请输入用户 ID'
       }
     },
     {
@@ -74,7 +74,7 @@ const TokenPage: React.FC = () => {
         2: { text: '会员' }
       },
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}用户类型`
+        placeholder: '请输入用户类型'
       },
       render: (_text, record) => {
         const item = USER_TYPE_MAP[record.userType]
@@ -89,7 +89,7 @@ const TokenPage: React.FC = () => {
       valueType: 'text',
       hideInTable: true,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}客户端 ID`
+        placeholder: '请输入客户端 ID'
       }
     },
     {

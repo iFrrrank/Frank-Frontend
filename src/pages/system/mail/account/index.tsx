@@ -5,7 +5,10 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailAccount, getMailAccountPage } from '@/api/system/mailAccount'
 
-import SaveMailAccountForm, { handleCreateMailAccount, handleEditMailAccount } from './SaveMailAccountForm'
+import SaveMailAccountForm, {
+  handleCreateMailAccount,
+  handleEditMailAccount
+} from './SaveMailAccountForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const MailAccountConfig: React.FC = () => {
@@ -28,7 +31,7 @@ const MailAccountConfig: React.FC = () => {
       align: 'center',
       width: 200,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}邮箱`
+        placeholder: '请输入邮箱'
       }
     },
     {
@@ -37,7 +40,7 @@ const MailAccountConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}用户名`
+        placeholder: '请输入用户名'
       }
     },
     {
@@ -112,7 +115,7 @@ const MailAccountConfig: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除 ID 为"${record.id}"的邮箱账号数据项?`,
+      content: '是否确认删除 ID 为"${record.id}"的邮箱账号数据项?',
       okText: textConstants.common.ok,
       cancelText: textConstants.common.cancel,
       onOk: async () => {
@@ -132,7 +135,7 @@ const MailAccountConfig: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除选中的 ${selectedRowKeys.length} 个邮箱账号数据项?`,
+      content: '是否确认删除选中的 ${selectedRowKeys.length} 个邮箱账号数据项?',
       okText: textConstants.common.ok,
       cancelText: textConstants.common.cancel,
       onOk: async () => {

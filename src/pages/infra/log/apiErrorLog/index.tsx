@@ -54,7 +54,7 @@ const ApiErrorLogPage: React.FC = () => {
       dataIndex: 'userId',
       align: 'center',
       width: 100,
-      fieldProps: { placeholder: `${textConstants.common.inputText}用户编号` }
+      fieldProps: { placeholder: '请输入用户编号' }
     },
     {
       title: '用户类型',
@@ -66,14 +66,14 @@ const ApiErrorLogPage: React.FC = () => {
         1: { text: '会员', status: 'Default' },
         2: { text: '管理员', status: 'Processing' }
       },
-      fieldProps: { placeholder: `${textConstants.common.inputText}用户类型` }
+      fieldProps: { placeholder: '请输入用户类型' }
     },
     {
       title: '应用名称',
       dataIndex: 'applicationName',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: `${textConstants.common.inputText}应用名称` }
+      fieldProps: { placeholder: '请输入应用名称' }
     },
     {
       title: '请求方法',
@@ -160,7 +160,7 @@ const ApiErrorLogPage: React.FC = () => {
         1: { text: '已处理', status: 'Success' },
         2: { text: '已忽略', status: 'Default' }
       },
-      fieldProps: { placeholder: `${textConstants.common.inputText}处理状态` }
+      fieldProps: { placeholder: '请输入处理状态' }
     },
     {
       title: '操作',

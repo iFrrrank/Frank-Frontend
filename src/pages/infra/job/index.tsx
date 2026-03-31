@@ -160,7 +160,7 @@ const JobPage: React.FC = () => {
       title: '任务名称',
       dataIndex: 'name',
       align: 'center',
-      fieldProps: { placeholder: `${textConstants.common.inputText}任务名称` }
+      fieldProps: { placeholder: '请输入任务名称' }
     },
     {
       title: '任务状态',
@@ -174,7 +174,7 @@ const JobPage: React.FC = () => {
         },
         {} as Record<string, any>
       ),
-      fieldProps: { placeholder: `${textConstants.common.inputText}任务状态` },
+      fieldProps: { placeholder: '请输入任务状态' },
       render: (_, record) => (
         <Switch
           checked={record.status === 0}
@@ -188,7 +188,7 @@ const JobPage: React.FC = () => {
       title: '处理器的名字',
       dataIndex: 'handlerName',
       align: 'center',
-      fieldProps: { placeholder: `${textConstants.common.inputText}处理器的名字` }
+      fieldProps: { placeholder: '请输入处理器的名字' }
     },
     {
       title: '处理器的参数',

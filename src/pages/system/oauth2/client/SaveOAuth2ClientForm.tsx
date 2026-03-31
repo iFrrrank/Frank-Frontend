@@ -134,41 +134,37 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       <ProFormText
         name="name"
         label="应用名称"
-        placeholder={`${textConstants.common.inputText}应用名称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}应用名称` }]}
+        placeholder="请输入应用名称"
+        rules={[{ required: true, message: '请输入应用名称' }]}
       />
       <ProFormSelect
         name="status"
         label="状态"
-        placeholder={`${textConstants.common.selectText}状态`}
+        placeholder="请选择状态"
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
+        rules={[{ required: true, message: '请输入状态' }]}
       />
       <ProFormText
         name="clientId"
         label="客户端 ID"
-        placeholder={`${textConstants.common.inputText}客户端 ID`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}客户端 ID` }]}
+        placeholder="请输入客户端 ID"
+        rules={[{ required: true, message: '请输入客户端 ID' }]}
         disabled={!!editingClient}
       />
       <ProFormText
         name="secret"
         label="客户端密钥"
-        placeholder={`${textConstants.common.inputText}客户端密钥`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}客户端密钥` }]}
+        placeholder="请输入客户端密钥"
+        rules={[{ required: true, message: '请输入客户端密钥' }]}
       />
-      <ProFormText
-        name="logo"
-        label="应用图标"
-        placeholder={`${textConstants.common.inputText}应用图标 URL`}
-      />
+      <ProFormText name="logo" label="应用图标" placeholder="请输入应用图标 URL" />
       <ProFormSelect
         name="authorizedGrantTypes"
         label="授权类型"
-        placeholder={`${textConstants.common.selectText}授权类型`}
+        placeholder="请选择授权类型"
         options={[
           { label: '授权码模式', value: 'authorization_code' },
           { label: '隐式授权', value: 'implicit' },
@@ -176,13 +172,13 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
           { label: '客户端凭证', value: 'client_credentials' },
           { label: '刷新令牌', value: 'refresh_token' }
         ]}
-        rules={[{ required: true, message: `${textConstants.common.inputText}授权类型` }]}
+        rules={[{ required: true, message: '请输入授权类型' }]}
       />
       <ProFormSelect
         name="scopes"
         label="授权范围"
         mode="multiple"
-        placeholder={`${textConstants.common.selectText}授权范围`}
+        placeholder="请选择授权范围"
         options={[
           { label: '读取', value: 'read' },
           { label: '写入', value: 'write' },
@@ -194,7 +190,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
         name="autoApproveScopes"
         label="自动授权范围"
         mode="multiple"
-        placeholder={`${textConstants.common.selectText}自动授权范围`}
+        placeholder="请选择自动授权范围"
         options={[
           { label: '读取', value: 'read' },
           { label: '写入', value: 'write' },
@@ -206,14 +202,14 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
         name="redirectUris"
         label="可重定向 URL"
         mode="tags"
-        placeholder={`${textConstants.common.inputText}可重定向 URL`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}可重定向URL` }]}
+        placeholder="请输入可重定向 URL"
+        rules={[{ required: true, message: '请输入可重定向URL' }]}
       />
       <ProFormSelect
         name="authorities"
         label="权限"
         mode="multiple"
-        placeholder={`${textConstants.common.selectText}权限`}
+        placeholder="请选择权限"
         options={[
           { label: '用户管理', value: 'USER_VIEW' },
           { label: '角色管理', value: 'ROLE_VIEW' },
@@ -225,7 +221,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
         name="resourceIds"
         label="资源"
         mode="multiple"
-        placeholder={`${textConstants.common.selectText}资源`}
+        placeholder="请选择资源"
         options={[
           { label: '系统管理', value: 'system' },
           { label: '用户中心', value: 'user' },
@@ -236,38 +232,30 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       <ProFormDigit
         name="accessTokenValiditySeconds"
         label="访问令牌有效期"
-        placeholder={`${textConstants.common.inputText}访问令牌有效期`}
+        placeholder="请输入访问令牌有效期"
         fieldProps={{
           addonAfter: '秒(s)'
         }}
         rules={[
-          { required: true, message: `${textConstants.common.inputText}访问令牌有效期` },
-          { pattern: /^\d+$/, message: `${textConstants.common.inputText}有效的数字` }
+          { required: true, message: '请输入访问令牌有效期' },
+          { pattern: /^\d+$/, message: '请输入有效的数字' }
         ]}
       />
 
       <ProFormDigit
         name="refreshTokenValiditySeconds"
         label="刷新令牌有效期"
-        placeholder={`${textConstants.common.inputText}刷新令牌有效期`}
+        placeholder="请输入刷新令牌有效期"
         fieldProps={{
           addonAfter: '秒(s)'
         }}
         rules={[
-          { required: true, message: `${textConstants.common.inputText}刷新令牌有效期` },
-          { pattern: /^\d+$/, message: `${textConstants.common.inputText}有效的数字` }
+          { required: true, message: '请输入刷新令牌有效期' },
+          { pattern: /^\d+$/, message: '请输入有效的数字' }
         ]}
       />
-      <ProFormTextArea
-        name="additionalInformation"
-        label="附加信息"
-        placeholder={`${textConstants.common.inputText}附加信息`}
-      />
-      <ProFormTextArea
-        name="description"
-        label="应用描述"
-        placeholder={`${textConstants.common.inputText}应用描述`}
-      />
+      <ProFormTextArea name="additionalInformation" label="附加信息" placeholder="请输入附加信息" />
+      <ProFormTextArea name="description" label="应用描述" placeholder="请输入应用描述" />
     </ModalForm>
   )
 }

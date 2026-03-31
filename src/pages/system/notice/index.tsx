@@ -38,7 +38,7 @@ const NoticeConfig: React.FC = () => {
       dataIndex: 'title',
       align: 'center',
       width: 220,
-      fieldProps: { placeholder: `${textConstants.common.inputText}公告标题` },
+      fieldProps: { placeholder: '请输入公告标题' },
       render: (_, record) => (
         <Typography.Text style={{ width: 200, margin: 0 }} ellipsis={{ tooltip: record.title }}>
           {record.title}

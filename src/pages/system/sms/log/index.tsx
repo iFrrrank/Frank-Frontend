@@ -69,7 +69,7 @@ const SmsLogConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}手机号码`
+        placeholder: '请输入手机号码'
       }
     },
     {
@@ -98,7 +98,7 @@ const SmsLogConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: sendStatusEnum,
       fieldProps: {
-        placeholder: `${textConstants.common.selectText}发送状态`
+        placeholder: '请选择发送状态'
       }
     },
     {
@@ -109,7 +109,7 @@ const SmsLogConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: receiveStatusEnum,
       fieldProps: {
-        placeholder: `${textConstants.common.selectText}接收状态`
+        placeholder: '请选择接收状态'
       }
     },
     {
@@ -120,7 +120,7 @@ const SmsLogConfig: React.FC = () => {
       valueType: 'select',
       fieldProps: {
         options: channelOptions,
-        placeholder: `${textConstants.common.selectText}短信渠道`,
+        placeholder: '请选择短信渠道',
         showSearch: true
       },
       render: (_, record) => {
@@ -134,7 +134,7 @@ const SmsLogConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}模板 ID`
+        placeholder: '请输入模板 ID'
       }
     },
     {

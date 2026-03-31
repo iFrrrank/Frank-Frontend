@@ -1,6 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal } from 'antd'
-import { DeleteOutlined, DownloadOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  DownloadOutlined,
+  ExclamationCircleOutlined,
+  PlusOutlined
+} from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteRole, exportUsingGet, getRolePage } from '@/api/system/role'
@@ -32,7 +37,7 @@ const Role: React.FC = () => {
       align: 'center',
       width: 120,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}角色名称`
+        placeholder: '请输入角色名称'
       }
     },
     {
@@ -73,7 +78,7 @@ const Role: React.FC = () => {
       align: 'center',
       width: 120,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}角色标识`
+        placeholder: '请输入角色标识'
       }
     },
     {

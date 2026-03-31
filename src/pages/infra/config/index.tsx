@@ -112,14 +112,14 @@ const ConfigPage: React.FC = () => {
       title: '参数名称',
       dataIndex: 'name',
       align: 'center',
-      fieldProps: { placeholder: `${textConstants.common.inputText}参数名称` },
+      fieldProps: { placeholder: '请输入参数名称' },
       hideInTable: true
     },
     {
       title: '参数键名',
       dataIndex: 'key',
       align: 'center',
-      fieldProps: { placeholder: `${textConstants.common.inputText}参数键名` },
+      fieldProps: { placeholder: '请输入参数键名' },
       hideInTable: true
     },
     {
@@ -128,7 +128,7 @@ const ConfigPage: React.FC = () => {
       align: 'center',
       valueType: 'select',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}系统内置`,
+        placeholder: '请输入系统内置',
         options: CONFIG_TYPE_OPTIONS
       },
       hideInTable: true

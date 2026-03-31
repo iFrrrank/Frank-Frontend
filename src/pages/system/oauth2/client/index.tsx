@@ -37,7 +37,7 @@ const App_: React.FC = () => {
       width: 80,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText} ID`
+        placeholder: '请输入 ID'
       }
     },
     {
@@ -47,7 +47,7 @@ const App_: React.FC = () => {
       width: 150,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}应用名称`
+        placeholder: '请输入应用名称'
       }
     },
     {
@@ -83,7 +83,7 @@ const App_: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}状态`
+        placeholder: '请输入状态'
       }
     },
     {
@@ -93,7 +93,7 @@ const App_: React.FC = () => {
       width: 120,
       valueType: 'text',
       hideInSearch: true,
-      render: (text) => (text ? `${text}秒` : '-')
+      render: (text) => (text ? '${text}秒' : '-')
     },
     {
       title: '刷新令牌有效期',
@@ -102,7 +102,7 @@ const App_: React.FC = () => {
       width: 120,
       valueType: 'text',
       hideInSearch: true,
-      render: (text) => (text ? `${text}秒` : '-')
+      render: (text) => (text ? '${text}秒' : '-')
     },
     {
       title: textConstants.columns.createTime,
@@ -154,7 +154,7 @@ const App_: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: `确定要删除应用"${record.name}"吗？`,
+      content: '确定要删除应用"${record.name}"吗？',
       onOk: async () => {
         try {
           await deleteOAuth2Client({ id: record.id })
@@ -172,7 +172,7 @@ const App_: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: `确定要删除选中的 ${selectedRowKeys.length} 个应用吗？`,
+      content: '确定要删除选中的 ${selectedRowKeys.length} 个应用吗？',
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteOAuth2Client({ id: Number(id) })))

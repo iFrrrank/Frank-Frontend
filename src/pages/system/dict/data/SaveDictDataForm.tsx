@@ -99,29 +99,29 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
         name="dictType"
         label="字典类型"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}字典类型`}
+        placeholder="请输入字典类型"
         readonly // 页面上一般是不可修改或者就是下拉选择
       />
       <ProFormText
         name="label"
         label="数据标签"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}数据标签`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}数据标签` }]}
+        placeholder="请输入数据标签"
+        rules={[{ required: true, message: '请输入数据标签' }]}
       />
       <ProFormText
         name="value"
         label="数据键值"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}数据键值`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}数据键值` }]}
+        placeholder="请输入数据键值"
+        rules={[{ required: true, message: '请输入数据键值' }]}
       />
       <ProFormDigit
         name="sort"
         label="显示排序"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}显示排序`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}显示排序` }]}
+        placeholder="请输入显示排序"
+        rules={[{ required: true, message: '请输入显示排序' }]}
         fieldProps={{ min: 0 }}
       />
       <ProFormRadio.Group
@@ -132,13 +132,13 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
+        rules={[{ required: true, message: '请输入状态' }]}
       />
       <ProFormSelect
         name="colorType"
         label="颜色类型"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.selectText}`}
+        placeholder="请选择"
         options={[
           { label: '默认（default）', value: 'default' },
           { label: '主要（primary）', value: 'primary' },
@@ -152,13 +152,13 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
         name="cssClass"
         label="CSS Class"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText} CSS Class`}
+        placeholder="请输入 CSS Class"
       />
       <ProFormTextArea
         name="remark"
         label="备注"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}内容`}
+        placeholder="请输入内容"
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>

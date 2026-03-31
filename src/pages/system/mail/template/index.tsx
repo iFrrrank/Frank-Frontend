@@ -58,7 +58,7 @@ const MailTemplateConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}模板编码`
+        placeholder: '请输入模板编码'
       }
     },
     {
@@ -67,7 +67,7 @@ const MailTemplateConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}模板名称`
+        placeholder: '请输入模板名称'
       }
     },
     {
@@ -99,7 +99,7 @@ const MailTemplateConfig: React.FC = () => {
       width: 200,
       valueType: 'select',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}邮箱账号`,
+        placeholder: '请输入邮箱账号',
         options: accountOptions,
         showSearch: true
       },
@@ -119,7 +119,7 @@ const MailTemplateConfig: React.FC = () => {
       width: 120,
       valueType: 'select',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}开启状态`
+        placeholder: '请输入开启状态'
       },
       valueEnum: {
         0: { text: '开启', status: 'Success' },
@@ -165,7 +165,7 @@ const MailTemplateConfig: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除编号为"${record.id}"的邮件模板数据项?`,
+      content: '是否确认删除编号为"${record.id}"的邮件模板数据项?',
       okText: textConstants.common.ok,
       cancelText: textConstants.common.cancel,
       onOk: async () => {
@@ -185,7 +185,7 @@ const MailTemplateConfig: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除选中的 ${selectedRowKeys.length} 个邮件模板数据项?`,
+      content: '是否确认删除选中的 ${selectedRowKeys.length} 个邮件模板数据项?',
       okText: textConstants.common.ok,
       cancelText: textConstants.common.cancel,
       onOk: async () => {

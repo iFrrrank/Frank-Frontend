@@ -26,7 +26,7 @@ const ApiAccessLogPage: React.FC = () => {
       dataIndex: 'userId',
       align: 'center',
       width: 80,
-      fieldProps: { placeholder: `${textConstants.common.inputText}用户 ID` }
+      fieldProps: { placeholder: '请输入用户 ID' }
     },
     {
       title: '用户类型',
@@ -38,14 +38,14 @@ const ApiAccessLogPage: React.FC = () => {
         1: { text: '会员', status: 'Default' },
         2: { text: '管理员', status: 'Processing' }
       },
-      fieldProps: { placeholder: `${textConstants.common.inputText}用户类型` }
+      fieldProps: { placeholder: '请输入用户类型' }
     },
     {
       title: '应用名称',
       dataIndex: 'applicationName',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: `${textConstants.common.inputText}应用名称` }
+      fieldProps: { placeholder: '请输入应用名称' }
     },
     {
       title: '请求方法',
@@ -111,14 +111,14 @@ const ApiAccessLogPage: React.FC = () => {
       dataIndex: 'duration',
       align: 'center',
       width: 100,
-      fieldProps: { placeholder: `${textConstants.common.inputText}执行时长` },
+      fieldProps: { placeholder: '请输入执行时长' },
       render: (_, record) => <span>{record.duration}</span>
     },
     {
       title: '结果码',
       dataIndex: 'resultCode',
       hideInTable: true,
-      fieldProps: { placeholder: `${textConstants.common.inputText}结果码` }
+      fieldProps: { placeholder: '请输入结果码' }
     },
     {
       title: '操作结果',

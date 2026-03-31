@@ -36,7 +36,7 @@ const WangEditor: React.FC<EditorProps> = ({
     const uploadUrl = 'http://localhost:9001/admin-api/infra/file/upload'
 
     return {
-      placeholder: `${textConstants.common.inputText}内容...`,
+      placeholder: '请输入内容...',
       readOnly: readonly || disabled,
       autoFocus: false,
       scroll: true,

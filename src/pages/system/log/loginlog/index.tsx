@@ -49,14 +49,14 @@ const LoginLogPage: React.FC = () => {
       dataIndex: 'username',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: `${textConstants.common.inputText}用户名` }
+      fieldProps: { placeholder: '请输入用户名' }
     },
     {
       title: '登录地址',
       dataIndex: 'userIp',
       align: 'center',
       width: 160,
-      fieldProps: { placeholder: `${textConstants.common.inputText}登录地址` }
+      fieldProps: { placeholder: '请输入登录地址' }
     },
     {
       title: '浏览器',

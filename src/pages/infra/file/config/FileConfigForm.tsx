@@ -86,20 +86,16 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
       <ProFormText
         name="name"
         label="配置名称"
-        rules={[{ required: true, message: `${textConstants.common.inputText}配置名称` }]}
-        placeholder={`${textConstants.common.inputText}配置名称`}
+        rules={[{ required: true, message: '请输入配置名称' }]}
+        placeholder="请输入配置名称"
       />
-      <ProFormText
-        name="remark"
-        label="备注"
-        placeholder={`${textConstants.common.inputText}备注`}
-      />
+      <ProFormText name="remark" label="备注" placeholder="请输入备注" />
       <ProFormSelect
         name="storage"
         label="存储器"
         options={STORAGE_OPTIONS}
         disabled={isUpdate}
-        rules={[{ required: true, message: `${textConstants.common.selectText}存储器` }]}
+        rules={[{ required: true, message: '请选择存储器' }]}
       />
     </ModalForm>
   )

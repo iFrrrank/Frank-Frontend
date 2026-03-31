@@ -51,7 +51,7 @@ const SocialClientPage: React.FC = () => {
       width: 150,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}应用名`
+        placeholder: '请输入应用名'
       }
     },
     {
@@ -69,7 +69,7 @@ const SocialClientPage: React.FC = () => {
         32: { text: '微信开放平台' }
       },
       fieldProps: {
-        placeholder: `${textConstants.common.selectText}社交平台`
+        placeholder: '请选择社交平台'
       },
       render: (_text, record) => SOCIAL_TYPE_MAP[record.socialType] || record.socialType
     },
@@ -84,7 +84,7 @@ const SocialClientPage: React.FC = () => {
         2: { text: '会员' }
       },
       fieldProps: {
-        placeholder: `${textConstants.common.selectText}用户类型`
+        placeholder: '请选择用户类型'
       },
       render: (_text, record) => {
         const item = USER_TYPE_MAP[record.userType]
@@ -98,7 +98,7 @@ const SocialClientPage: React.FC = () => {
       width: 200,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}客户端 ID`
+        placeholder: '请输入客户端 ID'
       }
     },
     {
@@ -112,7 +112,7 @@ const SocialClientPage: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: `${textConstants.common.selectText}状态`
+        placeholder: '请选择状态'
       }
     },
     {
@@ -159,7 +159,7 @@ const SocialClientPage: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: `确定要删除应用"${record.name}"吗？`,
+      content: '确定要删除应用"${record.name}"吗？',
       onOk: async () => {
         try {
           await deleteSocialClient({ id: record.id })

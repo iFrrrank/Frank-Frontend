@@ -95,16 +95,16 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
       <ProFormSelect
         name="channelId"
         label="短信渠道 ID"
-        placeholder={`${textConstants.common.selectText}短信渠道 ID`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}短信渠道 ID` }]}
+        placeholder="请选择短信渠道 ID"
+        rules={[{ required: true, message: '请输入短信渠道 ID' }]}
         options={channelOptions}
         showSearch
       />
       <ProFormSelect
         name="type"
         label="短信类型"
-        placeholder={`${textConstants.common.selectText}短信类型`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}短信类型` }]}
+        placeholder="请选择短信类型"
+        rules={[{ required: true, message: '请输入短信类型' }]}
         options={[
           { label: '验证码', value: 1 },
           { label: '通知', value: 2 },
@@ -114,20 +114,20 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
       <ProFormText
         name="code"
         label="模板编码"
-        placeholder={`${textConstants.common.inputText}模板编码`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}模板编码` }]}
+        placeholder="请输入模板编码"
+        rules={[{ required: true, message: '请输入模板编码' }]}
       />
       <ProFormText
         name="name"
         label="模板名称"
-        placeholder={`${textConstants.common.inputText}模板名称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}模板名称` }]}
+        placeholder="请输入模板名称"
+        rules={[{ required: true, message: '请输入模板名称' }]}
       />
       <ProFormTextArea
         name="content"
         label="模板内容"
-        placeholder={`${textConstants.common.inputText}模板内容`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}模板内容` }]}
+        placeholder="请输入模板内容"
+        rules={[{ required: true, message: '请输入模板内容' }]}
         fieldProps={{ rows: 3 }}
       />
       <ProFormRadio.Group
@@ -137,18 +137,18 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: `${textConstants.common.inputText}开启状态` }]}
+        rules={[{ required: true, message: '请输入开启状态' }]}
       />
       <ProFormText
         name="apiTemplateId"
         label="短信 API 模板 ID"
-        placeholder={`${textConstants.common.inputText}短信 API 的模板ID`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}短信 API 的模板 ID` }]}
+        placeholder="请输入短信 API 的模板ID"
+        rules={[{ required: true, message: '请输入短信 API 的模板 ID' }]}
       />
       <ProFormTextArea
         name="remark"
         label="备注"
-        placeholder={`${textConstants.common.inputText}备注`}
+        placeholder="请输入备注"
         fieldProps={{ rows: 2 }}
       />
     </ModalForm>

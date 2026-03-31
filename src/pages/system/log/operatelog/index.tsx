@@ -32,21 +32,21 @@ const OperateLogConfig: React.FC = () => {
       dataIndex: 'userName',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: `${textConstants.common.inputText}操作人` }
+      fieldProps: { placeholder: '请输入操作人' }
     },
     {
       title: '操作模块',
       dataIndex: 'type',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: `${textConstants.common.inputText}操作模块` }
+      fieldProps: { placeholder: '请输入操作模块' }
     },
     {
       title: '操作名',
       dataIndex: 'subType',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: `${textConstants.common.inputText}操作名` }
+      fieldProps: { placeholder: '请输入操作名' }
     },
     {
       title: '操作内容',
@@ -87,14 +87,14 @@ const OperateLogConfig: React.FC = () => {
       dataIndex: 'bizId',
       align: 'center',
       width: 120,
-      fieldProps: { placeholder: `${textConstants.common.inputText}业务 ID` }
+      fieldProps: { placeholder: '请输入业务 ID' }
     },
     {
       title: '操作 IP',
       dataIndex: 'userIp',
       align: 'center',
       width: 140,
-      fieldProps: { placeholder: `${textConstants.common.inputText}操作 IP` }
+      fieldProps: { placeholder: '请输入操作 IP' }
     },
     {
       title: '操作',

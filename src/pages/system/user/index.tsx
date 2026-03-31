@@ -39,7 +39,7 @@ const SystemUser: React.FC = () => {
       width: 80,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}员工 ID`
+        placeholder: '请输入员工 ID'
       }
     },
     {
@@ -49,7 +49,7 @@ const SystemUser: React.FC = () => {
       width: 120,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}用户名`
+        placeholder: '请输入用户名'
       }
     },
     {
@@ -59,7 +59,7 @@ const SystemUser: React.FC = () => {
       width: 200,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}邮箱`
+        placeholder: '请输入邮箱'
       }
     },
     {
@@ -77,7 +77,7 @@ const SystemUser: React.FC = () => {
       valueType: 'select',
       valueEnum: COMMON_STATUS_VALUE_ENUM,
       fieldProps: {
-        placeholder: `${textConstants.common.selectText}状态`
+        placeholder: '请选择状态'
       }
     },
     {
@@ -140,10 +140,10 @@ const SystemUser: React.FC = () => {
       onOk: async () => {
         try {
           await deleteUser({ id: record.id })
-          message.success(`${textConstants.action.delete}${textConstants.common.success}`)
+          message.success('${textConstants.action.delete}${textConstants.common.success}')
           actionRef.current?.reload()
         } catch {
-          message.error(`${textConstants.action.delete}${textConstants.common.fail}`)
+          message.error('${textConstants.action.delete}${textConstants.common.fail}')
         }
       }
     })

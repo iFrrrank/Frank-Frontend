@@ -116,7 +116,7 @@ const FileConfigPage: React.FC = () => {
       title: '配置名称',
       dataIndex: 'name',
       align: 'center',
-      fieldProps: { placeholder: `${textConstants.common.inputText}配置名称` }
+      fieldProps: { placeholder: '请输入配置名称' }
     },
     {
       title: '存储器',
@@ -145,7 +145,7 @@ const FileConfigPage: React.FC = () => {
         },
         {} as Record<string, any>
       ),
-      fieldProps: { placeholder: `${textConstants.common.inputText}存储器` }
+      fieldProps: { placeholder: '请输入存储器' }
     },
     {
       title: '备注',

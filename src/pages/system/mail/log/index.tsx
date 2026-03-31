@@ -110,7 +110,7 @@ const MailLog: React.FC = () => {
       dataIndex: 'userId',
       hideInTable: true,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}用户编号`
+        placeholder: '请输入用户编号'
       },
       order: 3
     },
@@ -121,7 +121,7 @@ const MailLog: React.FC = () => {
       valueType: 'select',
       valueEnum: userTypeEnum,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}用户类型`
+        placeholder: '请输入用户类型'
       },
       order: 2
     },
@@ -131,7 +131,7 @@ const MailLog: React.FC = () => {
       align: 'center',
       width: 180,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}接收邮箱`
+        placeholder: '请输入接收邮箱'
       },
       order: 7 // 对应图中顺序 第一排左
     },
@@ -156,7 +156,7 @@ const MailLog: React.FC = () => {
       dataIndex: 'templateCode',
       hideInTable: true,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}模板编号`
+        placeholder: '请输入模板编号'
       },
       order: 5 // 第一排右
     },
@@ -168,7 +168,7 @@ const MailLog: React.FC = () => {
       valueType: 'select',
       valueEnum: sendStatusEnum,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}发送状态`
+        placeholder: '请输入发送状态'
       },
       order: 4 // 第二排左
     },
@@ -179,7 +179,7 @@ const MailLog: React.FC = () => {
       width: 200,
       valueType: 'select',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}邮箱账号`,
+        placeholder: '请输入邮箱账号',
         options: accountOptions,
         showSearch: true
       },

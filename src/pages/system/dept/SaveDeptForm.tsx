@@ -123,7 +123,7 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         name="parentId"
         label="上级部门"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.selectText}上级部门`}
+        placeholder="请选择上级部门"
         request={async () => {
           // 拉取精简的树形部门数据作为上级选择
           const resp = await getSimpleDeptList()
@@ -135,28 +135,28 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           fieldNames: { label: 'title', value: 'value' },
           treeDefaultExpandAll: true
         }}
-        rules={[{ required: true, message: `${textConstants.common.inputText}上级部门` }]}
+        rules={[{ required: true, message: '请输入上级部门' }]}
       />
       <ProFormText
         name="name"
         label="部门名称"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}部门名称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}部门名称` }]}
+        placeholder="请输入部门名称"
+        rules={[{ required: true, message: '请输入部门名称' }]}
       />
       <ProFormDigit
         name="sort"
         label="显示排序"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}显示排序`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}显示排序` }]}
+        placeholder="请输入显示排序"
+        rules={[{ required: true, message: '请输入显示排序' }]}
         fieldProps={{ min: 0 }}
       />
       <ProFormSelect
         name="leaderUserId"
         label="负责人"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.selectText}负责人`}
+        placeholder="请选择负责人"
         showSearch
         request={async () => {
           const list = await fetchUserList()
@@ -170,14 +170,14 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         name="phone"
         label="联系电话"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}联系电话`}
+        placeholder="请输入联系电话"
       />
       <ProFormText
         name="email"
         label="邮箱"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}邮箱`}
-        rules={[{ type: 'email', message: `${textConstants.common.inputText}正确的邮箱格式` }]}
+        placeholder="请输入邮箱"
+        rules={[{ type: 'email', message: '请输入正确的邮箱格式' }]}
       />
       <ProFormSelect
         name="status"
@@ -187,7 +187,7 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
+        rules={[{ required: true, message: '请输入状态' }]}
         allowClear
       />
     </ModalForm>

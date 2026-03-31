@@ -90,38 +90,34 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
       <ProFormSelect
         name="accountId"
         label="邮箱账号"
-        placeholder={`${textConstants.common.selectText}邮箱账号`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}邮箱账号` }]}
+        placeholder="请选择邮箱账号"
+        rules={[{ required: true, message: '请输入邮箱账号' }]}
         options={accountOptions}
         showSearch
       />
       <ProFormText
         name="code"
         label="模板编码"
-        placeholder={`${textConstants.common.inputText}模板编码`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}模板编码` }]}
+        placeholder="请输入模板编码"
+        rules={[{ required: true, message: '请输入模板编码' }]}
       />
       <ProFormText
         name="name"
         label="模板名称"
-        placeholder={`${textConstants.common.inputText}模板名称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}模板名称` }]}
+        placeholder="请输入模板名称"
+        rules={[{ required: true, message: '请输入模板名称' }]}
       />
-      <ProFormText
-        name="nickname"
-        label="发送人名称"
-        placeholder={`${textConstants.common.inputText}发送人名称`}
-      />
+      <ProFormText name="nickname" label="发送人名称" placeholder="请输入发送人名称" />
       <ProFormText
         name="title"
         label="模板标题"
-        placeholder={`${textConstants.common.inputText}模板标题`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}模板标题` }]}
+        placeholder="请输入模板标题"
+        rules={[{ required: true, message: '请输入模板标题' }]}
       />
       <ProForm.Item
         name="content"
         label="模板内容"
-        rules={[{ required: true, message: `${textConstants.common.inputText}模板内容` }]}
+        rules={[{ required: true, message: '请输入模板内容' }]}
         wrapperCol={{ span: 20 }}
       >
         <Editor height={100} />
@@ -129,17 +125,13 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
       <ProFormRadio.Group
         name="status"
         label="开启状态"
-        rules={[{ required: true, message: `${textConstants.common.inputText}开启状态` }]}
+        rules={[{ required: true, message: '请输入开启状态' }]}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
       />
-      <ProFormTextArea
-        name="remark"
-        label="备注"
-        placeholder={`${textConstants.common.inputText}备注`}
-      />
+      <ProFormTextArea name="remark" label="备注" placeholder="请输入备注" />
     </ModalForm>
   )
 }

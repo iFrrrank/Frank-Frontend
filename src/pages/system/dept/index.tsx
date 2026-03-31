@@ -74,7 +74,7 @@ const DeptManagement: React.FC = () => {
     Modal.confirm({
       title: textConstants.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除勾选的 ${selectedRowKeys.length} 项数据？`,
+      content: '是否确认删除勾选的 ${selectedRowKeys.length} 项数据？',
       okText: textConstants.common.ok,
       cancelText: textConstants.common.cancel,
       onOk: async () => {
@@ -111,7 +111,7 @@ const DeptManagement: React.FC = () => {
       dataIndex: 'name',
       width: 250,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}部门名称`
+        placeholder: '请输入部门名称'
       }
     },
     {
@@ -143,7 +143,7 @@ const DeptManagement: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: `${textConstants.common.selectText}部门状态`
+        placeholder: '请选择部门状态'
       }
     },
     {

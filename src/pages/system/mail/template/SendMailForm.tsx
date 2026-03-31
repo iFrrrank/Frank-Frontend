@@ -66,20 +66,20 @@ const SendMailForm: React.FC = () => {
       <ProFormTextArea
         name="mail"
         label="收件邮箱"
-        placeholder={`${textConstants.common.inputText}收件邮箱，多个邮箱用回车分隔`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}收件邮箱` }]}
+        placeholder="请输入收件邮箱，多个邮箱用回车分隔"
+        rules={[{ required: true, message: '请输入收件邮箱' }]}
         fieldProps={{ rows: 2 }}
       />
       <ProFormTextArea
         name="ccMail"
         label="抄送邮箱"
-        placeholder={`${textConstants.common.inputText}抄送邮箱，多个邮箱用回车分隔`}
+        placeholder="请输入抄送邮箱，多个邮箱用回车分隔"
         fieldProps={{ rows: 2 }}
       />
       <ProFormTextArea
         name="bccMail"
         label="密送邮箱"
-        placeholder={`${textConstants.common.inputText}密送邮箱，多个邮箱用回车分隔`}
+        placeholder="请输入密送邮箱，多个邮箱用回车分隔"
         fieldProps={{ rows: 2 }}
       />
     </ModalForm>

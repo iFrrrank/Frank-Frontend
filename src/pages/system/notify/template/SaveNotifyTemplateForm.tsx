@@ -87,33 +87,33 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
       <ProFormText
         name="code"
         label="模板编码"
-        placeholder={`${textConstants.common.inputText}模板编码`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}模板编码` }]}
+        placeholder="请输入模板编码"
+        rules={[{ required: true, message: '请输入模板编码' }]}
       />
       <ProFormText
         name="name"
         label="模板名称"
-        placeholder={`${textConstants.common.inputText}模板名称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}模板名称` }]}
+        placeholder="请输入模板名称"
+        rules={[{ required: true, message: '请输入模板名称' }]}
       />
       <ProFormText
         name="nickname"
         label="发件人名称"
-        placeholder={`${textConstants.common.inputText}发件人名称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}发件人名称` }]}
+        placeholder="请输入发件人名称"
+        rules={[{ required: true, message: '请输入发件人名称' }]}
       />
       <ProFormTextArea
         name="content"
         label="模板内容"
-        placeholder={`${textConstants.common.inputText}模板内容`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}模板内容` }]}
+        placeholder="请输入模板内容"
+        rules={[{ required: true, message: '请输入模板内容' }]}
         fieldProps={{ rows: 3 }}
       />
       <ProFormSelect
         name="type"
         label="类型"
-        placeholder={`${textConstants.common.selectText}类型`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}类型` }]}
+        placeholder="请选择类型"
+        rules={[{ required: true, message: '请输入类型' }]}
         options={[
           { label: '系统通知', value: 1 },
           { label: '业务通知', value: 2 },
@@ -123,17 +123,13 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
       <ProFormRadio.Group
         name="status"
         label="开启状态"
-        rules={[{ required: true, message: `${textConstants.common.inputText}开启状态` }]}
+        rules={[{ required: true, message: '请输入开启状态' }]}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
       />
-      <ProFormText
-        name="remark"
-        label="备注"
-        placeholder={`${textConstants.common.inputText}备注`}
-      />
+      <ProFormText name="remark" label="备注" placeholder="请输入备注" />
     </ModalForm>
   )
 }

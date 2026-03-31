@@ -88,7 +88,7 @@ const MenuManagement: React.FC = () => {
       dataIndex: 'name',
       width: 250,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}菜单名称`
+        placeholder: '请输入菜单名称'
       }
     },
     {
@@ -138,7 +138,7 @@ const MenuManagement: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}菜单状态`
+        placeholder: '请输入菜单状态'
       },
       render: (_, record) => (
         <Switch

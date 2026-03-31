@@ -80,7 +80,7 @@ const JobLogPage: React.FC = () => {
       title: '处理器的名字',
       dataIndex: 'handlerName',
       align: 'center',
-      fieldProps: { placeholder: `${textConstants.common.inputText}处理器的名字` }
+      fieldProps: { placeholder: '请输入处理器的名字' }
     },
     {
       title: '处理器的参数',
@@ -133,7 +133,7 @@ const JobLogPage: React.FC = () => {
         },
         {} as Record<string, any>
       ),
-      fieldProps: { placeholder: `${textConstants.common.inputText}任务状态` }
+      fieldProps: { placeholder: '请输入任务状态' }
     },
     {
       title: '操作',

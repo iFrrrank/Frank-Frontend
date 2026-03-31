@@ -88,39 +88,39 @@ const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
         name="name"
         label="岗位标题"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}岗位名称`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}岗位标题` }]}
+        placeholder="请输入岗位名称"
+        rules={[{ required: true, message: '请输入岗位标题' }]}
       />
       <ProFormText
         name="code"
         label="岗位编码"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}岗位编码`}
-        rules={[{ required: true, message: `${textConstants.common.inputText}岗位编码` }]}
+        placeholder="请输入岗位编码"
+        rules={[{ required: true, message: '请输入岗位编码' }]}
       />
       <ProFormDigit
         name="sort"
         label="岗位顺序"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}岗位顺序`}
+        placeholder="请输入岗位顺序"
         fieldProps={{ min: 0 }}
       />
       <ProFormSelect
         name="status"
         label="状态"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.selectText}状态`}
+        placeholder="请选择状态"
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: `${textConstants.common.inputText}状态` }]}
+        rules={[{ required: true, message: '请输入状态' }]}
       />
       <ProFormTextArea
         name="remark"
         label="备注"
         colProps={{ span: 24 }}
-        placeholder={`${textConstants.common.inputText}备注内容`}
+        placeholder="请输入备注内容"
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>
