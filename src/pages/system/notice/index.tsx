@@ -1,13 +1,8 @@
 import React, { useRef, useState } from 'react'
-import {
-  type ActionType,
-  type ProColumns,
-  type ProFormInstance,
-  ProTable
-} from '@ant-design/pro-components'
+import { type ActionType, type ProColumns, type ProFormInstance, ProTable } from '@ant-design/pro-components'
 import { textConstants } from '@/locales/zh-CN'
 import { Button, message, Modal, Space, Typography } from 'antd'
-import SaveNoticeModal, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
+import SaveNoticeForm, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { deleteNotice, getNoticePage, push } from '@/api/system/notice'
 
@@ -226,7 +221,7 @@ const NoticeConfig: React.FC = () => {
         ]}
       />
 
-      <SaveNoticeModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveNoticeForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

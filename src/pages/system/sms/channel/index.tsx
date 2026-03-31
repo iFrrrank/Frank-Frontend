@@ -2,10 +2,7 @@ import React, { useRef, useState } from 'react'
 import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import { textConstants } from '@/locales/zh-CN'
 import { Button, message, Modal, Tag, Typography } from 'antd'
-import SaveSmsChannelModal, {
-  handleCreateSmsChannel,
-  handleEditSmsChannel
-} from './SaveSmsChannelForm'
+import SaveSmsChannelForm, { handleCreateSmsChannel, handleEditSmsChannel } from './SaveSmsChannelForm'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { deleteSmsChannel, getSmsChannelPage } from '@/api/system/smsChannel'
 
@@ -276,7 +273,7 @@ const SmsChannelConfig: React.FC = () => {
         ]}
       />
 
-      <SaveSmsChannelModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveSmsChannelForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

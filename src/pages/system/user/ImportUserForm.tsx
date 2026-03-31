@@ -9,7 +9,7 @@ const { Dragger } = Upload
 
 export let handleImportUser: () => void
 
-const ImportUserModal: React.FC = () => {
+const ImportUserForm: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const [importModalVisible, setImportModalVisible] = useState(false)
   const [importFile, setImportFile] = useState<File | null>(null)
@@ -113,4 +113,4 @@ const ImportUserModal: React.FC = () => {
   )
 }
 
-export default ImportUserModal
+export default ImportUserForm

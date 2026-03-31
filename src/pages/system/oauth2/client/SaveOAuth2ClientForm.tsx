@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
 import { message } from 'antd'
-import {
-  ModalForm,
-  ProFormDigit,
-  ProFormSelect,
-  ProFormText,
-  ProFormTextArea
-} from '@ant-design/pro-components'
+import { ModalForm, ProFormDigit, ProFormSelect, ProFormText, ProFormTextArea } from '@ant-design/pro-components'
 import { createOAuth2Client, getOAuth2Client, updateOAuth2Client } from '@/api/system/oAuth2Client'
 import { textConstants } from '@/locales/zh-CN'
 
@@ -17,7 +11,7 @@ interface SaveOAuth2ClientModalProps {
   onSuccess: () => void
 }
 
-const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess }) => {
+const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingClient, setEditingClient] = useState<API.SystemOAuth2ClientRespVO | null>(null)
 
@@ -272,4 +266,4 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
   )
 }
 
-export default SaveOAuth2ClientModal
+export default SaveOAuth2ClientForm

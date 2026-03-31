@@ -4,10 +4,7 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-de
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteNotifyTemplate, getNotifyTemplatePage } from '@/api/system/notifyTemplate'
-import SaveNotifyTemplateModal, {
-  handleCreateNotifyTemplate,
-  handleEditNotifyTemplate
-} from './SaveNotifyTemplateForm'
+import SaveNotifyTemplateForm, { handleCreateNotifyTemplate, handleEditNotifyTemplate } from './SaveNotifyTemplateForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const NotifyTemplateConfig: React.FC = () => {
@@ -251,7 +248,7 @@ const NotifyTemplateConfig: React.FC = () => {
         ]}
       />
 
-      <SaveNotifyTemplateModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveNotifyTemplateForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

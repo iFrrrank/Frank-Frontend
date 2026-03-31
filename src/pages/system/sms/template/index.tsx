@@ -1,22 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Button, message, Modal, Tag, Typography } from 'antd'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { DeleteOutlined, DownloadOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import {
-  deleteSmsTemplate,
-  exportSmsTemplateExcel,
-  getSmsTemplatePage
-} from '@/api/system/smsTemplate'
-import SaveSmsTemplateModal, {
-  handleCreateSmsTemplate,
-  handleEditSmsTemplate
-} from './SaveSmsTemplateForm'
+import { deleteSmsTemplate, exportSmsTemplateExcel, getSmsTemplatePage } from '@/api/system/smsTemplate'
+import SaveSmsTemplateForm, { handleCreateSmsTemplate, handleEditSmsTemplate } from './SaveSmsTemplateForm'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
 import { textConstants } from '@/locales/zh-CN'
 
@@ -394,7 +382,7 @@ const SmsTemplateConfig: React.FC = () => {
         ]}
       />
 
-      <SaveSmsTemplateModal
+      <SaveSmsTemplateForm
         onSuccess={() => actionRef.current?.reload()}
         channelOptions={channelOptions}
       />

@@ -20,7 +20,7 @@ interface SaveMailTemplateModalProps {
   accountOptions: { label: string; value: number }[]
 }
 
-const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
+const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
   onSuccess,
   accountOptions
 }) => {
@@ -144,4 +144,4 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
   )
 }
 
-export default SaveMailTemplateModal
+export default SaveMailTemplateForm

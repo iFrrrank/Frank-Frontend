@@ -18,7 +18,7 @@ interface SaveNoticeModalProps {
   onSuccess: () => void
 }
 
-const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
+const SaveNoticeForm: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [editingNotice, setEditingNotice] = useState<API.SystemNoticeRespVO | null>(null)
 
@@ -122,4 +122,4 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SaveNoticeModal
+export default SaveNoticeForm

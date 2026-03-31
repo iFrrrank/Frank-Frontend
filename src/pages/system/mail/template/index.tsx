@@ -4,11 +4,8 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-de
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailTemplate, getMailTemplatePage } from '@/api/system/mailTemplate'
-import SaveMailTemplateModal, {
-  handleCreateMailTemplate,
-  handleEditMailTemplate
-} from './SaveMailTemplateForm'
-import SendMailModal, { handleTestMailTemplate } from './SendMailForm'
+import SaveMailTemplateForm, { handleCreateMailTemplate, handleEditMailTemplate } from './SaveMailTemplateForm'
+import SendMailForm, { handleTestMailTemplate } from './SendMailForm'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
 
 import '@wangeditor/editor/dist/css/style.css'
@@ -279,11 +276,11 @@ const MailTemplateConfig: React.FC = () => {
         ]}
       />
 
-      <SaveMailTemplateModal
+      <SaveMailTemplateForm
         onSuccess={() => actionRef.current?.reload()}
         accountOptions={accountOptions}
       />
-      <SendMailModal />
+      <SendMailForm />
     </>
   )
 }

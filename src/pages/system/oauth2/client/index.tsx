@@ -12,10 +12,7 @@ import {
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteOAuth2Client, getOAuth2Client, getOAuth2ClientPage } from '@/api/system/oAuth2Client'
-import SaveOAuth2ClientModal, {
-  handleCreateOAuth2Client,
-  handleEditOAuth2Client
-} from './SaveOAuth2ClientForm'
+import SaveOAuth2ClientForm, { handleCreateOAuth2Client, handleEditOAuth2Client } from './SaveOAuth2ClientForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const App_: React.FC = () => {
@@ -301,7 +298,7 @@ const App_: React.FC = () => {
         />
       </Col>
 
-      <SaveOAuth2ClientModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveOAuth2ClientForm onSuccess={() => actionRef.current?.reload()} />
 
       {/* ========== 复制凭证弹窗 ========== */}
       <Modal

@@ -18,7 +18,7 @@ interface SaveDictDataModalProps {
   onSuccess: () => void
 }
 
-const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
+const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingDictData, setEditingDictData] = useState<any | null>(null)
 
@@ -165,4 +165,4 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SaveDictDataModal
+export default SaveDictDataForm

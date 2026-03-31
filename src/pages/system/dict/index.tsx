@@ -1,16 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal } from 'antd'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { DeleteOutlined, DownloadOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { history } from '@umijs/max'
 import { deleteDictType, export2, pageDictTypes } from '@/api/system/dictType'
-import SaveDictTypeModal, { handleCreateDictType, handleEditDictType } from './SaveDictTypeForm'
+import SaveDictTypeForm, { handleCreateDictType, handleEditDictType } from './SaveDictTypeForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const DictTypeConfig: React.FC = () => {
@@ -270,7 +265,7 @@ const DictTypeConfig: React.FC = () => {
         ]}
       />
 
-      <SaveDictTypeModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveDictTypeForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

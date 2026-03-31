@@ -11,7 +11,7 @@ interface SaveDictTypeModalProps {
   onSuccess: () => void
 }
 
-const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
+const SaveDictTypeForm: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingDictType, setEditingDictType] = useState<API.SystemDictTypeRespVO | null>(null)
 
@@ -118,4 +118,4 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SaveDictTypeModal
+export default SaveDictTypeForm

@@ -17,7 +17,7 @@ import { buildTreeData } from '@/utils/tree'
 export let handleEditUser: (record: API.SystemUserRespVO) => void
 export let handleCreateUser: () => void
 
-const SaveUserModal: React.FC = () => {
+const SaveUserForm: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingUser, setEditingUser] = useState<API.SystemUserRespVO | null>(null)
@@ -199,4 +199,4 @@ const SaveUserModal: React.FC = () => {
   )
 }
 
-export default SaveUserModal
+export default SaveUserForm

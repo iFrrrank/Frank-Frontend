@@ -11,7 +11,7 @@ interface SaveMailAccountModalProps {
   onSuccess: () => void
 }
 
-const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }) => {
+const SaveMailAccountForm: React.FC<SaveMailAccountModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingMailAccount, setEditingMailAccount] = useState<API.SystemMailAccountRespVO | null>(
     null
@@ -137,4 +137,4 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
   )
 }
 
-export default SaveMailAccountModal
+export default SaveMailAccountForm

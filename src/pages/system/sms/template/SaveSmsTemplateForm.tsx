@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
 import { message } from 'antd'
-import {
-  ModalForm,
-  ProFormRadio,
-  ProFormSelect,
-  ProFormText,
-  ProFormTextArea
-} from '@ant-design/pro-components'
+import { ModalForm, ProFormRadio, ProFormSelect, ProFormText, ProFormTextArea } from '@ant-design/pro-components'
 import { createSmsTemplate, updateSmsTemplate } from '@/api/system/smsTemplate'
 import { textConstants } from '@/locales/zh-CN'
 
@@ -18,7 +12,7 @@ interface SaveSmsTemplateModalProps {
   channelOptions: { label: string; value: number }[]
 }
 
-const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({
+const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
   onSuccess,
   channelOptions
 }) => {
@@ -155,4 +149,4 @@ const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({
   )
 }
 
-export default SaveSmsTemplateModal
+export default SaveSmsTemplateForm

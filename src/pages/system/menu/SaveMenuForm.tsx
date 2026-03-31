@@ -33,7 +33,7 @@ const handleTreeData = (data: any[], parentId: number = 0): any[] => {
   return tree.sort((a, b) => a.sort - b.sort) // 排序
 }
 
-const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
+const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingMenu, setEditingMenu] = useState<any>(null)
 
@@ -275,4 +275,4 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SaveMenuModal
+export default SaveMenuForm

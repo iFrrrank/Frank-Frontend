@@ -17,7 +17,7 @@ interface SaveNotifyTemplateModalProps {
   onSuccess: () => void
 }
 
-const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuccess }) => {
+const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingTemplate, setEditingTemplate] = useState<API.SystemNotifyTemplateRespVO | null>(
     null
@@ -134,4 +134,4 @@ const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuc
   )
 }
 
-export default SaveNotifyTemplateModal
+export default SaveNotifyTemplateForm

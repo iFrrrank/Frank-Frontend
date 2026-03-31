@@ -2,16 +2,11 @@ import React, { useRef, useState } from 'react'
 import { Button, message, Modal, Switch } from 'antd'
 import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import * as AntdIcons from '@ant-design/icons'
-import {
-  ExclamationCircleOutlined,
-  PlusOutlined,
-  SwapOutlined,
-  SyncOutlined
-} from '@ant-design/icons'
+import { ExclamationCircleOutlined, PlusOutlined, SwapOutlined, SyncOutlined } from '@ant-design/icons'
 
 import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
 import { textConstants } from '@/locales/zh-CN'
-import SaveMenuModal, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
+import SaveMenuForm, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
 import { handleTreeData } from '@/utils/tree'
 
 // 动态渲染图标
@@ -243,7 +238,7 @@ const MenuManagement: React.FC = () => {
         ]}
       />
 
-      <SaveMenuModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveMenuForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

@@ -1,16 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal } from 'antd'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { DeleteOutlined, DownloadOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deletePost, export1, getPostPage } from '@/api/system/post'
 
-import SavePostModal, { handleCreatePost, handleEditPost } from './SavePostForm'
+import SavePostForm, { handleCreatePost, handleEditPost } from './SavePostForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const PostManagement: React.FC = () => {
@@ -265,7 +260,7 @@ const PostManagement: React.FC = () => {
         ]}
       />
 
-      <SavePostModal onSuccess={() => actionRef.current?.reload()} />
+      <SavePostForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

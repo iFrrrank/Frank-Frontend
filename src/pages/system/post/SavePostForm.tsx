@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
 import { message } from 'antd'
-import {
-  ModalForm,
-  ProFormDigit,
-  ProFormSelect,
-  ProFormText,
-  ProFormTextArea
-} from '@ant-design/pro-components'
+import { ModalForm, ProFormDigit, ProFormSelect, ProFormText, ProFormTextArea } from '@ant-design/pro-components'
 import { createPost, updatePost } from '@/api/system/post'
 import { textConstants } from '@/locales/zh-CN'
 
@@ -17,7 +11,7 @@ interface SavePostModalProps {
   onSuccess: () => void
 }
 
-const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
+const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingPost, setEditingPost] = useState<API.SystemPostRespVO | null>(null)
 
@@ -127,4 +121,4 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SavePostModal
+export default SavePostForm

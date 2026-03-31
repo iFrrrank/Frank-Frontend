@@ -1,18 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal } from 'antd'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { DeleteOutlined, DownloadOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteRole, exportUsingGet, getRolePage } from '@/api/system/role'
 
 import SaveRoleForm, { handleCreateRole, handleEditRole } from './SaveRoleForm'
-import AssignMenuModal, { handleOpenMenuAssign } from './AssignMenuForm'
-import AssignDataScopeModal, { handleOpenDataScope } from './AssignDataScopeForm'
+import AssignMenuForm, { handleOpenMenuAssign } from './AssignMenuForm'
+import AssignDataScopeForm, { handleOpenDataScope } from './AssignDataScopeForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const Role: React.FC = () => {
@@ -301,8 +296,8 @@ const Role: React.FC = () => {
 
       {/* ========== 新增/修改角色弹窗 ========== */}
       <SaveRoleForm onSuccess={() => actionRef.current?.reload()} />
-      <AssignMenuModal />
-      <AssignDataScopeModal />
+      <AssignMenuForm />
+      <AssignDataScopeForm />
     </>
   )
 }

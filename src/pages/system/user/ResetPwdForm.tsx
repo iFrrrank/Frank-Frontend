@@ -6,7 +6,7 @@ import { textConstants } from '@/locales/zh-CN'
 
 export let handleResetPwd: (record: API.SystemUserRespVO) => void
 
-const ResetPwdModal: React.FC = () => {
+const ResetPwdForm: React.FC = () => {
   const [resetPwdVisible, setResetPwdVisible] = useState(false)
   const [resetPwdUser, setResetPwdUser] = useState<API.SystemUserRespVO | null>(null)
   const [newPassword, setNewPassword] = useState('')
@@ -59,4 +59,4 @@ const ResetPwdModal: React.FC = () => {
   )
 }
 
-export default ResetPwdModal
+export default ResetPwdForm

@@ -5,7 +5,7 @@ import { assignRoleDataScope } from '@/api/system/permission'
 
 export let handleOpenDataScope: (record: API.SystemRoleRespVO) => void
 
-const AssignDataScopeModal: React.FC = () => {
+const AssignDataScopeForm: React.FC = () => {
   const [dataScopeVisible, setDataScopeVisible] = useState(false)
   const [dataScopeRole, setDataScopeRole] = useState<API.SystemRoleRespVO | null>(null)
 
@@ -95,4 +95,4 @@ const AssignDataScopeModal: React.FC = () => {
   )
 }
 
-export default AssignDataScopeModal
+export default AssignDataScopeForm

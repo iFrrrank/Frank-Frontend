@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Space, Switch, Tree, message } from 'antd'
+import { message, Modal, Space, Switch, Tree } from 'antd'
 import type { DataNode } from 'antd/es/tree'
 import { assignRoleMenu, getRoleMenuList } from '@/api/system/permission'
 import { getSimpleMenuList } from '@/api/system/menu'
@@ -27,7 +27,7 @@ const buildMenuTreeData = (list: { id: number; name: string; parentId: number }[
   return tree
 }
 
-const AssignMenuModal: React.FC = () => {
+const AssignMenuForm: React.FC = () => {
   const [menuModalVisible, setMenuModalVisible] = useState(false)
   const [currentRole, setCurrentRole] = useState<API.SystemRoleRespVO | null>(null)
   const [menuTreeData, setMenuTreeData] = useState<DataNode[]>([])
@@ -189,5 +189,4 @@ const AssignMenuModal: React.FC = () => {
   )
 }
 
-export default AssignMenuModal
-
+export default AssignMenuForm

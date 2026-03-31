@@ -7,7 +7,7 @@ import { textConstants } from '@/locales/zh-CN'
 
 export let handleAssignRole: (record: API.SystemUserRespVO) => void
 
-const AssignRoleModal: React.FC = () => {
+const AssignRoleForm: React.FC = () => {
   const [assignRoleVisible, setAssignRoleVisible] = useState(false)
   const [assignRoleUser, setAssignRoleUser] = useState<API.SystemUserRespVO | null>(null)
   const [assignRoleIds, setAssignRoleIds] = useState<number[]>([])
@@ -117,4 +117,4 @@ const AssignRoleModal: React.FC = () => {
   )
 }
 
-export default AssignRoleModal
+export default AssignRoleForm

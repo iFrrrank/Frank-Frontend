@@ -5,10 +5,7 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailAccount, getMailAccountPage } from '@/api/system/mailAccount'
 
-import SaveMailAccountModal, {
-  handleCreateMailAccount,
-  handleEditMailAccount
-} from './SaveMailAccountForm'
+import SaveMailAccountForm, { handleCreateMailAccount, handleEditMailAccount } from './SaveMailAccountForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const MailAccountConfig: React.FC = () => {
@@ -227,7 +224,7 @@ const MailAccountConfig: React.FC = () => {
         ]}
       />
 
-      <SaveMailAccountModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveMailAccountForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

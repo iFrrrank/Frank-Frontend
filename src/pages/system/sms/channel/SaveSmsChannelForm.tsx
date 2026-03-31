@@ -17,7 +17,7 @@ interface SaveSmsChannelModalProps {
   onSuccess: () => void
 }
 
-const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) => {
+const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingSmsChannel, setEditingSmsChannel] = useState<API.SystemSmsChannelRespVO | null>(
     null
@@ -141,4 +141,4 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
   )
 }
 
-export default SaveSmsChannelModal
+export default SaveSmsChannelForm

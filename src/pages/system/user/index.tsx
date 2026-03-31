@@ -17,10 +17,10 @@ import { ProTable } from '@ant-design/pro-components'
 import { deleteUser, exportUserList, getUser, getUserPage } from '@/api/system/user'
 import DeptTree from '@/pages/system/user/DeptTree'
 import { COMMON_STATUS_VALUE_ENUM } from '@/utils/constantsValue'
-import ResetPwdModal, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
-import AssignRoleModal, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
-import ImportUserModal, { handleImportUser } from '@/pages/system/user/ImportUserForm'
-import SaveUserModal, { handleCreateUser, handleEditUser } from '@/pages/system/user/SaveUserForm'
+import ResetPwdForm, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
+import AssignRoleForm, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
+import ImportUserForm, { handleImportUser } from '@/pages/system/user/ImportUserForm'
+import SaveUserForm, { handleCreateUser, handleEditUser } from '@/pages/system/user/SaveUserForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const SystemUser: React.FC = () => {
@@ -317,13 +317,13 @@ const SystemUser: React.FC = () => {
         />
       </Col>
 
-      <SaveUserModal />
+      <SaveUserForm />
 
-      <ResetPwdModal />
+      <ResetPwdForm />
 
-      <AssignRoleModal />
+      <AssignRoleForm />
 
-      <ImportUserModal />
+      <ImportUserForm />
     </Row>
   )
 }

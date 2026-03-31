@@ -1,20 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {
-  type ActionType,
-  type ProColumns,
-  type ProFormInstance,
-  ProTable
-} from '@ant-design/pro-components'
+import { type ActionType, type ProColumns, type ProFormInstance, ProTable } from '@ant-design/pro-components'
 import { useParams } from '@umijs/max'
 import { getSimpleDictTypeList } from '@/api/system/dictType'
 import { textConstants } from '@/locales/zh-CN'
-import SaveDictDataModal, { handleCreateDictData, handleEditDictData } from './SaveDictDataForm'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import SaveDictDataForm, { handleCreateDictData, handleEditDictData } from './SaveDictDataForm'
+import { DeleteOutlined, DownloadOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { deleteDictData, export3, getDictTypePage } from '@/api/system/dictData'
 import { Button, message, Modal } from 'antd'
 
@@ -311,7 +301,7 @@ const DictDataList: React.FC = () => {
         ]}
       />
 
-      <SaveDictDataModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveDictDataForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }
