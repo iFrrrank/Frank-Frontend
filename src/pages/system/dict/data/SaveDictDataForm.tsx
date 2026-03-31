@@ -138,7 +138,7 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
         name="colorType"
         label="颜色类型"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.selectText"
+        placeholder={`${textConstants.common.selectText}`}
         options={[
           { label: '默认（default）', value: 'default' },
           { label: '主要（primary）', value: 'primary' },

@@ -90,7 +90,7 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
       <ProFormSelect
         name="accountId"
         label="邮箱账号"
-        placeholder="textConstants.common.selectText邮箱账号"
+        placeholder={`${textConstants.common.selectText}邮箱账号`}
         rules={[{ required: true, message: `${textConstants.common.inputText}邮箱账号` }]}
         options={accountOptions}
         showSearch

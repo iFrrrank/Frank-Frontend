@@ -112,7 +112,7 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
       <ProFormSelect
         name="type"
         label="类型"
-        placeholder="textConstants.common.selectText类型"
+        placeholder={`${textConstants.common.selectText}类型`}
         rules={[{ required: true, message: `${textConstants.common.inputText}类型` }]}
         options={[
           { label: '系统通知', value: 1 },

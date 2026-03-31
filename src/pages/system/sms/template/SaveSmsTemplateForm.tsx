@@ -95,7 +95,7 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
       <ProFormSelect
         name="channelId"
         label="短信渠道 ID"
-        placeholder="textConstants.common.selectText短信渠道 ID"
+        placeholder={`${textConstants.common.selectText}短信渠道 ID`}
         rules={[{ required: true, message: `${textConstants.common.inputText}短信渠道 ID` }]}
         options={channelOptions}
         showSearch
@@ -103,7 +103,7 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
       <ProFormSelect
         name="type"
         label="短信类型"
-        placeholder="textConstants.common.selectText短信类型"
+        placeholder={`${textConstants.common.selectText}短信类型`}
         rules={[{ required: true, message: `${textConstants.common.inputText}短信类型` }]}
         options={[
           { label: '验证码', value: 1 },

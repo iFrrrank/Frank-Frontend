@@ -123,7 +123,7 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         name="parentId"
         label="上级部门"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.selectText上级部门"
+        placeholder={`${textConstants.common.selectText}上级部门`}
         request={async () => {
           // 拉取精简的树形部门数据作为上级选择
           const resp = await getSimpleDeptList()

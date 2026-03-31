@@ -118,7 +118,7 @@ const SaveUserForm: React.FC = () => {
         name="deptId"
         label="归属部门"
         colProps={{ span: 12 }}
-        placeholder="textConstants.common.selectText归属部门"
+        placeholder={`${textConstants.common.selectText}归属部门`}
         request={async () => {
           const resp = await getSimpleDeptList()
           if (resp.code === 0) {
@@ -164,7 +164,7 @@ const SaveUserForm: React.FC = () => {
         name="sex"
         label="用户性别"
         colProps={{ span: 12 }}
-        placeholder="textConstants.common.selectText性别"
+        placeholder={`${textConstants.common.selectText}性别`}
         options={[
           { label: '男', value: 1 },
           { label: '女', value: 2 }
@@ -174,7 +174,7 @@ const SaveUserForm: React.FC = () => {
         name="postIds"
         label="岗位"
         colProps={{ span: 12 }}
-        placeholder="textConstants.common.selectText岗位"
+        placeholder={`${textConstants.common.selectText}岗位`}
         fieldProps={{ mode: 'multiple' }}
         request={async () => {
           const resp = await getSimplePostList()

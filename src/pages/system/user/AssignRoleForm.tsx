@@ -106,7 +106,7 @@ const AssignRoleForm: React.FC = () => {
         name="roleIds"
         label="角色"
         initialValue={assignRoleIds}
-        placeholder="textConstants.common.selectText角色"
+        placeholder={`${textConstants.common.selectText}角色`}
         fieldProps={{
           mode: 'multiple',
           options: roleOptions,

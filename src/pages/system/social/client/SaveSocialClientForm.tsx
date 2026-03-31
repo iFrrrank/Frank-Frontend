@@ -105,7 +105,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
       <ProFormSelect
         name="socialType"
         label="社交平台"
-        placeholder="textConstants.common.selectText社交平台"
+        placeholder={`${textConstants.common.selectText}社交平台`}
         options={[
           { label: 'Gitee', value: 5 },
           { label: '钉钉', value: 10 },
@@ -119,7 +119,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
       <ProFormSelect
         name="userType"
         label="用户类型"
-        placeholder="textConstants.common.selectText用户类型"
+        placeholder={`${textConstants.common.selectText}用户类型`}
         options={[
           { label: '会员', value: 2 },
           { label: '管理员', value: 1 }
@@ -141,7 +141,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
       <ProFormSelect
         name="status"
         label="状态"
-        placeholder="textConstants.common.selectText状态"
+        placeholder={`${textConstants.common.selectText}状态`}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }

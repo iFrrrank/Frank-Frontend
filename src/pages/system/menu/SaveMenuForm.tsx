@@ -116,7 +116,7 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
         name="parentId"
         label="上级菜单"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.selectText上级菜单"
+        placeholder={`${textConstants.common.selectText}上级菜单`}
         request={async () => {
           // 拉取全量菜单用于树形选择
           const resp = await getMenuList({} as any)

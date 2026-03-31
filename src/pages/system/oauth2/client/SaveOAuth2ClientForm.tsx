@@ -140,7 +140,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       <ProFormSelect
         name="status"
         label="状态"
-        placeholder="textConstants.common.selectText状态`}
+        placeholder={`${textConstants.common.selectText}状态`}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
@@ -168,7 +168,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       <ProFormSelect
         name="authorizedGrantTypes"
         label="授权类型"
-        placeholder="textConstants.common.selectText授权类型"
+        placeholder={`${textConstants.common.selectText}授权类型`}
         options={[
           { label: '授权码模式', value: 'authorization_code' },
           { label: '隐式授权', value: 'implicit' },
@@ -182,7 +182,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
         name="scopes"
         label="授权范围"
         mode="multiple"
-        placeholder="textConstants.common.selectText授权范围"
+        placeholder={`${textConstants.common.selectText}授权范围`}
         options={[
           { label: '读取', value: 'read' },
           { label: '写入', value: 'write' },
@@ -194,7 +194,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
         name="autoApproveScopes"
         label="自动授权范围"
         mode="multiple"
-        placeholder="textConstants.common.selectText自动授权范围"
+        placeholder={`${textConstants.common.selectText}自动授权范围`}
         options={[
           { label: '读取', value: 'read' },
           { label: '写入', value: 'write' },
@@ -213,7 +213,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
         name="authorities"
         label="权限"
         mode="multiple"
-        placeholder="textConstants.common.selectText权限"
+        placeholder={`${textConstants.common.selectText}权限`}
         options={[
           { label: '用户管理', value: 'USER_VIEW' },
           { label: '角色管理', value: 'ROLE_VIEW' },
@@ -225,7 +225,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
         name="resourceIds"
         label="资源"
         mode="multiple"
-        placeholder="textConstants.common.selectText资源"
+        placeholder={`${textConstants.common.selectText}资源`}
         options={[
           { label: '系统管理', value: 'system' },
           { label: '用户中心', value: 'user' },

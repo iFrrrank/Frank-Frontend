@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { message, Space } from 'antd'
 import { ModalForm, ProFormSelect } from '@ant-design/pro-components'
 import { assignRoleDataScope } from '@/api/system/permission'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleOpenDataScope: (record: API.SystemRoleRespVO) => void
 
@@ -82,7 +83,7 @@ const AssignDataScopeForm: React.FC = () => {
       <ProFormSelect
         name="dataScope"
         label="权限范围"
-        placeholder="textConstants.common.selectText权限范围"
+        placeholder={`${textConstants.common.selectText}权限范围`}
         options={[
           { label: '全部数据权限', value: 1 },
           { label: '自定数据权限', value: 2 },

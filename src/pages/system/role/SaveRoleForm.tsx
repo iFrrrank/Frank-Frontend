@@ -115,7 +115,7 @@ const SaveRoleForm: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
         name="status"
         label="状态"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.selectText状态"
+        placeholder={`${textConstants.common.selectText}状态`}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
