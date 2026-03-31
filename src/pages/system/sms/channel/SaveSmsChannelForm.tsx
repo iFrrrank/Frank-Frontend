@@ -91,13 +91,13 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
       <ProFormText
         name="signature"
         label="短信签名"
-        placeholder="textConstants.common.inputText短信签名"
+        placeholder={`${textConstants.common.inputText}短信签名`}
         rules={[{ required: true, message: `${textConstants.common.inputText}短信签名` }]}
       />
       <ProFormSelect
         name="code"
         label="渠道编码"
-        placeholder="textConstants.common.selectText渠道编码"
+        placeholder="textConstants.common.selectText渠道编码`}
         rules={[{ required: true, message: `${textConstants.common.inputText}渠道编码` }]}
         options={[
           { label: '阿里云', value: 'ALIYUN' },
@@ -118,24 +118,24 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
       <ProFormTextArea
         name="remark"
         label="备注"
-        placeholder="textConstants.common.inputText备注"
+        placeholder={`${textConstants.common.inputText}备注`}
         fieldProps={{ rows: 2 }}
       />
       <ProFormText
         name="apiKey"
         label="短信 API 的账号"
-        placeholder="textConstants.common.inputText短信 API 的账号"
+        placeholder={`${textConstants.common.inputText}短信 API 的账号`}
         rules={[{ required: true, message: `${textConstants.common.inputText}短信 API 的账号` }]}
       />
       <ProFormText
         name="apiSecret"
         label="短信 API 的密钥"
-        placeholder="textConstants.common.inputText短信 API 的密钥"
+        placeholder={`${textConstants.common.inputText}短信 API 的密钥`}
       />
       <ProFormText
         name="callbackUrl"
         label="短信发送回调 URL"
-        placeholder="textConstants.common.inputText短信发送回调 URL"
+        placeholder={`${textConstants.common.inputText}短信发送回调 URL`}
       />
     </ModalForm>
   )

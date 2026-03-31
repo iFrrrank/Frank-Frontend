@@ -135,7 +135,7 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
         name="name"
         label="菜单名称"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText菜单名称"
+        placeholder={`${textConstants.common.inputText}菜单名称`}
         rules={[{ required: true, message: `${textConstants.common.inputText}菜单名称` }]}
       />
 
@@ -161,7 +161,7 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                   name="icon"
                   label="菜单图标"
                   colProps={{ span: 24 }}
-                  placeholder="textConstants.common.inputText菜单图标"
+                  placeholder={`${textConstants.common.inputText}菜单图标`}
                   fieldProps={{
                     addonAfter: <AntdIcons.UserOutlined /> // 示意性图标后置
                   }}
@@ -173,7 +173,7 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                   name="path"
                   label="路由地址"
                   colProps={{ span: 24 }}
-                  placeholder="textConstants.common.inputText路由地址"
+                  placeholder={`${textConstants.common.inputText}路由地址`}
                   tooltip="访问的路由地址，如：`user`，如外网地址需内链访问则以 `http(s)://` 开头"
                   rules={[{ required: true, message: `${textConstants.common.inputText}路由地址` }]}
                 />
@@ -186,13 +186,13 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                     name="component"
                     label="组件地址"
                     colProps={{ span: 24 }}
-                    placeholder="textConstants.common.inputText组件地址"
+                    placeholder={`${textConstants.common.inputText}组件地址`}
                   />
                   <ProFormText
                     name="componentName"
                     label="组件名字"
                     colProps={{ span: 24 }}
-                    placeholder="textConstants.common.inputText组件名字"
+                    placeholder={`${textConstants.common.inputText}组件名字`}
                   />
                 </>
               )}
@@ -213,7 +213,7 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                 name="sort"
                 label="显示排序"
                 colProps={{ span: 24 }}
-                placeholder="textConstants.common.inputText排序"
+                placeholder={`${textConstants.common.inputText}排序`}
                 rules={[{ required: true, message: `${textConstants.common.inputText}显示排序` }]}
                 fieldProps={{ min: 0 }}
               />

@@ -88,25 +88,25 @@ const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({
         name="name"
         label="数据源名称"
         rules={[{ required: true, message: `${textConstants.common.inputText}参数名称` }]}
-        placeholder="textConstants.common.inputText参数名称"
+        placeholder={`${textConstants.common.inputText}参数名称`}
       />
       <ProFormText
         name="url"
         label="数据源连接"
         rules={[{ required: true, message: `${textConstants.common.inputText}数据源连接` }]}
-        placeholder="textConstants.common.inputText数据源连接"
+        placeholder={`${textConstants.common.inputText}数据源连接`}
       />
       <ProFormText
         name="username"
         label="用户名"
         rules={[{ required: true, message: `${textConstants.common.inputText}用户名` }]}
-        placeholder="textConstants.common.inputText用户名"
+        placeholder={`${textConstants.common.inputText}用户名`}
       />
       <ProFormText.Password
         name="password"
         label="密码"
         rules={[{ required: true, message: `${textConstants.common.inputText}密码` }]}
-        placeholder="textConstants.common.inputText密码"
+        placeholder={`${textConstants.common.inputText}密码`}
       />
     </ModalForm>
   )

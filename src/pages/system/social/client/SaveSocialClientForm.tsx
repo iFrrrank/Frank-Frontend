@@ -99,7 +99,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
       <ProFormText
         name="name"
         label="应用名"
-        placeholder="textConstants.common.inputText应用名"
+        placeholder={`${textConstants.common.inputText}应用名`}
         rules={[{ required: true, message: `${textConstants.common.inputText}应用名` }]}
       />
       <ProFormSelect
@@ -129,13 +129,13 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
       <ProFormText
         name="clientId"
         label="客户端 ID"
-        placeholder="textConstants.common.inputText客户端 ID,对应各平台的appKey"
+        placeholder={`${textConstants.common.inputText}客户端 ID,对应各平台的appKey`}
         rules={[{ required: true, message: `${textConstants.common.inputText}客户端 ID` }]}
       />
       <ProFormText
         name="clientSecret"
         label="客户端密钥"
-        placeholder="textConstants.common.inputText客户端密钥,对应各平台的appSecret"
+        placeholder={`${textConstants.common.inputText}客户端密钥,对应各平台的appSecret`}
         rules={[{ required: true, message: `${textConstants.common.inputText}客户端密钥` }]}
       />
       <ProFormSelect

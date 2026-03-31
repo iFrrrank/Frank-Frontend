@@ -176,7 +176,7 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
         name="email"
         label="邮箱"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText邮箱"
+        placeholder={`${textConstants.common.inputText}邮箱`}
         rules={[{ type: 'email', message: `${textConstants.common.inputText}正确的邮箱格式` }]}
       />
       <ProFormSelect

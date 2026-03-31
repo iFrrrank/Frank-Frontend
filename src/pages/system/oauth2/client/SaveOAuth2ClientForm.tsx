@@ -134,13 +134,13 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       <ProFormText
         name="name"
         label="应用名称"
-        placeholder="textConstants.common.inputText应用名称"
+        placeholder={`${textConstants.common.inputText}应用名称`}
         rules={[{ required: true, message: `${textConstants.common.inputText}应用名称` }]}
       />
       <ProFormSelect
         name="status"
         label="状态"
-        placeholder="textConstants.common.selectText状态"
+        placeholder="textConstants.common.selectText状态`}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
@@ -150,20 +150,20 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       <ProFormText
         name="clientId"
         label="客户端 ID"
-        placeholder="textConstants.common.inputText客户端 ID"
+        placeholder={`${textConstants.common.inputText}客户端 ID`}
         rules={[{ required: true, message: `${textConstants.common.inputText}客户端 ID` }]}
         disabled={!!editingClient}
       />
       <ProFormText
         name="secret"
         label="客户端密钥"
-        placeholder="textConstants.common.inputText客户端密钥"
+        placeholder={`${textConstants.common.inputText}客户端密钥`}
         rules={[{ required: true, message: `${textConstants.common.inputText}客户端密钥` }]}
       />
       <ProFormText
         name="logo"
         label="应用图标"
-        placeholder="textConstants.common.inputText应用图标 URL"
+        placeholder={`${textConstants.common.inputText}应用图标 URL`}
       />
       <ProFormSelect
         name="authorizedGrantTypes"
@@ -206,7 +206,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
         name="redirectUris"
         label="可重定向 URL"
         mode="tags"
-        placeholder="textConstants.common.inputText可重定向 URL"
+        placeholder={`${textConstants.common.inputText}可重定向 URL`}
         rules={[{ required: true, message: `${textConstants.common.inputText}可重定向URL` }]}
       />
       <ProFormSelect
@@ -236,7 +236,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       <ProFormDigit
         name="accessTokenValiditySeconds"
         label="访问令牌有效期"
-        placeholder="textConstants.common.inputText访问令牌有效期"
+        placeholder={`${textConstants.common.inputText}访问令牌有效期`}
         fieldProps={{
           addonAfter: '秒(s)'
         }}
@@ -249,7 +249,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       <ProFormDigit
         name="refreshTokenValiditySeconds"
         label="刷新令牌有效期"
-        placeholder="textConstants.common.inputText刷新令牌有效期"
+        placeholder={`${textConstants.common.inputText}刷新令牌有效期`}
         fieldProps={{
           addonAfter: '秒(s)'
         }}
@@ -261,12 +261,12 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       <ProFormTextArea
         name="additionalInformation"
         label="附加信息"
-        placeholder="textConstants.common.inputText附加信息"
+        placeholder={`${textConstants.common.inputText}附加信息`}
       />
       <ProFormTextArea
         name="description"
         label="应用描述"
-        placeholder="textConstants.common.inputText应用描述"
+        placeholder={`${textConstants.common.inputText}应用描述`}
       />
     </ModalForm>
   )

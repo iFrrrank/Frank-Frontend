@@ -83,24 +83,24 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
           name="name"
           label="任务名称"
           rules={[{ required: true, message: `${textConstants.common.inputText}任务名称` }]}
-          placeholder="textConstants.common.inputText任务名称"
+          placeholder={`${textConstants.common.inputText}任务名称`}
         />
         <ProFormText
           name="handlerName"
           label="处理器名称"
           rules={[{ required: true, message: `${textConstants.common.inputText}处理器的名字` }]}
-          placeholder="textConstants.common.inputText处理器的名称"
+          placeholder={`${textConstants.common.inputText}处理器的名称`}
         />
         <ProFormText
           name="handlerParam"
           label="处理器参数"
-          placeholder="textConstants.common.inputText处理器的参数"
+          placeholder={`${textConstants.common.inputText}处理器的参数`}
         />
         <ProFormText
           name="cronExpression"
           label="CRON 表达式"
           rules={[{ required: true, message: `${textConstants.common.inputText} CRON 表达式` }]}
-          placeholder="textConstants.common.inputText CRON 表达式"
+          placeholder={`${textConstants.common.inputText} CRON 表达式`}
           fieldProps={{
             addonAfter: (
               <Select
@@ -134,14 +134,14 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
           name="retryCount"
           label="重试次数"
           rules={[{ required: true, message: `${textConstants.common.inputText}重试次数` }]}
-          placeholder="textConstants.common.inputText重试次数。设置为 0 时，不进行重试"
+          placeholder={`${textConstants.common.inputText}重试次数。设置为 0 时，不进行重试`}
           min={0}
         />
         <ProFormDigit
           name="retryInterval"
           label="重试间隔"
           rules={[{ required: true, message: `${textConstants.common.inputText}重试间隔` }]}
-          placeholder="textConstants.common.inputText重试间隔。设置为 0 时，无需间隔"
+          placeholder={`${textConstants.common.inputText}重试间隔。设置为 0 时，无需间隔`}
           min={0}
           fieldProps={{
             addonAfter: '毫秒(ms)'
@@ -150,7 +150,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
         <ProFormDigit
           name="monitorTimeout"
           label="监控超时时间"
-          placeholder="textConstants.common.inputText监控超时时间。设置为 0 时，无需监控"
+          placeholder={`${textConstants.common.inputText}监控超时时间。设置为 0 时，无需监控`}
           min={0}
           fieldProps={{
             addonAfter: '毫秒(ms)'

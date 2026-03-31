@@ -111,7 +111,7 @@ const SaveUserForm: React.FC = () => {
         name="nickname"
         label="用户昵称"
         colProps={{ span: 12 }}
-        placeholder="textConstants.common.inputText用户昵称"
+        placeholder={`${textConstants.common.inputText}用户昵称`}
         rules={[{ required: true, message: `${textConstants.common.inputText}用户昵称` }]}
       />
       <ProFormTreeSelect
@@ -136,20 +136,20 @@ const SaveUserForm: React.FC = () => {
         name="mobile"
         label="手机号码"
         colProps={{ span: 12 }}
-        placeholder="textConstants.common.inputText手机号码"
+        placeholder={`${textConstants.common.inputText}手机号码`}
       />
       <ProFormText
         name="email"
         label="邮箱"
         colProps={{ span: 12 }}
-        placeholder="textConstants.common.inputText邮箱"
+        placeholder={`${textConstants.common.inputText}邮箱`}
         rules={[{ type: 'email', message: `${textConstants.common.inputText}有效邮箱` }]}
       />
       <ProFormText
         name="username"
         label="用户名称"
         colProps={{ span: 12 }}
-        placeholder="textConstants.common.inputText用户名称"
+        placeholder={`${textConstants.common.inputText}用户名称`}
         rules={[{ required: true, message: `${textConstants.common.inputText}用户名称` }]}
         disabled={!!editingUser}
       />
@@ -157,7 +157,7 @@ const SaveUserForm: React.FC = () => {
         name="password"
         label="用户密码"
         colProps={{ span: 12 }}
-        placeholder="textConstants.common.inputText用户密码"
+        placeholder={`${textConstants.common.inputText}用户密码`}
         rules={[{ required: true, message: `${textConstants.common.inputText}用户密码` }]}
       />
       <ProFormSelect
@@ -193,7 +193,7 @@ const SaveUserForm: React.FC = () => {
         colProps={{ span: 24 }}
         labelCol={{ span: 3 }}
         wrapperCol={{ span: 21 }}
-        placeholder="textConstants.common.inputText备注内容"
+        placeholder={`${textConstants.common.inputText}备注内容`}
       />
     </ModalForm>
   )

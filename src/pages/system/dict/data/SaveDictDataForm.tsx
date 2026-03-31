@@ -99,28 +99,28 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
         name="dictType"
         label="字典类型"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText字典类型"
+        placeholder={`${textConstants.common.inputText}字典类型`}
         readonly // 页面上一般是不可修改或者就是下拉选择
       />
       <ProFormText
         name="label"
         label="数据标签"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText数据标签"
+        placeholder={`${textConstants.common.inputText}数据标签`}
         rules={[{ required: true, message: `${textConstants.common.inputText}数据标签` }]}
       />
       <ProFormText
         name="value"
         label="数据键值"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText数据键值"
+        placeholder={`${textConstants.common.inputText}数据键值`}
         rules={[{ required: true, message: `${textConstants.common.inputText}数据键值` }]}
       />
       <ProFormDigit
         name="sort"
         label="显示排序"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText显示排序"
+        placeholder={`${textConstants.common.inputText}显示排序`}
         rules={[{ required: true, message: `${textConstants.common.inputText}显示排序` }]}
         fieldProps={{ min: 0 }}
       />
@@ -152,13 +152,13 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
         name="cssClass"
         label="CSS Class"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText CSS Class"
+        placeholder={`${textConstants.common.inputText} CSS Class`}
       />
       <ProFormTextArea
         name="remark"
         label="备注"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText内容"
+        placeholder={`${textConstants.common.inputText}内容`}
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>

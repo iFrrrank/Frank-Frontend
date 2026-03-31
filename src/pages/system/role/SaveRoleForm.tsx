@@ -93,21 +93,21 @@ const SaveRoleForm: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
         name="name"
         label="角色名称"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText角色名称"
+        placeholder={`${textConstants.common.inputText}角色名称`}
         rules={[{ required: true, message: `${textConstants.common.inputText}角色名称` }]}
       />
       <ProFormText
         name="code"
         label="角色标识"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText角色标识"
+        placeholder={`${textConstants.common.inputText}角色标识`}
         rules={[{ required: true, message: `${textConstants.common.inputText}角色标识` }]}
       />
       <ProFormDigit
         name="sort"
         label="显示顺序"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText显示顺序"
+        placeholder={`${textConstants.common.inputText}显示顺序`}
         rules={[{ required: true, message: `${textConstants.common.inputText}显示顺序` }]}
         fieldProps={{ min: 0 }}
       />

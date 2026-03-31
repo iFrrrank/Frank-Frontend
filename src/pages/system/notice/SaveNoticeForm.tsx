@@ -82,7 +82,7 @@ const SaveNoticeForm: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
       <ProFormText
         name="title"
         label="公告标题"
-        placeholder="textConstants.common.inputText公告标题"
+        placeholder={`${textConstants.common.inputText}公告标题`}
         rules={[{ required: true, message: `${textConstants.common.inputText}公告标题` }]}
       />
       <ProForm.Item
@@ -115,7 +115,7 @@ const SaveNoticeForm: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
       <ProFormTextArea
         name="remark"
         label="备注"
-        placeholder="textConstants.common.inputText备注"
+        placeholder={`${textConstants.common.inputText}备注`}
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>

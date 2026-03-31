@@ -84,14 +84,14 @@ const SaveDictTypeForm: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
         name="name"
         label="字典名称"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText字典名称"
+        placeholder={`${textConstants.common.inputText}字典名称`}
         rules={[{ required: true, message: `${textConstants.common.inputText}字典名称` }]}
       />
       <ProFormText
         name="type"
         label="字典类型"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText字典类型"
+        placeholder={`${textConstants.common.inputText}字典类型`}
         rules={[
           { required: true, message: `${textConstants.common.inputText}字典类型` },
           { pattern: /^[a-z_0-9]+$/, message: '字典类型必须以小写字母、数字或下划线组成' } // 根据常见业务规则加入正则表达式体验更佳
@@ -111,7 +111,7 @@ const SaveDictTypeForm: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
         name="remark"
         label="备注"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText备注内容"
+        placeholder={`${textConstants.common.inputText}备注内容`}
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>

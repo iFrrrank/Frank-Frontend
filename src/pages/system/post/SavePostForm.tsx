@@ -88,21 +88,21 @@ const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
         name="name"
         label="岗位标题"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText岗位名称"
+        placeholder={`${textConstants.common.inputText}岗位名称`}
         rules={[{ required: true, message: `${textConstants.common.inputText}岗位标题` }]}
       />
       <ProFormText
         name="code"
         label="岗位编码"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText岗位编码"
+        placeholder={`${textConstants.common.inputText}岗位编码`}
         rules={[{ required: true, message: `${textConstants.common.inputText}岗位编码` }]}
       />
       <ProFormDigit
         name="sort"
         label="岗位顺序"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText岗位顺序"
+        placeholder={`${textConstants.common.inputText}岗位顺序`}
         fieldProps={{ min: 0 }}
       />
       <ProFormSelect
@@ -120,7 +120,7 @@ const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
         name="remark"
         label="备注"
         colProps={{ span: 24 }}
-        placeholder="textConstants.common.inputText备注内容"
+        placeholder={`${textConstants.common.inputText}备注内容`}
         fieldProps={{ rows: 3 }}
       />
     </ModalForm>

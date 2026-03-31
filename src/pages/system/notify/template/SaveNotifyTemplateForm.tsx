@@ -87,25 +87,25 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
       <ProFormText
         name="code"
         label="模板编码"
-        placeholder="textConstants.common.inputText模板编码"
+        placeholder={`${textConstants.common.inputText}模板编码`}
         rules={[{ required: true, message: `${textConstants.common.inputText}模板编码` }]}
       />
       <ProFormText
         name="name"
         label="模板名称"
-        placeholder="textConstants.common.inputText模板名称"
+        placeholder={`${textConstants.common.inputText}模板名称`}
         rules={[{ required: true, message: `${textConstants.common.inputText}模板名称` }]}
       />
       <ProFormText
         name="nickname"
         label="发件人名称"
-        placeholder="textConstants.common.inputText发件人名称"
+        placeholder={`${textConstants.common.inputText}发件人名称`}
         rules={[{ required: true, message: `${textConstants.common.inputText}发件人名称` }]}
       />
       <ProFormTextArea
         name="content"
         label="模板内容"
-        placeholder="textConstants.common.inputText模板内容"
+        placeholder={`${textConstants.common.inputText}模板内容`}
         rules={[{ required: true, message: `${textConstants.common.inputText}模板内容` }]}
         fieldProps={{ rows: 3 }}
       />
@@ -129,7 +129,11 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
           { label: '关闭', value: 1 }
         ]}
       />
-      <ProFormText name="remark" label="备注" placeholder="textConstants.common.inputText备注" />
+      <ProFormText
+        name="remark"
+        label="备注"
+        placeholder={`${textConstants.common.inputText}备注`}
+      />
     </ModalForm>
   )
 }

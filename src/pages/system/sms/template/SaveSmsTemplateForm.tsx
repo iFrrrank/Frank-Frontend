@@ -114,19 +114,19 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
       <ProFormText
         name="code"
         label="模板编码"
-        placeholder="textConstants.common.inputText模板编码"
+        placeholder={`${textConstants.common.inputText}模板编码`}
         rules={[{ required: true, message: `${textConstants.common.inputText}模板编码` }]}
       />
       <ProFormText
         name="name"
         label="模板名称"
-        placeholder="textConstants.common.inputText模板名称"
+        placeholder={`${textConstants.common.inputText}模板名称`}
         rules={[{ required: true, message: `${textConstants.common.inputText}模板名称` }]}
       />
       <ProFormTextArea
         name="content"
         label="模板内容"
-        placeholder="textConstants.common.inputText模板内容"
+        placeholder={`${textConstants.common.inputText}模板内容`}
         rules={[{ required: true, message: `${textConstants.common.inputText}模板内容` }]}
         fieldProps={{ rows: 3 }}
       />
@@ -142,13 +142,13 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
       <ProFormText
         name="apiTemplateId"
         label="短信 API 模板 ID"
-        placeholder="textConstants.common.inputText短信 API 的模板ID"
+        placeholder={`${textConstants.common.inputText}短信 API 的模板ID`}
         rules={[{ required: true, message: `${textConstants.common.inputText}短信 API 的模板 ID` }]}
       />
       <ProFormTextArea
         name="remark"
         label="备注"
-        placeholder="textConstants.common.inputText备注"
+        placeholder={`${textConstants.common.inputText}备注`}
         fieldProps={{ rows: 2 }}
       />
     </ModalForm>
