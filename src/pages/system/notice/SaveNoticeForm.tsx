@@ -59,15 +59,22 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
             resp = await createNotice(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingNotice ? '修改成功' : textConstants.msg.createSuccess)
+            message.success(
+              editingNotice ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingNotice ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingNotice ? textConstants.msg.updateError : textConstants.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingNotice ? '修改失败' : '创建失败')
+          message.error(
+            editingNotice ? textConstants.msg.updateError : textConstants.msg.createError
+          )
           return false
         }
       }}

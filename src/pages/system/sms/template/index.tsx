@@ -236,7 +236,7 @@ const SmsTemplateConfig: React.FC = () => {
           message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delFail)
+          message.error(textConstants.msg.delError)
         }
       }
     })
@@ -257,7 +257,7 @@ const SmsTemplateConfig: React.FC = () => {
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.batchDelFail)
+          message.error(textConstants.msg.batchDelError)
         }
       }
     })
@@ -291,9 +291,9 @@ const SmsTemplateConfig: React.FC = () => {
           link.download = '短信模板数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConstants.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error('textConstants.msg.exportError')
         }
       }
     })

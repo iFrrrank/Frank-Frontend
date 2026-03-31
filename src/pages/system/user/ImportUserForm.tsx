@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Modal, message, Upload, Switch } from 'antd'
+import { message, Modal, Switch, Upload } from 'antd'
 import type { ActionType } from '@ant-design/pro-components'
 import { InboxOutlined } from '@ant-design/icons'
 import { importExcel, importTemplate } from '@/api/system/user'
@@ -48,10 +48,10 @@ const ImportUserModal: React.FC = () => {
         setImportFile(null)
         actionRef.current?.reload()
       } else {
-        message.error(resp.msg || textConstants.msg.exportFail)
+        message.error(resp.msg || textConstants.msg.exportError)
       }
     } catch {
-      message.error(textConstants.msg.exportFail)
+      message.error(textConstants.msg.exportError)
     } finally {
       setImportLoading(false)
     }

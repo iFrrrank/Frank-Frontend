@@ -64,15 +64,22 @@ const SaveNotifyTemplateModal: React.FC<SaveNotifyTemplateModalProps> = ({ onSuc
             resp = await createNotifyTemplate(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingTemplate ? '修改成功' : textConstants.msg.createSuccess)
+            message.success(
+              editingTemplate ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingTemplate ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingTemplate ? textConstants.msg.updateError : textConstants.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingTemplate ? '修改失败' : '创建失败')
+          message.error(
+            editingTemplate ? textConstants.msg.updateError : textConstants.msg.createError
+          )
           return false
         }
       }}

@@ -174,7 +174,7 @@ const MailTemplateConfig: React.FC = () => {
           message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delFail)
+          message.error(textConstants.msg.delError)
         }
       }
     })
@@ -196,7 +196,7 @@ const MailTemplateConfig: React.FC = () => {
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.batchDelFail)
+          message.error(textConstants.msg.batchDelError)
         }
       }
     })

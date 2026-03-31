@@ -97,12 +97,12 @@ const SaveUserModal: React.FC = () => {
           } else {
             message.error(
               resp.msg ||
-                (editingUser ? textConstants.msg.updateFail : textConstants.msg.createFail)
+                (editingUser ? textConstants.msg.updateError : textConstants.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(editingUser ? textConstants.msg.updateFail : textConstants.msg.createFail)
+          message.error(editingUser ? textConstants.msg.updateError : textConstants.msg.createError)
           return false
         }
       }}

@@ -111,15 +111,22 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
             resp = await createOAuth2Client(processedValues)
           }
           if (resp.code === 0) {
-            message.success(editingClient ? '修改成功' : textConstants.msg.createSuccess)
+            message.success(
+              editingClient ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingClient ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingClient ? textConstants.msg.updateError : textConstants.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingClient ? '修改失败' : '创建失败')
+          message.error(
+            editingClient ? textConstants.msg.updateError : textConstants.msg.createError
+          )
           return false
         }
       }}

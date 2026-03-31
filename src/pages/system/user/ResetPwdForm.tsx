@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Input, message } from 'antd'
+import { Input, message, Modal } from 'antd'
 import { updateUserPassword } from '@/api/system/user'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { textConstants } from '@/locales/zh-CN'
@@ -30,10 +30,10 @@ const ResetPwdModal: React.FC = () => {
         message.success(textConstants.msg.resetPwdSuccess)
         setResetPwdVisible(false)
       } else {
-        message.error(resp.msg || textConstants.msg.resetPwdFail)
+        message.error(resp.msg || textConstants.msg.resetPwdError)
       }
     } catch {
-      message.error(textConstants.msg.resetPwdFail)
+      message.error(textConstants.msg.resetPwdError)
     }
   }
 

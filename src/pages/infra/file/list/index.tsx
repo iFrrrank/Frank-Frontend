@@ -45,7 +45,7 @@ const FileListPage: React.FC = () => {
     navigator.clipboard
       .writeText(url)
       .then(() => message.success('链接已复制到剪贴板'))
-      .catch(() => message.error(textConstants.msg.copyFail))
+      .catch(() => message.error(textConstants.msg.copyError))
   }
 
   /** 删除单条 */
@@ -62,7 +62,7 @@ const FileListPage: React.FC = () => {
           message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delFail)
+          message.error(textConstants.msg.delError)
         }
       }
     })
@@ -83,7 +83,7 @@ const FileListPage: React.FC = () => {
           setSelectedRowKeys([])
           actionRef.current?.reloadAndRest?.()
         } catch {
-          message.error(textConstants.msg.delFail)
+          message.error(textConstants.msg.delError)
         }
       }
     })

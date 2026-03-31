@@ -64,15 +64,19 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
           }
 
           if (resp.code === 0) {
-            message.success(editingMailAccount ? '修改成功' : '新增成功')
+            message.success(
+              editingMailAccount ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingMailAccount ? '修改失败' : '新增失败'))
+            message.error(
+              resp.msg || (editingMailAccount ? textConstants.msg.updateError : '新增失败')
+            )
             return false
           }
         } catch {
-          message.error(editingMailAccount ? '修改失败' : '新增失败')
+          message.error(editingMailAccount ? textConstants.msg.updateError : '新增失败')
           return false
         }
       }}

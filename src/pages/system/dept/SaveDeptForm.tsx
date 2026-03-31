@@ -99,15 +99,22 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           }
 
           if (resp.code === 0) {
-            message.success(editingDept?.id ? '修改成功' : textConstants.msg.createSuccess)
+            message.success(
+              editingDept?.id ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingDept?.id ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingDept?.id ? textConstants.msg.updateError : textConstants.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingDept?.id ? '修改失败' : '创建失败')
+          message.error(
+            editingDept?.id ? textConstants.msg.updateError : textConstants.msg.createError
+          )
           return false
         }
       }}

@@ -160,10 +160,10 @@ const LoginLogPage: React.FC = () => {
           link.download = '登录日志数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConstants.msg.exportSuccess)
         } catch (error) {
           console.error(error)
-          message.error('导出失败')
+          message.error('textConstants.msg.exportError')
         }
       }
     })

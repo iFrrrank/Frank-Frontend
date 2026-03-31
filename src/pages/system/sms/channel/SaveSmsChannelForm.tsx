@@ -68,15 +68,22 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
             resp = await createSmsChannel(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingSmsChannel ? '修改成功' : textConstants.msg.createSuccess)
+            message.success(
+              editingSmsChannel ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingSmsChannel ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingSmsChannel ? textConstants.msg.updateError : textConstants.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingSmsChannel ? '修改失败' : '创建失败')
+          message.error(
+            editingSmsChannel ? textConstants.msg.updateError : textConstants.msg.createError
+          )
           return false
         }
       }}

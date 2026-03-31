@@ -197,9 +197,9 @@ const ApiAccessLogPage: React.FC = () => {
           link.download = 'API访问日志.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConstants.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error('textConstants.msg.exportError')
         }
       }
     })

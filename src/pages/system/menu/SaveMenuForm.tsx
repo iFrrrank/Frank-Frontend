@@ -92,15 +92,22 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
           }
 
           if (resp.code === 0) {
-            message.success(editingMenu?.id ? '修改成功' : textConstants.msg.createSuccess)
+            message.success(
+              editingMenu?.id ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingMenu?.id ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingMenu?.id ? textConstants.msg.updateError : textConstants.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingMenu?.id ? '修改失败' : '创建失败')
+          message.error(
+            editingMenu?.id ? textConstants.msg.updateError : textConstants.msg.createError
+          )
           return false
         }
       }}

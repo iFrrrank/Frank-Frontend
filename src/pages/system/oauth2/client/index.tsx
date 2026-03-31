@@ -161,7 +161,7 @@ const App_: React.FC = () => {
           message.success(textConstants.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delFail)
+          message.error(textConstants.msg.delError)
         }
       }
     })
@@ -180,7 +180,7 @@ const App_: React.FC = () => {
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.batchDelFail)
+          message.error(textConstants.msg.batchDelError)
         }
       }
     })
@@ -203,7 +203,7 @@ const App_: React.FC = () => {
         message.success(textConstants.msg.copySuccess)
       })
       .catch(() => {
-        message.error(textConstants.msg.copyFail)
+        message.error(textConstants.msg.copyError)
       })
   }
 

@@ -66,15 +66,20 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
             resp = await createPost(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingPost ? '修改成功' : textConstants.msg.createSuccess)
+            message.success(
+              editingPost ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingPost ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingPost ? textConstants.msg.updateError : textConstants.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingPost ? '修改失败' : '创建失败')
+          message.error(editingPost ? textConstants.msg.updateError : textConstants.msg.createError)
           return false
         }
       }}

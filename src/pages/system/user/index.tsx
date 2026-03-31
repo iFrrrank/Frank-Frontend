@@ -20,7 +20,7 @@ import { COMMON_STATUS_VALUE_ENUM } from '@/utils/constantsValue'
 import ResetPwdModal, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
 import AssignRoleModal, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
 import ImportUserModal, { handleImportUser } from '@/pages/system/user/ImportUserForm'
-import SaveUserModal, { handleEditUser, handleCreateUser } from '@/pages/system/user/SaveUserForm'
+import SaveUserModal, { handleCreateUser, handleEditUser } from '@/pages/system/user/SaveUserForm'
 import { textConstants } from '@/locales/zh-CN'
 
 const SystemUser: React.FC = () => {
@@ -162,7 +162,7 @@ const SystemUser: React.FC = () => {
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.batchDelFail)
+          message.error(textConstants.msg.batchDelError)
         }
       }
     })
@@ -200,7 +200,7 @@ const SystemUser: React.FC = () => {
           window.URL.revokeObjectURL(url)
           message.success(textConstants.msg.exportSuccess)
         } catch {
-          message.error(textConstants.msg.exportFail)
+          message.error(textConstants.msg.exportError)
         }
       }
     })

@@ -154,9 +154,9 @@ const OperateLogConfig: React.FC = () => {
           link.download = '操作日志数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConstants.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error('textConstants.msg.exportError')
         }
       }
     })

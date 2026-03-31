@@ -60,15 +60,22 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
             resp = await createDictType(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingDictType ? '修改成功' : textConstants.msg.createSuccess)
+            message.success(
+              editingDictType ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingDictType ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingDictType ? textConstants.msg.updateError : textConstants.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingDictType ? '修改失败' : '创建失败')
+          message.error(
+            editingDictType ? textConstants.msg.updateError : textConstants.msg.createError
+          )
           return false
         }
       }}

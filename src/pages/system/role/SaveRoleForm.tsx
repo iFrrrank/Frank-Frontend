@@ -71,15 +71,20 @@ const SaveRoleForm: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
             resp = await createRole(values)
           }
           if (resp.code === 0) {
-            message.success(editingRole ? '修改成功' : textConstants.msg.createSuccess)
+            message.success(
+              editingRole ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingRole ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingRole ? textConstants.msg.updateError : textConstants.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingRole ? '修改失败' : '创建失败')
+          message.error(editingRole ? textConstants.msg.updateError : textConstants.msg.createError)
           return false
         }
       }}

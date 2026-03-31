@@ -71,15 +71,26 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
             resp = await createDictData({ ...values, dictType: editingDictData?.dictType } as any)
           }
           if (resp.code === 0) {
-            message.success(editingDictData?.id ? '修改成功' : textConstants.msg.createSuccess)
+            message.success(
+              editingDictData?.id
+                ? textConstants.msg.updateSuccess
+                : textConstants.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingDictData?.id ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingDictData?.id
+                  ? textConstants.msg.updateError
+                  : textConstants.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingDictData?.id ? '修改失败' : '创建失败')
+          message.error(
+            editingDictData?.id ? textConstants.msg.updateError : textConstants.msg.createError
+          )
           return false
         }
       }}
