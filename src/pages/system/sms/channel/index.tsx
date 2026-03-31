@@ -1,6 +1,13 @@
 import React, { useRef, useState } from 'react'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
+import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import { textConstants } from '@/locales/zh-CN'
+import { Button, message, Modal, Tag, Typography } from 'antd'
+import SaveSmsChannelModal, {
+  handleCreateSmsChannel,
+  handleEditSmsChannel
+} from './SaveSmsChannelForm'
+import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { deleteSmsChannel, getSmsChannelPage } from '@/api/system/smsChannel'
 
 const SmsChannelConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -32,7 +39,7 @@ const SmsChannelConfig: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}短信签名'
+        placeholder: `${textConstants.common.inputText}短信签名`
       }
     },
     {

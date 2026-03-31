@@ -1,8 +1,16 @@
-import React, {useEffect, useRef, useState} from 'react'
-import {message} from 'antd'
-import type {ActionType, ProColumns, ProFormInstance} from '@ant-design/pro-components'
-import {useLocation} from '@umijs/max'
-import {exportJobLog, JobLogVO} from '@/api/infra/jobLog'
+import React, { useEffect, useRef, useState } from 'react'
+import { Button, message, Space } from 'antd'
+import {
+  type ActionType,
+  type ProColumns,
+  type ProFormInstance,
+  ProTable
+} from '@ant-design/pro-components'
+import { useLocation } from '@umijs/max'
+import { exportJobLog, getJobLogPage, JobLogVO } from '@/api/infra/jobLog'
+import { textConstants } from '@/locales/zh-CN'
+import { DownloadOutlined } from '@ant-design/icons'
+import JobLogDetail from '@/pages/infra/job/jobLog/JobLogDetail'
 
 export const JOB_LOG_STATUS_OPTIONS = [
   { label: '成功', value: 0 },
@@ -72,7 +80,7 @@ const JobLogPage: React.FC = () => {
       title: '处理器的名字',
       dataIndex: 'handlerName',
       align: 'center',
-      fieldProps: { placeholder: `${textConstants.common.inputText}处理器的名字' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}处理器的名字` }
     },
     {
       title: '处理器的参数',

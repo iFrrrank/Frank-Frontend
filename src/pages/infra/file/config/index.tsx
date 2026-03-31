@@ -1,9 +1,16 @@
 import React, { useRef, useState } from 'react'
-import { message, Modal } from 'antd'
-import { ExclamationCircleOutlined } from '@ant-design/icons'
-import type { ActionType, ProColumns } from '@ant-design/pro-components'
-import { deleteFileConfig, deleteFileConfigList, testFileConfig, updateFileConfigMaster } from '@/api/infra/fileConfig'
+import { Button, message, Modal, Space, Tag } from 'antd'
+import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
+import {
+  deleteFileConfig,
+  deleteFileConfigList,
+  getFileConfigPage,
+  testFileConfig,
+  updateFileConfigMaster
+} from '@/api/infra/fileConfig'
 import { textConstants } from '@/locales/zh-CN'
+import FileConfigForm, { STORAGE_OPTIONS } from '@/pages/infra/file/config/FileConfigForm'
 
 const FileConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -109,7 +116,7 @@ const FileConfigPage: React.FC = () => {
       title: '配置名称',
       dataIndex: 'name',
       align: 'center',
-      fieldProps: { placeholder: `${textConstants.common.inputText}配置名称' }
+      fieldProps: { placeholder: `${textConstants.common.inputText}配置名称` }
     },
     {
       title: '存储器',

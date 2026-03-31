@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react'
-import { message, Modal } from 'antd'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
+import { Button, message, Modal, Switch } from 'antd'
+import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import * as AntdIcons from '@ant-design/icons'
-import { ExclamationCircleOutlined } from '@ant-design/icons'
+import { ExclamationCircleOutlined, PlusOutlined, SwapOutlined, SyncOutlined } from '@ant-design/icons'
 
-import { deleteMenu, updateMenu } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
+import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
 import { textConstants } from '@/locales/zh-CN'
+import SaveMenuModal, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
+import { handleTreeData } from '@/utils/tree'
 
 // 动态渲染图标
 const IconFont = ({ type }: { type?: string }) => {
@@ -81,7 +83,7 @@ const MenuManagement: React.FC = () => {
       dataIndex: 'name',
       width: 250,
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}菜单名称'
+        placeholder: `${textConstants.common.inputText}菜单名称`
       }
     },
     {
