@@ -3,7 +3,7 @@ import { Modal, message, Upload, Switch } from 'antd'
 import type { ActionType } from '@ant-design/pro-components'
 import { InboxOutlined } from '@ant-design/icons'
 import { importExcel, importTemplate } from '@/api/system/user'
-import textConstants from '@/locales/zh-CN'
+import { textConstants } from '@/locales/zh-CN'
 
 const { Dragger } = Upload
 

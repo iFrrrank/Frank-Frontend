@@ -1,4 +1,4 @@
-export default {
+export const textConstants = {
   common: {
     inputText: '请输入',
     selectText: '请选择',

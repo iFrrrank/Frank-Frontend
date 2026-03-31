@@ -12,7 +12,7 @@ import { createUser, updateUser, getUser } from '@/api/system/user'
 import { getSimpleDeptList } from '@/api/system/dept'
 import { getSimplePostList } from '@/api/system/post'
 import { buildTreeData } from '@/utils/tree'
-import textConstants from '@/locales/zh-CN'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleEditUser: (record: API.SystemUserRespVO) => void
 export let handleCreateUser: () => void

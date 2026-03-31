@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal, Input, message } from 'antd'
 import { updateUserPassword } from '@/api/system/user'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
-import textConstants from '@/locales/zh-CN'
+import { textConstants } from '@/locales/zh-CN'
 
 export let handleResetPwd: (record: API.SystemUserRespVO) => void
 

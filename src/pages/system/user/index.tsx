@@ -21,7 +21,7 @@ import ResetPwdModal, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
 import AssignRoleModal, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
 import ImportUserModal, { handleImportUser } from '@/pages/system/user/ImportUserForm'
 import SaveUserModal, { handleEditUser, handleCreateUser } from '@/pages/system/user/SaveUserForm'
-import textConstants from '@/locales/zh-CN'
+import { textConstants } from '@/locales/zh-CN'
 
 const SystemUser: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
