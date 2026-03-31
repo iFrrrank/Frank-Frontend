@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { type ActionType, type ProColumns, type ProFormInstance, ProTable } from '@ant-design/pro-components'
+import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
+import { ProTable } from '@ant-design/pro-components'
 import { textConstants } from '@/locales/zh-CN'
 import { Button, message, Modal, Space, Typography } from 'antd'
 import SaveNoticeForm, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
