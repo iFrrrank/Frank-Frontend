@@ -87,7 +87,10 @@ const NotifyMessage: React.FC = () => {
       hideInSearch: true,
       render: (_, record) =>
         record.templateContent ? (
-          <Typography.Text style={{ width: 220, margin: 0 }} ellipsis={{ tooltip: record.templateContent }}>
+          <Typography.Text
+            style={{ width: 220, margin: 0 }}
+            ellipsis={{ tooltip: record.templateContent }}
+          >
             {record.templateContent}
           </Typography.Text>
         ) : (
@@ -102,7 +105,10 @@ const NotifyMessage: React.FC = () => {
       hideInSearch: true,
       render: (_, record) =>
         record.templateParams && Object.keys(record.templateParams).length > 0 ? (
-          <Typography.Text style={{ width: 100, margin: 0 }} ellipsis={{ tooltip: JSON.stringify(record.templateParams) }}>
+          <Typography.Text
+            style={{ width: 100, margin: 0 }}
+            ellipsis={{ tooltip: JSON.stringify(record.templateParams) }}
+          >
             {JSON.stringify(record.templateParams)}
           </Typography.Text>
         ) : (
@@ -201,7 +207,16 @@ const NotifyMessage: React.FC = () => {
         form={{ colon: false }}
         cardBordered
         request={async (params: Record<string, any>) => {
-          const { current, pageSize, userId, userType, templateCode, templateType, createTime, ...rest } = params
+          const {
+            current,
+            pageSize,
+            userId,
+            userType,
+            templateCode,
+            templateType,
+            createTime,
+            ...rest
+          } = params
 
           let beginCreateTime, endCreateTime
           if (createTime && createTime.length === 2) {
@@ -215,7 +230,9 @@ const NotifyMessage: React.FC = () => {
             ...(userId ? { userId: Number(userId) } : {}),
             ...(userType !== undefined && userType !== '' ? { userType: Number(userType) } : {}),
             ...(templateCode ? { templateCode } : {}),
-            ...(templateType !== undefined && templateType !== '' ? { templateType: Number(templateType) } : {}),
+            ...(templateType !== undefined && templateType !== ''
+              ? { templateType: Number(templateType) }
+              : {}),
             ...(beginCreateTime ? { beginCreateTime } : {}),
             ...(endCreateTime ? { endCreateTime } : {}),
             ...rest
@@ -254,7 +271,12 @@ const NotifyMessage: React.FC = () => {
         ]}
       >
         {detailData && (
-          <Descriptions bordered column={1} size="small" labelStyle={{ width: 120, background: '#fafafa' }}>
+          <Descriptions
+            bordered
+            column={1}
+            size="small"
+            labelStyle={{ width: 120, background: '#fafafa' }}
+          >
             <Descriptions.Item label="ID">{detailData.id}</Descriptions.Item>
             <Descriptions.Item label="用户类型">
               {(() => {

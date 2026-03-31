@@ -7,31 +7,22 @@ import {
   PlusOutlined
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
+import { ProTable } from '@ant-design/pro-components'
 import {
-  ModalForm,
-  ProFormRadio,
-  ProFormSelect,
-  ProFormText,
-  ProFormTextArea,
-  ProTable
-} from '@ant-design/pro-components'
-import {
-  createSmsTemplate,
   deleteSmsTemplate,
   exportSmsTemplateExcel,
-  getSmsTemplatePage,
-  updateSmsTemplate
+  getSmsTemplatePage
 } from '@/api/system/smsTemplate'
+import SaveSmsTemplateModal, {
+  handleCreateSmsTemplate,
+  handleEditSmsTemplate
+} from './SaveSmsTemplateForm'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
 
 const SmsTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
 
-  const [createModalVisible, setCreateModalVisible] = useState(false)
-  const [editingSmsTemplate, setEditingSmsTemplate] = useState<API.SystemSmsTemplateRespVO | null>(
-    null
-  )
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [channelOptions, setChannelOptions] = useState<{ label: string; value: number }[]>([])
 
@@ -142,13 +133,14 @@ const SmsTemplateConfig: React.FC = () => {
       align: 'center',
       width: 250,
       hideInSearch: true,
-      render: (_, record) => (
+      render: (_, record) =>
         record.content ? (
           <Typography.Text style={{ width: 220, margin: 0 }} ellipsis={{ tooltip: record.content }}>
             {record.content}
           </Typography.Text>
-        ) : <span>-</span>
-      )
+        ) : (
+          <span>-</span>
+        )
     },
     {
       title: '短信类型', // 作为表格列展示
@@ -186,13 +178,17 @@ const SmsTemplateConfig: React.FC = () => {
       align: 'center',
       width: 180,
       hideInSearch: true,
-      render: (_, record) => (
+      render: (_, record) =>
         record.apiTemplateId ? (
-          <Typography.Text style={{ width: 150, margin: 0 }} ellipsis={{ tooltip: record.apiTemplateId }}>
+          <Typography.Text
+            style={{ width: 150, margin: 0 }}
+            ellipsis={{ tooltip: record.apiTemplateId }}
+          >
             {record.apiTemplateId}
           </Typography.Text>
-        ) : <span>-</span>
-      )
+        ) : (
+          <span>-</span>
+        )
     },
     {
       title: '短信渠道', // 作为表格列展示
@@ -214,7 +210,7 @@ const SmsTemplateConfig: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
-          <a key="edit" onClick={() => handleEdit(record)}>
+          <a key="edit" onClick={() => handleEditSmsTemplate(record)}>
             修改
           </a>
           <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
@@ -302,12 +298,6 @@ const SmsTemplateConfig: React.FC = () => {
     })
   }
 
-  // ===== 修改 =====
-  const handleEdit = (record: API.SystemSmsTemplateRespVO) => {
-    setEditingSmsTemplate(record)
-    setCreateModalVisible(true)
-  }
-
   return (
     <>
       <ProTable<API.SystemSmsTemplateRespVO>
@@ -318,7 +308,17 @@ const SmsTemplateConfig: React.FC = () => {
         form={{ colon: false }}
         cardBordered
         request={async (params: Record<string, any>) => {
-          const { current, pageSize, type, status, code, apiTemplateId, channelId, createTime, ...rest } = params
+          const {
+            current,
+            pageSize,
+            type,
+            status,
+            code,
+            apiTemplateId,
+            channelId,
+            createTime,
+            ...rest
+          } = params
           let beginCreateTime, endCreateTime
           if (createTime && createTime.length === 2) {
             beginCreateTime = createTime[0] + ' 00:00:00'
@@ -331,7 +331,9 @@ const SmsTemplateConfig: React.FC = () => {
             ...(status !== undefined && status !== '' ? { status: Number(status) } : {}),
             ...(code ? { code } : {}),
             ...(apiTemplateId ? { apiTemplateId } : {}),
-            ...(channelId !== undefined && channelId !== '' ? { channelId: Number(channelId) } : {}),
+            ...(channelId !== undefined && channelId !== ''
+              ? { channelId: Number(channelId) }
+              : {}),
             ...(beginCreateTime ? { beginCreateTime } : {}),
             ...(endCreateTime ? { endCreateTime } : {}),
             ...rest
@@ -361,10 +363,7 @@ const SmsTemplateConfig: React.FC = () => {
           <Button
             key="create"
             icon={<PlusOutlined />}
-            onClick={() => {
-              setEditingSmsTemplate(null)
-              setCreateModalVisible(true)
-            }}
+            onClick={() => handleCreateSmsTemplate()}
             type="primary"
           >
             新增
@@ -394,114 +393,10 @@ const SmsTemplateConfig: React.FC = () => {
         ]}
       />
 
-      {/* ========== 新增/修改弹窗 ========== */}
-      <ModalForm<API.SystemSmsTemplateSaveReqVO>
-        title={editingSmsTemplate ? '修改' : '新增'}
-        width={700}
-        open={createModalVisible}
-        onOpenChange={(visible) => {
-          setCreateModalVisible(visible)
-          if (!visible) {
-            setEditingSmsTemplate(null)
-          }
-        }}
-        initialValues={
-          editingSmsTemplate
-            ? {
-              ...editingSmsTemplate
-            }
-            : { status: 0 }
-        }
-        layout="horizontal"
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 17 }}
-        colon={false}
-        modalProps={{
-          destroyOnClose: true,
-          bodyStyle: { paddingBottom: 0 }
-        }}
-        onFinish={async (values) => {
-          try {
-            let resp
-            if (editingSmsTemplate) {
-              resp = await updateSmsTemplate({ ...values, id: editingSmsTemplate.id } as any)
-            } else {
-              resp = await createSmsTemplate(values as any)
-            }
-            if (resp.code === 0) {
-              message.success(editingSmsTemplate ? '修改成功' : '创建成功')
-              actionRef.current?.reload()
-              return true
-            } else {
-              message.error(resp.msg || (editingSmsTemplate ? '修改失败' : '创建失败'))
-              return false
-            }
-          } catch {
-            message.error(editingSmsTemplate ? '修改失败' : '创建失败')
-            return false
-          }
-        }}
-      >
-        <ProFormSelect
-          name="channelId"
-          label="短信渠道 ID"
-          placeholder="请选择短信渠道 ID"
-          rules={[{ required: true, message: '请选择短信渠道 ID' }]}
-          options={channelOptions}
-          showSearch
-        />
-        <ProFormSelect
-          name="type"
-          label="短信类型"
-          placeholder="请选择短信类型"
-          rules={[{ required: true, message: '请选择短信类型' }]}
-          options={[
-            { label: '验证码', value: 1 },
-            { label: '通知', value: 2 },
-            { label: '营销', value: 3 }
-          ]}
-        />
-        <ProFormText
-          name="code"
-          label="模板编码"
-          placeholder="请输入模板编码"
-          rules={[{ required: true, message: '请输入模板编码' }]}
-        />
-        <ProFormText
-          name="name"
-          label="模板名称"
-          placeholder="请输入模板名称"
-          rules={[{ required: true, message: '请输入模板名称' }]}
-        />
-        <ProFormTextArea
-          name="content"
-          label="模板内容"
-          placeholder="请输入模板内容"
-          rules={[{ required: true, message: '请输入模板内容' }]}
-          fieldProps={{ rows: 3 }}
-        />
-        <ProFormRadio.Group
-          name="status"
-          label="开启状态"
-          options={[
-            { label: '开启', value: 0 },
-            { label: '关闭', value: 1 }
-          ]}
-          rules={[{ required: true, message: '请选择开启状态' }]}
-        />
-        <ProFormText
-          name="apiTemplateId"
-          label="短信 API 模板 ID"
-          placeholder="请输入短信 API 的模板ID"
-          rules={[{ required: true, message: '请输入短信 API 的模板 ID' }]}
-        />
-        <ProFormTextArea
-          name="remark"
-          label="备注"
-          placeholder="请输入备注"
-          fieldProps={{ rows: 2 }}
-        />
-      </ModalForm>
+      <SaveSmsTemplateModal
+        onSuccess={() => actionRef.current?.reload()}
+        channelOptions={channelOptions}
+      />
     </>
   )
 }

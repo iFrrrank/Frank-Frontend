@@ -1,21 +1,18 @@
 import React, { useRef, useState } from 'react'
-import { Badge, Button, message, Modal, Space, Typography } from 'antd'
+import { Button, message, Modal, Space, Typography } from 'antd'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ModalForm, ProFormRadio, ProFormSelect, ProFormText, ProFormTextArea, ProTable } from '@ant-design/pro-components'
-import {
-  createNotifyTemplate,
-  deleteNotifyTemplate,
-  getNotifyTemplatePage,
-  updateNotifyTemplate
-} from '@/api/system/notifyTemplate'
+import { ProTable } from '@ant-design/pro-components'
+import { deleteNotifyTemplate, getNotifyTemplatePage } from '@/api/system/notifyTemplate'
+import SaveNotifyTemplateModal, {
+  handleCreateNotifyTemplate,
+  handleEditNotifyTemplate
+} from './SaveNotifyTemplateForm'
 
 const NotifyTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
 
-  const [createModalVisible, setCreateModalVisible] = useState(false)
-  const [editingTemplate, setEditingTemplate] = useState<API.SystemNotifyTemplateRespVO | null>(null)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   // 状态枚举
@@ -75,13 +72,14 @@ const NotifyTemplateConfig: React.FC = () => {
       align: 'center',
       width: 250,
       hideInSearch: true,
-      render: (_, record) => (
+      render: (_, record) =>
         record.content ? (
           <Typography.Text style={{ width: 220, margin: 0 }} ellipsis={{ tooltip: record.content }}>
             {record.content}
           </Typography.Text>
-        ) : <span>-</span>
-      )
+        ) : (
+          <span>-</span>
+        )
     },
     {
       title: '开启状态',
@@ -124,7 +122,7 @@ const NotifyTemplateConfig: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <Space size={12}>
-          <a key="edit" onClick={() => handleEdit(record)}>
+          <a key="edit" onClick={() => handleEditNotifyTemplate(record)}>
             修改
           </a>
           <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
@@ -176,12 +174,6 @@ const NotifyTemplateConfig: React.FC = () => {
     })
   }
 
-  // ===== Edit =====
-  const handleEdit = (record: API.SystemNotifyTemplateRespVO) => {
-    setEditingTemplate(record)
-    setCreateModalVisible(true)
-  }
-
   return (
     <>
       <ProTable<API.SystemNotifyTemplateRespVO>
@@ -224,9 +216,7 @@ const NotifyTemplateConfig: React.FC = () => {
         search={{
           labelWidth: 'auto',
           defaultCollapsed: false,
-          optionRender: (searchConfig, formProps, dom) => [
-            ...dom.reverse()
-          ]
+          optionRender: (searchConfig, formProps, dom) => [...dom.reverse()]
         }}
         options={false}
         pagination={{
@@ -239,10 +229,7 @@ const NotifyTemplateConfig: React.FC = () => {
             key="create"
             icon={<PlusOutlined />}
             type="primary"
-            onClick={() => {
-              setEditingTemplate(null)
-              setCreateModalVisible(true)
-            }}
+            onClick={() => handleCreateNotifyTemplate()}
           >
             新增
           </Button>,
@@ -263,102 +250,7 @@ const NotifyTemplateConfig: React.FC = () => {
         ]}
       />
 
-      <ModalForm<API.SystemNotifyTemplateSaveReqVO>
-        title={editingTemplate ? '修改' : '新增'}
-        width={600}
-        open={createModalVisible}
-        onOpenChange={(visible) => {
-          setCreateModalVisible(visible)
-          if (!visible) {
-            setEditingTemplate(null)
-          }
-        }}
-        initialValues={
-          editingTemplate
-            ? { ...editingTemplate }
-            : { status: 0 } // default layout: open
-        }
-        layout="horizontal"
-        labelCol={{ span: 5 }}
-        wrapperCol={{ span: 18 }}
-        colon={false}
-        modalProps={{
-          destroyOnClose: true,
-          maskClosable: false
-        }}
-        onFinish={async (values) => {
-          try {
-            let resp
-            if (editingTemplate) {
-              resp = await updateNotifyTemplate({ ...values, id: editingTemplate.id } as any)
-            } else {
-              resp = await createNotifyTemplate(values as any)
-            }
-            if (resp.code === 0) {
-              message.success(editingTemplate ? '修改成功' : '创建成功')
-              actionRef.current?.reload()
-              return true
-            } else {
-              message.error(resp.msg || (editingTemplate ? '修改失败' : '创建失败'))
-              return false
-            }
-          } catch {
-            message.error(editingTemplate ? '修改失败' : '创建失败')
-            return false
-          }
-        }}
-      >
-        <ProFormText
-          name="code"
-          label="模板编码"
-          placeholder="请输入模板编码"
-          rules={[{ required: true, message: '请输入模板编码' }]}
-        />
-        <ProFormText
-          name="name"
-          label="模板名称"
-          placeholder="请输入模板名称"
-          rules={[{ required: true, message: '请输入模板名称' }]}
-        />
-        <ProFormText
-          name="nickname"
-          label="发件人名称"
-          placeholder="请输入发件人名称"
-          rules={[{ required: true, message: '请输入发件人名称' }]}
-        />
-        <ProFormTextArea
-          name="content"
-          label="模板内容"
-          placeholder="请输入模板内容"
-          rules={[{ required: true, message: '请输入模板内容' }]}
-          fieldProps={{ rows: 3 }}
-        />
-        <ProFormSelect
-          name="type"
-          label="类型"
-          placeholder="请选择类型"
-          rules={[{ required: true, message: '请选择类型' }]}
-          options={[
-            { label: '系统通知', value: 1 },
-            { label: '业务通知', value: 2 },
-            { label: '会议通知', value: 3 }
-          ]}
-        />
-        <ProFormRadio.Group
-          name="status"
-          label="开启状态"
-          rules={[{ required: true, message: '请选择开启状态' }]}
-          options={[
-            { label: '开启', value: 0 },
-            { label: '关闭', value: 1 }
-          ]}
-        />
-        <ProFormText
-          name="remark"
-          label="备注"
-          placeholder="请输入备注"
-        />
-      </ModalForm>
+      <SaveNotifyTemplateModal onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

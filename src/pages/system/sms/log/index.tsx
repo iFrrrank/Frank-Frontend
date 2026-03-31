@@ -77,13 +77,17 @@ const SmsLogConfig: React.FC = () => {
       align: 'center',
       hideInSearch: true,
       width: 300,
-      render: (_, record) => (
+      render: (_, record) =>
         record.templateContent ? (
-          <Typography.Text style={{ width: 280, margin: 0 }} ellipsis={{ tooltip: record.templateContent }}>
+          <Typography.Text
+            style={{ width: 280, margin: 0 }}
+            ellipsis={{ tooltip: record.templateContent }}
+          >
             {record.templateContent}
           </Typography.Text>
-        ) : <span>-</span>
-      )
+        ) : (
+          <span>-</span>
+        )
     },
     {
       title: '发送状态',
@@ -247,10 +251,16 @@ const SmsLogConfig: React.FC = () => {
             pageNo: current || 1,
             pageSize: pageSize || 10,
             ...(mobile ? { mobile } : {}),
-            ...(channelId !== undefined && channelId !== '' ? { channelId: Number(channelId) } : {}),
+            ...(channelId !== undefined && channelId !== ''
+              ? { channelId: Number(channelId) }
+              : {}),
             ...(templateId ? { templateId } : {}),
-            ...(sendStatus !== undefined && sendStatus !== '' ? { sendStatus: Number(sendStatus) } : {}),
-            ...(receiveStatus !== undefined && receiveStatus !== '' ? { receiveStatus: Number(receiveStatus) } : {}),
+            ...(sendStatus !== undefined && sendStatus !== ''
+              ? { sendStatus: Number(sendStatus) }
+              : {}),
+            ...(receiveStatus !== undefined && receiveStatus !== ''
+              ? { receiveStatus: Number(receiveStatus) }
+              : {}),
             ...(beginSendTime ? { beginSendTime } : {}),
             ...(endSendTime ? { endSendTime } : {}),
             ...(beginReceiveTime ? { beginReceiveTime } : {}),

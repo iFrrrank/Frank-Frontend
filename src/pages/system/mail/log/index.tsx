@@ -7,7 +7,6 @@ import { getSimpleMailAccountList } from '@/api/system/mailAccount'
 import { App } from 'antd'
 
 const MailLog: React.FC = () => {
-
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
 
@@ -17,7 +16,9 @@ const MailLog: React.FC = () => {
   const { message } = App.useApp()
 
   // ===== 获取邮箱账号下拉列表 =====
-  const [accountOptions, setAccountOptions] = useState<{ label: string; value: number; mailString?: string }[]>([])
+  const [accountOptions, setAccountOptions] = useState<
+    { label: string; value: number; mailString?: string }[]
+  >([])
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
@@ -89,10 +90,13 @@ const MailLog: React.FC = () => {
             <>
               {record.userId}
               <Tag style={{ marginLeft: 8 }}>
-                {userTypeEnum[record.userType as unknown as keyof typeof userTypeEnum]?.text || record.userType}
+                {userTypeEnum[record.userType as unknown as keyof typeof userTypeEnum]?.text ||
+                  record.userType}
               </Tag>
             </>
-          ) : '-'}
+          ) : (
+            '-'
+          )}
         </span>
       ),
       hideInSearch: true
@@ -242,9 +246,7 @@ const MailLog: React.FC = () => {
         search={{
           labelWidth: 'auto',
           defaultCollapsed: false,
-          optionRender: (searchConfig, formProps, dom) => [
-            ...dom.reverse()
-          ]
+          optionRender: (searchConfig, formProps, dom) => [...dom.reverse()]
         }}
         options={false}
         pagination={{
@@ -267,18 +269,38 @@ const MailLog: React.FC = () => {
       >
         {detailData && (
           <Descriptions bordered column={2}>
-            <Descriptions.Item label="日志编号" span={1}>{detailData.id}</Descriptions.Item>
-            <Descriptions.Item label="发送时间" span={1}>{detailData.sendTime}</Descriptions.Item>
-            <Descriptions.Item label="用户编号" span={1}>{detailData.userId || '-'}</Descriptions.Item>
-            <Descriptions.Item label="用户类型" span={1}>
-              {userTypeEnum[detailData.userType as unknown as keyof typeof userTypeEnum]?.text || detailData.userType || '-'}
+            <Descriptions.Item label="日志编号" span={1}>
+              {detailData.id}
             </Descriptions.Item>
-            <Descriptions.Item label="接收邮箱" span={1}>{detailData.toMail}</Descriptions.Item>
-            <Descriptions.Item label="邮箱账号" span={1}>{getAccountMail(detailData.accountId)}</Descriptions.Item>
-            <Descriptions.Item label="发送邮箱" span={1}>{detailData.fromMail}</Descriptions.Item>
-            <Descriptions.Item label="模板编号" span={1}>{detailData.templateCode}</Descriptions.Item>
-            <Descriptions.Item label="模板发送人" span={1}>{detailData.templateNickname || '-'}</Descriptions.Item>
-            <Descriptions.Item label="邮件标题" span={1}>{detailData.templateTitle}</Descriptions.Item>
+            <Descriptions.Item label="发送时间" span={1}>
+              {detailData.sendTime}
+            </Descriptions.Item>
+            <Descriptions.Item label="用户编号" span={1}>
+              {detailData.userId || '-'}
+            </Descriptions.Item>
+            <Descriptions.Item label="用户类型" span={1}>
+              {userTypeEnum[detailData.userType as unknown as keyof typeof userTypeEnum]?.text ||
+                detailData.userType ||
+                '-'}
+            </Descriptions.Item>
+            <Descriptions.Item label="接收邮箱" span={1}>
+              {detailData.toMail}
+            </Descriptions.Item>
+            <Descriptions.Item label="邮箱账号" span={1}>
+              {getAccountMail(detailData.accountId)}
+            </Descriptions.Item>
+            <Descriptions.Item label="发送邮箱" span={1}>
+              {detailData.fromMail}
+            </Descriptions.Item>
+            <Descriptions.Item label="模板编号" span={1}>
+              {detailData.templateCode}
+            </Descriptions.Item>
+            <Descriptions.Item label="模板发送人" span={1}>
+              {detailData.templateNickname || '-'}
+            </Descriptions.Item>
+            <Descriptions.Item label="邮件标题" span={1}>
+              {detailData.templateTitle}
+            </Descriptions.Item>
             <Descriptions.Item label="邮件参数" span={2}>
               {JSON.stringify(detailData.templateParams)}
             </Descriptions.Item>
@@ -287,15 +309,25 @@ const MailLog: React.FC = () => {
             </Descriptions.Item>
             <Descriptions.Item label="发送状态" span={1}>
               <Badge
-                status={sendStatusEnum[detailData.sendStatus as unknown as keyof typeof sendStatusEnum]?.status as any}
-                text={sendStatusEnum[detailData.sendStatus as unknown as keyof typeof sendStatusEnum]?.text}
+                status={
+                  sendStatusEnum[detailData.sendStatus as unknown as keyof typeof sendStatusEnum]
+                    ?.status as any
+                }
+                text={
+                  sendStatusEnum[detailData.sendStatus as unknown as keyof typeof sendStatusEnum]
+                    ?.text
+                }
               />
             </Descriptions.Item>
-            <Descriptions.Item label="消息 ID" span={1}>{detailData.sendMessageId || '-'}</Descriptions.Item>
+            <Descriptions.Item label="消息 ID" span={1}>
+              {detailData.sendMessageId || '-'}
+            </Descriptions.Item>
             <Descriptions.Item label="发送异常" span={2}>
               {detailData.sendException ? (
                 <Typography.Text type="danger">{detailData.sendException}</Typography.Text>
-              ) : '-'}
+              ) : (
+                '-'
+              )}
             </Descriptions.Item>
           </Descriptions>
         )}

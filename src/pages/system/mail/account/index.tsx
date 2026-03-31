@@ -1,20 +1,23 @@
 import React, { useRef, useState } from 'react'
 import { Badge, Button, message, Modal, Tag } from 'antd'
-import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ModalForm, ProFormDigit, ProFormRadio, ProFormText, ProTable } from '@ant-design/pro-components'
 import {
-  createMailAccount,
-  deleteMailAccount,
-  getMailAccountPage,
-  updateMailAccount
-} from '@/api/system/mailAccount'
+  DeleteOutlined,
+  EditOutlined,
+  ExclamationCircleOutlined,
+  PlusOutlined
+} from '@ant-design/icons'
+import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
+import { ProTable } from '@ant-design/pro-components'
+import { deleteMailAccount, getMailAccountPage } from '@/api/system/mailAccount'
+
+import SaveMailAccountModal, {
+  handleCreateMailAccount,
+  handleEditMailAccount
+} from './SaveMailAccountForm'
 
 const MailAccountConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
-  const [createModalVisible, setCreateModalVisible] = useState(false)
-  const [editingMailAccount, setEditingMailAccount] = useState<API.SystemMailAccountRespVO | null>(null)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   // ===== 数据列定义 =====
@@ -100,7 +103,7 @@ const MailAccountConfig: React.FC = () => {
       key: 'option',
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
-          <a key="edit" onClick={() => handleEdit(record)}>
+          <a key="edit" onClick={() => handleEditMailAccount(record)}>
             修改
           </a>
           <a key="delete" onClick={() => handleDelete(record)} style={{ color: '#ff4d4f' }}>
@@ -110,12 +113,6 @@ const MailAccountConfig: React.FC = () => {
       )
     }
   ]
-
-  // ===== 修改操作 =====
-  const handleEdit = (record: API.SystemMailAccountRespVO) => {
-    setEditingMailAccount(record)
-    setCreateModalVisible(true)
-  }
 
   // ===== 单个删除 =====
   const handleDelete = (record: API.SystemMailAccountRespVO) => {
@@ -213,10 +210,7 @@ const MailAccountConfig: React.FC = () => {
             key="create"
             icon={<PlusOutlined />}
             type="primary"
-            onClick={() => {
-              setEditingMailAccount(null)
-              setCreateModalVisible(true)
-            }}
+            onClick={() => handleCreateMailAccount()}
           >
             新增
           </Button>,
@@ -237,105 +231,7 @@ const MailAccountConfig: React.FC = () => {
         ]}
       />
 
-      <ModalForm<API.SystemMailAccountSaveReqVO>
-        title={editingMailAccount ? '修改' : '新增'}
-        width={600}
-        open={createModalVisible}
-        onOpenChange={(visible) => {
-          setCreateModalVisible(visible)
-          if (!visible) {
-            setEditingMailAccount(null)
-          }
-        }}
-        initialValues={
-          editingMailAccount
-            ? { ...editingMailAccount }
-            : {
-              sslEnable: true,
-              starttlsEnable: false
-            }
-        }
-        layout="horizontal"
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 16 }}
-        colon={false}
-        modalProps={{
-          destroyOnClose: true,
-          maskClosable: false
-        }}
-        onFinish={async (values) => {
-          try {
-            let resp
-            if (editingMailAccount) {
-              resp = await updateMailAccount({ ...values, id: editingMailAccount.id })
-            } else {
-              resp = await createMailAccount(values)
-            }
-
-            if (resp.code === 0) {
-              message.success(editingMailAccount ? '修改成功' : '新增成功')
-              actionRef.current?.reload()
-              return true
-            } else {
-              message.error(resp.msg || (editingMailAccount ? '修改失败' : '新增失败'))
-              return false
-            }
-          } catch {
-            message.error(editingMailAccount ? '修改失败' : '新增失败')
-            return false
-          }
-        }}
-      >
-        <ProFormText
-          name="mail"
-          label="邮箱"
-          placeholder="请输入邮箱"
-          rules={[{ required: true, message: '请输入邮箱' }, { type: 'email', message: '请输入正确的邮箱格式' }]}
-        />
-        <ProFormText
-          name="username"
-          label="用户名"
-          placeholder="请输入用户名"
-          rules={[{ required: true, message: '请输入用户名' }]}
-        />
-        <ProFormText.Password
-          name="password"
-          label="密码"
-          placeholder="请输入密码"
-          rules={[{ required: true, message: '请输入密码' }]}
-        />
-        <ProFormText
-          name="host"
-          label="SMTP 服务器域名"
-          placeholder="请输入 SMTP 服务器域名"
-          rules={[{ required: true, message: '请输入 SMTP 服务器域名' }]}
-        />
-        <ProFormDigit
-          name="port"
-          label="SMTP 服务器端口"
-          placeholder="请输入 SMTP 服务器端口"
-          rules={[{ required: true, message: '请输入 SMTP 服务器端口' }]}
-          fieldProps={{
-            precision: 0
-          }}
-        />
-        <ProFormRadio.Group
-          name="sslEnable"
-          label="是否开启 SSL"
-          options={[
-            { label: '是', value: true },
-            { label: '否', value: false }
-          ]}
-        />
-        <ProFormRadio.Group
-          name="starttlsEnable"
-          label="是否开启 STARTTLS"
-          options={[
-            { label: '是', value: true },
-            { label: '否', value: false }
-          ]}
-        />
-      </ModalForm>
+      <SaveMailAccountModal onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

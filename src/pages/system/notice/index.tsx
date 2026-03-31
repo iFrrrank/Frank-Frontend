@@ -1,24 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Badge, Button, message, Modal, Space, Tag, Typography } from 'antd'
+import React, { useRef, useState } from 'react'
+import { Button, message, Modal, Space, Typography } from 'antd'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import {
-  ModalForm,
-  ProForm,
-  ProFormSelect,
-  ProFormText,
-  ProFormTextArea,
-  ProTable
-} from '@ant-design/pro-components'
-import { Editor } from '@/components/Editor'
-import { createNotice, deleteNotice, getNoticePage, push, updateNotice } from '@/api/system/notice'
+import { ProTable } from '@ant-design/pro-components'
+import { deleteNotice, getNoticePage, push } from '@/api/system/notice'
+import SaveNoticeModal, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
 
 const NoticeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
 
-  const [modalVisible, setModalVisible] = useState(false)
-  const [editingNotice, setEditingNotice] = useState<API.SystemNoticeRespVO | null>(null)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   // 公告类型枚举
@@ -93,7 +84,7 @@ const NoticeConfig: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <Space size={12}>
-          <a key="edit" onClick={() => handleEdit(record)}>
+          <a key="edit" onClick={() => handleEditNotice(record)}>
             修改
           </a>
           <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
@@ -106,11 +97,6 @@ const NoticeConfig: React.FC = () => {
       )
     }
   ]
-
-  const handleEdit = (record: API.SystemNoticeRespVO) => {
-    setEditingNotice(record)
-    setModalVisible(true)
-  }
 
   const handleDelete = (record: API.SystemNoticeRespVO) => {
     Modal.confirm({
@@ -214,10 +200,7 @@ const NoticeConfig: React.FC = () => {
             key="create"
             icon={<PlusOutlined />}
             type="primary"
-            onClick={() => {
-              setEditingNotice(null)
-              setModalVisible(true)
-            }}
+            onClick={() => handleCreateNotice()}
           >
             新增
           </Button>,
@@ -238,88 +221,9 @@ const NoticeConfig: React.FC = () => {
         ]}
       />
 
-      <ModalForm<API.SystemNoticeSaveReqVO>
-        title={editingNotice ? '修改' : '新增'}
-        width={900}
-        open={modalVisible}
-        onOpenChange={(visible) => {
-          setModalVisible(visible)
-          if (!visible) setEditingNotice(null)
-        }}
-        initialValues={editingNotice ? { ...editingNotice } : { status: 0, type: 1 }}
-        layout="horizontal"
-        labelCol={{ span: 3 }}
-        wrapperCol={{ span: 20 }}
-        colon={false}
-        modalProps={{
-          destroyOnClose: true,
-          maskClosable: false
-        }}
-        onFinish={async (values) => {
-          try {
-            let resp
-            if (editingNotice) {
-              resp = await updateNotice({ ...values, id: editingNotice.id } as any)
-            } else {
-              resp = await createNotice(values as any)
-            }
-            if (resp.code === 0) {
-              message.success(editingNotice ? '修改成功' : '创建成功')
-              actionRef.current?.reload()
-              return true
-            } else {
-              message.error(resp.msg || (editingNotice ? '修改失败' : '创建失败'))
-              return false
-            }
-          } catch {
-            message.error(editingNotice ? '修改失败' : '创建失败')
-            return false
-          }
-        }}
-      >
-        <ProFormText
-          name="title"
-          label="公告标题"
-          placeholder="请输入公告标题"
-          rules={[{ required: true, message: '请输入公告标题' }]}
-        />
-        <ProForm.Item
-          name="content"
-          label="公告内容"
-          rules={[{ required: true, message: '请输入公告内容' }]}
-        >
-          <Editor height={75} />
-        </ProForm.Item>
-        <ProFormSelect
-          name="type"
-          label="公告类型"
-          placeholder="请选择公告类型"
-          rules={[{ required: true, message: '请选择公告类型' }]}
-          options={[
-            { label: '通知', value: 1 },
-            { label: '公告', value: 2 }
-          ]}
-        />
-        <ProFormSelect
-          name="status"
-          label="状态"
-          placeholder="请选择状态"
-          rules={[{ required: true, message: '请选择状态' }]}
-          options={[
-            { label: '开启', value: 0 },
-            { label: '关闭', value: 1 }
-          ]}
-        />
-        <ProFormTextArea
-          name="remark"
-          label="备注"
-          placeholder="请输入备注"
-          fieldProps={{ rows: 3 }}
-        />
-      </ModalForm>
+      <SaveNoticeModal onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }
 
 export default NoticeConfig
-
