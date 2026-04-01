@@ -230,7 +230,6 @@ const SmsTemplateConfig: React.FC = () => {
     }
   ]
 
-  // ===== 导出短信模板 =====
   const handleExport = () => {
     Modal.confirm({
       title: textConst.msg.confirmTitle,
@@ -359,7 +358,7 @@ const SmsTemplateConfig: React.FC = () => {
             onClick={handleExport}
             style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

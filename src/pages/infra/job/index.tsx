@@ -57,7 +57,7 @@ const JobPage: React.FC = () => {
       message.success(newStatus === 0 ? '已开启任务' : '已暂停任务')
       actionRef.current?.reload()
     } catch {
-      message.error('修改失败')
+      message.error(textConst.msg.updateError)
     }
   }
 
@@ -110,7 +110,6 @@ const JobPage: React.FC = () => {
     ]
   })
 
-  /** 导出 */
   const handleExport = async () => {
     try {
       const resp = await exportJob({
@@ -272,7 +271,7 @@ const JobPage: React.FC = () => {
             onClick={handleExport}
             style={{ color: '#52c41a', borderColor: '#52c41a', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>,
           <Button key="log" icon={<UnorderedListOutlined />} onClick={() => handleGoLog()}>
             执行日志

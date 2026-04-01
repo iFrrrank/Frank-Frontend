@@ -147,7 +147,7 @@ const FileConfigPage: React.FC = () => {
       width: 240,
       render: (_, record) => (
         <Space size={12}>
-          <a onClick={() => handleUpdate(record.id)}>编辑</a>
+          <a onClick={() => handleUpdate(record.id)}>{textConst.action.update}</a>
           <Button
             type="link"
             disabled={record.master}

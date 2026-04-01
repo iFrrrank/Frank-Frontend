@@ -153,7 +153,6 @@ const Role: React.FC = () => {
     }
   ]
 
-  // ===== 导出角色 =====
   const handleExport = () => {
     Modal.confirm({
       title: textConst.msg.reminder,
@@ -245,7 +244,7 @@ const Role: React.FC = () => {
             onClick={handleExport}
             style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>,
           <Button
             key="batchDelete"

@@ -40,7 +40,6 @@ const JobLogPage: React.FC = () => {
     setDetailVisible(true)
   }
 
-  /** 导出 */
   const handleExport = async (formVals: any) => {
     try {
       const resp = await exportJobLog({
@@ -197,7 +196,7 @@ const JobLogPage: React.FC = () => {
             onClick={() => handleExport(formRef.current?.getFieldsValue() || {})}
             style={{ color: '#52c41a', borderColor: '#52c41a', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

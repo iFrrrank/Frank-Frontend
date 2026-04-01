@@ -199,7 +199,7 @@ const ApiErrorLogPage: React.FC = () => {
     Modal.confirm({
       title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有API错误日志?',
+      content: '确认导出所有API错误日志？',
       okText: textConst.common.ok,
       cancelText: textConst.common.cancel,
       onOk: async () => {
@@ -297,7 +297,7 @@ const ApiErrorLogPage: React.FC = () => {
             onClick={handleExport}
             style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

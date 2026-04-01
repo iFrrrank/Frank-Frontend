@@ -235,7 +235,7 @@ const LoginLogPage: React.FC = () => {
             onClick={handleExport}
             style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

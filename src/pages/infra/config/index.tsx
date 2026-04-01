@@ -38,7 +38,6 @@ const ConfigPage: React.FC = () => {
     setFormVisible(true)
   }
 
-  /** 导出 */
   const handleExport = async () => {
     try {
       const params = formRef.current?.getFieldsValue() || {}
@@ -173,7 +172,7 @@ const ConfigPage: React.FC = () => {
       render: (_, record) => (
         <Space size={12}>
           <a key="edit" onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
-            编辑
+            {textConst.action.update}
           </a>
           <a
             key="delete"
@@ -257,7 +256,7 @@ const ConfigPage: React.FC = () => {
             onClick={handleExport}
             style={{ color: '#e6a23c', borderColor: '#e6a23c', background: '#fdf6ec' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

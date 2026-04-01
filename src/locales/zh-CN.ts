@@ -369,10 +369,7 @@ export const textConst = {
     generate: '生成',
     logout: '强制退出',
     test: '测试',
-    typeCreate: '字典类型创建',
-    typeUpdate: '字典类型编辑',
-    dataCreate: '字典数据创建',
-    dataUpdate: '字典数据编辑',
+
     resetPwd: '重置密码',
     assignRole: '分配角色',
     copy: '复制'

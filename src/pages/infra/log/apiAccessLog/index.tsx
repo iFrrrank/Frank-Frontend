@@ -173,7 +173,7 @@ const ApiAccessLogPage: React.FC = () => {
     Modal.confirm({
       title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有访问日志数据项?',
+      content: '确认导出所有访问日志数据项？',
       okText: textConst.common.ok,
       cancelText: textConst.common.cancel,
       onOk: async () => {
@@ -266,7 +266,7 @@ const ApiAccessLogPage: React.FC = () => {
             onClick={handleExport}
             style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

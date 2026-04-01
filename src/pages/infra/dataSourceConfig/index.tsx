@@ -73,7 +73,7 @@ const DataSourceConfigPage: React.FC = () => {
       render: (_, record) => (
         <Space size={12}>
           <a key="edit" onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
-            编辑
+            {textConst.action.update}
           </a>
           <a
             key="delete"

@@ -170,7 +170,6 @@ const SmsLogConfig: React.FC = () => {
     }
   ]
 
-  // ===== 导出短信日志 =====
   const handleExport = () => {
     Modal.confirm({
       title: textConst.msg.confirmTitle,
@@ -293,7 +292,7 @@ const SmsLogConfig: React.FC = () => {
             onClick={handleExport}
             style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />
