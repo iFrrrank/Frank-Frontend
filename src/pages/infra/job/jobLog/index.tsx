@@ -190,9 +190,10 @@ const JobLogPage: React.FC = () => {
         toolBarRender={() => [
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={() => handleExport(formRef.current?.getFieldsValue() || {})}
-            style={{ color: '#52c41a', borderColor: '#52c41a', background: '#f6ffed' }}
           >
             {textConst.action.export}
           </Button>

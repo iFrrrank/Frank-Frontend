@@ -273,16 +273,18 @@ const SystemUser: React.FC = () => {
             </Button>,
             <Button
               key="import"
+              color="green"
+              variant="outlined"
               icon={<UploadOutlined />}
-              style={{ backgroundColor: '#52c41a', borderColor: '#52c41a', color: '#fff' }}
               onClick={handleImportUser}
             >
               {textConst.action.import}
             </Button>,
             <Button
               key="export"
+              color="volcano"
+              variant="outlined"
               icon={<DownloadOutlined />}
-              style={{ backgroundColor: '#faad14', borderColor: '#faad14', color: '#fff' }}
               onClick={handleExport}
             >
               {textConst.action.export}

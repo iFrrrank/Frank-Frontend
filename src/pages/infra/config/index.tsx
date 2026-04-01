@@ -253,9 +253,10 @@ const ConfigPage: React.FC = () => {
           </Button>,
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#e6a23c', borderColor: '#e6a23c', background: '#fdf6ec' }}
           >
             {textConst.action.export}
           </Button>

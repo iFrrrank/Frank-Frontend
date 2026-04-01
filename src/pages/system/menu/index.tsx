@@ -212,16 +212,21 @@ const MenuManagement: React.FC = () => {
           </Button>,
           <Button
             key="expand"
+            type="default"
+            color="blue"
+            variant="outlined"
             icon={<SwapOutlined rotate={90} />}
-            style={{ color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }}
             onClick={handleToggleExpandAll}
           >
-            展开/折叠
+            {textConst.action.expandOrCollapse}
           </Button>,
           <Button
             key="refresh"
+            type="default"
+            color="danger"
+            variant="outlined"
             icon={<SyncOutlined />}
-            onClick={() => message.success('刷新菜单缓存成功')} // Mock 本地缓存刷新行为
+            onClick={() => message.success('刷新菜单缓存成功')}
           >
             刷新菜单缓存
           </Button>

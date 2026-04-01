@@ -233,7 +233,9 @@ const DeptManagement: React.FC = () => {
           </Button>,
           <Button
             key="expand"
-            type="primary"
+            type="default"
+            color="blue"
+            variant="outlined"
             icon={<SwapOutlined rotate={90} />}
             onClick={handleToggleExpandAll}
           >

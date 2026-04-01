@@ -260,9 +260,10 @@ const ApiAccessLogPage: React.FC = () => {
         toolBarRender={() => [
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
             {textConst.action.export}
           </Button>

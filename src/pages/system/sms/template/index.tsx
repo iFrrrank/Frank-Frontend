@@ -355,11 +355,12 @@ const SmsTemplateConfig: React.FC = () => {
           </Button>,
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            textConst.columns.startDate
+            {textConst.action.export}
           </Button>
         ]}
       />

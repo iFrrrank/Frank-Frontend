@@ -230,8 +230,9 @@ const LoginLogPage: React.FC = () => {
           <Button
             key="export"
             icon={<DownloadOutlined />}
+            color="volcano"
+            variant="outlined"
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
             {textConst.action.export}
           </Button>
