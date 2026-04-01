@@ -13,6 +13,7 @@ import ConfigForm from './ConfigForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/SingleDelete'
 import { handleBatchDelete } from '@/components/BatchDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 /** 系统内置选项 */
 const CONFIG_TYPE_OPTIONS = [
@@ -101,7 +102,7 @@ const ConfigPage: React.FC = () => {
       align: 'center',
       valueType: 'dateRange',
       hideInTable: true,
-      fieldProps: { placeholder: ['开始日期', '结束日期'] }
+      fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] }
     },
     {
       title: '参数主键',
@@ -170,18 +171,18 @@ const ConfigPage: React.FC = () => {
       width: 120,
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
             {textConst.action.update}
           </a>
           <a
             key="delete"
             onClick={() => handleDelete(record, deleteConfig, () => actionRef.current?.reload())}
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
           >
             {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
@@ -234,7 +235,7 @@ const ConfigPage: React.FC = () => {
             {textConst.action.create}
           </Button>,
           <Button
-            key="delete"
+            key="batchDelete"
             danger
             type="primary"
             icon={<DeleteOutlined />}

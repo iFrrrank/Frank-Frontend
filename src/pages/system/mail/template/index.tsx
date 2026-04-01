@@ -11,9 +11,10 @@ import SaveMailTemplateForm, {
 import SendMailForm, { handleTestMailTemplate } from './SendMailForm'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
 import { handleBatchDelete } from '@/components/BatchDelete'
-import {} from '@/components/SingleDelete'
+import { handleDelete } from '@/components/SingleDelete'
 import '@wangeditor/editor/dist/css/style.css'
 import { textConst } from '@/locales/zh-CN'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const MailTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -134,7 +135,7 @@ const MailTemplateConfig: React.FC = () => {
       valueType: 'dateRange',
       width: 180,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       render: (_, record) => <span>{record.createTime as any}</span>
     },
@@ -146,21 +147,23 @@ const MailTemplateConfig: React.FC = () => {
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditMailTemplate(record)}>
             {textConst.action.update}
           </a>
           <a key="test" onClick={() => handleTestMailTemplate(record)}>
-            测试
+            {textConst.action.test}
           </a>
           <a
             key="delete"
-            onClick={() => (record, deleteMailTemplate, () => actionRef.current?.reload())}
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
+            onClick={() =>
+              handleDelete(record, deleteMailTemplate, () => actionRef.current?.reload())
+            }
           >
             {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]

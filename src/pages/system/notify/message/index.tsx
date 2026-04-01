@@ -165,7 +165,7 @@ const NotifyMessage: React.FC = () => {
       valueType: 'dateRange',
       render: (_, record) => <span>{record.createTime as any}</span>,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       order: 0
     },
@@ -178,7 +178,7 @@ const NotifyMessage: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <a key="view" onClick={() => handleView(record)}>
-          详情
+          {textConst.action.detail}
         </a>
       )
     }

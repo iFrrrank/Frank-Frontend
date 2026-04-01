@@ -143,7 +143,7 @@ const SmsLogConfig: React.FC = () => {
       valueType: 'dateRange',
       hideInTable: true,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       }
     },
     {
@@ -152,7 +152,7 @@ const SmsLogConfig: React.FC = () => {
       valueType: 'dateRange',
       hideInTable: true,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       }
     },
     {
@@ -161,12 +161,7 @@ const SmsLogConfig: React.FC = () => {
       align: 'center',
       width: 80,
       key: 'option',
-      fixed: 'right', // 即使很少操作也占个位，如果没有详情这儿写死展示
-      render: () => (
-        <a key="view" style={{ color: '#1890ff', cursor: 'not-allowed' }} title="暂未配置详情界面">
-          详情
-        </a>
-      )
+      render: () => <a key="view">{textConst.action.detail}</a>
     }
   ]
 

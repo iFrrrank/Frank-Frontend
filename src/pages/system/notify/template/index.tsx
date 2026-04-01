@@ -11,6 +11,7 @@ import SaveNotifyTemplateForm, {
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete } from '@/components/BatchDelete'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const NotifyTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -112,7 +113,7 @@ const NotifyTemplateConfig: React.FC = () => {
       valueType: 'dateRange',
       render: (_, record) => <span>{record.createTime as any}</span>,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       order: 0
     },
@@ -124,20 +125,20 @@ const NotifyTemplateConfig: React.FC = () => {
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditNotifyTemplate(record)}>
             {textConst.action.update}
           </a>
           <a
             key="delete"
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
             onClick={() =>
               handleDelete(record, deleteNotifyTemplate, () => actionRef.current?.reload())
             }
           >
             {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]

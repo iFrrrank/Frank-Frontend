@@ -10,7 +10,8 @@ import {
   CaretDownOutlined,
   CaretRightOutlined,
   PlusOutlined,
-  SwapOutlined
+  SwapOutlined,
+  DeleteOutlined
 } from '@ant-design/icons'
 import { deleteDept, getDeptList } from '@/api/system/dept'
 import { getSimpleUserList } from '@/api/system/user'
@@ -19,6 +20,7 @@ import SaveDeptForm, { handleCreateDept, handleEditDept } from '@/pages/system/d
 import { handleTreeData } from '@/utils/tree'
 import { handleBatchDelete } from '@/components/BatchDelete'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DeptManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -117,10 +119,10 @@ const DeptManagement: React.FC = () => {
       width: 150,
       align: 'center',
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
-          <a onClick={() => handleEditDept(record)}>{textConst.action.create}</a>
+        <div style={tableActionStyle}>
+          <a onClick={() => handleEditDept(record)}>{textConst.action.update}</a>
           <a
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
             onClick={() =>
               handleDelete(
                 record,
@@ -231,14 +233,15 @@ const DeptManagement: React.FC = () => {
           </Button>,
           <Button
             key="expand"
+            type="primary"
             icon={<SwapOutlined rotate={90} />}
-            style={{ color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }}
             onClick={handleToggleExpandAll}
           >
-            展开/折叠
+            {textConst.action.expandOrCollapse}
           </Button>,
           <Button
-            key="batch-delete"
+            key="batchDelete"
+            icon={<DeleteOutlined />}
             danger
             type="primary"
             disabled={selectedRowKeys.length === 0}

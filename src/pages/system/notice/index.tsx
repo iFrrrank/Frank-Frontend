@@ -2,13 +2,13 @@ import React, { useRef, useState } from 'react'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { textConst } from '@/locales/zh-CN'
-import { Button, message, Modal, Space, Typography } from 'antd'
+import { Button, message, Modal, Typography } from 'antd'
 import SaveNoticeForm, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { deleteNotice, getNoticePage, push } from '@/api/system/notice'
-import { handleTreeData } from '@/utils/tree'
 import { handleBatchDelete } from '@/components/BatchDelete'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const NoticeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -87,21 +87,21 @@ const NoticeConfig: React.FC = () => {
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditNotice(record)}>
             {textConst.action.update}
           </a>
           <a
             key="delete"
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
             onClick={() => handleDelete(record, deleteNotice, () => actionRef.current?.reload())}
           >
             {textConst.action.delete}
           </a>
           <a key="push" onClick={() => handlePush(record)}>
-            推送
+            {textConst.action.push}
           </a>
-        </Space>
+        </div>
       )
     }
   ]

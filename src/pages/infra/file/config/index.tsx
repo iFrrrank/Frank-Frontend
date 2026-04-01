@@ -13,6 +13,7 @@ import { textConst } from '@/locales/zh-CN'
 import FileConfigForm, { STORAGE_OPTIONS } from '@/pages/infra/file/config/FileConfigForm'
 import { handleDelete } from '@/components/SingleDelete'
 import { handleBatchDelete } from '@/components/BatchDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const FileConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -131,7 +132,7 @@ const FileConfigPage: React.FC = () => {
       align: 'center',
       valueType: 'dateRange',
       hideInTable: true,
-      fieldProps: { placeholder: ['开始日期', '结束日期'] }
+      fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] }
     },
     {
       title: textConst.columns.createTime,
@@ -146,7 +147,7 @@ const FileConfigPage: React.FC = () => {
       align: 'center',
       width: 240,
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a onClick={() => handleUpdate(record.id)}>{textConst.action.update}</a>
           <Button
             type="link"
@@ -156,16 +157,16 @@ const FileConfigPage: React.FC = () => {
           >
             主配置
           </Button>
-          <a onClick={() => handleTest(record.id)}>测试</a>
+          <a onClick={() => handleTest(record.id)}>{textConst.action.test}</a>
           <a
             onClick={() =>
               handleDelete(record, deleteFileConfig, () => actionRef.current?.reload())
             }
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
           >
             {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
@@ -215,7 +216,7 @@ const FileConfigPage: React.FC = () => {
             {textConst.action.create}
           </Button>,
           <Button
-            key="delete"
+            key="batchDelete"
             danger
             type="primary"
             icon={<DeleteOutlined />}

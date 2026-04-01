@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
-import { Badge, Button, message, Modal } from 'antd'
-import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { Badge, Button } from 'antd'
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailAccount, getMailAccountPage } from '@/api/system/mailAccount'
 import { handleBatchDelete } from '@/components/BatchDelete'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 import SaveMailAccountForm, {
   handleCreateMailAccount,
@@ -100,7 +101,7 @@ const MailAccountConfig: React.FC = () => {
       width: 150,
       key: 'option',
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditMailAccount(record)}>
             {textConst.action.update}
           </a>
@@ -109,7 +110,7 @@ const MailAccountConfig: React.FC = () => {
             onClick={() =>
               handleDelete(record, deleteMailAccount, () => actionRef.current?.reload())
             }
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
           >
             {textConst.action.delete}
           </a>

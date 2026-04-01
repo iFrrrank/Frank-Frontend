@@ -23,7 +23,7 @@ import JobForm from './JobForm'
 import JobDetail from './JobDetail'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/SingleDelete'
-import { handleBatchDelete } from '@/components/BatchDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 export const JOB_STATUS_OPTIONS = [
   { label: '正常', value: 0 },
@@ -190,25 +190,26 @@ const JobPage: React.FC = () => {
       align: 'center',
       width: 220,
       render: (_, record) => (
-        <Space size={12}>
-          <a onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
+        <div style={tableActionStyle}>
+          <a key="create" onClick={() => handleUpdate(record.id)}>
             {textConst.action.create}
           </a>
           <a
+            key="delete"
+            style={deleteTextStyle}
             onClick={() => handleDelete(record, deleteJob, () => actionRef.current?.reload())}
-            style={{ color: '#ff4d4f' }}
           >
             {textConst.action.delete}
           </a>
           <Dropdown menu={getMenu(record)}>
             <a onClick={(e) => e.preventDefault()}>
               <Space>
-                更多
+                {textConst.action.more}
                 <DownOutlined />
               </Space>
             </a>
           </Dropdown>
-        </Space>
+        </div>
       )
     }
   ]

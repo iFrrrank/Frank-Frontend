@@ -140,11 +140,9 @@ const JobLogPage: React.FC = () => {
       align: 'center',
       width: 100,
       render: (_, record) => (
-        <Space size={12}>
-          <a onClick={() => handleDetail(record.id)} style={{ color: '#1677ff' }}>
-            详情
-          </a>
-        </Space>
+        <a key="detail" onClick={() => handleDetail(record.id)}>
+          {textConst.action.detail}
+        </a>
       )
     }
   ]

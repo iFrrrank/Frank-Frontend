@@ -15,6 +15,7 @@ import { deleteDictData, export3, getDictTypePage } from '@/api/system/dictData'
 import { Button, message, Modal } from 'antd'
 import { handleBatchDelete } from '@/components/BatchDelete'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DictDataList: React.FC = () => {
   const params = useParams<{ dictType: string }>()
@@ -136,19 +137,19 @@ const DictDataList: React.FC = () => {
       render: (_, record) => <span>{record.createTime as any}</span>
     },
     {
-      title: textConst.form.operateConst.form.operate,
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 120,
       key: 'option',
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditDictData(record)}>
             {textConst.action.create}
           </a>
           <a
             key="delete"
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
             onClick={() => handleDelete(record, deleteDictData, () => actionRef.current?.reload())}
           >
             {textConst.action.delete}

@@ -14,6 +14,7 @@ import { textConst } from '@/locales/zh-CN'
 import SaveMenuForm, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
 import { handleTreeData } from '@/utils/tree'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 // 动态渲染图标
 const IconFont = ({ type }: { type?: string }) => {
@@ -134,11 +135,11 @@ const MenuManagement: React.FC = () => {
       width: 200,
       align: 'center',
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+        <div style={tableActionStyle}>
           <a onClick={() => handleEditMenu(record)}>{textConst.action.update}</a>
-          <a onClick={() => handleCreateMenu(record.id)}>{textConst.action.create}</a>
+          <a onClick={() => handleCreateMenu(record.id)}>{textConst.action.addNew}</a>
           <a
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
             onClick={() => handleDelete(record, deleteMenu, () => actionRef.current?.reload())}
           >
             {textConst.action.delete}

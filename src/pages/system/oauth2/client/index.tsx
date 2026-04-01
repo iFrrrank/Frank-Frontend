@@ -19,6 +19,7 @@ import SaveOAuth2ClientForm, {
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete } from '@/components/BatchDelete'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const App_: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -137,13 +138,13 @@ const App_: React.FC = () => {
           }
         ]
         return (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
+          <div style={tableActionStyle}>
             <a key="edit" onClick={() => handleEditOAuth2Client(record)}>
               <EditOutlined /> {textConst.action.update}
             </a>
             <Dropdown menu={{ items: moreMenuItems }} placement="bottomRight">
               <a onClick={(e) => e.preventDefault()}>
-                <DoubleRightOutlined /> 更多
+                <DoubleRightOutlined /> {textConst.action.more}
               </a>
             </Dropdown>
           </div>
@@ -284,7 +285,7 @@ const App_: React.FC = () => {
         onCancel={() => setCopyModalVisible(false)}
         footer={[
           <Button key="close" onClick={() => setCopyModalVisible(false)}>
-            关闭
+            {textConst.common.close}
           </Button>
         ]}
       >
@@ -297,7 +298,7 @@ const App_: React.FC = () => {
               onClick={() => copyToClipboard(copyClientData?.clientId || '')}
               style={{ padding: 0, marginLeft: 8 }}
             >
-              复制
+              {textConst.action.copy}
             </Button>
           </div>
           <Input value={copyClientData?.clientId} readOnly style={{ marginBottom: 16 }} />
@@ -310,7 +311,7 @@ const App_: React.FC = () => {
               onClick={() => copyToClipboard(copyClientData?.secret || '')}
               style={{ padding: 0, marginLeft: 8 }}
             >
-              复制
+              {textConst.action.copy}
             </Button>
           </div>
           <Input.Password value={copyClientData?.secret} readOnly visibilityToggle={false} />

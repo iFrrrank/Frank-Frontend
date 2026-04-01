@@ -13,6 +13,7 @@ import { deleteFile, deleteFileList, getFilePage, uploadFile } from '@/api/infra
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/SingleDelete'
 import { handleBatchDelete } from '@/components/BatchDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const { Dragger } = Upload
 
@@ -111,7 +112,7 @@ const FileListPage: React.FC = () => {
       align: 'center',
       valueType: 'dateRange',
       hideInTable: true,
-      fieldProps: { placeholder: ['开始日期', '结束日期'] }
+      fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] }
     },
     {
       title: '文件名',
@@ -207,18 +208,18 @@ const FileListPage: React.FC = () => {
       width: 120,
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a key="copy" onClick={() => handleCopyLink(record.url)} style={{ color: '#1677ff' }}>
-            复制链接
+            {textConst.action.copyLink}
           </a>
           <a
             key="delete"
+            style={delteTextStyle}
             onClick={() => handleDelete(record, deleteFile, () => actionRef.current?.reload())}
-            style={{ color: '#ff4d4f' }}
           >
             {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
@@ -268,10 +269,10 @@ const FileListPage: React.FC = () => {
         headerTitle={false}
         toolBarRender={() => [
           <Button key="upload" type="primary" icon={<UploadOutlined />} onClick={handleOpenUpload}>
-            上传文件
+            {textConst.action.uploadFile}
           </Button>,
           <Button
-            key="delete"
+            key="batchDelete"
             danger
             type="primary"
             icon={<DeleteOutlined />}
@@ -302,7 +303,6 @@ const FileListPage: React.FC = () => {
         okText={textConst.common.ok}
         cancelText={textConst.common.cancel}
         confirmLoading={uploading}
-        width={600}
       >
         <Dragger
           accept={ACCEPT_EXTENSIONS}

@@ -12,6 +12,7 @@ import DataSourceConfigForm from './DataSourceConfigForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/SingleDelete'
 import { handleBatchDelete } from '@/components/BatchDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DataSourceConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -71,20 +72,20 @@ const DataSourceConfigPage: React.FC = () => {
       align: 'center',
       width: 120,
       render: (_, record) => (
-        <Space size={12}>
-          <a key="edit" onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
+        <div style={tableActionStyle}>
+          <a key="edit" onClick={() => handleUpdate(record.id)}>
             {textConst.action.update}
           </a>
           <a
             key="delete"
+            style={deleteTextStyle}
             onClick={() =>
               handleDelete(record, deleteDataSourceConfig, () => actionRef.current?.reload())
             }
-            style={{ color: '#ff4d4f' }}
           >
             {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
@@ -123,7 +124,7 @@ const DataSourceConfigPage: React.FC = () => {
             {textConst.action.create}
           </Button>,
           <Button
-            key="delete"
+            key="batchDelete"
             danger
             type="primary"
             icon={<DeleteOutlined />}

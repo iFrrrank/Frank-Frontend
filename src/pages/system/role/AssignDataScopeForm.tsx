@@ -24,7 +24,7 @@ const AssignDataScopeForm: React.FC = () => {
         setDataScopeVisible(visible)
         if (!visible) setDataScopeRole(null)
       }}
-      initialValues={{ dataScope: 1 }} // 默认全部数据权限
+      initialValues={{ dataScope: 1 }}
       colon={false}
       modalProps={{
         destroyOnClose: true
@@ -35,7 +35,7 @@ const AssignDataScopeForm: React.FC = () => {
             const resp = await assignRoleDataScope({
               roleId: dataScopeRole.id,
               dataScope: values.dataScope,
-              dataScopeDeptIds: [] // TODO: 处理自定义部门
+              dataScopeDeptIds: []
             })
             if (resp.code === 0) {
               message.success('数据权限分配成功')

@@ -195,7 +195,7 @@ const MailLog: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <a key="view" onClick={() => handleView(record)}>
-          详情
+          {textConst.action.detail}
         </a>
       )
     }

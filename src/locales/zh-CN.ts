@@ -37,8 +37,8 @@ export const textConst = {
     status: '状态',
     createTime: '创建时间',
     updateTime: '更新时间',
-    startTime: '开始时间',
-    endTime: '结束时间'
+    startDate: '开始日期',
+    endDate: '结束日期'
   },
   msg: {
     reminder: '温馨提示',
@@ -272,7 +272,6 @@ export const textConst = {
     hot: '热度',
     yield: '产量',
     dynamic: '动态',
-    push: '推送',
     follow: '关注'
   },
   form: {
@@ -351,14 +350,15 @@ export const textConst = {
   },
   action: {
     create: '创建',
+    addNew: '新增',
     delete: '删除',
     batchDelete: '批量删除',
     update: '修改',
     query: '查询',
     reset: '重置',
-    shrink: '折叠',
     expand: '展开',
-    expandOrShrink: '展开/折叠',
+    collapse: '折叠',
+    expandOrCollapse: '展开/折叠',
     preview: '预览',
     more: '更多',
     sync: '同步',
@@ -367,12 +367,17 @@ export const textConst = {
     export: '导出',
     import: '导入',
     generate: '生成',
-    logout: '强制退出',
+    logout: '强退',
     test: '测试',
-
     resetPwd: '重置密码',
     assignRole: '分配角色',
-    copy: '复制'
+    copy: '复制',
+    copyLink: '复制链接',
+    menuPermi: '菜单权限',
+    dataPermi: '数据权限',
+    data: '数据',
+    push: '推送',
+    uploadFile: '上传文件'
   },
   dialog: {
     dialog: '弹窗',

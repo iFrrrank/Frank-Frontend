@@ -10,6 +10,7 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-de
 import { deleteSmsChannel, getSmsChannelPage } from '@/api/system/smsChannel'
 import { handleBatchDelete } from '@/components/BatchDelete'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const SmsChannelConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -141,7 +142,7 @@ const SmsChannelConfig: React.FC = () => {
       align: 'center',
       width: 180,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       render: (_, record) => <span>{record.createTime as any}</span>
     },
@@ -151,15 +152,14 @@ const SmsChannelConfig: React.FC = () => {
       align: 'center',
       width: 120,
       key: 'option',
-      // fixed: 'right', // 防止长列表将操作列挤出屏幕
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditSmsChannel(record)}>
             {textConst.action.update}
           </a>
           <a
             key="delete"
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
             onClick={() =>
               handleDelete(record, deleteSmsChannel, () => actionRef.current?.reload())
             }

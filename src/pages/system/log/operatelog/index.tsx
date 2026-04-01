@@ -104,17 +104,15 @@ const OperateLogConfig: React.FC = () => {
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
-          <a
-            key="detail"
-            onClick={() => {
-              setSelectedRecord(record)
-              setDetailsDrawerVisible(true)
-            }}
-          >
-            详情
-          </a>
-        </Space>
+        <a
+          key="detail"
+          onClick={() => {
+            setSelectedRecord(record)
+            setDetailsDrawerVisible(true)
+          }}
+        >
+          {textConst.action.detail}
+        </a>
       )
     }
   ]

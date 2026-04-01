@@ -1,12 +1,6 @@
 import React, { useRef } from 'react'
-import { Button, Col, Dropdown, MenuProps, message, Modal, Row, Tag } from 'antd'
-import {
-  DeleteOutlined,
-  DoubleRightOutlined,
-  EditOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { Button, Col, Dropdown, MenuProps, Row, Tag } from 'antd'
+import { DeleteOutlined, DoubleRightOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import { deleteSocialClient, getSocialClientPage } from '@/api/system/socialClient'
 import SaveSocialClientForm, {
@@ -15,6 +9,7 @@ import SaveSocialClientForm, {
 } from './SaveSocialClientForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle } from '@/styles/common.style'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {
@@ -141,13 +136,13 @@ const SocialClientPage: React.FC = () => {
           }
         ]
         return (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
+          <div style={tableActionStyle}>
             <a key="edit" onClick={() => handleEditSocialClient(record)}>
               <EditOutlined /> {textConst.action.update}
             </a>
             <Dropdown menu={{ items: moreMenuItems }} placement="bottomRight">
               <a onClick={(e) => e.preventDefault()}>
-                <DoubleRightOutlined /> 更多
+                <DoubleRightOutlined /> {textConst.action.more}
               </a>
             </Dropdown>
           </div>

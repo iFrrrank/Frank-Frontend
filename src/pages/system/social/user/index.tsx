@@ -83,12 +83,12 @@ const SocialUserPage: React.FC = () => {
       order: 1,
       hideInSearch: true,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       render: (_, record) => record.createTime
     },
     {
-      title: '更新时间',
+      title: textConst.columns.updateTime,
       dataIndex: 'updateTime',
       valueType: 'dateTime',
       align: 'center',
@@ -103,11 +103,9 @@ const SocialUserPage: React.FC = () => {
       key: 'option',
       render: () => {
         return (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
-            <a key="detail" onClick={() => message.info('详情功能尚未实现')}>
-              详情
-            </a>
-          </div>
+          <a key="detail" onClick={() => message.info('详情功能尚未实现')}>
+            {textConst.action.detail}
+          </a>
         )
       }
     }

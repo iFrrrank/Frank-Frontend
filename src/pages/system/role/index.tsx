@@ -16,6 +16,7 @@ import AssignDataScopeForm, { handleOpenDataScope } from './AssignDataScopeForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete } from '@/components/BatchDelete'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const Role: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -120,7 +121,7 @@ const Role: React.FC = () => {
       align: 'center',
       width: 180,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       render: (_, record) => <span>{record.createTime as any}</span>
     },
@@ -131,19 +132,19 @@ const Role: React.FC = () => {
       width: 260,
       key: 'option',
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditRole(record)}>
             {textConst.action.update}
           </a>
           <a key="menu" onClick={() => handleOpenMenuAssign(record)}>
-            菜单权限
+            {textConst.action.menuPermi}
           </a>
           <a key="data" onClick={() => handleOpenDataScope(record)}>
-            数据权限
+            {textConst.action.dataPermi}
           </a>
           <a
             key="delete"
-            style={{ color: '#ff4d4f' }}
+            style={deleteTextStyle}
             onClick={() => handleDelete(record, deleteRole, () => actionRef.current?.reload())}
           >
             {textConst.action.delete}

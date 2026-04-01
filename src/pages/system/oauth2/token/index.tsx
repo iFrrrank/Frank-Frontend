@@ -5,6 +5,7 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteAccessToken, getAccessTokenPage } from '@/api/system/oAuth2Token'
 import { textConst } from '@/locales/zh-CN'
+import { deleteTextStyle } from '@/styles/common.style'
 
 /** 用户类型枚举 */
 const USER_TYPE_MAP: Record<number, { text: string; color: string }> = {
@@ -20,7 +21,7 @@ const TokenPage: React.FC = () => {
     Modal.confirm({
       title: textConst.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: '确定要强退用户 ID 为 ${record.userId} 的令牌吗？',
+      content: `确定要强退用户 ID 为 ${record.userId} 的令牌吗？`,
       onOk: async () => {
         try {
           await deleteAccessToken({ accessToken: record.accessToken })
@@ -115,8 +116,8 @@ const TokenPage: React.FC = () => {
       width: 80,
       key: 'option',
       render: (_text, record) => (
-        <a key="forceLogout" onClick={() => handleForceLogout(record)} style={{ color: 'red' }}>
-          强退
+        <a key="forceLogout" onClick={() => handleForceLogout(record)} style={deleteTextStyle}>
+          {textConst.action.logout}
         </a>
       )
     }

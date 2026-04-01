@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Button, Drawer, message, Modal, Space, Tag, Typography } from 'antd'
+import { Button, Drawer, message, Modal, Tag, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
@@ -95,7 +95,7 @@ const ApiAccessLogPage: React.FC = () => {
       align: 'center',
       width: 150,
       valueType: 'dateRange',
-      fieldProps: { placeholder: ['开始日期', '结束日期'] },
+      fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] },
       hideInTable: true
     },
     {
@@ -154,17 +154,15 @@ const ApiAccessLogPage: React.FC = () => {
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
-          <a
-            key="detail"
-            onClick={() => {
-              setSelectedRecord(record)
-              setDetailsDrawerVisible(true)
-            }}
-          >
-            详情
-          </a>
-        </Space>
+        <a
+          key="detail"
+          onClick={() => {
+            setSelectedRecord(record)
+            setDetailsDrawerVisible(true)
+          }}
+        >
+          {textConst.action.detail}
+        </a>
       )
     }
   ]

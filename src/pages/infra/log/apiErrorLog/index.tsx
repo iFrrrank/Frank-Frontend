@@ -9,6 +9,7 @@ import {
   updateApiErrorLogProcess
 } from '@/api/infra/apiErrorLog'
 import { textConst } from '@/locales/zh-CN'
+import { tableActionStyle } from '@/styles/common.style'
 
 const ApiErrorLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -123,7 +124,7 @@ const ApiErrorLogPage: React.FC = () => {
       align: 'center',
       width: 160,
       valueType: 'dateRange',
-      fieldProps: { placeholder: ['开始日期', '结束日期'] },
+      fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] },
       hideInTable: true
     },
     {
@@ -170,7 +171,7 @@ const ApiErrorLogPage: React.FC = () => {
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a
             key="detail"
             onClick={() => {
@@ -178,7 +179,7 @@ const ApiErrorLogPage: React.FC = () => {
               setDetailsDrawerVisible(true)
             }}
           >
-            详细
+            {textConst.action.detail}
           </a>
           {record.processStatus === 0 && (
             <>
@@ -190,7 +191,7 @@ const ApiErrorLogPage: React.FC = () => {
               </a>
             </>
           )}
-        </Space>
+        </div>
       )
     }
   ]

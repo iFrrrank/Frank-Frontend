@@ -97,7 +97,7 @@ const LoginLogPage: React.FC = () => {
       width: 200,
       valueType: 'dateRange',
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       hideInTable: true
     },
@@ -117,17 +117,15 @@ const LoginLogPage: React.FC = () => {
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
-          <a
-            key="detail"
-            onClick={() => {
-              setSelectedRecord(record)
-              setDetailsDrawerVisible(true)
-            }}
-          >
-            详情
-          </a>
-        </Space>
+        <a
+          key="detail"
+          onClick={() => {
+            setSelectedRecord(record)
+            setDetailsDrawerVisible(true)
+          }}
+        >
+          {textConst.action.detail}
+        </a>
       )
     }
   ]

@@ -24,6 +24,7 @@ import SaveUserForm, { handleCreateUser, handleEditUser } from '@/pages/system/u
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete } from '@/components/BatchDelete'
 import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const SystemUser: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -118,7 +119,7 @@ const SystemUser: React.FC = () => {
           }
         ]
         return (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
+          <div style={tableActionStyle}>
             <a key="edit" onClick={() => handleEditUser(record)}>
               <EditOutlined /> {textConst.action.update}
             </a>
