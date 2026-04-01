@@ -4,6 +4,8 @@ import { ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteAccessToken, getAccessTokenPage } from '@/api/system/oAuth2Token'
+import { textConst } from '@/locales/zh-CN'
+import { deleteTextStyle } from '@/styles/common.style'
 
 /** 用户类型枚举 */
 const USER_TYPE_MAP: Record<number, { text: string; color: string }> = {
@@ -17,7 +19,7 @@ const TokenPage: React.FC = () => {
   // ===== 强退（删除令牌） =====
   const handleForceLogout = (record: API.SystemOAuth2AccessTokenRespVO) => {
     Modal.confirm({
-      title: '温馨提示',
+      title: textConst.msg.reminder,
       icon: <ExclamationCircleOutlined />,
       content: `确定要强退用户 ID 为 ${record.userId} 的令牌吗？`,
       onOk: async () => {
@@ -73,7 +75,7 @@ const TokenPage: React.FC = () => {
         2: { text: '会员' }
       },
       fieldProps: {
-        placeholder: '请选择用户类型'
+        placeholder: '请输入用户类型'
       },
       render: (_text, record) => {
         const item = USER_TYPE_MAP[record.userType]
@@ -100,7 +102,7 @@ const TokenPage: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',
@@ -108,14 +110,14 @@ const TokenPage: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 80,
       key: 'option',
       render: (_text, record) => (
-        <a key="forceLogout" onClick={() => handleForceLogout(record)} style={{ color: 'red' }}>
-          强退
+        <a key="forceLogout" onClick={() => handleForceLogout(record)} style={deleteTextStyle}>
+          {textConst.action.logout}
         </a>
       )
     }
@@ -123,6 +125,7 @@ const TokenPage: React.FC = () => {
 
   return (
     <ProTable<API.SystemOAuth2AccessTokenRespVO>
+      headerTitle="令牌管理"
       columns={columns}
       scroll={{ x: 'max-content' }}
       actionRef={actionRef}
@@ -166,7 +169,6 @@ const TokenPage: React.FC = () => {
         showSizeChanger: true
       }}
       dateFormatter="string"
-      headerTitle="令牌管理"
     />
   )
 }

@@ -4,14 +4,17 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-de
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailTemplate, getMailTemplatePage } from '@/api/system/mailTemplate'
-import SaveMailTemplateModal, {
+import SaveMailTemplateForm, {
   handleCreateMailTemplate,
   handleEditMailTemplate
 } from './SaveMailTemplateForm'
-import SendMailModal, { handleTestMailTemplate } from './SendMailForm'
+import SendMailForm, { handleTestMailTemplate } from './SendMailForm'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
-
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 import '@wangeditor/editor/dist/css/style.css'
+import { textConst } from '@/locales/zh-CN'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const MailTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -98,7 +101,7 @@ const MailTemplateConfig: React.FC = () => {
       width: 200,
       valueType: 'select',
       fieldProps: {
-        placeholder: '请选择邮箱账号',
+        placeholder: '请输入邮箱账号',
         options: accountOptions,
         showSearch: true
       },
@@ -118,7 +121,7 @@ const MailTemplateConfig: React.FC = () => {
       width: 120,
       valueType: 'select',
       fieldProps: {
-        placeholder: '请选择开启状态'
+        placeholder: '请输入开启状态'
       },
       valueEnum: {
         0: { text: '开启', status: 'Success' },
@@ -126,84 +129,49 @@ const MailTemplateConfig: React.FC = () => {
       }
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       valueType: 'dateRange',
       width: 180,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       render: (_, record) => <span>{record.createTime as any}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 180,
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditMailTemplate(record)}>
-            修改
+            {textConst.action.update}
           </a>
           <a key="test" onClick={() => handleTestMailTemplate(record)}>
-            测试
+            {textConst.action.test}
           </a>
-          <a key="delete" onClick={() => handleDelete(record)} style={{ color: '#ff4d4f' }}>
-            删除
+          <a
+            key="delete"
+            style={deleteTextStyle}
+            onClick={() =>
+              handleDelete(record, deleteMailTemplate, () => actionRef.current?.reload())
+            }
+          >
+            {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
 
-  // ===== 单个删除 =====
-  const handleDelete = (record: API.SystemMailTemplateRespVO) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除编号为"${record.id}"的邮件模板数据项?`,
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteMailTemplate({ id: record.id! })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除选中的 ${selectedRowKeys.length} 个邮件模板数据项?`,
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          // 当前接口似乎仅支持单删，使用 Promise.all 并行调用
-          await Promise.all(selectedRowKeys.map((id) => deleteMailTemplate({ id: Number(id) })))
-          message.success('批量删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error('批量删除失败')
-        }
-      }
-    })
-  }
-
   return (
     <>
       <ProTable<API.SystemMailTemplateRespVO>
+        headerTitle="邮件模板"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -251,7 +219,6 @@ const MailTemplateConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"
@@ -259,30 +226,33 @@ const MailTemplateConfig: React.FC = () => {
             type="primary"
             onClick={() => handleCreateMailTemplate()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="batchDelete"
             icon={<DeleteOutlined />}
             danger
+            type="primary"
             disabled={selectedRowKeys.length === 0}
-            style={
-              selectedRowKeys.length > 0
-                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
-                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteMailTemplate,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
             }
-            onClick={handleBatchDelete}
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />
 
-      <SaveMailTemplateModal
+      <SaveMailTemplateForm
         onSuccess={() => actionRef.current?.reload()}
         accountOptions={accountOptions}
       />
-      <SendMailModal />
+      <SendMailForm />
     </>
   )
 }

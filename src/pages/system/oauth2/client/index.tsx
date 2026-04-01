@@ -12,10 +12,14 @@ import {
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteOAuth2Client, getOAuth2Client, getOAuth2ClientPage } from '@/api/system/oAuth2Client'
-import SaveOAuth2ClientModal, {
+import SaveOAuth2ClientForm, {
   handleCreateOAuth2Client,
   handleEditOAuth2Client
 } from './SaveOAuth2ClientForm'
+import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const App_: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -82,7 +86,7 @@ const App_: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: '请选择状态'
+        placeholder: '请输入状态'
       }
     },
     {
@@ -104,7 +108,7 @@ const App_: React.FC = () => {
       render: (text) => (text ? `${text}秒` : '-')
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',
@@ -112,7 +116,7 @@ const App_: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 160,
@@ -122,8 +126,9 @@ const App_: React.FC = () => {
           {
             key: 'delete',
             icon: <DeleteOutlined />,
-            label: '删除',
-            onClick: () => handleDelete(record)
+            label: textConst.action.delete,
+            onClick: () =>
+              handleDelete(record, deleteOAuth2Client, () => actionRef.current?.reload())
           },
           {
             key: 'copy',
@@ -133,13 +138,13 @@ const App_: React.FC = () => {
           }
         ]
         return (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
+          <div style={tableActionStyle}>
             <a key="edit" onClick={() => handleEditOAuth2Client(record)}>
-              <EditOutlined /> 修改
+              <EditOutlined /> {textConst.action.update}
             </a>
             <Dropdown menu={{ items: moreMenuItems }} placement="bottomRight">
               <a onClick={(e) => e.preventDefault()}>
-                <DoubleRightOutlined /> 更多
+                <DoubleRightOutlined /> {textConst.action.more}
               </a>
             </Dropdown>
           </div>
@@ -147,43 +152,6 @@ const App_: React.FC = () => {
       }
     }
   ]
-
-  // ===== 删除单个客户端 =====
-  const handleDelete = (record: API.SystemOAuth2ClientRespVO) => {
-    Modal.confirm({
-      title: '温馨提示',
-      icon: <ExclamationCircleOutlined />,
-      content: `确定要删除应用"${record.name}"吗？`,
-      onOk: async () => {
-        try {
-          await deleteOAuth2Client({ id: record.id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: '温馨提示',
-      icon: <ExclamationCircleOutlined />,
-      content: `确定要删除选中的 ${selectedRowKeys.length} 个应用吗？`,
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteOAuth2Client({ id: Number(id) })))
-          message.success('批量删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error('批量删除失败')
-        }
-      }
-    })
-  }
 
   // ===== 复制凭证 =====
   const handleCopyCredentials = (record: API.SystemOAuth2ClientRespVO) => {
@@ -199,10 +167,10 @@ const App_: React.FC = () => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        message.success('复制成功')
+        message.success(textConst.msg.copySuccess)
       })
       .catch(() => {
-        message.error('复制失败')
+        message.error(textConst.msg.copyError)
       })
   }
 
@@ -210,6 +178,7 @@ const App_: React.FC = () => {
     <Row gutter={16}>
       <Col span={24}>
         <ProTable<API.SystemOAuth2ClientRespVO>
+          headerTitle="应用管理"
           columns={columns}
           scroll={{ x: 'max-content' }}
           actionRef={actionRef}
@@ -277,7 +246,6 @@ const App_: React.FC = () => {
             showSizeChanger: true
           }}
           dateFormatter="string"
-          headerTitle="应用管理"
           toolBarRender={() => [
             <Button
               key="create"
@@ -285,22 +253,30 @@ const App_: React.FC = () => {
               onClick={() => handleCreateOAuth2Client()}
               type="primary"
             >
-              新增
+              {textConst.action.create}
             </Button>,
             <Button
               key="batchDelete"
               icon={<DeleteOutlined />}
               danger
+              type="primary"
               disabled={selectedRowKeys.length === 0}
-              onClick={handleBatchDelete}
+              onClick={() =>
+                handleBatchDelete(
+                  selectedRowKeys,
+                  deleteOAuth2Client,
+                  () => setSelectedRowKeys([]),
+                  () => actionRef.current?.reload()
+                )
+              }
             >
-              批量删除
+              {textConst.action.batchDelete}
             </Button>
           ]}
         />
       </Col>
 
-      <SaveOAuth2ClientModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveOAuth2ClientForm onSuccess={() => actionRef.current?.reload()} />
 
       {/* ========== 复制凭证弹窗 ========== */}
       <Modal
@@ -309,7 +285,7 @@ const App_: React.FC = () => {
         onCancel={() => setCopyModalVisible(false)}
         footer={[
           <Button key="close" onClick={() => setCopyModalVisible(false)}>
-            关闭
+            {textConst.common.close}
           </Button>
         ]}
       >
@@ -322,7 +298,7 @@ const App_: React.FC = () => {
               onClick={() => copyToClipboard(copyClientData?.clientId || '')}
               style={{ padding: 0, marginLeft: 8 }}
             >
-              复制
+              {textConst.action.copy}
             </Button>
           </div>
           <Input value={copyClientData?.clientId} readOnly style={{ marginBottom: 16 }} />
@@ -335,7 +311,7 @@ const App_: React.FC = () => {
               onClick={() => copyToClipboard(copyClientData?.secret || '')}
               style={{ padding: 0, marginLeft: 8 }}
             >
-              复制
+              {textConst.action.copy}
             </Button>
           </div>
           <Input.Password value={copyClientData?.secret} readOnly visibilityToggle={false} />

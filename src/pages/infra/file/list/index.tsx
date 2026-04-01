@@ -1,15 +1,19 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal, Space, Typography, Upload } from 'antd'
 import type { UploadFile } from 'antd'
+import { Button, message, Modal, Space, Typography, Upload } from 'antd'
 import {
-  UploadOutlined,
   DeleteOutlined,
   ExclamationCircleOutlined,
-  InboxOutlined
+  InboxOutlined,
+  UploadOutlined
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteFile, deleteFileList, getFilePage, uploadFile } from '@/api/infra/fileList'
+import { textConst } from '@/locales/zh-CN'
+import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const { Dragger } = Upload
 
@@ -44,48 +48,7 @@ const FileListPage: React.FC = () => {
     navigator.clipboard
       .writeText(url)
       .then(() => message.success('链接已复制到剪贴板'))
-      .catch(() => message.error('复制失败'))
-  }
-
-  /** 删除单条 */
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该文件？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteFile({ id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  /** 批量删除 */
-  const handleDeleteBatch = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中的文件？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteFileList({ ids: selectedRowKeys as number[] })
-          message.success('删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reloadAndRest?.()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
+      .catch(() => message.error(textConst.msg.copyError))
   }
 
   /** 打开上传弹窗 */
@@ -144,12 +107,12 @@ const FileListPage: React.FC = () => {
       hideInTable: true
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       valueType: 'dateRange',
       hideInTable: true,
-      fieldProps: { placeholder: ['开始日期', '结束日期'] }
+      fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] }
     },
     {
       title: '文件名',
@@ -221,8 +184,8 @@ const FileListPage: React.FC = () => {
                 alt={record.name}
                 style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 4 }}
                 onError={(e) => {
-                  ; (e.target as HTMLImageElement).style.display = 'none'
-                    ; (e.target as HTMLImageElement).parentElement!.textContent = '加载失败'
+                  ;(e.target as HTMLImageElement).style.display = 'none'
+                  ;(e.target as HTMLImageElement).parentElement!.textContent = '加载失败'
                 }}
               />
             </a>
@@ -239,20 +202,24 @@ const FileListPage: React.FC = () => {
       render: (_, record) => <span>{record.createTime}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 120,
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a key="copy" onClick={() => handleCopyLink(record.url)} style={{ color: '#1677ff' }}>
-            复制链接
+            {textConst.action.copyLink}
           </a>
-          <a key="delete" onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>
-            删除
+          <a
+            key="delete"
+            style={deleteTextStyle}
+            onClick={() => handleDelete(record, deleteFile, () => actionRef.current?.reload())}
+          >
+            {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
@@ -260,6 +227,7 @@ const FileListPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraFileRespVO>
+        headerTitle="文件列表"
         rowSelection={{
           selectedRowKeys,
           onChange: setSelectedRowKeys
@@ -299,20 +267,26 @@ const FileListPage: React.FC = () => {
         search={{ labelWidth: 'auto' }}
         options={false}
         pagination={{ align: 'center', showSizeChanger: true }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="upload" type="primary" icon={<UploadOutlined />} onClick={handleOpenUpload}>
-            上传文件
+            {textConst.action.uploadFile}
           </Button>,
           <Button
-            key="delete"
+            key="batchDelete"
             danger
+            type="primary"
             icon={<DeleteOutlined />}
             disabled={selectedRowKeys.length === 0}
-            onClick={handleDeleteBatch}
-            style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteFileList,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reloadAndRest?.()
+              )
+            }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />
@@ -326,10 +300,9 @@ const FileListPage: React.FC = () => {
           setUploadModalVisible(false)
           setUploadFileList([])
         }}
-        okText="确 定"
-        cancelText="取 消"
+        okText={textConst.common.ok}
+        cancelText={textConst.common.cancel}
         confirmLoading={uploading}
-        width={600}
       >
         <Dragger
           accept={ACCEPT_EXTENSIONS}
@@ -354,7 +327,9 @@ const FileListPage: React.FC = () => {
           <p className="ant-upload-drag-icon">
             <InboxOutlined />
           </p>
-          <p className="ant-upload-text">将文件拖到此处，或 <a>点击上传</a></p>
+          <p className="ant-upload-text">
+            将文件拖到此处，或 <a>点击上传</a>
+          </p>
         </Dragger>
         <div style={{ color: '#ff4d4f', marginTop: 8, fontSize: 13 }}>
           提示：仅允许导入 jpg、png、gif 格式文件！

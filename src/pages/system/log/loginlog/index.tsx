@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
-import { Button, Drawer, Modal, Space, Typography, message } from 'antd'
+import { Button, Drawer, message, Modal, Space, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import { getLoginLogPage, exportLoginLog } from '@/api/system/loginLog'
+import { exportLoginLog, getLoginLogPage } from '@/api/system/loginLog'
+import { textConst } from '@/locales/zh-CN'
 
 const LoginLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -96,7 +97,7 @@ const LoginLogPage: React.FC = () => {
       width: 200,
       valueType: 'dateRange',
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       hideInTable: true
     },
@@ -109,35 +110,33 @@ const LoginLogPage: React.FC = () => {
       render: (_, record) => <span>{record.createTime}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 100,
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
-          <a
-            key="detail"
-            onClick={() => {
-              setSelectedRecord(record)
-              setDetailsDrawerVisible(true)
-            }}
-          >
-            详情
-          </a>
-        </Space>
+        <a
+          key="detail"
+          onClick={() => {
+            setSelectedRecord(record)
+            setDetailsDrawerVisible(true)
+          }}
+        >
+          {textConst.action.detail}
+        </a>
       )
     }
   ]
 
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有登录日志数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -159,10 +158,10 @@ const LoginLogPage: React.FC = () => {
           link.download = '登录日志数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConst.msg.exportSuccess)
         } catch (error) {
           console.error(error)
-          message.error('导出失败')
+          message.error('textConst.msg.exportError')
         }
       }
     })
@@ -171,6 +170,7 @@ const LoginLogPage: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemLoginLogRespVO>
+        headerTitle="登录日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -226,15 +226,15 @@ const LoginLogPage: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"
             icon={<DownloadOutlined />}
+            color="volcano"
+            variant="outlined"
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

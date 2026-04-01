@@ -1,10 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, message, Modal, Tag, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { exportSmsLogExcel, getSmsLogPage } from '@/api/system/smsLog'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
+import { textConst } from '@/locales/zh-CN'
 
 const SmsLogConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -55,7 +56,7 @@ const SmsLogConfig: React.FC = () => {
       width: 80
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       hideInSearch: true,
@@ -73,7 +74,7 @@ const SmsLogConfig: React.FC = () => {
     },
     {
       title: '短信内容',
-      dataIndex: 'templateContent', // API 中可能是 templateContent
+      dataIndex: 'templateContent',
       align: 'center',
       hideInSearch: true,
       width: 300,
@@ -142,7 +143,7 @@ const SmsLogConfig: React.FC = () => {
       valueType: 'dateRange',
       hideInTable: true,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       }
     },
     {
@@ -151,32 +152,26 @@ const SmsLogConfig: React.FC = () => {
       valueType: 'dateRange',
       hideInTable: true,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       }
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 80,
       key: 'option',
-      fixed: 'right', // 即使很少操作也占个位，如果没有详情这儿写死展示
-      render: () => (
-        <a key="view" style={{ color: '#1890ff', cursor: 'not-allowed' }} title="暂未配置详情界面">
-          详情
-        </a>
-      )
+      render: () => <a key="view">{textConst.action.detail}</a>
     }
   ]
 
-  // ===== 导出短信日志 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有短信日志数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -204,9 +199,9 @@ const SmsLogConfig: React.FC = () => {
           link.download = '短信日志数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error('textConst.msg.exportError')
         }
       }
     })
@@ -215,6 +210,7 @@ const SmsLogConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemSmsLogRespVO>
+        headerTitle="短信日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -284,15 +280,15 @@ const SmsLogConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

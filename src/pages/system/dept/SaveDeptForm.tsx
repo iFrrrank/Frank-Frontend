@@ -7,9 +7,10 @@ import {
   ProFormText,
   ProFormTreeSelect
 } from '@ant-design/pro-components'
-import { createDept, updateDept, getSimpleDeptList } from '@/api/system/dept'
+import { createDept, getSimpleDeptList, updateDept } from '@/api/system/dept'
 import { getSimpleUserList } from '@/api/system/user'
 import { handleTreeData } from '@/utils/tree'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateDept: (parentId?: number) => void
 export let handleEditDept: (record: any) => void
@@ -32,7 +33,7 @@ const buildDeptTreeSelectData = (data: any[]): any[] => {
   })
 }
 
-const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
+const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingDept, setEditingDept] = useState<any>(null)
 
@@ -59,8 +60,8 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm
-      title={editingDept?.id ? '修改部门' : '新增部门'}
-      width={500}
+      title={editingDept?.id ? textConst.action.update : textConst.action.create}
+      width={400}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -98,15 +99,19 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           }
 
           if (resp.code === 0) {
-            message.success(editingDept?.id ? '修改成功' : '创建成功')
+            message.success(
+              editingDept?.id ? textConst.msg.updateSuccess : textConst.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingDept?.id ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg || (editingDept?.id ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingDept?.id ? '修改失败' : '创建失败')
+          message.error(editingDept?.id ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -127,7 +132,7 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           fieldNames: { label: 'title', value: 'value' },
           treeDefaultExpandAll: true
         }}
-        rules={[{ required: true, message: '请选择上级部门' }]}
+        rules={[{ required: true, message: '请输入上级部门' }]}
       />
       <ProFormText
         name="name"
@@ -179,12 +184,11 @@ const SaveDeptModal: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: '请输入状态' }]}
         allowClear
       />
     </ModalForm>
   )
 }
 
-export default SaveDeptModal
-
+export default SaveDeptForm

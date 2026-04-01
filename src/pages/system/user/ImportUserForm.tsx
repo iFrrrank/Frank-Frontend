@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react'
-import { Modal, message, Upload, Switch } from 'antd'
+import { message, Modal, Switch, Upload } from 'antd'
 import type { ActionType } from '@ant-design/pro-components'
 import { InboxOutlined } from '@ant-design/icons'
 import { importExcel, importTemplate } from '@/api/system/user'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const { Dragger } = Upload
 
 export let handleImportUser: () => void
 
-const ImportUserModal: React.FC = () => {
+const ImportUserForm: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const [importModalVisible, setImportModalVisible] = useState(false)
   const [importFile, setImportFile] = useState<File | null>(null)
@@ -43,15 +43,15 @@ const ImportUserModal: React.FC = () => {
             msgs.push(`导入失败用户: ${failKeys.join(', ')}`)
           }
         }
-        message.success(msgs.join('；') || textConstants.msg.exportSuccess)
+        message.success(msgs.join('；') || textConst.msg.exportSuccess)
         setImportModalVisible(false)
         setImportFile(null)
         actionRef.current?.reload()
       } else {
-        message.error(resp.msg || textConstants.msg.exportFail)
+        message.error(resp.msg || textConst.msg.exportError)
       }
     } catch {
-      message.error(textConstants.msg.exportFail)
+      message.error(textConst.msg.exportError)
     } finally {
       setImportLoading(false)
     }
@@ -113,4 +113,4 @@ const ImportUserModal: React.FC = () => {
   )
 }
 
-export default ImportUserModal
+export default ImportUserForm

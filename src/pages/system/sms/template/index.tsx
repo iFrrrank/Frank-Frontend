@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, message, Modal, Tag, Typography } from 'antd'
 import {
   DeleteOutlined,
@@ -13,11 +13,15 @@ import {
   exportSmsTemplateExcel,
   getSmsTemplatePage
 } from '@/api/system/smsTemplate'
-import SaveSmsTemplateModal, {
+import SaveSmsTemplateForm, {
   handleCreateSmsTemplate,
   handleEditSmsTemplate
 } from './SaveSmsTemplateForm'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
+import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const SmsTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -62,7 +66,7 @@ const SmsTemplateConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: smsTypeEnum,
       fieldProps: {
-        placeholder: '请选择短信类型'
+        placeholder: '请输入短信类型'
       }
     },
     {
@@ -76,7 +80,7 @@ const SmsTemplateConfig: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: '请选择开启状态'
+        placeholder: '请输入开启状态'
       }
     },
     {
@@ -105,18 +109,18 @@ const SmsTemplateConfig: React.FC = () => {
       valueType: 'select',
       fieldProps: {
         options: channelOptions,
-        placeholder: '请选择短信渠道',
+        placeholder: '请输入短信渠道',
         showSearch: true
       }
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
       hideInTable: true,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       }
     },
     {
@@ -202,74 +206,38 @@ const SmsTemplateConfig: React.FC = () => {
       }
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 150,
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditSmsTemplate(record)}>
-            修改
+            {textConst.action.update}
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
-            删除
+          <a
+            key="delete"
+            style={deleteTextStyle}
+            onClick={() =>
+              handleDelete(record, deleteSmsTemplate, () => actionRef.current?.reload())
+            }
+          >
+            {textConst.action.delete}
           </a>
         </div>
       )
     }
   ]
 
-  // ===== 删除短信模板 =====
-  const handleDelete = (record: API.SystemSmsTemplateRespVO) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteSmsTemplate({ id: record.id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据?',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteSmsTemplate({ id: Number(id) })))
-          message.success('批量删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error('批量删除失败')
-        }
-      }
-    })
-  }
-
-  // ===== 导出短信模板 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有短信模板数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -290,9 +258,9 @@ const SmsTemplateConfig: React.FC = () => {
           link.download = '短信模板数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error('textConst.msg.exportError')
         }
       }
     })
@@ -301,6 +269,7 @@ const SmsTemplateConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemSmsTemplateRespVO>
+        headerTitle="短信模板"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -358,7 +327,6 @@ const SmsTemplateConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"
@@ -366,34 +334,38 @@ const SmsTemplateConfig: React.FC = () => {
             onClick={() => handleCreateSmsTemplate()}
             type="primary"
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="batchDelete"
             icon={<DeleteOutlined />}
             danger
+            type="primary"
             disabled={selectedRowKeys.length === 0}
-            onClick={handleBatchDelete}
-            style={
-              selectedRowKeys.length > 0
-                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
-                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteSmsTemplate,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>,
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />
 
-      <SaveSmsTemplateModal
+      <SaveSmsTemplateForm
         onSuccess={() => actionRef.current?.reload()}
         channelOptions={channelOptions}
       />

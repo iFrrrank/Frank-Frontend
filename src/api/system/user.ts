@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 新增用户 POST /system/user/create */
+/** 创建用户 POST /system/user/create */
 export async function createUser(body: API.SystemUserSaveReqVO, options?: { [key: string]: any }) {
   return request<API.CommonResultLong>('/system/user/create', {
     method: 'POST',

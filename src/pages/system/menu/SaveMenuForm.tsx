@@ -8,8 +8,8 @@ import {
   ProFormText,
   ProFormTreeSelect
 } from '@ant-design/pro-components'
-import * as AntdIcons from '@ant-design/icons'
-import { createMenu, updateMenu, getMenuList } from '@/api/system/menu'
+import { createMenu, getMenuList, updateMenu } from '@/api/system/menu'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateMenu: (parentId?: number) => void
 export let handleEditMenu: (record: any) => void
@@ -33,7 +33,7 @@ const handleTreeData = (data: any[], parentId: number = 0): any[] => {
   return tree.sort((a, b) => a.sort - b.sort) // 排序
 }
 
-const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
+const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingMenu, setEditingMenu] = useState<any>(null)
 
@@ -49,7 +49,7 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm
-      title={editingMenu?.id ? '修改菜单' : '新增菜单'}
+      title={editingMenu?.id ? textConst.action.update : textConst.action.create}
       width={680}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -92,15 +92,19 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
           }
 
           if (resp.code === 0) {
-            message.success(editingMenu?.id ? '修改成功' : '创建成功')
+            message.success(
+              editingMenu?.id ? textConst.msg.updateSuccess : textConst.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingMenu?.id ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg || (editingMenu?.id ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingMenu?.id ? '修改失败' : '创建失败')
+          message.error(editingMenu?.id ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -121,7 +125,7 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
           fieldNames: { label: 'name', value: 'id' },
           treeDefaultExpandAll: true
         }}
-        rules={[{ required: true, message: '请选择上级菜单' }]}
+        rules={[{ required: true, message: '请输入上级菜单' }]}
       />
 
       <ProFormText
@@ -197,7 +201,7 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                   label="权限标识"
                   colProps={{ span: 24 }}
                   placeholder="请输入权限标识"
-                  tooltip="控制器中定义的权限字符，如：`system:user:list`"
+                  tooltip="控制器中定义的权限字符，如：system:user:list"
                 />
               )}
 
@@ -268,5 +272,4 @@ const SaveMenuModal: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SaveMenuModal
-
+export default SaveMenuForm

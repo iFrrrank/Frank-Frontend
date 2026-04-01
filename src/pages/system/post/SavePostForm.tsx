@@ -8,6 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createPost, updatePost } from '@/api/system/post'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreatePost: () => void
 export let handleEditPost: (record: API.SystemPostRespVO) => void
@@ -16,7 +17,7 @@ interface SavePostModalProps {
   onSuccess: () => void
 }
 
-const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
+const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingPost, setEditingPost] = useState<API.SystemPostRespVO | null>(null)
 
@@ -32,8 +33,8 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemPostSaveReqVO>
-      title={editingPost ? '修改' : '新增'}
-      width={600}
+      title={editingPost ? textConst.action.update : textConst.action.create}
+      width={400}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -49,8 +50,8 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
           : { sort: 0, status: 0 }
       }
       layout="horizontal"
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 20 }}
+      labelCol={{ span: 5 }}
+      wrapperCol={{ span: 19 }}
       colon={false}
       modalProps={{
         destroyOnClose: true,
@@ -65,15 +66,17 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
             resp = await createPost(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingPost ? '修改成功' : '创建成功')
+            message.success(editingPost ? textConst.msg.updateSuccess : textConst.msg.createSuccess)
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingPost ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg || (editingPost ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingPost ? '修改失败' : '创建失败')
+          message.error(editingPost ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -108,7 +111,7 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: '请输入状态' }]}
       />
       <ProFormTextArea
         name="remark"
@@ -121,5 +124,4 @@ const SavePostModal: React.FC<SavePostModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SavePostModal
-
+export default SavePostForm

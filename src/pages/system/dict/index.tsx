@@ -10,7 +10,11 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { history } from '@umijs/max'
 import { deleteDictType, export2, pageDictTypes } from '@/api/system/dictType'
-import SaveDictTypeModal, { handleCreateDictType, handleEditDictType } from './SaveDictTypeForm'
+import SaveDictTypeForm, { handleCreateDictType, handleEditDictType } from './SaveDictTypeForm'
+import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DictTypeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -18,7 +22,6 @@ const DictTypeConfig: React.FC = () => {
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
-  // ===== 数据列定义 =====
   const columns: ProColumns<API.SystemDictTypeRespVO>[] = [
     {
       title: '字典ID',
@@ -74,87 +77,49 @@ const DictTypeConfig: React.FC = () => {
       ellipsis: true
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
       width: 180,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       render: (_, record) => <span>{record.createTime as any}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 180,
       key: 'option',
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditDictType(record)}>
-            修改
+            {textConst.action.update}
           </a>
           <a key="data" onClick={() => handleData(record)}>
-            数据
+            {textConst.action.data}
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
-            删除
+          <a
+            key="delete"
+            style={deleteTextStyle}
+            onClick={() => handleDelete(record, deleteDictType, () => actionRef.current?.reload())}
+          >
+            {textConst.action.delete}
           </a>
         </div>
       )
     }
   ]
 
-  // ===== 删除字典类型 =====
-  const handleDelete = (record: API.SystemDictTypeRespVO) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteDictType({ id: record.id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据?',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteDictType({ id: Number(id) })))
-          message.success('批量删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error('批量删除失败')
-        }
-      }
-    })
-  }
-
-  // ===== 导出字典类型 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有字典类型数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -175,9 +140,9 @@ const DictTypeConfig: React.FC = () => {
           link.download = '字典类型数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error('textConst.msg.exportError')
         }
       }
     })
@@ -185,12 +150,13 @@ const DictTypeConfig: React.FC = () => {
 
   // ===== 字典数据维护页 =====
   const handleData = (record: API.SystemDictTypeRespVO) => {
-    history.push(`/system/dict/data/${record.type}`)
+    history.push('/system/dict/data/${record.type}')
   }
 
   return (
     <>
       <ProTable<API.SystemDictTypeRespVO>
+        headerTitle="字典管理"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -234,7 +200,6 @@ const DictTypeConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"
@@ -242,34 +207,38 @@ const DictTypeConfig: React.FC = () => {
             onClick={handleCreateDictType}
             type="primary"
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>,
           <Button
             key="batchDelete"
             icon={<DeleteOutlined />}
             danger
+            type="primary"
             disabled={selectedRowKeys.length === 0}
-            onClick={handleBatchDelete}
-            style={
-              selectedRowKeys.length > 0
-                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
-                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' } // 模拟图片中禁用的淡粉色背景
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteDictType,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />
 
-      <SaveDictTypeModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveDictTypeForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal, Space, Typography } from 'antd'
-import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
+import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import {
@@ -9,6 +9,10 @@ import {
   getDataSourceConfigList
 } from '@/api/infra/dataSourceConfig'
 import DataSourceConfigForm from './DataSourceConfigForm'
+import { textConst } from '@/locales/zh-CN'
+import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DataSourceConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -25,45 +29,6 @@ const DataSourceConfigPage: React.FC = () => {
   const handleUpdate = (id: number) => {
     setCurrentId(id)
     setFormVisible(true)
-  }
-
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该数据源配置？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteDataSourceConfig({ id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  const handleDeleteBatch = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中的数据？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteDataSourceConfigList({ ids: selectedRowKeys as number[] })
-          message.success('删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reloadAndRest?.()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
   }
 
   const columns: ProColumns<API.InfraDataSourceConfigRespVO>[] = [
@@ -96,25 +61,31 @@ const DataSourceConfigPage: React.FC = () => {
       align: 'center'
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       render: (_, record) => <span>{record.createTime}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 120,
       render: (_, record) => (
-        <Space size={12}>
-          <a key="edit" onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
-            编辑
+        <div style={tableActionStyle}>
+          <a key="edit" onClick={() => handleUpdate(record.id)}>
+            {textConst.action.update}
           </a>
-          <a key="delete" onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>
-            删除
+          <a
+            key="delete"
+            style={deleteTextStyle}
+            onClick={() =>
+              handleDelete(record, deleteDataSourceConfig, () => actionRef.current?.reload())
+            }
+          >
+            {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
@@ -122,6 +93,7 @@ const DataSourceConfigPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraDataSourceConfigRespVO>
+        headerTitle="数据源配置"
         rowSelection={{
           selectedRowKeys,
           onChange: setSelectedRowKeys
@@ -147,20 +119,26 @@ const DataSourceConfigPage: React.FC = () => {
         search={false}
         options={false}
         pagination={false}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
-            key="delete"
+            key="batchDelete"
             danger
+            type="primary"
             icon={<DeleteOutlined />}
             disabled={selectedRowKeys.length === 0}
-            onClick={handleDeleteBatch}
-            style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteDataSourceConfigList,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

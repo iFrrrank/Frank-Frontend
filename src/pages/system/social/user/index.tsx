@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
-import { Col, message, Row, Image } from 'antd'
+import { Col, Image, message, Row } from 'antd'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { getSocialUserPage } from '@/api/system/socialUser'
+import { textConst } from '@/locales/zh-CN'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {
@@ -34,7 +35,7 @@ const SocialUserPage: React.FC = () => {
         32: { text: '微信开放平台' }
       },
       fieldProps: {
-        placeholder: '请选择社交平台'
+        placeholder: '请输入社交平台'
       },
       render: (_text, record) => SOCIAL_TYPE_MAP[record.type] || record.type
     },
@@ -74,7 +75,7 @@ const SocialUserPage: React.FC = () => {
         )
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTimeRange',
       align: 'center',
@@ -82,12 +83,12 @@ const SocialUserPage: React.FC = () => {
       order: 1,
       hideInSearch: true,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       render: (_, record) => record.createTime
     },
     {
-      title: '更新时间',
+      title: textConst.columns.updateTime,
       dataIndex: 'updateTime',
       valueType: 'dateTime',
       align: 'center',
@@ -95,18 +96,16 @@ const SocialUserPage: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 100,
       key: 'option',
       render: () => {
         return (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
-            <a key="detail" onClick={() => message.info('详情功能尚未实现')}>
-              详情
-            </a>
-          </div>
+          <a key="detail" onClick={() => message.info('详情功能尚未实现')}>
+            {textConst.action.detail}
+          </a>
         )
       }
     }
@@ -116,6 +115,7 @@ const SocialUserPage: React.FC = () => {
     <Row gutter={16}>
       <Col span={24}>
         <ProTable<API.SystemSocialUserRespVO>
+          headerTitle="三方用户"
           columns={columns}
           scroll={{ x: 'max-content' }}
           actionRef={actionRef}

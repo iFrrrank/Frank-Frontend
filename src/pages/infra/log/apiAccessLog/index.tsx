@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
-import { Button, Drawer, message, Modal, Space, Tag, Typography } from 'antd'
+import { Button, Drawer, message, Modal, Tag, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { exportApiAccessLogExcel, getApiAccessLogPage } from '@/api/infra/apiAccessLog'
+import { textConst } from '@/locales/zh-CN'
 
 const ApiAccessLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -37,7 +38,7 @@ const ApiAccessLogPage: React.FC = () => {
         1: { text: '会员', status: 'Default' },
         2: { text: '管理员', status: 'Processing' }
       },
-      fieldProps: { placeholder: '请选择用户类型' }
+      fieldProps: { placeholder: '请输入用户类型' }
     },
     {
       title: '应用名称',
@@ -94,7 +95,7 @@ const ApiAccessLogPage: React.FC = () => {
       align: 'center',
       width: 150,
       valueType: 'dateRange',
-      fieldProps: { placeholder: ['开始日期', '结束日期'] },
+      fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] },
       hideInTable: true
     },
     {
@@ -146,35 +147,33 @@ const ApiAccessLogPage: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 80,
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
-          <a
-            key="detail"
-            onClick={() => {
-              setSelectedRecord(record)
-              setDetailsDrawerVisible(true)
-            }}
-          >
-            详情
-          </a>
-        </Space>
+        <a
+          key="detail"
+          onClick={() => {
+            setSelectedRecord(record)
+            setDetailsDrawerVisible(true)
+          }}
+        >
+          {textConst.action.detail}
+        </a>
       )
     }
   ]
 
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有访问日志数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      content: '确认导出所有访问日志数据项？',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -196,9 +195,9 @@ const ApiAccessLogPage: React.FC = () => {
           link.download = 'API访问日志.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error('textConst.msg.exportError')
         }
       }
     })
@@ -207,6 +206,7 @@ const ApiAccessLogPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraApiAccessLogRespVO>
+        headerTitle="访问日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -257,15 +257,15 @@ const ApiAccessLogPage: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

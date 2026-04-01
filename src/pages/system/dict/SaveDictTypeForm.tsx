@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import { ModalForm, ProFormRadio, ProFormText, ProFormTextArea } from '@ant-design/pro-components'
 import { createDictType, updateDictType } from '@/api/system/dictType'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateDictType: () => void
 export let handleEditDictType: (record: API.SystemDictTypeRespVO) => void
@@ -10,7 +11,7 @@ interface SaveDictTypeModalProps {
   onSuccess: () => void
 }
 
-const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
+const SaveDictTypeForm: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingDictType, setEditingDictType] = useState<API.SystemDictTypeRespVO | null>(null)
 
@@ -26,8 +27,8 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemDictTypeSaveReqVO>
-      title={editingDictType ? '修改' : '新增'}
-      width={600}
+      title={editingDictType ? textConst.action.update : textConst.action.create}
+      width={400}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -43,8 +44,8 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
           : { status: 0 }
       }
       layout="horizontal"
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 20 }}
+      labelCol={{ span: 5 }}
+      wrapperCol={{ span: 19 }}
       colon={false}
       modalProps={{
         destroyOnClose: true,
@@ -59,15 +60,19 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
             resp = await createDictType(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingDictType ? '修改成功' : '创建成功')
+            message.success(
+              editingDictType ? textConst.msg.updateSuccess : textConst.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingDictType ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg || (editingDictType ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingDictType ? '修改失败' : '创建失败')
+          message.error(editingDictType ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -97,7 +102,7 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: '请输入状态' }]}
       />
       <ProFormTextArea
         name="remark"
@@ -110,5 +115,4 @@ const SaveDictTypeModal: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SaveDictTypeModal
-
+export default SaveDictTypeForm

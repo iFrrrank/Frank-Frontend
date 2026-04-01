@@ -8,6 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createSmsChannel, updateSmsChannel } from '@/api/system/smsChannel'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateSmsChannel: () => void
 export let handleEditSmsChannel: (record: API.SystemSmsChannelRespVO) => void
@@ -16,7 +17,7 @@ interface SaveSmsChannelModalProps {
   onSuccess: () => void
 }
 
-const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) => {
+const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingSmsChannel, setEditingSmsChannel] = useState<API.SystemSmsChannelRespVO | null>(
     null
@@ -34,8 +35,8 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
 
   return (
     <ModalForm<API.SystemSmsChannelSaveReqVO>
-      title={editingSmsChannel ? '修改' : '新增'}
-      width={700}
+      title={editingSmsChannel ? textConst.action.update : textConst.action.create}
+      width={450}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -51,7 +52,7 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
           : { status: 0 }
       }
       layout="horizontal"
-      labelCol={{ span: 5 }}
+      labelCol={{ span: 6 }}
       wrapperCol={{ span: 18 }}
       colon={false}
       modalProps={{
@@ -67,15 +68,20 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
             resp = await createSmsChannel(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingSmsChannel ? '修改成功' : '创建成功')
+            message.success(
+              editingSmsChannel ? textConst.msg.updateSuccess : textConst.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingSmsChannel ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingSmsChannel ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingSmsChannel ? '修改失败' : '创建失败')
+          message.error(editingSmsChannel ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -90,7 +96,7 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
         name="code"
         label="渠道编码"
         placeholder="请选择渠道编码"
-        rules={[{ required: true, message: '请选择渠道编码' }]}
+        rules={[{ required: true, message: '请输入渠道编码' }]}
         options={[
           { label: '阿里云', value: 'ALIYUN' },
           { label: '腾讯云', value: 'TENCENT' },
@@ -107,27 +113,22 @@ const SaveSmsChannelModal: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) 
           { label: '关闭', value: 1 }
         ]}
       />
+      <ProFormText
+        name="apiKey"
+        label="短信 API 账号"
+        placeholder="请输入短信 API 的账号"
+        rules={[{ required: true, message: '请输入短信 API 的账号' }]}
+      />
+      <ProFormText name="apiSecret" label="短信 API 密钥" placeholder="请输入短信 API 密钥" />
+      <ProFormText name="callbackUrl" label="短信回调 URL" placeholder="请输入短信发送回调 URL" />
       <ProFormTextArea
         name="remark"
         label="备注"
         placeholder="请输入备注"
         fieldProps={{ rows: 2 }}
       />
-      <ProFormText
-        name="apiKey"
-        label="短信 API 的账号"
-        placeholder="请输入短信 API 的账号"
-        rules={[{ required: true, message: '请输入短信 API 的账号' }]}
-      />
-      <ProFormText name="apiSecret" label="短信 API 的密钥" placeholder="请输入短信 API 的密钥" />
-      <ProFormText
-        name="callbackUrl"
-        label="短信发送回调 URL"
-        placeholder="请输入短信发送回调 URL"
-      />
     </ModalForm>
   )
 }
 
-export default SaveSmsChannelModal
-
+export default SaveSmsChannelForm

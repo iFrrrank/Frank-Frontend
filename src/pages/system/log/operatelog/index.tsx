@@ -1,9 +1,14 @@
 import React, { useRef, useState } from 'react'
-import { Button, Drawer, Modal, Space, Typography, message } from 'antd'
+import {
+  type ActionType,
+  type ProColumns,
+  type ProFormInstance,
+  ProTable
+} from '@ant-design/pro-components'
+import { textConst } from '@/locales/zh-CN'
+import { Button, Drawer, message, Modal, Space, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
-import { pageOperateLog, exportOperateLog } from '@/api/system/operateLog'
+import { exportOperateLog, pageOperateLog } from '@/api/system/operateLog'
 
 const OperateLogConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -92,36 +97,33 @@ const OperateLogConfig: React.FC = () => {
       fieldProps: { placeholder: '请输入操作 IP' }
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 100,
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
-          <a
-            key="detail"
-            onClick={() => {
-              setSelectedRecord(record)
-              setDetailsDrawerVisible(true)
-            }}
-          >
-            详情
-          </a>
-        </Space>
+        <a
+          key="detail"
+          onClick={() => {
+            setSelectedRecord(record)
+            setDetailsDrawerVisible(true)
+          }}
+        >
+          {textConst.action.detail}
+        </a>
       )
     }
   ]
 
-  // ===== 导出操作日志 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有操作日志数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -149,9 +151,9 @@ const OperateLogConfig: React.FC = () => {
           link.download = '操作日志数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error('textConst.msg.exportError')
         }
       }
     })
@@ -160,6 +162,7 @@ const OperateLogConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemOperateLogRespVO>
+        headerTitle="操作日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -215,15 +218,15 @@ const OperateLogConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

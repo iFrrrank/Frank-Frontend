@@ -7,7 +7,8 @@ import {
   ProFormText,
   ProFormTextArea
 } from '@ant-design/pro-components'
-import { createOAuth2Client, updateOAuth2Client, getOAuth2Client } from '@/api/system/oAuth2Client'
+import { createOAuth2Client, getOAuth2Client, updateOAuth2Client } from '@/api/system/oAuth2Client'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateOAuth2Client: () => void
 export let handleEditOAuth2Client: (record: API.SystemOAuth2ClientRespVO) => void
@@ -16,7 +17,7 @@ interface SaveOAuth2ClientModalProps {
   onSuccess: () => void
 }
 
-const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess }) => {
+const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingClient, setEditingClient] = useState<API.SystemOAuth2ClientRespVO | null>(null)
 
@@ -39,8 +40,19 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
 
   return (
     <ModalForm<API.SystemOAuth2ClientSaveReqVO>
-      title={editingClient ? '修改应用' : '新增应用'}
-      width={800}
+      title={editingClient ? textConst.action.update : textConst.action.create}
+      width={550}
+      modalProps={{
+        // 1. 设置内容区高度（推荐）
+        bodyStyle: {
+          height: '700px', // 固定高度
+          maxHeight: '70vh', // 最大高度（推荐，响应式）
+          overflowY: 'auto' // 内容溢出自动滚动
+        },
+        // 其他 Modal 配置
+        centered: true, // 垂直居中
+        destroyOnClose: true // 关闭销毁
+      }}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -82,10 +94,6 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
       grid={true}
       colon={false}
       rowProps={{ gutter: [16, 0] }}
-      modalProps={{
-        destroyOnClose: true,
-        bodyStyle: { paddingBottom: 0 }
-      }}
       onFinish={async (values) => {
         try {
           // 处理数组字段
@@ -103,22 +111,24 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
 
           let resp: any
           if (editingClient) {
-            // 修改模式
             resp = await updateOAuth2Client({ ...processedValues, id: editingClient.id })
           } else {
-            // 新增模式
             resp = await createOAuth2Client(processedValues)
           }
           if (resp.code === 0) {
-            message.success(editingClient ? '修改成功' : '创建成功')
+            message.success(
+              editingClient ? textConst.msg.updateSuccess : textConst.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingClient ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg || (editingClient ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingClient ? '修改失败' : '创建失败')
+          message.error(editingClient ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -137,7 +147,7 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: '请输入状态' }]}
       />
       <ProFormText
         name="clientId"
@@ -164,7 +174,7 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
           { label: '客户端凭证', value: 'client_credentials' },
           { label: '刷新令牌', value: 'refresh_token' }
         ]}
-        rules={[{ required: true, message: '请选择授权类型' }]}
+        rules={[{ required: true, message: '请输入授权类型' }]}
       />
       <ProFormSelect
         name="scopes"
@@ -252,5 +262,4 @@ const SaveOAuth2ClientModal: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess
   )
 }
 
-export default SaveOAuth2ClientModal
-
+export default SaveOAuth2ClientForm

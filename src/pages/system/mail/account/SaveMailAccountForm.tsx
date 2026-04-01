@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import { ModalForm, ProFormDigit, ProFormRadio, ProFormText } from '@ant-design/pro-components'
 import { createMailAccount, updateMailAccount } from '@/api/system/mailAccount'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateMailAccount: () => void
 export let handleEditMailAccount: (record: API.SystemMailAccountRespVO) => void
@@ -10,7 +11,7 @@ interface SaveMailAccountModalProps {
   onSuccess: () => void
 }
 
-const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }) => {
+const SaveMailAccountForm: React.FC<SaveMailAccountModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingMailAccount, setEditingMailAccount] = useState<API.SystemMailAccountRespVO | null>(
     null
@@ -28,8 +29,8 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
 
   return (
     <ModalForm<API.SystemMailAccountSaveReqVO>
-      title={editingMailAccount ? '修改' : '新增'}
-      width={600}
+      title={editingMailAccount ? textConst.action.update : textConst.action.create}
+      width={450}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -46,7 +47,7 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
             }
       }
       layout="horizontal"
-      labelCol={{ span: 6 }}
+      labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       colon={false}
       modalProps={{
@@ -63,15 +64,20 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
           }
 
           if (resp.code === 0) {
-            message.success(editingMailAccount ? '修改成功' : '新增成功')
+            message.success(
+              editingMailAccount ? textConst.msg.updateSuccess : textConst.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingMailAccount ? '修改失败' : '新增失败'))
+            message.error(
+              resp.msg ||
+                (editingMailAccount ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingMailAccount ? '修改失败' : '新增失败')
+          message.error(editingMailAccount ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -132,5 +138,4 @@ const SaveMailAccountModal: React.FC<SaveMailAccountModalProps> = ({ onSuccess }
   )
 }
 
-export default SaveMailAccountModal
-
+export default SaveMailAccountForm

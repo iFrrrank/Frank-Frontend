@@ -1,11 +1,12 @@
 import React from 'react'
-import { message, Button } from 'antd'
+import { Button, message } from 'antd'
+import { ModalForm, ProFormInstance, ProFormText } from '@ant-design/pro-components'
 import {
-  ModalForm,
-  ProFormText,
-  ProFormInstance
-} from '@ant-design/pro-components'
-import { getDataSourceConfig, createDataSourceConfig, updateDataSourceConfig } from '@/api/infra/dataSourceConfig'
+  createDataSourceConfig,
+  getDataSourceConfig,
+  updateDataSourceConfig
+} from '@/api/infra/dataSourceConfig'
+import { textConst } from '@/locales/zh-CN'
 
 interface DataSourceConfigFormProps {
   visible: boolean
@@ -14,21 +15,26 @@ interface DataSourceConfigFormProps {
   id?: number
 }
 
-const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({ visible, setVisible, onSuccess, id }) => {
+const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({
+  visible,
+  setVisible,
+  onSuccess,
+  id
+}) => {
   const isUpdate = id !== undefined
   const formRef = React.useRef<ProFormInstance>(undefined)
 
   return (
     <ModalForm
-      title={isUpdate ? '编辑' : '新增'}
+      title={isUpdate ? textConst.action.update : textConst.action.create}
       open={visible}
       onOpenChange={setVisible}
       formRef={formRef}
       modalProps={{ destroyOnClose: true }}
       layout="horizontal"
-      width={600}
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 19 }}
+      width={450}
+      labelCol={{ span: 6 }}
+      wrapperCol={{ span: 18 }}
       colon={false}
       submitter={{
         render: (props) => {
@@ -40,7 +46,7 @@ const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({ visible, se
                 props.submit()
               }}
             >
-              确 定
+              {textConst.common.ok}
             </Button>,
             <Button
               key="cancel"
@@ -49,7 +55,7 @@ const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({ visible, se
                 setVisible(false)
               }}
             >
-              取 消
+              {textConst.common.cancel}
             </Button>
           ]
         }
@@ -65,15 +71,15 @@ const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({ visible, se
         try {
           if (isUpdate) {
             await updateDataSourceConfig({ id, ...values } as any)
-            message.success('更新成功')
+            message.success(textConst.msg.updateSuccess)
           } else {
             await createDataSourceConfig(values as any)
-            message.success('创建成功')
+            message.success(textConst.msg.createSuccess)
           }
           onSuccess()
           return true
         } catch (e) {
-          message.error('操作失败')
+          message.error(textConst.error.operationFail)
           return false
         }
       }}

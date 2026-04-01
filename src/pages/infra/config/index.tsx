@@ -1,20 +1,19 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal, Space, Tag } from 'antd'
 import {
-  PlusOutlined,
   DeleteOutlined,
+  DownloadOutlined,
   ExclamationCircleOutlined,
-  DownloadOutlined
+  PlusOutlined
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import {
-  deleteConfig,
-  deleteConfigList,
-  getConfigPage,
-  exportConfig
-} from '@/api/infra/config'
+import { deleteConfig, deleteConfigList, exportConfig, getConfigPage } from '@/api/infra/config'
 import ConfigForm from './ConfigForm'
+import { textConst } from '@/locales/zh-CN'
+import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 /** 系统内置选项 */
 const CONFIG_TYPE_OPTIONS = [
@@ -40,46 +39,6 @@ const ConfigPage: React.FC = () => {
     setFormVisible(true)
   }
 
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该参数配置？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteConfig({ id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  const handleDeleteBatch = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中的数据？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteConfigList({ ids: selectedRowKeys as number[] })
-          message.success('删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reloadAndRest?.()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  /** 导出 */
   const handleExport = async () => {
     try {
       const params = formRef.current?.getFieldsValue() || {}
@@ -96,16 +55,18 @@ const ConfigPage: React.FC = () => {
         pageSize: '100'
       } as any)
       // 处理文件下载
-      const blob = new Blob([resp], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+      const blob = new Blob([resp], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      })
       const url = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
       link.download = '参数配置.xlsx'
       link.click()
       window.URL.revokeObjectURL(url)
-      message.success('导出成功')
+      message.success(textConst.msg.exportSuccess)
     } catch {
-      message.error('导出失败')
+      message.error('textConst.msg.exportError')
     }
   }
 
@@ -129,16 +90,19 @@ const ConfigPage: React.FC = () => {
       dataIndex: 'type',
       align: 'center',
       valueType: 'select',
-      fieldProps: { placeholder: '请选择系统内置', options: CONFIG_TYPE_OPTIONS },
+      fieldProps: {
+        placeholder: '请输入系统内置',
+        options: CONFIG_TYPE_OPTIONS
+      },
       hideInTable: true
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       valueType: 'dateRange',
       hideInTable: true,
-      fieldProps: { placeholder: ['开始日期', '结束日期'] }
+      fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] }
     },
     {
       title: '参数主键',
@@ -194,27 +158,31 @@ const ConfigPage: React.FC = () => {
       ellipsis: true
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       hideInSearch: true,
       render: (_, record) => <span>{record.createTime}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 120,
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
-            编辑
+            {textConst.action.update}
           </a>
-          <a key="delete" onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>
-            删除
+          <a
+            key="delete"
+            onClick={() => handleDelete(record, deleteConfig, () => actionRef.current?.reload())}
+            style={deleteTextStyle}
+          >
+            {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
@@ -222,6 +190,7 @@ const ConfigPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraConfigRespVO>
+        headerTitle="参数配置"
         rowSelection={{
           selectedRowKeys,
           onChange: setSelectedRowKeys
@@ -261,28 +230,35 @@ const ConfigPage: React.FC = () => {
         search={{ labelWidth: 'auto', defaultCollapsed: false }}
         options={false}
         pagination={{ align: 'center', showSizeChanger: true }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
-            key="delete"
+            key="batchDelete"
             danger
+            type="primary"
             icon={<DeleteOutlined />}
             disabled={selectedRowKeys.length === 0}
-            onClick={handleDeleteBatch}
-            style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteConfigList,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>,
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#e6a23c', borderColor: '#e6a23c', background: '#fdf6ec' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />

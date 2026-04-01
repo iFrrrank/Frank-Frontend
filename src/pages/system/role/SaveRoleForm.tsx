@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import {
   ModalForm,
-  ProFormText,
   ProFormDigit,
   ProFormSelect,
+  ProFormText,
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createRole, updateRole } from '@/api/system/role'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateRole: () => void
 export let handleEditRole: (record: API.SystemRoleRespVO) => void
@@ -16,7 +17,7 @@ interface SaveRoleModalProps {
   onSuccess: () => void
 }
 
-const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
+const SaveRoleForm: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingRole, setEditingRole] = useState<API.SystemRoleRespVO | null>(null)
 
@@ -32,8 +33,8 @@ const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemRoleSaveReqVO>
-      title={editingRole ? '修改' : '新增'}
-      width={500}
+      title={editingRole ? textConst.action.update : textConst.action.create}
+      width={400}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -70,15 +71,17 @@ const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
             resp = await createRole(values)
           }
           if (resp.code === 0) {
-            message.success(editingRole ? '修改成功' : '创建成功')
+            message.success(editingRole ? textConst.msg.updateSuccess : textConst.msg.createSuccess)
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingRole ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg || (editingRole ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingRole ? '修改失败' : '创建失败')
+          message.error(editingRole ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -126,5 +129,4 @@ const SaveRoleModal: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SaveRoleModal
-
+export default SaveRoleForm

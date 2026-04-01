@@ -8,6 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createSmsTemplate, updateSmsTemplate } from '@/api/system/smsTemplate'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateSmsTemplate: () => void
 export let handleEditSmsTemplate: (record: API.SystemSmsTemplateRespVO) => void
@@ -17,7 +18,7 @@ interface SaveSmsTemplateModalProps {
   channelOptions: { label: string; value: number }[]
 }
 
-const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({
+const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
   onSuccess,
   channelOptions
 }) => {
@@ -38,8 +39,8 @@ const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({
 
   return (
     <ModalForm<API.SystemSmsTemplateSaveReqVO>
-      title={editingSmsTemplate ? '修改' : '新增'}
-      width={700}
+      title={editingSmsTemplate ? textConst.action.update : textConst.action.create}
+      width={450}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -71,15 +72,20 @@ const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({
             resp = await createSmsTemplate(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingSmsTemplate ? '修改成功' : '创建成功')
+            message.success(
+              editingSmsTemplate ? textConst.msg.updateSuccess : textConst.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingSmsTemplate ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingSmsTemplate ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingSmsTemplate ? '修改失败' : '创建失败')
+          message.error(editingSmsTemplate ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -88,7 +94,7 @@ const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({
         name="channelId"
         label="短信渠道 ID"
         placeholder="请选择短信渠道 ID"
-        rules={[{ required: true, message: '请选择短信渠道 ID' }]}
+        rules={[{ required: true, message: '请输入短信渠道 ID' }]}
         options={channelOptions}
         showSearch
       />
@@ -96,7 +102,7 @@ const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({
         name="type"
         label="短信类型"
         placeholder="请选择短信类型"
-        rules={[{ required: true, message: '请选择短信类型' }]}
+        rules={[{ required: true, message: '请输入短信类型' }]}
         options={[
           { label: '验证码', value: 1 },
           { label: '通知', value: 2 },
@@ -129,7 +135,7 @@ const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择开启状态' }]}
+        rules={[{ required: true, message: '请输入开启状态' }]}
       />
       <ProFormText
         name="apiTemplateId"
@@ -147,5 +153,4 @@ const SaveSmsTemplateModal: React.FC<SaveSmsTemplateModalProps> = ({
   )
 }
 
-export default SaveSmsTemplateModal
-
+export default SaveSmsTemplateForm

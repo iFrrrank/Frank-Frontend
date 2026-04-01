@@ -1,19 +1,21 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Button, message, Modal } from 'antd'
+import React, { useEffect, useRef, useState } from 'react'
+import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
+import { ProTable } from '@ant-design/pro-components'
+import { useParams } from '@umijs/max'
+import { getSimpleDictTypeList } from '@/api/system/dictType'
+import { textConst } from '@/locales/zh-CN'
+import SaveDictDataForm, { handleCreateDictData, handleEditDictData } from './SaveDictDataForm'
 import {
   DeleteOutlined,
   DownloadOutlined,
   ExclamationCircleOutlined,
   PlusOutlined
 } from '@ant-design/icons'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
-import { useParams } from '@umijs/max'
-
 import { deleteDictData, export3, getDictTypePage } from '@/api/system/dictData'
-
-import SaveDictDataModal, { handleCreateDictData, handleEditDictData } from './SaveDictDataForm'
-import { getSimpleDictTypeList } from '@/api/system/dictType'
+import { Button, message, Modal } from 'antd'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DictDataList: React.FC = () => {
   const params = useParams<{ dictType: string }>()
@@ -48,7 +50,7 @@ const DictDataList: React.FC = () => {
   // ===== 数据列定义 =====
   const columns: ProColumns<any>[] = [
     {
-      title: '字典名称', // 搜索字段 (字典类型下拉)
+      title: '字典名称',
       dataIndex: 'dictType',
       hideInTable: true,
       valueType: 'select',
@@ -56,7 +58,7 @@ const DictDataList: React.FC = () => {
       fieldProps: {
         options: dictTypeOptions,
         showSearch: true,
-        placeholder: '请选择字典名称'
+        placeholder: '请输入字典名称'
       }
     },
     {
@@ -126,82 +128,44 @@ const DictDataList: React.FC = () => {
       ellipsis: true
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
-      hideInSearch: true, // Mock 中没有在头部搜索时间，只在列里显示
+      hideInSearch: true,
       width: 180,
       render: (_, record) => <span>{record.createTime as any}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 120,
       key: 'option',
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditDictData(record)}>
-            修改
+            {textConst.action.create}
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
-            删除
+          <a
+            key="delete"
+            style={deleteTextStyle}
+            onClick={() => handleDelete(record, deleteDictData, () => actionRef.current?.reload())}
+          >
+            {textConst.action.delete}
           </a>
         </div>
       )
     }
   ]
 
-  // ===== 删除字典数据 =====
-  const handleDelete = (record: any) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteDictData({ id: record.id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据?',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteDictData({ id: Number(id) })))
-          message.success('批量删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error('批量删除失败')
-        }
-      }
-    })
-  }
-
-  // ===== 导出字典数据 =====
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有字典数据项?',
-      okText: '确定',
-      cancelText: '取消',
+      content: '确认导出所有字典数据项？',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -221,9 +185,9 @@ const DictDataList: React.FC = () => {
           link.download = '字典数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error('textConst.msg.exportError')
         }
       }
     })
@@ -232,6 +196,7 @@ const DictDataList: React.FC = () => {
   return (
     <>
       <ProTable<any>
+        headerTitle="字典数据管理"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -271,7 +236,6 @@ const DictDataList: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"
@@ -281,34 +245,38 @@ const DictDataList: React.FC = () => {
             }
             type="primary"
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>,
           <Button
             key="batchDelete"
             icon={<DeleteOutlined />}
             danger
+            type="primary"
             disabled={selectedRowKeys.length === 0}
-            onClick={handleBatchDelete}
-            style={
-              selectedRowKeys.length > 0
-                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
-                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteDictData,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />
 
-      <SaveDictDataModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveDictDataForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

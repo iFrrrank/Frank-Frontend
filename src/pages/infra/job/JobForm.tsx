@@ -1,12 +1,8 @@
 import React from 'react'
-import { message, Button, Select, Modal } from 'antd'
-import {
-  ModalForm,
-  ProFormText,
-  ProFormInstance,
-  ProFormDigit
-} from '@ant-design/pro-components'
-import { getJob, createJob, updateJob } from '@/api/infra/job'
+import { Button, message, Modal, Select } from 'antd'
+import { ModalForm, ProFormDigit, ProFormInstance, ProFormText } from '@ant-design/pro-components'
+import { createJob, getJob, updateJob } from '@/api/infra/job'
+import { textConst } from '@/locales/zh-CN'
 import CronExpressionGenerator from '@/components/Crontab'
 
 interface JobFormProps {
@@ -25,14 +21,14 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
   return (
     <>
       <ModalForm
-        title={isUpdate ? '编辑' : '新增'}
+        title={isUpdate ? textConst.action.update : textConst.action.create}
         open={visible}
         onOpenChange={setVisible}
         formRef={formRef}
         modalProps={{ destroyOnClose: true }}
         layout="horizontal"
-        width={600}
-        labelCol={{ span: 5 }}
+        width={500}
+        labelCol={{ span: 6 }}
         wrapperCol={{ span: 18 }}
         colon={false}
         submitter={{
@@ -45,7 +41,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
                   props.submit()
                 }}
               >
-                确 定
+                {textConst.common.ok}
               </Button>,
               <Button
                 key="cancel"
@@ -54,7 +50,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
                   setVisible(false)
                 }}
               >
-                取 消
+                {textConst.common.cancel}
               </Button>
             ]
           }
@@ -70,15 +66,15 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
           try {
             if (isUpdate) {
               await updateJob({ id, ...values } as any)
-              message.success('更新成功')
+              message.success(textConst.msg.updateSuccess)
             } else {
               await createJob(values as any)
-              message.success('创建成功')
+              message.success(textConst.msg.createSuccess)
             }
             onSuccess()
             return true
           } catch (e) {
-            message.error('操作失败')
+            message.error(textConst.error.operationFail)
             return false
           }
         }}
@@ -95,11 +91,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
           rules={[{ required: true, message: '请输入处理器的名字' }]}
           placeholder="请输入处理器的名称"
         />
-        <ProFormText
-          name="handlerParam"
-          label="处理器参数"
-          placeholder="请输入处理器的参数"
-        />
+        <ProFormText name="handlerParam" label="处理器参数" placeholder="请输入处理器的参数" />
         <ProFormText
           name="cronExpression"
           label="CRON 表达式"
@@ -114,7 +106,9 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
                   if (value !== 'custom') {
                     formRef.current?.setFieldsValue({ cronExpression: value })
                   } else {
-                    setTempCronValue(formRef.current?.getFieldValue('cronExpression') || '0 0 * * * ?')
+                    setTempCronValue(
+                      formRef.current?.getFieldValue('cronExpression') || '0 0 * * * ?'
+                    )
                     setCronModalVisible(true)
                   }
                 }}
@@ -126,7 +120,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
                   { label: '每月一号零点', value: '0 0 0 1 * ?' },
                   { label: '每月最后一天零点', value: '0 0 0 L * ?' },
                   { label: '每周星期日零点', value: '0 0 0 ? * 1' },
-                  { label: '自定义', value: 'custom' },
+                  { label: '自定义', value: 'custom' }
                 ]}
               />
             )
@@ -167,8 +161,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
           setCronModalVisible(false)
         }}
         onCancel={() => setCronModalVisible(false)}
-        width={700}
-        destroyOnClose
+        width={600}
       >
         <CronExpressionGenerator value={tempCronValue} onChange={setTempCronValue} />
       </Modal>

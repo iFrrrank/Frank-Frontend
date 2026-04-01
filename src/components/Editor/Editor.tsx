@@ -3,6 +3,7 @@ import '@wangeditor/editor/dist/css/style.css'
 import { Editor, Toolbar } from '@wangeditor/editor-for-react'
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
 import { message } from 'antd'
+import { textConst } from '@/locales/zh-CN'
 
 export interface EditorProps {
   id?: string
@@ -54,7 +55,7 @@ const WangEditor: React.FC<EditorProps> = ({
             if (res.code === 0) {
               insertFn(res.data, 'image', res.data)
             } else {
-              message.error(res.msg || '上传失败')
+              message.error(res.msg || textConst.cropper.uploadFail)
             }
           }
         },
@@ -72,7 +73,7 @@ const WangEditor: React.FC<EditorProps> = ({
             if (res.code === 0) {
               insertFn(res.data, 'video', res.data)
             } else {
-              message.error(res.msg || '上传失败')
+              message.error(res.msg || textConst.cropper.uploadFail)
             }
           }
         }
@@ -99,9 +100,9 @@ const WangEditor: React.FC<EditorProps> = ({
     <div className="wangeditor-container">
       <style>
         {`
-          .wangeditor-container { 
-            border: 1px solid #d9d9d9; 
-            z-index: 100; 
+          .wangeditor-container {
+            border: 1px solid #d9d9d9;
+            z-index: 100;
           }
           .wangeditor-container .w-e-toolbar { border-bottom: 1px solid #d9d9d9 !important; }
           .wangeditor-container .w-e-text-container { border-top: none !important; }
@@ -126,4 +127,3 @@ const WangEditor: React.FC<EditorProps> = ({
 }
 
 export default WangEditor
-

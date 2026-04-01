@@ -1,11 +1,16 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, message, Space } from 'antd'
-import { DownloadOutlined } from '@ant-design/icons'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
+import {
+  type ActionType,
+  type ProColumns,
+  type ProFormInstance,
+  ProTable
+} from '@ant-design/pro-components'
 import { useLocation } from '@umijs/max'
-import { getJobLogPage, exportJobLog, JobLogVO } from '@/api/infra/jobLog'
-import JobLogDetail from './JobLogDetail'
+import { exportJobLog, getJobLogPage, JobLogVO } from '@/api/infra/jobLog'
+import { textConst } from '@/locales/zh-CN'
+import { DownloadOutlined } from '@ant-design/icons'
+import JobLogDetail from '@/pages/infra/job/jobLog/JobLogDetail'
 
 export const JOB_LOG_STATUS_OPTIONS = [
   { label: '成功', value: 0 },
@@ -35,7 +40,6 @@ const JobLogPage: React.FC = () => {
     setDetailVisible(true)
   }
 
-  /** 导出 */
   const handleExport = async (formVals: any) => {
     try {
       const resp = await exportJobLog({
@@ -43,16 +47,18 @@ const JobLogPage: React.FC = () => {
         pageNo: '1',
         pageSize: '100'
       })
-      const blob = new Blob([resp], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+      const blob = new Blob([resp], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      })
       const url = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
       link.download = '定时任务日志.xlsx'
       link.click()
       window.URL.revokeObjectURL(url)
-      message.success('导出成功')
+      message.success(textConst.msg.exportSuccess)
     } catch {
-      message.error('导出失败')
+      message.error('textConst.msg.exportError')
     }
   }
 
@@ -70,13 +76,13 @@ const JobLogPage: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '处理器的名字',
+      title: '处理器名称',
       dataIndex: 'handlerName',
       align: 'center',
       fieldProps: { placeholder: '请输入处理器的名字' }
     },
     {
-      title: '处理器的参数',
+      title: '处理器参数',
       dataIndex: 'handlerParam',
       align: 'center',
       hideInSearch: true
@@ -119,21 +125,24 @@ const JobLogPage: React.FC = () => {
       dataIndex: 'status',
       align: 'center',
       valueType: 'select',
-      valueEnum: JOB_LOG_STATUS_OPTIONS.reduce((acc, cur) => {
-        acc[cur.value] = { text: cur.label, status: cur.value === 0 ? 'Success' : 'Error' }
-        return acc
-      }, {} as Record<string, any>),
-      fieldProps: { placeholder: '请选择任务状态' }
+      valueEnum: JOB_LOG_STATUS_OPTIONS.reduce(
+        (acc, cur) => {
+          acc[cur.value] = { text: cur.label, status: cur.value === 0 ? 'Success' : 'Error' }
+          return acc
+        },
+        {} as Record<string, any>
+      ),
+      fieldProps: { placeholder: '请输入任务状态' }
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 100,
       render: (_, record) => (
-        <Space size={12}>
-          <a onClick={() => handleDetail(record.id)} style={{ color: '#1677ff' }}>详情</a>
-        </Space>
+        <a key="detail" onClick={() => handleDetail(record.id)}>
+          {textConst.action.detail}
+        </a>
       )
     }
   ]
@@ -141,6 +150,7 @@ const JobLogPage: React.FC = () => {
   return (
     <>
       <ProTable<JobLogVO>
+        headerTitle="定时任务日志"
         columns={columns}
         actionRef={actionRef}
         formRef={formRef}
@@ -158,7 +168,9 @@ const JobLogPage: React.FC = () => {
             const resp = await getJobLogPage({
               pageNo: current || 1,
               pageSize: pageSize || 10,
-              ...(beginTimeStr && endTimeStr ? { beginTime: beginTimeStr, endTime: endTimeStr } : {}),
+              ...(beginTimeStr && endTimeStr
+                ? { beginTime: beginTimeStr, endTime: endTimeStr }
+                : {}),
               ...rest
             })
             return {
@@ -175,25 +187,21 @@ const JobLogPage: React.FC = () => {
         search={{ labelWidth: 'auto', defaultCollapsed: false }}
         options={{ reload: true, setting: true, density: true }}
         pagination={{ align: 'center', showSizeChanger: true }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={() => handleExport(formRef.current?.getFieldsValue() || {})}
-            style={{ color: '#52c41a', borderColor: '#52c41a', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />
 
       {detailVisible && (
-        <JobLogDetail
-          visible={detailVisible}
-          setVisible={setDetailVisible}
-          id={detailId}
-        />
+        <JobLogDetail visible={detailVisible} setVisible={setDetailVisible} id={detailId} />
       )}
     </>
   )

@@ -4,10 +4,14 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-de
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteNotifyTemplate, getNotifyTemplatePage } from '@/api/system/notifyTemplate'
-import SaveNotifyTemplateModal, {
+import SaveNotifyTemplateForm, {
   handleCreateNotifyTemplate,
   handleEditNotifyTemplate
 } from './SaveNotifyTemplateForm'
+import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const NotifyTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -89,7 +93,7 @@ const NotifyTemplateConfig: React.FC = () => {
       valueType: 'select',
       valueEnum: statusEnum,
       fieldProps: {
-        placeholder: '请选择开启状态'
+        placeholder: '请输入开启状态'
       },
       order: 1
     },
@@ -102,81 +106,47 @@ const NotifyTemplateConfig: React.FC = () => {
       ellipsis: true
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       width: 180,
       valueType: 'dateRange',
       render: (_, record) => <span>{record.createTime as any}</span>,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       order: 0
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 120,
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditNotifyTemplate(record)}>
-            修改
+            {textConst.action.update}
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
-            删除
+          <a
+            key="delete"
+            style={deleteTextStyle}
+            onClick={() =>
+              handleDelete(record, deleteNotifyTemplate, () => actionRef.current?.reload())
+            }
+          >
+            {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
 
-  // ===== 删除 =====
-  const handleDelete = (record: API.SystemNotifyTemplateRespVO) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除编号为"${record.id}"的数据项?`,
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteNotifyTemplate({ id: record.id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除选中的 ${selectedRowKeys.length} 条数据?`,
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteNotifyTemplate({ id: Number(id) })))
-          message.success('批量删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error('批量删除失败')
-        }
-      }
-    })
-  }
-
   return (
     <>
       <ProTable<API.SystemNotifyTemplateRespVO>
+        headerTitle="站内信模板"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -223,7 +193,6 @@ const NotifyTemplateConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"
@@ -231,26 +200,29 @@ const NotifyTemplateConfig: React.FC = () => {
             type="primary"
             onClick={() => handleCreateNotifyTemplate()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="batchDelete"
             icon={<DeleteOutlined />}
             danger
+            type="primary"
             disabled={selectedRowKeys.length === 0}
-            style={
-              selectedRowKeys.length > 0
-                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
-                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteNotifyTemplate,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
             }
-            onClick={handleBatchDelete}
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />
 
-      <SaveNotifyTemplateModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveNotifyTemplateForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

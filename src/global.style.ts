@@ -1,26 +1,26 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(() => {
   return {
     colorWeak: {
-      filter: 'invert(80%)',
+      filter: 'invert(80%)'
     },
     'ant-layout': {
-      minHeight: '100vh',
+      minHeight: '100vh'
     },
     'ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed': {
-      left: 'unset',
+      left: 'unset'
     },
     canvas: {
-      display: 'block',
+      display: 'block'
     },
     body: {
       textRendering: 'optimizeLegibility',
       WebkitFontSmoothing: 'antialiased',
-      MozOsxFontSmoothing: 'grayscale',
+      MozOsxFontSmoothing: 'grayscale'
     },
     'ul,ol': {
-      listStyle: 'none',
+      listStyle: 'none'
     },
     '@media(max-width: 768px)': {
       'ant-table': {
@@ -30,13 +30,13 @@ const useStyles = createStyles(() => {
           '> th,      > td': {
             whiteSpace: 'pre',
             '> span': {
-              display: 'block',
-            },
-          },
-        },
-      },
-    },
-  };
-});
+              display: 'block'
+            }
+          }
+        }
+      }
+    }
+  }
+})
 
-export default useStyles;
+export default useStyles

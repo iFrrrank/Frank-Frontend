@@ -1,12 +1,8 @@
 import React from 'react'
-import { message, Button } from 'antd'
-import {
-  ModalForm,
-  ProFormText,
-  ProFormSelect,
-  ProFormInstance
-} from '@ant-design/pro-components'
-import { getFileConfig, createFileConfig, updateFileConfig } from '@/api/infra/fileConfig'
+import { Button, message } from 'antd'
+import { ModalForm, ProFormInstance, ProFormSelect, ProFormText } from '@ant-design/pro-components'
+import { createFileConfig, getFileConfig, updateFileConfig } from '@/api/infra/fileConfig'
+import { textConst } from '@/locales/zh-CN'
 
 interface FileConfigFormProps {
   visible: boolean
@@ -29,14 +25,14 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
 
   return (
     <ModalForm
-      title={isUpdate ? '编辑' : '新增'}
+      title={isUpdate ? textConst.action.update : textConst.action.create}
       open={visible}
       onOpenChange={setVisible}
       formRef={formRef}
       modalProps={{ destroyOnClose: true }}
       layout="horizontal"
-      width={600}
-      labelCol={{ span: 4 }}
+      width={450}
+      labelCol={{ span: 5 }}
       wrapperCol={{ span: 19 }}
       colon={false}
       submitter={{
@@ -49,7 +45,7 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
                 props.submit()
               }}
             >
-              确定
+              {textConst.common.ok}
             </Button>,
             <Button
               key="cancel"
@@ -58,7 +54,7 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
                 setVisible(false)
               }}
             >
-              取消
+              {textConst.common.cancel}
             </Button>
           ]
         }
@@ -74,15 +70,15 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
         try {
           if (isUpdate) {
             await updateFileConfig({ id, ...values } as any)
-            message.success('更新成功')
+            message.success(textConst.msg.updateSuccess)
           } else {
             await createFileConfig(values as any)
-            message.success('创建成功')
+            message.success(textConst.msg.createSuccess)
           }
           onSuccess()
           return true
         } catch (e) {
-          message.error('操作失败')
+          message.error(textConst.error.operationFail)
           return false
         }
       }}

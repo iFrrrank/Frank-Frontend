@@ -1,20 +1,15 @@
 import React, { useRef } from 'react'
-import type { MenuProps } from 'antd'
-import { Button, Col, Dropdown, message, Modal, Row, Tag } from 'antd'
-import {
-  DeleteOutlined,
-  DoubleRightOutlined,
-  EditOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
+import { Button, Col, Dropdown, MenuProps, Row, Tag } from 'antd'
+import { DeleteOutlined, DoubleRightOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
+import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import { deleteSocialClient, getSocialClientPage } from '@/api/system/socialClient'
-import SaveSocialClientModal, {
+import SaveSocialClientForm, {
   handleCreateSocialClient,
   handleEditSocialClient
 } from './SaveSocialClientForm'
+import { textConst } from '@/locales/zh-CN'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle } from '@/styles/common.style'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {
@@ -117,7 +112,7 @@ const SocialClientPage: React.FC = () => {
       }
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',
@@ -125,7 +120,7 @@ const SocialClientPage: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 160,
@@ -135,18 +130,19 @@ const SocialClientPage: React.FC = () => {
           {
             key: 'delete',
             icon: <DeleteOutlined />,
-            label: '删除',
-            onClick: () => handleDelete(record)
+            label: textConst.action.delete,
+            onClick: () =>
+              handleDelete(record, deleteSocialClient, () => actionRef.current?.reload())
           }
         ]
         return (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
+          <div style={tableActionStyle}>
             <a key="edit" onClick={() => handleEditSocialClient(record)}>
-              <EditOutlined /> 修改
+              <EditOutlined /> {textConst.action.update}
             </a>
             <Dropdown menu={{ items: moreMenuItems }} placement="bottomRight">
               <a onClick={(e) => e.preventDefault()}>
-                <DoubleRightOutlined /> 更多
+                <DoubleRightOutlined /> {textConst.action.more}
               </a>
             </Dropdown>
           </div>
@@ -155,28 +151,11 @@ const SocialClientPage: React.FC = () => {
     }
   ]
 
-  // ===== 删除 =====
-  const handleDelete = (record: API.SystemSocialClientRespVO) => {
-    Modal.confirm({
-      title: '温馨提示',
-      icon: <ExclamationCircleOutlined />,
-      content: `确定要删除应用"${record.name}"吗？`,
-      onOk: async () => {
-        try {
-          await deleteSocialClient({ id: record.id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
   return (
     <Row gutter={16}>
       <Col span={24}>
         <ProTable<API.SystemSocialClientRespVO>
+          headerTitle="三方应用"
           columns={columns}
           scroll={{ x: 'max-content' }}
           actionRef={actionRef}
@@ -229,7 +208,6 @@ const SocialClientPage: React.FC = () => {
             showSizeChanger: true
           }}
           dateFormatter="string"
-          headerTitle="三方应用"
           toolBarRender={() => [
             <Button
               key="create"
@@ -237,13 +215,13 @@ const SocialClientPage: React.FC = () => {
               onClick={() => handleCreateSocialClient()}
               type="primary"
             >
-              新增
+              {textConst.action.create}
             </Button>
           ]}
         />
       </Col>
 
-      <SaveSocialClientModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveSocialClientForm onSuccess={() => actionRef.current?.reload()} />
     </Row>
   )
 }

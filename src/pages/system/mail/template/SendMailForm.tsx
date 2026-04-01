@@ -3,10 +3,11 @@ import { message } from 'antd'
 import { ModalForm, ProForm, ProFormTextArea } from '@ant-design/pro-components'
 import { Editor } from '@/components/Editor'
 import { sendMail } from '@/api/system/mailTemplate'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleTestMailTemplate: (record: API.SystemMailTemplateRespVO) => void
 
-const SendMailModal: React.FC = () => {
+const SendMailForm: React.FC = () => {
   const [testModalVisible, setTestModalVisible] = useState(false)
   const [testingTemplate, setTestingTemplate] = useState<API.SystemMailTemplateRespVO | null>(null)
 
@@ -85,5 +86,4 @@ const SendMailModal: React.FC = () => {
   )
 }
 
-export default SendMailModal
-
+export default SendMailForm

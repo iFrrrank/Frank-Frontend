@@ -1,26 +1,29 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal, Space, Dropdown, MenuProps, Switch } from 'antd'
+import { Button, Dropdown, MenuProps, message, Modal, Space, Switch } from 'antd'
 import {
-  PlusOutlined,
   DeleteOutlined,
-  ExclamationCircleOutlined,
   DownloadOutlined,
-  UnorderedListOutlined,
-  DownOutlined
+  DownOutlined,
+  ExclamationCircleOutlined,
+  PlusOutlined,
+  UnorderedListOutlined
 } from '@ant-design/icons'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { history } from '@umijs/max'
 import {
-  getJobPage,
   deleteJob,
   exportJob,
-  updateJobStatus,
+  getJobPage,
+  JobVO,
   triggerJob,
-  JobVO
+  updateJobStatus
 } from '@/api/infra/job'
 import JobForm from './JobForm'
 import JobDetail from './JobDetail'
+import { textConst } from '@/locales/zh-CN'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 export const JOB_STATUS_OPTIONS = [
   { label: '正常', value: 0 },
@@ -47,25 +50,6 @@ const JobPage: React.FC = () => {
     setFormVisible(true)
   }
 
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该定时任务？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteJob(id)
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
   const handleUpdateStatus = async (record: JobVO) => {
     try {
       const newStatus = record.status === 0 ? 1 : 0
@@ -73,17 +57,17 @@ const JobPage: React.FC = () => {
       message.success(newStatus === 0 ? '已开启任务' : '已暂停任务')
       actionRef.current?.reload()
     } catch {
-      message.error('状态修改失败')
+      message.error(textConst.msg.updateError)
     }
   }
 
   const handleTrigger = (id: number) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认要立即执行一次该任务吗？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await triggerJob(id)
@@ -126,23 +110,24 @@ const JobPage: React.FC = () => {
     ]
   })
 
-  /** 导出 */
   const handleExport = async () => {
     try {
       const resp = await exportJob({
         pageNo: '1',
         pageSize: '100'
       })
-      const blob = new Blob([resp], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+      const blob = new Blob([resp], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      })
       const url = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
       link.download = '定时任务.xlsx'
       link.click()
       window.URL.revokeObjectURL(url)
-      message.success('导出成功')
+      message.success(textConst.msg.exportSuccess)
     } catch {
-      message.error('导出失败')
+      message.error('textConst.msg.exportError')
     }
   }
 
@@ -164,11 +149,14 @@ const JobPage: React.FC = () => {
       dataIndex: 'status',
       align: 'center',
       valueType: 'select',
-      valueEnum: JOB_STATUS_OPTIONS.reduce((acc, cur) => {
-        acc[cur.value] = { text: cur.label, status: cur.value === 0 ? 'Success' : 'Error' }
-        return acc
-      }, {} as Record<string, any>),
-      fieldProps: { placeholder: '请选择任务状态' },
+      valueEnum: JOB_STATUS_OPTIONS.reduce(
+        (acc, cur) => {
+          acc[cur.value] = { text: cur.label, status: cur.value === 0 ? 'Success' : 'Error' }
+          return acc
+        },
+        {} as Record<string, any>
+      ),
+      fieldProps: { placeholder: '请输入任务状态' },
       render: (_, record) => (
         <Switch
           checked={record.status === 0}
@@ -197,23 +185,31 @@ const JobPage: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 220,
       render: (_, record) => (
-        <Space size={12}>
-          <a onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>修改</a>
-          <a onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>删除</a>
+        <div style={tableActionStyle}>
+          <a key="create" onClick={() => handleUpdate(record.id)}>
+            {textConst.action.create}
+          </a>
+          <a
+            key="delete"
+            style={deleteTextStyle}
+            onClick={() => handleDelete(record, deleteJob, () => actionRef.current?.reload())}
+          >
+            {textConst.action.delete}
+          </a>
           <Dropdown menu={getMenu(record)}>
             <a onClick={(e) => e.preventDefault()}>
               <Space>
-                更多
+                {textConst.action.more}
                 <DownOutlined />
               </Space>
             </a>
           </Dropdown>
-        </Space>
+        </div>
       )
     }
   ]
@@ -221,6 +217,7 @@ const JobPage: React.FC = () => {
   return (
     <>
       <ProTable<JobVO>
+        headerTitle="定时任务"
         rowSelection={{
           selectedRowKeys,
           onChange: setSelectedRowKeys
@@ -251,38 +248,34 @@ const JobPage: React.FC = () => {
         search={{ labelWidth: 'auto', defaultCollapsed: false }}
         options={{ reload: true, setting: true, density: true }}
         pagination={{ align: 'center', showSizeChanger: true }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="delete"
             danger
+            type="primary"
             icon={<DeleteOutlined />}
-            style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
             disabled={selectedRowKeys.length === 0}
             onClick={() => {
               if (selectedRowKeys && selectedRowKeys.length > 0) {
-                 message.warning('尚未对接批量删除接口');
+                message.warning('尚未对接批量删除接口')
               }
             }}
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>,
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#52c41a', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>,
-          <Button
-            key="log"
-            icon={<UnorderedListOutlined />}
-            onClick={() => handleGoLog()}
-          >
+          <Button key="log" icon={<UnorderedListOutlined />} onClick={() => handleGoLog()}>
             执行日志
           </Button>
         ]}
@@ -301,11 +294,7 @@ const JobPage: React.FC = () => {
       )}
 
       {detailVisible && (
-        <JobDetail
-          visible={detailVisible}
-          setVisible={setDetailVisible}
-          id={detailId}
-        />
+        <JobDetail visible={detailVisible} setVisible={setDetailVisible} id={detailId} />
       )}
     </>
   )

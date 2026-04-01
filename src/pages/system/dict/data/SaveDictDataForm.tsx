@@ -9,6 +9,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createDictData, updateDictData } from '@/api/system/dictData'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateDictData: (dictType: string) => void
 export let handleEditDictData: (record: any) => void
@@ -17,7 +18,7 @@ interface SaveDictDataModalProps {
   onSuccess: () => void
 }
 
-const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
+const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingDictData, setEditingDictData] = useState<any | null>(null)
 
@@ -33,8 +34,8 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<any>
-      title={editingDictData?.id ? '修改' : '新增'}
-      width={600}
+      title={editingDictData?.id ? textConst.action.update : textConst.action.create}
+      width={450}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -54,8 +55,8 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
             }
       }
       layout="horizontal"
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 20 }}
+      labelCol={{ span: 5 }}
+      wrapperCol={{ span: 19 }}
       colon={false}
       modalProps={{
         destroyOnClose: true,
@@ -70,15 +71,20 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
             resp = await createDictData({ ...values, dictType: editingDictData?.dictType } as any)
           }
           if (resp.code === 0) {
-            message.success(editingDictData?.id ? '修改成功' : '创建成功')
+            message.success(
+              editingDictData?.id ? textConst.msg.updateSuccess : textConst.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingDictData?.id ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg ||
+                (editingDictData?.id ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingDictData?.id ? '修改失败' : '创建失败')
+          message.error(editingDictData?.id ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -88,7 +94,7 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
         label="字典类型"
         colProps={{ span: 24 }}
         placeholder="请输入字典类型"
-        readonly // 页面上一般是不可修改或者就是下拉选择
+        readonly
       />
       <ProFormText
         name="label"
@@ -120,7 +126,7 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
         ]}
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: '请输入状态' }]}
       />
       <ProFormSelect
         name="colorType"
@@ -153,5 +159,4 @@ const SaveDictDataModal: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SaveDictDataModal
-
+export default SaveDictDataForm

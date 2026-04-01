@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal, Space, Tag } from 'antd'
-import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
-import type { ActionType, ProColumns } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
+import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
 import {
   deleteFileConfig,
   deleteFileConfigList,
@@ -10,7 +9,11 @@ import {
   testFileConfig,
   updateFileConfigMaster
 } from '@/api/infra/fileConfig'
-import FileConfigForm, { STORAGE_OPTIONS } from './FileConfigForm'
+import { textConst } from '@/locales/zh-CN'
+import FileConfigForm, { STORAGE_OPTIONS } from '@/pages/infra/file/config/FileConfigForm'
+import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const FileConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -28,59 +31,20 @@ const FileConfigPage: React.FC = () => {
     setFormVisible(true)
   }
 
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该数据？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteFileConfig({ id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  const handleDeleteBatch = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中数据？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteFileConfigList({ ids: selectedRowKeys as number[] })
-          message.success('删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reloadAndRest?.()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
   const handleMaster = (id: number) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `是否确认修改配置 ID 为 ${id} 的数据项为主配置？`,
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await updateFileConfigMaster({ id })
           message.success('操作成功')
           actionRef.current?.reload()
         } catch {
-          message.error('操作失败')
+          message.error(textConst.error.operationFail)
         }
       }
     })
@@ -93,8 +57,8 @@ const FileConfigPage: React.FC = () => {
         Modal.confirm({
           title: '测试上传成功',
           content: '是否要访问该文件？',
-          okText: '确定',
-          cancelText: '取消',
+          okText: textConst.common.ok,
+          cancelText: textConst.common.cancel,
           onOk: () => {
             window.open(resp.data, '_blank')
           }
@@ -145,7 +109,7 @@ const FileConfigPage: React.FC = () => {
         },
         {} as Record<string, any>
       ),
-      fieldProps: { placeholder: '请选择存储器' }
+      fieldProps: { placeholder: '请输入存储器' }
     },
     {
       title: '备注',
@@ -163,28 +127,28 @@ const FileConfigPage: React.FC = () => {
       }
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       valueType: 'dateRange',
       hideInTable: true,
-      fieldProps: { placeholder: ['开始日期', '结束日期'] }
+      fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] }
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       hideInSearch: true,
       render: (_, record) => <span>{record.createTime}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 240,
       render: (_, record) => (
-        <Space size={12}>
-          <a onClick={() => handleUpdate(record.id)}>编辑</a>
+        <div style={tableActionStyle}>
+          <a onClick={() => handleUpdate(record.id)}>{textConst.action.update}</a>
           <Button
             type="link"
             disabled={record.master}
@@ -193,11 +157,16 @@ const FileConfigPage: React.FC = () => {
           >
             主配置
           </Button>
-          <a onClick={() => handleTest(record.id)}>测试</a>
-          <a onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>
-            删除
+          <a onClick={() => handleTest(record.id)}>{textConst.action.test}</a>
+          <a
+            onClick={() =>
+              handleDelete(record, deleteFileConfig, () => actionRef.current?.reload())
+            }
+            style={deleteTextStyle}
+          >
+            {textConst.action.delete}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
@@ -205,6 +174,7 @@ const FileConfigPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraFileConfigRespVO>
+        headerTitle="文件配置"
         rowSelection={{
           selectedRowKeys,
           onChange: setSelectedRowKeys
@@ -241,20 +211,26 @@ const FileConfigPage: React.FC = () => {
         search={{ labelWidth: 'auto', defaultCollapsed: false }}
         options={{ reload: true, setting: true, density: true }}
         pagination={{ align: 'center', showSizeChanger: true }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
-            key="delete"
+            key="batchDelete"
             danger
+            type="primary"
             icon={<DeleteOutlined />}
             disabled={selectedRowKeys.length === 0}
-            onClick={handleDeleteBatch}
-            style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteFileConfigList,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

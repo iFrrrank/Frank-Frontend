@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 新增字典数据 POST /system/dict-data/create */
+/** 创建字典数据 POST /system/dict-data/create */
 export async function createDictData(
   body: API.SystemDictDataSaveReqVO,
   options?: { [key: string]: any }

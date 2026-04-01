@@ -1,19 +1,18 @@
 import React, { useRef, useState } from 'react'
-import { Badge, Button, message, Modal, Tag } from 'antd'
-import {
-  DeleteOutlined,
-  EditOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { Badge, Button } from 'antd'
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailAccount, getMailAccountPage } from '@/api/system/mailAccount'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
-import SaveMailAccountModal, {
+import SaveMailAccountForm, {
   handleCreateMailAccount,
   handleEditMailAccount
 } from './SaveMailAccountForm'
+import { textConst } from '@/locales/zh-CN'
 
 const MailAccountConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -88,7 +87,7 @@ const MailAccountConfig: React.FC = () => {
       )
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       width: 180,
@@ -96,69 +95,34 @@ const MailAccountConfig: React.FC = () => {
       render: (_, record) => <span>{record.createTime as any}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 150,
       key: 'option',
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditMailAccount(record)}>
-            修改
+            {textConst.action.update}
           </a>
-          <a key="delete" onClick={() => handleDelete(record)} style={{ color: '#ff4d4f' }}>
-            删除
+          <a
+            key="delete"
+            onClick={() =>
+              handleDelete(record, deleteMailAccount, () => actionRef.current?.reload())
+            }
+            style={deleteTextStyle}
+          >
+            {textConst.action.delete}
           </a>
         </div>
       )
     }
   ]
 
-  // ===== 单个删除 =====
-  const handleDelete = (record: API.SystemMailAccountRespVO) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除 ID 为"${record.id}"的邮箱账号数据项?`,
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteMailAccount({ id: record.id! })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除选中的 ${selectedRowKeys.length} 个邮箱账号数据项?`,
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          // 在实际项目中建议提供后台批量接口，由于这里的 API 中暂时只有单删，通过循环并行发送请求
-          await Promise.all(selectedRowKeys.map((id) => deleteMailAccount({ id: Number(id) })))
-          message.success('批量删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error('批量删除失败')
-        }
-      }
-    })
-  }
-
   return (
     <>
       <ProTable<API.SystemMailAccountRespVO>
+        headerTitle="邮件账号"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -204,7 +168,6 @@ const MailAccountConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"
@@ -212,26 +175,29 @@ const MailAccountConfig: React.FC = () => {
             type="primary"
             onClick={() => handleCreateMailAccount()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="batchDelete"
             icon={<DeleteOutlined />}
             danger
+            type="primary"
             disabled={selectedRowKeys.length === 0}
-            style={
-              selectedRowKeys.length > 0
-                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
-                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteMailAccount,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
             }
-            onClick={handleBatchDelete}
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />
 
-      <SaveMailAccountModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveMailAccountForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

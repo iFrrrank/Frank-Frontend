@@ -3,6 +3,7 @@ import { Badge, Button, Descriptions, Modal, Tag, Typography } from 'antd'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { getNotifyMessage, getNotifyMessagePage } from '@/api/system/notifyMessage'
+import { textConst } from '@/locales/zh-CN'
 
 const NotifyMessage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -40,7 +41,7 @@ const NotifyMessage: React.FC = () => {
       width: 100,
       valueType: 'select',
       fieldProps: {
-        placeholder: '请选择用户类型'
+        placeholder: '请输入用户类型'
       },
       valueEnum: {
         1: { text: '管理员' },
@@ -122,7 +123,7 @@ const NotifyMessage: React.FC = () => {
       width: 120,
       valueType: 'select',
       fieldProps: {
-        placeholder: '请选择模版类型'
+        placeholder: '请输入模版类型'
       },
       valueEnum: {
         1: { text: '系统消息' },
@@ -157,19 +158,19 @@ const NotifyMessage: React.FC = () => {
       render: (_, record) => <span>{record.readTime || '-'}</span>
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       width: 180,
       valueType: 'dateRange',
       render: (_, record) => <span>{record.createTime as any}</span>,
       fieldProps: {
-        placeholder: ['开始日期', '结束日期']
+        placeholder: [textConst.columns.startDate, textConst.columns.endDate]
       },
       order: 0
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 80,
@@ -177,7 +178,7 @@ const NotifyMessage: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <a key="view" onClick={() => handleView(record)}>
-          详情
+          {textConst.action.detail}
         </a>
       )
     }
@@ -200,6 +201,7 @@ const NotifyMessage: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemNotifyMessageRespVO>
+        headerTitle="站内信消息"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -255,7 +257,6 @@ const NotifyMessage: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
       />
 
       {/* 详情弹窗 */}

@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Badge, Button, Descriptions, Modal, Space, Tag, Typography } from 'antd'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
-import { getMailLogPage, getMailLog } from '@/api/system/mailLog'
+import { App, Badge, Button, Descriptions, Modal, Tag, Typography } from 'antd'
+import {
+  type ActionType,
+  type ProColumns,
+  type ProFormInstance,
+  ProTable
+} from '@ant-design/pro-components'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
-import { App } from 'antd'
+import { textConst } from '@/locales/zh-CN'
+import { getMailLog, getMailLogPage } from '@/api/system/mailLog'
 
 const MailLog: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -117,7 +121,7 @@ const MailLog: React.FC = () => {
       valueType: 'select',
       valueEnum: userTypeEnum,
       fieldProps: {
-        placeholder: '请选择用户类型'
+        placeholder: '请输入用户类型'
       },
       order: 2
     },
@@ -164,7 +168,7 @@ const MailLog: React.FC = () => {
       valueType: 'select',
       valueEnum: sendStatusEnum,
       fieldProps: {
-        placeholder: '请选择发送状态'
+        placeholder: '请输入发送状态'
       },
       order: 4 // 第二排左
     },
@@ -175,7 +179,7 @@ const MailLog: React.FC = () => {
       width: 200,
       valueType: 'select',
       fieldProps: {
-        placeholder: '请选择邮箱账号',
+        placeholder: '请输入邮箱账号',
         options: accountOptions,
         showSearch: true
       },
@@ -183,7 +187,7 @@ const MailLog: React.FC = () => {
       order: 6 // 第一排中
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 80,
@@ -191,7 +195,7 @@ const MailLog: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <a key="view" onClick={() => handleView(record)}>
-          详情
+          {textConst.action.detail}
         </a>
       )
     }
@@ -213,6 +217,7 @@ const MailLog: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemMailLogRespVO>
+        headerTitle="邮件日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -253,7 +258,6 @@ const MailLog: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
       />
 
       <Modal

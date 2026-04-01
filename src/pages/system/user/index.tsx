@@ -17,17 +17,20 @@ import { ProTable } from '@ant-design/pro-components'
 import { deleteUser, exportUserList, getUser, getUserPage } from '@/api/system/user'
 import DeptTree from '@/pages/system/user/DeptTree'
 import { COMMON_STATUS_VALUE_ENUM } from '@/utils/constantsValue'
-import ResetPwdModal, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
-import AssignRoleModal, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
-import ImportUserModal, { handleImportUser } from '@/pages/system/user/ImportUserForm'
-import SaveUserModal, { handleEditUser, handleCreateUser } from '@/pages/system/user/SaveUserForm'
-import { textConstants } from '@/locales/zh-CN'
+import ResetPwdForm, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
+import AssignRoleForm, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
+import ImportUserForm, { handleImportUser } from '@/pages/system/user/ImportUserForm'
+import SaveUserForm, { handleCreateUser, handleEditUser } from '@/pages/system/user/SaveUserForm'
+import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const SystemUser: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
   const [selectedDeptId, setSelectedDeptId] = useState<number | undefined>(undefined)
-  // 批量删除相关
+
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   // 列定义
@@ -39,7 +42,7 @@ const SystemUser: React.FC = () => {
       width: 80,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}员工 ID`
+        placeholder: '请输入员工 ID'
       }
     },
     {
@@ -49,7 +52,7 @@ const SystemUser: React.FC = () => {
       width: 120,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}用户名`
+        placeholder: '请输入用户名'
       }
     },
     {
@@ -59,7 +62,7 @@ const SystemUser: React.FC = () => {
       width: 200,
       valueType: 'text',
       fieldProps: {
-        placeholder: `${textConstants.common.inputText}邮箱`
+        placeholder: '请输入邮箱'
       }
     },
     {
@@ -77,11 +80,11 @@ const SystemUser: React.FC = () => {
       valueType: 'select',
       valueEnum: COMMON_STATUS_VALUE_ENUM,
       fieldProps: {
-        placeholder: `${textConstants.common.selectText}状态`
+        placeholder: '请选择状态'
       }
     },
     {
-      title: textConstants.table.createTime,
+      title: textConst.table.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',
@@ -89,7 +92,7 @@ const SystemUser: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: textConstants.table.action,
+      title: textConst.table.action,
       valueType: 'option',
       align: 'center',
       width: 160,
@@ -99,30 +102,30 @@ const SystemUser: React.FC = () => {
           {
             key: 'delete',
             icon: <DeleteOutlined />,
-            label: textConstants.action.delete,
-            onClick: () => handleDelete(record)
+            label: textConst.action.delete,
+            onClick: () => handleDelete(record, deleteUser, () => actionRef.current?.reload())
           },
           {
             key: 'resetPwd',
             icon: <KeyOutlined />,
-            label: textConstants.action.resetPwd,
+            label: textConst.action.resetPwd,
             onClick: () => handleResetPwd(record)
           },
           {
             key: 'assignRole',
             icon: <UserSwitchOutlined />,
-            label: textConstants.action.assignRole,
+            label: textConst.action.assignRole,
             onClick: () => handleAssignRole(record)
           }
         ]
         return (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
+          <div style={tableActionStyle}>
             <a key="edit" onClick={() => handleEditUser(record)}>
-              <EditOutlined /> textConstants.action.update
+              <EditOutlined /> {textConst.action.update}
             </a>
             <Dropdown menu={{ items: moreMenuItems }} placement="bottomRight">
               <a onClick={(e) => e.preventDefault()}>
-                <DoubleRightOutlined /> textConstants.action.more
+                <DoubleRightOutlined /> {textConst.action.more}
               </a>
             </Dropdown>
           </div>
@@ -130,43 +133,6 @@ const SystemUser: React.FC = () => {
       }
     }
   ]
-
-  // ===== 删除单个用户 =====
-  const handleDelete = (record: API.SystemUserRespVO) => {
-    Modal.confirm({
-      title: textConstants.msg.reminder,
-      icon: <ExclamationCircleOutlined />,
-      content: textConstants.msg.delOneMsg,
-      onOk: async () => {
-        try {
-          await deleteUser({ id: record.id })
-          message.success(`${textConstants.action.delete}${textConstants.common.success}`)
-          actionRef.current?.reload()
-        } catch {
-          message.error(`${textConstants.action.delete}${textConstants.common.fail}`)
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConstants.msg.reminder,
-      icon: <ExclamationCircleOutlined />,
-      content: textConstants.msg.delDataMsg,
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteUser({ id: Number(id) })))
-          message.success(textConstants.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConstants.msg.batchDelFail)
-        }
-      }
-    })
-  }
 
   // 部门选中回调
   const handleDeptSelect = (deptId: number | undefined) => {
@@ -177,9 +143,9 @@ const SystemUser: React.FC = () => {
   // 导出用户
   const handleExport = () => {
     Modal.confirm({
-      title: textConstants.msg.reminder,
+      title: textConst.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: textConstants.msg.exportMsg,
+      content: textConst.msg.exportMsg,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -198,9 +164,9 @@ const SystemUser: React.FC = () => {
           link.download = '用户数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success(textConstants.msg.exportSuccess)
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error(textConstants.msg.exportFail)
+          message.error(textConst.msg.exportError)
         }
       }
     })
@@ -286,44 +252,54 @@ const SystemUser: React.FC = () => {
           headerTitle="用户管理"
           toolBarRender={() => [
             <Button key="create" icon={<PlusOutlined />} onClick={handleCreateUser} type="primary">
-              textConstants.action.create
+              {textConst.action.create}
             </Button>,
             <Button
               key="batchDelete"
               icon={<DeleteOutlined />}
               danger
+              type="primary"
               disabled={selectedRowKeys.length === 0}
-              onClick={handleBatchDelete}
+              onClick={() =>
+                handleBatchDelete(
+                  selectedRowKeys,
+                  deleteUser,
+                  () => setSelectedRowKeys([]),
+                  () => actionRef.current?.reload()
+                )
+              }
             >
-              textConstants.action.batchDelete
+              {textConst.action.batchDelete}
             </Button>,
             <Button
               key="import"
+              color="green"
+              variant="outlined"
               icon={<UploadOutlined />}
-              style={{ backgroundColor: '#52c41a', borderColor: '#52c41a', color: '#fff' }}
               onClick={handleImportUser}
             >
-              textConstants.action.import
+              {textConst.action.import}
             </Button>,
             <Button
               key="export"
+              color="volcano"
+              variant="outlined"
               icon={<DownloadOutlined />}
-              style={{ backgroundColor: '#faad14', borderColor: '#faad14', color: '#fff' }}
               onClick={handleExport}
             >
-              textConstants.action.export
+              {textConst.action.export}
             </Button>
           ]}
         />
       </Col>
 
-      <SaveUserModal />
+      <SaveUserForm />
 
-      <ResetPwdModal />
+      <ResetPwdForm />
 
-      <AssignRoleModal />
+      <AssignRoleForm />
 
-      <ImportUserModal />
+      <ImportUserForm />
     </Row>
   )
 }

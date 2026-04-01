@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import {
   ModalForm,
-  ProFormText,
-  ProFormSelect,
+  ProForm,
   ProFormRadio,
-  ProFormTextArea,
-  ProForm
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea
 } from '@ant-design/pro-components'
 import { Editor } from '@/components/Editor'
 import { createMailTemplate, updateMailTemplate } from '@/api/system/mailTemplate'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateMailTemplate: () => void
 export let handleEditMailTemplate: (record: API.SystemMailTemplateRespVO) => void
@@ -19,7 +20,7 @@ interface SaveMailTemplateModalProps {
   accountOptions: { label: string; value: number }[]
 }
 
-const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
+const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
   onSuccess,
   accountOptions
 }) => {
@@ -39,7 +40,7 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
 
   return (
     <ModalForm<API.SystemMailTemplateSaveReqVO>
-      title={editingMailTemplate ? '修改' : '新增'}
+      title={editingMailTemplate ? textConst.action.update : textConst.action.create}
       width={900}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -67,15 +68,20 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
           }
 
           if (resp.code === 0) {
-            message.success(editingMailTemplate ? '修改成功' : '新增成功')
+            message.success(
+              editingMailTemplate ? textConst.msg.updateSuccess : textConst.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingMailTemplate ? '修改失败' : '新增失败'))
+            message.error(
+              resp.msg ||
+                (editingMailTemplate ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingMailTemplate ? '修改失败' : '新增失败')
+          message.error(editingMailTemplate ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -84,7 +90,7 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
         name="accountId"
         label="邮箱账号"
         placeholder="请选择邮箱账号"
-        rules={[{ required: true, message: '请选择邮箱账号' }]}
+        rules={[{ required: true, message: '请输入邮箱账号' }]}
         options={accountOptions}
         showSearch
       />
@@ -118,7 +124,7 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
       <ProFormRadio.Group
         name="status"
         label="开启状态"
-        rules={[{ required: true, message: '请选择开启状态' }]}
+        rules={[{ required: true, message: '请输入开启状态' }]}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
@@ -129,5 +135,4 @@ const SaveMailTemplateModal: React.FC<SaveMailTemplateModalProps> = ({
   )
 }
 
-export default SaveMailTemplateModal
-
+export default SaveMailTemplateForm

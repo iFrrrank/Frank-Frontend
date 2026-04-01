@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { message, Space } from 'antd'
 import { ModalForm, ProFormSelect } from '@ant-design/pro-components'
 import { assignRoleDataScope } from '@/api/system/permission'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleOpenDataScope: (record: API.SystemRoleRespVO) => void
 
-const AssignDataScopeModal: React.FC = () => {
+const AssignDataScopeForm: React.FC = () => {
   const [dataScopeVisible, setDataScopeVisible] = useState(false)
   const [dataScopeRole, setDataScopeRole] = useState<API.SystemRoleRespVO | null>(null)
 
@@ -23,7 +24,7 @@ const AssignDataScopeModal: React.FC = () => {
         setDataScopeVisible(visible)
         if (!visible) setDataScopeRole(null)
       }}
-      initialValues={{ dataScope: 1 }} // 默认全部数据权限
+      initialValues={{ dataScope: 1 }}
       colon={false}
       modalProps={{
         destroyOnClose: true
@@ -34,7 +35,7 @@ const AssignDataScopeModal: React.FC = () => {
             const resp = await assignRoleDataScope({
               roleId: dataScopeRole.id,
               dataScope: values.dataScope,
-              dataScopeDeptIds: [] // TODO: 处理自定义部门
+              dataScopeDeptIds: []
             })
             if (resp.code === 0) {
               message.success('数据权限分配成功')
@@ -95,5 +96,4 @@ const AssignDataScopeModal: React.FC = () => {
   )
 }
 
-export default AssignDataScopeModal
-
+export default AssignDataScopeForm

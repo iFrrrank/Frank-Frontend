@@ -1,34 +1,32 @@
 import React, { useRef, useState } from 'react'
 import { message } from 'antd'
 import {
+  ActionType,
   ModalForm,
   ProFormSelect,
   ProFormText,
-  ProFormTreeSelect,
-  ProFormTextArea
+  ProFormTextArea,
+  ProFormTreeSelect
 } from '@ant-design/pro-components'
-import type { ActionType } from '@ant-design/pro-components'
-import { createUser, updateUser, getUser } from '@/api/system/user'
-import { getSimpleDeptList } from '@/api/system/dept'
+import { createUser, getUser, updateUser } from '@/api/system/user'
 import { getSimplePostList } from '@/api/system/post'
+import { textConst } from '@/locales/zh-CN'
+import { getSimpleDeptList } from '@/api/system/dept'
 import { buildTreeData } from '@/utils/tree'
-import { textConstants } from '@/locales/zh-CN'
 
 export let handleEditUser: (record: API.SystemUserRespVO) => void
 export let handleCreateUser: () => void
 
-const SaveUserModal: React.FC = () => {
+const SaveUserForm: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingUser, setEditingUser] = useState<API.SystemUserRespVO | null>(null)
 
-  // 新增用户
   handleCreateUser = () => {
     setEditingUser(null)
     setCreateModalVisible(true)
   }
 
-  // 修改用户
   handleEditUser = async (record: API.SystemUserRespVO) => {
     try {
       const resp = await getUser({ id: record.id })
@@ -43,7 +41,7 @@ const SaveUserModal: React.FC = () => {
 
   return (
     <ModalForm<API.SystemUserSaveReqVO>
-      title={editingUser ? '修改用户' : '新增用户'}
+      title={editingUser ? textConst.action.update : textConst.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -82,27 +80,22 @@ const SaveUserModal: React.FC = () => {
         try {
           let resp
           if (editingUser) {
-            // 修改模式
             resp = await updateUser({ ...values, id: editingUser.id })
           } else {
-            // 新增模式
             resp = await createUser(values)
           }
           if (resp.code === 0) {
-            message.success(
-              editingUser ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
-            )
+            message.success(editingUser ? textConst.msg.updateSuccess : textConst.msg.createSuccess)
             actionRef.current?.reload()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingUser ? textConstants.msg.updateFail : textConstants.msg.createFail)
+              resp.msg || (editingUser ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(editingUser ? textConstants.msg.updateFail : textConstants.msg.createFail)
+          message.error(editingUser ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -199,4 +192,4 @@ const SaveUserModal: React.FC = () => {
   )
 }
 
-export default SaveUserModal
+export default SaveUserForm

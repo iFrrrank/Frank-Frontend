@@ -8,6 +8,8 @@ import {
   getApiErrorLogPage,
   updateApiErrorLogProcess
 } from '@/api/infra/apiErrorLog'
+import { textConst } from '@/locales/zh-CN'
+import { tableActionStyle } from '@/styles/common.style'
 
 const ApiErrorLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -18,11 +20,11 @@ const ApiErrorLogPage: React.FC = () => {
 
   const handleUpdateStatus = (id: number, processStatus: number, statusText: string) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `确认标记为${statusText}？`,
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const resp = await updateApiErrorLogProcess({ id, processStatus })
@@ -30,11 +32,11 @@ const ApiErrorLogPage: React.FC = () => {
             message.success(`已标记为${statusText}`)
             actionRef.current?.reload()
           } else {
-            message.error('操作失败')
+            message.error(textConst.error.operationFail)
           }
         } catch (e) {
           console.error(e)
-          message.error('操作失败')
+          message.error(textConst.error.operationFail)
         }
       }
     })
@@ -65,7 +67,7 @@ const ApiErrorLogPage: React.FC = () => {
         1: { text: '会员', status: 'Default' },
         2: { text: '管理员', status: 'Processing' }
       },
-      fieldProps: { placeholder: '请选择用户类型' }
+      fieldProps: { placeholder: '请输入用户类型' }
     },
     {
       title: '应用名称',
@@ -122,7 +124,7 @@ const ApiErrorLogPage: React.FC = () => {
       align: 'center',
       width: 160,
       valueType: 'dateRange',
-      fieldProps: { placeholder: ['开始日期', '结束日期'] },
+      fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] },
       hideInTable: true
     },
     {
@@ -159,17 +161,17 @@ const ApiErrorLogPage: React.FC = () => {
         1: { text: '已处理', status: 'Success' },
         2: { text: '已忽略', status: 'Default' }
       },
-      fieldProps: { placeholder: '请选择处理状态' }
+      fieldProps: { placeholder: '请输入处理状态' }
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 150,
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a
             key="detail"
             onClick={() => {
@@ -177,36 +179,30 @@ const ApiErrorLogPage: React.FC = () => {
               setDetailsDrawerVisible(true)
             }}
           >
-            详细
+            {textConst.action.detail}
           </a>
           {record.processStatus === 0 && (
             <>
-              <a
-                key="process"
-                onClick={() => handleUpdateStatus(record.id, 1, '已处理')}
-              >
+              <a key="process" onClick={() => handleUpdateStatus(record.id, 1, '已处理')}>
                 已处理
               </a>
-              <a
-                key="ignore"
-                onClick={() => handleUpdateStatus(record.id, 2, '已忽略')}
-              >
+              <a key="ignore" onClick={() => handleUpdateStatus(record.id, 2, '已忽略')}>
                 已忽略
               </a>
             </>
           )}
-        </Space>
+        </div>
       )
     }
   ]
 
   const handleExport = () => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有API错误日志?',
-      okText: '确定',
-      cancelText: '取消',
+      content: '确认导出所有API错误日志？',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -228,9 +224,9 @@ const ApiErrorLogPage: React.FC = () => {
           link.download = 'API错误日志.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success('导出成功')
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('导出失败')
+          message.error('textConst.msg.exportError')
         }
       }
     })
@@ -239,6 +235,7 @@ const ApiErrorLogPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraApiErrorLogRespVO>
+        headerTitle="错误日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -288,21 +285,21 @@ const ApiErrorLogPage: React.FC = () => {
         options={{
           reload: true,
           setting: true,
-          density: true,
+          density: true
         }}
         pagination={{
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"
+            color="volcano"
+            variant="outlined"
             icon={<DownloadOutlined />}
             onClick={handleExport}
-            style={{ color: '#52c41a', borderColor: '#b7eb8f', background: '#f6ffed' }}
           >
-            导出
+            {textConst.action.export}
           </Button>
         ]}
       />
@@ -380,7 +377,15 @@ const DetailItem: React.FC<{ label: string; value: any; isLong?: boolean }> = ({
       paddingTop: '4px'
     }}
   >
-    <div style={{ fontWeight: 500, width: '120px', flexShrink: 0, textAlign: 'right', paddingRight: '16px' }}>
+    <div
+      style={{
+        fontWeight: 500,
+        width: '120px',
+        flexShrink: 0,
+        textAlign: 'right',
+        paddingRight: '16px'
+      }}
+    >
       {label}
     </div>
     <div

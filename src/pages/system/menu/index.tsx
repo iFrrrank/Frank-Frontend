@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Modal, Switch } from 'antd'
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
+import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import * as AntdIcons from '@ant-design/icons'
 import {
   ExclamationCircleOutlined,
@@ -11,8 +10,11 @@ import {
 } from '@ant-design/icons'
 
 import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
-import SaveMenuModal, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
+import { textConst } from '@/locales/zh-CN'
+import SaveMenuForm, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
 import { handleTreeData } from '@/utils/tree'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 // 动态渲染图标
 const IconFont = ({ type }: { type?: string }) => {
@@ -36,7 +38,7 @@ const MenuManagement: React.FC = () => {
   const [isExpandAll, setIsExpandAll] = useState(false)
   const [allKeys, setAllKeys] = useState<React.Key[]>([])
 
-  // 全量扁平数据（用于在新增弹窗里选择父级）
+  // 全量扁平数据（用于在创建弹窗里选择父级）
   const [flatMenuData, setFlatMenuData] = useState<any[]>([])
 
   // 展开折叠切换
@@ -48,26 +50,6 @@ const MenuManagement: React.FC = () => {
     } else {
       setExpandedRowKeys([])
     }
-  }
-
-  // ===== 基础操作 =====
-  const handleDelete = (record: any) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据？',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteMenu({ id: record.id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
   }
 
   // 状态切换 (Mock 快捷切换，调用 Update)
@@ -138,7 +120,7 @@ const MenuManagement: React.FC = () => {
         1: { text: '关闭', status: 'Error' }
       },
       fieldProps: {
-        placeholder: '请选择菜单状态'
+        placeholder: '请输入菜单状态'
       },
       render: (_, record) => (
         <Switch
@@ -148,16 +130,19 @@ const MenuManagement: React.FC = () => {
       )
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       width: 200,
       align: 'center',
       render: (_, record) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
-          <a onClick={() => handleEditMenu(record)}>修改</a>
-          <a onClick={() => handleCreateMenu(record.id)}>新增</a>
-          <a style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
-            删除
+        <div style={tableActionStyle}>
+          <a onClick={() => handleEditMenu(record)}>{textConst.action.update}</a>
+          <a onClick={() => handleCreateMenu(record.id)}>{textConst.action.addNew}</a>
+          <a
+            style={deleteTextStyle}
+            onClick={() => handleDelete(record, deleteMenu, () => actionRef.current?.reload())}
+          >
+            {textConst.action.delete}
           </a>
         </div>
       )
@@ -167,6 +152,7 @@ const MenuManagement: React.FC = () => {
   return (
     <>
       <ProTable<any>
+        headerTitle="菜单管理"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -215,7 +201,6 @@ const MenuManagement: React.FC = () => {
           defaultCollapsed: false
         }}
         options={false}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"
@@ -223,27 +208,32 @@ const MenuManagement: React.FC = () => {
             icon={<PlusOutlined />}
             onClick={() => handleCreateMenu()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="expand"
+            type="default"
+            color="blue"
+            variant="outlined"
             icon={<SwapOutlined rotate={90} />}
-            style={{ color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }}
             onClick={handleToggleExpandAll}
           >
-            展开/折叠
+            {textConst.action.expandOrCollapse}
           </Button>,
           <Button
             key="refresh"
+            type="default"
+            color="danger"
+            variant="outlined"
             icon={<SyncOutlined />}
-            onClick={() => message.success('刷新菜单缓存成功')} // Mock 本地缓存刷新行为
+            onClick={() => message.success('刷新菜单缓存成功')}
           >
             刷新菜单缓存
           </Button>
         ]}
       />
 
-      <SaveMenuModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveMenuForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }

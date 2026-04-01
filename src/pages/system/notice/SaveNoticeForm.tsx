@@ -9,6 +9,7 @@ import {
 } from '@ant-design/pro-components'
 import { Editor } from '@/components/Editor'
 import { createNotice, updateNotice } from '@/api/system/notice'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateNotice: () => void
 export let handleEditNotice: (record: API.SystemNoticeRespVO) => void
@@ -17,7 +18,7 @@ interface SaveNoticeModalProps {
   onSuccess: () => void
 }
 
-const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
+const SaveNoticeForm: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [editingNotice, setEditingNotice] = useState<API.SystemNoticeRespVO | null>(null)
 
@@ -33,7 +34,7 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemNoticeSaveReqVO>
-      title={editingNotice ? '修改' : '新增'}
+      title={editingNotice ? textConst.action.update : textConst.action.create}
       width={900}
       open={modalVisible}
       onOpenChange={(visible) => {
@@ -58,15 +59,19 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
             resp = await createNotice(values as any)
           }
           if (resp.code === 0) {
-            message.success(editingNotice ? '修改成功' : '创建成功')
+            message.success(
+              editingNotice ? textConst.msg.updateSuccess : textConst.msg.createSuccess
+            )
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingNotice ? '修改失败' : '创建失败'))
+            message.error(
+              resp.msg || (editingNotice ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingNotice ? '修改失败' : '创建失败')
+          message.error(editingNotice ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}
@@ -88,7 +93,7 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
         name="type"
         label="公告类型"
         placeholder="请选择公告类型"
-        rules={[{ required: true, message: '请选择公告类型' }]}
+        rules={[{ required: true, message: '请输入公告类型' }]}
         options={[
           { label: '通知', value: 1 },
           { label: '公告', value: 2 }
@@ -98,7 +103,7 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
         name="status"
         label="状态"
         placeholder="请选择状态"
-        rules={[{ required: true, message: '请选择状态' }]}
+        rules={[{ required: true, message: '请输入状态' }]}
         options={[
           { label: '开启', value: 0 },
           { label: '关闭', value: 1 }
@@ -114,5 +119,4 @@ const SaveNoticeModal: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
   )
 }
 
-export default SaveNoticeModal
-
+export default SaveNoticeForm

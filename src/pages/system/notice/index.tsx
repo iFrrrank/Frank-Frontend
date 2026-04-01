@@ -1,10 +1,14 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal, Space, Typography } from 'antd'
-import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
+import { textConst } from '@/locales/zh-CN'
+import { Button, message, Modal, Typography } from 'antd'
+import SaveNoticeForm, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
+import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { deleteNotice, getNoticePage, push } from '@/api/system/notice'
-import SaveNoticeModal, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const NoticeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -68,7 +72,7 @@ const NoticeConfig: React.FC = () => {
       }
     },
     {
-      title: '创建时间',
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       width: 180,
@@ -76,54 +80,39 @@ const NoticeConfig: React.FC = () => {
       render: (_, record) => <span>{record.createTime as any}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 150,
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
-        <Space size={12}>
+        <div style={tableActionStyle}>
           <a key="edit" onClick={() => handleEditNotice(record)}>
-            修改
+            {textConst.action.update}
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
-            删除
+          <a
+            key="delete"
+            style={deleteTextStyle}
+            onClick={() => handleDelete(record, deleteNotice, () => actionRef.current?.reload())}
+          >
+            {textConst.action.delete}
           </a>
           <a key="push" onClick={() => handlePush(record)}>
-            推送
+            {textConst.action.push}
           </a>
-        </Space>
+        </div>
       )
     }
   ]
 
-  const handleDelete = (record: API.SystemNoticeRespVO) => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除 ID 为"${record.id}"的公告？`,
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await deleteNotice({ id: record.id })
-          message.success('删除成功')
-          actionRef.current?.reload()
-        } catch {
-          message.error('删除失败')
-        }
-      }
-    })
-  }
-
   const handlePush = (record: API.SystemNoticeRespVO) => {
     Modal.confirm({
-      title: '系统提示',
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否推送所选中通知？',
-      okText: '确定',
-      cancelText: '取消',
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await push({ id: record.id })
@@ -135,29 +124,10 @@ const NoticeConfig: React.FC = () => {
     })
   }
 
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除选中的 ${selectedRowKeys.length} 条公告?`,
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteNotice({ id: Number(id) })))
-          message.success('批量删除成功')
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error('批量删除失败')
-        }
-      }
-    })
-  }
-
   return (
     <>
       <ProTable<API.SystemNoticeRespVO>
+        headerTitle="通知公告"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -194,7 +164,6 @@ const NoticeConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"
@@ -202,26 +171,29 @@ const NoticeConfig: React.FC = () => {
             type="primary"
             onClick={() => handleCreateNotice()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="batchDelete"
             icon={<DeleteOutlined />}
             danger
+            type="primary"
             disabled={selectedRowKeys.length === 0}
-            style={
-              selectedRowKeys.length > 0
-                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
-                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteNotice,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
             }
-            onClick={handleBatchDelete}
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />
 
-      <SaveNoticeModal onSuccess={() => actionRef.current?.reload()} />
+      <SaveNoticeForm onSuccess={() => actionRef.current?.reload()} />
     </>
   )
 }
