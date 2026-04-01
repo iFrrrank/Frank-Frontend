@@ -94,7 +94,7 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
         label="字典类型"
         colProps={{ span: 24 }}
         placeholder="请输入字典类型"
-        readonly // 页面上一般是不可修改或者就是下拉选择
+        readonly
       />
       <ProFormText
         name="label"

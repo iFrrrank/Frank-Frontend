@@ -255,8 +255,8 @@ const JobPage: React.FC = () => {
           <Button
             key="delete"
             danger
+            type="primary"
             icon={<DeleteOutlined />}
-            style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
             disabled={selectedRowKeys.length === 0}
             onClick={() => {
               if (selectedRowKeys && selectedRowKeys.length > 0) {

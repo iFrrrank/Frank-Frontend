@@ -135,7 +135,7 @@ const SocialClientPage: React.FC = () => {
           {
             key: 'delete',
             icon: <DeleteOutlined />,
-            label: {textConst.action.delete},
+            label: textConst.action.delete,
             onClick: () =>
               handleDelete(record, deleteSocialClient, () => actionRef.current?.reload())
           }

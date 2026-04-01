@@ -257,6 +257,7 @@ const SystemUser: React.FC = () => {
               key="batchDelete"
               icon={<DeleteOutlined />}
               danger
+              type="primary"
               disabled={selectedRowKeys.length === 0}
               onClick={() =>
                 handleBatchDelete(

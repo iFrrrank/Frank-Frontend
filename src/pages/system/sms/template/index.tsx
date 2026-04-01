@@ -340,6 +340,7 @@ const SmsTemplateConfig: React.FC = () => {
             key="batchDelete"
             icon={<DeleteOutlined />}
             danger
+            type="primary"
             disabled={selectedRowKeys.length === 0}
             onClick={() =>
               handleBatchDelete(
@@ -348,11 +349,6 @@ const SmsTemplateConfig: React.FC = () => {
                 () => setSelectedRowKeys([]),
                 () => actionRef.current?.reload()
               )
-            }
-            style={
-              selectedRowKeys.length > 0
-                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
-                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
             }
           >
             {textConst.action.batchDelete}

@@ -217,6 +217,7 @@ const FileConfigPage: React.FC = () => {
           <Button
             key="delete"
             danger
+            type="primary"
             icon={<DeleteOutlined />}
             disabled={selectedRowKeys.length === 0}
             onClick={() =>
@@ -227,7 +228,6 @@ const FileConfigPage: React.FC = () => {
                 () => actionRef.current?.reload()
               )
             }
-            style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
           >
             {textConst.action.batchDelete}
           </Button>

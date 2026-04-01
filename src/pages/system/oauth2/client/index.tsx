@@ -125,7 +125,7 @@ const App_: React.FC = () => {
           {
             key: 'delete',
             icon: <DeleteOutlined />,
-            label: {textConst.action.delete},
+            label: textConst.action.delete,
             onClick: () =>
               handleDelete(record, deleteOAuth2Client, () => actionRef.current?.reload())
           },
@@ -258,6 +258,7 @@ const App_: React.FC = () => {
               key="batchDelete"
               icon={<DeleteOutlined />}
               danger
+              type="primary"
               disabled={selectedRowKeys.length === 0}
               onClick={() =>
                 handleBatchDelete(

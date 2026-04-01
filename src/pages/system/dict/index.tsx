@@ -21,7 +21,6 @@ const DictTypeConfig: React.FC = () => {
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
-  // ===== 数据列定义 =====
   const columns: ProColumns<API.SystemDictTypeRespVO>[] = [
     {
       title: '字典ID',
@@ -222,6 +221,7 @@ const DictTypeConfig: React.FC = () => {
             key="batchDelete"
             icon={<DeleteOutlined />}
             danger
+            type="primary"
             disabled={selectedRowKeys.length === 0}
             onClick={() =>
               handleBatchDelete(
@@ -230,11 +230,6 @@ const DictTypeConfig: React.FC = () => {
                 () => setSelectedRowKeys([]),
                 () => actionRef.current?.reload()
               )
-            }
-            style={
-              selectedRowKeys.length > 0
-                ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
-                : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' } // 模拟图片中禁用的淡粉色背景
             }
           >
             {textConst.action.batchDelete}
