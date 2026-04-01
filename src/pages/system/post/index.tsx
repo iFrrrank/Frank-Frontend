@@ -95,7 +95,7 @@ const PostManagement: React.FC = () => {
       render: (_, record) => <span>{record.createTime as any}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 150,

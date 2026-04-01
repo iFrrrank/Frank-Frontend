@@ -129,7 +129,7 @@ const MenuManagement: React.FC = () => {
       )
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       width: 200,
       align: 'center',

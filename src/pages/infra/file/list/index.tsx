@@ -201,7 +201,7 @@ const FileListPage: React.FC = () => {
       render: (_, record) => <span>{record.createTime}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 120,
@@ -299,8 +299,8 @@ const FileListPage: React.FC = () => {
           setUploadModalVisible(false)
           setUploadFileList([])
         }}
-        okText="确 定"
-        cancelText="取 消"
+        okText={textConst.common.ok}
+        cancelText={textConst.common.cancel}
         confirmLoading={uploading}
         width={600}
       >

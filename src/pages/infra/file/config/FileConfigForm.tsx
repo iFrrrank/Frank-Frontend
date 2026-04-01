@@ -45,7 +45,7 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
                 props.submit()
               }}
             >
-              确定
+              {textConst.common.ok}
             </Button>,
             <Button
               key="cancel"
@@ -54,7 +54,7 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
                 setVisible(false)
               }}
             >
-              取消
+              {textConst.common.cancel}
             </Button>
           ]
         }

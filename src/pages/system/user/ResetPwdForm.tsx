@@ -11,14 +11,12 @@ const ResetPwdForm: React.FC = () => {
   const [resetPwdUser, setResetPwdUser] = useState<API.SystemUserRespVO | null>(null)
   const [newPassword, setNewPassword] = useState('')
 
-  // ===== 重置密码 =====
   handleResetPwd = (record: API.SystemUserRespVO) => {
     setResetPwdUser(record)
     setNewPassword('')
     setResetPwdVisible(true)
   }
 
-  // 提交重置密码
   const handleResetPwdSubmit = async () => {
     if (!newPassword) {
       message.warning('请输入新密码')
@@ -48,7 +46,7 @@ const ResetPwdForm: React.FC = () => {
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
         <ExclamationCircleOutlined style={{ color: '#faad14', fontSize: 20 }} />
-        <span>textConst.common.inputText {resetPwdUser?.username} 的新密码</span>
+        <span>请输入 {resetPwdUser?.username} 的新密码</span>
       </div>
       <Input.Password
         value={newPassword}

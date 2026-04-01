@@ -97,7 +97,7 @@ const OperateLogConfig: React.FC = () => {
       fieldProps: { placeholder: '请输入操作 IP' }
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 100,

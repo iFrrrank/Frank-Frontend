@@ -51,7 +51,6 @@ const DeptTree: React.FC<DeptTreeProps> = ({ onSelect }) => {
     if (keys.length > 0) {
       onSelect?.(Number(keys[0]))
     } else {
-      // 取消选中时，清除部门筛选
       onSelect?.(undefined)
     }
   }

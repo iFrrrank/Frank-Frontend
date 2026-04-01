@@ -43,7 +43,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
                 props.submit()
               }}
             >
-              确定
+              {textConst.common.ok}
             </Button>,
             <Button
               key="cancel"
@@ -52,7 +52,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
                 setVisible(false)
               }}
             >
-              取消
+              {textConst.common.cancel}
             </Button>
           ]
         }

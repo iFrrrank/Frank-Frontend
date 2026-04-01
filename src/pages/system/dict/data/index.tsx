@@ -136,7 +136,7 @@ const DictDataList: React.FC = () => {
       render: (_, record) => <span>{record.createTime as any}</span>
     },
     {
-      title: '操作',
+      title: textConst.form.operateConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 120,

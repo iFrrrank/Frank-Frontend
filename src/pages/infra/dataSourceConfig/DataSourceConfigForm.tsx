@@ -46,7 +46,7 @@ const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({
                 props.submit()
               }}
             >
-              确 定
+              {textConst.common.ok}
             </Button>,
             <Button
               key="cancel"
@@ -55,7 +55,7 @@ const DataSourceConfigForm: React.FC<DataSourceConfigFormProps> = ({
                 setVisible(false)
               }}
             >
-              取 消
+              {textConst.common.cancel}
             </Button>
           ]
         }

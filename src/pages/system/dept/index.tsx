@@ -112,7 +112,7 @@ const DeptManagement: React.FC = () => {
       valueType: 'dateTime'
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       width: 150,
       align: 'center',

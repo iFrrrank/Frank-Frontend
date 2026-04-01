@@ -170,7 +170,7 @@ const NotifyMessage: React.FC = () => {
       order: 0
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 80,

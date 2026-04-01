@@ -187,7 +187,7 @@ const MailLog: React.FC = () => {
       order: 6 // 第一排中
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 80,

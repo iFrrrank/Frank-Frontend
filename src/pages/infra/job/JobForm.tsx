@@ -41,7 +41,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
                   props.submit()
                 }}
               >
-                确 定
+                {textConst.common.ok}
               </Button>,
               <Button
                 key="cancel"
@@ -50,7 +50,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
                   setVisible(false)
                 }}
               >
-                取 消
+                {textConst.common.cancel}
               </Button>
             ]
           }

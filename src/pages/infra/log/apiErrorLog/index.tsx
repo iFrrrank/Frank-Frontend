@@ -163,7 +163,7 @@ const ApiErrorLogPage: React.FC = () => {
       fieldProps: { placeholder: '请输入处理状态' }
     },
     {
-      title: '操作',
+      title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
       width: 150,
