@@ -103,14 +103,14 @@ const PostManagement: React.FC = () => {
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
           <a key="edit" onClick={() => handleEditPost(record)}>
-            修改
+            {textConst.action.update}
           </a>
           <a
             key="delete"
             style={{ color: '#ff4d4f' }}
             onClick={() => handleDelete(record, deletePost, () => actionRef.current?.reload())}
           >
-            删除
+            {textConst.action.delete}
           </a>
         </div>
       )
@@ -202,7 +202,7 @@ const PostManagement: React.FC = () => {
         headerTitle={false}
         toolBarRender={() => [
           <Button key="create" icon={<PlusOutlined />} onClick={handleCreatePost} type="primary">
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="export"
@@ -231,7 +231,7 @@ const PostManagement: React.FC = () => {
                 : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' } // 模拟图片中禁用的淡粉色背景
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

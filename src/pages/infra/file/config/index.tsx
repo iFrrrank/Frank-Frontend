@@ -163,7 +163,7 @@ const FileConfigPage: React.FC = () => {
             }
             style={{ color: '#ff4d4f' }}
           >
-            删除
+            {textConst.action.delete}
           </a>
         </Space>
       )
@@ -212,7 +212,7 @@ const FileConfigPage: React.FC = () => {
         headerTitle={false}
         toolBarRender={() => [
           <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="delete"
@@ -229,7 +229,7 @@ const FileConfigPage: React.FC = () => {
             }
             style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

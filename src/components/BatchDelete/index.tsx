@@ -2,7 +2,7 @@ import { Modal, message } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { textConst } from '@/locales/zh-CN'
 
-type DeleteApi = (params: { ids: number[] }) => Promise<any>
+type DeleteApi = (params: { id: number[] }) => Promise<any>
 
 export const handleBatchDelete = async (
   selectedRowKeys: React.Key[],
@@ -24,7 +24,7 @@ export const handleBatchDelete = async (
     cancelText: textConst.common.cancel,
     onOk: async () => {
       try {
-        await Promise.all(selectedRowKeys.map((id) => deleteApi({ ids: [Number(id)] })))
+        await Promise.all(selectedRowKeys.map((id) => deleteApi({ id: [Number(id)] })))
         message.success(textConst.msg.batchDelSuccess)
         clearSelected()
         reload()

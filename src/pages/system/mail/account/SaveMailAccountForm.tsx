@@ -70,11 +70,14 @@ const SaveMailAccountForm: React.FC<SaveMailAccountModalProps> = ({ onSuccess })
             onSuccess()
             return true
           } else {
-            message.error(resp.msg || (editingMailAccount ? textConst.msg.updateError : '新增失败'))
+            message.error(
+              resp.msg ||
+                (editingMailAccount ? textConst.msg.updateError : textConst.msg.createError)
+            )
             return false
           }
         } catch {
-          message.error(editingMailAccount ? textConst.msg.updateError : '新增失败')
+          message.error(editingMailAccount ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

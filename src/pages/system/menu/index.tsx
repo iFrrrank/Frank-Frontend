@@ -37,7 +37,7 @@ const MenuManagement: React.FC = () => {
   const [isExpandAll, setIsExpandAll] = useState(false)
   const [allKeys, setAllKeys] = useState<React.Key[]>([])
 
-  // 全量扁平数据（用于在新增弹窗里选择父级）
+  // 全量扁平数据（用于在创建弹窗里选择父级）
   const [flatMenuData, setFlatMenuData] = useState<any[]>([])
 
   // 展开折叠切换
@@ -50,26 +50,6 @@ const MenuManagement: React.FC = () => {
       setExpandedRowKeys([])
     }
   }
-
-  // // ===== 基础操作 =====
-  // const handleDelete = (record: any) => {
-  //   Modal.confirm({
-  //     title: textConst.msg.confirmTitle,
-  //     icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-  //     content: '是否确认删除选中数据？',
-  //     okText: textConst.common.ok,
-  //     cancelText: textConst.common.cancel,
-  //     onOk: async () => {
-  //       try {
-  //         await deleteMenu({ id: record.id })
-  //         message.success(textConst.msg.delSuccess)
-  //         actionRef.current?.reload()
-  //       } catch {
-  //         message.error(textConst.msg.delError)
-  //       }
-  //     }
-  //   })
-  // }
 
   // 状态切换 (Mock 快捷切换，调用 Update)
   const handleStatusChange = async (checked: boolean, record: any) => {
@@ -155,13 +135,13 @@ const MenuManagement: React.FC = () => {
       align: 'center',
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
-          <a onClick={() => handleEditMenu(record)}>修改</a>
-          <a onClick={() => handleCreateMenu(record.id)}>新增</a>
+          <a onClick={() => handleEditMenu(record)}>{textConst.action.update}</a>
+          <a onClick={() => handleCreateMenu(record.id)}>{textConst.action.create}</a>
           <a
             style={{ color: '#ff4d4f' }}
             onClick={() => handleDelete(record, deleteMenu, () => actionRef.current?.reload())}
           >
-            删除
+            {textConst.action.delete}
           </a>
         </div>
       )
@@ -227,7 +207,7 @@ const MenuManagement: React.FC = () => {
             icon={<PlusOutlined />}
             onClick={() => handleCreateMenu()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="expand"

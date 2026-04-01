@@ -214,7 +214,7 @@ const SmsTemplateConfig: React.FC = () => {
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
           <a key="edit" onClick={() => handleEditSmsTemplate(record)}>
-            修改
+            {textConst.action.update}
           </a>
           <a
             key="delete"
@@ -223,7 +223,7 @@ const SmsTemplateConfig: React.FC = () => {
               handleDelete(record, deleteSmsTemplate, () => actionRef.current?.reload())
             }
           >
-            删除
+            {textConst.action.delete}
           </a>
         </div>
       )
@@ -334,7 +334,7 @@ const SmsTemplateConfig: React.FC = () => {
             onClick={() => handleCreateSmsTemplate()}
             type="primary"
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="batchDelete"
@@ -355,7 +355,7 @@ const SmsTemplateConfig: React.FC = () => {
                 : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>,
           <Button
             key="export"

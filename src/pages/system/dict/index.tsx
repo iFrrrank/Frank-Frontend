@@ -96,7 +96,7 @@ const DictTypeConfig: React.FC = () => {
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
           <a key="edit" onClick={() => handleEditDictType(record)}>
-            修改
+            {textConst.action.update}
           </a>
           <a key="data" onClick={() => handleData(record)}>
             数据
@@ -106,7 +106,7 @@ const DictTypeConfig: React.FC = () => {
             style={{ color: '#ff4d4f' }}
             onClick={() => handleDelete(record, deleteDictType, () => actionRef.current?.reload())}
           >
-            删除
+            {textConst.action.delete}
           </a>
         </div>
       )
@@ -208,7 +208,7 @@ const DictTypeConfig: React.FC = () => {
             onClick={handleCreateDictType}
             type="primary"
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="export"
@@ -237,7 +237,7 @@ const DictTypeConfig: React.FC = () => {
                 : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' } // 模拟图片中禁用的淡粉色背景
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

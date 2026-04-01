@@ -89,14 +89,14 @@ const NoticeConfig: React.FC = () => {
       render: (_, record) => (
         <Space size={12}>
           <a key="edit" onClick={() => handleEditNotice(record)}>
-            修改
+            {textConst.action.update}
           </a>
           <a
             key="delete"
             style={{ color: '#ff4d4f' }}
             onClick={() => handleDelete(record, deleteNotice, () => actionRef.current?.reload())}
           >
-            删除
+            {textConst.action.delete}
           </a>
           <a key="push" onClick={() => handlePush(record)}>
             推送
@@ -171,7 +171,7 @@ const NoticeConfig: React.FC = () => {
             type="primary"
             onClick={() => handleCreateNotice()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="batchDelete"
@@ -192,7 +192,7 @@ const NoticeConfig: React.FC = () => {
               )
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

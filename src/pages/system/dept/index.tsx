@@ -30,13 +30,12 @@ const DeptManagement: React.FC = () => {
   const [allKeys, setAllKeys] = useState<React.Key[]>([])
   const [hasInitExpanded, setHasInitExpanded] = useState(false)
 
-  // 全量扁平数据（用于在新增弹窗里选择父级）
+  // 全量扁平数据（用于在创建弹窗里选择父级）
   const [flatDeptData, setFlatDeptData] = useState<any[]>([])
 
   // 用户选项缓存，用于匹配表格的负责人显示
   const [userList, setUserList] = useState<any[]>([])
 
-  // 批量删除
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   // 展开折叠切换
@@ -119,7 +118,7 @@ const DeptManagement: React.FC = () => {
       align: 'center',
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
-          <a onClick={() => handleEditDept(record)}>修改</a>
+          <a onClick={() => handleEditDept(record)}>{textConst.action.create}</a>
           <a
             style={{ color: '#ff4d4f' }}
             onClick={() =>
@@ -131,7 +130,7 @@ const DeptManagement: React.FC = () => {
               )
             }
           >
-            删除
+            {textConst.action.delete}
           </a>
         </div>
       )
@@ -256,7 +255,7 @@ const DeptManagement: React.FC = () => {
                 : {}
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

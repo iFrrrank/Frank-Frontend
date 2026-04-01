@@ -216,7 +216,7 @@ const FileListPage: React.FC = () => {
             onClick={() => handleDelete(record, deleteFile, () => actionRef.current?.reload())}
             style={{ color: '#ff4d4f' }}
           >
-            删除
+            {textConst.action.delete}
           </a>
         </Space>
       )
@@ -285,7 +285,7 @@ const FileListPage: React.FC = () => {
             }
             style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

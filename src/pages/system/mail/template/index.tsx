@@ -148,7 +148,7 @@ const MailTemplateConfig: React.FC = () => {
       render: (_, record) => (
         <Space size={12}>
           <a key="edit" onClick={() => handleEditMailTemplate(record)}>
-            修改
+            {textConst.action.update}
           </a>
           <a key="test" onClick={() => handleTestMailTemplate(record)}>
             测试
@@ -158,7 +158,7 @@ const MailTemplateConfig: React.FC = () => {
             onClick={() => (record, deleteMailTemplate, () => actionRef.current?.reload())}
             style={{ color: '#ff4d4f' }}
           >
-            删除
+            {textConst.action.delete}
           </a>
         </Space>
       )
@@ -223,7 +223,7 @@ const MailTemplateConfig: React.FC = () => {
             type="primary"
             onClick={() => handleCreateMailTemplate()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="batchDelete"
@@ -244,7 +244,7 @@ const MailTemplateConfig: React.FC = () => {
               )
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

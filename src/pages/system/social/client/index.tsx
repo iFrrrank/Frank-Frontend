@@ -135,7 +135,7 @@ const SocialClientPage: React.FC = () => {
           {
             key: 'delete',
             icon: <DeleteOutlined />,
-            label: '删除',
+            label: {textConst.action.delete},
             onClick: () =>
               handleDelete(record, deleteSocialClient, () => actionRef.current?.reload())
           }
@@ -143,7 +143,7 @@ const SocialClientPage: React.FC = () => {
         return (
           <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
             <a key="edit" onClick={() => handleEditSocialClient(record)}>
-              <EditOutlined /> 修改
+              <EditOutlined /> {textConst.action.update}
             </a>
             <Dropdown menu={{ items: moreMenuItems }} placement="bottomRight">
               <a onClick={(e) => e.preventDefault()}>
@@ -220,7 +220,7 @@ const SocialClientPage: React.FC = () => {
               onClick={() => handleCreateSocialClient()}
               type="primary"
             >
-              新增
+              {textConst.action.create}
             </Button>
           ]}
         />

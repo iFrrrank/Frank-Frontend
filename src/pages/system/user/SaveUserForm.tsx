@@ -22,13 +22,11 @@ const SaveUserForm: React.FC = () => {
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [editingUser, setEditingUser] = useState<API.SystemUserRespVO | null>(null)
 
-  // 新增用户
   handleCreateUser = () => {
     setEditingUser(null)
     setCreateModalVisible(true)
   }
 
-  // 修改用户
   handleEditUser = async (record: API.SystemUserRespVO) => {
     try {
       const resp = await getUser({ id: record.id })
@@ -43,7 +41,7 @@ const SaveUserForm: React.FC = () => {
 
   return (
     <ModalForm<API.SystemUserSaveReqVO>
-      title={editingUser ? '修改用户' : '新增用户'}
+      title={editingUser ? textConst.action.update : textConst.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -82,10 +80,8 @@ const SaveUserForm: React.FC = () => {
         try {
           let resp
           if (editingUser) {
-            // 修改模式
             resp = await updateUser({ ...values, id: editingUser.id })
           } else {
-            // 新增模式
             resp = await createUser(values)
           }
           if (resp.code === 0) {

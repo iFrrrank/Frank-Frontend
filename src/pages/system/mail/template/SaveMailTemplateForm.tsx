@@ -75,12 +75,13 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
             return true
           } else {
             message.error(
-              resp.msg || (editingMailTemplate ? textConst.msg.updateError : '新增失败')
+              resp.msg ||
+                (editingMailTemplate ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(editingMailTemplate ? textConst.msg.updateError : '新增失败')
+          message.error(editingMailTemplate ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

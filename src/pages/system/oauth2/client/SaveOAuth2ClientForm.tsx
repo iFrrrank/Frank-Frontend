@@ -40,7 +40,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
 
   return (
     <ModalForm<API.SystemOAuth2ClientSaveReqVO>
-      title={editingClient ? '修改应用' : '新增应用'}
+      title={editingClient ? textConst.action.update : textConst.action.create}
       width={800}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -104,10 +104,8 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
 
           let resp: any
           if (editingClient) {
-            // 修改模式
             resp = await updateOAuth2Client({ ...processedValues, id: editingClient.id })
           } else {
-            // 新增模式
             resp = await createOAuth2Client(processedValues)
           }
           if (resp.code === 0) {

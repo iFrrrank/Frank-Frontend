@@ -49,7 +49,7 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm
-      title={editingMenu?.id ? '修改菜单' : '新增菜单'}
+      title={editingMenu?.id ? textConst.action.update : textConst.action.create}
       width={680}
       open={createModalVisible}
       onOpenChange={(visible) => {

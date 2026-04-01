@@ -102,7 +102,7 @@ const MailAccountConfig: React.FC = () => {
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
           <a key="edit" onClick={() => handleEditMailAccount(record)}>
-            修改
+            {textConst.action.update}
           </a>
           <a
             key="delete"
@@ -111,54 +111,12 @@ const MailAccountConfig: React.FC = () => {
             }
             style={{ color: '#ff4d4f' }}
           >
-            删除
+            {textConst.action.delete}
           </a>
         </div>
       )
     }
   ]
-
-  // // ===== 单个删除 =====
-  // const handleDelete = (record: API.SystemMailAccountRespVO) => {
-  //   Modal.confirm({
-  //     title: textConst.msg.confirmTitle,
-  //     icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-  //     content: '是否确认删除 ID 为"${record.id}"的邮箱账号数据项?',
-  //     okText: textConst.common.ok,
-  //     cancelText: textConst.common.cancel,
-  //     onOk: async () => {
-  //       try {
-  //         await deleteMailAccount({ id: record.id! })
-  //         message.success(textConst.msg.delSuccess)
-  //         actionRef.current?.reload()
-  //       } catch {
-  //         message.error(textConst.msg.delError)
-  //       }
-  //     }
-  //   })
-  // }
-
-  // // ===== 批量删除 =====
-  // const handleBatchDelete = () => {
-  //   Modal.confirm({
-  //     title: textConst.msg.confirmTitle,
-  //     icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-  //     content: '是否确认删除选中的 ${selectedRowKeys.length} 个邮箱账号数据项?',
-  //     okText: textConst.common.ok,
-  //     cancelText: textConst.common.cancel,
-  //     onOk: async () => {
-  //       try {
-  //         // 在实际项目中建议提供后台批量接口，由于这里的 API 中暂时只有单删，通过循环并行发送请求
-  //         await Promise.all(selectedRowKeys.map((id) => deleteMailAccount({ id: Number(id) })))
-  //         message.success(textConst.msg.batchDelSuccess)
-  //         setSelectedRowKeys([])
-  //         actionRef.current?.reload()
-  //       } catch {
-  //         message.error(textConst.msg.batchDelError)
-  //       }
-  //     }
-  //   })
-  // }
 
   return (
     <>
@@ -216,7 +174,7 @@ const MailAccountConfig: React.FC = () => {
             type="primary"
             onClick={() => handleCreateMailAccount()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="batchDelete"
@@ -237,7 +195,7 @@ const MailAccountConfig: React.FC = () => {
               )
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

@@ -21,7 +21,6 @@ const Role: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
 
-  // 批量删除相关
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   // 数据列定义
@@ -134,7 +133,7 @@ const Role: React.FC = () => {
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
           <a key="edit" onClick={() => handleEditRole(record)}>
-            修改
+            {textConst.action.update}
           </a>
           <a key="menu" onClick={() => handleOpenMenuAssign(record)}>
             菜单权限
@@ -147,7 +146,7 @@ const Role: React.FC = () => {
             style={{ color: '#ff4d4f' }}
             onClick={() => handleDelete(record, deleteRole, () => actionRef.current?.reload())}
           >
-            删除
+            {textConst.action.delete}
           </a>
         </div>
       )
@@ -238,7 +237,7 @@ const Role: React.FC = () => {
         headerTitle={false}
         toolBarRender={() => [
           <Button key="create" icon={<PlusOutlined />} onClick={handleCreateRole} type="primary">
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="export"
@@ -267,12 +266,11 @@ const Role: React.FC = () => {
                 : {}
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />
 
-      {/* ========== 新增/修改角色弹窗 ========== */}
       <SaveRoleForm onSuccess={() => actionRef.current?.reload()} />
       <AssignMenuForm />
       <AssignDataScopeForm />

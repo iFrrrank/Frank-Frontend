@@ -50,25 +50,6 @@ const JobPage: React.FC = () => {
     setFormVisible(true)
   }
 
-  // const handleDelete = (id: number) => {
-  //   Modal.confirm({
-  //     title: textConst.msg.confirmTitle,
-  //     icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-  //     content: '确认删除该定时任务？',
-  //     okText: textConst.common.ok,
-  //     cancelText: textConst.common.cancel,
-  //     onOk: async () => {
-  //       try {
-  //         await deleteJob(id)
-  //         message.success(textConst.msg.delSuccess)
-  //         actionRef.current?.reload()
-  //       } catch {
-  //         message.error(textConst.msg.delError)
-  //       }
-  //     }
-  //   })
-  // }
-
   const handleUpdateStatus = async (record: JobVO) => {
     try {
       const newStatus = record.status === 0 ? 1 : 0
@@ -76,7 +57,7 @@ const JobPage: React.FC = () => {
       message.success(newStatus === 0 ? '已开启任务' : '已暂停任务')
       actionRef.current?.reload()
     } catch {
-      message.error('状态修改失败')
+      message.error('修改失败')
     }
   }
 
@@ -212,13 +193,13 @@ const JobPage: React.FC = () => {
       render: (_, record) => (
         <Space size={12}>
           <a onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
-            修改
+            {textConst.action.create}
           </a>
           <a
             onClick={() => handleDelete(record, deleteJob, () => actionRef.current?.reload())}
             style={{ color: '#ff4d4f' }}
           >
-            删除
+            {textConst.action.delete}
           </a>
           <Dropdown menu={getMenu(record)}>
             <a onClick={(e) => e.preventDefault()}>
@@ -269,7 +250,7 @@ const JobPage: React.FC = () => {
         headerTitle={false}
         toolBarRender={() => [
           <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="delete"
@@ -283,7 +264,7 @@ const JobPage: React.FC = () => {
               }
             }}
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>,
           <Button
             key="export"

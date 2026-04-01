@@ -126,7 +126,7 @@ const NotifyTemplateConfig: React.FC = () => {
       render: (_, record) => (
         <Space size={12}>
           <a key="edit" onClick={() => handleEditNotifyTemplate(record)}>
-            修改
+            {textConst.action.update}
           </a>
           <a
             key="delete"
@@ -135,7 +135,7 @@ const NotifyTemplateConfig: React.FC = () => {
               handleDelete(record, deleteNotifyTemplate, () => actionRef.current?.reload())
             }
           >
-            删除
+            {textConst.action.delete}
           </a>
         </Space>
       )
@@ -199,7 +199,7 @@ const NotifyTemplateConfig: React.FC = () => {
             type="primary"
             onClick={() => handleCreateNotifyTemplate()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="batchDelete"
@@ -220,7 +220,7 @@ const NotifyTemplateConfig: React.FC = () => {
               )
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

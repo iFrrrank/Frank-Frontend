@@ -144,14 +144,14 @@ const DictDataList: React.FC = () => {
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
           <a key="edit" onClick={() => handleEditDictData(record)}>
-            修改
+            {textConst.action.create}
           </a>
           <a
             key="delete"
             style={{ color: '#ff4d4f' }}
             onClick={() => handleDelete(record, deleteDictData, () => actionRef.current?.reload())}
           >
-            删除
+            {textConst.action.delete}
           </a>
         </div>
       )
@@ -245,7 +245,7 @@ const DictDataList: React.FC = () => {
             }
             type="primary"
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="export"
@@ -274,7 +274,7 @@ const DictDataList: React.FC = () => {
                 : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
             }
           >
-            批量删除
+            {textConst.action.batchDelete}
           </Button>
         ]}
       />

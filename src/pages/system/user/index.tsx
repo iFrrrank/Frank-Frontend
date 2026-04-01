@@ -29,7 +29,7 @@ const SystemUser: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
   const [selectedDeptId, setSelectedDeptId] = useState<number | undefined>(undefined)
-  // 批量删除相关
+
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   // 列定义

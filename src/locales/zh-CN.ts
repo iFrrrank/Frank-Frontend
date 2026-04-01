@@ -218,7 +218,7 @@ export const textConst = {
     workplace: '工作台'
   },
   analysis: {
-    newUser: '新增用户',
+    newUser: '创建用户',
     unreadInformation: '未读消息',
     transactionAmount: '成交金额',
     totalShopping: '购物总量',
@@ -350,7 +350,7 @@ export const textConst = {
     header: '头部'
   },
   action: {
-    create: '新增',
+    create: '创建',
     delete: '删除',
     batchDelete: '批量删除',
     update: '修改',
@@ -369,9 +369,9 @@ export const textConst = {
     generate: '生成',
     logout: '强制退出',
     test: '测试',
-    typeCreate: '字典类型新增',
+    typeCreate: '字典类型创建',
     typeUpdate: '字典类型编辑',
-    dataCreate: '字典数据新增',
+    dataCreate: '字典数据创建',
     dataUpdate: '字典数据编辑',
     resetPwd: '重置密码',
     assignRole: '分配角色',

@@ -60,7 +60,7 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm
-      title={editingDept?.id ? '修改' : '新增'}
+      title={editingDept?.id ? textConst.action.update : textConst.action.create}
       width={500}
       open={createModalVisible}
       onOpenChange={(visible) => {

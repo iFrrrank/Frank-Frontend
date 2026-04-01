@@ -125,7 +125,7 @@ const App_: React.FC = () => {
           {
             key: 'delete',
             icon: <DeleteOutlined />,
-            label: '删除',
+            label: {textConst.action.delete},
             onClick: () =>
               handleDelete(record, deleteOAuth2Client, () => actionRef.current?.reload())
           },
@@ -139,7 +139,7 @@ const App_: React.FC = () => {
         return (
           <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
             <a key="edit" onClick={() => handleEditOAuth2Client(record)}>
-              <EditOutlined /> 修改
+              <EditOutlined /> {textConst.action.update}
             </a>
             <Dropdown menu={{ items: moreMenuItems }} placement="bottomRight">
               <a onClick={(e) => e.preventDefault()}>
@@ -252,7 +252,7 @@ const App_: React.FC = () => {
               onClick={() => handleCreateOAuth2Client()}
               type="primary"
             >
-              新增
+              {textConst.action.create}
             </Button>,
             <Button
               key="batchDelete"
@@ -268,7 +268,7 @@ const App_: React.FC = () => {
                 )
               }
             >
-              批量删除
+              {textConst.action.batchDelete}
             </Button>
           ]}
         />
