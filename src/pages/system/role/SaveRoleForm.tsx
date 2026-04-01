@@ -8,7 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createRole, updateRole } from '@/api/system/role'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateRole: () => void
 export let handleEditRole: (record: API.SystemRoleRespVO) => void
@@ -33,7 +33,7 @@ const SaveRoleForm: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemRoleSaveReqVO>
-      title={editingRole ? textConstants.action.update : textConstants.action.create}
+      title={editingRole ? textConst.action.update : textConst.action.create}
       width={500}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -71,20 +71,17 @@ const SaveRoleForm: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
             resp = await createRole(values)
           }
           if (resp.code === 0) {
-            message.success(
-              editingRole ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
-            )
+            message.success(editingRole ? textConst.msg.updateSuccess : textConst.msg.createSuccess)
             onSuccess()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingRole ? textConstants.msg.updateError : textConstants.msg.createError)
+              resp.msg || (editingRole ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(editingRole ? textConstants.msg.updateError : textConstants.msg.createError)
+          message.error(editingRole ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

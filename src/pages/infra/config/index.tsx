@@ -10,7 +10,7 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { deleteConfig, deleteConfigList, exportConfig, getConfigPage } from '@/api/infra/config'
 import ConfigForm from './ConfigForm'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 /** 系统内置选项 */
 const CONFIG_TYPE_OPTIONS = [
@@ -38,18 +38,18 @@ const ConfigPage: React.FC = () => {
 
   const handleDelete = (id: number) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认删除该参数配置？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteConfig({ id })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -57,19 +57,19 @@ const ConfigPage: React.FC = () => {
 
   const handleDeleteBatch = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否删除所选中的数据？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteConfigList({ ids: selectedRowKeys as number[] })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reloadAndRest?.()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -101,9 +101,9 @@ const ConfigPage: React.FC = () => {
       link.download = '参数配置.xlsx'
       link.click()
       window.URL.revokeObjectURL(url)
-      message.success(textConstants.msg.exportSuccess)
+      message.success(textConst.msg.exportSuccess)
     } catch {
-      message.error('textConstants.msg.exportError')
+      message.error('textConst.msg.exportError')
     }
   }
 
@@ -134,7 +134,7 @@ const ConfigPage: React.FC = () => {
       hideInTable: true
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       valueType: 'dateRange',
@@ -195,7 +195,7 @@ const ConfigPage: React.FC = () => {
       ellipsis: true
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       hideInSearch: true,

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import { ModalForm, ProFormSelect, ProFormText } from '@ant-design/pro-components'
 import { createSocialClient, getSocialClient, updateSocialClient } from '@/api/system/socialClient'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateSocialClient: () => void
 export let handleEditSocialClient: (record: API.SystemSocialClientRespVO) => void
@@ -34,7 +34,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
 
   return (
     <ModalForm<API.SystemSocialClientSaveReqVO>
-      title={editingClient ? textConstants.action.update : textConstants.action.create}
+      title={editingClient ? textConst.action.update : textConst.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -77,21 +77,18 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
           }
           if (resp.code === 0) {
             message.success(
-              editingClient ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+              editingClient ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingClient ? textConstants.msg.updateError : textConstants.msg.createError)
+              resp.msg || (editingClient ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(
-            editingClient ? textConstants.msg.updateError : textConstants.msg.createError
-          )
+          message.error(editingClient ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

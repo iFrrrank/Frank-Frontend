@@ -9,7 +9,7 @@ import SaveMailAccountForm, {
   handleCreateMailAccount,
   handleEditMailAccount
 } from './SaveMailAccountForm'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const MailAccountConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -84,7 +84,7 @@ const MailAccountConfig: React.FC = () => {
       )
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       width: 180,
@@ -113,18 +113,18 @@ const MailAccountConfig: React.FC = () => {
   // ===== 单个删除 =====
   const handleDelete = (record: API.SystemMailAccountRespVO) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除 ID 为"${record.id}"的邮箱账号数据项?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteMailAccount({ id: record.id! })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -133,20 +133,20 @@ const MailAccountConfig: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中的 ${selectedRowKeys.length} 个邮箱账号数据项?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           // 在实际项目中建议提供后台批量接口，由于这里的 API 中暂时只有单删，通过循环并行发送请求
           await Promise.all(selectedRowKeys.map((id) => deleteMailAccount({ id: Number(id) })))
-          message.success(textConstants.msg.batchDelSuccess)
+          message.success(textConst.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.batchDelError)
+          message.error(textConst.msg.batchDelError)
         }
       }
     })

@@ -8,7 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createSmsTemplate, updateSmsTemplate } from '@/api/system/smsTemplate'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateSmsTemplate: () => void
 export let handleEditSmsTemplate: (record: API.SystemSmsTemplateRespVO) => void
@@ -39,7 +39,7 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
 
   return (
     <ModalForm<API.SystemSmsTemplateSaveReqVO>
-      title={editingSmsTemplate ? textConstants.action.update : textConstants.action.create}
+      title={editingSmsTemplate ? textConst.action.update : textConst.action.create}
       width={700}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -73,21 +73,19 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
           }
           if (resp.code === 0) {
             message.success(
-              editingSmsTemplate ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+              editingSmsTemplate ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
               resp.msg ||
-                (editingSmsTemplate ? textConstants.msg.updateError : textConstants.msg.createError)
+                (editingSmsTemplate ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(
-            editingSmsTemplate ? textConstants.msg.updateError : textConstants.msg.createError
-          )
+          message.error(editingSmsTemplate ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

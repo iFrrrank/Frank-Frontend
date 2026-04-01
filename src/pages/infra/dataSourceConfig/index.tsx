@@ -9,7 +9,7 @@ import {
   getDataSourceConfigList
 } from '@/api/infra/dataSourceConfig'
 import DataSourceConfigForm from './DataSourceConfigForm'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const DataSourceConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -30,18 +30,18 @@ const DataSourceConfigPage: React.FC = () => {
 
   const handleDelete = (id: number) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认删除该数据源配置？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteDataSourceConfig({ id })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -49,19 +49,19 @@ const DataSourceConfigPage: React.FC = () => {
 
   const handleDeleteBatch = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否删除所选中的数据？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteDataSourceConfigList({ ids: selectedRowKeys as number[] })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reloadAndRest?.()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -97,7 +97,7 @@ const DataSourceConfigPage: React.FC = () => {
       align: 'center'
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       render: (_, record) => <span>{record.createTime}</span>

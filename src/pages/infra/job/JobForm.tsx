@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, message, Modal, Select } from 'antd'
 import { ModalForm, ProFormDigit, ProFormInstance, ProFormText } from '@ant-design/pro-components'
 import { createJob, getJob, updateJob } from '@/api/infra/job'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 import CronExpressionGenerator from '@/components/Crontab'
 
 interface JobFormProps {
@@ -21,7 +21,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
   return (
     <>
       <ModalForm
-        title={isUpdate ? textConstants.action.update : textConstants.action.create}
+        title={isUpdate ? textConst.action.update : textConst.action.create}
         open={visible}
         onOpenChange={setVisible}
         formRef={formRef}
@@ -66,15 +66,15 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
           try {
             if (isUpdate) {
               await updateJob({ id, ...values } as any)
-              message.success(textConstants.msg.updateSuccess)
+              message.success(textConst.msg.updateSuccess)
             } else {
               await createJob(values as any)
-              message.success(textConstants.msg.createSuccess)
+              message.success(textConst.msg.createSuccess)
             }
             onSuccess()
             return true
           } catch (e) {
-            message.error(textConstants.error.operationFail)
+            message.error(textConst.error.operationFail)
             return false
           }
         }}

@@ -8,7 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createConfig, getConfig, updateConfig } from '@/api/infra/config'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 interface ConfigFormProps {
   visible: boolean
@@ -23,7 +23,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
 
   return (
     <ModalForm
-      title={isUpdate ? textConstants.action.update : textConstants.action.create}
+      title={isUpdate ? textConst.action.update : textConst.action.create}
       open={visible}
       onOpenChange={setVisible}
       formRef={formRef}
@@ -68,15 +68,15 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ visible, setVisible, onSuccess,
         try {
           if (isUpdate) {
             await updateConfig({ id, ...values } as any)
-            message.success(textConstants.msg.updateSuccess)
+            message.success(textConst.msg.updateSuccess)
           } else {
             await createConfig(values as any)
-            message.success(textConstants.msg.createSuccess)
+            message.success(textConst.msg.createSuccess)
           }
           onSuccess()
           return true
         } catch (e) {
-          message.error(textConstants.error.operationFail)
+          message.error(textConst.error.operationFail)
           return false
         }
       }}

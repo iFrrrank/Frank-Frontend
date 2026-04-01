@@ -15,7 +15,7 @@ import { createStyles } from 'antd-style'
 import React, { useState } from 'react'
 import { flushSync } from 'react-dom'
 import Settings from '../../../../config/defaultSettings'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -110,7 +110,7 @@ const Login: React.FC = () => {
         if (refreshToken) {
           localStorage.setItem('refreshToken', refreshToken)
         }
-        message.success('登录成功')
+        message.success(textConst.login.loginSuccess)
         await fetchUserInfo()
         const urlParams = new URL(window.location.href).searchParams
         window.location.href = urlParams.get('redirect') || '/'
@@ -119,7 +119,7 @@ const Login: React.FC = () => {
         setUserLoginState({ type })
       }
     } catch (error) {
-      message.error('登录失败，请重试')
+      message.error(textConst.login.loginError)
     }
   }
   const { status, type: loginType } = userLoginState
@@ -127,8 +127,8 @@ const Login: React.FC = () => {
     <div className={styles.container}>
       <Helmet>
         <title>
-          "登录'}
-          {Settings.title && ` - ${Settings.title}"
+          {textConst.login.login}
+          {Settings.title && ` - ${Settings.title}`}
         </title>
       </Helmet>
       <Lang />
@@ -145,11 +145,11 @@ const Login: React.FC = () => {
           }}
           logo={<img alt="logo" src="/logo.svg" />}
           title="Frank Design Pro"
-          subTitle="Frank Design 是西湖区最具影响力的 Web 设计规范'}
+          subTitle={'Frank Design 是西湖区最具影响力的 Web 设计规范'}
           initialValues={{
             autoLogin: true
           }}
-          actions={['其他登录方式 :', <ActionIcons key="icons" />]}
+          actions={[textConst.login.otherLogin, <ActionIcons key="icons" />]}
           onFinish={async (values) => {
             await handleSubmit(values as API.SystemAuthLoginReqVO)
           }}
@@ -161,17 +161,17 @@ const Login: React.FC = () => {
             items={[
               {
                 key: 'account',
-                label: '账户密码登录'
+                label: textConst.login.accountLogin
               },
               {
                 key: 'mobile',
-                label: '手机号登录'
+                label: textConst.login.mobileLogin
               }
             ]}
           />
 
           {status === 'error' && loginType === 'account' && (
-            <LoginMessage content="错误的用户名和密码'} />
+            <LoginMessage content={textConst.login.usernameOrPasswordError} />
           )}
           {type === 'account' && (
             <>
@@ -181,11 +181,11 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <UserOutlined />
                 }}
-                placeholder="用户名'}
+                placeholder={textConst.login.username}
                 rules={[
                   {
                     required: true,
-                    message: '用户名是必填项！'
+                    message: textConst.rules.usernameRequired
                   }
                 ]}
               />
@@ -195,11 +195,11 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <LockOutlined />
                 }}
-                placeholder="密码'}
+                placeholder={textConst.login.password}
                 rules={[
                   {
                     required: true,
-                    message: '密码是必填项！'
+                    message: textConst.rules.passwordRequired
                   }
                 ]}
               />
@@ -215,7 +215,7 @@ const Login: React.FC = () => {
                   prefix: <MobileOutlined />
                 }}
                 name="mobile"
-                placeholder="请输入手机号！"
+                placeholder={'请输入手机号！'}
                 rules={[
                   {
                     required: true,
@@ -235,12 +235,12 @@ const Login: React.FC = () => {
                 captchaProps={{
                   size: 'large'
                 }}
-                placeholder="请输入验证码！"
+                placeholder={'请输入验证码！'}
                 captchaTextRender={(timing, count) => {
                   if (timing) {
-                    return `${count} $"秒后重新获取'}`
+                    return `${count} ${textConst.login.getAfterSec}`
                   }
-                  return '获取验证码'
+                  return textConst.login.getSmsCode
                 }}
                 name="captcha"
                 rules={[
@@ -281,4 +281,5 @@ const Login: React.FC = () => {
     </div>
   )
 }
+
 export default Login

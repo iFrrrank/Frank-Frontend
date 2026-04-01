@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 import { Button, message, Modal, Tag, Typography } from 'antd'
 import SaveSmsChannelForm, {
   handleCreateSmsChannel,
@@ -133,7 +133,7 @@ const SmsChannelConfig: React.FC = () => {
         )
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
@@ -166,18 +166,18 @@ const SmsChannelConfig: React.FC = () => {
   // ===== 删除短信渠道 =====
   const handleDelete = (record: API.SystemSmsChannelRespVO) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteSmsChannel({ id: record.id })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -186,19 +186,19 @@ const SmsChannelConfig: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteSmsChannel({ id: Number(id) })))
-          message.success(textConstants.msg.batchDelSuccess)
+          message.success(textConst.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.batchDelError)
+          message.error(textConst.msg.batchDelError)
         }
       }
     })

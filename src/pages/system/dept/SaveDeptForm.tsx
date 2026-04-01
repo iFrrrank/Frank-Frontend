@@ -10,7 +10,7 @@ import {
 import { createDept, getSimpleDeptList, updateDept } from '@/api/system/dept'
 import { getSimpleUserList } from '@/api/system/user'
 import { handleTreeData } from '@/utils/tree'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateDept: (parentId?: number) => void
 export let handleEditDept: (record: any) => void
@@ -100,21 +100,18 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
 
           if (resp.code === 0) {
             message.success(
-              editingDept?.id ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+              editingDept?.id ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingDept?.id ? textConstants.msg.updateError : textConstants.msg.createError)
+              resp.msg || (editingDept?.id ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(
-            editingDept?.id ? textConstants.msg.updateError : textConstants.msg.createError
-          )
+          message.error(editingDept?.id ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

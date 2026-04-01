@@ -21,7 +21,7 @@ import ResetPwdForm, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
 import AssignRoleForm, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
 import ImportUserForm, { handleImportUser } from '@/pages/system/user/ImportUserForm'
 import SaveUserForm, { handleCreateUser, handleEditUser } from '@/pages/system/user/SaveUserForm'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const SystemUser: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -81,7 +81,7 @@ const SystemUser: React.FC = () => {
       }
     },
     {
-      title: textConstants.table.createTime,
+      title: textConst.table.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',
@@ -89,7 +89,7 @@ const SystemUser: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: textConstants.table.action,
+      title: textConst.table.action,
       valueType: 'option',
       align: 'center',
       width: 160,
@@ -99,30 +99,30 @@ const SystemUser: React.FC = () => {
           {
             key: 'delete',
             icon: <DeleteOutlined />,
-            label: textConstants.action.delete,
+            label: textConst.action.delete,
             onClick: () => handleDelete(record)
           },
           {
             key: 'resetPwd',
             icon: <KeyOutlined />,
-            label: textConstants.action.resetPwd,
+            label: textConst.action.resetPwd,
             onClick: () => handleResetPwd(record)
           },
           {
             key: 'assignRole',
             icon: <UserSwitchOutlined />,
-            label: textConstants.action.assignRole,
+            label: textConst.action.assignRole,
             onClick: () => handleAssignRole(record)
           }
         ]
         return (
           <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
             <a key="edit" onClick={() => handleEditUser(record)}>
-              <EditOutlined /> textConstants.action.update
+              <EditOutlined /> {textConst.action.update}
             </a>
             <Dropdown menu={{ items: moreMenuItems }} placement="bottomRight">
               <a onClick={(e) => e.preventDefault()}>
-                <DoubleRightOutlined /> textConstants.action.more
+                <DoubleRightOutlined /> {textConst.action.more}
               </a>
             </Dropdown>
           </div>
@@ -134,16 +134,16 @@ const SystemUser: React.FC = () => {
   // ===== 删除单个用户 =====
   const handleDelete = (record: API.SystemUserRespVO) => {
     Modal.confirm({
-      title: textConstants.msg.reminder,
+      title: textConst.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: textConstants.msg.delOneMsg,
+      content: textConst.msg.delOneMsg,
       onOk: async () => {
         try {
           await deleteUser({ id: record.id })
-          message.success('${textConstants.action.delete}${textConstants.common.success}')
+          message.success('${textConst.action.delete}${textConst.common.success}')
           actionRef.current?.reload()
         } catch {
-          message.error('${textConstants.action.delete}${textConstants.common.fail}')
+          message.error('${textConst.action.delete}${textConst.common.fail}')
         }
       }
     })
@@ -152,17 +152,17 @@ const SystemUser: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: textConstants.msg.reminder,
+      title: textConst.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: textConstants.msg.delDataMsg,
+      content: textConst.msg.delDataMsg,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteUser({ id: Number(id) })))
-          message.success(textConstants.msg.batchDelSuccess)
+          message.success(textConst.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.batchDelError)
+          message.error(textConst.msg.batchDelError)
         }
       }
     })
@@ -177,9 +177,9 @@ const SystemUser: React.FC = () => {
   // 导出用户
   const handleExport = () => {
     Modal.confirm({
-      title: textConstants.msg.reminder,
+      title: textConst.msg.reminder,
       icon: <ExclamationCircleOutlined />,
-      content: textConstants.msg.exportMsg,
+      content: textConst.msg.exportMsg,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -198,9 +198,9 @@ const SystemUser: React.FC = () => {
           link.download = '用户数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success(textConstants.msg.exportSuccess)
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error(textConstants.msg.exportError)
+          message.error(textConst.msg.exportError)
         }
       }
     })
@@ -286,7 +286,7 @@ const SystemUser: React.FC = () => {
           headerTitle="用户管理"
           toolBarRender={() => [
             <Button key="create" icon={<PlusOutlined />} onClick={handleCreateUser} type="primary">
-              textConstants.action.create
+              {textConst.action.create}
             </Button>,
             <Button
               key="batchDelete"
@@ -295,7 +295,7 @@ const SystemUser: React.FC = () => {
               disabled={selectedRowKeys.length === 0}
               onClick={handleBatchDelete}
             >
-              textConstants.action.batchDelete
+              {textConst.action.batchDelete}
             </Button>,
             <Button
               key="import"
@@ -303,7 +303,7 @@ const SystemUser: React.FC = () => {
               style={{ backgroundColor: '#52c41a', borderColor: '#52c41a', color: '#fff' }}
               onClick={handleImportUser}
             >
-              textConstants.action.import
+              {textConst.action.import}
             </Button>,
             <Button
               key="export"
@@ -311,7 +311,7 @@ const SystemUser: React.FC = () => {
               style={{ backgroundColor: '#faad14', borderColor: '#faad14', color: '#fff' }}
               onClick={handleExport}
             >
-              textConstants.action.export
+              {textConst.action.export}
             </Button>
           ]}
         />

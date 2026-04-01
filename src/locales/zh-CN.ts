@@ -1,13 +1,8 @@
-export const textConstants = {
+export const textConst = {
   common: {
-    startTimeText: '开始时间',
-    endTimeText: '结束时间',
-    login: '登录',
-    required: '该项为必填项',
     loginOut: '退出系统',
     document: '项目文档',
     profile: '个人中心',
-    loginOutMsg: '是否退出本系统？',
     back: '返回',
     ok: '确定',
     save: '保存',
@@ -41,7 +36,9 @@ export const textConstants = {
     index: '序号',
     status: '状态',
     createTime: '创建时间',
-    updateTime: '更新时间'
+    updateTime: '更新时间',
+    startTime: '开始时间',
+    endTime: '结束时间'
   },
   msg: {
     reminder: '温馨提示',
@@ -153,6 +150,8 @@ export const textConstants = {
     register: '注册',
     login: '登录',
     relogin: '重新登录',
+    accountLogin: '账户密码登录',
+    mobileLogin: '手机号登录',
     otherLogin: '其他登录方式',
     remember: '记住我',
     hasUser: '已有账号？去登录',
@@ -162,41 +161,52 @@ export const textConstants = {
     btnQRCode: '二维码登录',
     qrcode: '扫描二维码登录',
     rememberMe: '记住我',
-    otherSignIn: '其他登录方式',
     ssoFormTitle: '三方授权',
+    verify: '验证',
+    verification: '请完成安全验证',
+    slide: '向右滑动完成验证',
+    point: '请依次点击',
+    getAfterSec: '秒后重新获取',
     // message
+    loginSuccess: '登录成功',
+    loginError: '登录失败',
+    usernameOrPasswordError: '用户名或密码错误',
     getSmsCode: '获取验证码',
     SmsSendMsg: '验证码已发送',
-    loginSuccessTitle: '登录成功',
+    verifySuccess: '验证成功',
+    verifyError: '验证码错误',
     loginSuccessDesc: '欢迎回来',
+    diffPwd: '两次输入密码不一致',
+    loginOutMsg: '是否退出本系统？',
     resetPasswordSuccess: '重置密码成功',
     policy: '我同意xxx隐私政策',
     scanSign: `扫码后点击"确认"，即可完成登录`,
     policyPlaceholder: '勾选后才能注册',
-    diffPwd: '两次输入密码不一致',
     // formColumns
     username: '用户名',
     password: '密码',
     confirmPassword: '确认密码',
     mobile: '手机号码',
-    code: '验证码',
     email: '邮箱',
-    smsCode: '短信验证码',
-    // placeholder
+    smsCode: '短信验证码'
+  },
+  plh: {
     usernamePlaceholder: '请输入用户名',
     passwordPlaceholder: '请输入密码',
+    nicknamePlaceholder: '请输入用户昵称',
     confirmPasswordPlaceholder: '请输入确认密码',
-    smsPlaceholder: '请输入验证码',
-    mobilePlaceholder: '请输入手机号码'
+    smsCodePlaceholder: '请输入验证码',
+    mobilePlaceholder: '请输入手机号码',
+    emailPlaceholder: '请输入邮箱地址'
   },
-  captcha: {
-    verify: '验证',
-    verification: '请完成安全验证',
-    slide: '向右滑动完成验证',
-    point: '请依次点击',
-    code: '请输入验证码',
-    success: '验证成功',
-    fail: '验证失败'
+  rules: {
+    usernameRequired: '用户名是必填项！',
+    passwordRequired: '密码是必填项！',
+    confirmPasswordRequired: '确认密码是必填项！',
+    mobileRequired: '手机号码是必填项！',
+    emailRequired: '邮箱是必填项！',
+    smsCodeRequired: '短信验证码是必填项！',
+    nicknameRequired: '用户昵称是必填项！'
   },
   router: {
     login: '登录',
@@ -381,21 +391,13 @@ export const textConstants = {
       roles: '所属角色',
       sex: '性别',
       man: '男',
-      woman: '女',
-      createTime: '创建日期'
+      woman: '女'
     },
     info: {
       title: '基本信息',
       basicInfo: '基本设置',
       resetPwd: '密码设置',
       userSocial: '社交绑定'
-    },
-    rules: {
-      nickname: '请输入用户昵称',
-      mail: '请输入邮箱地址',
-      trueMail: '请输入正确的邮箱地址',
-      phone: '请输入正确的手机号码',
-      truePhone: '请输入正确的手机号码'
     },
     password: {
       oldPassword: '旧密码',
@@ -408,7 +410,7 @@ export const textConstants = {
       diffPwd: '两次输入密码不一致'
     }
   },
-  cropper: {
+  img: {
     selectImage: '选择图片',
     uploadSuccess: '上传成功',
     uploadFail: '上传失败',

@@ -8,7 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createNotifyTemplate, updateNotifyTemplate } from '@/api/system/notifyTemplate'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateNotifyTemplate: () => void
 export let handleEditNotifyTemplate: (record: API.SystemNotifyTemplateRespVO) => void
@@ -35,7 +35,7 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
 
   return (
     <ModalForm<API.SystemNotifyTemplateSaveReqVO>
-      title={editingTemplate ? textConstants.action.update : textConstants.action.create}
+      title={editingTemplate ? textConst.action.update : textConst.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -65,21 +65,18 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
           }
           if (resp.code === 0) {
             message.success(
-              editingTemplate ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+              editingTemplate ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingTemplate ? textConstants.msg.updateError : textConstants.msg.createError)
+              resp.msg || (editingTemplate ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(
-            editingTemplate ? textConstants.msg.updateError : textConstants.msg.createError
-          )
+          message.error(editingTemplate ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

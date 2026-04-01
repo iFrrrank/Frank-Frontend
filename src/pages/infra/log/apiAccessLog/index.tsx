@@ -4,7 +4,7 @@ import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { exportApiAccessLogExcel, getApiAccessLogPage } from '@/api/infra/apiAccessLog'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const ApiAccessLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -171,11 +171,11 @@ const ApiAccessLogPage: React.FC = () => {
 
   const handleExport = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有访问日志数据项?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -197,9 +197,9 @@ const ApiAccessLogPage: React.FC = () => {
           link.download = 'API访问日志.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success(textConstants.msg.exportSuccess)
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('textConstants.msg.exportError')
+          message.error('textConst.msg.exportError')
         }
       }
     })

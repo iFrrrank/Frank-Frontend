@@ -3,7 +3,7 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { useParams } from '@umijs/max'
 import { getSimpleDictTypeList } from '@/api/system/dictType'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 import SaveDictDataForm, { handleCreateDictData, handleEditDictData } from './SaveDictDataForm'
 import {
   DeleteOutlined,
@@ -125,7 +125,7 @@ const DictDataList: React.FC = () => {
       ellipsis: true
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
@@ -155,18 +155,18 @@ const DictDataList: React.FC = () => {
   // ===== 删除字典数据 =====
   const handleDelete = (record: any) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteDictData({ id: record.id })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -175,19 +175,19 @@ const DictDataList: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中数据?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteDictData({ id: Number(id) })))
-          message.success(textConstants.msg.batchDelSuccess)
+          message.success(textConst.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.batchDelError)
+          message.error(textConst.msg.batchDelError)
         }
       }
     })
@@ -196,11 +196,11 @@ const DictDataList: React.FC = () => {
   // ===== 导出字典数据 =====
   const handleExport = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有字典数据项?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -220,9 +220,9 @@ const DictDataList: React.FC = () => {
           link.download = '字典数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success(textConstants.msg.exportSuccess)
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('textConstants.msg.exportError')
+          message.error('textConst.msg.exportError')
         }
       }
     })

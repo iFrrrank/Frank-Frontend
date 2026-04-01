@@ -8,7 +8,7 @@ import SaveNotifyTemplateForm, {
   handleCreateNotifyTemplate,
   handleEditNotifyTemplate
 } from './SaveNotifyTemplateForm'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const NotifyTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -103,7 +103,7 @@ const NotifyTemplateConfig: React.FC = () => {
       ellipsis: true
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       width: 180,
@@ -137,18 +137,18 @@ const NotifyTemplateConfig: React.FC = () => {
   // ===== 删除 =====
   const handleDelete = (record: API.SystemNotifyTemplateRespVO) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除编号为"${record.id}"的数据项?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteNotifyTemplate({ id: record.id })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -157,19 +157,19 @@ const NotifyTemplateConfig: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否确认删除选中的 ${selectedRowKeys.length} 条数据?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteNotifyTemplate({ id: Number(id) })))
-          message.success(textConstants.msg.batchDelSuccess)
+          message.success(textConst.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.batchDelError)
+          message.error(textConst.msg.batchDelError)
         }
       }
     })

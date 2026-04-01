@@ -10,7 +10,7 @@ import {
 } from '@ant-design/pro-components'
 import { Editor } from '@/components/Editor'
 import { createMailTemplate, updateMailTemplate } from '@/api/system/mailTemplate'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateMailTemplate: () => void
 export let handleEditMailTemplate: (record: API.SystemMailTemplateRespVO) => void
@@ -40,7 +40,7 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
 
   return (
     <ModalForm<API.SystemMailTemplateSaveReqVO>
-      title={editingMailTemplate ? textConstants.action.update : textConstants.action.create}
+      title={editingMailTemplate ? textConst.action.update : textConst.action.create}
       width={900}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -69,20 +69,18 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
 
           if (resp.code === 0) {
             message.success(
-              editingMailTemplate
-                ? textConstants.msg.updateSuccess
-                : textConstants.msg.createSuccess
+              editingMailTemplate ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
-              resp.msg || (editingMailTemplate ? textConstants.msg.updateError : '新增失败')
+              resp.msg || (editingMailTemplate ? textConst.msg.updateError : '新增失败')
             )
             return false
           }
         } catch {
-          message.error(editingMailTemplate ? textConstants.msg.updateError : '新增失败')
+          message.error(editingMailTemplate ? textConst.msg.updateError : '新增失败')
           return false
         }
       }}

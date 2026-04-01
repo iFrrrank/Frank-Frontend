@@ -3,7 +3,7 @@ import type { TreeDataNode } from 'antd'
 import { Input, message, Tree } from 'antd'
 import { getSimpleDeptList } from '@/api/system/dept'
 import { buildTreeData, getParentKey } from '@/utils/tree'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const { Search } = Input
 

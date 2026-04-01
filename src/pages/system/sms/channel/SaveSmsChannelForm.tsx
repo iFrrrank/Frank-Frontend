@@ -8,7 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createSmsChannel, updateSmsChannel } from '@/api/system/smsChannel'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateSmsChannel: () => void
 export let handleEditSmsChannel: (record: API.SystemSmsChannelRespVO) => void
@@ -35,7 +35,7 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
 
   return (
     <ModalForm<API.SystemSmsChannelSaveReqVO>
-      title={editingSmsChannel ? textConstants.action.update : textConstants.action.create}
+      title={editingSmsChannel ? textConst.action.update : textConst.action.create}
       width={700}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -69,21 +69,19 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
           }
           if (resp.code === 0) {
             message.success(
-              editingSmsChannel ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+              editingSmsChannel ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
               resp.msg ||
-                (editingSmsChannel ? textConstants.msg.updateError : textConstants.msg.createError)
+                (editingSmsChannel ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(
-            editingSmsChannel ? textConstants.msg.updateError : textConstants.msg.createError
-          )
+          message.error(editingSmsChannel ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

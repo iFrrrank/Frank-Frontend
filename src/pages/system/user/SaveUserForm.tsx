@@ -10,7 +10,7 @@ import {
 } from '@ant-design/pro-components'
 import { createUser, getUser, updateUser } from '@/api/system/user'
 import { getSimplePostList } from '@/api/system/post'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 import { getSimpleDeptList } from '@/api/system/dept'
 import { buildTreeData } from '@/utils/tree'
 
@@ -89,20 +89,17 @@ const SaveUserForm: React.FC = () => {
             resp = await createUser(values)
           }
           if (resp.code === 0) {
-            message.success(
-              editingUser ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
-            )
+            message.success(editingUser ? textConst.msg.updateSuccess : textConst.msg.createSuccess)
             actionRef.current?.reload()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingUser ? textConstants.msg.updateError : textConstants.msg.createError)
+              resp.msg || (editingUser ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(editingUser ? textConstants.msg.updateError : textConstants.msg.createError)
+          message.error(editingUser ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

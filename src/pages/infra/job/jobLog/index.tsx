@@ -8,7 +8,7 @@ import {
 } from '@ant-design/pro-components'
 import { useLocation } from '@umijs/max'
 import { exportJobLog, getJobLogPage, JobLogVO } from '@/api/infra/jobLog'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 import { DownloadOutlined } from '@ant-design/icons'
 import JobLogDetail from '@/pages/infra/job/jobLog/JobLogDetail'
 
@@ -57,9 +57,9 @@ const JobLogPage: React.FC = () => {
       link.download = '定时任务日志.xlsx'
       link.click()
       window.URL.revokeObjectURL(url)
-      message.success(textConstants.msg.exportSuccess)
+      message.success(textConst.msg.exportSuccess)
     } catch {
-      message.error('textConstants.msg.exportError')
+      message.error('textConst.msg.exportError')
     }
   }
 

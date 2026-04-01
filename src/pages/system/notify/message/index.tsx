@@ -3,7 +3,7 @@ import { Badge, Button, Descriptions, Modal, Tag, Typography } from 'antd'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { getNotifyMessage, getNotifyMessagePage } from '@/api/system/notifyMessage'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const NotifyMessage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -158,7 +158,7 @@ const NotifyMessage: React.FC = () => {
       render: (_, record) => <span>{record.readTime || '-'}</span>
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       width: 180,

@@ -8,7 +8,7 @@ import {
   getApiErrorLogPage,
   updateApiErrorLogProcess
 } from '@/api/infra/apiErrorLog'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const ApiErrorLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -19,11 +19,11 @@ const ApiErrorLogPage: React.FC = () => {
 
   const handleUpdateStatus = (id: number, processStatus: number, statusText: string) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `确认标记为${statusText}？`,
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const resp = await updateApiErrorLogProcess({ id, processStatus })
@@ -31,11 +31,11 @@ const ApiErrorLogPage: React.FC = () => {
             message.success(`已标记为${statusText}`)
             actionRef.current?.reload()
           } else {
-            message.error(textConstants.error.operationFail)
+            message.error(textConst.error.operationFail)
           }
         } catch (e) {
           console.error(e)
-          message.error(textConstants.error.operationFail)
+          message.error(textConst.error.operationFail)
         }
       }
     })
@@ -197,11 +197,11 @@ const ApiErrorLogPage: React.FC = () => {
 
   const handleExport = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有API错误日志?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -223,9 +223,9 @@ const ApiErrorLogPage: React.FC = () => {
           link.download = 'API错误日志.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success(textConstants.msg.exportSuccess)
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('textConstants.msg.exportError')
+          message.error('textConst.msg.exportError')
         }
       }
     })

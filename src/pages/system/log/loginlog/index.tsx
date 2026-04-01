@@ -4,7 +4,7 @@ import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { exportLoginLog, getLoginLogPage } from '@/api/system/loginLog'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const LoginLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -134,11 +134,11 @@ const LoginLogPage: React.FC = () => {
 
   const handleExport = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有登录日志数据项?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -160,10 +160,10 @@ const LoginLogPage: React.FC = () => {
           link.download = '登录日志数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success(textConstants.msg.exportSuccess)
+          message.success(textConst.msg.exportSuccess)
         } catch (error) {
           console.error(error)
-          message.error('textConstants.msg.exportError')
+          message.error('textConst.msg.exportError')
         }
       }
     })

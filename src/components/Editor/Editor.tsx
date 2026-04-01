@@ -3,7 +3,7 @@ import '@wangeditor/editor/dist/css/style.css'
 import { Editor, Toolbar } from '@wangeditor/editor-for-react'
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
 import { message } from 'antd'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export interface EditorProps {
   id?: string
@@ -55,7 +55,7 @@ const WangEditor: React.FC<EditorProps> = ({
             if (res.code === 0) {
               insertFn(res.data, 'image', res.data)
             } else {
-              message.error(res.msg || textConstants.cropper.uploadFail)
+              message.error(res.msg || textConst.cropper.uploadFail)
             }
           }
         },
@@ -73,7 +73,7 @@ const WangEditor: React.FC<EditorProps> = ({
             if (res.code === 0) {
               insertFn(res.data, 'video', res.data)
             } else {
-              message.error(res.msg || textConstants.cropper.uploadFail)
+              message.error(res.msg || textConst.cropper.uploadFail)
             }
           }
         }

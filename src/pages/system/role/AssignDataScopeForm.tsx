@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { message, Space } from 'antd'
 import { ModalForm, ProFormSelect } from '@ant-design/pro-components'
 import { assignRoleDataScope } from '@/api/system/permission'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleOpenDataScope: (record: API.SystemRoleRespVO) => void
 

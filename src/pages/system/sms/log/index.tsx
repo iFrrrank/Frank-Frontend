@@ -5,7 +5,7 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { exportSmsLogExcel, getSmsLogPage } from '@/api/system/smsLog'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const SmsLogConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -56,7 +56,7 @@ const SmsLogConfig: React.FC = () => {
       width: 80
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       hideInSearch: true,
@@ -173,11 +173,11 @@ const SmsLogConfig: React.FC = () => {
   // ===== 导出短信日志 =====
   const handleExport = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有短信日志数据项?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -205,9 +205,9 @@ const SmsLogConfig: React.FC = () => {
           link.download = '短信日志数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success(textConstants.msg.exportSuccess)
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('textConstants.msg.exportError')
+          message.error('textConst.msg.exportError')
         }
       }
     })

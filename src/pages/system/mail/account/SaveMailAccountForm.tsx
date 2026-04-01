@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import { ModalForm, ProFormDigit, ProFormRadio, ProFormText } from '@ant-design/pro-components'
 import { createMailAccount, updateMailAccount } from '@/api/system/mailAccount'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateMailAccount: () => void
 export let handleEditMailAccount: (record: API.SystemMailAccountRespVO) => void
@@ -29,7 +29,7 @@ const SaveMailAccountForm: React.FC<SaveMailAccountModalProps> = ({ onSuccess })
 
   return (
     <ModalForm<API.SystemMailAccountSaveReqVO>
-      title={editingMailAccount ? textConstants.action.update : textConstants.action.create}
+      title={editingMailAccount ? textConst.action.update : textConst.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -65,18 +65,16 @@ const SaveMailAccountForm: React.FC<SaveMailAccountModalProps> = ({ onSuccess })
 
           if (resp.code === 0) {
             message.success(
-              editingMailAccount ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+              editingMailAccount ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
-            message.error(
-              resp.msg || (editingMailAccount ? textConstants.msg.updateError : '新增失败')
-            )
+            message.error(resp.msg || (editingMailAccount ? textConst.msg.updateError : '新增失败'))
             return false
           }
         } catch {
-          message.error(editingMailAccount ? textConstants.msg.updateError : '新增失败')
+          message.error(editingMailAccount ? textConst.msg.updateError : '新增失败')
           return false
         }
       }}

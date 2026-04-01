@@ -9,7 +9,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createDictData, updateDictData } from '@/api/system/dictData'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateDictData: (dictType: string) => void
 export let handleEditDictData: (record: any) => void
@@ -34,7 +34,7 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<any>
-      title={editingDictData?.id ? textConstants.action.update : textConstants.action.create}
+      title={editingDictData?.id ? textConst.action.update : textConst.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -72,25 +72,19 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
           }
           if (resp.code === 0) {
             message.success(
-              editingDictData?.id
-                ? textConstants.msg.updateSuccess
-                : textConstants.msg.createSuccess
+              editingDictData?.id ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
               resp.msg ||
-                (editingDictData?.id
-                  ? textConstants.msg.updateError
-                  : textConstants.msg.createError)
+                (editingDictData?.id ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(
-            editingDictData?.id ? textConstants.msg.updateError : textConstants.msg.createError
-          )
+          message.error(editingDictData?.id ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

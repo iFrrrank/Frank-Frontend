@@ -3,7 +3,7 @@ import { message } from 'antd'
 import { ModalForm, ProForm, ProFormTextArea } from '@ant-design/pro-components'
 import { Editor } from '@/components/Editor'
 import { sendMail } from '@/api/system/mailTemplate'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleTestMailTemplate: (record: API.SystemMailTemplateRespVO) => void
 

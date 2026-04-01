@@ -10,7 +10,7 @@ import {
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteFile, deleteFileList, getFilePage, uploadFile } from '@/api/infra/fileList'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const { Dragger } = Upload
 
@@ -45,24 +45,24 @@ const FileListPage: React.FC = () => {
     navigator.clipboard
       .writeText(url)
       .then(() => message.success('链接已复制到剪贴板'))
-      .catch(() => message.error(textConstants.msg.copyError))
+      .catch(() => message.error(textConst.msg.copyError))
   }
 
   /** 删除单条 */
   const handleDelete = (id: number) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认删除该文件？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteFile({ id })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -71,19 +71,19 @@ const FileListPage: React.FC = () => {
   /** 批量删除 */
   const handleDeleteBatch = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否删除所选中的文件？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteFileList({ ids: selectedRowKeys as number[] })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reloadAndRest?.()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -145,7 +145,7 @@ const FileListPage: React.FC = () => {
       hideInTable: true
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       valueType: 'dateRange',

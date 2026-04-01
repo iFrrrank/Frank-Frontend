@@ -9,7 +9,7 @@ import {
   ProFormTreeSelect
 } from '@ant-design/pro-components'
 import { createMenu, getMenuList, updateMenu } from '@/api/system/menu'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateMenu: (parentId?: number) => void
 export let handleEditMenu: (record: any) => void
@@ -93,21 +93,18 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
 
           if (resp.code === 0) {
             message.success(
-              editingMenu?.id ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+              editingMenu?.id ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingMenu?.id ? textConstants.msg.updateError : textConstants.msg.createError)
+              resp.msg || (editingMenu?.id ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(
-            editingMenu?.id ? textConstants.msg.updateError : textConstants.msg.createError
-          )
+          message.error(editingMenu?.id ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

@@ -1,15 +1,17 @@
 import { history } from '@umijs/max'
 import { Button, Card, Result } from 'antd'
 import React from 'react'
+import { textConst } from '@/locales/zh-CN'
+
 const NoFoundPage: React.FC = () => (
   <Card variant="borderless">
     <Result
       status="404"
       title="404"
-      subTitle={'抱歉，您访问的页面不存在。'}
+      subTitle={textConst.error.pageError}
       extra={
         <Button type="primary" onClick={() => history.push('/')}>
-          {'返回首页'}
+          {textConst.error.backHome}
         </Button>
       }
     />

@@ -4,7 +4,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteAccessToken, getAccessTokenPage } from '@/api/system/oAuth2Token'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 /** 用户类型枚举 */
 const USER_TYPE_MAP: Record<number, { text: string; color: string }> = {
@@ -18,7 +18,7 @@ const TokenPage: React.FC = () => {
   // ===== 强退（删除令牌） =====
   const handleForceLogout = (record: API.SystemOAuth2AccessTokenRespVO) => {
     Modal.confirm({
-      title: textConstants.msg.reminder,
+      title: textConst.msg.reminder,
       icon: <ExclamationCircleOutlined />,
       content: '确定要强退用户 ID 为 ${record.userId} 的令牌吗？',
       onOk: async () => {
@@ -101,7 +101,7 @@ const TokenPage: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',

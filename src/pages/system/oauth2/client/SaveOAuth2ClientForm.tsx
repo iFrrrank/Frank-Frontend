@@ -8,7 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createOAuth2Client, getOAuth2Client, updateOAuth2Client } from '@/api/system/oAuth2Client'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateOAuth2Client: () => void
 export let handleEditOAuth2Client: (record: API.SystemOAuth2ClientRespVO) => void
@@ -112,21 +112,18 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
           }
           if (resp.code === 0) {
             message.success(
-              editingClient ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+              editingClient ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingClient ? textConstants.msg.updateError : textConstants.msg.createError)
+              resp.msg || (editingClient ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(
-            editingClient ? textConstants.msg.updateError : textConstants.msg.createError
-          )
+          message.error(editingClient ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

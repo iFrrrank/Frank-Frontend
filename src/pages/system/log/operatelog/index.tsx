@@ -5,7 +5,7 @@ import {
   type ProFormInstance,
   ProTable
 } from '@ant-design/pro-components'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 import { Button, Drawer, message, Modal, Space, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import { exportOperateLog, pageOperateLog } from '@/api/system/operateLog'
@@ -122,11 +122,11 @@ const OperateLogConfig: React.FC = () => {
   // ===== 导出操作日志 =====
   const handleExport = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认导出所有操作日志数据项?',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           const formValues = formRef.current?.getFieldsValue?.() || {}
@@ -154,9 +154,9 @@ const OperateLogConfig: React.FC = () => {
           link.download = '操作日志数据.xlsx'
           link.click()
           window.URL.revokeObjectURL(url)
-          message.success(textConstants.msg.exportSuccess)
+          message.success(textConst.msg.exportSuccess)
         } catch {
-          message.error('textConstants.msg.exportError')
+          message.error('textConst.msg.exportError')
         }
       }
     })

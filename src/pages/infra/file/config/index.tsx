@@ -9,7 +9,7 @@ import {
   testFileConfig,
   updateFileConfigMaster
 } from '@/api/infra/fileConfig'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 import FileConfigForm, { STORAGE_OPTIONS } from '@/pages/infra/file/config/FileConfigForm'
 
 const FileConfigPage: React.FC = () => {
@@ -30,18 +30,18 @@ const FileConfigPage: React.FC = () => {
 
   const handleDelete = (id: number) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认删除该数据？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteFileConfig({ id })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -49,19 +49,19 @@ const FileConfigPage: React.FC = () => {
 
   const handleDeleteBatch = () => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '是否删除所选中数据？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteFileConfigList({ ids: selectedRowKeys as number[] })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reloadAndRest?.()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -69,18 +69,18 @@ const FileConfigPage: React.FC = () => {
 
   const handleMaster = (id: number) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: `是否确认修改配置 ID 为 ${id} 的数据项为主配置？`,
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await updateFileConfigMaster({ id })
           message.success('操作成功')
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.error.operationFail)
+          message.error(textConst.error.operationFail)
         }
       }
     })
@@ -93,8 +93,8 @@ const FileConfigPage: React.FC = () => {
         Modal.confirm({
           title: '测试上传成功',
           content: '是否要访问该文件？',
-          okText: textConstants.common.ok,
-          cancelText: textConstants.common.cancel,
+          okText: textConst.common.ok,
+          cancelText: textConst.common.cancel,
           onOk: () => {
             window.open(resp.data, '_blank')
           }
@@ -163,7 +163,7 @@ const FileConfigPage: React.FC = () => {
       }
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       valueType: 'dateRange',
@@ -171,7 +171,7 @@ const FileConfigPage: React.FC = () => {
       fieldProps: { placeholder: ['开始日期', '结束日期'] }
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       align: 'center',
       hideInSearch: true,

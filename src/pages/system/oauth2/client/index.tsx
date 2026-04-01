@@ -16,7 +16,7 @@ import SaveOAuth2ClientForm, {
   handleCreateOAuth2Client,
   handleEditOAuth2Client
 } from './SaveOAuth2ClientForm'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 const App_: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -93,7 +93,7 @@ const App_: React.FC = () => {
       width: 120,
       valueType: 'text',
       hideInSearch: true,
-      render: (text) => (text ? '${text}秒' : '-')
+      render: (text) => (text ? `${text}秒` : '-')
     },
     {
       title: '刷新令牌有效期',
@@ -102,10 +102,10 @@ const App_: React.FC = () => {
       width: 120,
       valueType: 'text',
       hideInSearch: true,
-      render: (text) => (text ? '${text}秒' : '-')
+      render: (text) => (text ? `${text}秒` : '-')
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',
@@ -152,16 +152,16 @@ const App_: React.FC = () => {
   // ===== 删除单个客户端 =====
   const handleDelete = (record: API.SystemOAuth2ClientRespVO) => {
     Modal.confirm({
-      title: textConstants.msg.reminder,
+      title: textConst.msg.reminder,
       icon: <ExclamationCircleOutlined />,
       content: '确定要删除应用"${record.name}"吗？',
       onOk: async () => {
         try {
           await deleteOAuth2Client({ id: record.id })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -170,17 +170,17 @@ const App_: React.FC = () => {
   // ===== 批量删除 =====
   const handleBatchDelete = () => {
     Modal.confirm({
-      title: textConstants.msg.reminder,
+      title: textConst.msg.reminder,
       icon: <ExclamationCircleOutlined />,
       content: '确定要删除选中的 ${selectedRowKeys.length} 个应用吗？',
       onOk: async () => {
         try {
           await Promise.all(selectedRowKeys.map((id) => deleteOAuth2Client({ id: Number(id) })))
-          message.success(textConstants.msg.batchDelSuccess)
+          message.success(textConst.msg.batchDelSuccess)
           setSelectedRowKeys([])
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.batchDelError)
+          message.error(textConst.msg.batchDelError)
         }
       }
     })
@@ -200,10 +200,10 @@ const App_: React.FC = () => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        message.success(textConstants.msg.copySuccess)
+        message.success(textConst.msg.copySuccess)
       })
       .catch(() => {
-        message.error(textConstants.msg.copyError)
+        message.error(textConst.msg.copyError)
       })
   }
 

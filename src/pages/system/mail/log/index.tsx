@@ -7,7 +7,7 @@ import {
   ProTable
 } from '@ant-design/pro-components'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 import { getMailLog, getMailLogPage } from '@/api/system/mailLog'
 
 const MailLog: React.FC = () => {

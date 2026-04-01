@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, message } from 'antd'
 import { ModalForm, ProFormInstance, ProFormSelect, ProFormText } from '@ant-design/pro-components'
 import { createFileConfig, getFileConfig, updateFileConfig } from '@/api/infra/fileConfig'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 interface FileConfigFormProps {
   visible: boolean
@@ -25,7 +25,7 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
 
   return (
     <ModalForm
-      title={isUpdate ? textConstants.action.update : textConstants.action.create}
+      title={isUpdate ? textConst.action.update : textConst.action.create}
       open={visible}
       onOpenChange={setVisible}
       formRef={formRef}
@@ -70,15 +70,15 @@ const FileConfigForm: React.FC<FileConfigFormProps> = ({ visible, setVisible, on
         try {
           if (isUpdate) {
             await updateFileConfig({ id, ...values } as any)
-            message.success(textConstants.msg.updateSuccess)
+            message.success(textConst.msg.updateSuccess)
           } else {
             await createFileConfig(values as any)
-            message.success(textConstants.msg.createSuccess)
+            message.success(textConst.msg.createSuccess)
           }
           onSuccess()
           return true
         } catch (e) {
-          message.error(textConstants.error.operationFail)
+          message.error(textConst.error.operationFail)
           return false
         }
       }}

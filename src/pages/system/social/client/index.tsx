@@ -13,7 +13,7 @@ import SaveSocialClientForm, {
   handleCreateSocialClient,
   handleEditSocialClient
 } from './SaveSocialClientForm'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {
@@ -116,7 +116,7 @@ const SocialClientPage: React.FC = () => {
       }
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTime',
       align: 'center',
@@ -157,16 +157,16 @@ const SocialClientPage: React.FC = () => {
   // ===== 删除 =====
   const handleDelete = (record: API.SystemSocialClientRespVO) => {
     Modal.confirm({
-      title: textConstants.msg.reminder,
+      title: textConst.msg.reminder,
       icon: <ExclamationCircleOutlined />,
       content: '确定要删除应用"${record.name}"吗？',
       onOk: async () => {
         try {
           await deleteSocialClient({ id: record.id })
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })

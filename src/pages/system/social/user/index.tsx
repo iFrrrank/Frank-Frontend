@@ -3,7 +3,7 @@ import { Col, Image, message, Row } from 'antd'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { getSocialUserPage } from '@/api/system/socialUser'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {
@@ -75,7 +75,7 @@ const SocialUserPage: React.FC = () => {
         )
     },
     {
-      title: textConstants.columns.createTime,
+      title: textConst.columns.createTime,
       dataIndex: 'createTime',
       valueType: 'dateTimeRange',
       align: 'center',

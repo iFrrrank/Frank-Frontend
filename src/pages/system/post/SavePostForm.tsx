@@ -8,7 +8,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createPost, updatePost } from '@/api/system/post'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreatePost: () => void
 export let handleEditPost: (record: API.SystemPostRespVO) => void
@@ -33,7 +33,7 @@ const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemPostSaveReqVO>
-      title={editingPost ? textConstants.action.update : textConstants.action.create}
+      title={editingPost ? textConst.action.update : textConst.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -66,20 +66,17 @@ const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
             resp = await createPost(values as any)
           }
           if (resp.code === 0) {
-            message.success(
-              editingPost ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
-            )
+            message.success(editingPost ? textConst.msg.updateSuccess : textConst.msg.createSuccess)
             onSuccess()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingPost ? textConstants.msg.updateError : textConstants.msg.createError)
+              resp.msg || (editingPost ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(editingPost ? textConstants.msg.updateError : textConstants.msg.createError)
+          message.error(editingPost ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

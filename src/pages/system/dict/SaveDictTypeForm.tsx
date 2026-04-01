@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { message } from 'antd'
 import { ModalForm, ProFormRadio, ProFormText, ProFormTextArea } from '@ant-design/pro-components'
 import { createDictType, updateDictType } from '@/api/system/dictType'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateDictType: () => void
 export let handleEditDictType: (record: API.SystemDictTypeRespVO) => void
@@ -27,7 +27,7 @@ const SaveDictTypeForm: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemDictTypeSaveReqVO>
-      title={editingDictType ? textConstants.action.update : textConstants.action.create}
+      title={editingDictType ? textConst.action.update : textConst.action.create}
       width={600}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -61,21 +61,18 @@ const SaveDictTypeForm: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
           }
           if (resp.code === 0) {
             message.success(
-              editingDictType ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+              editingDictType ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingDictType ? textConstants.msg.updateError : textConstants.msg.createError)
+              resp.msg || (editingDictType ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(
-            editingDictType ? textConstants.msg.updateError : textConstants.msg.createError
-          )
+          message.error(editingDictType ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

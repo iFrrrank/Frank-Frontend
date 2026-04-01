@@ -9,7 +9,7 @@ import {
 } from '@ant-design/pro-components'
 import { Editor } from '@/components/Editor'
 import { createNotice, updateNotice } from '@/api/system/notice'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleCreateNotice: () => void
 export let handleEditNotice: (record: API.SystemNoticeRespVO) => void
@@ -34,7 +34,7 @@ const SaveNoticeForm: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
 
   return (
     <ModalForm<API.SystemNoticeSaveReqVO>
-      title={editingNotice ? textConstants.action.update : textConstants.action.create}
+      title={editingNotice ? textConst.action.update : textConst.action.create}
       width={900}
       open={modalVisible}
       onOpenChange={(visible) => {
@@ -60,21 +60,18 @@ const SaveNoticeForm: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
           }
           if (resp.code === 0) {
             message.success(
-              editingNotice ? textConstants.msg.updateSuccess : textConstants.msg.createSuccess
+              editingNotice ? textConst.msg.updateSuccess : textConst.msg.createSuccess
             )
             onSuccess()
             return true
           } else {
             message.error(
-              resp.msg ||
-                (editingNotice ? textConstants.msg.updateError : textConstants.msg.createError)
+              resp.msg || (editingNotice ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }
         } catch {
-          message.error(
-            editingNotice ? textConstants.msg.updateError : textConstants.msg.createError
-          )
+          message.error(editingNotice ? textConst.msg.updateError : textConst.msg.createError)
           return false
         }
       }}

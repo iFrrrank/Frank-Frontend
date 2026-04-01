@@ -3,7 +3,7 @@ import { message } from 'antd'
 import { ModalForm, ProFormSelect, ProFormText } from '@ant-design/pro-components'
 import { assignUserRole, listAdminRoles } from '@/api/system/permission'
 import { getSimpleRoleList } from '@/api/system/role'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export let handleAssignRole: (record: API.SystemUserRespVO) => void
 
@@ -80,8 +80,8 @@ const AssignRoleForm: React.FC = () => {
       }}
       submitter={{
         searchConfig: {
-          submitText: textConstants.common.ok,
-          resetText: textConstants.common.cancel
+          submitText: textConst.common.ok,
+          resetText: textConst.common.cancel
         },
         submitButtonProps: { type: 'primary' }
       }}

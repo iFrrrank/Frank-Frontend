@@ -21,7 +21,7 @@ import {
 } from '@/api/infra/job'
 import JobForm from './JobForm'
 import JobDetail from './JobDetail'
-import { textConstants } from '@/locales/zh-CN'
+import { textConst } from '@/locales/zh-CN'
 
 export const JOB_STATUS_OPTIONS = [
   { label: '正常', value: 0 },
@@ -50,18 +50,18 @@ const JobPage: React.FC = () => {
 
   const handleDelete = (id: number) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认删除该定时任务？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await deleteJob(id)
-          message.success(textConstants.msg.delSuccess)
+          message.success(textConst.msg.delSuccess)
           actionRef.current?.reload()
         } catch {
-          message.error(textConstants.msg.delError)
+          message.error(textConst.msg.delError)
         }
       }
     })
@@ -80,11 +80,11 @@ const JobPage: React.FC = () => {
 
   const handleTrigger = (id: number) => {
     Modal.confirm({
-      title: textConstants.msg.confirmTitle,
+      title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
       content: '确认要立即执行一次该任务吗？',
-      okText: textConstants.common.ok,
-      cancelText: textConstants.common.cancel,
+      okText: textConst.common.ok,
+      cancelText: textConst.common.cancel,
       onOk: async () => {
         try {
           await triggerJob(id)
@@ -143,9 +143,9 @@ const JobPage: React.FC = () => {
       link.download = '定时任务.xlsx'
       link.click()
       window.URL.revokeObjectURL(url)
-      message.success(textConstants.msg.exportSuccess)
+      message.success(textConst.msg.exportSuccess)
     } catch {
-      message.error('textConstants.msg.exportError')
+      message.error('textConst.msg.exportError')
     }
   }
 
