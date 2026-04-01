@@ -22,6 +22,8 @@ import AssignRoleForm, { handleAssignRole } from '@/pages/system/user/AssignRole
 import ImportUserForm, { handleImportUser } from '@/pages/system/user/ImportUserForm'
 import SaveUserForm, { handleCreateUser, handleEditUser } from '@/pages/system/user/SaveUserForm'
 import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 const SystemUser: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -100,7 +102,7 @@ const SystemUser: React.FC = () => {
             key: 'delete',
             icon: <DeleteOutlined />,
             label: textConst.action.delete,
-            onClick: () => handleDelete(record)
+            onClick: () => handleDelete(record, deleteUser, () => actionRef.current?.reload())
           },
           {
             key: 'resetPwd',
@@ -130,43 +132,6 @@ const SystemUser: React.FC = () => {
       }
     }
   ]
-
-  // ===== 删除单个用户 =====
-  const handleDelete = (record: API.SystemUserRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.reminder,
-      icon: <ExclamationCircleOutlined />,
-      content: textConst.msg.delOneMsg,
-      onOk: async () => {
-        try {
-          await deleteUser({ id: record.id })
-          message.success('${textConst.action.delete}${textConst.common.success}')
-          actionRef.current?.reload()
-        } catch {
-          message.error('${textConst.action.delete}${textConst.common.fail}')
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.reminder,
-      icon: <ExclamationCircleOutlined />,
-      content: textConst.msg.delDataMsg,
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteUser({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
-        }
-      }
-    })
-  }
 
   // 部门选中回调
   const handleDeptSelect = (deptId: number | undefined) => {
@@ -293,7 +258,14 @@ const SystemUser: React.FC = () => {
               icon={<DeleteOutlined />}
               danger
               disabled={selectedRowKeys.length === 0}
-              onClick={handleBatchDelete}
+              onClick={() =>
+                handleBatchDelete(
+                  selectedRowKeys,
+                  deleteUser,
+                  () => setSelectedRowKeys([]),
+                  () => actionRef.current?.reload()
+                )
+              }
             >
               {textConst.action.batchDelete}
             </Button>,

@@ -13,6 +13,8 @@ import {
 } from '@ant-design/icons'
 import { deleteDictData, export3, getDictTypePage } from '@/api/system/dictData'
 import { Button, message, Modal } from 'antd'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 const DictDataList: React.FC = () => {
   const params = useParams<{ dictType: string }>()
@@ -47,7 +49,7 @@ const DictDataList: React.FC = () => {
   // ===== 数据列定义 =====
   const columns: ProColumns<any>[] = [
     {
-      title: '字典名称', // 搜索字段 (字典类型下拉)
+      title: '字典名称',
       dataIndex: 'dictType',
       hideInTable: true,
       valueType: 'select',
@@ -144,54 +146,17 @@ const DictDataList: React.FC = () => {
           <a key="edit" onClick={() => handleEditDictData(record)}>
             修改
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+          <a
+            key="delete"
+            style={{ color: '#ff4d4f' }}
+            onClick={() => handleDelete(record, deleteDictData, () => actionRef.current?.reload())}
+          >
             删除
           </a>
         </div>
       )
     }
   ]
-
-  // ===== 删除字典数据 =====
-  const handleDelete = (record: any) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteDictData({ id: record.id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteDictData({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
-        }
-      }
-    })
-  }
 
   // ===== 导出字典数据 =====
   const handleExport = () => {
@@ -295,7 +260,14 @@ const DictDataList: React.FC = () => {
             icon={<DeleteOutlined />}
             danger
             disabled={selectedRowKeys.length === 0}
-            onClick={handleBatchDelete}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteDictData,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
             style={
               selectedRowKeys.length > 0
                 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }

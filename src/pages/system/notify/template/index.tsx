@@ -9,6 +9,8 @@ import SaveNotifyTemplateForm, {
   handleEditNotifyTemplate
 } from './SaveNotifyTemplateForm'
 import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 const NotifyTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -126,54 +128,19 @@ const NotifyTemplateConfig: React.FC = () => {
           <a key="edit" onClick={() => handleEditNotifyTemplate(record)}>
             修改
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+          <a
+            key="delete"
+            style={{ color: '#ff4d4f' }}
+            onClick={() =>
+              handleDelete(record, deleteNotifyTemplate, () => actionRef.current?.reload())
+            }
+          >
             删除
           </a>
         </Space>
       )
     }
   ]
-
-  // ===== 删除 =====
-  const handleDelete = (record: API.SystemNotifyTemplateRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除编号为"${record.id}"的数据项?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteNotifyTemplate({ id: record.id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中的 ${selectedRowKeys.length} 条数据?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteNotifyTemplate({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
-        }
-      }
-    })
-  }
 
   return (
     <>
@@ -244,7 +211,14 @@ const NotifyTemplateConfig: React.FC = () => {
                 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
                 : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
             }
-            onClick={handleBatchDelete}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteNotifyTemplate,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
           >
             批量删除
           </Button>

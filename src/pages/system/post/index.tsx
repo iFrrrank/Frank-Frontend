@@ -12,6 +12,8 @@ import { deletePost, export1, getPostPage } from '@/api/system/post'
 
 import SavePostForm, { handleCreatePost, handleEditPost } from './SavePostForm'
 import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 const PostManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -103,55 +105,17 @@ const PostManagement: React.FC = () => {
           <a key="edit" onClick={() => handleEditPost(record)}>
             修改
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+          <a
+            key="delete"
+            style={{ color: '#ff4d4f' }}
+            onClick={() => handleDelete(record, deletePost, () => actionRef.current?.reload())}
+          >
             删除
           </a>
         </div>
       )
     }
   ]
-
-  // ===== 删除岗位 =====
-  const handleDelete = (record: API.SystemPostRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deletePost({ id: record.id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除所选中数据?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          // 假设后端支持批量或者前端循环请求
-          await Promise.all(selectedRowKeys.map((id) => deletePost({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
-        }
-      }
-    })
-  }
 
   // ===== 导出岗位 =====
   const handleExport = () => {
@@ -253,7 +217,14 @@ const PostManagement: React.FC = () => {
             icon={<DeleteOutlined />}
             danger
             disabled={selectedRowKeys.length === 0}
-            onClick={handleBatchDelete}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deletePost,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
             style={
               selectedRowKeys.length > 0
                 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }

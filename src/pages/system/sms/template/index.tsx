@@ -19,6 +19,8 @@ import SaveSmsTemplateForm, {
 } from './SaveSmsTemplateForm'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
 import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 const SmsTemplateConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -214,54 +216,19 @@ const SmsTemplateConfig: React.FC = () => {
           <a key="edit" onClick={() => handleEditSmsTemplate(record)}>
             修改
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+          <a
+            key="delete"
+            style={{ color: '#ff4d4f' }}
+            onClick={() =>
+              handleDelete(record, deleteSmsTemplate, () => actionRef.current?.reload())
+            }
+          >
             删除
           </a>
         </div>
       )
     }
   ]
-
-  // ===== 删除短信模板 =====
-  const handleDelete = (record: API.SystemSmsTemplateRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteSmsTemplate({ id: record.id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteSmsTemplate({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
-        }
-      }
-    })
-  }
 
   // ===== 导出短信模板 =====
   const handleExport = () => {
@@ -374,7 +341,14 @@ const SmsTemplateConfig: React.FC = () => {
             icon={<DeleteOutlined />}
             danger
             disabled={selectedRowKeys.length === 0}
-            onClick={handleBatchDelete}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteSmsTemplate,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
             style={
               selectedRowKeys.length > 0
                 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }

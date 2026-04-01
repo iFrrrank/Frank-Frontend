@@ -14,6 +14,8 @@ import SaveRoleForm, { handleCreateRole, handleEditRole } from './SaveRoleForm'
 import AssignMenuForm, { handleOpenMenuAssign } from './AssignMenuForm'
 import AssignDataScopeForm, { handleOpenDataScope } from './AssignDataScopeForm'
 import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 const Role: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -140,53 +142,17 @@ const Role: React.FC = () => {
           <a key="data" onClick={() => handleOpenDataScope(record)}>
             数据权限
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+          <a
+            key="delete"
+            style={{ color: '#ff4d4f' }}
+            onClick={() => handleDelete(record, deleteRole, () => actionRef.current?.reload())}
+          >
             删除
           </a>
         </div>
       )
     }
   ]
-
-  // ===== 删除角色 =====
-  const handleDelete = (record: API.SystemRoleRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteRole({ id: record.id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中数据?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteRole({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
-        }
-      }
-    })
-  }
 
   // ===== 导出角色 =====
   const handleExport = () => {
@@ -287,7 +253,14 @@ const Role: React.FC = () => {
             icon={<DeleteOutlined />}
             danger
             disabled={selectedRowKeys.length === 0}
-            onClick={handleBatchDelete}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteRole,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
             style={
               selectedRowKeys.length > 0
                 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }

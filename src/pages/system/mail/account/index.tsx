@@ -4,6 +4,8 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-de
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailAccount, getMailAccountPage } from '@/api/system/mailAccount'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 import SaveMailAccountForm, {
   handleCreateMailAccount,
@@ -102,7 +104,13 @@ const MailAccountConfig: React.FC = () => {
           <a key="edit" onClick={() => handleEditMailAccount(record)}>
             修改
           </a>
-          <a key="delete" onClick={() => handleDelete(record)} style={{ color: '#ff4d4f' }}>
+          <a
+            key="delete"
+            onClick={() =>
+              handleDelete(record, deleteMailAccount, () => actionRef.current?.reload())
+            }
+            style={{ color: '#ff4d4f' }}
+          >
             删除
           </a>
         </div>
@@ -110,47 +118,47 @@ const MailAccountConfig: React.FC = () => {
     }
   ]
 
-  // ===== 单个删除 =====
-  const handleDelete = (record: API.SystemMailAccountRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除 ID 为"${record.id}"的邮箱账号数据项?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteMailAccount({ id: record.id! })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
+  // // ===== 单个删除 =====
+  // const handleDelete = (record: API.SystemMailAccountRespVO) => {
+  //   Modal.confirm({
+  //     title: textConst.msg.confirmTitle,
+  //     icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+  //     content: '是否确认删除 ID 为"${record.id}"的邮箱账号数据项?',
+  //     okText: textConst.common.ok,
+  //     cancelText: textConst.common.cancel,
+  //     onOk: async () => {
+  //       try {
+  //         await deleteMailAccount({ id: record.id! })
+  //         message.success(textConst.msg.delSuccess)
+  //         actionRef.current?.reload()
+  //       } catch {
+  //         message.error(textConst.msg.delError)
+  //       }
+  //     }
+  //   })
+  // }
 
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中的 ${selectedRowKeys.length} 个邮箱账号数据项?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          // 在实际项目中建议提供后台批量接口，由于这里的 API 中暂时只有单删，通过循环并行发送请求
-          await Promise.all(selectedRowKeys.map((id) => deleteMailAccount({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
-        }
-      }
-    })
-  }
+  // // ===== 批量删除 =====
+  // const handleBatchDelete = () => {
+  //   Modal.confirm({
+  //     title: textConst.msg.confirmTitle,
+  //     icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+  //     content: '是否确认删除选中的 ${selectedRowKeys.length} 个邮箱账号数据项?',
+  //     okText: textConst.common.ok,
+  //     cancelText: textConst.common.cancel,
+  //     onOk: async () => {
+  //       try {
+  //         // 在实际项目中建议提供后台批量接口，由于这里的 API 中暂时只有单删，通过循环并行发送请求
+  //         await Promise.all(selectedRowKeys.map((id) => deleteMailAccount({ id: Number(id) })))
+  //         message.success(textConst.msg.batchDelSuccess)
+  //         setSelectedRowKeys([])
+  //         actionRef.current?.reload()
+  //       } catch {
+  //         message.error(textConst.msg.batchDelError)
+  //       }
+  //     }
+  //   })
+  // }
 
   return (
     <>
@@ -220,7 +228,14 @@ const MailAccountConfig: React.FC = () => {
                 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
                 : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
             }
-            onClick={handleBatchDelete}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteMailAccount,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
           >
             批量删除
           </Button>

@@ -14,6 +14,7 @@ import SaveSocialClientForm, {
   handleEditSocialClient
 } from './SaveSocialClientForm'
 import { textConst } from '@/locales/zh-CN'
+import { handleDelete } from '@/components/SingleDelete'
 
 /** 社交平台类型枚举 */
 const SOCIAL_TYPE_MAP: Record<number, string> = {
@@ -135,7 +136,8 @@ const SocialClientPage: React.FC = () => {
             key: 'delete',
             icon: <DeleteOutlined />,
             label: '删除',
-            onClick: () => handleDelete(record)
+            onClick: () =>
+              handleDelete(record, deleteSocialClient, () => actionRef.current?.reload())
           }
         ]
         return (
@@ -153,24 +155,6 @@ const SocialClientPage: React.FC = () => {
       }
     }
   ]
-
-  // ===== 删除 =====
-  const handleDelete = (record: API.SystemSocialClientRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.reminder,
-      icon: <ExclamationCircleOutlined />,
-      content: '确定要删除应用"${record.name}"吗？',
-      onOk: async () => {
-        try {
-          await deleteSocialClient({ id: record.id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
 
   return (
     <Row gutter={16}>

@@ -10,6 +10,8 @@ import {
 } from '@/api/infra/dataSourceConfig'
 import DataSourceConfigForm from './DataSourceConfigForm'
 import { textConst } from '@/locales/zh-CN'
+import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete } from '@/components/BatchDelete'
 
 const DataSourceConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -26,45 +28,6 @@ const DataSourceConfigPage: React.FC = () => {
   const handleUpdate = (id: number) => {
     setCurrentId(id)
     setFormVisible(true)
-  }
-
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该数据源配置？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteDataSourceConfig({ id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  const handleDeleteBatch = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中的数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteDataSourceConfigList({ ids: selectedRowKeys as number[] })
-          message.success(textConst.msg.delSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reloadAndRest?.()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
   }
 
   const columns: ProColumns<API.InfraDataSourceConfigRespVO>[] = [
@@ -112,7 +75,13 @@ const DataSourceConfigPage: React.FC = () => {
           <a key="edit" onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
             编辑
           </a>
-          <a key="delete" onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>
+          <a
+            key="delete"
+            onClick={() =>
+              handleDelete(record, deleteDataSourceConfig, () => actionRef.current?.reload())
+            }
+            style={{ color: '#ff4d4f' }}
+          >
             删除
           </a>
         </Space>
@@ -158,7 +127,14 @@ const DataSourceConfigPage: React.FC = () => {
             danger
             icon={<DeleteOutlined />}
             disabled={selectedRowKeys.length === 0}
-            onClick={handleDeleteBatch}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteDataSourceConfigList,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
             style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
           >
             批量删除

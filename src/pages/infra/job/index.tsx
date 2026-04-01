@@ -22,6 +22,8 @@ import {
 import JobForm from './JobForm'
 import JobDetail from './JobDetail'
 import { textConst } from '@/locales/zh-CN'
+import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete } from '@/components/BatchDelete'
 
 export const JOB_STATUS_OPTIONS = [
   { label: '正常', value: 0 },
@@ -48,24 +50,24 @@ const JobPage: React.FC = () => {
     setFormVisible(true)
   }
 
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该定时任务？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteJob(id)
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
+  // const handleDelete = (id: number) => {
+  //   Modal.confirm({
+  //     title: textConst.msg.confirmTitle,
+  //     icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+  //     content: '确认删除该定时任务？',
+  //     okText: textConst.common.ok,
+  //     cancelText: textConst.common.cancel,
+  //     onOk: async () => {
+  //       try {
+  //         await deleteJob(id)
+  //         message.success(textConst.msg.delSuccess)
+  //         actionRef.current?.reload()
+  //       } catch {
+  //         message.error(textConst.msg.delError)
+  //       }
+  //     }
+  //   })
+  // }
 
   const handleUpdateStatus = async (record: JobVO) => {
     try {
@@ -212,7 +214,10 @@ const JobPage: React.FC = () => {
           <a onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
             修改
           </a>
-          <a onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>
+          <a
+            onClick={() => handleDelete(record, deleteJob, () => actionRef.current?.reload())}
+            style={{ color: '#ff4d4f' }}
+          >
             删除
           </a>
           <Dropdown menu={getMenu(record)}>

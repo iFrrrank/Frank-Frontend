@@ -10,7 +10,8 @@ import SaveMailTemplateForm, {
 } from './SaveMailTemplateForm'
 import SendMailForm, { handleTestMailTemplate } from './SendMailForm'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
-
+import { handleBatchDelete } from '@/components/BatchDelete'
+import {} from '@/components/SingleDelete'
 import '@wangeditor/editor/dist/css/style.css'
 import { textConst } from '@/locales/zh-CN'
 
@@ -152,55 +153,17 @@ const MailTemplateConfig: React.FC = () => {
           <a key="test" onClick={() => handleTestMailTemplate(record)}>
             测试
           </a>
-          <a key="delete" onClick={() => handleDelete(record)} style={{ color: '#ff4d4f' }}>
+          <a
+            key="delete"
+            onClick={() => (record, deleteMailTemplate, () => actionRef.current?.reload())}
+            style={{ color: '#ff4d4f' }}
+          >
             删除
           </a>
         </Space>
       )
     }
   ]
-
-  // ===== 单个删除 =====
-  const handleDelete = (record: API.SystemMailTemplateRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除编号为"${record.id}"的邮件模板数据项?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteMailTemplate({ id: record.id! })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中的 ${selectedRowKeys.length} 个邮件模板数据项?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          // 当前接口似乎仅支持单删，使用 Promise.all 并行调用
-          await Promise.all(selectedRowKeys.map((id) => deleteMailTemplate({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
-        }
-      }
-    })
-  }
 
   return (
     <>
@@ -272,7 +235,14 @@ const MailTemplateConfig: React.FC = () => {
                 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
                 : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
             }
-            onClick={handleBatchDelete}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteMailTemplate,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
           >
             批量删除
           </Button>

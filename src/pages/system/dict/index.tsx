@@ -12,6 +12,8 @@ import { history } from '@umijs/max'
 import { deleteDictType, export2, pageDictTypes } from '@/api/system/dictType'
 import SaveDictTypeForm, { handleCreateDictType, handleEditDictType } from './SaveDictTypeForm'
 import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 const DictTypeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -99,54 +101,17 @@ const DictTypeConfig: React.FC = () => {
           <a key="data" onClick={() => handleData(record)}>
             数据
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+          <a
+            key="delete"
+            style={{ color: '#ff4d4f' }}
+            onClick={() => handleDelete(record, deleteDictType, () => actionRef.current?.reload())}
+          >
             删除
           </a>
         </div>
       )
     }
   ]
-
-  // ===== 删除字典类型 =====
-  const handleDelete = (record: API.SystemDictTypeRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteDictType({ id: record.id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteDictType({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
-        }
-      }
-    })
-  }
 
   // ===== 导出字典类型 =====
   const handleExport = () => {
@@ -258,7 +223,14 @@ const DictTypeConfig: React.FC = () => {
             icon={<DeleteOutlined />}
             danger
             disabled={selectedRowKeys.length === 0}
-            onClick={handleBatchDelete}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteDictType,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
             style={
               selectedRowKeys.length > 0
                 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }

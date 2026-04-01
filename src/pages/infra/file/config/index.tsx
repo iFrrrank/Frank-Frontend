@@ -11,6 +11,8 @@ import {
 } from '@/api/infra/fileConfig'
 import { textConst } from '@/locales/zh-CN'
 import FileConfigForm, { STORAGE_OPTIONS } from '@/pages/infra/file/config/FileConfigForm'
+import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete } from '@/components/BatchDelete'
 
 const FileConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -26,45 +28,6 @@ const FileConfigPage: React.FC = () => {
   const handleUpdate = (id: number) => {
     setCurrentId(id)
     setFormVisible(true)
-  }
-
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteFileConfig({ id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  const handleDeleteBatch = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteFileConfigList({ ids: selectedRowKeys as number[] })
-          message.success(textConst.msg.delSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reloadAndRest?.()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
   }
 
   const handleMaster = (id: number) => {
@@ -194,7 +157,12 @@ const FileConfigPage: React.FC = () => {
             主配置
           </Button>
           <a onClick={() => handleTest(record.id)}>测试</a>
-          <a onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>
+          <a
+            onClick={() =>
+              handleDelete(record, deleteFileConfig, () => actionRef.current?.reload())
+            }
+            style={{ color: '#ff4d4f' }}
+          >
             删除
           </a>
         </Space>
@@ -251,7 +219,14 @@ const FileConfigPage: React.FC = () => {
             danger
             icon={<DeleteOutlined />}
             disabled={selectedRowKeys.length === 0}
-            onClick={handleDeleteBatch}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteFileConfigList,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
             style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
           >
             批量删除

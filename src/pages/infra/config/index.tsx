@@ -11,6 +11,8 @@ import { ProTable } from '@ant-design/pro-components'
 import { deleteConfig, deleteConfigList, exportConfig, getConfigPage } from '@/api/infra/config'
 import ConfigForm from './ConfigForm'
 import { textConst } from '@/locales/zh-CN'
+import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete } from '@/components/BatchDelete'
 
 /** 系统内置选项 */
 const CONFIG_TYPE_OPTIONS = [
@@ -34,45 +36,6 @@ const ConfigPage: React.FC = () => {
   const handleUpdate = (id: number) => {
     setCurrentId(id)
     setFormVisible(true)
-  }
-
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该参数配置？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteConfig({ id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  const handleDeleteBatch = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中的数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteConfigList({ ids: selectedRowKeys as number[] })
-          message.success(textConst.msg.delSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reloadAndRest?.()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
   }
 
   /** 导出 */
@@ -212,7 +175,11 @@ const ConfigPage: React.FC = () => {
           <a key="edit" onClick={() => handleUpdate(record.id)} style={{ color: '#1677ff' }}>
             编辑
           </a>
-          <a key="delete" onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>
+          <a
+            key="delete"
+            onClick={() => handleDelete(record, deleteConfig, () => actionRef.current?.reload())}
+            style={{ color: '#ff4d4f' }}
+          >
             删除
           </a>
         </Space>
@@ -272,7 +239,14 @@ const ConfigPage: React.FC = () => {
             danger
             icon={<DeleteOutlined />}
             disabled={selectedRowKeys.length === 0}
-            onClick={handleDeleteBatch}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteConfigList,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
             style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
           >
             批量删除

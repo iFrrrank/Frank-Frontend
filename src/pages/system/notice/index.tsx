@@ -6,6 +6,9 @@ import { Button, message, Modal, Space, Typography } from 'antd'
 import SaveNoticeForm, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { deleteNotice, getNoticePage, push } from '@/api/system/notice'
+import { handleTreeData } from '@/utils/tree'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 const NoticeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -88,7 +91,11 @@ const NoticeConfig: React.FC = () => {
           <a key="edit" onClick={() => handleEditNotice(record)}>
             修改
           </a>
-          <a key="delete" style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+          <a
+            key="delete"
+            style={{ color: '#ff4d4f' }}
+            onClick={() => handleDelete(record, deleteNotice, () => actionRef.current?.reload())}
+          >
             删除
           </a>
           <a key="push" onClick={() => handlePush(record)}>
@@ -98,25 +105,6 @@ const NoticeConfig: React.FC = () => {
       )
     }
   ]
-
-  const handleDelete = (record: API.SystemNoticeRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除 ID 为"${record.id}"的公告？`,
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteNotice({ id: record.id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
 
   const handlePush = (record: API.SystemNoticeRespVO) => {
     Modal.confirm({
@@ -131,26 +119,6 @@ const NoticeConfig: React.FC = () => {
           message.success('推送成功')
         } catch {
           message.error('推送失败')
-        }
-      }
-    })
-  }
-
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: `是否确认删除选中的 ${selectedRowKeys.length} 条公告？`,
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteNotice({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
         }
       }
     })
@@ -215,7 +183,14 @@ const NoticeConfig: React.FC = () => {
                 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }
                 : { color: '#ffccc7', borderColor: '#ffe6e6', background: '#fffaf0' }
             }
-            onClick={handleBatchDelete}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteNotice,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
           >
             批量删除
           </Button>

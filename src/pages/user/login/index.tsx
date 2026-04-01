@@ -16,6 +16,7 @@ import React, { useState } from 'react'
 import { flushSync } from 'react-dom'
 import Settings from '../../../../config/defaultSettings'
 import { textConst } from '@/locales/zh-CN'
+import { text } from 'stream/consumers'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -215,15 +216,15 @@ const Login: React.FC = () => {
                   prefix: <MobileOutlined />
                 }}
                 name="mobile"
-                placeholder={'请输入手机号！'}
+                placeholder={textConst.plh.mobilePlaceholder}
                 rules={[
                   {
                     required: true,
-                    message: '手机号是必填项！'
+                    message: textConst.rules.mobileRequired
                   },
                   {
                     pattern: /^1\d{10}$/,
-                    message: '不合法的手机号！'
+                    message: textConst.rules.mobileInvalid
                   }
                 ]}
               />
@@ -235,7 +236,7 @@ const Login: React.FC = () => {
                 captchaProps={{
                   size: 'large'
                 }}
-                placeholder={'请输入验证码！'}
+                placeholder={textConst.plh.smsCodePlaceholder}
                 captchaTextRender={(timing, count) => {
                   if (timing) {
                     return `${count} ${textConst.login.getAfterSec}`
@@ -246,7 +247,7 @@ const Login: React.FC = () => {
                 rules={[
                   {
                     required: true,
-                    message: '验证码是必填项！'
+                    message: textConst.rules.smsCodeRequired
                   }
                 ]}
                 onGetCaptcha={async (phone) => {
@@ -254,7 +255,7 @@ const Login: React.FC = () => {
                   if (!result) {
                     return
                   }
-                  message.success('获取验证码成功')
+                  message.success(textConst.login.SmsSendMsg)
                 }}
               />
             </>
@@ -265,14 +266,14 @@ const Login: React.FC = () => {
             }}
           >
             <ProFormCheckbox noStyle name="autoLogin">
-              自动登录
+              {textConst.login.autoLogin}
             </ProFormCheckbox>
             <a
               style={{
                 float: 'right'
               }}
             >
-              忘记密码 ?
+              {textConst.login.forgetPassword}
             </a>
           </div>
         </LoginForm>

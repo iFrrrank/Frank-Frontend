@@ -17,6 +17,8 @@ import SaveOAuth2ClientForm, {
   handleEditOAuth2Client
 } from './SaveOAuth2ClientForm'
 import { textConst } from '@/locales/zh-CN'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 const App_: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -124,7 +126,8 @@ const App_: React.FC = () => {
             key: 'delete',
             icon: <DeleteOutlined />,
             label: '删除',
-            onClick: () => handleDelete(record)
+            onClick: () =>
+              handleDelete(record, deleteOAuth2Client, () => actionRef.current?.reload())
           },
           {
             key: 'copy',
@@ -148,43 +151,6 @@ const App_: React.FC = () => {
       }
     }
   ]
-
-  // ===== 删除单个客户端 =====
-  const handleDelete = (record: API.SystemOAuth2ClientRespVO) => {
-    Modal.confirm({
-      title: textConst.msg.reminder,
-      icon: <ExclamationCircleOutlined />,
-      content: '确定要删除应用"${record.name}"吗？',
-      onOk: async () => {
-        try {
-          await deleteOAuth2Client({ id: record.id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  // ===== 批量删除 =====
-  const handleBatchDelete = () => {
-    Modal.confirm({
-      title: textConst.msg.reminder,
-      icon: <ExclamationCircleOutlined />,
-      content: '确定要删除选中的 ${selectedRowKeys.length} 个应用吗？',
-      onOk: async () => {
-        try {
-          await Promise.all(selectedRowKeys.map((id) => deleteOAuth2Client({ id: Number(id) })))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.batchDelError)
-        }
-      }
-    })
-  }
 
   // ===== 复制凭证 =====
   const handleCopyCredentials = (record: API.SystemOAuth2ClientRespVO) => {
@@ -293,7 +259,14 @@ const App_: React.FC = () => {
               icon={<DeleteOutlined />}
               danger
               disabled={selectedRowKeys.length === 0}
-              onClick={handleBatchDelete}
+              onClick={() =>
+                handleBatchDelete(
+                  selectedRowKeys,
+                  deleteOAuth2Client,
+                  () => setSelectedRowKeys([]),
+                  () => actionRef.current?.reload()
+                )
+              }
             >
               批量删除
             </Button>

@@ -13,6 +13,7 @@ import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu' // 将�
 import { textConst } from '@/locales/zh-CN'
 import SaveMenuForm, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
 import { handleTreeData } from '@/utils/tree'
+import { handleDelete } from '@/components/SingleDelete'
 
 // 动态渲染图标
 const IconFont = ({ type }: { type?: string }) => {
@@ -50,25 +51,25 @@ const MenuManagement: React.FC = () => {
     }
   }
 
-  // ===== 基础操作 =====
-  const handleDelete = (record: any) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除选中数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteMenu({ id: record.id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
+  // // ===== 基础操作 =====
+  // const handleDelete = (record: any) => {
+  //   Modal.confirm({
+  //     title: textConst.msg.confirmTitle,
+  //     icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
+  //     content: '是否确认删除选中数据？',
+  //     okText: textConst.common.ok,
+  //     cancelText: textConst.common.cancel,
+  //     onOk: async () => {
+  //       try {
+  //         await deleteMenu({ id: record.id })
+  //         message.success(textConst.msg.delSuccess)
+  //         actionRef.current?.reload()
+  //       } catch {
+  //         message.error(textConst.msg.delError)
+  //       }
+  //     }
+  //   })
+  // }
 
   // 状态切换 (Mock 快捷切换，调用 Update)
   const handleStatusChange = async (checked: boolean, record: any) => {
@@ -156,7 +157,10 @@ const MenuManagement: React.FC = () => {
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
           <a onClick={() => handleEditMenu(record)}>修改</a>
           <a onClick={() => handleCreateMenu(record.id)}>新增</a>
-          <a style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+          <a
+            style={{ color: '#ff4d4f' }}
+            onClick={() => handleDelete(record, deleteMenu, () => actionRef.current?.reload())}
+          >
             删除
           </a>
         </div>

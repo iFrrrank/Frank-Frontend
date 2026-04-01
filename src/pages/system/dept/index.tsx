@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal } from 'antd'
+import { Button } from 'antd'
 import {
   type ActionType,
   type ProColumns,
@@ -9,7 +9,6 @@ import {
 import {
   CaretDownOutlined,
   CaretRightOutlined,
-  ExclamationCircleOutlined,
   PlusOutlined,
   SwapOutlined
 } from '@ant-design/icons'
@@ -18,6 +17,8 @@ import { getSimpleUserList } from '@/api/system/user'
 import { textConst } from '@/locales/zh-CN'
 import SaveDeptForm, { handleCreateDept, handleEditDept } from '@/pages/system/dept/SaveDeptForm'
 import { handleTreeData } from '@/utils/tree'
+import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleDelete } from '@/components/SingleDelete'
 
 const DeptManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -47,49 +48,6 @@ const DeptManagement: React.FC = () => {
     } else {
       setExpandedRowKeys([])
     }
-  }
-
-  // ===== 基本操作 API 调用 =====
-  const handleDelete = (record: any) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该部门？（若存在子部门则不允许删除）',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteDept({ id: record.id } as any)
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload() // 重新加载数据
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  const handleBatchDelete = () => {
-    if (selectedRowKeys.length === 0) return
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否确认删除勾选的 ${selectedRowKeys.length} 项数据？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          // Promise.all or an Array deletion API if provided
-          // Mock sequential deletions since we don't know the exact batch API
-          await Promise.all(selectedRowKeys.map((id) => deleteDept({ id } as any)))
-          message.success(textConst.msg.batchDelSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reload()
-        } catch {
-          message.error('部分或全部数据删除失败，请检查是否包含子级')
-        }
-      }
-    })
   }
 
   // 获取用户列表（负责人字典）
@@ -162,7 +120,17 @@ const DeptManagement: React.FC = () => {
       render: (_, record) => (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
           <a onClick={() => handleEditDept(record)}>修改</a>
-          <a style={{ color: '#ff4d4f' }} onClick={() => handleDelete(record)}>
+          <a
+            style={{ color: '#ff4d4f' }}
+            onClick={() =>
+              handleDelete(
+                record,
+                deleteDept,
+                () => actionRef.current?.reload(),
+                '确认删除该部门？（若存在子部门则不允许删除）'
+              )
+            }
+          >
             删除
           </a>
         </div>
@@ -179,7 +147,7 @@ const DeptManagement: React.FC = () => {
         formRef={formRef}
         form={{ colon: false }}
         cardBordered
-        pagination={false} // 树形不分页
+        pagination={false}
         rowKey="id"
         rowSelection={{
           selectedRowKeys,
@@ -260,7 +228,7 @@ const DeptManagement: React.FC = () => {
             icon={<PlusOutlined />}
             onClick={() => handleCreateDept()}
           >
-            新增
+            {textConst.action.create}
           </Button>,
           <Button
             key="expand"
@@ -274,7 +242,14 @@ const DeptManagement: React.FC = () => {
             key="batch-delete"
             danger
             disabled={selectedRowKeys.length === 0}
-            onClick={handleBatchDelete}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteDept,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reload()
+              )
+            }
             style={
               selectedRowKeys.length > 0
                 ? { color: '#ff4d4f', borderColor: '#ffccc7', background: '#fff2f0' }

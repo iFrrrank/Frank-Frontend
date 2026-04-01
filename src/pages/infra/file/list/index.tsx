@@ -11,6 +11,8 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { deleteFile, deleteFileList, getFilePage, uploadFile } from '@/api/infra/fileList'
 import { textConst } from '@/locales/zh-CN'
+import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete } from '@/components/BatchDelete'
 
 const { Dragger } = Upload
 
@@ -46,47 +48,6 @@ const FileListPage: React.FC = () => {
       .writeText(url)
       .then(() => message.success('链接已复制到剪贴板'))
       .catch(() => message.error(textConst.msg.copyError))
-  }
-
-  /** 删除单条 */
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认删除该文件？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteFile({ id })
-          message.success(textConst.msg.delSuccess)
-          actionRef.current?.reload()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
-  }
-
-  /** 批量删除 */
-  const handleDeleteBatch = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '是否删除所选中的文件？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          await deleteFileList({ ids: selectedRowKeys as number[] })
-          message.success(textConst.msg.delSuccess)
-          setSelectedRowKeys([])
-          actionRef.current?.reloadAndRest?.()
-        } catch {
-          message.error(textConst.msg.delError)
-        }
-      }
-    })
   }
 
   /** 打开上传弹窗 */
@@ -250,7 +211,11 @@ const FileListPage: React.FC = () => {
           <a key="copy" onClick={() => handleCopyLink(record.url)} style={{ color: '#1677ff' }}>
             复制链接
           </a>
-          <a key="delete" onClick={() => handleDelete(record.id)} style={{ color: '#ff4d4f' }}>
+          <a
+            key="delete"
+            onClick={() => handleDelete(record, deleteFile, () => actionRef.current?.reload())}
+            style={{ color: '#ff4d4f' }}
+          >
             删除
           </a>
         </Space>
@@ -310,7 +275,14 @@ const FileListPage: React.FC = () => {
             danger
             icon={<DeleteOutlined />}
             disabled={selectedRowKeys.length === 0}
-            onClick={handleDeleteBatch}
+            onClick={() =>
+              handleBatchDelete(
+                selectedRowKeys,
+                deleteFileList,
+                () => setSelectedRowKeys([]),
+                () => actionRef.current?.reloadAndRest?.()
+              )
+            }
             style={{ color: '#ff4d4f', borderColor: '#ff4d4f', background: '#fff1f0' }}
           >
             批量删除
