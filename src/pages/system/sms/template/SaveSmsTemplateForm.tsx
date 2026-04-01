@@ -40,7 +40,7 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
   return (
     <ModalForm<API.SystemSmsTemplateSaveReqVO>
       title={editingSmsTemplate ? textConst.action.update : textConst.action.create}
-      width={700}
+      width={450}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)

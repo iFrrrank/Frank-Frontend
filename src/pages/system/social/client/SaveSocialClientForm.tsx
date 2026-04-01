@@ -35,7 +35,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
   return (
     <ModalForm<API.SystemSocialClientSaveReqVO>
       title={editingClient ? textConst.action.update : textConst.action.create}
-      width={600}
+      width={450}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -63,6 +63,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 18 }}
       autoFocusFirstInput
+      colon={false}
       modalProps={{
         destroyOnClose: true,
         bodyStyle: { paddingBottom: 0 }
@@ -126,13 +127,13 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
       <ProFormText
         name="clientId"
         label="客户端 ID"
-        placeholder="请输入客户端 ID,对应各平台的appKey"
+        placeholder="请输入客户端 ID"
         rules={[{ required: true, message: '请输入客户端 ID' }]}
       />
       <ProFormText
         name="clientSecret"
         label="客户端密钥"
-        placeholder="请输入客户端密钥,对应各平台的appSecret"
+        placeholder="请输入客户端密钥"
         rules={[{ required: true, message: '请输入客户端密钥' }]}
       />
       <ProFormSelect

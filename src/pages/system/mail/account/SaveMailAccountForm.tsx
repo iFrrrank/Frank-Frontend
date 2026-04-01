@@ -30,7 +30,7 @@ const SaveMailAccountForm: React.FC<SaveMailAccountModalProps> = ({ onSuccess })
   return (
     <ModalForm<API.SystemMailAccountSaveReqVO>
       title={editingMailAccount ? textConst.action.update : textConst.action.create}
-      width={600}
+      width={450}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -47,7 +47,7 @@ const SaveMailAccountForm: React.FC<SaveMailAccountModalProps> = ({ onSuccess })
             }
       }
       layout="horizontal"
-      labelCol={{ span: 6 }}
+      labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       colon={false}
       modalProps={{

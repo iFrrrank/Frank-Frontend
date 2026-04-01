@@ -27,8 +27,8 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
         formRef={formRef}
         modalProps={{ destroyOnClose: true }}
         layout="horizontal"
-        width={600}
-        labelCol={{ span: 5 }}
+        width={500}
+        labelCol={{ span: 6 }}
         wrapperCol={{ span: 18 }}
         colon={false}
         submitter={{
@@ -161,8 +161,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
           setCronModalVisible(false)
         }}
         onCancel={() => setCronModalVisible(false)}
-        width={700}
-        destroyOnClose
+        width={600}
       >
         <CronExpressionGenerator value={tempCronValue} onChange={setTempCronValue} />
       </Modal>

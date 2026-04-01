@@ -34,7 +34,7 @@ const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
   return (
     <ModalForm<API.SystemPostSaveReqVO>
       title={editingPost ? textConst.action.update : textConst.action.create}
-      width={600}
+      width={400}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -50,8 +50,8 @@ const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
           : { sort: 0, status: 0 }
       }
       layout="horizontal"
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 20 }}
+      labelCol={{ span: 5 }}
+      wrapperCol={{ span: 19 }}
       colon={false}
       modalProps={{
         destroyOnClose: true,

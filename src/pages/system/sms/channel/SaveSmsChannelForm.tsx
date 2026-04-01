@@ -36,7 +36,7 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
   return (
     <ModalForm<API.SystemSmsChannelSaveReqVO>
       title={editingSmsChannel ? textConst.action.update : textConst.action.create}
-      width={700}
+      width={450}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -52,7 +52,7 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
           : { status: 0 }
       }
       layout="horizontal"
-      labelCol={{ span: 5 }}
+      labelCol={{ span: 6 }}
       wrapperCol={{ span: 18 }}
       colon={false}
       modalProps={{
@@ -113,23 +113,19 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
           { label: '关闭', value: 1 }
         ]}
       />
+      <ProFormText
+        name="apiKey"
+        label="短信 API 账号"
+        placeholder="请输入短信 API 的账号"
+        rules={[{ required: true, message: '请输入短信 API 的账号' }]}
+      />
+      <ProFormText name="apiSecret" label="短信 API 密钥" placeholder="请输入短信 API 密钥" />
+      <ProFormText name="callbackUrl" label="短信回调 URL" placeholder="请输入短信发送回调 URL" />
       <ProFormTextArea
         name="remark"
         label="备注"
         placeholder="请输入备注"
         fieldProps={{ rows: 2 }}
-      />
-      <ProFormText
-        name="apiKey"
-        label="短信 API 的账号"
-        placeholder="请输入短信 API 的账号"
-        rules={[{ required: true, message: '请输入短信 API 的账号' }]}
-      />
-      <ProFormText name="apiSecret" label="短信 API 的密钥" placeholder="请输入短信 API 的密钥" />
-      <ProFormText
-        name="callbackUrl"
-        label="短信发送回调 URL"
-        placeholder="请输入短信发送回调 URL"
       />
     </ModalForm>
   )

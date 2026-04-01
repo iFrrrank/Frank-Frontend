@@ -36,7 +36,7 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
   return (
     <ModalForm<API.SystemNotifyTemplateSaveReqVO>
       title={editingTemplate ? textConst.action.update : textConst.action.create}
-      width={600}
+      width={450}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -48,7 +48,7 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
         editingTemplate ? { ...editingTemplate } : { status: 0 } // default layout: open
       }
       layout="horizontal"
-      labelCol={{ span: 5 }}
+      labelCol={{ span: 6 }}
       wrapperCol={{ span: 18 }}
       colon={false}
       modalProps={{
@@ -104,7 +104,7 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
         label="模板内容"
         placeholder="请输入模板内容"
         rules={[{ required: true, message: '请输入模板内容' }]}
-        fieldProps={{ rows: 3 }}
+        fieldProps={{ rows: 2 }}
       />
       <ProFormSelect
         name="type"
@@ -126,7 +126,12 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
           { label: '关闭', value: 1 }
         ]}
       />
-      <ProFormText name="remark" label="备注" placeholder="请输入备注" />
+      <ProFormTextArea
+        name="remark"
+        label="备注"
+        placeholder="请输入备注"
+        fieldProps={{ rows: 2 }}
+      />
     </ModalForm>
   )
 }

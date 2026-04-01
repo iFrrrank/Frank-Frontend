@@ -132,7 +132,7 @@ const DictDataList: React.FC = () => {
       dataIndex: 'createTime',
       valueType: 'dateRange',
       align: 'center',
-      hideInSearch: true, // Mock 中没有在头部搜索时间，只在列里显示
+      hideInSearch: true,
       width: 180,
       render: (_, record) => <span>{record.createTime as any}</span>
     },
@@ -163,7 +163,7 @@ const DictDataList: React.FC = () => {
     Modal.confirm({
       title: textConst.msg.confirmTitle,
       icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有字典数据项?',
+      content: '确认导出所有字典数据项？',
       okText: textConst.common.ok,
       cancelText: textConst.common.cancel,
       onOk: async () => {

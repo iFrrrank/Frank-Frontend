@@ -34,7 +34,7 @@ const SaveRoleForm: React.FC<SaveRoleModalProps> = ({ onSuccess }) => {
   return (
     <ModalForm<API.SystemRoleSaveReqVO>
       title={editingRole ? textConst.action.update : textConst.action.create}
-      width={500}
+      width={400}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)

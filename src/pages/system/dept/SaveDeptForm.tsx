@@ -61,7 +61,7 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
   return (
     <ModalForm
       title={editingDept?.id ? textConst.action.update : textConst.action.create}
-      width={500}
+      width={400}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)

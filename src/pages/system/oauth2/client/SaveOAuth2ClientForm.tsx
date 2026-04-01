@@ -41,7 +41,18 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
   return (
     <ModalForm<API.SystemOAuth2ClientSaveReqVO>
       title={editingClient ? textConst.action.update : textConst.action.create}
-      width={800}
+      width={550}
+      modalProps={{
+        // 1. 设置内容区高度（推荐）
+        bodyStyle: {
+          height: '700px', // 固定高度
+          maxHeight: '70vh', // 最大高度（推荐，响应式）
+          overflowY: 'auto' // 内容溢出自动滚动
+        },
+        // 其他 Modal 配置
+        centered: true, // 垂直居中
+        destroyOnClose: true // 关闭销毁
+      }}
       open={createModalVisible}
       onOpenChange={(visible) => {
         setCreateModalVisible(visible)
@@ -83,10 +94,6 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       grid={true}
       colon={false}
       rowProps={{ gutter: [16, 0] }}
-      modalProps={{
-        destroyOnClose: true,
-        bodyStyle: { paddingBottom: 0 }
-      }}
       onFinish={async (values) => {
         try {
           // 处理数组字段
