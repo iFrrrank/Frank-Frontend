@@ -217,6 +217,7 @@ const MailLog: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemMailLogRespVO>
+        headerTitle="邮件日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -257,7 +258,6 @@ const MailLog: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
       />
 
       <Modal

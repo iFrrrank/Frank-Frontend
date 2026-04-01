@@ -196,6 +196,7 @@ const DictDataList: React.FC = () => {
   return (
     <>
       <ProTable<any>
+        headerTitle="字典数据管理"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -235,7 +236,6 @@ const DictDataList: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"

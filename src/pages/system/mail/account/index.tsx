@@ -122,6 +122,7 @@ const MailAccountConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemMailAccountRespVO>
+        headerTitle="邮件账号"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -167,7 +168,6 @@ const MailAccountConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"

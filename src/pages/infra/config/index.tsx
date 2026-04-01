@@ -190,6 +190,7 @@ const ConfigPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraConfigRespVO>
+        headerTitle="参数配置"
         rowSelection={{
           selectedRowKeys,
           onChange: setSelectedRowKeys
@@ -229,7 +230,6 @@ const ConfigPage: React.FC = () => {
         search={{ labelWidth: 'auto', defaultCollapsed: false }}
         options={false}
         pagination={{ align: 'center', showSizeChanger: true }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
             {textConst.action.create}

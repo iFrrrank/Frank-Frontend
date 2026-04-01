@@ -178,6 +178,7 @@ const App_: React.FC = () => {
     <Row gutter={16}>
       <Col span={24}>
         <ProTable<API.SystemOAuth2ClientRespVO>
+          headerTitle="应用管理"
           columns={columns}
           scroll={{ x: 'max-content' }}
           actionRef={actionRef}
@@ -245,7 +246,6 @@ const App_: React.FC = () => {
             showSizeChanger: true
           }}
           dateFormatter="string"
-          headerTitle="应用管理"
           toolBarRender={() => [
             <Button
               key="create"

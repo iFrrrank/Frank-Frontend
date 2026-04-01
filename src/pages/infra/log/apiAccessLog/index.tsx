@@ -206,6 +206,7 @@ const ApiAccessLogPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraApiAccessLogRespVO>
+        headerTitle="访问日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -256,7 +257,6 @@ const ApiAccessLogPage: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"

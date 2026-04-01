@@ -76,13 +76,13 @@ const JobLogPage: React.FC = () => {
       hideInSearch: true
     },
     {
-      title: '处理器的名字',
+      title: '处理器名称',
       dataIndex: 'handlerName',
       align: 'center',
       fieldProps: { placeholder: '请输入处理器的名字' }
     },
     {
-      title: '处理器的参数',
+      title: '处理器参数',
       dataIndex: 'handlerParam',
       align: 'center',
       hideInSearch: true
@@ -150,6 +150,7 @@ const JobLogPage: React.FC = () => {
   return (
     <>
       <ProTable<JobLogVO>
+        headerTitle="定时任务日志"
         columns={columns}
         actionRef={actionRef}
         formRef={formRef}
@@ -186,7 +187,6 @@ const JobLogPage: React.FC = () => {
         search={{ labelWidth: 'auto', defaultCollapsed: false }}
         options={{ reload: true, setting: true, density: true }}
         pagination={{ align: 'center', showSizeChanger: true }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"

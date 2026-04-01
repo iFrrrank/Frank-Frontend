@@ -171,6 +171,7 @@ const MailTemplateConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemMailTemplateRespVO>
+        headerTitle="邮件模板"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -218,7 +219,6 @@ const MailTemplateConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"

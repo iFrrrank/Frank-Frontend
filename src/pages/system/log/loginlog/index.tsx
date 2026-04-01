@@ -170,6 +170,7 @@ const LoginLogPage: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemLoginLogRespVO>
+        headerTitle="登录日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -225,7 +226,6 @@ const LoginLogPage: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"

@@ -174,6 +174,7 @@ const FileConfigPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraFileConfigRespVO>
+        headerTitle="文件配置"
         rowSelection={{
           selectedRowKeys,
           onChange: setSelectedRowKeys
@@ -210,7 +211,6 @@ const FileConfigPage: React.FC = () => {
         search={{ labelWidth: 'auto', defaultCollapsed: false }}
         options={{ reload: true, setting: true, density: true }}
         pagination={{ align: 'center', showSizeChanger: true }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
             {textConst.action.create}

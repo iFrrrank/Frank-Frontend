@@ -146,6 +146,7 @@ const NotifyTemplateConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemNotifyTemplateRespVO>
+        headerTitle="站内信模板"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -192,7 +193,6 @@ const NotifyTemplateConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"

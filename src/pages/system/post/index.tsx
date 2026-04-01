@@ -156,6 +156,7 @@ const PostManagement: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemPostRespVO>
+        headerTitle="岗位管理"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -199,7 +200,6 @@ const PostManagement: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="create" icon={<PlusOutlined />} onClick={handleCreatePost} type="primary">
             {textConst.action.create}

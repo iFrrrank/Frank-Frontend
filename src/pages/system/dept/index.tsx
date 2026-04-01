@@ -142,6 +142,7 @@ const DeptManagement: React.FC = () => {
   return (
     <>
       <ProTable<any>
+        headerTitle="部门管理"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -221,7 +222,6 @@ const DeptManagement: React.FC = () => {
           defaultCollapsed: false
         }}
         options={false}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"

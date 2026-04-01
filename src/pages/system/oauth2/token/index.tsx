@@ -125,6 +125,7 @@ const TokenPage: React.FC = () => {
 
   return (
     <ProTable<API.SystemOAuth2AccessTokenRespVO>
+      headerTitle="令牌管理"
       columns={columns}
       scroll={{ x: 'max-content' }}
       actionRef={actionRef}
@@ -168,7 +169,6 @@ const TokenPage: React.FC = () => {
         showSizeChanger: true
       }}
       dateFormatter="string"
-      headerTitle="令牌管理"
     />
   )
 }

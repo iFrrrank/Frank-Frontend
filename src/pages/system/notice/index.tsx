@@ -127,6 +127,7 @@ const NoticeConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemNoticeRespVO>
+        headerTitle="通知公告"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -163,7 +164,6 @@ const NoticeConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"

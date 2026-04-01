@@ -162,6 +162,7 @@ const OperateLogConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemOperateLogRespVO>
+        headerTitle="操作日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -217,7 +218,6 @@ const OperateLogConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"

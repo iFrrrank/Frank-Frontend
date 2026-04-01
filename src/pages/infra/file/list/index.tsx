@@ -214,7 +214,7 @@ const FileListPage: React.FC = () => {
           </a>
           <a
             key="delete"
-            style={delteTextStyle}
+            style={deleteTextStyle}
             onClick={() => handleDelete(record, deleteFile, () => actionRef.current?.reload())}
           >
             {textConst.action.delete}
@@ -227,6 +227,7 @@ const FileListPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraFileRespVO>
+        headerTitle="文件列表"
         rowSelection={{
           selectedRowKeys,
           onChange: setSelectedRowKeys
@@ -266,7 +267,6 @@ const FileListPage: React.FC = () => {
         search={{ labelWidth: 'auto' }}
         options={false}
         pagination={{ align: 'center', showSizeChanger: true }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="upload" type="primary" icon={<UploadOutlined />} onClick={handleOpenUpload}>
             {textConst.action.uploadFile}

@@ -155,6 +155,7 @@ const SocialClientPage: React.FC = () => {
     <Row gutter={16}>
       <Col span={24}>
         <ProTable<API.SystemSocialClientRespVO>
+          headerTitle="三方应用"
           columns={columns}
           scroll={{ x: 'max-content' }}
           actionRef={actionRef}
@@ -207,7 +208,6 @@ const SocialClientPage: React.FC = () => {
             showSizeChanger: true
           }}
           dateFormatter="string"
-          headerTitle="三方应用"
           toolBarRender={() => [
             <Button
               key="create"

@@ -174,6 +174,7 @@ const SmsChannelConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemSmsChannelRespVO>
+        headerTitle="短信渠道"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -216,7 +217,6 @@ const SmsChannelConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"

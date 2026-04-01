@@ -201,6 +201,7 @@ const NotifyMessage: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemNotifyMessageRespVO>
+        headerTitle="站内信消息"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -256,7 +257,6 @@ const NotifyMessage: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
       />
 
       {/* 详情弹窗 */}

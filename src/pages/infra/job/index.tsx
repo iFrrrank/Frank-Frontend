@@ -217,6 +217,7 @@ const JobPage: React.FC = () => {
   return (
     <>
       <ProTable<JobVO>
+        headerTitle="定时任务"
         rowSelection={{
           selectedRowKeys,
           onChange: setSelectedRowKeys
@@ -247,7 +248,6 @@ const JobPage: React.FC = () => {
         search={{ labelWidth: 'auto', defaultCollapsed: false }}
         options={{ reload: true, setting: true, density: true }}
         pagination={{ align: 'center', showSizeChanger: true }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
             {textConst.action.create}

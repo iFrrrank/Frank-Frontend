@@ -191,6 +191,7 @@ const Role: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemRoleRespVO>
+        headerTitle="角色管理"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -234,7 +235,6 @@ const Role: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="create" icon={<PlusOutlined />} onClick={handleCreateRole} type="primary">
             {textConst.action.create}

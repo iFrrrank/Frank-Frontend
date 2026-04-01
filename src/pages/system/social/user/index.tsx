@@ -115,6 +115,7 @@ const SocialUserPage: React.FC = () => {
     <Row gutter={16}>
       <Col span={24}>
         <ProTable<API.SystemSocialUserRespVO>
+          headerTitle="三方用户"
           columns={columns}
           scroll={{ x: 'max-content' }}
           actionRef={actionRef}

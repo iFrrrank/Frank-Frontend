@@ -210,6 +210,7 @@ const SmsLogConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemSmsLogRespVO>
+        headerTitle="短信日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -279,7 +280,6 @@ const SmsLogConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"

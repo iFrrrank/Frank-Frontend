@@ -269,6 +269,7 @@ const SmsTemplateConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemSmsTemplateRespVO>
+        headerTitle="短信模板"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -326,7 +327,6 @@ const SmsTemplateConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"

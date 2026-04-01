@@ -235,6 +235,7 @@ const ApiErrorLogPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraApiErrorLogRespVO>
+        headerTitle="错误日志"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -290,7 +291,6 @@ const ApiErrorLogPage: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="export"

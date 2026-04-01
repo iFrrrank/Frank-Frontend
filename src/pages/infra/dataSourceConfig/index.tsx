@@ -93,6 +93,7 @@ const DataSourceConfigPage: React.FC = () => {
   return (
     <>
       <ProTable<API.InfraDataSourceConfigRespVO>
+        headerTitle="数据源配置"
         rowSelection={{
           selectedRowKeys,
           onChange: setSelectedRowKeys
@@ -118,7 +119,6 @@ const DataSourceConfigPage: React.FC = () => {
         search={false}
         options={false}
         pagination={false}
-        headerTitle={false}
         toolBarRender={() => [
           <Button key="create" type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
             {textConst.action.create}

@@ -152,6 +152,7 @@ const MenuManagement: React.FC = () => {
   return (
     <>
       <ProTable<any>
+        headerTitle="菜单管理"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -200,7 +201,6 @@ const MenuManagement: React.FC = () => {
           defaultCollapsed: false
         }}
         options={false}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"

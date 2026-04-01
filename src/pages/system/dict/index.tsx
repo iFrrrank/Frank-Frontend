@@ -156,6 +156,7 @@ const DictTypeConfig: React.FC = () => {
   return (
     <>
       <ProTable<API.SystemDictTypeRespVO>
+        headerTitle="字典管理"
         columns={columns}
         scroll={{ x: 'max-content' }}
         actionRef={actionRef}
@@ -199,7 +200,6 @@ const DictTypeConfig: React.FC = () => {
           align: 'center',
           showSizeChanger: true
         }}
-        headerTitle={false}
         toolBarRender={() => [
           <Button
             key="create"
