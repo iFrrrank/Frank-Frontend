@@ -1,6 +1,7 @@
 import type { RequestOptions } from '@@/plugin-request/request';
 import type { RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
+import { ApiEncrypt } from '@/utils/encrypt'; // Added encrypt module
 
 // 错误处理方案： 错误类型
 enum ErrorShowType {
@@ -33,7 +34,7 @@ export const errorConfig: RequestConfig = {
         res as unknown as ResponseStructure;
       if (!success) {
         const error: any = new Error(errorMessage);
-        error.name = 'BizError';
+        error.name = 'BizError'
         error.info = { errorCode, errorMessage, showType, data };
         throw error; // 抛出自制的错误
       }
@@ -92,12 +93,44 @@ export const errorConfig: RequestConfig = {
       const url = config?.url;
       // 从 localStorage 中获取 accessToken，并添加到请求头中
       const accessToken = localStorage.getItem('accessToken');
+
+      const configHeaders: Record<string, any> = { ...config.headers };
+
       if (accessToken) {
-        config.headers = {
-          ...config.headers,
-          Authorization: `Bearer ${accessToken}`,
-        };
+        configHeaders.Authorization = `Bearer ${accessToken}`;
       }
+
+      const method = config.method?.toUpperCase();
+      // 防止 GET 请求缓存
+      if (method === 'GET') {
+        configHeaders['Cache-Control'] = 'no-cache';
+        configHeaders['Pragma'] = 'no-cache';
+      }
+      // 处理 x-www-form-urlencoded
+      else if (method === 'POST') {
+        const contentType = configHeaders['Content-Type'] || configHeaders['content-type'];
+        if (contentType === 'application/x-www-form-urlencoded') {
+          if (config.data && typeof config.data !== 'string') {
+            config.data = new URLSearchParams(config.data as Record<string, string>).toString();
+          }
+        }
+      }
+
+      // 是否 API 加密
+      if (configHeaders.isEncrypt) {
+        try {
+          if (config.data) {
+            config.data = ApiEncrypt.encryptRequest(config.data);
+            configHeaders[ApiEncrypt.getEncryptHeader()] = 'true';
+          }
+        } catch (error) {
+          console.error('请求数据加密失败:', error);
+          throw error;
+        }
+      }
+
+      // 重新赋给 config.headers
+      config.headers = configHeaders as any;
       return { ...config, url };
     },
   ],
@@ -106,7 +139,25 @@ export const errorConfig: RequestConfig = {
   responseInterceptors: [
     (response) => {
       // 拦截响应数据，进行个性化处理
-      const { data } = response as unknown as ResponseStructure;
+      let data = (response as any).data;
+
+      // 检查是否需要解密响应数据
+      const headers = (response as any).headers || {};
+      const encryptHeader = ApiEncrypt.getEncryptHeader();
+      const isEncryptResponse =
+        headers[encryptHeader] === 'true' ||
+        headers[encryptHeader.toLowerCase()] === 'true';
+
+      if (isEncryptResponse && typeof data === 'string') {
+        try {
+          // 解密响应数据
+          data = ApiEncrypt.decryptResponse(data);
+          (response as any).data = data;
+        } catch (error) {
+          console.error('响应数据解密失败:', error);
+          throw new Error('响应数据解密失败: ' + (error as Error).message);
+        }
+      }
 
       if (data?.success === false) {
         message.error('请求失败！');
