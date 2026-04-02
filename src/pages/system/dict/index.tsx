@@ -12,8 +12,8 @@ import { history } from '@umijs/max'
 import { deleteDictType, export2, pageDictTypes } from '@/api/system/dictType'
 import SaveDictTypeForm, { handleCreateDictType, handleEditDictType } from './SaveDictTypeForm'
 import { textConst } from '@/locales/zh-CN'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DictTypeConfig: React.FC = () => {

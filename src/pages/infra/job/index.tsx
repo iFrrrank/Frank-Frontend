@@ -22,7 +22,7 @@ import {
 import JobForm from './JobForm'
 import JobDetail from './JobDetail'
 import { textConst } from '@/locales/zh-CN'
-import { handleDelete } from '@/components/SingleDelete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 export const JOB_STATUS_OPTIONS = [

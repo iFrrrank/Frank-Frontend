@@ -22,8 +22,8 @@ import AssignRoleForm, { handleAssignRole } from '@/pages/system/user/AssignRole
 import ImportUserForm, { handleImportUser } from '@/pages/system/user/ImportUserForm'
 import SaveUserForm, { handleCreateUser, handleEditUser } from '@/pages/system/user/SaveUserForm'
 import { textConst } from '@/locales/zh-CN'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const SystemUser: React.FC = () => {

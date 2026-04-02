@@ -4,8 +4,7 @@ import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailAccount, getMailAccountPage } from '@/api/system/mailAccount'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 import SaveMailAccountForm, {

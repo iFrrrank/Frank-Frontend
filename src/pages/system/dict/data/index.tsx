@@ -13,8 +13,8 @@ import {
 } from '@ant-design/icons'
 import { deleteDictData, export3, getDictTypePage } from '@/api/system/dictData'
 import { Button, message, Modal } from 'antd'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DictDataList: React.FC = () => {

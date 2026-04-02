@@ -11,8 +11,7 @@ import { ProTable } from '@ant-design/pro-components'
 import { deleteConfig, deleteConfigList, exportConfig, getConfigPage } from '@/api/infra/config'
 import ConfigForm from './ConfigForm'
 import { textConst } from '@/locales/zh-CN'
-import { handleDelete } from '@/components/SingleDelete'
-import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 /** 系统内置选项 */

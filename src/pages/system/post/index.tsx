@@ -12,8 +12,8 @@ import { deletePost, export1, getPostPage } from '@/api/system/post'
 
 import SavePostForm, { handleCreatePost, handleEditPost } from './SavePostForm'
 import { textConst } from '@/locales/zh-CN'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const PostManagement: React.FC = () => {

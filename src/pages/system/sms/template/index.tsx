@@ -19,8 +19,8 @@ import SaveSmsTemplateForm, {
 } from './SaveSmsTemplateForm'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
 import { textConst } from '@/locales/zh-CN'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const SmsTemplateConfig: React.FC = () => {

@@ -8,6 +8,7 @@ import {
   ProFormText,
   ProFormTreeSelect
 } from '@ant-design/pro-components'
+import { UserOutlined } from '@ant-design/icons'
 import { createMenu, getMenuList, updateMenu } from '@/api/system/menu'
 import { textConst } from '@/locales/zh-CN'
 
@@ -160,7 +161,7 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
                   colProps={{ span: 24 }}
                   placeholder="请输入菜单图标"
                   fieldProps={{
-                    addonAfter: <AntdIcons.UserOutlined /> // 示意性图标后置
+                    addonAfter: <UserOutlined /> // 示意性图标后置
                   }}
                 />
               )}

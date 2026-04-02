@@ -13,7 +13,7 @@ import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu' // 将�
 import { textConst } from '@/locales/zh-CN'
 import SaveMenuForm, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
 import { handleTreeData } from '@/utils/tree'
-import { handleDelete } from '@/components/SingleDelete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 // 动态渲染图标

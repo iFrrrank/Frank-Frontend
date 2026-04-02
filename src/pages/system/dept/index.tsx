@@ -18,8 +18,7 @@ import { getSimpleUserList } from '@/api/system/user'
 import { textConst } from '@/locales/zh-CN'
 import SaveDeptForm, { handleCreateDept, handleEditDept } from '@/pages/system/dept/SaveDeptForm'
 import { handleTreeData } from '@/utils/tree'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DeptManagement: React.FC = () => {
@@ -60,7 +59,7 @@ const DeptManagement: React.FC = () => {
         setUserList(resp.data)
         return resp.data
       }
-    } catch {}
+    } catch { }
     return []
   }
 

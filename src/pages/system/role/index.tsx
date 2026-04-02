@@ -14,8 +14,8 @@ import SaveRoleForm, { handleCreateRole, handleEditRole } from './SaveRoleForm'
 import AssignMenuForm, { handleOpenMenuAssign } from './AssignMenuForm'
 import AssignDataScopeForm, { handleOpenDataScope } from './AssignDataScopeForm'
 import { textConst } from '@/locales/zh-CN'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const Role: React.FC = () => {
