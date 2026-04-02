@@ -22,7 +22,8 @@ import {
 import JobForm from './JobForm'
 import JobDetail from './JobDetail'
 import { textConst } from '@/locales/zh-CN'
-
+import { handleExport } from '@/components/Export'
+import { handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 export const JOB_STATUS_OPTIONS = [
@@ -110,25 +111,8 @@ const JobPage: React.FC = () => {
     ]
   })
 
-  const handleExport = async () => {
-    try {
-      const resp = await exportJob({
-        pageNo: '1',
-        pageSize: '100'
-      })
-      const blob = new Blob([resp], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      })
-      const url = window.URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = '定时任务.xlsx'
-      link.click()
-      window.URL.revokeObjectURL(url)
-      message.success(textConst.msg.exportSuccess)
-    } catch {
-      message.error('textConst.msg.exportError')
-    }
+  const handleExportClick = () => {
+    handleExport(exportJob, { pageNo: '1', pageSize: '100' }, '定时任务.xlsx', '确定要导出定时任务吗？')
   }
 
   const columns: ProColumns<JobVO>[] = [
@@ -271,7 +255,7 @@ const JobPage: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>,

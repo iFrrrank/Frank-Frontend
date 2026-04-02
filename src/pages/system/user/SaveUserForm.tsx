@@ -120,7 +120,7 @@ const SaveUserForm: React.FC = () => {
           return []
         }}
         fieldProps={{
-          fieldNames: { label: 'title', value: 'value', children: 'children' },
+          fieldNames: { label: 'title', value: 'key', children: 'children' },
           showSearch: true,
           treeNodeFilterProp: 'title'
         }}

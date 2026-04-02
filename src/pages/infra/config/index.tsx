@@ -13,6 +13,7 @@ import ConfigForm from './ConfigForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import { handleExport } from '@/components/Export'
 
 /** 系统内置选项 */
 const CONFIG_TYPE_OPTIONS = [
@@ -38,35 +39,20 @@ const ConfigPage: React.FC = () => {
     setFormVisible(true)
   }
 
-  const handleExport = async () => {
-    try {
-      const params = formRef.current?.getFieldsValue() || {}
-      const { createTime, ...rest } = params
-      let beginTimeStr, endTimeStr
-      if (createTime && createTime.length === 2) {
-        beginTimeStr = createTime[0] + ' 00:00:00'
-        endTimeStr = createTime[1] + ' 23:59:59'
-      }
-      const resp = await exportConfig({
-        ...(beginTimeStr && endTimeStr ? { createTime: [beginTimeStr, endTimeStr] } : {}),
-        ...rest,
-        pageNo: '1',
-        pageSize: '100'
-      } as any)
-      // 处理文件下载
-      const blob = new Blob([resp], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      })
-      const url = window.URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = '参数配置.xlsx'
-      link.click()
-      window.URL.revokeObjectURL(url)
-      message.success(textConst.msg.exportSuccess)
-    } catch {
-      message.error('textConst.msg.exportError')
+  const handleExportClick = () => {
+    const params = formRef.current?.getFieldsValue() || {}
+    const { createTime, ...rest } = params
+    let beginTimeStr, endTimeStr
+    if (createTime && createTime.length === 2) {
+      beginTimeStr = createTime[0] + ' 00:00:00'
+      endTimeStr = createTime[1] + ' 23:59:59'
     }
+    handleExport(exportConfig, {
+      ...(beginTimeStr && endTimeStr ? { createTime: [beginTimeStr, endTimeStr] } : {}),
+      ...rest,
+      pageNo: '1',
+      pageSize: '100'
+    }, '参数配置.xlsx', '确定要导出参数配置吗？')
   }
 
   const columns: ProColumns<API.InfraConfigRespVO>[] = [
@@ -255,7 +241,7 @@ const ConfigPage: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>

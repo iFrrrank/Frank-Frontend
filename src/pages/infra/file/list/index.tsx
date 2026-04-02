@@ -46,7 +46,7 @@ const FileListPage: React.FC = () => {
     }
     navigator.clipboard
       .writeText(url)
-      .then(() => message.success('链接已复制到剪贴板'))
+      .then(() => message.success(textConst.msg.copySuccess))
       .catch(() => message.error(textConst.msg.copyError))
   }
 

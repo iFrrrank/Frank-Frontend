@@ -13,6 +13,7 @@ import { deleteDictType, export2, pageDictTypes } from '@/api/system/dictType'
 import SaveDictTypeForm, { handleCreateDictType, handleEditDictType } from './SaveDictTypeForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
+import { handleExport } from '@/components/Export'
 
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
@@ -113,44 +114,19 @@ const DictTypeConfig: React.FC = () => {
     }
   ]
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有字典类型数据项?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          const formValues = formRef.current?.getFieldsValue?.() || {}
-          if (formValues.createTime && formValues.createTime.length === 2) {
-            formValues.beginTime = formValues.createTime[0] + ' 00:00:00'
-            formValues.endTime = formValues.createTime[1] + ' 23:59:59'
-            delete formValues.createTime
-          }
-          const resp = await export2(formValues as any)
-          if (!resp) return
-          // 处理为 Blob 下载
-          const blob = new Blob([resp as any], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          })
-          const url = window.URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.href = url
-          link.download = '字典类型数据.xlsx'
-          link.click()
-          window.URL.revokeObjectURL(url)
-          message.success(textConst.msg.exportSuccess)
-        } catch {
-          message.error('textConst.msg.exportError')
-        }
-      }
-    })
+  const handleExportClick = () => {
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    if (formValues.createTime && formValues.createTime.length === 2) {
+      formValues.beginTime = formValues.createTime[0] + ' 00:00:00'
+      formValues.endTime = formValues.createTime[1] + ' 23:59:59'
+      delete formValues.createTime
+    }
+    handleExport(export2, formValues, '字典类型数据.xlsx', '确认导出所有字典类型数据项?')
   }
 
   // ===== 字典数据维护页 =====
   const handleData = (record: API.SystemDictTypeRespVO) => {
-    history.push('/system/dict/data/${record.type}')
+    history.push(`/system/dict/data/${record.type}`)
   }
 
   return (
@@ -204,7 +180,7 @@ const DictTypeConfig: React.FC = () => {
           <Button
             key="create"
             icon={<PlusOutlined />}
-            onClick={handleCreateDictType}
+            onClick={() => handleCreateDictType()}
             type="primary"
           >
             {textConst.action.create}
@@ -214,7 +190,7 @@ const DictTypeConfig: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>,

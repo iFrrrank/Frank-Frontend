@@ -3,6 +3,7 @@ import { message, Modal, Switch, Upload } from 'antd'
 import type { ActionType } from '@ant-design/pro-components'
 import { InboxOutlined } from '@ant-design/icons'
 import { importExcel, importTemplate } from '@/api/system/user'
+import { handleImport, handleDownloadTemplate } from '@/components/Import'
 import { textConst } from '@/locales/zh-CN'
 
 const { Dragger } = Upload
@@ -18,61 +19,23 @@ const ImportUserForm: React.FC = () => {
 
   // 导入用户
   handleImportUser = async () => {
-    if (!importFile) {
-      message.warning('请先选择文件')
-      return
-    }
     setImportLoading(true)
-    try {
-      const formData = new FormData()
-      formData.append('file', importFile)
-      const resp = await importExcel({ updateSupport, file: importFile } as any, formData as any)
-      if (resp.code === 0) {
-        const data = resp.data
-        const msgs: string[] = []
-        if (data?.createUsernames?.length) {
-          msgs.push(`成功导入用户: ${data.createUsernames.join(', ')}`)
-        }
-        if (data?.updateUsernames?.length) {
-          msgs.push(`成功更新用户: ${data.updateUsernames.join(', ')}`)
-        }
-        if (data?.failureUsernames) {
-          const failMap = data.failureUsernames as Record<string, string>
-          const failKeys = Object.keys(failMap)
-          if (failKeys.length > 0) {
-            msgs.push(`导入失败用户: ${failKeys.join(', ')}`)
-          }
-        }
-        message.success(msgs.join('；') || textConst.msg.exportSuccess)
+    await handleImport(
+      importExcel,
+      importFile,
+      { updateSupport },
+      () => actionRef.current?.reload(),
+      () => {
         setImportModalVisible(false)
         setImportFile(null)
-        actionRef.current?.reload()
-      } else {
-        message.error(resp.msg || textConst.msg.exportError)
       }
-    } catch {
-      message.error(textConst.msg.exportError)
-    } finally {
-      setImportLoading(false)
-    }
+    )
+    setImportLoading(false)
   }
 
   // 下载导入模板
-  const handleDownloadTemplate = async () => {
-    try {
-      const resp = await importTemplate()
-      const blob = new Blob([resp], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      })
-      const url = window.URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = '用户导入模板.xlsx'
-      link.click()
-      window.URL.revokeObjectURL(url)
-    } catch {
-      message.error('下载模板失败')
-    }
+  const handleDownloadTemplateClick = async () => {
+    await handleDownloadTemplate(importTemplate, '用户导入模板.xlsx')
   }
 
   return (
@@ -88,7 +51,7 @@ const ImportUserForm: React.FC = () => {
       okText="确认导入"
     >
       <div style={{ marginBottom: 16 }}>
-        <a onClick={handleDownloadTemplate}>下载导入模板</a>
+        <a onClick={handleDownloadTemplateClick}>下载导入模板</a>
       </div>
       <Dragger
         accept=".xlsx,.xls"

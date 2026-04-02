@@ -6,9 +6,10 @@ import {
   ProTable
 } from '@ant-design/pro-components'
 import { textConst } from '@/locales/zh-CN'
-import { Button, Drawer, message, Modal, Space, Typography } from 'antd'
+import { Button, Drawer, message, Modal, Space, Typography, Descriptions } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import { exportOperateLog, pageOperateLog } from '@/api/system/operateLog'
+import { handleExport } from '@/components/Export'
 
 const OperateLogConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -100,7 +101,7 @@ const OperateLogConfig: React.FC = () => {
       title: textConst.form.operate,
       valueType: 'option',
       align: 'center',
-      width: 100,
+      width: 80,
       key: 'option',
       fixed: 'right',
       render: (_, record) => (
@@ -117,46 +118,16 @@ const OperateLogConfig: React.FC = () => {
     }
   ]
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有操作日志数据项?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          const formValues = formRef.current?.getFieldsValue?.() || {}
+  const handleExportClick = () => {
+    const formValues = formRef.current?.getFieldsValue?.() || {}
 
-          if (formValues.sendTime && formValues.sendTime.length === 2) {
-            formValues.beginSendTime = formValues.sendTime[0] + ' 00:00:00'
-            formValues.endSendTime = formValues.sendTime[1] + ' 23:59:59'
-          }
-          if (formValues.receiveTime && formValues.receiveTime.length === 2) {
-            formValues.beginReceiveTime = formValues.receiveTime[0] + ' 00:00:00'
-            formValues.endReceiveTime = formValues.receiveTime[1] + ' 23:59:59'
-          }
-          delete formValues.sendTime
-          delete formValues.receiveTime
+    if (formValues.createTime && formValues.createTime.length === 2) {
+      formValues.beginTime = formValues.createTime[0] + ' 00:00:00'
+      formValues.endTime = formValues.createTime[1] + ' 23:59:59'
+      delete formValues.createTime
+    }
 
-          const resp = await exportOperateLog(formValues as any)
-          if (!resp) return
-          // 处理为 Blob 下载
-          const blob = new Blob([resp as any], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          })
-          const url = window.URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.href = url
-          link.download = '操作日志数据.xlsx'
-          link.click()
-          window.URL.revokeObjectURL(url)
-          message.success(textConst.msg.exportSuccess)
-        } catch {
-          message.error('textConst.msg.exportError')
-        }
-      }
-    })
+    handleExport(exportOperateLog, formValues, '操作日志数据.xlsx', '确认导出所有操作日志数据项?')
   }
 
   return (
@@ -224,14 +195,13 @@ const OperateLogConfig: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>
         ]}
       />
 
-      {/* 详情抽屉 */}
       <Drawer
         title="操作日志详情"
         placement="right"
@@ -240,59 +210,27 @@ const OperateLogConfig: React.FC = () => {
           setSelectedRecord(null)
         }}
         open={detailsDrawerVisible}
-        width={450}
+        width={400}
       >
         {selectedRecord && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <DetailItem label="日志 ID" value={selectedRecord.id} />
-            <DetailItem label="操作人 ID" value={selectedRecord.userId} />
-            <DetailItem label="操作人名字" value={selectedRecord.userName} />
-            <DetailItem label="操作人 IP" value={selectedRecord.userIp} />
-            <DetailItem label="操作人 UA" value={selectedRecord.userAgent} isLong />
-            <DetailItem label="操作模块" value={selectedRecord.type} />
-            <DetailItem label="操作名" value={selectedRecord.subType} />
-            <DetailItem label="操作内容" value={selectedRecord.action} isLong />
-            <DetailItem label="操作结果" value={selectedRecord.requestMethod} />
-            <DetailItem label="请求 URL" value={selectedRecord.requestUrl} />
-            <DetailItem label="操作时间" value={selectedRecord.createTime} />
-            <DetailItem label="业务 ID" value={selectedRecord.bizId} />
-          </div>
+          <Descriptions column={1} colon={false} labelStyle={{ width: '80px', display: 'flex', justifyContent: 'flex-end', fontWeight: 'bold', color: 'black' }} contentStyle={{ paddingLeft: '10px' }} >
+            <Descriptions.Item label="日志 ID">{selectedRecord.id || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作人 ID">{selectedRecord.userId || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作人">{selectedRecord.userName || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作人 IP">{selectedRecord.userIp || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作人 UA">{selectedRecord.userAgent || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作模块">{selectedRecord.type || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作名">{selectedRecord.subType || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作内容">{selectedRecord.action || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作结果">{selectedRecord.requestMethod || '-'}</Descriptions.Item>
+            <Descriptions.Item label="请求 URL">{selectedRecord.requestUrl || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作时间">{selectedRecord.createTime || '-'}</Descriptions.Item>
+            <Descriptions.Item label="业务 ID">{selectedRecord.bizId || '-'}</Descriptions.Item>
+          </Descriptions>
         )}
-      </Drawer>
+      </Drawer >
     </>
   )
 }
-
-// 详情项组件
-const DetailItem: React.FC<{ label: string; value: any; isLong?: boolean }> = ({
-  label,
-  value,
-  isLong = false
-}) => (
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      borderBottom: '1px solid #f0f0f0',
-      paddingBottom: isLong ? '16px' : '12px',
-      paddingTop: isLong ? '8px' : '0'
-    }}
-  >
-    <div style={{ fontWeight: 500, width: '80px', flexShrink: 0 }}>{label}</div>
-    <div
-      style={{
-        flex: 1,
-        marginLeft: '16px',
-        wordBreak: isLong ? 'break-all' : 'normal',
-        whiteSpace: isLong ? 'normal' : 'nowrap',
-        overflow: isLong ? 'visible' : 'hidden',
-        textOverflow: isLong ? 'clip' : 'ellipsis',
-        lineHeight: isLong ? '1.5' : '1'
-      }}
-    >
-      {value || '-'}
-    </div>
-  </div>
-)
 
 export default OperateLogConfig

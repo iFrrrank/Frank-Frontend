@@ -11,6 +11,7 @@ import { exportJobLog, getJobLogPage, JobLogVO } from '@/api/infra/jobLog'
 import { textConst } from '@/locales/zh-CN'
 import { DownloadOutlined } from '@ant-design/icons'
 import JobLogDetail from '@/pages/infra/job/jobLog/JobLogDetail'
+import { handleExport } from '@/components/Export'
 
 export const JOB_LOG_STATUS_OPTIONS = [
   { label: '成功', value: 0 },
@@ -40,26 +41,9 @@ const JobLogPage: React.FC = () => {
     setDetailVisible(true)
   }
 
-  const handleExport = async (formVals: any) => {
-    try {
-      const resp = await exportJobLog({
-        ...formVals,
-        pageNo: '1',
-        pageSize: '100'
-      })
-      const blob = new Blob([resp], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      })
-      const url = window.URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = '定时任务日志.xlsx'
-      link.click()
-      window.URL.revokeObjectURL(url)
-      message.success(textConst.msg.exportSuccess)
-    } catch {
-      message.error('textConst.msg.exportError')
-    }
+  const handleExportClick = () => {
+    const formVals = formRef.current?.getFieldsValue() || {}
+    handleExport(exportJobLog, { ...formVals, pageNo: '1', pageSize: '100' }, '定时任务日志.xlsx', '确定要导出定时任务日志吗？')
   }
 
   const columns: ProColumns<JobLogVO>[] = [
@@ -193,7 +177,7 @@ const JobLogPage: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={() => handleExport(formRef.current?.getFieldsValue() || {})}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>

@@ -1,5 +1,5 @@
 import { login } from '@/api/system/auth'
-import { Footer } from '@/components'
+import { Footer } from '@/components/Footer'
 import {
   AlipayCircleOutlined,
   LockOutlined,

@@ -23,7 +23,7 @@ import ImportUserForm, { handleImportUser } from '@/pages/system/user/ImportUser
 import SaveUserForm, { handleCreateUser, handleEditUser } from '@/pages/system/user/SaveUserForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
-
+import { handleExport } from '@/components/Export'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const SystemUser: React.FC = () => {
@@ -141,35 +141,14 @@ const SystemUser: React.FC = () => {
   }
 
   // 导出用户
-  const handleExport = () => {
-    Modal.confirm({
-      title: textConst.msg.reminder,
-      icon: <ExclamationCircleOutlined />,
-      content: textConst.msg.exportMsg,
-      onOk: async () => {
-        try {
-          const formValues = formRef.current?.getFieldsValue?.() || {}
-          const resp = await exportUserList({
-            exportReqVO: {
-              ...formValues,
-              deptId: selectedDeptId
-            }
-          })
-          const blob = new Blob([resp], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          })
-          const url = window.URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.href = url
-          link.download = '用户数据.xlsx'
-          link.click()
-          window.URL.revokeObjectURL(url)
-          message.success(textConst.msg.exportSuccess)
-        } catch {
-          message.error(textConst.msg.exportError)
-        }
-      }
-    })
+  const handleExportBtnClick = () => {
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport(
+      exportUserList,
+      { exportReqVO: { ...formValues, deptId: selectedDeptId } },
+      '用户数据.xlsx',
+      textConst.msg.exportMsg
+    )
   }
 
   return (
@@ -251,7 +230,7 @@ const SystemUser: React.FC = () => {
           dateFormatter="string"
           headerTitle="用户管理"
           toolBarRender={() => [
-            <Button key="create" icon={<PlusOutlined />} onClick={handleCreateUser} type="primary">
+            <Button key="create" icon={<PlusOutlined />} onClick={() => handleCreateUser()} type="primary">
               {textConst.action.create}
             </Button>,
             <Button
@@ -276,7 +255,7 @@ const SystemUser: React.FC = () => {
               color="green"
               variant="outlined"
               icon={<UploadOutlined />}
-              onClick={handleImportUser}
+              onClick={() => handleImportUser()}
             >
               {textConst.action.import}
             </Button>,
@@ -285,7 +264,7 @@ const SystemUser: React.FC = () => {
               color="volcano"
               variant="outlined"
               icon={<DownloadOutlined />}
-              onClick={handleExport}
+              onClick={handleExportBtnClick}
             >
               {textConst.action.export}
             </Button>

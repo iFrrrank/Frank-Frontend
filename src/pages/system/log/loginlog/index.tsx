@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react'
-import { Button, Drawer, message, Modal, Space, Typography } from 'antd'
+import { Button, Drawer, message, Modal, Space, Typography, Descriptions } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { exportLoginLog, getLoginLogPage } from '@/api/system/loginLog'
 import { textConst } from '@/locales/zh-CN'
+import { handleExport } from '@/components/Export'
 
 const LoginLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -130,41 +131,14 @@ const LoginLogPage: React.FC = () => {
     }
   ]
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有登录日志数据项?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          const formValues = formRef.current?.getFieldsValue?.() || {}
-          if (formValues.createTime && formValues.createTime.length === 2) {
-            formValues.beginCreateTime = formValues.createTime[0] + ' 00:00:00'
-            formValues.endCreateTime = formValues.createTime[1] + ' 23:59:59'
-          }
-          delete formValues.createTime
-
-          const resp = await exportLoginLog(formValues as any)
-          if (!resp) return
-
-          const blob = new Blob([resp as any], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          })
-          const url = window.URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.href = url
-          link.download = '登录日志数据.xlsx'
-          link.click()
-          window.URL.revokeObjectURL(url)
-          message.success(textConst.msg.exportSuccess)
-        } catch (error) {
-          console.error(error)
-          message.error('textConst.msg.exportError')
-        }
-      }
-    })
+  const handleExportClick = () => {
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    if (formValues.createTime && formValues.createTime.length === 2) {
+      formValues.beginCreateTime = formValues.createTime[0] + ' 00:00:00'
+      formValues.endCreateTime = formValues.createTime[1] + ' 23:59:59'
+    }
+    delete formValues.createTime
+    handleExport(exportLoginLog, formValues, '登录日志数据.xlsx', '确认导出所有登录日志数据项?')
   }
 
   return (
@@ -232,7 +206,7 @@ const LoginLogPage: React.FC = () => {
             icon={<DownloadOutlined />}
             color="volcano"
             variant="outlined"
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>
@@ -247,61 +221,24 @@ const LoginLogPage: React.FC = () => {
           setSelectedRecord(null)
         }}
         open={detailsDrawerVisible}
-        width={500}
+        width={400}
       >
         {selectedRecord && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <DetailItem label="日志 ID" value={selectedRecord.id} />
-            <DetailItem
-              label="日志类型"
-              value={logTypeMap[selectedRecord.logType] || selectedRecord.logType}
-            />
-            <DetailItem label="用户 ID" value={selectedRecord.userId} />
-            <DetailItem label="用户名" value={selectedRecord.username} />
-            <DetailItem label="登录地址" value={selectedRecord.userIp} />
-            <DetailItem label="浏览器 UA" value={selectedRecord.userAgent} isLong />
-            <DetailItem
-              label="登录结果"
-              value={resultMap[selectedRecord.result] || selectedRecord.result}
-            />
-            <DetailItem label="创建时间" value={selectedRecord.createTime} />
-            <DetailItem label="Trace ID" value={selectedRecord.traceId} isLong />
-          </div>
+          <Descriptions column={1} colon={false} labelStyle={{ width: '80px', display: 'flex', justifyContent: 'flex-end', fontWeight: 'bold', color: 'black' }} contentStyle={{ paddingLeft: '10px' }} >
+            <Descriptions.Item label="日志 ID">{selectedRecord.id || '-'}</Descriptions.Item>
+            <Descriptions.Item label="日志类型">{logTypeMap[selectedRecord.logType] || selectedRecord.logType}</Descriptions.Item>
+            <Descriptions.Item label="用户 ID">{selectedRecord.userId || '-'}</Descriptions.Item>
+            <Descriptions.Item label="用户名">{selectedRecord.username || '-'}</Descriptions.Item>
+            <Descriptions.Item label="登录 IP">{selectedRecord.userIp || '-'}</Descriptions.Item>
+            <Descriptions.Item label="浏览器 UA">{selectedRecord.userAgent || '-'}</Descriptions.Item>
+            <Descriptions.Item label="登录结果">{resultMap[selectedRecord.result] || selectedRecord.result}</Descriptions.Item>
+            <Descriptions.Item label="创建时间">{selectedRecord.createTime || '-'}</Descriptions.Item>
+            <Descriptions.Item label="Trace ID">{selectedRecord.traceId || '-'}</Descriptions.Item>
+          </Descriptions>
         )}
       </Drawer>
     </>
   )
 }
-
-const DetailItem: React.FC<{ label: string; value: any; isLong?: boolean }> = ({
-  label,
-  value,
-  isLong = false
-}) => (
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      borderBottom: '1px solid #f0f0f0',
-      paddingBottom: isLong ? '16px' : '12px',
-      paddingTop: isLong ? '8px' : '0'
-    }}
-  >
-    <div style={{ fontWeight: 500, width: '100px', flexShrink: 0 }}>{label}</div>
-    <div
-      style={{
-        flex: 1,
-        marginLeft: '16px',
-        wordBreak: isLong ? 'break-all' : 'normal',
-        whiteSpace: isLong ? 'normal' : 'nowrap',
-        overflow: isLong ? 'visible' : 'hidden',
-        textOverflow: isLong ? 'clip' : 'ellipsis',
-        lineHeight: isLong ? '1.5' : '1'
-      }}
-    >
-      {value || '-'}
-    </div>
-  </div>
-)
 
 export default LoginLogPage

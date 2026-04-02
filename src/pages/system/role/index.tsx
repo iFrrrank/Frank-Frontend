@@ -15,6 +15,7 @@ import AssignMenuForm, { handleOpenMenuAssign } from './AssignMenuForm'
 import AssignDataScopeForm, { handleOpenDataScope } from './AssignDataScopeForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
+import { handleExport } from '@/components/Export'
 
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
@@ -154,38 +155,20 @@ const Role: React.FC = () => {
     }
   ]
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: textConst.msg.reminder,
-      icon: <ExclamationCircleOutlined />,
-      content: '确定要导出角色数据吗？',
-      onOk: async () => {
-        try {
-          const formValues = formRef.current?.getFieldsValue?.() || {}
-          // 处理时间范围
-          if (formValues.createTime && formValues.createTime.length === 2) {
-            formValues.beginTime = formValues.createTime[0] + ' 00:00:00'
-            formValues.endTime = formValues.createTime[1] + ' 23:59:59'
-            delete formValues.createTime
-          }
-          const resp = await exportUsingGet({
-            exportReqVO: formValues
-          })
-          const blob = new Blob([resp], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          })
-          const url = window.URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.href = url
-          link.download = '角色数据.xlsx'
-          link.click()
-          window.URL.revokeObjectURL(url)
-          message.success(textConst.msg.exportSuccess)
-        } catch {
-          message.error('textConst.msg.exportError')
-        }
-      }
-    })
+  const handleExportClick = () => {
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    // 处理时间范围
+    if (formValues.createTime && formValues.createTime.length === 2) {
+      formValues.beginTime = formValues.createTime[0] + ' 00:00:00'
+      formValues.endTime = formValues.createTime[1] + ' 23:59:59'
+      delete formValues.createTime
+    }
+    handleExport(
+      exportUsingGet,
+      { exportReqVO: formValues },
+      '角色数据.xlsx',
+      '确定要导出角色数据吗？'
+    )
   }
 
   return (
@@ -236,7 +219,7 @@ const Role: React.FC = () => {
           showSizeChanger: true
         }}
         toolBarRender={() => [
-          <Button key="create" icon={<PlusOutlined />} onClick={handleCreateRole} type="primary">
+          <Button key="create" icon={<PlusOutlined />} onClick={() => handleCreateRole()} type="primary">
             {textConst.action.create}
           </Button>,
           <Button
@@ -244,7 +227,7 @@ const Role: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>,
