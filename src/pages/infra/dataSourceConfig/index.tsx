@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal, Space, Typography } from 'antd'
-import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { Button, message, Typography } from 'antd'
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import {
@@ -10,8 +10,7 @@ import {
 } from '@/api/infra/dataSourceConfig'
 import DataSourceConfigForm from './DataSourceConfigForm'
 import { textConst } from '@/locales/zh-CN'
-import { handleDelete } from '@/components/SingleDelete'
-import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DataSourceConfigPage: React.FC = () => {

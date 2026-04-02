@@ -8,7 +8,7 @@ import SaveSocialClientForm, {
   handleEditSocialClient
 } from './SaveSocialClientForm'
 import { textConst } from '@/locales/zh-CN'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle } from '@/styles/common.style'
 
 /** 社交平台类型枚举 */

@@ -17,8 +17,8 @@ import SaveOAuth2ClientForm, {
   handleEditOAuth2Client
 } from './SaveOAuth2ClientForm'
 import { textConst } from '@/locales/zh-CN'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const App_: React.FC = () => {
@@ -283,38 +283,32 @@ const App_: React.FC = () => {
         title="应用凭证"
         open={copyModalVisible}
         onCancel={() => setCopyModalVisible(false)}
-        footer={[
-          <Button key="close" onClick={() => setCopyModalVisible(false)}>
-            {textConst.common.close}
-          </Button>
-        ]}
+        footer={[]}
       >
-        <div style={{ marginBottom: 16 }}>
-          <div style={{ marginBottom: 8 }}>
-            <span style={{ fontWeight: 'bold' }}>客户端 ID：</span>
+        <div >
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span style={{ fontWeight: 'bold' }}>客户端编号：</span>
+            <span>{copyClientData?.clientId}</span>
             <Button
               type="link"
               icon={<CopyOutlined />}
               onClick={() => copyToClipboard(copyClientData?.clientId || '')}
-              style={{ padding: 0, marginLeft: 8 }}
             >
               {textConst.action.copy}
             </Button>
           </div>
-          <Input value={copyClientData?.clientId} readOnly style={{ marginBottom: 16 }} />
 
-          <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
             <span style={{ fontWeight: 'bold' }}>客户端密钥：</span>
+            <span>{copyClientData?.secret}</span>
             <Button
               type="link"
               icon={<CopyOutlined />}
               onClick={() => copyToClipboard(copyClientData?.secret || '')}
-              style={{ padding: 0, marginLeft: 8 }}
             >
               {textConst.action.copy}
             </Button>
           </div>
-          <Input.Password value={copyClientData?.secret} readOnly visibilityToggle={false} />
         </div>
         <div
           style={{

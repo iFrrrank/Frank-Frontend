@@ -10,6 +10,7 @@ import {
 } from '@/api/infra/apiErrorLog'
 import { textConst } from '@/locales/zh-CN'
 import { tableActionStyle } from '@/styles/common.style'
+import { handleExport } from '@/components/Export'
 
 const ApiErrorLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -196,40 +197,14 @@ const ApiErrorLogPage: React.FC = () => {
     }
   ]
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有API错误日志？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          const formValues = formRef.current?.getFieldsValue?.() || {}
-
-          if (formValues.exceptionTime && formValues.exceptionTime.length === 2) {
-            formValues.beginTimeStr = formValues.exceptionTime[0] + ' 00:00:00'
-            formValues.endTimeStr = formValues.exceptionTime[1] + ' 23:59:59'
-          }
-          delete formValues.exceptionTime
-
-          const resp = await exportApiErrorLogExcel(formValues as any)
-          if (!resp) return
-          const blob = new Blob([resp as any], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          })
-          const url = window.URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.href = url
-          link.download = 'API错误日志.xlsx'
-          link.click()
-          window.URL.revokeObjectURL(url)
-          message.success(textConst.msg.exportSuccess)
-        } catch {
-          message.error('textConst.msg.exportError')
-        }
-      }
-    })
+  const handleExportClick = () => {
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    if (formValues.exceptionTime && formValues.exceptionTime.length === 2) {
+      formValues.beginTimeStr = formValues.exceptionTime[0] + ' 00:00:00'
+      formValues.endTimeStr = formValues.exceptionTime[1] + ' 23:59:59'
+    }
+    delete formValues.exceptionTime
+    handleExport(exportApiErrorLogExcel, formValues, 'API错误日志.xlsx', '确认导出所有API错误日志？')
   }
 
   return (
@@ -297,7 +272,7 @@ const ApiErrorLogPage: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>

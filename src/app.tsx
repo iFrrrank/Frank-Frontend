@@ -1,4 +1,6 @@
-import { AvatarDropdown, AvatarName, Footer, Question } from '@/components'
+import { AvatarDropdown, AvatarName } from '@/components/RightContent/AvatarDropdown'
+import { Question } from '@/components/RightContent'
+import { Footer } from '@/components/Footer'
 import { getUser } from '@/api/system/user'
 import { LinkOutlined } from '@ant-design/icons'
 import type { Settings as LayoutSettings } from '@ant-design/pro-components'
@@ -92,11 +94,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     ],
     links: isDev
       ? [
-          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
-            <LinkOutlined />
-            <span>OpenAPI 文档</span>
-          </Link>
-        ]
+        <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
+          <LinkOutlined />
+          <span>OpenAPI 文档</span>
+        </Link>
+      ]
       : [],
     menuHeaderRender: undefined,
     // 自定义 403 页面
@@ -136,4 +138,3 @@ export const request: RequestConfig = {
   baseURL: 'http://localhost:9001',
   ...errorConfig
 }
-

@@ -13,8 +13,9 @@ import {
 } from '@ant-design/icons'
 import { deleteDictData, export3, getDictTypePage } from '@/api/system/dictData'
 import { Button, message, Modal } from 'antd'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+import { handleExport } from '@/components/Export'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DictDataList: React.FC = () => {
@@ -159,38 +160,13 @@ const DictDataList: React.FC = () => {
     }
   ]
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有字典数据项？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          const formValues = formRef.current?.getFieldsValue?.() || {}
-          // 填补隐藏/默认的 dictType
-          if (!formValues.dictType && defaultDictType) {
-            formValues.dictType = defaultDictType
-          }
-          const resp = await export3(formValues as any)
-          if (!resp) return
-          // 处理为 Blob 下载
-          const blob = new Blob([resp as any], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          })
-          const url = window.URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.href = url
-          link.download = '字典数据.xlsx'
-          link.click()
-          window.URL.revokeObjectURL(url)
-          message.success(textConst.msg.exportSuccess)
-        } catch {
-          message.error('textConst.msg.exportError')
-        }
-      }
-    })
+  const handleExportClick = () => {
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    // 填补隐藏/默认的 dictType
+    if (!formValues.dictType && defaultDictType) {
+      formValues.dictType = defaultDictType
+    }
+    handleExport(export3, formValues, '字典数据.xlsx', '确认导出所有字典数据项？')
   }
 
   return (
@@ -252,7 +228,7 @@ const DictDataList: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>,

@@ -12,8 +12,9 @@ import { deletePost, export1, getPostPage } from '@/api/system/post'
 
 import SavePostForm, { handleCreatePost, handleEditPost } from './SavePostForm'
 import { textConst } from '@/locales/zh-CN'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+import { handleExport } from '@/components/Export'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const PostManagement: React.FC = () => {
@@ -81,7 +82,7 @@ const PostManagement: React.FC = () => {
         }
       },
       fieldProps: {
-        placeholder: 'textConst.common.selectText状态'
+        placeholder: '请选择状态'
       }
     },
     {
@@ -118,39 +119,19 @@ const PostManagement: React.FC = () => {
     }
   ]
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有岗位数据项?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          const formValues = formRef.current?.getFieldsValue?.() || {}
-          if (formValues.createTime && formValues.createTime.length === 2) {
-            formValues.beginTime = formValues.createTime[0] + ' 00:00:00'
-            formValues.endTime = formValues.createTime[1] + ' 23:59:59'
-            delete formValues.createTime
-          }
-          const resp = await export1(formValues as any)
-          if (!resp) return
-          // 处理为 Blob 下载
-          const blob = new Blob([resp], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          })
-          const url = window.URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.href = url
-          link.download = '岗位数据.xlsx'
-          link.click()
-          window.URL.revokeObjectURL(url)
-          message.success(textConst.msg.exportSuccess)
-        } catch {
-          message.error('textConst.msg.exportError')
-        }
-      }
-    })
+  const handleExportClick = () => {
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    if (formValues.createTime && formValues.createTime.length === 2) {
+      formValues.beginTime = formValues.createTime[0] + ' 00:00:00'
+      formValues.endTime = formValues.createTime[1] + ' 23:59:59'
+      delete formValues.createTime
+    }
+    handleExport(
+      export1,
+      formValues,
+      '岗位数据.xlsx',
+      '确认导出所有岗位数据项?'
+    )
   }
 
   return (
@@ -201,7 +182,7 @@ const PostManagement: React.FC = () => {
           showSizeChanger: true
         }}
         toolBarRender={() => [
-          <Button key="create" icon={<PlusOutlined />} onClick={handleCreatePost} type="primary">
+          <Button key="create" icon={<PlusOutlined />} onClick={() => handleCreatePost()} type="primary">
             {textConst.action.create}
           </Button>,
           <Button
@@ -209,7 +190,7 @@ const PostManagement: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>,

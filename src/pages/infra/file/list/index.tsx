@@ -11,8 +11,7 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { deleteFile, deleteFileList, getFilePage, uploadFile } from '@/api/infra/fileList'
 import { textConst } from '@/locales/zh-CN'
-import { handleDelete } from '@/components/SingleDelete'
-import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const { Dragger } = Upload
@@ -47,7 +46,7 @@ const FileListPage: React.FC = () => {
     }
     navigator.clipboard
       .writeText(url)
-      .then(() => message.success('链接已复制到剪贴板'))
+      .then(() => message.success(textConst.msg.copySuccess))
       .catch(() => message.error(textConst.msg.copyError))
   }
 
@@ -184,8 +183,8 @@ const FileListPage: React.FC = () => {
                 alt={record.name}
                 style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 4 }}
                 onError={(e) => {
-                  ;(e.target as HTMLImageElement).style.display = 'none'
-                  ;(e.target as HTMLImageElement).parentElement!.textContent = '加载失败'
+                  ; (e.target as HTMLImageElement).style.display = 'none'
+                    ; (e.target as HTMLImageElement).parentElement!.textContent = '加载失败'
                 }}
               />
             </a>

@@ -8,8 +8,8 @@ import SaveSmsChannelForm, {
 } from './SaveSmsChannelForm'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { deleteSmsChannel, getSmsChannelPage } from '@/api/system/smsChannel'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const SmsChannelConfig: React.FC = () => {

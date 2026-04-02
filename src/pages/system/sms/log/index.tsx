@@ -6,6 +6,7 @@ import { ProTable } from '@ant-design/pro-components'
 import { exportSmsLogExcel, getSmsLogPage } from '@/api/system/smsLog'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
 import { textConst } from '@/locales/zh-CN'
+import { handleExport } from '@/components/Export'
 
 const SmsLogConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -165,46 +166,21 @@ const SmsLogConfig: React.FC = () => {
     }
   ]
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有短信日志数据项?',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          const formValues = formRef.current?.getFieldsValue?.() || {}
+  const handleExportClick = () => {
+    const formValues = formRef.current?.getFieldsValue?.() || {}
 
-          if (formValues.sendTime && formValues.sendTime.length === 2) {
-            formValues.beginSendTime = formValues.sendTime[0] + ' 00:00:00'
-            formValues.endSendTime = formValues.sendTime[1] + ' 23:59:59'
-          }
-          if (formValues.receiveTime && formValues.receiveTime.length === 2) {
-            formValues.beginReceiveTime = formValues.receiveTime[0] + ' 00:00:00'
-            formValues.endReceiveTime = formValues.receiveTime[1] + ' 23:59:59'
-          }
-          delete formValues.sendTime
-          delete formValues.receiveTime
+    if (formValues.sendTime && formValues.sendTime.length === 2) {
+      formValues.beginSendTime = formValues.sendTime[0] + ' 00:00:00'
+      formValues.endSendTime = formValues.sendTime[1] + ' 23:59:59'
+    }
+    if (formValues.receiveTime && formValues.receiveTime.length === 2) {
+      formValues.beginReceiveTime = formValues.receiveTime[0] + ' 00:00:00'
+      formValues.endReceiveTime = formValues.receiveTime[1] + ' 23:59:59'
+    }
+    delete formValues.sendTime
+    delete formValues.receiveTime
 
-          const resp = await exportSmsLogExcel(formValues as any)
-          if (!resp) return
-          // 处理为 Blob 下载
-          const blob = new Blob([resp as any], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          })
-          const url = window.URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.href = url
-          link.download = '短信日志数据.xlsx'
-          link.click()
-          window.URL.revokeObjectURL(url)
-          message.success(textConst.msg.exportSuccess)
-        } catch {
-          message.error('textConst.msg.exportError')
-        }
-      }
-    })
+    handleExport(exportSmsLogExcel, formValues, '短信日志数据.xlsx', '确认导出所有短信日志数据项?')
   }
 
   return (
@@ -286,7 +262,7 @@ const SmsLogConfig: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>

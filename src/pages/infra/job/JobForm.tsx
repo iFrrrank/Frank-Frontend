@@ -60,7 +60,7 @@ const JobForm: React.FC<JobFormProps> = ({ visible, setVisible, onSuccess, id })
             const resp = await getJob(id)
             return resp.data as Record<string, any>
           }
-          return { retryCount: 0, retryInterval: 0 }
+          return {}
         }}
         onFinish={async (values) => {
           try {

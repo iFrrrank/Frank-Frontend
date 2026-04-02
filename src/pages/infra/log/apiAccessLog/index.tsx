@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react'
-import { Button, Drawer, message, Modal, Tag, Typography } from 'antd'
+import { Button, Descriptions, Drawer, message, Modal, Tag, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { exportApiAccessLogExcel, getApiAccessLogPage } from '@/api/infra/apiAccessLog'
 import { textConst } from '@/locales/zh-CN'
+import { handleExport } from '@/components/Export'
 
 const ApiAccessLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -18,21 +19,21 @@ const ApiAccessLogPage: React.FC = () => {
       title: '日志 ID',
       dataIndex: 'id',
       align: 'center',
-      width: 80,
+      width: 70,
       hideInSearch: true
     },
     {
       title: '用户 ID',
       dataIndex: 'userId',
       align: 'center',
-      width: 80,
+      width: 70,
       fieldProps: { placeholder: '请输入用户 ID' }
     },
     {
       title: '用户类型',
       dataIndex: 'userType',
       align: 'center',
-      width: 100,
+      width: 90,
       valueType: 'select',
       valueEnum: {
         1: { text: '会员', status: 'Default' },
@@ -44,14 +45,14 @@ const ApiAccessLogPage: React.FC = () => {
       title: '应用名称',
       dataIndex: 'applicationName',
       align: 'center',
-      width: 120,
+      width: 110,
       fieldProps: { placeholder: '请输入应用名称' }
     },
     {
       title: '请求方法',
       dataIndex: 'requestMethod',
       align: 'center',
-      width: 80,
+      width: 75,
       hideInSearch: true,
       render: (_, record) => {
         let color = ''
@@ -93,7 +94,7 @@ const ApiAccessLogPage: React.FC = () => {
       title: '请求时间',
       dataIndex: 'beginTime',
       align: 'center',
-      width: 150,
+      width: 140,
       valueType: 'dateRange',
       fieldProps: { placeholder: [textConst.columns.startDate, textConst.columns.endDate] },
       hideInTable: true
@@ -110,7 +111,7 @@ const ApiAccessLogPage: React.FC = () => {
       title: '执行时长(ms)',
       dataIndex: 'duration',
       align: 'center',
-      width: 100,
+      width: 105,
       fieldProps: { placeholder: '请输入执行时长' },
       render: (_, record) => <span>{record.duration}</span>
     },
@@ -124,7 +125,7 @@ const ApiAccessLogPage: React.FC = () => {
       title: '操作结果',
       dataIndex: 'resultCode',
       align: 'center',
-      width: 100,
+      width: 90,
       hideInSearch: true,
       valueType: 'select',
       valueEnum: {
@@ -167,40 +168,14 @@ const ApiAccessLogPage: React.FC = () => {
     }
   ]
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: textConst.msg.confirmTitle,
-      icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
-      content: '确认导出所有访问日志数据项？',
-      okText: textConst.common.ok,
-      cancelText: textConst.common.cancel,
-      onOk: async () => {
-        try {
-          const formValues = formRef.current?.getFieldsValue?.() || {}
-
-          if (formValues.beginTime && formValues.beginTime.length === 2) {
-            formValues.beginTimeStr = formValues.beginTime[0] + ' 00:00:00'
-            formValues.endTimeStr = formValues.beginTime[1] + ' 23:59:59'
-          }
-          delete formValues.beginTime
-
-          const resp = await exportApiAccessLogExcel(formValues as any)
-          if (!resp) return
-          const blob = new Blob([resp as any], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          })
-          const url = window.URL.createObjectURL(blob)
-          const link = document.createElement('a')
-          link.href = url
-          link.download = 'API访问日志.xlsx'
-          link.click()
-          window.URL.revokeObjectURL(url)
-          message.success(textConst.msg.exportSuccess)
-        } catch {
-          message.error('textConst.msg.exportError')
-        }
-      }
-    })
+  const handleExportClick = () => {
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    if (formValues.beginTime && formValues.beginTime.length === 2) {
+      formValues.beginTimeStr = formValues.beginTime[0] + ' 00:00:00'
+      formValues.endTimeStr = formValues.beginTime[1] + ' 23:59:59'
+    }
+    delete formValues.beginTime
+    handleExport(exportApiAccessLogExcel, formValues, 'API访问日志.xlsx', '确认导出所有访问日志数据项？')
   }
 
   return (
@@ -263,7 +238,7 @@ const ApiAccessLogPage: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportClick}
           >
             {textConst.action.export}
           </Button>
@@ -281,81 +256,38 @@ const ApiAccessLogPage: React.FC = () => {
         width={450}
       >
         {selectedRecord && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <DetailItem label="日志 ID" value={selectedRecord.id} />
-            <DetailItem label="用户 ID" value={selectedRecord.userId} />
-            <DetailItem
+          <Descriptions column={1} colon={false} labelStyle={{ width: '100px', display: 'flex', justifyContent: 'flex-end', fontWeight: 'bold', color: 'black' }} contentStyle={{ paddingLeft: '15px' }} >
+            <Descriptions.Item label="日志 ID">{selectedRecord.id}</Descriptions.Item>
+            <Descriptions.Item label="Trace ID">{selectedRecord.traceId}</Descriptions.Item>
+            <Descriptions.Item label="用户 ID">{selectedRecord.userId}</Descriptions.Item>
+            <Descriptions.Item
               label="用户类型"
-              value={
-                selectedRecord.userType === 1
-                  ? '会员'
-                  : selectedRecord.userType === 2
-                    ? '管理员'
-                    : selectedRecord.userType
+            >
+              {selectedRecord.userType === 1
+                ? '会员'
+                : selectedRecord.userType === 2
+                  ? '管理员'
+                  : selectedRecord.userType
               }
-            />
-            <DetailItem label="应用名称" value={selectedRecord.applicationName} />
-            <DetailItem label="请求方法" value={selectedRecord.requestMethod} />
-            <DetailItem label="请求地址" value={selectedRecord.requestUrl} />
-            <DetailItem label="请求时间" value={selectedRecord.beginTime} />
-            <DetailItem label="响应时间" value={selectedRecord.endTime} />
-            <DetailItem
-              label="执行时长(ms)"
-              value={selectedRecord.duration ? `${selectedRecord.duration}` : '-'}
-            />
-            <DetailItem
-              label="操作结果"
-              value={selectedRecord.resultCode === 0 ? '成功' : '失败'}
-            />
-            <DetailItem label="结果码" value={selectedRecord.resultCode} />
-            <DetailItem label="结果提示" value={selectedRecord.resultMsg} isLong />
-            {selectedRecord.operateModule && (
-              <DetailItem label="操作模块" value={selectedRecord.operateModule} />
-            )}
-            {selectedRecord.operateName && (
-              <DetailItem label="操作名" value={selectedRecord.operateName} />
-            )}
-            {selectedRecord.traceId && (
-              <DetailItem label="链路追踪" value={selectedRecord.traceId} isLong />
-            )}
-            <DetailItem label="客户端 IP" value={selectedRecord.userIp} />
-            <DetailItem label="请求参数" value={selectedRecord.requestParams} isLong />
-          </div>
+            </Descriptions.Item>
+            <Descriptions.Item label="应用名称">{selectedRecord.applicationName}</Descriptions.Item>
+            <Descriptions.Item label="请求方法">{selectedRecord.requestMethod}</Descriptions.Item>
+            <Descriptions.Item label="请求地址">{selectedRecord.requestUrl}</Descriptions.Item>
+            <Descriptions.Item label="请求时间">{selectedRecord.beginTime}</Descriptions.Item>
+            <Descriptions.Item label="响应时间">{selectedRecord.endTime}</Descriptions.Item>
+            <Descriptions.Item label="执行时长(ms)">{selectedRecord.duration ? `${selectedRecord.duration}` : '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作结果">{selectedRecord.resultCode === 0 ? '成功' : '失败'}</Descriptions.Item>
+            <Descriptions.Item label="结果码">{selectedRecord.resultCode}</Descriptions.Item>
+            <Descriptions.Item label="结果提示">{selectedRecord.resultMsg}</Descriptions.Item>
+            <Descriptions.Item label="操作模块">{selectedRecord.operateModule}</Descriptions.Item>
+            <Descriptions.Item label="操作名">{selectedRecord.operateName}</Descriptions.Item>
+            <Descriptions.Item label="客户端 IP">{selectedRecord.userIp}</Descriptions.Item>
+            <Descriptions.Item label="请求参数">{selectedRecord.requestParams}</Descriptions.Item>
+          </Descriptions>
         )}
       </Drawer>
     </>
   )
 }
-
-const DetailItem: React.FC<{ label: string; value: any; isLong?: boolean }> = ({
-  label,
-  value,
-  isLong = false
-}) => (
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      borderBottom: '1px solid #f0f0f0',
-      paddingBottom: isLong ? '16px' : '12px',
-      paddingTop: isLong ? '8px' : '0'
-    }}
-  >
-    <div style={{ fontWeight: 500, width: '80px', flexShrink: 0 }}>{label}</div>
-    <div
-      style={{
-        flex: 1,
-        marginLeft: '16px',
-        wordBreak: isLong ? 'break-all' : 'normal',
-        whiteSpace: isLong ? 'normal' : 'nowrap',
-        overflow: isLong ? 'visible' : 'hidden',
-        textOverflow: isLong ? 'clip' : 'ellipsis',
-        lineHeight: isLong ? '1.5' : '1'
-      }}
-    >
-      {value ?? '-'}
-    </div>
-  </div>
-)
 
 export default ApiAccessLogPage

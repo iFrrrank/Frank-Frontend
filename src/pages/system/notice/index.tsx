@@ -6,8 +6,8 @@ import { Button, message, Modal, Typography } from 'antd'
 import SaveNoticeForm, { handleCreateNotice, handleEditNotice } from './SaveNoticeForm'
 import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { deleteNotice, getNoticePage, push } from '@/api/system/notice'
-import { handleBatchDelete } from '@/components/BatchDelete'
-import { handleDelete } from '@/components/SingleDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
+
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const NoticeConfig: React.FC = () => {

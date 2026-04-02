@@ -89,31 +89,41 @@ const SaveNoticeForm: React.FC<SaveNoticeModalProps> = ({ onSuccess }) => {
       >
         <Editor height={75} />
       </ProForm.Item>
-      <ProFormSelect
-        name="type"
-        label="公告类型"
-        placeholder="请选择公告类型"
-        rules={[{ required: true, message: '请输入公告类型' }]}
-        options={[
-          { label: '通知', value: 1 },
-          { label: '公告', value: 2 }
-        ]}
-      />
-      <ProFormSelect
-        name="status"
-        label="状态"
-        placeholder="请选择状态"
-        rules={[{ required: true, message: '请输入状态' }]}
-        options={[
-          { label: '开启', value: 0 },
-          { label: '关闭', value: 1 }
-        ]}
-      />
+      <div style={{ display: 'flex', gap: '16px' }}>
+        <div style={{ flex: 1 }}>
+          <ProFormSelect
+            name="type"
+            label="公告类型"
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 18 }}
+            placeholder="请选择公告类型"
+            rules={[{ required: true, message: '请输入公告类型' }]}
+            options={[
+              { label: '通知', value: 1 },
+              { label: '公告', value: 2 }
+            ]}
+          />
+        </div>
+        <div style={{ flex: 1 }}>
+          <ProFormSelect
+            name="status"
+            label="状态"
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 18 }}
+            placeholder="请选择状态"
+            rules={[{ required: true, message: '请输入状态' }]}
+            options={[
+              { label: '开启', value: 0 },
+              { label: '关闭', value: 1 }
+            ]}
+          />
+        </div>
+      </div>
       <ProFormTextArea
         name="remark"
         label="备注"
         placeholder="请输入备注"
-        fieldProps={{ rows: 3 }}
+        fieldProps={{ rows: 2 }}
       />
     </ModalForm>
   )

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Badge, Button, Descriptions, Modal, Tag, Typography } from 'antd'
+import { Badge, Descriptions, Drawer, Tag, Typography } from 'antd'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { getNotifyMessage, getNotifyMessagePage } from '@/api/system/notifyMessage'
@@ -9,7 +9,7 @@ const NotifyMessage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
 
-  const [detailModalVisible, setDetailModalVisible] = useState(false)
+  const [detailsDrawerVisible, setDetailsDrawerVisible] = useState(false)
   const [detailData, setDetailData] = useState<API.SystemNotifyMessageRespVO | null>(null)
 
   // 用户类型枚举
@@ -28,7 +28,7 @@ const NotifyMessage: React.FC = () => {
   // ===== 列定义 =====
   const columns: ProColumns<API.SystemNotifyMessageRespVO>[] = [
     {
-      title: 'ID',
+      title: '消息 ID',
       dataIndex: 'id',
       align: 'center',
       width: 70,
@@ -190,11 +190,11 @@ const NotifyMessage: React.FC = () => {
       const resp = await getNotifyMessage({ id: record.id })
       if (resp.code === 0 && resp.data) {
         setDetailData(resp.data)
-        setDetailModalVisible(true)
+        setDetailsDrawerVisible(true)
       }
     } catch {
       setDetailData(record)
-      setDetailModalVisible(true)
+      setDetailsDrawerVisible(true)
     }
   }
 
@@ -259,26 +259,20 @@ const NotifyMessage: React.FC = () => {
         }}
       />
 
-      {/* 详情弹窗 */}
-      <Modal
-        title="详情"
-        width={700}
-        open={detailModalVisible}
-        onCancel={() => setDetailModalVisible(false)}
-        footer={[
-          <Button key="close" onClick={() => setDetailModalVisible(false)}>
-            关闭
-          </Button>
-        ]}
+      {/* 详情抽屉 */}
+      <Drawer
+        title="消息详情"
+        placement="right"
+        onClose={() => {
+          setDetailsDrawerVisible(false)
+          setDetailData(null)
+        }}
+        open={detailsDrawerVisible}
+        width={400}
       >
         {detailData && (
-          <Descriptions
-            bordered
-            column={1}
-            size="small"
-            labelStyle={{ width: 120, background: '#fafafa' }}
-          >
-            <Descriptions.Item label="ID">{detailData.id}</Descriptions.Item>
+          <Descriptions column={1} colon={false} labelStyle={{ width: '80px', display: 'flex', justifyContent: 'flex-end', fontWeight: 'bold', color: 'black' }} contentStyle={{ paddingLeft: '15px' }} >
+            <Descriptions.Item label="消息 ID">{detailData.id}</Descriptions.Item>
             <Descriptions.Item label="用户类型">
               {(() => {
                 const t = userTypeEnum[detailData.userType as unknown as number]
@@ -293,7 +287,7 @@ const NotifyMessage: React.FC = () => {
             <Descriptions.Item label="模版参数">
               {detailData.templateParams && Object.keys(detailData.templateParams).length > 0
                 ? JSON.stringify(detailData.templateParams)
-                : ''}
+                : '-'}
             </Descriptions.Item>
             <Descriptions.Item label="模版类型">
               {(() => {
@@ -307,11 +301,11 @@ const NotifyMessage: React.FC = () => {
                 text={detailData.readStatus ? '是' : '否'}
               />
             </Descriptions.Item>
-            <Descriptions.Item label="阅读时间">{detailData.readTime || ''}</Descriptions.Item>
+            <Descriptions.Item label="阅读时间">{detailData.readTime || '-'}</Descriptions.Item>
             <Descriptions.Item label="创建时间">{detailData.createTime as any}</Descriptions.Item>
           </Descriptions>
         )}
-      </Modal>
+      </Drawer>
     </>
   )
 }

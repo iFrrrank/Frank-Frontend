@@ -11,8 +11,7 @@ import {
 } from '@/api/infra/fileConfig'
 import { textConst } from '@/locales/zh-CN'
 import FileConfigForm, { STORAGE_OPTIONS } from '@/pages/infra/file/config/FileConfigForm'
-import { handleDelete } from '@/components/SingleDelete'
-import { handleBatchDelete } from '@/components/BatchDelete'
+import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const FileConfigPage: React.FC = () => {
