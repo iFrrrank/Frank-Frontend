@@ -1,17 +1,12 @@
 import CryptoJS from 'crypto-js'
 import { JSEncrypt } from 'jsencrypt'
 
-/**
- * API 加解密工具类
- * 支持 AES 和 RSA 加密算法
- */
-
 // 从环境变量获取配置
-const API_ENCRYPT_ENABLE = import.meta.env.VITE_APP_API_ENCRYPT_ENABLE === 'true'
-const API_ENCRYPT_HEADER = import.meta.env.VITE_APP_API_ENCRYPT_HEADER || 'X-Api-Encrypt'
-const API_ENCRYPT_ALGORITHM = import.meta.env.VITE_APP_API_ENCRYPT_ALGORITHM || 'AES'
-const API_ENCRYPT_REQUEST_KEY = import.meta.env.VITE_APP_API_ENCRYPT_REQUEST_KEY || '' // AES密钥 或 RSA公钥
-const API_ENCRYPT_RESPONSE_KEY = import.meta.env.VITE_APP_API_ENCRYPT_RESPONSE_KEY || '' // AES密钥 或 RSA私钥
+const API_ENCRYPT_ENABLE = process.env.VITE_APP_API_ENCRYPT_ENABLE === 'true'
+const API_ENCRYPT_HEADER = process.env.VITE_APP_API_ENCRYPT_HEADER || 'X-Api-Encrypt'
+const API_ENCRYPT_ALGORITHM = process.env.VITE_APP_API_ENCRYPT_ALGORITHM || 'AES'
+const API_ENCRYPT_REQUEST_KEY = process.env.VITE_APP_API_ENCRYPT_REQUEST_KEY || '' // AES密钥 或 RSA公钥
+const API_ENCRYPT_RESPONSE_KEY = process.env.VITE_APP_API_ENCRYPT_RESPONSE_KEY || '' // AES密钥 或 RSA私钥
 
 /**
  * AES 加密工具类

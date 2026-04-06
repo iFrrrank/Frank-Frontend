@@ -9,15 +9,16 @@ enum ErrorShowType {
   WARN_MESSAGE = 1,
   ERROR_MESSAGE = 2,
   NOTIFICATION = 3,
-  REDIRECT = 9,
+  REDIRECT = 9
 }
+
 // 与后端约定的响应数据格式
 interface ResponseStructure {
-  success: boolean;
-  data: any;
-  errorCode?: number;
-  errorMessage?: string;
-  showType?: ErrorShowType;
+  success: boolean
+  data: any
+  errorCode?: number
+  errorMessage?: string
+  showType?: ErrorShowType
 }
 
 /**
@@ -33,85 +34,85 @@ export const errorConfig: RequestConfig = {
       const { success, data, errorCode, errorMessage, showType } =
         res as unknown as ResponseStructure;
       if (!success) {
-        const error: any = new Error(errorMessage);
+        const error: any = new Error(errorMessage)
         error.name = 'BizError'
-        error.info = { errorCode, errorMessage, showType, data };
+        error.info = { errorCode, errorMessage, showType, data }
         throw error; // 抛出自制的错误
       }
     },
     // 错误接收及处理
     errorHandler: (error: any, opts: any) => {
-      if (opts?.skipErrorHandler) throw error;
+      if (opts?.skipErrorHandler) throw error
       // 我们的 errorThrower 抛出的错误。
       if (error.name === 'BizError') {
-        const errorInfo: ResponseStructure | undefined = error.info;
+        const errorInfo: ResponseStructure | undefined = error.info
         if (errorInfo) {
-          const { errorMessage, errorCode } = errorInfo;
+          const { errorMessage, errorCode } = errorInfo
           switch (errorInfo.showType) {
             case ErrorShowType.SILENT:
               // do nothing
-              break;
+              break
             case ErrorShowType.WARN_MESSAGE:
-              message.warning(errorMessage);
+              message.warning(errorMessage)
               break;
             case ErrorShowType.ERROR_MESSAGE:
-              message.error(errorMessage);
-              break;
+              message.error(errorMessage)
+              break
             case ErrorShowType.NOTIFICATION:
               notification.open({
                 description: errorMessage,
                 message: errorCode,
-              });
-              break;
+              })
+              break
             case ErrorShowType.REDIRECT:
               // TODO: redirect
-              break;
+              break
             default:
-              message.error(errorMessage);
+              message.error(errorMessage)
           }
         }
       } else if (error.response) {
         // Axios 的错误
         // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
-        message.error(`Response status:${error.response.status}`);
+        message.error(`Response status:${error.response.status}`)
       } else if (error.request) {
         // 请求已经成功发起，但没有收到响应
         // \`error.request\` 在浏览器中是 XMLHttpRequest 的实例，
         // 而在node.js中是 http.ClientRequest 的实例
-        message.error('None response! Please retry.');
+        message.error('None response! Please retry.')
       } else {
         // 发送请求时出了点问题
-        message.error('Request error, please retry.');
+        message.error('Request error, please retry.')
       }
-    },
+    }
   },
 
   // 请求拦截器
   requestInterceptors: [
     (config: RequestOptions) => {
       // 拦截请求配置，进行个性化处理
-      const url = config?.url;
+      const url = config?.url
       // 从 localStorage 中获取 accessToken，并添加到请求头中
-      const accessToken = localStorage.getItem('accessToken');
+      const accessToken = localStorage.getItem('accessToken')
 
-      const configHeaders: Record<string, any> = { ...config.headers };
+      const configHeaders: Record<string, any> = { ...config.headers }
 
       if (accessToken) {
-        configHeaders.Authorization = `Bearer ${accessToken}`;
+        configHeaders.Authorization = `Bearer ${accessToken}`
       }
 
-      const method = config.method?.toUpperCase();
+      const method = config.method?.toUpperCase()
       // 防止 GET 请求缓存
       if (method === 'GET') {
-        configHeaders['Cache-Control'] = 'no-cache';
-        configHeaders['Pragma'] = 'no-cache';
+        configHeaders['Cache-Control'] = 'no-cache'
+        configHeaders['Pragma'] = 'no-cache'
       }
       // 处理 x-www-form-urlencoded
       else if (method === 'POST') {
-        const contentType = configHeaders['Content-Type'] || configHeaders['content-type'];
+        const contentType = configHeaders['Content-Type'] || configHeaders['content-type']
         if (contentType === 'application/x-www-form-urlencoded') {
           if (config.data && typeof config.data !== 'string') {
-            config.data = new URLSearchParams(config.data as Record<string, string>).toString();
+            config.data = new URLSearchParams(config.data as Record<string, string>).toString()
           }
         }
       }
@@ -120,33 +121,31 @@ export const errorConfig: RequestConfig = {
       if (configHeaders.isEncrypt) {
         try {
           if (config.data) {
-            config.data = ApiEncrypt.encryptRequest(config.data);
-            configHeaders[ApiEncrypt.getEncryptHeader()] = 'true';
+            config.data = ApiEncrypt.encryptRequest(config.data)
+            configHeaders[ApiEncrypt.getEncryptHeader()] = 'true'
           }
         } catch (error) {
-          console.error('请求数据加密失败:', error);
-          throw error;
+          console.error('请求数据加密失败:', error)
+          throw error
         }
       }
 
       // 重新赋给 config.headers
-      config.headers = configHeaders as any;
-      return { ...config, url };
-    },
+      config.headers = configHeaders as any
+      return { ...config, url }
+    }
   ],
 
   // 响应拦截器
   responseInterceptors: [
     (response) => {
       // 拦截响应数据，进行个性化处理
-      let data = (response as any).data;
+      let data = (response as any).data
 
       // 检查是否需要解密响应数据
-      const headers = (response as any).headers || {};
-      const encryptHeader = ApiEncrypt.getEncryptHeader();
-      const isEncryptResponse =
-        headers[encryptHeader] === 'true' ||
-        headers[encryptHeader.toLowerCase()] === 'true';
+      const headers = (response as any).headers || {}
+      const encryptHeader = ApiEncrypt.getEncryptHeader()
+      const isEncryptResponse = headers[encryptHeader] === 'true' || headers[encryptHeader.toLowerCase()] === 'true'
 
       if (isEncryptResponse && typeof data === 'string') {
         try {
@@ -160,9 +159,9 @@ export const errorConfig: RequestConfig = {
       }
 
       if (data?.success === false) {
-        message.error('请求失败！');
+        message.error('请求失败！')
       }
-      return response;
-    },
-  ],
-};
+      return response
+    }
+  ]
+}
