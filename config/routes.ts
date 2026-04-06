@@ -266,6 +266,12 @@ export default [
         name: '待办事项',
         icon: 'schedule',
         component: './crm/backlog'
+      },
+      {
+        path: '/crm/clue',
+        name: '线索管理',
+        icon: 'schedule',
+        component: './crm/clue'
       }
     ]
   },

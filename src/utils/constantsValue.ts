@@ -97,3 +97,8 @@ export const RECEIVABLE_STATUS: SelectValueItem = {
   2: { text: '已逾期' },
   3: { text: '已回款' }
 }
+
+export const CLUE_TRANSFER_STATUS: SelectValueItem = {
+  10: { text: '未转化' },
+  20: { text: '已转化' }
+}
