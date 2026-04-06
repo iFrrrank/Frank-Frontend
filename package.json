@@ -73,8 +73,6 @@
     "@umijs/max": "^4.3.24",
     "cross-env": "^7.0.3",
     "eslint": "^9.39.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react": "^7.37.5",
     "express": "^4.21.1",
     "gh-pages": "^6.1.1",

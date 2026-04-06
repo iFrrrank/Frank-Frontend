@@ -17,8 +17,7 @@ module.exports = {
     'eslint:recommended', // 继承 ESLint 的推荐规则
     'plugin:react/recommended', // 引入 eslint-plugin-react 的推荐规则
     'plugin:react-hooks/recommended', // 确保 React Hooks 的使用符合规范
-    'plugin:@typescript-eslint/recommended', // 继承 TypeScript 的推荐规则集，确保 TypeScript 代码的基本规范
-    'plugin:prettier/recommended'
+    'plugin:@typescript-eslint/recommended' // 继承 TypeScript 的推荐规则集，确保 TypeScript 代码的基本规范
   ],
   plugins: ['react', 'react-hooks', '@typescript-eslint'], // extends继承规则
   rules: {
@@ -108,7 +107,6 @@ module.exports = {
     'react/require-render-return': 'error', // 要求类组件的 render 方法必须返回一个 JSX 元素（或 null）
     'react/sort-comp': 'warn', // 要求类组件的方法按指定顺序排列（如静态方法、生命周期方法、自定义方法等）
     'react/state-in-constructor': ['warn', 'never'], // 控制类组件的状态（state）是否应在构造函数（constructor）中初始化
-    'react/static-property-placement': ['warn', 'static public field'], // 规定类组件的静态属性（如 defaultProps、propTypes）的声明位置
-    'prettier/prettier': 'error' // 强制 Prettier 生效
+    'react/static-property-placement': ['warn', 'static public field'] // 规定类组件的静态属性（如 defaultProps、propTypes）的声明位置
   }
 }

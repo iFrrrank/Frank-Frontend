@@ -256,6 +256,19 @@ export default [
       }
     ]
   },
+  {
+    path: '/crm',
+    name: 'CRM系统',
+    icon: 'user',
+    routes: [
+      {
+        path: '/crm/backlog',
+        name: '待办事项',
+        icon: 'schedule',
+        component: './crm/backlog'
+      }
+    ]
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]
