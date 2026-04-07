@@ -180,8 +180,7 @@ const CustomerList: React.FC = () => {
         actionRef={actionRef}
         rowKey="id"
         search={{
-          labelWidth: 'auto',
-          defaultCollapsed: false
+          labelWidth: 'auto'
         }}
         form={{ colon: false }}
         options={false}

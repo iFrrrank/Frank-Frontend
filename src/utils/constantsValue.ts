@@ -7,7 +7,7 @@ type SelectValueItem = Record<string | number, ProSchemaValueEnumType>
 
 export interface OptionItem {
   label: string
-  value: string
+  value: string | number
 }
 
 export const AUTO_APPROVE_SCOPES: OptionItem[] = [
@@ -28,6 +28,16 @@ export const COMMON_STATUS: SelectValueItem = {
     status: 'Error'
   }
 }
+
+export const BOOLEAN_OPTIONS: OptionItem[] = [
+  { label: '是', value: 1 },
+  { label: '否', value: 0 }
+]
+
+export const SEX_OPTIONS: OptionItem[] = [
+  { label: '男', value: 1 },
+  { label: '女', value: 2 }
+]
 
 // ========== CRM 系统 ==========
 export const BACKLOG_MENU_LIST: MenuItem[] = [
@@ -144,3 +154,4 @@ export const CUSTOMER_SOURCE: SelectValueItem = {
   10: { text: '陌拜' },
   11: { text: '其他' }
 }
+

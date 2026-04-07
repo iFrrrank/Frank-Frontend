@@ -278,6 +278,12 @@ export default [
         name: '客户管理',
         icon: 'user',
         component: './crm/customer'
+      },
+      {
+        path: '/crm/contact',
+        name: '联系人管理',
+        icon: 'contacts',
+        component: './crm/contact'
       }
     ]
   },
