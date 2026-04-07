@@ -1,0 +1,280 @@
+import React, { useRef, useState } from 'react'
+import type { ActionType, ProColumns } from '@ant-design/pro-components'
+import { ProTable } from '@ant-design/pro-components'
+import { Button, Modal, message } from 'antd'
+import { PlusOutlined, DownloadOutlined, UploadOutlined, ExclamationCircleFilled } from '@ant-design/icons'
+import { getCustomerPage, exportCustomerExcel } from '@/api/crm/customer'
+import { SCENE_TYPE } from '@/utils/constantsValue'
+import { textConst } from '@/locales/zh-CN'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import download from '@/utils/download'
+import CustomerForm from './CustomerForm'
+import CustomerImportForm from './CustomerImportForm'
+import { INDUSTRY_LIST, CUSTOMER_LEVEL, CUSTOMER_SOURCE } from '@/utils/constantsValue'
+
+const CustomerList: React.FC = () => {
+  const actionRef = useRef<ActionType>(undefined)
+  const [sceneType, setSceneType] = useState<number>(1)
+  const [formVisible, setFormVisible] = useState<boolean>(false)
+  const [formId, setFormId] = useState<number | undefined>(undefined)
+  const [importVisible, setImportVisible] = useState<boolean>(false)
+
+  const handleExport = () => {
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleFilled style={{ color: '#faad14' }} />,
+      content: '是否确认导出数据项？',
+      onOk: async () => {
+        try {
+          const res = await exportCustomerExcel({ sceneType } as any)
+          download.excel(res, '客户数据.xls')
+          message.success('导出成功')
+        } catch (e) {
+          message.error('导出失败')
+        }
+      }
+    })
+  }
+
+  const columns: ProColumns<API.CrmCustomerRespVO>[] = [
+    {
+      title: '客户名称',
+      dataIndex: 'name',
+      align: 'center',
+      fieldProps: {
+        placeholder: '请输入客户名称'
+      }
+    },
+    {
+      title: '手机',
+      dataIndex: 'mobile',
+      align: 'center',
+      fieldProps: {
+        placeholder: '请输入手机'
+      }
+    },
+    {
+      title: '所属行业',
+      dataIndex: 'industryId',
+      valueType: 'select',
+      align: 'center',
+      hideInTable: true,
+      valueEnum: INDUSTRY_LIST,
+      fieldProps: {
+        placeholder: '请选择所属行业'
+      }
+    },
+    {
+      title: '客户级别',
+      dataIndex: 'level',
+      valueType: 'select',
+      align: 'center',
+      hideInTable: true,
+      valueEnum: CUSTOMER_LEVEL,
+      fieldProps: {
+        placeholder: '请选择客户级别'
+      }
+    },
+    {
+      title: '客户来源',
+      dataIndex: 'source',
+      valueType: 'select',
+      align: 'center',
+      hideInTable: true,
+      valueEnum: CUSTOMER_SOURCE,
+      fieldProps: {
+        placeholder: '请选择客户来源'
+      }
+    },
+    {
+      title: '客户名称',
+      dataIndex: 'name',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '手机',
+      dataIndex: 'mobile',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '电话',
+      dataIndex: 'telephone',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '邮箱',
+      dataIndex: 'email',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '客户级别',
+      dataIndex: 'level',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '客户行业',
+      dataIndex: 'industryId',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '下次联系时间',
+      dataIndex: 'contactNextTime',
+      valueType: 'dateTime',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '备注',
+      dataIndex: 'remark',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '锁定状态',
+      dataIndex: 'lockStatus',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '成交状态',
+      dataIndex: 'dealStatus',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '最后跟进时间',
+      dataIndex: 'contactLastTime',
+      valueType: 'dateTime',
+      align: 'center',
+      hideInSearch: true
+    },
+    {
+      title: '操作',
+      valueType: 'option',
+      align: 'center',
+      width: 120,
+      render: (_, record) => (
+        <div style={tableActionStyle}>
+          <a key="edit" onClick={() => {
+            setFormId(record.id)
+            setFormVisible(true)
+          }}>
+            {textConst.action.update}
+          </a>
+          <a key="delete" style={deleteTextStyle}>{textConst.action.delete}</a>
+        </div>
+      )
+    }
+  ]
+
+  return (
+    <>
+      <ProTable<API.CrmCustomerRespVO>
+        columns={columns}
+        actionRef={actionRef}
+        rowKey="id"
+        search={{
+          labelWidth: 'auto',
+          defaultCollapsed: false
+        }}
+        form={{ colon: false }}
+        options={false}
+        toolbar={{
+          actions: [
+            <Button
+              key="add"
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => {
+                setFormId(undefined)
+                setFormVisible(true)
+              }}
+            >
+              {textConst.action.create}
+            </Button>,
+            <Button
+              key="import"
+              color="green"
+              variant="outlined"
+              icon={<UploadOutlined />}
+              onClick={() => setImportVisible(true)}
+            >
+              {textConst.action.import}
+            </Button>,
+            <Button
+              key="export"
+              color="volcano"
+              variant="outlined"
+              icon={<DownloadOutlined />}
+              onClick={handleExport}
+            >
+              {textConst.action.export}
+            </Button>
+          ],
+          menu: {
+            type: 'tab',
+            activeKey: sceneType.toString(),
+            items: Object.entries(SCENE_TYPE).map(([key, value]) => ({
+              key: key,
+              label: value.text
+            })),
+            onChange: (key) => {
+              setSceneType(Number(key))
+              actionRef.current?.reload()
+            }
+          }
+        }}
+        request={async (params) => {
+          const { current, pageSize, ...rest } = params
+          const req = {
+            pageNo: current || 1,
+            pageSize: pageSize || 10,
+            sceneType,
+            ...rest
+          }
+          const res = await getCustomerPage({ pageVO: req } as any)
+          return {
+            data: res.data?.list || [],
+            success: res.code === 0,
+            total: res.data?.total || 0
+          }
+        }}
+        pagination={{
+          pageSize: 10,
+          showSizeChanger: true
+        }}
+      />
+
+      {formVisible && (
+        <CustomerForm
+          id={formId}
+          visible={formVisible}
+          setVisible={setFormVisible}
+          onSuccess={() => {
+            setFormVisible(false)
+            actionRef.current?.reload()
+          }}
+        />
+      )}
+
+      {importVisible && (
+        <CustomerImportForm
+          visible={importVisible}
+          setVisible={setImportVisible}
+          onSuccess={() => {
+            setImportVisible(false)
+            actionRef.current?.reload()
+          }}
+        />
+      )}
+    </>
+  )
+}
+
+export default CustomerList

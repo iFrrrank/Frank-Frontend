@@ -47,8 +47,8 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
       initialValues={
         editingSmsChannel
           ? {
-              ...editingSmsChannel
-            }
+            ...editingSmsChannel
+          }
           : { status: 0 }
       }
       layout="horizontal"
@@ -56,7 +56,7 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
       wrapperCol={{ span: 18 }}
       colon={false}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
         bodyStyle: { paddingBottom: 0 }
       }}
       onFinish={async (values) => {
@@ -76,7 +76,7 @@ const SaveSmsChannelForm: React.FC<SaveSmsChannelModalProps> = ({ onSuccess }) =
           } else {
             message.error(
               resp.msg ||
-                (editingSmsChannel ? textConst.msg.updateError : textConst.msg.createError)
+              (editingSmsChannel ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }

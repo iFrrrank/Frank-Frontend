@@ -36,7 +36,7 @@ const JobLogDetail: React.FC<JobLogDetailProps> = ({ visible, setVisible, id }) 
       width={700}
       open={visible}
       onClose={() => setVisible(false)}
-      destroyOnClose
+      destroyOnHidden
     >
       <Spin spinning={loading}>
         <Descriptions column={2} bordered size="small">

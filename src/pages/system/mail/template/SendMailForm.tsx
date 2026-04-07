@@ -33,7 +33,7 @@ const SendMailForm: React.FC = () => {
       wrapperCol={{ span: 20 }}
       colon={false}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
         maskClosable: false
       }}
       onFinish={async (values) => {

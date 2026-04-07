@@ -53,16 +53,16 @@ const SaveUserForm: React.FC = () => {
       initialValues={
         editingUser
           ? {
-              id: editingUser.id,
-              nickname: editingUser.nickname,
-              deptId: editingUser.deptId,
-              mobile: editingUser.mobile,
-              email: editingUser.email,
-              username: editingUser.username,
-              sex: editingUser.sex,
-              postIds: editingUser.postIds,
-              remark: editingUser.remark
-            }
+            id: editingUser.id,
+            nickname: editingUser.nickname,
+            deptId: editingUser.deptId,
+            mobile: editingUser.mobile,
+            email: editingUser.email,
+            username: editingUser.username,
+            sex: editingUser.sex,
+            postIds: editingUser.postIds,
+            remark: editingUser.remark
+          }
           : undefined
       }
       layout="horizontal"
@@ -73,7 +73,7 @@ const SaveUserForm: React.FC = () => {
       colon={false}
       rowProps={{ gutter: [16, 0] }}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
         bodyStyle: { paddingBottom: 0 }
       }}
       onFinish={async (values) => {

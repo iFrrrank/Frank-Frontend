@@ -55,7 +55,7 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
       wrapperCol={{ span: 20 }}
       colon={false}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
         maskClosable: false
       }}
       onFinish={async (values) => {
@@ -76,7 +76,7 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
           } else {
             message.error(
               resp.msg ||
-                (editingMailTemplate ? textConst.msg.updateError : textConst.msg.createError)
+              (editingMailTemplate ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }

@@ -75,7 +75,7 @@ const AssignRoleForm: React.FC = () => {
         }
       }}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
         bodyStyle: { paddingBottom: 0 }
       }}
       submitter={{

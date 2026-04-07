@@ -51,8 +51,8 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
       initialValues={
         editingSmsTemplate
           ? {
-              ...editingSmsTemplate
-            }
+            ...editingSmsTemplate
+          }
           : { status: 0 }
       }
       layout="horizontal"
@@ -60,7 +60,7 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
       wrapperCol={{ span: 17 }}
       colon={false}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
         bodyStyle: { paddingBottom: 0 }
       }}
       onFinish={async (values) => {
@@ -80,7 +80,7 @@ const SaveSmsTemplateForm: React.FC<SaveSmsTemplateModalProps> = ({
           } else {
             message.error(
               resp.msg ||
-                (editingSmsTemplate ? textConst.msg.updateError : textConst.msg.createError)
+              (editingSmsTemplate ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }

@@ -1,4 +1,4 @@
-import { CommonStatusEnum, CrmAuditStatusEnum, CrmSceneTypeEnum } from './constants'
+import { CommonStatusEnum, CrmAuditStatusEnum, CrmSceneTypeEnum, CrmCustomerLevelEnum } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
 
@@ -101,4 +101,46 @@ export const RECEIVABLE_STATUS: SelectValueItem = {
 export const CLUE_TRANSFER_STATUS: SelectValueItem = {
   10: { text: '未转化' },
   20: { text: '已转化' }
+}
+
+export const INDUSTRY_LIST: SelectValueItem = {
+  1: { text: '农、林、牧、渔业' },
+  2: { text: '采矿业' },
+  3: { text: '制造业' },
+  4: { text: '电力、热力、燃气及水生产和供应业' },
+  5: { text: '建筑业' },
+  6: { text: '批发零售业' },
+  7: { text: '交通运输、仓储和邮政业' },
+  8: { text: '住宿和餐饮业' },
+  9: { text: '信息传输、软件和信息技术服务业' },
+  10: { text: '金融业' },
+  11: { text: '房地产业' },
+  12: { text: '租赁和商务服务业' },
+  13: { text: '科学研究和技术服务业' },
+  14: { text: '水利、环境和公共设施管理业' },
+  15: { text: '教育' },
+  16: { text: '卫生和社会工作' },
+  17: { text: '文化、体育和娱乐业' },
+  18: { text: '公共管理、社会保障和社会组织' },
+  19: { text: '其他' }
+}
+
+export const CUSTOMER_LEVEL: SelectValueItem = {
+  [CrmCustomerLevelEnum.IMPORTANT.level]: { text: CrmCustomerLevelEnum.IMPORTANT.name },
+  [CrmCustomerLevelEnum.GENERAL.level]: { text: CrmCustomerLevelEnum.GENERAL.name },
+  [CrmCustomerLevelEnum.LOW_PRIORITY.level]: { text: CrmCustomerLevelEnum.LOW_PRIORITY.name }
+}
+
+export const CUSTOMER_SOURCE: SelectValueItem = {
+  1: { text: '促销' },
+  2: { text: '广告' },
+  3: { text: '转介绍' },
+  4: { text: '搜索引擎' },
+  5: { text: '线上注册' },
+  6: { text: '线上咨询' },
+  7: { text: '预约上门' },
+  8: { text: '电话咨询' },
+  9: { text: '邮件咨询' },
+  10: { text: '陌拜' },
+  11: { text: '其他' }
 }

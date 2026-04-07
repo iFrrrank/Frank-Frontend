@@ -272,6 +272,12 @@ export default [
         name: '线索管理',
         icon: 'schedule',
         component: './crm/clue'
+      },
+      {
+        path: '/crm/customer',
+        name: '客户管理',
+        icon: 'user',
+        component: './crm/customer'
       }
     ]
   },

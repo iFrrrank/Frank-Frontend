@@ -39,8 +39,8 @@ const SaveDictTypeForm: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
       initialValues={
         editingDictType
           ? {
-              ...editingDictType
-            }
+            ...editingDictType
+          }
           : { status: 0 }
       }
       layout="horizontal"
@@ -48,7 +48,7 @@ const SaveDictTypeForm: React.FC<SaveDictTypeModalProps> = ({ onSuccess }) => {
       wrapperCol={{ span: 19 }}
       colon={false}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
         bodyStyle: { paddingBottom: 0 }
       }}
       onFinish={async (values) => {
