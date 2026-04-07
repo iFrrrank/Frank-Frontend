@@ -2,7 +2,12 @@ import React, { useRef, useState } from 'react'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { Button, Modal, message } from 'antd'
-import { PlusOutlined, DownloadOutlined, UploadOutlined, ExclamationCircleFilled } from '@ant-design/icons'
+import {
+  PlusOutlined,
+  DownloadOutlined,
+  UploadOutlined,
+  ExclamationCircleFilled
+} from '@ant-design/icons'
 import { getCustomerPage, exportCustomerExcel } from '@/api/crm/customer'
 import { SCENE_TYPE } from '@/utils/constantsValue'
 import { textConst } from '@/locales/zh-CN'
@@ -161,13 +166,18 @@ const CustomerList: React.FC = () => {
       width: 120,
       render: (_, record) => (
         <div style={tableActionStyle}>
-          <a key="edit" onClick={() => {
-            setFormId(record.id)
-            setFormVisible(true)
-          }}>
+          <a
+            key="edit"
+            onClick={() => {
+              setFormId(record.id)
+              setFormVisible(true)
+            }}
+          >
             {textConst.action.update}
           </a>
-          <a key="delete" style={deleteTextStyle}>{textConst.action.delete}</a>
+          <a key="delete" style={deleteTextStyle}>
+            {textConst.action.delete}
+          </a>
         </div>
       )
     }
@@ -245,7 +255,7 @@ const CustomerList: React.FC = () => {
           }
         }}
         pagination={{
-          pageSize: 10,
+          align: 'center',
           showSizeChanger: true
         }}
       />
@@ -277,3 +287,4 @@ const CustomerList: React.FC = () => {
 }
 
 export default CustomerList
+

@@ -101,7 +101,7 @@ export default [
             name: '通知公告',
             icon: 'notification',
             component: './system/notice'
-          },
+          }
         ]
       },
       {
@@ -277,7 +277,20 @@ export default [
         path: '/crm/customer',
         name: '客户管理',
         icon: 'user',
-        component: './crm/customer'
+        routes: [
+          {
+            path: '/crm/customer/list',
+            name: '客户列表',
+            icon: 'user',
+            component: './crm/customer'
+          },
+          {
+            path: '/crm/customer/pool',
+            name: '客户公海',
+            icon: 'user',
+            component: './crm/customer/pool'
+          }
+        ]
       },
       {
         path: '/crm/contact',
