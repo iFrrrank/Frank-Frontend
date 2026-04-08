@@ -297,6 +297,12 @@ export default [
         name: '联系人管理',
         icon: 'contacts',
         component: './crm/contact'
+      },
+      {
+        path: '/crm/business',
+        name: '商机管理',
+        icon: 'shoppingCart',
+        component: './crm/business'
       }
     ]
   },
