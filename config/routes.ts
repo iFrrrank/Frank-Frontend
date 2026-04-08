@@ -303,6 +303,12 @@ export default [
         name: '商机管理',
         icon: 'shoppingCart',
         component: './crm/business'
+      },
+      {
+        path: '/crm/product',
+        name: '产品管理',
+        icon: 'shoppingCart',
+        component: './crm/product'
       }
     ]
   },

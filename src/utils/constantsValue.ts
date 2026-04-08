@@ -1,4 +1,10 @@
-import { CommonStatusEnum, CrmAuditStatusEnum, CrmSceneTypeEnum, CrmCustomerLevelEnum } from './constants'
+import {
+  CommonStatusEnum,
+  CrmAuditStatusEnum,
+  CrmSceneTypeEnum,
+  CrmCustomerLevelEnum,
+  CrmProductStatusEnum
+} from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
 
@@ -155,3 +161,34 @@ export const CUSTOMER_SOURCE: SelectValueItem = {
   11: { text: '其他' }
 }
 
+export const PRODUCT_UNITS: OptionItem[] = [
+  { label: '个', value: 1 },
+  { label: '块', value: 2 },
+  { label: '只', value: 3 },
+  { label: '把', value: 4 },
+  { label: '枚', value: 5 },
+  { label: '瓶', value: 6 },
+  { label: '盒', value: 7 },
+  { label: '台', value: 8 },
+  { label: '吨', value: 9 },
+  { label: '千克', value: 10 },
+  { label: '米', value: 11 },
+  { label: '箱', value: 12 },
+  { label: '套', value: 13 }
+]
+
+export const PRODUCT_STATUS_ENUM = {
+  [CrmProductStatusEnum.ENABLE.status]: {
+    text: CrmProductStatusEnum.ENABLE.name,
+    status: 'Success'
+  },
+  [CrmProductStatusEnum.DISABLE.status]: {
+    text: CrmProductStatusEnum.DISABLE.name,
+    status: 'Error'
+  }
+}
+
+export const PRODUCT_STATUS: OptionItem[] = [
+  { label: CrmProductStatusEnum.ENABLE.name, value: CrmProductStatusEnum.ENABLE.status },
+  { label: CrmProductStatusEnum.DISABLE.name, value: CrmProductStatusEnum.DISABLE.status }
+]
