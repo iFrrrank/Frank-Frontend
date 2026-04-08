@@ -177,7 +177,7 @@ export const PRODUCT_UNITS: OptionItem[] = [
   { label: '套', value: 13 }
 ]
 
-export const PRODUCT_STATUS_ENUM = {
+export const PRODUCT_STATUS_ENUM: SelectValueItem = {
   [CrmProductStatusEnum.ENABLE.status]: {
     text: CrmProductStatusEnum.ENABLE.name,
     status: 'Success'

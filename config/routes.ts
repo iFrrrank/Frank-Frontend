@@ -305,6 +305,12 @@ export default [
         component: './crm/business'
       },
       {
+        path: '/crm/contract',
+        name: '合同管理',
+        icon: 'shoppingCart',
+        component: './crm/contract'
+      },
+      {
         path: '/crm/product',
         name: '产品管理',
         icon: 'shoppingCart',

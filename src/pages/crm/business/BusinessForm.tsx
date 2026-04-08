@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { message, Button, Space, Select, Form, Col, Popconfirm } from 'antd'
-import {
-  DeleteOutlined,
-  PlusOutlined,
-  EditOutlined,
-  SaveOutlined,
-  CloseOutlined
-} from '@ant-design/icons'
+import { message, Select, Form, Col, Popconfirm } from 'antd'
+import { DeleteOutlined, PlusOutlined, EditOutlined } from '@ant-design/icons'
 import {
   ModalForm,
   ProFormText,
@@ -22,6 +16,7 @@ import { getSimpleUserList } from '@/api/system/user'
 import { getBusinessStatusTypeSimpleList } from '@/api/crm/businessStatus'
 import { getProductSimpleList } from '@/api/crm/product'
 import { textConst } from '@/locales/zh-CN'
+import { emptyTextStyle } from '@/styles/common.style'
 
 interface BusinessFormProps {
   visible: boolean
@@ -382,6 +377,9 @@ const BusinessForm: React.FC<BusinessFormProps> = ({ visible, setVisible, onSucc
             type: 'multiple',
             editableKeys,
             onChange: setEditableRowKeys
+          }}
+          locale={{
+            emptyText: <div style={emptyTextStyle}>暂无数据</div>
           }}
         />
       </Col>

@@ -19,3 +19,10 @@ export const siderStyle = {
   border: 'none',
   marginRight: 10
 }
+
+export const emptyTextStyle = {
+  backgroundColor: 'transparent',
+  border: 'none',
+  padding: '2px 0',
+  color: '#999'
+}
