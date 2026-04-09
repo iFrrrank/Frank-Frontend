@@ -241,9 +241,6 @@ const ReceivableManagement: React.FC = () => {
             {textConst.action.export}
           </Button>
         ]}
-        locale={{
-          emptyText: <div style={emptyTextStyle}>暂无数据</div>
-        }}
       />
 
       <ReceivableForm

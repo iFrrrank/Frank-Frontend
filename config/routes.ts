@@ -314,7 +314,20 @@ export default [
         path: '/crm/receivable',
         name: '回款管理',
         icon: 'shoppingCart',
-        component: './crm/receivable'
+        routes: [
+          {
+            path: '/crm/receivable/list',
+            name: '回款列表',
+            icon: 'user',
+            component: './crm/receivable'
+          },
+          {
+            path: '/crm/receivable/plan',
+            name: '回款计划',
+            icon: 'user',
+            component: './crm/receivable/plan'
+          }
+        ]
       },
       {
         path: '/crm/product',
