@@ -357,6 +357,12 @@ export default [
             name: '产品分类配置',
             icon: 'user',
             component: './crm/config/product/category'
+          },
+          {
+            path: '/crm/config/business/status',
+            name: '商机状态配置',
+            icon: 'user',
+            component: './crm/config/business/status'
           }
         ]
       }

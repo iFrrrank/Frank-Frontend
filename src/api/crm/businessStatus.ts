@@ -85,7 +85,7 @@ export async function getBusinessStatusTypeSimpleList(options?: { [key: string]:
 }
 
 /** 更新商机状态 PUT /crm/business-status/update */
-export async function updateBusinessStatus1(
+export async function updateBusinessStatus(
   body: API.CrmBusinessStatusSaveReqVO,
   options?: { [key: string]: any }
 ) {

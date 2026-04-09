@@ -74,7 +74,8 @@ const ProductCategoryManagement: React.FC = () => {
 
   return (
     <>
-      <ProTable<any>
+      <ProTable<API.CommonResultListCrmProductCategoryRespVO>
+        headerTitle="产品分类配置"
         actionRef={actionRef}
         rowKey="id"
         columns={columns}
