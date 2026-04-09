@@ -1,7 +1,7 @@
 import { request } from '@umijs/max'
 
 /** 获取合同配置 GET /crm/contract-config/get */
-export async function getCustomerPoolConfig1(options?: { [key: string]: any }) {
+export async function getCustomerPoolConfig(options?: { [key: string]: any }) {
   return request<API.CommonResultCrmContractConfigRespVO>('/crm/contract-config/get', {
     method: 'GET',
     ...(options || {})

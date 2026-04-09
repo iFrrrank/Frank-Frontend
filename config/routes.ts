@@ -363,6 +363,12 @@ export default [
             name: '商机状态配置',
             icon: 'user',
             component: './crm/config/business/status'
+          },
+          {
+            path: '/crm/config/contract',
+            name: '合同配置',
+            icon: 'user',
+            component: './crm/config/contract'
           }
         ]
       }
