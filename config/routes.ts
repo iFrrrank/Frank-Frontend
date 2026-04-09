@@ -311,6 +311,12 @@ export default [
         component: './crm/contract'
       },
       {
+        path: '/crm/receivable',
+        name: '回款管理',
+        icon: 'shoppingCart',
+        component: './crm/receivable'
+      },
+      {
         path: '/crm/product',
         name: '产品管理',
         icon: 'shoppingCart',

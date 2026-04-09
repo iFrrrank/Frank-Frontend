@@ -3,7 +3,8 @@ import {
   CrmAuditStatusEnum,
   CrmSceneTypeEnum,
   CrmCustomerLevelEnum,
-  CrmProductStatusEnum
+  CrmProductStatusEnum,
+  CrmReceivableReturnTypeEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -191,4 +192,30 @@ export const PRODUCT_STATUS_ENUM: SelectValueItem = {
 export const PRODUCT_STATUS: OptionItem[] = [
   { label: CrmProductStatusEnum.ENABLE.name, value: CrmProductStatusEnum.ENABLE.status },
   { label: CrmProductStatusEnum.DISABLE.name, value: CrmProductStatusEnum.DISABLE.status }
+]
+
+export const RECEIVABLE_RETURN_TYPE: OptionItem[] = [
+  { label: CrmReceivableReturnTypeEnum.CHECK.name, value: CrmReceivableReturnTypeEnum.CHECK.type },
+  { label: CrmReceivableReturnTypeEnum.CASH.name, value: CrmReceivableReturnTypeEnum.CASH.type },
+  {
+    label: CrmReceivableReturnTypeEnum.POSTAL_REMITTANCE.name,
+    value: CrmReceivableReturnTypeEnum.POSTAL_REMITTANCE.type
+  },
+  {
+    label: CrmReceivableReturnTypeEnum.TELEGRAPHIC_TRANSFER.name,
+    value: CrmReceivableReturnTypeEnum.TELEGRAPHIC_TRANSFER.type
+  },
+  {
+    label: CrmReceivableReturnTypeEnum.ONLINE_TRANSFER.name,
+    value: CrmReceivableReturnTypeEnum.ONLINE_TRANSFER.type
+  },
+  {
+    label: CrmReceivableReturnTypeEnum.ALIPAY.name,
+    value: CrmReceivableReturnTypeEnum.ALIPAY.type
+  },
+  {
+    label: CrmReceivableReturnTypeEnum.WECHAT_PAY.name,
+    value: CrmReceivableReturnTypeEnum.WECHAT_PAY.type
+  },
+  { label: CrmReceivableReturnTypeEnum.OTHER.name, value: CrmReceivableReturnTypeEnum.OTHER.type }
 ]
