@@ -44,7 +44,7 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
       if (resp.code === 0 && resp.data) {
         return resp.data
       }
-    } catch {}
+    } catch { }
     return []
   }
 
@@ -71,13 +71,13 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
       initialValues={
         editingDept?.id
           ? {
-              ...editingDept
-            }
+            ...editingDept
+          }
           : {
-              parentId: editingDept?.parentId || 0,
-              sort: 0,
-              status: 0
-            }
+            parentId: editingDept?.parentId || 0,
+            sort: 0,
+            status: 0
+          }
       }
       layout="horizontal"
       labelCol={{ span: 5 }}
@@ -85,7 +85,7 @@ const SaveDeptForm: React.FC<SaveDeptModalProps> = ({ onSuccess }) => {
       grid={true}
       rowProps={{ gutter: [16, 0] }}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
         bodyStyle: { paddingBottom: 0 }
       }}
       colon={false}

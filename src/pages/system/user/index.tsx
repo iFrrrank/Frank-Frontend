@@ -1,12 +1,11 @@
 import React, { useRef, useState } from 'react'
 import type { MenuProps } from 'antd'
-import { Button, Col, Dropdown, message, Modal, Row } from 'antd'
+import { Button, Col, Dropdown, Row } from 'antd'
 import {
   DeleteOutlined,
   DoubleRightOutlined,
   DownloadOutlined,
   EditOutlined,
-  ExclamationCircleOutlined,
   KeyOutlined,
   PlusOutlined,
   UploadOutlined,
@@ -16,7 +15,7 @@ import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-co
 import { ProTable } from '@ant-design/pro-components'
 import { deleteUser, exportUserList, getUser, getUserPage } from '@/api/system/user'
 import DeptTree from '@/pages/system/user/DeptTree'
-import { COMMON_STATUS_VALUE_ENUM } from '@/utils/constantsValue'
+import { COMMON_STATUS } from '@/utils/constantsValue'
 import ResetPwdForm, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
 import AssignRoleForm, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
 import ImportUserForm, { handleImportUser } from '@/pages/system/user/ImportUserForm'
@@ -78,7 +77,7 @@ const SystemUser: React.FC = () => {
       dataIndex: 'status',
       width: 80,
       valueType: 'select',
-      valueEnum: COMMON_STATUS_VALUE_ENUM,
+      valueEnum: COMMON_STATUS,
       fieldProps: {
         placeholder: '请选择状态'
       }

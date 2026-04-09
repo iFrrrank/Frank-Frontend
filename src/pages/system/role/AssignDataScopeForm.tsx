@@ -27,7 +27,7 @@ const AssignDataScopeForm: React.FC = () => {
       initialValues={{ dataScope: 1 }}
       colon={false}
       modalProps={{
-        destroyOnClose: true
+        destroyOnHidden: true
       }}
       onFinish={async (values) => {
         try {

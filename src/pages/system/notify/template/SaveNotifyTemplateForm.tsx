@@ -52,7 +52,7 @@ const SaveNotifyTemplateForm: React.FC<SaveNotifyTemplateModalProps> = ({ onSucc
       wrapperCol={{ span: 18 }}
       colon={false}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
         maskClosable: false
       }}
       onFinish={async (values) => {

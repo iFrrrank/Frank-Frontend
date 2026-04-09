@@ -101,7 +101,7 @@ export default [
             name: '通知公告',
             icon: 'notification',
             component: './system/notice'
-          },
+          }
         ]
       },
       {
@@ -251,6 +251,137 @@ export default [
             name: '任务日志',
             icon: 'unorderedList',
             component: './infra/job/jobLog/index'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: '/crm',
+    name: 'CRM系统',
+    icon: 'user',
+    routes: [
+      {
+        path: '/crm/backlog',
+        name: '待办事项',
+        icon: 'schedule',
+        component: './crm/backlog'
+      },
+      {
+        path: '/crm/clue',
+        name: '线索管理',
+        icon: 'schedule',
+        component: './crm/clue'
+      },
+      {
+        path: '/crm/customer',
+        name: '客户管理',
+        icon: 'user',
+        routes: [
+          {
+            path: '/crm/customer/list',
+            name: '客户列表',
+            icon: 'user',
+            component: './crm/customer'
+          },
+          {
+            path: '/crm/customer/pool',
+            name: '客户公海',
+            icon: 'user',
+            component: './crm/customer/pool'
+          }
+        ]
+      },
+      {
+        path: '/crm/contact',
+        name: '联系人管理',
+        icon: 'contacts',
+        component: './crm/contact'
+      },
+      {
+        path: '/crm/business',
+        name: '商机管理',
+        icon: 'shoppingCart',
+        component: './crm/business'
+      },
+      {
+        path: '/crm/contract',
+        name: '合同管理',
+        icon: 'shoppingCart',
+        component: './crm/contract'
+      },
+      {
+        path: '/crm/receivable',
+        name: '回款管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/crm/receivable/list',
+            name: '回款列表',
+            icon: 'user',
+            component: './crm/receivable'
+          },
+          {
+            path: '/crm/receivable/plan',
+            name: '回款计划',
+            icon: 'user',
+            component: './crm/receivable/plan'
+          }
+        ]
+      },
+      {
+        path: '/crm/product',
+        name: '产品管理',
+        icon: 'shoppingCart',
+        component: './crm/product'
+      },
+      {
+        path: '/crm/config',
+        name: '系统配置',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/crm/config/customer/pool',
+            name: '客户公海配置',
+            icon: 'user',
+            component: './crm/config/customer/pool'
+          },
+          {
+            path: '/crm/config/customer/limit',
+            name: '客户限制配置',
+            icon: 'user',
+            component: './crm/config/customer/limit'
+          },
+          {
+            path: '/crm/config/product/category',
+            name: '产品分类配置',
+            icon: 'user',
+            component: './crm/config/product/category'
+          },
+          {
+            path: '/crm/config/business/status',
+            name: '商机状态配置',
+            icon: 'user',
+            component: './crm/config/business/status'
+          },
+          {
+            path: '/crm/config/contract',
+            name: '合同配置',
+            icon: 'user',
+            component: './crm/config/contract'
+          }
+        ]
+      },
+      {
+        path: '/crm/statistics',
+        name: '数据统计',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/crm/statistics/customer',
+            name: '客户分析',
+            icon: 'user',
+            component: './crm/statistics/customer'
           }
         ]
       }

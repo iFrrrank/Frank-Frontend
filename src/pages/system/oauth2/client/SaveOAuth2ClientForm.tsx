@@ -51,7 +51,7 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
         },
         // 其他 Modal 配置
         centered: true, // 垂直居中
-        destroyOnClose: true // 关闭销毁
+        destroyOnHidden: true // 关闭销毁
       }}
       open={createModalVisible}
       onOpenChange={(visible) => {
@@ -63,29 +63,29 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       initialValues={
         editingClient
           ? {
-              id: editingClient.id,
-              clientId: editingClient.clientId,
-              secret: editingClient.secret,
-              name: editingClient.name,
-              logo: editingClient.logo,
-              description: editingClient.description,
-              status: editingClient.status,
-              accessTokenValiditySeconds: editingClient.accessTokenValiditySeconds,
-              refreshTokenValiditySeconds: editingClient.refreshTokenValiditySeconds,
-              redirectUris: editingClient.redirectUris || [],
-              authorizedGrantTypes: editingClient.authorizedGrantTypes?.[0] || 'authorization_code',
-              scopes: editingClient.scopes || [],
-              autoApproveScopes: editingClient.autoApproveScopes || [],
-              authorities: editingClient.authorities || [],
-              resourceIds: editingClient.resourceIds || [],
-              additionalInformation: editingClient.additionalInformation
-            }
+            id: editingClient.id,
+            clientId: editingClient.clientId,
+            secret: editingClient.secret,
+            name: editingClient.name,
+            logo: editingClient.logo,
+            description: editingClient.description,
+            status: editingClient.status,
+            accessTokenValiditySeconds: editingClient.accessTokenValiditySeconds,
+            refreshTokenValiditySeconds: editingClient.refreshTokenValiditySeconds,
+            redirectUris: editingClient.redirectUris || [],
+            authorizedGrantTypes: editingClient.authorizedGrantTypes?.[0] || 'authorization_code',
+            scopes: editingClient.scopes || [],
+            autoApproveScopes: editingClient.autoApproveScopes || [],
+            authorities: editingClient.authorities || [],
+            resourceIds: editingClient.resourceIds || [],
+            additionalInformation: editingClient.additionalInformation
+          }
           : {
-              status: 0,
-              accessTokenValiditySeconds: 3600,
-              refreshTokenValiditySeconds: 86400,
-              authorizedGrantTypes: ['authorization_code', 'refresh_token']
-            }
+            status: 0,
+            accessTokenValiditySeconds: 3600,
+            refreshTokenValiditySeconds: 86400,
+            authorizedGrantTypes: ['authorization_code', 'refresh_token']
+          }
       }
       layout="horizontal"
       labelCol={{ span: 6 }}

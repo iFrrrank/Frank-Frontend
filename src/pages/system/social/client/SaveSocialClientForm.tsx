@@ -46,18 +46,18 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
       initialValues={
         editingClient
           ? {
-              id: editingClient.id,
-              name: editingClient.name,
-              socialType: editingClient.socialType,
-              userType: editingClient.userType,
-              clientId: editingClient.clientId,
-              clientSecret: editingClient.clientSecret,
-              agentId: editingClient.agentId,
-              status: editingClient.status
-            }
+            id: editingClient.id,
+            name: editingClient.name,
+            socialType: editingClient.socialType,
+            userType: editingClient.userType,
+            clientId: editingClient.clientId,
+            clientSecret: editingClient.clientSecret,
+            agentId: editingClient.agentId,
+            status: editingClient.status
+          }
           : {
-              status: 0
-            }
+            status: 0
+          }
       }
       layout="horizontal"
       labelCol={{ span: 6 }}
@@ -65,7 +65,7 @@ const SaveSocialClientForm: React.FC<SaveSocialClientModalProps> = ({ onSuccess 
       autoFocusFirstInput
       colon={false}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
         bodyStyle: { paddingBottom: 0 }
       }}
       onFinish={async (values) => {
