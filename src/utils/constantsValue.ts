@@ -36,6 +36,11 @@ export const COMMON_STATUS: SelectValueItem = {
   }
 }
 
+export const COMMON_STATUS_OPTIONS: OptionItem[] = [
+  { label: CommonStatusEnum.ENABLE.name, value: CommonStatusEnum.ENABLE.status },
+  { label: CommonStatusEnum.DISABLE.name, value: CommonStatusEnum.DISABLE.status }
+]
+
 export const BOOLEAN_OPTIONS: OptionItem[] = [
   { label: '是', value: 1 },
   { label: '否', value: 0 }
@@ -218,4 +223,9 @@ export const RECEIVABLE_RETURN_TYPE: OptionItem[] = [
     value: CrmReceivableReturnTypeEnum.WECHAT_PAY.type
   },
   { label: CrmReceivableReturnTypeEnum.OTHER.name, value: CrmReceivableReturnTypeEnum.OTHER.type }
+]
+
+export const NOTIFY_STATUS: OptionItem[] = [
+  { label: '提醒', value: 1 },
+  { label: '不提醒', value: 0 }
 ]

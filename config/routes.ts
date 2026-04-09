@@ -334,6 +334,19 @@ export default [
         name: '产品管理',
         icon: 'shoppingCart',
         component: './crm/product'
+      },
+      {
+        path: '/crm/config',
+        name: '系统配置',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/crm/config/customer/pool',
+            name: '客户公海配置',
+            icon: 'user',
+            component: './crm/config/customer/pool'
+          }
+        ]
       }
     ]
   },

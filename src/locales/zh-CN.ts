@@ -47,6 +47,8 @@ export const textConst = {
     createError: '创建失败',
     updateSuccess: '修改成功',
     updateError: '修改失败',
+    saveSuccess: '保存成功',
+    saveError: '保存失败',
     delSuccess: '删除成功',
     delError: '删除失败',
     batchDelSuccess: '批量删除成功',
