@@ -4,7 +4,8 @@ import {
   CrmSceneTypeEnum,
   CrmCustomerLevelEnum,
   CrmProductStatusEnum,
-  CrmReceivableReturnTypeEnum
+  CrmReceivableReturnTypeEnum,
+  CrmCustomerLimitConfigTypeEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -229,3 +230,12 @@ export const NOTIFY_STATUS: OptionItem[] = [
   { label: '提醒', value: 1 },
   { label: '不提醒', value: 0 }
 ]
+
+export const CUSTOMER_LIMIT_CONFIG_TYPE: SelectValueItem = {
+  [CrmCustomerLimitConfigTypeEnum.CUSTOMER_OWNER_LIMIT.type]: {
+    text: CrmCustomerLimitConfigTypeEnum.CUSTOMER_OWNER_LIMIT.name
+  },
+  [CrmCustomerLimitConfigTypeEnum.CUSTOMER_LOCK_LIMIT.type]: {
+    text: CrmCustomerLimitConfigTypeEnum.CUSTOMER_LOCK_LIMIT.name
+  }
+}

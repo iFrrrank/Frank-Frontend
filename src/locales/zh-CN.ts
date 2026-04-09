@@ -357,6 +357,7 @@ export const textConst = {
     batchDelete: '批量删除',
     update: '修改',
     query: '查询',
+    refresh: '刷新',
     reset: '重置',
     expand: '展开',
     collapse: '折叠',

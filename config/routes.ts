@@ -345,6 +345,12 @@ export default [
             name: '客户公海配置',
             icon: 'user',
             component: './crm/config/customer/pool'
+          },
+          {
+            path: '/crm/config/customer/limit',
+            name: '客户限制配置',
+            icon: 'user',
+            component: './crm/config/customer/limit'
           }
         ]
       }
