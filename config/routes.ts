@@ -371,6 +371,19 @@ export default [
             component: './crm/config/contract'
           }
         ]
+      },
+      {
+        path: '/crm/statistics',
+        name: '数据统计',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/crm/statistics/customer',
+            name: '客户分析',
+            icon: 'user',
+            component: './crm/statistics/customer'
+          }
+        ]
       }
     ]
   },

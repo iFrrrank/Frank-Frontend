@@ -3,6 +3,7 @@ import { Card, Button, Form, Space, message } from 'antd'
 import { ProForm, ProFormRadio, ProFormDependency, ProFormDigit } from '@ant-design/pro-components'
 import { getCustomerPoolConfig, saveCustomerPoolConfig } from '@/api/crm/contractConfig'
 import { textConst } from '@/locales/zh-CN'
+import { NOTIFY_STATUS } from '@/utils/constantsValue'
 
 const ContractConfig: React.FC = () => {
   const [form] = Form.useForm()
@@ -60,10 +61,7 @@ const ContractConfig: React.FC = () => {
           name="notifyEnabled"
           label="提前提醒设置"
           rules={[{ required: true, message: '请选择是否提醒' }]}
-          options={[
-            { label: '不提醒', value: false },
-            { label: '提醒', value: true }
-          ]}
+          options={NOTIFY_STATUS}
         />
 
         <ProFormDependency name={['notifyEnabled']}>
