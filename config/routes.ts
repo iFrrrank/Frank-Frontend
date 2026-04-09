@@ -387,6 +387,26 @@ export default [
       }
     ]
   },
+  {
+    path: '/erp',
+    name: 'ERP系统',
+    icon: 'user',
+    routes: [
+      {
+        path: '/erp/purchase',
+        name: '采购管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/erp/purchase/order',
+            name: '采购订单',
+            icon: 'schedule',
+            component: './erp/purchase/order'
+          }
+        ]
+      }
+    ]
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]

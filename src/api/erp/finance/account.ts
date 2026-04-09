@@ -73,7 +73,7 @@ export async function getAccountPage(
 }
 
 // 获取结算账户精简列表 只包含被开启的结算账户，主要用于前端的下拉选项 GET /erp/account/simple-list
-export async function getWarehouseSimpleList1(options?: { [key: string]: any }) {
+export async function getAccountSimpleList(options?: { [key: string]: any }) {
   return request<API.CommonResultListErpAccountRespVO>('/erp/account/simple-list', {
     method: 'GET',
     ...(options || {})
