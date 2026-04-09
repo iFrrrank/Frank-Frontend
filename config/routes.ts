@@ -351,6 +351,12 @@ export default [
             name: '客户限制配置',
             icon: 'user',
             component: './crm/config/customer/limit'
+          },
+          {
+            path: '/crm/config/product/category',
+            name: '产品分类配置',
+            icon: 'user',
+            component: './crm/config/product/category'
           }
         ]
       }
