@@ -422,6 +422,19 @@ export default [
             component: './erp/purchase/supplier'
           }
         ]
+      },
+      {
+        path: '/erp/sale',
+        name: '销售管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/erp/sale/order',
+            name: '销售订单',
+            icon: 'schedule',
+            component: './erp/sale/order'
+          }
+        ]
       }
     ]
   },

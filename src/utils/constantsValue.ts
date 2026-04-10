@@ -5,7 +5,8 @@ import {
   CrmCustomerLevelEnum,
   CrmProductStatusEnum,
   CrmReceivableReturnTypeEnum,
-  CrmCustomerLimitConfigTypeEnum
+  CrmCustomerLimitConfigTypeEnum,
+  ErpAuditStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -237,5 +238,17 @@ export const CUSTOMER_LIMIT_CONFIG_TYPE: SelectValueItem = {
   },
   [CrmCustomerLimitConfigTypeEnum.CUSTOMER_LOCK_LIMIT.type]: {
     text: CrmCustomerLimitConfigTypeEnum.CUSTOMER_LOCK_LIMIT.name
+  }
+}
+
+// ========== ERP 系统 ==========
+export const ERP_AUDIT_STATUS: SelectValueItem = {
+  [ErpAuditStatusEnum.PROCESS.status]: {
+    text: ErpAuditStatusEnum.PROCESS.name,
+    status: 'Processing'
+  },
+  [ErpAuditStatusEnum.APPROVE.status]: {
+    text: ErpAuditStatusEnum.APPROVE.name,
+    status: 'Success'
   }
 }
