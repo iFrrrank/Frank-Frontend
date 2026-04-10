@@ -252,12 +252,14 @@ const PurchaseOrderForm: React.FC<PurchaseOrderFormProps> = ({
         label="订单时间"
         rules={[{ required: true }]}
         colProps={{ span: 8 }}
+        fieldProps={{ placeholder: '请选择订单时间' }}
       />
       <ProFormSelect
         name="supplierId"
         label="供应商"
         rules={[{ required: true }]}
         colProps={{ span: 8 }}
+        fieldProps={{ placeholder: '请选择供应商' }}
         request={async () => {
           const res = await getSupplierSimpleList()
           return res.data?.map((item: any) => ({ label: item.name, value: item.id })) || []
@@ -268,7 +270,7 @@ const PurchaseOrderForm: React.FC<PurchaseOrderFormProps> = ({
         name="fileUrl"
         label="附件"
         max={1}
-        title="选取文件"
+        title="上传附件"
         colProps={{ span: 8 }}
       />
       <ProFormTextArea

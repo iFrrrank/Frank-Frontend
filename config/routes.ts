@@ -402,6 +402,12 @@ export default [
             name: '采购订单',
             icon: 'schedule',
             component: './erp/purchase/order'
+          },
+          {
+            path: '/erp/purchase/in',
+            name: '采购入库',
+            icon: 'schedule',
+            component: './erp/purchase/in'
           }
         ]
       }
