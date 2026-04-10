@@ -274,10 +274,13 @@ const PurchaseInForm: React.FC<PurchaseInboundFormProps> = ({
           fieldProps={{
             readOnly: true,
             addonAfter: (
-              <SearchOutlined
+              <div
                 style={{ cursor: 'pointer', color: '#1890ff' }}
                 onClick={() => setOrderModalVisible(true)}
-              />
+              >
+                <SearchOutlined />
+                <span>选择</span>
+              </div>
             )
           }}
         />

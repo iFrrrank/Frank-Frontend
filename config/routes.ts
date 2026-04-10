@@ -408,6 +408,12 @@ export default [
             name: '采购入库',
             icon: 'schedule',
             component: './erp/purchase/in'
+          },
+          {
+            path: '/erp/purchase/return',
+            name: '采购退货',
+            icon: 'schedule',
+            component: './erp/purchase/return'
           }
         ]
       }
