@@ -414,6 +414,12 @@ export default [
             name: '采购退货',
             icon: 'schedule',
             component: './erp/purchase/return'
+          },
+          {
+            path: '/erp/purchase/supplier',
+            name: '供应商信息',
+            icon: 'schedule',
+            component: './erp/purchase/supplier'
           }
         ]
       }
