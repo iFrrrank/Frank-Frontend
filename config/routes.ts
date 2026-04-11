@@ -433,6 +433,12 @@ export default [
             name: '销售订单',
             icon: 'schedule',
             component: './erp/sale/order'
+          },
+          {
+            path: '/erp/sale/out',
+            name: '销售出库',
+            icon: 'schedule',
+            component: './erp/sale/out'
           }
         ]
       }

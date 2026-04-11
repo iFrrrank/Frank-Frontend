@@ -172,7 +172,6 @@ const SaleOrderManagement: React.FC = () => {
         columns={columns}
         rowSelection={{ selectedRowKeys, onChange: setSelectedRowKeys }}
         search={{ labelWidth: 80, span: 6 }}
-        options={false}
         request={async (params) => {
           const { current, pageSize, orderTime, ...rest } = params
           const req = {
