@@ -527,6 +527,19 @@ export default [
             component: './erp/product/unit'
           }
         ]
+      },
+      {
+        path: '/erp/finance',
+        name: '财务管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/erp/finance/payment',
+            name: '付款单',
+            icon: 'schedule',
+            component: './erp/finance/payment'
+          }
+        ]
       }
     ]
   },
