@@ -544,6 +544,12 @@ export default [
             name: '收款单',
             icon: 'schedule',
             component: './erp/finance/receipt'
+          },
+          {
+            path: '/erp/finance/account',
+            name: '结算账户',
+            icon: 'schedule',
+            component: './erp/finance/account'
           }
         ]
       }
