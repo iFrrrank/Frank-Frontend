@@ -482,6 +482,12 @@ export default [
             name: '其他入库',
             icon: 'schedule',
             component: './erp/stock/in'
+          },
+          {
+            path: '/erp/stock/out',
+            name: '其他出库',
+            icon: 'schedule',
+            component: './erp/stock/out'
           }
         ]
       }
