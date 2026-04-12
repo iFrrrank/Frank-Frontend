@@ -439,6 +439,12 @@ export default [
             name: '销售出库',
             icon: 'schedule',
             component: './erp/sale/out'
+          },
+          {
+            path: '/erp/sale/return',
+            name: '销售退货',
+            icon: 'schedule',
+            component: './erp/sale/return'
           }
         ]
       }

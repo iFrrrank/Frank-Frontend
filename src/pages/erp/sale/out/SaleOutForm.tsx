@@ -15,7 +15,12 @@ import {
 import SaleOrderSelectModal from './SaleOrderSelectModal'
 import { createSaleOut, updateSaleOut, getSaleOut } from '@/api/erp/sale/out'
 import { textConst } from '@/locales/zh-CN'
-import { emptyTextStyle, tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import {
+  emptyTextStyle,
+  tableActionStyle,
+  deleteTextStyle,
+  correlativeOrder
+} from '@/styles/common.style'
 
 interface SaleOutFormProps {
   visible: boolean
@@ -297,16 +302,7 @@ const SaleOutForm: React.FC<SaleOutFormProps> = ({ visible, setVisible, onSucces
           fieldProps={{
             readOnly: true,
             addonAfter: (
-              <div
-                style={{
-                  cursor: 'pointer',
-                  color: '#1890ff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 4
-                }}
-                onClick={() => setOrderModalVisible(true)}
-              >
+              <div style={correlativeOrder} onClick={() => setOrderModalVisible(true)}>
                 <SearchOutlined />
                 <span>选择</span>
               </div>
@@ -344,7 +340,7 @@ const SaleOutForm: React.FC<SaleOutFormProps> = ({ visible, setVisible, onSucces
           name="fileUrl"
           label="附件"
           max={1}
-          title="上传文件"
+          title="上传附件"
           colProps={{ span: 8 }}
         />
         <ProFormText name="remark" label="备注" colProps={{ span: 8 }} placeholder="请输入备注" />

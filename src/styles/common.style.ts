@@ -26,3 +26,11 @@ export const emptyTextStyle = {
   padding: '2px 0',
   color: '#999'
 }
+
+export const correlativeOrder = {
+  cursor: 'pointer',
+  color: '#1890ff',
+  display: 'flex',
+  alignItems: 'center',
+  gap: 4
+}

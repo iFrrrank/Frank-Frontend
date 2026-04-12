@@ -14,7 +14,12 @@ import {
 import PurchaseOrderSelectModal from './PurchaseOrderSelectModal'
 import {} from '@/api/erp/purchase/in'
 import { textConst } from '@/locales/zh-CN'
-import { emptyTextStyle, tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import {
+  emptyTextStyle,
+  tableActionStyle,
+  deleteTextStyle,
+  correlativeOrder
+} from '@/styles/common.style'
 
 interface PurchaseInboundFormProps {
   visible: boolean
@@ -274,10 +279,7 @@ const PurchaseInForm: React.FC<PurchaseInboundFormProps> = ({
           fieldProps={{
             readOnly: true,
             addonAfter: (
-              <div
-                style={{ cursor: 'pointer', color: '#1890ff' }}
-                onClick={() => setOrderModalVisible(true)}
-              >
+              <div style={correlativeOrder} onClick={() => setOrderModalVisible(true)}>
                 <SearchOutlined />
                 <span>选择</span>
               </div>

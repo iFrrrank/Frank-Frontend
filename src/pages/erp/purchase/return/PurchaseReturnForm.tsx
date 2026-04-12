@@ -18,7 +18,12 @@ import {
   getPurchaseReturn
 } from '@/api/erp/purchase/return'
 import { textConst } from '@/locales/zh-CN'
-import { emptyTextStyle, tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import {
+  emptyTextStyle,
+  tableActionStyle,
+  deleteTextStyle,
+  correlativeOrder
+} from '@/styles/common.style'
 
 interface PurchaseReturnFormProps {
   visible: boolean
@@ -304,10 +309,7 @@ const PurchaseReturnForm: React.FC<PurchaseReturnFormProps> = ({
           fieldProps={{
             readOnly: true,
             addonAfter: (
-              <div
-                style={{ cursor: 'pointer', color: '#1890ff' }}
-                onClick={() => setOrderModalVisible(true)}
-              >
+              <div style={correlativeOrder} onClick={() => setOrderModalVisible(true)}>
                 <SearchOutlined />
                 <span>选择</span>
               </div>
