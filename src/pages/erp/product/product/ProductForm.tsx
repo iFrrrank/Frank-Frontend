@@ -70,13 +70,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ visible, setVisible, onSucces
         name="name"
         label="名称"
         rules={[{ required: true, message: '请输入产品名称' }]}
-        placeholder="请输入名称"
+        placeholder="请输入产品名称"
       />
       <ProFormText
         name="barCode"
         label="条码"
         rules={[{ required: true, message: '请输入产品条码' }]}
-        placeholder="请输入条码"
+        placeholder="请输入产品条码"
       />
       <ProFormSelect
         name="categoryId"
