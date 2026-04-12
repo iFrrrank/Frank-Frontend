@@ -538,6 +538,12 @@ export default [
             name: '付款单',
             icon: 'schedule',
             component: './erp/finance/payment'
+          },
+          {
+            path: '/erp/finance/receipt',
+            name: '收款单',
+            icon: 'schedule',
+            component: './erp/finance/receipt'
           }
         ]
       }
