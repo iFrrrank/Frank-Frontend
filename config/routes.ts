@@ -453,6 +453,19 @@ export default [
             component: './erp/sale/customer'
           }
         ]
+      },
+      {
+        path: '/erp/stock',
+        name: '库存管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/erp/stock/warehouse',
+            name: '仓库信息',
+            icon: 'schedule',
+            component: './erp/stock/warehouse'
+          }
+        ]
       }
     ]
   },
