@@ -502,6 +502,19 @@ export default [
             component: './erp/stock/check'
           }
         ]
+      },
+      {
+        path: '/erp/product',
+        name: '产品管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/erp/product/index',
+            name: '产品信息',
+            icon: 'schedule',
+            component: './erp/product/product'
+          }
+        ]
       }
     ]
   },
