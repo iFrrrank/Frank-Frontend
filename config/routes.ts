@@ -494,6 +494,12 @@ export default [
             name: '库存调拨',
             icon: 'schedule',
             component: './erp/stock/move'
+          },
+          {
+            path: '/erp/stock/check',
+            name: '库存盘点',
+            icon: 'schedule',
+            component: './erp/stock/check'
           }
         ]
       }
