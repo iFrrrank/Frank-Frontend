@@ -460,6 +460,12 @@ export default [
         icon: 'shoppingCart',
         routes: [
           {
+            path: '/erp/stock/index',
+            name: '产品库存',
+            icon: 'schedule',
+            component: './erp/stock/stock'
+          },
+          {
             path: '/erp/stock/warehouse',
             name: '仓库信息',
             icon: 'schedule',
