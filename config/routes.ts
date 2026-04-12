@@ -519,6 +519,12 @@ export default [
             name: '产品分类',
             icon: 'schedule',
             component: './erp/product/category'
+          },
+          {
+            path: '/erp/product/unit',
+            name: '产品单位',
+            icon: 'schedule',
+            component: './erp/product/unit'
           }
         ]
       }
