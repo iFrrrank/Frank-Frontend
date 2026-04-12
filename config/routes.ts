@@ -387,6 +387,174 @@ export default [
       }
     ]
   },
+  {
+    path: '/erp',
+    name: 'ERP系统',
+    icon: 'user',
+    routes: [
+      {
+        path: '/erp/purchase',
+        name: '采购管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/erp/purchase/order',
+            name: '采购订单',
+            icon: 'schedule',
+            component: './erp/purchase/order'
+          },
+          {
+            path: '/erp/purchase/in',
+            name: '采购入库',
+            icon: 'schedule',
+            component: './erp/purchase/in'
+          },
+          {
+            path: '/erp/purchase/return',
+            name: '采购退货',
+            icon: 'schedule',
+            component: './erp/purchase/return'
+          },
+          {
+            path: '/erp/purchase/supplier',
+            name: '供应商信息',
+            icon: 'schedule',
+            component: './erp/purchase/supplier'
+          }
+        ]
+      },
+      {
+        path: '/erp/sale',
+        name: '销售管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/erp/sale/order',
+            name: '销售订单',
+            icon: 'schedule',
+            component: './erp/sale/order'
+          },
+          {
+            path: '/erp/sale/out',
+            name: '销售出库',
+            icon: 'schedule',
+            component: './erp/sale/out'
+          },
+          {
+            path: '/erp/sale/return',
+            name: '销售退货',
+            icon: 'schedule',
+            component: './erp/sale/return'
+          },
+          {
+            path: '/erp/sale/customer',
+            name: '客户信息',
+            icon: 'schedule',
+            component: './erp/sale/customer'
+          }
+        ]
+      },
+      {
+        path: '/erp/stock',
+        name: '库存管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/erp/stock/index',
+            name: '产品库存',
+            icon: 'schedule',
+            component: './erp/stock/stock'
+          },
+          {
+            path: '/erp/stock/warehouse',
+            name: '仓库信息',
+            icon: 'schedule',
+            component: './erp/stock/warehouse'
+          },
+          {
+            path: '/erp/stock/record',
+            name: '出入库明细',
+            icon: 'schedule',
+            component: './erp/stock/record'
+          },
+          {
+            path: '/erp/stock/in',
+            name: '其他入库',
+            icon: 'schedule',
+            component: './erp/stock/in'
+          },
+          {
+            path: '/erp/stock/out',
+            name: '其他出库',
+            icon: 'schedule',
+            component: './erp/stock/out'
+          },
+          {
+            path: '/erp/stock/move',
+            name: '库存调拨',
+            icon: 'schedule',
+            component: './erp/stock/move'
+          },
+          {
+            path: '/erp/stock/check',
+            name: '库存盘点',
+            icon: 'schedule',
+            component: './erp/stock/check'
+          }
+        ]
+      },
+      {
+        path: '/erp/product',
+        name: '产品管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/erp/product/index',
+            name: '产品信息',
+            icon: 'schedule',
+            component: './erp/product/product'
+          },
+          {
+            path: '/erp/product/category',
+            name: '产品分类',
+            icon: 'schedule',
+            component: './erp/product/category'
+          },
+          {
+            path: '/erp/product/unit',
+            name: '产品单位',
+            icon: 'schedule',
+            component: './erp/product/unit'
+          }
+        ]
+      },
+      {
+        path: '/erp/finance',
+        name: '财务管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/erp/finance/payment',
+            name: '付款单',
+            icon: 'schedule',
+            component: './erp/finance/payment'
+          },
+          {
+            path: '/erp/finance/receipt',
+            name: '收款单',
+            icon: 'schedule',
+            component: './erp/finance/receipt'
+          },
+          {
+            path: '/erp/finance/account',
+            name: '结算账户',
+            icon: 'schedule',
+            component: './erp/finance/account'
+          }
+        ]
+      }
+    ]
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]

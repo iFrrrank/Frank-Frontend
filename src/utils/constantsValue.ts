@@ -5,7 +5,8 @@ import {
   CrmCustomerLevelEnum,
   CrmProductStatusEnum,
   CrmReceivableReturnTypeEnum,
-  CrmCustomerLimitConfigTypeEnum
+  CrmCustomerLimitConfigTypeEnum,
+  ErpAuditStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -238,4 +239,39 @@ export const CUSTOMER_LIMIT_CONFIG_TYPE: SelectValueItem = {
   [CrmCustomerLimitConfigTypeEnum.CUSTOMER_LOCK_LIMIT.type]: {
     text: CrmCustomerLimitConfigTypeEnum.CUSTOMER_LOCK_LIMIT.name
   }
+}
+
+// ========== ERP 系统 ==========
+export const ERP_AUDIT_STATUS: SelectValueItem = {
+  [ErpAuditStatusEnum.PROCESS.status]: {
+    text: ErpAuditStatusEnum.PROCESS.name,
+    status: 'Processing'
+  },
+  [ErpAuditStatusEnum.APPROVE.status]: {
+    text: ErpAuditStatusEnum.APPROVE.name,
+    status: 'Success'
+  }
+}
+
+export const BIZ_TYPE = {
+  10: { text: '采购入库', status: 'Success' },
+  11: { text: '采购入库（作废）', status: 'Error' },
+  12: { text: '采购退货出库', status: 'Success' },
+  13: { text: '采购退货出库（作废）', status: 'Error' },
+  20: { text: '盘盈入库', status: 'Success' },
+  21: { text: '盘盈入库（作废）', status: 'Error' },
+  22: { text: '盘盈出库', status: 'Success' },
+  23: { text: '盘盈出库（作废）', status: 'Error' },
+  30: { text: '销售出库', status: 'Success' },
+  31: { text: '销售出货（作废）', status: 'Error' },
+  32: { text: '销售退货入库', status: 'Success' },
+  33: { text: '销售退货入库（作废）', status: 'Error' },
+  40: { text: '调拨入库', status: 'Success' },
+  41: { text: '调拨入库（作废）', status: 'Error' },
+  42: { text: '调拨出库', status: 'Success' },
+  43: { text: '调拨出库（作废）', status: 'Error' },
+  50: { text: '其他入库', status: 'Success' },
+  51: { text: '其他入库（作废）', status: 'Error' },
+  52: { text: '其他出库', status: 'Success' },
+  53: { text: '其他出库（作废）', status: 'Error' }
 }
