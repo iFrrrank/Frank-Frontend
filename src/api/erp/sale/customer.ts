@@ -39,7 +39,7 @@ export async function exportCustomerExcel(
     params: {
       ...params,
       pageReqVO: undefined,
-      ...params['pageReqVO']
+      ...params['pageVO']
     },
     ...(options || {})
   })
@@ -66,7 +66,7 @@ export async function getCustomerPage(
     params: {
       ...params,
       pageReqVO: undefined,
-      ...params['pageReqVO']
+      ...params['pageVO']
     },
     ...(options || {})
   })

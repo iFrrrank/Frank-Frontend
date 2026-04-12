@@ -445,6 +445,12 @@ export default [
             name: '销售退货',
             icon: 'schedule',
             component: './erp/sale/return'
+          },
+          {
+            path: '/erp/sale/customer',
+            name: '客户信息',
+            icon: 'schedule',
+            component: './erp/sale/customer'
           }
         ]
       }
