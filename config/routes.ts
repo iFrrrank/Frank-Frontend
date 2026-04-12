@@ -513,6 +513,12 @@ export default [
             name: '产品信息',
             icon: 'schedule',
             component: './erp/product/product'
+          },
+          {
+            path: '/erp/product/category',
+            name: '产品分类',
+            icon: 'schedule',
+            component: './erp/product/category'
           }
         ]
       }
