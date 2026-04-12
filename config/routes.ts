@@ -488,6 +488,12 @@ export default [
             name: '其他出库',
             icon: 'schedule',
             component: './erp/stock/out'
+          },
+          {
+            path: '/erp/stock/move',
+            name: '库存调拨',
+            icon: 'schedule',
+            component: './erp/stock/move'
           }
         ]
       }
