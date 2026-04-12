@@ -470,6 +470,12 @@ export default [
             name: '仓库信息',
             icon: 'schedule',
             component: './erp/stock/warehouse'
+          },
+          {
+            path: '/erp/stock/record',
+            name: '出入库明细',
+            icon: 'schedule',
+            component: './erp/stock/record'
           }
         ]
       }
