@@ -316,3 +316,8 @@ export const DELIVERY_TYPE: OptionItem[] = [
   { label: DeliveryTypeEnum.EXPRESS.name, value: DeliveryTypeEnum.EXPRESS.type },
   { label: DeliveryTypeEnum.PICK_UP.name, value: DeliveryTypeEnum.PICK_UP.type }
 ]
+
+export const REPLY_STATUS: SelectValueItem = {
+  0: { text: '未回复', status: 'Default' },
+  1: { text: '已回复', status: 'Success' }
+}

@@ -303,6 +303,12 @@ export default [
             path: '/mall/product/property',
             icon: 'schedule',
             component: './mall/product/property'
+          },
+          {
+            name: '商品评论',
+            path: '/mall/product/comment',
+            icon: 'schedule',
+            component: './mall/product/comment'
           }
         ]
       }
