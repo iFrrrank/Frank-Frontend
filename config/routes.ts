@@ -297,6 +297,12 @@ export default [
             path: '/mall/product/brand',
             icon: 'schedule',
             component: './mall/product/brand'
+          },
+          {
+            name: '商品属性',
+            path: '/mall/product/property',
+            icon: 'schedule',
+            component: './mall/product/property'
           }
         ]
       }
