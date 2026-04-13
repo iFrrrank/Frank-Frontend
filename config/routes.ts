@@ -257,6 +257,64 @@ export default [
     ]
   },
   {
+    path: '/mall',
+    name: '商城系统',
+    icon: 'user',
+    routes: [
+      {
+        path: '/mall/product',
+        name: '商品管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            name: '商品列表',
+            path: '/mall/product/spu',
+            icon: 'schedule',
+            component: './mall/product/spu/index'
+          },
+          {
+            name: '新增商品',
+            path: '/mall/product/spu/add',
+            icon: 'schedule',
+            component: './mall/product/spu/add',
+            hideInMenu: true
+          },
+          {
+            name: '编辑商品',
+            path: '/mall/product/spu/edit',
+            icon: 'schedule',
+            component: './mall/product/spu/add',
+            hideInMenu: true
+          },
+          {
+            name: '商品分类',
+            path: '/mall/product/category',
+            icon: 'schedule',
+            component: './mall/product/category'
+          },
+          {
+            name: '商品品牌',
+            path: '/mall/product/brand',
+            icon: 'schedule',
+            component: './mall/product/brand'
+          },
+          {
+            name: '商品属性',
+            path: '/mall/product/property',
+            icon: 'schedule',
+            component: './mall/product/property'
+          },
+          {
+            name: '商品评论',
+            path: '/mall/product/comment',
+            icon: 'schedule',
+            component: './mall/product/comment'
+          }
+        ]
+      }
+    ]
+  },
+  {
     path: '/crm',
     name: 'CRM系统',
     icon: 'user',
