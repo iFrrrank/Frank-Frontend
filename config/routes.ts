@@ -285,6 +285,12 @@ export default [
             icon: 'schedule',
             component: './mall/product/spu/add',
             hideInMenu: true
+          },
+          {
+            name: '商品分类',
+            path: '/mall/product/category',
+            icon: 'schedule',
+            component: './mall/product/category'
           }
         ]
       }
