@@ -6,7 +6,9 @@ import {
   CrmProductStatusEnum,
   CrmReceivableReturnTypeEnum,
   CrmCustomerLimitConfigTypeEnum,
-  ErpAuditStatusEnum
+  ErpAuditStatusEnum,
+  ProductSpuStatusEnum,
+  DeliveryTypeEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -253,7 +255,7 @@ export const ERP_AUDIT_STATUS: SelectValueItem = {
   }
 }
 
-export const BIZ_TYPE = {
+export const BIZ_TYPE: SelectValueItem = {
   10: { text: '采购入库', status: 'Success' },
   11: { text: '采购入库（作废）', status: 'Error' },
   12: { text: '采购退货出库', status: 'Success' },
@@ -275,3 +277,42 @@ export const BIZ_TYPE = {
   52: { text: '其他出库', status: 'Success' },
   53: { text: '其他出库（作废）', status: 'Error' }
 }
+
+// ========== MALL-PRODUCT 系统 ==========
+export const PRODUCT_SPU_TYPE: OptionItem[] = [
+  { value: '0', label: '出售中(0)' },
+  { value: '1', label: '仓库中(0)' },
+  { value: '2', label: '已售罄(0)' },
+  { value: '3', label: '警戒库存(0)' },
+  { value: '4', label: '回收站(0)' }
+]
+
+export const SPU_STATUS: SelectValueItem = {
+  [ProductSpuStatusEnum.ENABLE.status]: {
+    text: ProductSpuStatusEnum.ENABLE.name,
+    status: 'Success'
+  },
+  [ProductSpuStatusEnum.DISABLE.status]: {
+    text: ProductSpuStatusEnum.DISABLE.name,
+    status: 'Error'
+  },
+  [ProductSpuStatusEnum.RECYCLE.status]: {
+    text: ProductSpuStatusEnum.RECYCLE.name,
+    status: 'Error'
+  }
+}
+
+export const DISTRIBUTE_TYPE: OptionItem[] = [
+  { label: '默认设置', value: 0 },
+  { label: '单独设置', value: 1 }
+]
+
+export const SPEC_TYPE: OptionItem[] = [
+  { label: '单规格', value: 0 },
+  { label: '多规格', value: 1 }
+]
+
+export const DELIVERY_TYPE: OptionItem[] = [
+  { label: DeliveryTypeEnum.EXPRESS.name, value: DeliveryTypeEnum.EXPRESS.type },
+  { label: DeliveryTypeEnum.PICK_UP.name, value: DeliveryTypeEnum.PICK_UP.type }
+]
