@@ -50,7 +50,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ visible, setVisible, onSucc
           const resp = await getCategory({ id } as any)
           return resp.data as Record<string, any>
         }
-        return {}
+        return { status: 0 }
       }}
       onFinish={async (values) => {
         try {
