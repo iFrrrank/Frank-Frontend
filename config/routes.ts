@@ -311,6 +311,26 @@ export default [
             component: './mall/product/comment'
           }
         ]
+      },
+      {
+        path: '/mall/promotion',
+        name: '营销中心',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            name: '内容管理',
+            path: '/mall/promotion/content',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '文章分类',
+                path: '/mall/promotion/content/article/category',
+                icon: 'schedule',
+                component: './mall/promotion/content/article/category'
+              }
+            ]
+          }
+        ]
       }
     ]
   },
