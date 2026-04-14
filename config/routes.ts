@@ -324,15 +324,21 @@ export default [
             routes: [
               {
                 name: '文章列表',
-                path: '/mall/promotion/content/article/list',
+                path: '/mall/promotion/content/article',
                 icon: 'schedule',
-                component: './mall/promotion/content/article/list'
+                component: './mall/promotion/content/article'
               },
               {
                 name: '文章分类',
                 path: '/mall/promotion/content/article/category',
                 icon: 'schedule',
-                component: './mall/promotion/content/article/category'
+                component: './mall/promotion/content/category'
+              },
+              {
+                name: 'Banner',
+                path: '/mall/promotion/content/banner',
+                icon: 'schedule',
+                component: './mall/promotion/content/banner'
               }
             ]
           }

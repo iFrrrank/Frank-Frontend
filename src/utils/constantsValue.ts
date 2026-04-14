@@ -8,7 +8,8 @@ import {
   CrmCustomerLimitConfigTypeEnum,
   ErpAuditStatusEnum,
   ProductSpuStatusEnum,
-  DeliveryTypeEnum
+  DeliveryTypeEnum,
+  BannerPositionEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -321,3 +322,49 @@ export const REPLY_STATUS: SelectValueItem = {
   0: { text: '未回复', status: 'Default' },
   1: { text: '已回复', status: 'Success' }
 }
+
+export const BANNER_POSITION: SelectValueItem = {
+  [BannerPositionEnum.HOME_POSITION.position]: {
+    text: BannerPositionEnum.HOME_POSITION.name,
+    status: ''
+  },
+  [BannerPositionEnum.SECKILL_POSITION.position]: {
+    text: BannerPositionEnum.SECKILL_POSITION.name,
+    status: ''
+  },
+  [BannerPositionEnum.COMBINATION_POSITION.position]: {
+    text: BannerPositionEnum.COMBINATION_POSITION.name,
+    status: ''
+  },
+  [BannerPositionEnum.DISCOUNT_POSITION.position]: {
+    text: BannerPositionEnum.DISCOUNT_POSITION.name,
+    status: ''
+  },
+  [BannerPositionEnum.REWARD_POSITION.position]: {
+    text: BannerPositionEnum.REWARD_POSITION.name,
+    status: ''
+  }
+}
+
+export const BANNER_POSITION_OPTIONS: OptionItem[] = [
+  {
+    label: BannerPositionEnum.HOME_POSITION.name,
+    value: BannerPositionEnum.HOME_POSITION.position
+  },
+  {
+    label: BannerPositionEnum.SECKILL_POSITION.name,
+    value: BannerPositionEnum.SECKILL_POSITION.position
+  },
+  {
+    label: BannerPositionEnum.COMBINATION_POSITION.name,
+    value: BannerPositionEnum.COMBINATION_POSITION.position
+  },
+  {
+    label: BannerPositionEnum.DISCOUNT_POSITION.name,
+    value: BannerPositionEnum.DISCOUNT_POSITION.position
+  },
+  {
+    label: BannerPositionEnum.REWARD_POSITION.name,
+    value: BannerPositionEnum.REWARD_POSITION.position
+  }
+]
