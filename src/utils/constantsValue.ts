@@ -9,7 +9,10 @@ import {
   ErpAuditStatusEnum,
   ProductSpuStatusEnum,
   DeliveryTypeEnum,
-  BannerPositionEnum
+  BannerPositionEnum,
+  PromotionDiscountTypeEnum,
+  CouponTakeTypeEnum,
+  CouponTemplateValidityTypeEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -368,3 +371,62 @@ export const BANNER_POSITION_OPTIONS: OptionItem[] = [
     value: BannerPositionEnum.REWARD_POSITION.position
   }
 ]
+
+export const DISCOUNT_TYPE: SelectValueItem = {
+  [PromotionDiscountTypeEnum.PRICE.type]: {
+    text: PromotionDiscountTypeEnum.PRICE.name,
+    status: ''
+  },
+  [PromotionDiscountTypeEnum.PERCENT.type]: {
+    text: PromotionDiscountTypeEnum.PERCENT.name,
+    status: ''
+  }
+}
+
+export const DISCOUNT_TYPE_OPTIONS: OptionItem[] = [
+  {
+    label: PromotionDiscountTypeEnum.PRICE.name,
+    value: PromotionDiscountTypeEnum.PRICE.type
+  },
+  {
+    label: PromotionDiscountTypeEnum.PERCENT.name,
+    value: PromotionDiscountTypeEnum.PERCENT.type
+  }
+]
+
+export const COUPON_TAKE_TYPE: SelectValueItem = Object.values(CouponTakeTypeEnum).reduce(
+  (acc, item) => {
+    acc[item.type] = {
+      text: item.name
+      // status: item.type === 1 ? 'Processing' : 'Default'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const COUPON_TAKE_TYPE_OPTIONS: OptionItem[] = Object.values(CouponTakeTypeEnum).map(
+  (item) => ({
+    label: item.name,
+    value: item.type
+  })
+)
+
+export const COUPON_TYPE: SelectValueItem = {
+  1: { text: '通用券', status: 'Default' },
+  2: { text: '商品券', status: 'Success' },
+  3: { text: '品类券', status: 'Success' }
+}
+
+export const COUPON_TYPE_OPTIONS: OptionItem[] = [
+  { label: '通用券', value: 1 },
+  { label: '商品券', value: 2 },
+  { label: '品类券', value: 3 }
+]
+
+export const COUPON_TEMPLATE_VALIDITY_TYPE_OPTIONS: OptionItem[] = Object.values(
+  CouponTemplateValidityTypeEnum
+).map((item) => ({
+  label: item.name,
+  value: item.type
+}))

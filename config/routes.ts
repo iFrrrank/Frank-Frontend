@@ -341,6 +341,19 @@ export default [
                 component: './mall/promotion/content/banner'
               }
             ]
+          },
+          {
+            name: '优惠券',
+            path: '/mall/promotion/coupon',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '优惠券列表',
+                path: '/mall/promotion/coupon/list',
+                icon: 'schedule',
+                component: './mall/promotion/coupon/list'
+              }
+            ]
           }
         ]
       }
