@@ -323,6 +323,12 @@ export default [
             icon: 'schedule',
             routes: [
               {
+                name: '文章列表',
+                path: '/mall/promotion/content/article/list',
+                icon: 'schedule',
+                component: './mall/promotion/content/article/list'
+              },
+              {
                 name: '文章分类',
                 path: '/mall/promotion/content/article/category',
                 icon: 'schedule',
