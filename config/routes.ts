@@ -352,6 +352,12 @@ export default [
                 path: '/mall/promotion/coupon/list',
                 icon: 'schedule',
                 component: './mall/promotion/coupon/list'
+              },
+              {
+                name: '领取记录',
+                path: '/mall/promotion/coupon/record',
+                icon: 'schedule',
+                component: './mall/promotion/coupon/record'
               }
             ]
           }

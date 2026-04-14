@@ -12,7 +12,8 @@ import {
   BannerPositionEnum,
   PromotionDiscountTypeEnum,
   CouponTakeTypeEnum,
-  CouponTemplateValidityTypeEnum
+  CouponTemplateValidityTypeEnum,
+  CouponStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -430,3 +431,16 @@ export const COUPON_TEMPLATE_VALIDITY_TYPE_OPTIONS: OptionItem[] = Object.values
   label: item.name,
   value: item.type
 }))
+
+export const COUPON_STATUS: SelectValueItem = Object.values(CouponStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 1 ? 'Default' : item.status === 2 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {
+    0: { text: '全部', status: 'Default' }
+  } as SelectValueItem
+)
