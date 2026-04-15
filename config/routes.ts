@@ -373,10 +373,23 @@ export default [
                 component: './mall/promotion/seckill/config'
               },
               {
-                name: '秒杀活动',
+                name: '秒杀商品',
                 path: '/mall/promotion/seckill/activity',
                 icon: 'schedule',
                 component: './mall/promotion/seckill/activity'
+              }
+            ]
+          },
+          {
+            name: '拼团活动',
+            path: '/mall/promotion/combination',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '拼团商品',
+                path: '/mall/promotion/combination/acitivity',
+                icon: 'schedule',
+                component: './mall/promotion/combination/acitivity'
               }
             ]
           }

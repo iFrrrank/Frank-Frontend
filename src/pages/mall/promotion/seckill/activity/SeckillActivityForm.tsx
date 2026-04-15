@@ -16,6 +16,7 @@ import {
 } from '@/api/mall/promotion/seckill/activity'
 import { getSeckillConfigSimpleList } from '@/api/mall/promotion/seckill/config'
 import ProductSelectModal from '@/pages/mall/promotion/coupon/list/ProductSelectModal'
+import { textConst } from '@/locales/zh-CN'
 
 interface SeckillActivityFormProps {
   visible: boolean
@@ -36,26 +37,6 @@ const SeckillActivityForm: React.FC<SeckillActivityFormProps> = ({
   // 管理商品选择弹窗的状态和已选择的商品数据
   const [productModalVisible, setProductModalVisible] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<any>(null)
-
-  // 用于在表单中预览已选商品的 Table 列配置
-  const productColumns = [
-    { title: '商品编号', dataIndex: 'id', align: 'center' as const },
-    {
-      title: '商品图',
-      dataIndex: 'picUrl',
-      align: 'center' as const,
-      render: (url: string) => (url ? <Image src={url} width={40} height={40} /> : '-')
-    },
-    { title: '商品名称', dataIndex: 'name', align: 'center' as const },
-    {
-      title: '商品售价',
-      dataIndex: 'price',
-      align: 'center' as const,
-      render: (val: number) => `￥${(val / 100).toFixed(2)}` // 假设后端按分存储
-    },
-    { title: '销量', dataIndex: 'sales', align: 'center' as const },
-    { title: '库存', dataIndex: 'stock', align: 'center' as const }
-  ]
 
   return (
     <ModalForm
@@ -81,8 +62,9 @@ const SeckillActivityForm: React.FC<SeckillActivityFormProps> = ({
         if (id !== undefined) {
           const resp = await getSeckillActivity({ id } as any)
           const data = resp.data as Record<string, any>
-          // 如果后端在详情里返回了商品信息，可以在这里赋值给预览表格
-          // if (data.spuId) { setSelectedProduct(data.spuInfo) }
+          if (data.spuId) {
+            setSelectedProduct(data.spuInfo)
+          }
           return data
         }
         return {}
@@ -91,15 +73,15 @@ const SeckillActivityForm: React.FC<SeckillActivityFormProps> = ({
         try {
           if (isUpdate) {
             await updateSeckillActivity({ id, ...values } as any)
-            message.success('更新成功')
+            message.success(textConst.msg.updateSuccess)
           } else {
             await createSeckillActivity(values as any)
-            message.success('新增成功')
+            message.success(textConst.msg.createSuccess)
           }
           onSuccess()
           return true
         } catch (e) {
-          message.error('操作失败')
+          message.error(textConst.error.operationFail)
           return false
         }
       }}
