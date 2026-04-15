@@ -428,6 +428,12 @@ export default [
                 path: '/mall/promotion/diy/template',
                 icon: 'schedule',
                 component: './mall/promotion/diy/template'
+              },
+              {
+                name: '装修页面',
+                path: '/mall/promotion/diy/page',
+                icon: 'schedule',
+                component: './mall/promotion/diy/page'
               }
             ]
           }
