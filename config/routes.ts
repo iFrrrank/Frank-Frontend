@@ -409,6 +409,12 @@ export default [
                 path: '/mall/promotion/bargain/acitivity',
                 icon: 'schedule',
                 component: './mall/promotion/bargain/activity'
+              },
+              {
+                name: '砍价记录',
+                path: '/mall/promotion/bargain/record',
+                icon: 'schedule',
+                component: './mall/promotion/bargain/record'
               }
             ]
           }
