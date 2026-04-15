@@ -398,6 +398,19 @@ export default [
                 component: './mall/promotion/combination/record'
               }
             ]
+          },
+          {
+            name: '砍价活动',
+            path: '/mall/promotion/bargain',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '砍价商品',
+                path: '/mall/promotion/bargain/acitivity',
+                icon: 'schedule',
+                component: './mall/promotion/bargain/activity'
+              }
+            ]
           }
         ]
       }
