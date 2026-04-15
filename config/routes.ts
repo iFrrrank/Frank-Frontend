@@ -436,6 +436,19 @@ export default [
                 component: './mall/promotion/diy/page'
               }
             ]
+          },
+          {
+            name: '优惠活动',
+            path: '/mall/promotion/discount',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '限时折扣',
+                path: '/mall/promotion/discount/activity',
+                icon: 'schedule',
+                component: './mall/promotion/discount/activity'
+              }
+            ]
           }
         ]
       }
