@@ -64,9 +64,7 @@ const ExpiringContract: React.FC = () => {
       hideInSearch: true,
       valueType: 'option',
       render: () => {
-        return [
-          <a key="detail">详情</a>
-        ]
+        return [<a key="detail">详情</a>]
       }
     }
   ]
@@ -78,6 +76,7 @@ const ExpiringContract: React.FC = () => {
       rowKey="id"
       search={{
         labelWidth: 'auto',
+        span: 6
       }}
       form={{ colon: false }}
       options={false}
@@ -94,12 +93,12 @@ const ExpiringContract: React.FC = () => {
         return {
           data: res.data?.list || [],
           success: res.code === 0,
-          total: res.data?.total || 0,
+          total: res.data?.total || 0
         }
       }}
       pagination={{
         pageSize: 10,
-        showSizeChanger: true,
+        showSizeChanger: true
       }}
     />
   )

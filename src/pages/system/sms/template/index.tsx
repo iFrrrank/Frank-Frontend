@@ -239,7 +239,12 @@ const SmsTemplateConfig: React.FC = () => {
       formValues.endCreateTime = formValues.createTime[1] + ' 23:59:59'
       delete formValues.createTime
     }
-    handleExport(exportSmsTemplateExcel, formValues, '短信模板数据.xlsx', '确认导出所有短信模板数据项?')
+    handleExport(
+      exportSmsTemplateExcel,
+      formValues,
+      '短信模板数据.xlsx',
+      '确认导出所有短信模板数据项?'
+    )
   }
 
   return (
@@ -296,6 +301,7 @@ const SmsTemplateConfig: React.FC = () => {
         rowKey="id"
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false
         }}
         options={false}

@@ -311,6 +311,152 @@ export default [
             component: './mall/product/comment'
           }
         ]
+      },
+      {
+        path: '/mall/promotion',
+        name: '营销中心',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            name: '内容管理',
+            path: '/mall/promotion/content',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '文章列表',
+                path: '/mall/promotion/content/article',
+                icon: 'schedule',
+                component: './mall/promotion/content/article'
+              },
+              {
+                name: '文章分类',
+                path: '/mall/promotion/content/article/category',
+                icon: 'schedule',
+                component: './mall/promotion/content/category'
+              },
+              {
+                name: 'Banner',
+                path: '/mall/promotion/content/banner',
+                icon: 'schedule',
+                component: './mall/promotion/content/banner'
+              }
+            ]
+          },
+          {
+            name: '优惠券',
+            path: '/mall/promotion/coupon',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '优惠券列表',
+                path: '/mall/promotion/coupon/list',
+                icon: 'schedule',
+                component: './mall/promotion/coupon/list'
+              },
+              {
+                name: '领取记录',
+                path: '/mall/promotion/coupon/record',
+                icon: 'schedule',
+                component: './mall/promotion/coupon/record'
+              }
+            ]
+          },
+          {
+            name: '秒杀活动',
+            path: '/mall/promotion/seckill',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '秒杀模板',
+                path: '/mall/promotion/seckill/config',
+                icon: 'schedule',
+                component: './mall/promotion/seckill/config'
+              },
+              {
+                name: '秒杀商品',
+                path: '/mall/promotion/seckill/activity',
+                icon: 'schedule',
+                component: './mall/promotion/seckill/activity'
+              }
+            ]
+          },
+          {
+            name: '拼团活动',
+            path: '/mall/promotion/combination',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '拼团商品',
+                path: '/mall/promotion/combination/acitivity',
+                icon: 'schedule',
+                component: './mall/promotion/combination/acitivity'
+              },
+              {
+                name: '拼团记录',
+                path: '/mall/promotion/combination/record',
+                icon: 'schedule',
+                component: './mall/promotion/combination/record'
+              }
+            ]
+          },
+          {
+            name: '砍价活动',
+            path: '/mall/promotion/bargain',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '砍价商品',
+                path: '/mall/promotion/bargain/acitivity',
+                icon: 'schedule',
+                component: './mall/promotion/bargain/activity'
+              },
+              {
+                name: '砍价记录',
+                path: '/mall/promotion/bargain/record',
+                icon: 'schedule',
+                component: './mall/promotion/bargain/record'
+              }
+            ]
+          },
+          {
+            name: '商城装修',
+            path: '/mall/promotion/diy',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '装修模板',
+                path: '/mall/promotion/diy/template',
+                icon: 'schedule',
+                component: './mall/promotion/diy/template'
+              },
+              {
+                name: '装修页面',
+                path: '/mall/promotion/diy/page',
+                icon: 'schedule',
+                component: './mall/promotion/diy/page'
+              }
+            ]
+          },
+          {
+            name: '优惠活动',
+            path: '/mall/promotion/discount',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '限时折扣',
+                path: '/mall/promotion/discount/activity',
+                icon: 'schedule',
+                component: './mall/promotion/discount/activity'
+              },
+              {
+                name: '满减送',
+                path: '/mall/promotion/discount/reward',
+                icon: 'schedule',
+                component: './mall/promotion/discount/reward'
+              }
+            ]
+          }
+        ]
       }
     ]
   },

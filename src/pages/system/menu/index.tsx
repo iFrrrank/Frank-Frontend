@@ -1,20 +1,14 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal, Switch } from 'antd'
+import { Button, message } from 'antd'
 import { ActionType, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components'
 import * as AntdIcons from '@ant-design/icons'
-import {
-  ExclamationCircleOutlined,
-  PlusOutlined,
-  SwapOutlined,
-  SyncOutlined
-} from '@ant-design/icons'
-
-import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu' // 将扁平菜单数据转换为树形结构
+import { PlusOutlined, SwapOutlined, SyncOutlined } from '@ant-design/icons'
+import { deleteMenu, getMenuList, updateMenu } from '@/api/system/menu'
 import { textConst } from '@/locales/zh-CN'
 import SaveMenuForm, { handleCreateMenu, handleEditMenu } from './SaveMenuForm'
 import { handleTreeData } from '@/utils/tree'
-
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import { handleDelete } from '@/components/Delete'
 
 // 动态渲染图标
 const IconFont = ({ type }: { type?: string }) => {
@@ -198,6 +192,7 @@ const MenuManagement: React.FC = () => {
         }}
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false
         }}
         options={false}

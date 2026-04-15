@@ -8,7 +8,15 @@ import {
   CrmCustomerLimitConfigTypeEnum,
   ErpAuditStatusEnum,
   ProductSpuStatusEnum,
-  DeliveryTypeEnum
+  DeliveryTypeEnum,
+  BannerPositionEnum,
+  PromotionDiscountTypeEnum,
+  CouponTakeTypeEnum,
+  CouponTemplateValidityTypeEnum,
+  CouponStatusEnum,
+  CombinationRecordStatusEnum,
+  BargainRecordStatusEnum,
+  PromotionConditionTypeEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -321,3 +329,154 @@ export const REPLY_STATUS: SelectValueItem = {
   0: { text: '未回复', status: 'Default' },
   1: { text: '已回复', status: 'Success' }
 }
+
+export const BANNER_POSITION: SelectValueItem = {
+  [BannerPositionEnum.HOME_POSITION.position]: {
+    text: BannerPositionEnum.HOME_POSITION.name,
+    status: ''
+  },
+  [BannerPositionEnum.SECKILL_POSITION.position]: {
+    text: BannerPositionEnum.SECKILL_POSITION.name,
+    status: ''
+  },
+  [BannerPositionEnum.COMBINATION_POSITION.position]: {
+    text: BannerPositionEnum.COMBINATION_POSITION.name,
+    status: ''
+  },
+  [BannerPositionEnum.DISCOUNT_POSITION.position]: {
+    text: BannerPositionEnum.DISCOUNT_POSITION.name,
+    status: ''
+  },
+  [BannerPositionEnum.REWARD_POSITION.position]: {
+    text: BannerPositionEnum.REWARD_POSITION.name,
+    status: ''
+  }
+}
+
+export const BANNER_POSITION_OPTIONS: OptionItem[] = [
+  {
+    label: BannerPositionEnum.HOME_POSITION.name,
+    value: BannerPositionEnum.HOME_POSITION.position
+  },
+  {
+    label: BannerPositionEnum.SECKILL_POSITION.name,
+    value: BannerPositionEnum.SECKILL_POSITION.position
+  },
+  {
+    label: BannerPositionEnum.COMBINATION_POSITION.name,
+    value: BannerPositionEnum.COMBINATION_POSITION.position
+  },
+  {
+    label: BannerPositionEnum.DISCOUNT_POSITION.name,
+    value: BannerPositionEnum.DISCOUNT_POSITION.position
+  },
+  {
+    label: BannerPositionEnum.REWARD_POSITION.name,
+    value: BannerPositionEnum.REWARD_POSITION.position
+  }
+]
+
+export const DISCOUNT_TYPE: SelectValueItem = {
+  [PromotionDiscountTypeEnum.PRICE.type]: {
+    text: PromotionDiscountTypeEnum.PRICE.name,
+    status: ''
+  },
+  [PromotionDiscountTypeEnum.PERCENT.type]: {
+    text: PromotionDiscountTypeEnum.PERCENT.name,
+    status: ''
+  }
+}
+
+export const DISCOUNT_TYPE_OPTIONS: OptionItem[] = [
+  {
+    label: PromotionDiscountTypeEnum.PRICE.name,
+    value: PromotionDiscountTypeEnum.PRICE.type
+  },
+  {
+    label: PromotionDiscountTypeEnum.PERCENT.name,
+    value: PromotionDiscountTypeEnum.PERCENT.type
+  }
+]
+
+export const COUPON_TAKE_TYPE: SelectValueItem = Object.values(CouponTakeTypeEnum).reduce(
+  (acc, item) => {
+    acc[item.type] = {
+      text: item.name
+      // status: item.type === 1 ? 'Processing' : 'Default'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const COUPON_TAKE_TYPE_OPTIONS: OptionItem[] = Object.values(CouponTakeTypeEnum).map(
+  (item) => ({
+    label: item.name,
+    value: item.type
+  })
+)
+
+export const COUPON_TYPE: SelectValueItem = {
+  1: { text: '通用券', status: 'Default' },
+  2: { text: '商品券', status: 'Success' },
+  3: { text: '品类券', status: 'Success' }
+}
+
+export const COUPON_TYPE_OPTIONS: OptionItem[] = [
+  { label: '通用券', value: 1 },
+  { label: '商品券', value: 2 },
+  { label: '品类券', value: 3 }
+]
+
+export const COUPON_TEMPLATE_VALIDITY_TYPE_OPTIONS: OptionItem[] = Object.values(
+  CouponTemplateValidityTypeEnum
+).map((item) => ({
+  label: item.name,
+  value: item.type
+}))
+
+export const COUPON_STATUS: SelectValueItem = Object.values(CouponStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 1 ? 'Default' : item.status === 2 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {
+    0: { text: '全部', status: 'Default' }
+  } as SelectValueItem
+)
+
+export const COMBINATION_RECORD_STATUS: SelectValueItem = Object.values(
+  CombinationRecordStatusEnum
+).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 1 ? 'Processing' : item.status === 2 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {
+    0: { text: '全部', status: 'Default' }
+  } as SelectValueItem
+)
+
+export const BARGAIN_RECORD_STATUS: SelectValueItem = Object.values(BargainRecordStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 1 ? 'Processing' : item.status === 2 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const PROMOTION_CONDITION_TYPE: OptionItem[] = Object.values(PromotionConditionTypeEnum).map(
+  (item) => ({
+    label: item.name,
+    value: item.type
+  })
+)

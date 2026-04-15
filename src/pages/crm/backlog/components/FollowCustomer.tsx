@@ -16,7 +16,7 @@ const FollowCustomer: React.FC = () => {
       valueEnum: FOLLOW_STATUS,
       align: 'center',
       fieldProps: {
-        placeholder: "请选择状态"
+        placeholder: '请选择状态'
       }
     },
     {
@@ -77,6 +77,7 @@ const FollowCustomer: React.FC = () => {
       rowKey="id"
       search={{
         labelWidth: 'auto',
+        span: 6
       }}
       form={{ colon: false }}
       options={false}
@@ -86,7 +87,8 @@ const FollowCustomer: React.FC = () => {
         const req = {
           pageNo: current || 1,
           pageSize: pageSize || 10,
-          followUpStatus: followUpStatus === 'true' ? true : followUpStatus === 'false' ? false : undefined,
+          followUpStatus:
+            followUpStatus === 'true' ? true : followUpStatus === 'false' ? false : undefined,
           sceneType: 1, // '我负责的'
           pool: false,
           ...rest
@@ -95,12 +97,12 @@ const FollowCustomer: React.FC = () => {
         return {
           data: res.data?.list || [],
           success: res.code === 0,
-          total: res.data?.total || 0,
+          total: res.data?.total || 0
         }
       }}
       pagination={{
         pageSize: 10,
-        showSizeChanger: true,
+        showSizeChanger: true
       }}
     />
   )

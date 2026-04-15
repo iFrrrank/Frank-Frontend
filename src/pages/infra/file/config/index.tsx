@@ -207,7 +207,7 @@ const FileConfigPage: React.FC = () => {
           }
         }}
         rowKey="id"
-        search={{ labelWidth: 'auto', defaultCollapsed: false }}
+        search={{ labelWidth: 'auto', span: 6, defaultCollapsed: false }}
         options={{ reload: true, setting: true, density: true }}
         pagination={{ align: 'center', showSizeChanger: true }}
         toolBarRender={() => [

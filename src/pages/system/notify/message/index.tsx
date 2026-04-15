@@ -249,6 +249,7 @@ const NotifyMessage: React.FC = () => {
         rowKey="id"
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false,
           optionRender: (searchConfig, formProps, dom) => [...dom.reverse()]
         }}
@@ -271,7 +272,18 @@ const NotifyMessage: React.FC = () => {
         width={400}
       >
         {detailData && (
-          <Descriptions column={1} colon={false} labelStyle={{ width: '80px', display: 'flex', justifyContent: 'flex-end', fontWeight: 'bold', color: 'black' }} contentStyle={{ paddingLeft: '15px' }} >
+          <Descriptions
+            column={1}
+            colon={false}
+            labelStyle={{
+              width: '80px',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              fontWeight: 'bold',
+              color: 'black'
+            }}
+            contentStyle={{ paddingLeft: '15px' }}
+          >
             <Descriptions.Item label="消息 ID">{detailData.id}</Descriptions.Item>
             <Descriptions.Item label="用户类型">
               {(() => {

@@ -215,7 +215,8 @@ const SystemUser: React.FC = () => {
           }}
           rowKey="id"
           search={{
-            labelWidth: 'auto'
+            labelWidth: 'auto',
+            span: 6
           }}
           options={{
             setting: {
@@ -229,7 +230,12 @@ const SystemUser: React.FC = () => {
           dateFormatter="string"
           headerTitle="用户管理"
           toolBarRender={() => [
-            <Button key="create" icon={<PlusOutlined />} onClick={() => handleCreateUser()} type="primary">
+            <Button
+              key="create"
+              icon={<PlusOutlined />}
+              onClick={() => handleCreateUser()}
+              type="primary"
+            >
               {textConst.action.create}
             </Button>,
             <Button

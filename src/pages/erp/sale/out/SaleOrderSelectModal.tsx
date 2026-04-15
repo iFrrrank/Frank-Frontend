@@ -108,7 +108,7 @@ const SaleOrderSelectModal: React.FC<SaleOrderSelectModalProps> = ({
         form={{ colon: false }}
         search={{
           labelWidth: 'auto',
-          span: 8
+          span: 6
         }}
         options={false}
         rowSelection={{

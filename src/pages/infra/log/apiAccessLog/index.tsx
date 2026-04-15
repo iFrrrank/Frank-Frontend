@@ -175,7 +175,12 @@ const ApiAccessLogPage: React.FC = () => {
       formValues.endTimeStr = formValues.beginTime[1] + ' 23:59:59'
     }
     delete formValues.beginTime
-    handleExport(exportApiAccessLogExcel, formValues, 'API访问日志.xlsx', '确认导出所有访问日志数据项？')
+    handleExport(
+      exportApiAccessLogExcel,
+      formValues,
+      'API访问日志.xlsx',
+      '确认导出所有访问日志数据项？'
+    )
   }
 
   return (
@@ -225,6 +230,7 @@ const ApiAccessLogPage: React.FC = () => {
         rowKey="id"
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false
         }}
         options={false}
@@ -256,27 +262,39 @@ const ApiAccessLogPage: React.FC = () => {
         width={450}
       >
         {selectedRecord && (
-          <Descriptions column={1} colon={false} labelStyle={{ width: '100px', display: 'flex', justifyContent: 'flex-end', fontWeight: 'bold', color: 'black' }} contentStyle={{ paddingLeft: '15px' }} >
+          <Descriptions
+            column={1}
+            colon={false}
+            labelStyle={{
+              width: '100px',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              fontWeight: 'bold',
+              color: 'black'
+            }}
+            contentStyle={{ paddingLeft: '15px' }}
+          >
             <Descriptions.Item label="日志 ID">{selectedRecord.id}</Descriptions.Item>
             <Descriptions.Item label="Trace ID">{selectedRecord.traceId}</Descriptions.Item>
             <Descriptions.Item label="用户 ID">{selectedRecord.userId}</Descriptions.Item>
-            <Descriptions.Item
-              label="用户类型"
-            >
+            <Descriptions.Item label="用户类型">
               {selectedRecord.userType === 1
                 ? '会员'
                 : selectedRecord.userType === 2
                   ? '管理员'
-                  : selectedRecord.userType
-              }
+                  : selectedRecord.userType}
             </Descriptions.Item>
             <Descriptions.Item label="应用名称">{selectedRecord.applicationName}</Descriptions.Item>
             <Descriptions.Item label="请求方法">{selectedRecord.requestMethod}</Descriptions.Item>
             <Descriptions.Item label="请求地址">{selectedRecord.requestUrl}</Descriptions.Item>
             <Descriptions.Item label="请求时间">{selectedRecord.beginTime}</Descriptions.Item>
             <Descriptions.Item label="响应时间">{selectedRecord.endTime}</Descriptions.Item>
-            <Descriptions.Item label="执行时长(ms)">{selectedRecord.duration ? `${selectedRecord.duration}` : '-'}</Descriptions.Item>
-            <Descriptions.Item label="操作结果">{selectedRecord.resultCode === 0 ? '成功' : '失败'}</Descriptions.Item>
+            <Descriptions.Item label="执行时长(ms)">
+              {selectedRecord.duration ? `${selectedRecord.duration}` : '-'}
+            </Descriptions.Item>
+            <Descriptions.Item label="操作结果">
+              {selectedRecord.resultCode === 0 ? '成功' : '失败'}
+            </Descriptions.Item>
             <Descriptions.Item label="结果码">{selectedRecord.resultCode}</Descriptions.Item>
             <Descriptions.Item label="结果提示">{selectedRecord.resultMsg}</Descriptions.Item>
             <Descriptions.Item label="操作模块">{selectedRecord.operateModule}</Descriptions.Item>

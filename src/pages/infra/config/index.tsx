@@ -47,12 +47,17 @@ const ConfigPage: React.FC = () => {
       beginTimeStr = createTime[0] + ' 00:00:00'
       endTimeStr = createTime[1] + ' 23:59:59'
     }
-    handleExport(exportConfig, {
-      ...(beginTimeStr && endTimeStr ? { createTime: [beginTimeStr, endTimeStr] } : {}),
-      ...rest,
-      pageNo: '1',
-      pageSize: '100'
-    }, '参数配置.xlsx', '确定要导出参数配置吗？')
+    handleExport(
+      exportConfig,
+      {
+        ...(beginTimeStr && endTimeStr ? { createTime: [beginTimeStr, endTimeStr] } : {}),
+        ...rest,
+        pageNo: '1',
+        pageSize: '100'
+      },
+      '参数配置.xlsx',
+      '确定要导出参数配置吗？'
+    )
   }
 
   const columns: ProColumns<API.InfraConfigRespVO>[] = [
@@ -212,7 +217,7 @@ const ConfigPage: React.FC = () => {
           }
         }}
         rowKey="id"
-        search={{ labelWidth: 'auto', defaultCollapsed: false }}
+        search={{ labelWidth: 'auto', span: 6, defaultCollapsed: false }}
         options={false}
         pagination={{ align: 'center', showSizeChanger: true }}
         toolBarRender={() => [

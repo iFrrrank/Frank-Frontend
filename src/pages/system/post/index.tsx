@@ -126,12 +126,7 @@ const PostManagement: React.FC = () => {
       formValues.endTime = formValues.createTime[1] + ' 23:59:59'
       delete formValues.createTime
     }
-    handleExport(
-      export1,
-      formValues,
-      '岗位数据.xlsx',
-      '确认导出所有岗位数据项?'
-    )
+    handleExport(export1, formValues, '岗位数据.xlsx', '确认导出所有岗位数据项?')
   }
 
   return (
@@ -174,6 +169,7 @@ const PostManagement: React.FC = () => {
         rowKey="id"
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false
         }}
         options={false}
@@ -182,7 +178,12 @@ const PostManagement: React.FC = () => {
           showSizeChanger: true
         }}
         toolBarRender={() => [
-          <Button key="create" icon={<PlusOutlined />} onClick={() => handleCreatePost()} type="primary">
+          <Button
+            key="create"
+            icon={<PlusOutlined />}
+            onClick={() => handleCreatePost()}
+            type="primary"
+          >
             {textConst.action.create}
           </Button>,
           <Button

@@ -146,7 +146,7 @@ export default defineConfig({
     {
       requestLibPath: "import { request } from '@umijs/max'",
       // 或者使用在线的版本
-      schemaPath: 'http://localhost:48100/v3/api-docs/all',
+      schemaPath: 'http://localhost:48101/v3/api-docs/all',
       // schemaPath: join(__dirname, 'OpenApi.json'),
       mock: false,
       projectName: 'Frank'

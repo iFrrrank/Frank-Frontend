@@ -211,6 +211,7 @@ const Role: React.FC = () => {
         rowKey="id"
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false
         }}
         options={false}
@@ -219,7 +220,12 @@ const Role: React.FC = () => {
           showSizeChanger: true
         }}
         toolBarRender={() => [
-          <Button key="create" icon={<PlusOutlined />} onClick={() => handleCreateRole()} type="primary">
+          <Button
+            key="create"
+            icon={<PlusOutlined />}
+            onClick={() => handleCreateRole()}
+            type="primary"
+          >
             {textConst.action.create}
           </Button>,
           <Button

@@ -43,7 +43,12 @@ const JobLogPage: React.FC = () => {
 
   const handleExportClick = () => {
     const formVals = formRef.current?.getFieldsValue() || {}
-    handleExport(exportJobLog, { ...formVals, pageNo: '1', pageSize: '100' }, '定时任务日志.xlsx', '确定要导出定时任务日志吗？')
+    handleExport(
+      exportJobLog,
+      { ...formVals, pageNo: '1', pageSize: '100' },
+      '定时任务日志.xlsx',
+      '确定要导出定时任务日志吗？'
+    )
   }
 
   const columns: ProColumns<JobLogVO>[] = [
@@ -168,7 +173,7 @@ const JobLogPage: React.FC = () => {
           }
         }}
         rowKey="id"
-        search={{ labelWidth: 'auto', defaultCollapsed: false }}
+        search={{ labelWidth: 'auto', span: 6, defaultCollapsed: false }}
         options={{ reload: true, setting: true, density: true }}
         pagination={{ align: 'center', showSizeChanger: true }}
         toolBarRender={() => [

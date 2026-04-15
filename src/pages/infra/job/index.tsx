@@ -112,7 +112,12 @@ const JobPage: React.FC = () => {
   })
 
   const handleExportClick = () => {
-    handleExport(exportJob, { pageNo: '1', pageSize: '100' }, '定时任务.xlsx', '确定要导出定时任务吗？')
+    handleExport(
+      exportJob,
+      { pageNo: '1', pageSize: '100' },
+      '定时任务.xlsx',
+      '确定要导出定时任务吗？'
+    )
   }
 
   const columns: ProColumns<JobVO>[] = [
@@ -229,7 +234,7 @@ const JobPage: React.FC = () => {
           }
         }}
         rowKey="id"
-        search={{ labelWidth: 'auto', defaultCollapsed: false }}
+        search={{ labelWidth: 'auto', span: 6, defaultCollapsed: false }}
         options={{ reload: true, setting: true, density: true }}
         pagination={{ align: 'center', showSizeChanger: true }}
         toolBarRender={() => [

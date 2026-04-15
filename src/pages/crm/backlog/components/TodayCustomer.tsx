@@ -17,7 +17,7 @@ const TodayCustomer: React.FC = () => {
       valueEnum: CONTACT_STATUS,
       align: 'center',
       fieldProps: {
-        placeholder: "请选择状态"
+        placeholder: '请选择状态'
       }
     },
     {
@@ -28,7 +28,7 @@ const TodayCustomer: React.FC = () => {
       valueEnum: SCENE_TYPE,
       align: 'center',
       fieldProps: {
-        placeholder: "请选择归属"
+        placeholder: '请选择归属'
       }
     },
     {
@@ -89,6 +89,7 @@ const TodayCustomer: React.FC = () => {
       rowKey="id"
       search={{
         labelWidth: 'auto',
+        span: 6
       }}
       form={{ colon: false }}
       options={false}
@@ -107,12 +108,12 @@ const TodayCustomer: React.FC = () => {
         return {
           data: res.data?.list || [],
           success: res.code === 0,
-          total: res.data?.total || 0,
+          total: res.data?.total || 0
         }
       }}
       pagination={{
         pageSize: 10,
-        showSizeChanger: true,
+        showSizeChanger: true
       }}
     />
   )

@@ -234,7 +234,8 @@ const App_: React.FC = () => {
           }}
           rowKey="id"
           search={{
-            labelWidth: 'auto'
+            labelWidth: 'auto',
+            span: 6
           }}
           options={{
             setting: {
@@ -285,7 +286,7 @@ const App_: React.FC = () => {
         onCancel={() => setCopyModalVisible(false)}
         footer={[]}
       >
-        <div >
+        <div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <span style={{ fontWeight: 'bold' }}>客户端编号：</span>
             <span>{copyClientData?.clientId}</span>

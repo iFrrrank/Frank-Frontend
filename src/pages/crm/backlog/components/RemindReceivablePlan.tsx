@@ -70,10 +70,7 @@ const RemindReceivablePlan: React.FC = () => {
       hideInSearch: true,
       align: 'center',
       render: () => {
-        return [
-          <a key="create">添加回款</a>,
-          <a key="detail">详情</a>
-        ]
+        return [<a key="create">添加回款</a>, <a key="detail">详情</a>]
       }
     }
   ]
@@ -85,6 +82,7 @@ const RemindReceivablePlan: React.FC = () => {
       rowKey="id"
       search={{
         labelWidth: 'auto',
+        span: 6
       }}
       form={{ colon: false }}
       options={false}
@@ -101,12 +99,12 @@ const RemindReceivablePlan: React.FC = () => {
         return {
           data: res.data?.list || [],
           success: res.code === 0,
-          total: res.data?.total || 0,
+          total: res.data?.total || 0
         }
       }}
       pagination={{
         pageSize: 10,
-        showSizeChanger: true,
+        showSizeChanger: true
       }}
     />
   )

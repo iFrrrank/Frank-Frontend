@@ -187,7 +187,7 @@ const ReceivablePlanManagement: React.FC = () => {
             total: res.data?.total || 0
           }
         }}
-        search={{ labelWidth: 'auto' }}
+        search={{ labelWidth: 'auto', span: 6 }}
         pagination={{ align: 'center', showSizeChanger: true }}
         toolBarRender={() => [
           <Button key="button" icon={<PlusOutlined />} type="primary" onClick={handleCreate}>
