@@ -193,7 +193,8 @@ const ContractManagement: React.FC = () => {
           }
         }}
         search={{
-          labelWidth: 'auto'
+          labelWidth: 'auto',
+          span: 6
         }}
         toolBarRender={() => [
           <Button key="button" icon={<PlusOutlined />} type="primary" onClick={handleAdd}>

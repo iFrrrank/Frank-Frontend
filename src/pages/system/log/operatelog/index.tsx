@@ -182,6 +182,7 @@ const OperateLogConfig: React.FC = () => {
         rowKey="id"
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false
         }}
         options={false}
@@ -213,22 +214,41 @@ const OperateLogConfig: React.FC = () => {
         width={400}
       >
         {selectedRecord && (
-          <Descriptions column={1} colon={false} labelStyle={{ width: '80px', display: 'flex', justifyContent: 'flex-end', fontWeight: 'bold', color: 'black' }} contentStyle={{ paddingLeft: '10px' }} >
+          <Descriptions
+            column={1}
+            colon={false}
+            labelStyle={{
+              width: '80px',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              fontWeight: 'bold',
+              color: 'black'
+            }}
+            contentStyle={{ paddingLeft: '10px' }}
+          >
             <Descriptions.Item label="日志 ID">{selectedRecord.id || '-'}</Descriptions.Item>
             <Descriptions.Item label="操作人 ID">{selectedRecord.userId || '-'}</Descriptions.Item>
             <Descriptions.Item label="操作人">{selectedRecord.userName || '-'}</Descriptions.Item>
             <Descriptions.Item label="操作人 IP">{selectedRecord.userIp || '-'}</Descriptions.Item>
-            <Descriptions.Item label="操作人 UA">{selectedRecord.userAgent || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作人 UA">
+              {selectedRecord.userAgent || '-'}
+            </Descriptions.Item>
             <Descriptions.Item label="操作模块">{selectedRecord.type || '-'}</Descriptions.Item>
             <Descriptions.Item label="操作名">{selectedRecord.subType || '-'}</Descriptions.Item>
             <Descriptions.Item label="操作内容">{selectedRecord.action || '-'}</Descriptions.Item>
-            <Descriptions.Item label="操作结果">{selectedRecord.requestMethod || '-'}</Descriptions.Item>
-            <Descriptions.Item label="请求 URL">{selectedRecord.requestUrl || '-'}</Descriptions.Item>
-            <Descriptions.Item label="操作时间">{selectedRecord.createTime || '-'}</Descriptions.Item>
+            <Descriptions.Item label="操作结果">
+              {selectedRecord.requestMethod || '-'}
+            </Descriptions.Item>
+            <Descriptions.Item label="请求 URL">
+              {selectedRecord.requestUrl || '-'}
+            </Descriptions.Item>
+            <Descriptions.Item label="操作时间">
+              {selectedRecord.createTime || '-'}
+            </Descriptions.Item>
             <Descriptions.Item label="业务 ID">{selectedRecord.bizId || '-'}</Descriptions.Item>
           </Descriptions>
         )}
-      </Drawer >
+      </Drawer>
     </>
   )
 }

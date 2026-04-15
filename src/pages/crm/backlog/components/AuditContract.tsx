@@ -62,10 +62,7 @@ const AuditContract: React.FC = () => {
       valueType: 'option',
       align: 'center',
       render: () => {
-        return [
-          <a key="audit">审批</a>,
-          <a key="detail">详情</a>
-        ]
+        return [<a key="audit">审批</a>, <a key="detail">详情</a>]
       }
     }
   ]
@@ -77,6 +74,7 @@ const AuditContract: React.FC = () => {
       rowKey="id"
       search={{
         labelWidth: 'auto',
+        span: 6
       }}
       options={false}
       form={{ colon: false }}
@@ -93,12 +91,12 @@ const AuditContract: React.FC = () => {
         return {
           data: res.data?.list || [],
           success: res.code === 0,
-          total: res.data?.total || 0,
+          total: res.data?.total || 0
         }
       }}
       pagination={{
         pageSize: 10,
-        showSizeChanger: true,
+        showSizeChanger: true
       }}
     />
   )

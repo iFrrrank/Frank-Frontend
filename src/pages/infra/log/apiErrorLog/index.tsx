@@ -204,7 +204,12 @@ const ApiErrorLogPage: React.FC = () => {
       formValues.endTimeStr = formValues.exceptionTime[1] + ' 23:59:59'
     }
     delete formValues.exceptionTime
-    handleExport(exportApiErrorLogExcel, formValues, 'API错误日志.xlsx', '确认导出所有API错误日志？')
+    handleExport(
+      exportApiErrorLogExcel,
+      formValues,
+      'API错误日志.xlsx',
+      '确认导出所有API错误日志？'
+    )
   }
 
   return (
@@ -255,6 +260,7 @@ const ApiErrorLogPage: React.FC = () => {
         rowKey="id"
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false
         }}
         options={{

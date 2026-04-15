@@ -113,7 +113,9 @@ const ClueList: React.FC = () => {
       render: (_, record) => (
         <div style={tableActionStyle}>
           <a key="edit">{textConst.action.update}</a>
-          <a key="delete" style={deleteTextStyle}>{textConst.action.delete}</a>
+          <a key="delete" style={deleteTextStyle}>
+            {textConst.action.delete}
+          </a>
         </div>
       )
     }
@@ -125,7 +127,8 @@ const ClueList: React.FC = () => {
       actionRef={actionRef}
       rowKey="id"
       search={{
-        labelWidth: 'auto'
+        labelWidth: 'auto',
+        span: 6
       }}
       form={{ colon: false }}
       options={false}
@@ -134,12 +137,7 @@ const ClueList: React.FC = () => {
           <Button key="add" type="primary" icon={<PlusOutlined />}>
             {textConst.action.create}
           </Button>,
-          <Button
-            key="export"
-            color="volcano"
-            variant="outlined"
-            icon={<DownloadOutlined />}
-          >
+          <Button key="export" color="volcano" variant="outlined" icon={<DownloadOutlined />}>
             {textConst.action.export}
           </Button>
         ],

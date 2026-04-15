@@ -183,8 +183,8 @@ const FileListPage: React.FC = () => {
                 alt={record.name}
                 style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 4 }}
                 onError={(e) => {
-                  ; (e.target as HTMLImageElement).style.display = 'none'
-                    ; (e.target as HTMLImageElement).parentElement!.textContent = '加载失败'
+                  ;(e.target as HTMLImageElement).style.display = 'none'
+                  ;(e.target as HTMLImageElement).parentElement!.textContent = '加载失败'
                 }}
               />
             </a>
@@ -263,7 +263,7 @@ const FileListPage: React.FC = () => {
           }
         }}
         rowKey="id"
-        search={{ labelWidth: 'auto' }}
+        search={{ labelWidth: 'auto', span: 6 }}
         options={false}
         pagination={{ align: 'center', showSizeChanger: true }}
         toolBarRender={() => [

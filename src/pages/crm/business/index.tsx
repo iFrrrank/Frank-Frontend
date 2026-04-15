@@ -189,7 +189,8 @@ const BusinessList: React.FC = () => {
         actionRef={actionRef}
         rowKey="id"
         search={{
-          labelWidth: 'auto'
+          labelWidth: 'auto',
+          span: 6
         }}
         form={{ colon: false }}
         options={false}
@@ -266,4 +267,3 @@ const BusinessList: React.FC = () => {
 }
 
 export default BusinessList
-

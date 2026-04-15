@@ -171,7 +171,8 @@ const ProductManagement: React.FC = () => {
           }
         }}
         search={{
-          labelWidth: 'auto'
+          labelWidth: 'auto',
+          span: 6
         }}
         toolBarRender={() => [
           <Button key="create" icon={<PlusOutlined />} type="primary" onClick={handleCreate}>

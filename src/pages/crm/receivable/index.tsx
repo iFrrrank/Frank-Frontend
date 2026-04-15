@@ -224,7 +224,8 @@ const ReceivableManagement: React.FC = () => {
           }
         }}
         search={{
-          labelWidth: 'auto'
+          labelWidth: 'auto',
+          span: 6
         }}
         pagination={{ align: 'center', showSizeChanger: true }}
         toolBarRender={() => [

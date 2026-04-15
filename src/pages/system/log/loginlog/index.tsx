@@ -193,6 +193,7 @@ const LoginLogPage: React.FC = () => {
         rowKey="id"
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false
         }}
         options={false}
@@ -224,15 +225,34 @@ const LoginLogPage: React.FC = () => {
         width={400}
       >
         {selectedRecord && (
-          <Descriptions column={1} colon={false} labelStyle={{ width: '80px', display: 'flex', justifyContent: 'flex-end', fontWeight: 'bold', color: 'black' }} contentStyle={{ paddingLeft: '10px' }} >
+          <Descriptions
+            column={1}
+            colon={false}
+            labelStyle={{
+              width: '80px',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              fontWeight: 'bold',
+              color: 'black'
+            }}
+            contentStyle={{ paddingLeft: '10px' }}
+          >
             <Descriptions.Item label="日志 ID">{selectedRecord.id || '-'}</Descriptions.Item>
-            <Descriptions.Item label="日志类型">{logTypeMap[selectedRecord.logType] || selectedRecord.logType}</Descriptions.Item>
+            <Descriptions.Item label="日志类型">
+              {logTypeMap[selectedRecord.logType] || selectedRecord.logType}
+            </Descriptions.Item>
             <Descriptions.Item label="用户 ID">{selectedRecord.userId || '-'}</Descriptions.Item>
             <Descriptions.Item label="用户名">{selectedRecord.username || '-'}</Descriptions.Item>
             <Descriptions.Item label="登录 IP">{selectedRecord.userIp || '-'}</Descriptions.Item>
-            <Descriptions.Item label="浏览器 UA">{selectedRecord.userAgent || '-'}</Descriptions.Item>
-            <Descriptions.Item label="登录结果">{resultMap[selectedRecord.result] || selectedRecord.result}</Descriptions.Item>
-            <Descriptions.Item label="创建时间">{selectedRecord.createTime || '-'}</Descriptions.Item>
+            <Descriptions.Item label="浏览器 UA">
+              {selectedRecord.userAgent || '-'}
+            </Descriptions.Item>
+            <Descriptions.Item label="登录结果">
+              {resultMap[selectedRecord.result] || selectedRecord.result}
+            </Descriptions.Item>
+            <Descriptions.Item label="创建时间">
+              {selectedRecord.createTime || '-'}
+            </Descriptions.Item>
             <Descriptions.Item label="Trace ID">{selectedRecord.traceId || '-'}</Descriptions.Item>
           </Descriptions>
         )}

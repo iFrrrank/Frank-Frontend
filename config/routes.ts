@@ -390,6 +390,12 @@ export default [
                 path: '/mall/promotion/combination/acitivity',
                 icon: 'schedule',
                 component: './mall/promotion/combination/acitivity'
+              },
+              {
+                name: '拼团记录',
+                path: '/mall/promotion/combination/record',
+                icon: 'schedule',
+                component: './mall/promotion/combination/record'
               }
             ]
           }

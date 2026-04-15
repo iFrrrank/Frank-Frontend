@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, message, Modal, Space, Typography } from 'antd'
-import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { Button, Typography } from 'antd'
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteMailTemplate, getMailTemplatePage } from '@/api/system/mailTemplate'
@@ -11,7 +11,6 @@ import SaveMailTemplateForm, {
 import SendMailForm, { handleTestMailTemplate } from './SendMailForm'
 import { getSimpleMailAccountList } from '@/api/system/mailAccount'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
-import '@wangeditor/editor/dist/css/style.css'
 import { textConst } from '@/locales/zh-CN'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
@@ -211,6 +210,7 @@ const MailTemplateConfig: React.FC = () => {
         rowKey="id"
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false
         }}
         options={false}

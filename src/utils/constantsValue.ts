@@ -13,7 +13,8 @@ import {
   PromotionDiscountTypeEnum,
   CouponTakeTypeEnum,
   CouponTemplateValidityTypeEnum,
-  CouponStatusEnum
+  CouponStatusEnum,
+  CombinationRecordStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -437,6 +438,21 @@ export const COUPON_STATUS: SelectValueItem = Object.values(CouponStatusEnum).re
     acc[item.status] = {
       text: item.name,
       status: item.status === 1 ? 'Default' : item.status === 2 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {
+    0: { text: '全部', status: 'Default' }
+  } as SelectValueItem
+)
+
+export const COMBINATION_RECORD_STATUS: SelectValueItem = Object.values(
+  CombinationRecordStatusEnum
+).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 1 ? 'Processing' : item.status === 2 ? 'Success' : 'Error'
     }
     return acc
   },

@@ -157,7 +157,8 @@ const TokenPage: React.FC = () => {
       }}
       rowKey="id"
       search={{
-        labelWidth: 'auto'
+        labelWidth: 'auto',
+        span: 6
       }}
       options={{
         setting: {

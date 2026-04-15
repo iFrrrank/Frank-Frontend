@@ -90,7 +90,7 @@ const PurchaseOrderSelectModal: React.FC<PurchaseOrderSelectModalProps> = ({
         form={{ colon: false }}
         search={{
           labelWidth: 'auto',
-          span: 8
+          span: 6
         }}
         options={false}
         rowSelection={{

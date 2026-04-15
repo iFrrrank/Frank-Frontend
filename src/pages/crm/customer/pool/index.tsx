@@ -175,7 +175,8 @@ const CustomerPool: React.FC = () => {
         actionRef={actionRef}
         rowKey="id"
         search={{
-          labelWidth: 'auto'
+          labelWidth: 'auto',
+          span: 6
         }}
         form={{ colon: false }}
         options={false}
@@ -216,4 +217,3 @@ const CustomerPool: React.FC = () => {
 }
 
 export default CustomerPool
-

@@ -96,7 +96,7 @@ const ProductSelectForm: React.FC<ProductSelectModalProps> = ({
         columns={columns}
         search={{
           labelWidth: 'auto',
-          span: 8
+          span: 6
         }}
         options={false}
         rowSelection={{

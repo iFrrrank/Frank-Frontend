@@ -59,7 +59,7 @@ const DeptManagement: React.FC = () => {
         setUserList(resp.data)
         return resp.data
       }
-    } catch { }
+    } catch {}
     return []
   }
 
@@ -218,6 +218,7 @@ const DeptManagement: React.FC = () => {
         }}
         search={{
           labelWidth: 'auto',
+          span: 6,
           defaultCollapsed: false
         }}
         options={false}
