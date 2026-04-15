@@ -360,6 +360,19 @@ export default [
                 component: './mall/promotion/coupon/record'
               }
             ]
+          },
+          {
+            name: '秒杀活动',
+            path: '/mall/promotion/seckill',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '秒杀时段',
+                path: '/mall/promotion/seckill/config',
+                icon: 'schedule',
+                component: './mall/promotion/seckill/config'
+              }
+            ]
           }
         ]
       }
