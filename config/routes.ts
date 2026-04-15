@@ -447,6 +447,12 @@ export default [
                 path: '/mall/promotion/discount/activity',
                 icon: 'schedule',
                 component: './mall/promotion/discount/activity'
+              },
+              {
+                name: '满减送',
+                path: '/mall/promotion/discount/reward',
+                icon: 'schedule',
+                component: './mall/promotion/discount/reward'
               }
             ]
           }

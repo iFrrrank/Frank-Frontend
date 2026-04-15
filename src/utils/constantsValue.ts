@@ -15,7 +15,8 @@ import {
   CouponTemplateValidityTypeEnum,
   CouponStatusEnum,
   CombinationRecordStatusEnum,
-  BargainRecordStatusEnum
+  BargainRecordStatusEnum,
+  PromotionConditionTypeEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -471,4 +472,11 @@ export const BARGAIN_RECORD_STATUS: SelectValueItem = Object.values(BargainRecor
     return acc
   },
   {} as SelectValueItem
+)
+
+export const PROMOTION_CONDITION_TYPE: OptionItem[] = Object.values(PromotionConditionTypeEnum).map(
+  (item) => ({
+    label: item.name,
+    value: item.type
+  })
 )
