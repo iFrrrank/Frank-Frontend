@@ -417,6 +417,19 @@ export default [
                 component: './mall/promotion/bargain/record'
               }
             ]
+          },
+          {
+            name: '商城装修',
+            path: '/mall/promotion/diy',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '装修模板',
+                path: '/mall/promotion/diy/template',
+                icon: 'schedule',
+                component: './mall/promotion/diy/template'
+              }
+            ]
           }
         ]
       }
