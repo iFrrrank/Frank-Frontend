@@ -367,10 +367,16 @@ export default [
             icon: 'schedule',
             routes: [
               {
-                name: '秒杀时段',
+                name: '秒杀模板',
                 path: '/mall/promotion/seckill/config',
                 icon: 'schedule',
                 component: './mall/promotion/seckill/config'
+              },
+              {
+                name: '秒杀活动',
+                path: '/mall/promotion/seckill/activity',
+                icon: 'schedule',
+                component: './mall/promotion/seckill/activity'
               }
             ]
           }
