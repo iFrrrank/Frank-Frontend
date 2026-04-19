@@ -313,6 +313,19 @@ export default [
         ]
       },
       {
+        path: '/mall/trade',
+        name: '订单中心',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            name: '交易配置',
+            path: '/mall/trade/config',
+            icon: 'schedule',
+            component: './mall/trade/config'
+          }
+        ]
+      },
+      {
         path: '/mall/promotion',
         name: '营销中心',
         icon: 'shoppingCart',

@@ -16,7 +16,10 @@ import {
   CouponStatusEnum,
   CombinationRecordStatusEnum,
   BargainRecordStatusEnum,
-  PromotionConditionTypeEnum
+  PromotionConditionTypeEnum,
+  BrokerageEnabledConditionEnum,
+  BrokerageBindModeEnum,
+  BrokerageWithdrawTypeEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -475,6 +478,27 @@ export const BARGAIN_RECORD_STATUS: SelectValueItem = Object.values(BargainRecor
 )
 
 export const PROMOTION_CONDITION_TYPE: OptionItem[] = Object.values(PromotionConditionTypeEnum).map(
+  (item) => ({
+    label: item.name,
+    value: item.type
+  })
+)
+
+export const BROKERAGE_ENABLED: OptionItem[] = Object.values(BrokerageEnabledConditionEnum).map(
+  (item) => ({
+    label: item.name,
+    value: item.condition
+  })
+)
+
+export const BROKERAGE_BIND_MODE: OptionItem[] = Object.values(BrokerageBindModeEnum).map(
+  (item) => ({
+    label: item.name,
+    value: item.mode
+  })
+)
+
+export const BROKERAGE_WITHDRAW_TYPE: OptionItem[] = Object.values(BrokerageWithdrawTypeEnum).map(
   (item) => ({
     label: item.name,
     value: item.type
