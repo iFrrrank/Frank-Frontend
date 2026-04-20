@@ -19,7 +19,12 @@ import {
   PromotionConditionTypeEnum,
   BrokerageEnabledConditionEnum,
   BrokerageBindModeEnum,
-  BrokerageWithdrawTypeEnum
+  BrokerageWithdrawTypeEnum,
+  TradeOrderStatusEnum,
+  PayChannelEnum,
+  TerminalEnum,
+  TradeOrderTypeEnum,
+  TradeOrderItemAfterSaleStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -323,10 +328,21 @@ export const SPEC_TYPE: OptionItem[] = [
   { label: '多规格', value: 1 }
 ]
 
-export const DELIVERY_TYPE: OptionItem[] = [
+export const DELIVERY_TYPE_OPTIONS: OptionItem[] = [
   { label: DeliveryTypeEnum.EXPRESS.name, value: DeliveryTypeEnum.EXPRESS.type },
   { label: DeliveryTypeEnum.PICK_UP.name, value: DeliveryTypeEnum.PICK_UP.type }
 ]
+
+export const DELIVERY_TYPE: SelectValueItem = Object.values(DeliveryTypeEnum).reduce(
+  (acc, item) => {
+    acc[item.type] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
 
 export const REPLY_STATUS: SelectValueItem = {
   0: { text: '未回复', status: 'Default' },
@@ -504,3 +520,59 @@ export const BROKERAGE_WITHDRAW_TYPE: OptionItem[] = Object.values(BrokerageWith
     value: item.type
   })
 )
+
+export const TRADE_ORDER_STATUS: SelectValueItem = Object.values(TradeOrderStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status:
+        item.status === 0 || 10 ? 'Processing' : item.status === 20 || 30 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const PAY_CHANNEL: SelectValueItem = Object.values(PayChannelEnum).reduce((acc, item) => {
+  acc[item.code] = {
+    text: item.name,
+    status: ''
+  }
+  return acc
+}, {} as SelectValueItem)
+
+export const ORDER_SOURCE: SelectValueItem = Object.values(TerminalEnum).reduce((acc, item) => {
+  acc[item.terminal] = {
+    text: item.name,
+    status: ''
+  }
+  return acc
+}, {} as SelectValueItem)
+
+export const TRADE_ORDER_TYPE: SelectValueItem = Object.values(TradeOrderTypeEnum).reduce(
+  (acc, item) => {
+    acc[item.type] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const COMPOSITE_SEARCH_TYPE: OptionItem[] = [
+  { label: '订单编号', value: 'orderNo' },
+  { label: '用户 ID', value: 'userId' },
+  { label: '用户昵称', value: 'nickname' },
+  { label: '用户电话', value: 'mobile' }
+]
+
+export const AFTER_SALE_STATUS: SelectValueItem = Object.values(
+  TradeOrderItemAfterSaleStatusEnum
+).reduce((acc, item) => {
+  acc[item.status] = {
+    text: item.name,
+    status: ''
+  }
+  return acc
+}, {} as SelectValueItem)

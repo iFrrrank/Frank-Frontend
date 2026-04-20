@@ -1389,7 +1389,7 @@ export const PayChannelEnum = {
   },
   WX_WAP: {
     code: 'wx_wap',
-    name: ''
+    name: '微信 H5 支付'
   },
   WX_BAR: {
     code: 'wx_bar',

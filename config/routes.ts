@@ -322,6 +322,12 @@ export default [
             path: '/mall/trade/config',
             icon: 'schedule',
             component: './mall/trade/config'
+          },
+          {
+            name: '订单列表',
+            path: '/mall/trade/order',
+            icon: 'schedule',
+            component: './mall/trade/order'
           }
         ]
       },
