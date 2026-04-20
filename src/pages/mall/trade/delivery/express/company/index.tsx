@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Button, message } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
-import DeliveryExpressForm from './DeliveryExpressForm'
+import ExpressForm from './ExpressForm'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/Delete'
@@ -153,7 +153,7 @@ const DeliveryExpressManagement: React.FC = () => {
         ]}
       />
 
-      <DeliveryExpressForm
+      <ExpressForm
         visible={formVisible}
         setVisible={setFormVisible}
         id={currentId}

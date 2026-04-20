@@ -350,6 +350,12 @@ export default [
                     path: '/mall/trade/delivery/express/company',
                     icon: 'schedule',
                     component: './mall/trade/delivery/express/company'
+                  },
+                  {
+                    name: '运费模板',
+                    path: '/mall/trade/delivery/express/template',
+                    icon: 'schedule',
+                    component: './mall/trade/delivery/express/template'
                   }
                 ]
               }

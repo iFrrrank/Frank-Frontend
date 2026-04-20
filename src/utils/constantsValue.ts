@@ -611,3 +611,15 @@ export const AFTERSALE_TYPE: SelectValueItem = Object.values(AfterSaleTypeEnum).
   },
   {} as SelectValueItem
 )
+
+export const CHARGE_MODE: SelectValueItem = {
+  1: { text: '按件' },
+  2: { text: '按重量' },
+  3: { text: '按体积' }
+}
+
+export const CHARGE_MODE_OPTIONS: OptionItem[] = [
+  { label: '按件', value: 1 },
+  { label: '按重量', value: 2 },
+  { label: '按体积', value: 3 }
+]

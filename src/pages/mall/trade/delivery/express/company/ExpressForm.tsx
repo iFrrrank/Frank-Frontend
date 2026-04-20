@@ -13,7 +13,6 @@ import {
   getDeliveryExpress
 } from '@/api/mall/trade/delivery/express'
 import { textConst } from '@/locales/zh-CN'
-import { text } from 'node:stream/consumers'
 import { COMMON_STATUS_OPTIONS } from '@/utils/constantsValue'
 
 interface DeliveryExpressFormProps {
@@ -23,7 +22,7 @@ interface DeliveryExpressFormProps {
   id?: number
 }
 
-const DeliveryExpressForm: React.FC<DeliveryExpressFormProps> = ({
+const ExpressForm: React.FC<DeliveryExpressFormProps> = ({
   visible,
   setVisible,
   onSuccess,
@@ -119,4 +118,4 @@ const DeliveryExpressForm: React.FC<DeliveryExpressFormProps> = ({
   )
 }
 
-export default DeliveryExpressForm
+export default ExpressForm
