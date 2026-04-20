@@ -24,7 +24,9 @@ import {
   PayChannelEnum,
   TerminalEnum,
   TradeOrderTypeEnum,
-  TradeOrderItemAfterSaleStatusEnum
+  TradeOrderItemAfterSaleStatusEnum,
+  AfterSaleWayEnum,
+  AfterSaleTypeEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -576,3 +578,36 @@ export const AFTER_SALE_STATUS: SelectValueItem = Object.values(
   }
   return acc
 }, {} as SelectValueItem)
+
+export const AFTERSALE_STATUS: SelectValueItem = {
+  10: { text: '申请售后', status: 'Processing' },
+  20: { text: '商品待退货', status: 'Processing' },
+  30: { text: '商品待收货', status: 'Processing' },
+  40: { text: '等待退款', status: 'Warning' },
+  50: { text: '退款成功', status: 'Success' },
+  60: { text: '卖家取消', status: 'Default' },
+  70: { text: '商家拒绝', status: 'Error' },
+  80: { text: '商家拒收货', status: 'Error' }
+}
+
+export const AFTERSALE_WAY: SelectValueItem = Object.values(AfterSaleWayEnum).reduce(
+  (acc, item) => {
+    acc[item.way] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const AFTERSALE_TYPE: SelectValueItem = Object.values(AfterSaleTypeEnum).reduce(
+  (acc, item) => {
+    acc[item.type] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)

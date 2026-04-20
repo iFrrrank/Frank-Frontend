@@ -328,6 +328,12 @@ export default [
             path: '/mall/trade/order',
             icon: 'schedule',
             component: './mall/trade/order'
+          },
+          {
+            name: '售后退款',
+            path: '/mall/trade/aftersale',
+            icon: 'schedule',
+            component: './mall/trade/aftersale'
           }
         ]
       },
