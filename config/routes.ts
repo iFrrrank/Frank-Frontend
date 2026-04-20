@@ -334,6 +334,26 @@ export default [
             path: '/mall/trade/aftersale',
             icon: 'schedule',
             component: './mall/trade/aftersale'
+          },
+          {
+            name: '配送管理',
+            path: '/mall/trade/delivery',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '快递发货',
+                path: '/mall/trade/delivery/express',
+                icon: 'schedule',
+                routes: [
+                  {
+                    name: '快递公司',
+                    path: '/mall/trade/delivery/express/company',
+                    icon: 'schedule',
+                    component: './mall/trade/delivery/express/company'
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
