@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { message, Space, Input, Select } from 'antd'
+import { message } from 'antd'
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
 import { tableActionStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
@@ -10,41 +10,12 @@ import {
   ORDER_SOURCE,
   TRADE_ORDER_TYPE,
   DELIVERY_TYPE,
-  COMPOSITE_SEARCH_TYPE,
   AFTER_SALE_STATUS
 } from '@/utils/constantsValue'
-
-interface CompositeSearchValue {
-  type?: string
-  keyword?: string
-}
+import { CompositeSearch } from '@/components/CompositeSearch'
 
 const OrderManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
-
-  const CompositeSearch: React.FC<{
-    value?: CompositeSearchValue
-    onChange?: (value: CompositeSearchValue) => void
-  }> = ({ value = {}, onChange }) => {
-    const currentType = value.type || 'orderNo'
-
-    return (
-      <Space.Compact style={{ display: 'flex', width: '100%' }}>
-        <Select
-          value={value.type || ''}
-          onChange={(t) => onChange?.({ ...value, type: t })}
-          style={{ width: 100 }}
-          options={COMPOSITE_SEARCH_TYPE}
-        />
-        <Input
-          value={value.keyword || ''}
-          onChange={(e) => onChange?.({ type: currentType, keyword: e.target.value })}
-          placeholder="请输入关键字"
-          style={{ flex: 1 }}
-        />
-      </Space.Compact>
-    )
-  }
 
   const columns: ProColumns<any>[] = [
     {

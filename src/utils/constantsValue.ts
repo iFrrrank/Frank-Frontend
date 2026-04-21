@@ -26,7 +26,8 @@ import {
   TradeOrderTypeEnum,
   TradeOrderItemAfterSaleStatusEnum,
   AfterSaleWayEnum,
-  AfterSaleTypeEnum
+  AfterSaleTypeEnum,
+  PayOrderStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -623,3 +624,13 @@ export const CHARGE_MODE_OPTIONS: OptionItem[] = [
   { label: '按重量', value: 2 },
   { label: '按体积', value: 3 }
 ]
+export const PAY_ORDER_STATUS: SelectValueItem = Object.values(PayOrderStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 0 ? 'Default' : item.status === 10 || 20 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)

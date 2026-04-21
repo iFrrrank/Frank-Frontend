@@ -369,6 +369,12 @@ export default [
                     path: '/mall/trade/delivery/pickupstore/list',
                     icon: 'schedule',
                     component: './mall/trade/delivery/pickupstore/list'
+                  },
+                  {
+                    name: '核销订单',
+                    path: '/mall/trade/delivery/pickupstore/order',
+                    icon: 'schedule',
+                    component: './mall/trade/delivery/pickupstore/order'
                   }
                 ]
               }
