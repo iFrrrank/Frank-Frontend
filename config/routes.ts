@@ -313,6 +313,101 @@ export default [
         ]
       },
       {
+        path: '/mall/trade',
+        name: '订单中心',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            name: '交易配置',
+            path: '/mall/trade/config',
+            icon: 'schedule',
+            component: './mall/trade/config'
+          },
+          {
+            name: '订单列表',
+            path: '/mall/trade/order',
+            icon: 'schedule',
+            component: './mall/trade/order'
+          },
+          {
+            name: '售后退款',
+            path: '/mall/trade/aftersale',
+            icon: 'schedule',
+            component: './mall/trade/aftersale'
+          },
+          {
+            name: '配送管理',
+            path: '/mall/trade/delivery',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '快递发货',
+                path: '/mall/trade/delivery/express',
+                icon: 'schedule',
+                routes: [
+                  {
+                    name: '快递公司',
+                    path: '/mall/trade/delivery/express/company',
+                    icon: 'schedule',
+                    component: './mall/trade/delivery/express/company'
+                  },
+                  {
+                    name: '运费模板',
+                    path: '/mall/trade/delivery/express/template',
+                    icon: 'schedule',
+                    component: './mall/trade/delivery/express/template'
+                  }
+                ]
+              },
+              {
+                name: '门店自提',
+                path: '/mall/trade/delivery/pickupstore',
+                icon: 'schedule',
+                routes: [
+                  {
+                    name: '门店管理',
+                    path: '/mall/trade/delivery/pickupstore/list',
+                    icon: 'schedule',
+                    component: './mall/trade/delivery/pickupstore/list'
+                  },
+                  {
+                    name: '核销订单',
+                    path: '/mall/trade/delivery/pickupstore/order',
+                    icon: 'schedule',
+                    component: './mall/trade/delivery/pickupstore/order'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            name: '分销管理',
+            path: '/mall/trade/brokerage',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '分销用户',
+                path: '/mall/trade/brokerage/user',
+                icon: 'schedule',
+                component: './mall/trade/brokerage/user'
+              },
+              {
+                name: '佣金记录',
+                path: '/mall/trade/brokerage/record',
+                icon: 'schedule',
+                component: './mall/trade/brokerage/record'
+              },
+              {
+                name: '佣金提现',
+                path: '/mall/trade/brokerage/withdraw',
+                icon: 'schedule',
+                component: './mall/trade/brokerage/withdraw'
+              }
+            ]
+          }
+        ]
+      },
+      {
         path: '/mall/promotion',
         name: '营销中心',
         icon: 'shoppingCart',

@@ -16,7 +16,20 @@ import {
   CouponStatusEnum,
   CombinationRecordStatusEnum,
   BargainRecordStatusEnum,
-  PromotionConditionTypeEnum
+  PromotionConditionTypeEnum,
+  BrokerageEnabledConditionEnum,
+  BrokerageBindModeEnum,
+  BrokerageWithdrawTypeEnum,
+  TradeOrderStatusEnum,
+  PayChannelEnum,
+  TerminalEnum,
+  TradeOrderTypeEnum,
+  TradeOrderItemAfterSaleStatusEnum,
+  AfterSaleWayEnum,
+  AfterSaleTypeEnum,
+  PayOrderStatusEnum,
+  BrokerageRecordStatusEnum,
+  BrokerageWithdrawStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -320,10 +333,21 @@ export const SPEC_TYPE: OptionItem[] = [
   { label: '多规格', value: 1 }
 ]
 
-export const DELIVERY_TYPE: OptionItem[] = [
+export const DELIVERY_TYPE_OPTIONS: OptionItem[] = [
   { label: DeliveryTypeEnum.EXPRESS.name, value: DeliveryTypeEnum.EXPRESS.type },
   { label: DeliveryTypeEnum.PICK_UP.name, value: DeliveryTypeEnum.PICK_UP.type }
 ]
+
+export const DELIVERY_TYPE: SelectValueItem = Object.values(DeliveryTypeEnum).reduce(
+  (acc, item) => {
+    acc[item.type] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
 
 export const REPLY_STATUS: SelectValueItem = {
   0: { text: '未回复', status: 'Default' },
@@ -480,3 +504,186 @@ export const PROMOTION_CONDITION_TYPE: OptionItem[] = Object.values(PromotionCon
     value: item.type
   })
 )
+
+export const BROKERAGE_ENABLED: OptionItem[] = Object.values(BrokerageEnabledConditionEnum).map(
+  (item) => ({
+    label: item.name,
+    value: item.condition
+  })
+)
+
+export const BROKERAGE_BIND_MODE: OptionItem[] = Object.values(BrokerageBindModeEnum).map(
+  (item) => ({
+    label: item.name,
+    value: item.mode
+  })
+)
+
+export const BROKERAGE_WITHDRAW_TYPE_OPTIONS: OptionItem[] = Object.values(
+  BrokerageWithdrawTypeEnum
+).map((item) => ({
+  label: item.name,
+  value: item.type
+}))
+
+export const BROKERAGE_WITHDRAW_TYPE: SelectValueItem = Object.values(
+  BrokerageWithdrawTypeEnum
+).reduce((acc, item) => {
+  acc[item.type] = {
+    text: item.name,
+    status: ''
+  }
+  return acc
+}, {} as SelectValueItem)
+
+export const TRADE_ORDER_STATUS: SelectValueItem = Object.values(TradeOrderStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status:
+        item.status === 0 || 10 ? 'Processing' : item.status === 20 || 30 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const PAY_CHANNEL: SelectValueItem = Object.values(PayChannelEnum).reduce((acc, item) => {
+  acc[item.code] = {
+    text: item.name,
+    status: ''
+  }
+  return acc
+}, {} as SelectValueItem)
+
+export const ORDER_SOURCE: SelectValueItem = Object.values(TerminalEnum).reduce((acc, item) => {
+  acc[item.terminal] = {
+    text: item.name,
+    status: ''
+  }
+  return acc
+}, {} as SelectValueItem)
+
+export const TRADE_ORDER_TYPE: SelectValueItem = Object.values(TradeOrderTypeEnum).reduce(
+  (acc, item) => {
+    acc[item.type] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const COMPOSITE_SEARCH_TYPE: OptionItem[] = [
+  { label: '订单编号', value: 'orderNo' },
+  { label: '用户 ID', value: 'userId' },
+  { label: '用户昵称', value: 'nickname' },
+  { label: '用户电话', value: 'mobile' }
+]
+
+export const AFTER_SALE_STATUS: SelectValueItem = Object.values(
+  TradeOrderItemAfterSaleStatusEnum
+).reduce((acc, item) => {
+  acc[item.status] = {
+    text: item.name,
+    status: ''
+  }
+  return acc
+}, {} as SelectValueItem)
+
+export const AFTERSALE_STATUS: SelectValueItem = {
+  10: { text: '申请售后', status: 'Processing' },
+  20: { text: '商品待退货', status: 'Processing' },
+  30: { text: '商品待收货', status: 'Processing' },
+  40: { text: '等待退款', status: 'Warning' },
+  50: { text: '退款成功', status: 'Success' },
+  60: { text: '卖家取消', status: 'Default' },
+  70: { text: '商家拒绝', status: 'Error' },
+  80: { text: '商家拒收货', status: 'Error' }
+}
+
+export const AFTERSALE_WAY: SelectValueItem = Object.values(AfterSaleWayEnum).reduce(
+  (acc, item) => {
+    acc[item.way] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const AFTERSALE_TYPE: SelectValueItem = Object.values(AfterSaleTypeEnum).reduce(
+  (acc, item) => {
+    acc[item.type] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const CHARGE_MODE: SelectValueItem = {
+  1: { text: '按件' },
+  2: { text: '按重量' },
+  3: { text: '按体积' }
+}
+
+export const CHARGE_MODE_OPTIONS: OptionItem[] = [
+  { label: '按件', value: 1 },
+  { label: '按重量', value: 2 },
+  { label: '按体积', value: 3 }
+]
+
+export const PAY_ORDER_STATUS: SelectValueItem = Object.values(PayOrderStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 0 ? 'Default' : item.status === 10 || 20 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const BROKERAGE_QUALIFICATION: SelectValueItem = {
+  1: { text: '有', status: 'Success' },
+  0: { text: '无', status: 'Error' }
+}
+
+export const BROKERAGE_BIZ_TYPE: SelectValueItem = {
+  1: { text: '订单返佣' },
+  2: { text: '申请提现' },
+  3: { text: '申请提现驳回' }
+}
+
+export const BROKERAGE_RECORD_STATUS: SelectValueItem = Object.values(
+  BrokerageRecordStatusEnum
+).reduce((acc, item) => {
+  acc[item.status] = {
+    text: item.name,
+    status: item.status === 0 ? 'Processing' : item.status === 1 ? 'Success' : 'Default'
+  }
+  return acc
+}, {} as SelectValueItem)
+
+export const BROKERAGE_WITHDRAW_STATUS: SelectValueItem = Object.values(
+  BrokerageWithdrawStatusEnum
+).reduce((acc, item) => {
+  acc[item.status] = {
+    text: item.name,
+    status: item.status === 0 ? 'Processing' : item.status === 10 || 11 ? 'Success' : 'Error'
+  }
+  return acc
+}, {} as SelectValueItem)
+
+export const BANK_TYPE: SelectValueItem = {
+  1: { text: '中国银行' },
+  2: { text: '工商银行' },
+  3: { text: '建设银行' },
+  4: { text: '农业银行' },
+  5: { text: '招商银行' },
+  6: { text: '交通银行' }
+}

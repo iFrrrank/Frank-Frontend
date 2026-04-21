@@ -13,11 +13,10 @@ import {
   EditableProTable,
   ProColumns
 } from '@ant-design/pro-components'
-import { DISTRIBUTE_TYPE, SPEC_TYPE, DELIVERY_TYPE } from '@/utils/constantsValue'
+import { DISTRIBUTE_TYPE, SPEC_TYPE, DELIVERY_TYPE_OPTIONS } from '@/utils/constantsValue'
 
 const AddProductSpu: React.FC = () => {
   const navigate = useNavigate()
-  // 用于控制 Step 2 中 SKU 表格的数据
   const [skuData, setSkuData] = useState<any[]>([])
 
   const skuColumns: ProColumns<any>[] = [
@@ -229,7 +228,7 @@ const AddProductSpu: React.FC = () => {
             name="deliveryTypes"
             label="配送方式"
             rules={[{ required: true }]}
-            options={DELIVERY_TYPE}
+            options={DELIVERY_TYPE_OPTIONS}
           />
         </StepsForm.StepForm>
 
