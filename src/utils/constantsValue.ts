@@ -634,3 +634,8 @@ export const PAY_ORDER_STATUS: SelectValueItem = Object.values(PayOrderStatusEnu
   },
   {} as SelectValueItem
 )
+
+export const BROKERAGE_QUALIFICATION: SelectValueItem = {
+  1: { text: '有', status: 'Success' },
+  0: { text: '无', status: 'Error' }
+}

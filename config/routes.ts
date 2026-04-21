@@ -379,6 +379,19 @@ export default [
                 ]
               }
             ]
+          },
+          {
+            name: '分销管理',
+            path: '/mall/trade/brokerage',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '分销用户',
+                path: '/mall/trade/brokerage/user',
+                icon: 'schedule',
+                component: './mall/trade/brokerage/user'
+              }
+            ]
           }
         ]
       },
