@@ -358,6 +358,19 @@ export default [
                     component: './mall/trade/delivery/express/template'
                   }
                 ]
+              },
+              {
+                name: '门店自提',
+                path: '/mall/trade/delivery/pickupstore',
+                icon: 'schedule',
+                routes: [
+                  {
+                    name: '门店管理',
+                    path: '/mall/trade/delivery/pickupstore/list',
+                    icon: 'schedule',
+                    component: './mall/trade/delivery/pickupstore/list'
+                  }
+                ]
               }
             ]
           }
