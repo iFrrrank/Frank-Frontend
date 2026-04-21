@@ -28,7 +28,8 @@ import {
   AfterSaleWayEnum,
   AfterSaleTypeEnum,
   PayOrderStatusEnum,
-  BrokerageRecordStatusEnum
+  BrokerageRecordStatusEnum,
+  BrokerageWithdrawStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -518,12 +519,22 @@ export const BROKERAGE_BIND_MODE: OptionItem[] = Object.values(BrokerageBindMode
   })
 )
 
-export const BROKERAGE_WITHDRAW_TYPE: OptionItem[] = Object.values(BrokerageWithdrawTypeEnum).map(
-  (item) => ({
-    label: item.name,
-    value: item.type
-  })
-)
+export const BROKERAGE_WITHDRAW_TYPE_OPTIONS: OptionItem[] = Object.values(
+  BrokerageWithdrawTypeEnum
+).map((item) => ({
+  label: item.name,
+  value: item.type
+}))
+
+export const BROKERAGE_WITHDRAW_TYPE: SelectValueItem = Object.values(
+  BrokerageWithdrawTypeEnum
+).reduce((acc, item) => {
+  acc[item.type] = {
+    text: item.name,
+    status: ''
+  }
+  return acc
+}, {} as SelectValueItem)
 
 export const TRADE_ORDER_STATUS: SelectValueItem = Object.values(TradeOrderStatusEnum).reduce(
   (acc, item) => {
@@ -642,7 +653,7 @@ export const BROKERAGE_QUALIFICATION: SelectValueItem = {
   0: { text: '无', status: 'Error' }
 }
 
-export const BROKERAGE_BIZ_TYPE = {
+export const BROKERAGE_BIZ_TYPE: SelectValueItem = {
   1: { text: '订单返佣' },
   2: { text: '申请提现' },
   3: { text: '申请提现驳回' }
@@ -657,3 +668,22 @@ export const BROKERAGE_RECORD_STATUS: SelectValueItem = Object.values(
   }
   return acc
 }, {} as SelectValueItem)
+
+export const BROKERAGE_WITHDRAW_STATUS: SelectValueItem = Object.values(
+  BrokerageWithdrawStatusEnum
+).reduce((acc, item) => {
+  acc[item.status] = {
+    text: item.name,
+    status: item.status === 0 ? 'Processing' : item.status === 10 || 11 ? 'Success' : 'Error'
+  }
+  return acc
+}, {} as SelectValueItem)
+
+export const BANK_TYPE: SelectValueItem = {
+  1: { text: '中国银行' },
+  2: { text: '工商银行' },
+  3: { text: '建设银行' },
+  4: { text: '农业银行' },
+  5: { text: '招商银行' },
+  6: { text: '交通银行' }
+}

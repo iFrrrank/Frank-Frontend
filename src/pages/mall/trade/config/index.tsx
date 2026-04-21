@@ -14,7 +14,7 @@ import { textConst } from '@/locales/zh-CN'
 import {
   BROKERAGE_ENABLED,
   BROKERAGE_BIND_MODE,
-  BROKERAGE_WITHDRAW_TYPE
+  BROKERAGE_WITHDRAW_TYPE_OPTIONS
 } from '@/utils/constantsValue'
 
 const TradeConfig: React.FC = () => {
@@ -192,7 +192,7 @@ const TradeConfig: React.FC = () => {
               name="brokerageWithdrawTypes"
               label="提现方式"
               rules={[{ required: true, message: '请至少选择一种提现方式' }]}
-              options={BROKERAGE_WITHDRAW_TYPE}
+              options={BROKERAGE_WITHDRAW_TYPE_OPTIONS}
               extra="商城开通提现的付款方式"
             />
           </Tabs.TabPane>

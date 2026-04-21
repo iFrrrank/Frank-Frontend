@@ -396,6 +396,12 @@ export default [
                 path: '/mall/trade/brokerage/record',
                 icon: 'schedule',
                 component: './mall/trade/brokerage/record'
+              },
+              {
+                name: '佣金提现',
+                path: '/mall/trade/brokerage/withdraw',
+                icon: 'schedule',
+                component: './mall/trade/brokerage/withdraw'
               }
             ]
           }
