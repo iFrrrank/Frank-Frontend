@@ -390,6 +390,12 @@ export default [
                 path: '/mall/trade/brokerage/user',
                 icon: 'schedule',
                 component: './mall/trade/brokerage/user'
+              },
+              {
+                name: '佣金记录',
+                path: '/mall/trade/brokerage/record',
+                icon: 'schedule',
+                component: './mall/trade/brokerage/record'
               }
             ]
           }
