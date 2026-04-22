@@ -687,3 +687,23 @@ export const BANK_TYPE: SelectValueItem = {
   5: { text: '招商银行' },
   6: { text: '交通银行' }
 }
+
+export const GATEWAY_TYPE: OptionItem[] = [
+  { label: '线上环境', value: 'online' },
+  { label: '沙箱环境', value: 'sandbox' }
+]
+
+export const PUBLICKEY_TYPE: OptionItem[] = [
+  { label: '公钥模式', value: 'publicKey' },
+  { label: '证书模式', value: 'certificate' }
+]
+
+export const ENCRYPT_TYPE: OptionItem[] = [
+  { label: '无加密', value: 'none' },
+  { label: 'AES', value: 'AES' }
+]
+
+export const API_VERSION_TYPE: OptionItem[] = [
+  { label: 'v2', value: 'v2' },
+  { label: 'v3', value: 'v3' }
+]

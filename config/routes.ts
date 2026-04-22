@@ -257,6 +257,19 @@ export default [
     ]
   },
   {
+    path: '/pay',
+    name: '支付管理',
+    icon: 'user',
+    routes: [
+      {
+        path: '/pay/app',
+        name: '应用中心',
+        icon: 'shoppingCart',
+        component: './pay/app'
+      }
+    ]
+  },
+  {
     path: '/mall',
     name: '商城系统',
     icon: 'user',
