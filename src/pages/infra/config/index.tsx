@@ -15,7 +15,7 @@ import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { handleExport } from '@/components/Export'
 
-/** 系统内置选项 */
+// 系统内置选项
 const CONFIG_TYPE_OPTIONS = [
   { label: '是', value: 1 },
   { label: '否', value: 2 }

@@ -30,7 +30,7 @@ export const removeToken = () => {
   wsCache.delete(RefreshTokenKey)
 }
 
-/** 格式化token（jwt格式） */
+// 格式化token（jwt格式）
 export const formatToken = (token: string): string => {
   return 'Bearer ' + token
 }

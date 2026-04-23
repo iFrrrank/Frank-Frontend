@@ -325,16 +325,6 @@ const SaleOutForm: React.FC<SaleOutFormProps> = ({ visible, setVisible, onSucces
           placeholder="请选择销售人员"
           request={async () => []}
         />
-
-        {/* 占位控制：使备注占 16 栅格(两列)，附件占 8 栅格，完美还原截图2 */}
-        {/* <ProFormTextArea
-          name="remark"
-          label="备注"
-          placeholder="请输入备注"
-          colProps={{ span: 16 }}
-          labelCol={{ span: 3 }}
-          fieldProps={{ rows: 1 }}
-        /> */}
         {/* @ts-ignore */}
         <ProFormUploadButton
           name="fileUrl"

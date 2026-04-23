@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 获取用户基本信息 GET /system/oauth2/user/get */
+// 获取用户基本信息 GET /system/oauth2/user/get
 export async function getUserInfo(options?: { [key: string]: any }) {
   return request<API.CommonResultSystemOAuth2UserInfoRespVO>('/system/oauth2/user/get', {
     method: 'GET',
@@ -8,7 +8,7 @@ export async function getUserInfo(options?: { [key: string]: any }) {
   })
 }
 
-/** 更新用户基本信息 PUT /system/oauth2/user/update */
+// 更新用户基本信息 PUT /system/oauth2/user/update
 export async function updateUserInfo(
   body: API.SystemOAuth2UserUpdateReqVO,
   options?: { [key: string]: any }

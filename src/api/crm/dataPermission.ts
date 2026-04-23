@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建数据权限 POST /crm/permission/create */
+// 创建数据权限 POST /crm/permission/create
 export async function createPermission(
   body: API.CrmPermissionSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createPermission(
   })
 }
 
-/** 删除数据权限 DELETE /crm/permission/delete */
+// 删除数据权限 DELETE /crm/permission/delete
 export async function deletePermission(
   params: API.deletePermissionParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deletePermission(
   })
 }
 
-/** 删除自己的数据权限 DELETE /crm/permission/delete-self */
+// 删除自己的数据权限 DELETE /crm/permission/delete-self
 export async function deleteSelfPermission(
   params: API.deleteSelfPermissionParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function deleteSelfPermission(
   })
 }
 
-/** 获取数据权限列表 GET /crm/permission/list */
+// 获取数据权限列表 GET /crm/permission/list
 export async function getPermissionList(
   params: API.getPermissionListParams,
   options?: { [key: string]: any }
@@ -57,7 +57,7 @@ export async function getPermissionList(
   })
 }
 
-/** 更新数据权限 PUT /crm/permission/update */
+// 更新数据权限 PUT /crm/permission/update
 export async function updatePermission(
   body: API.CrmPermissionUpdateReqVO,
   options?: { [key: string]: any }

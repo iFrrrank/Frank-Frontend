@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建跟进记录 POST /crm/follow-up-record/create */
+// 创建跟进记录 POST /crm/follow-up-record/create
 export async function createFollowUpRecord(
   body: API.CrmFollowUpRecordSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createFollowUpRecord(
   })
 }
 
-/** 删除跟进记录 DELETE /crm/follow-up-record/delete */
+// 删除跟进记录 DELETE /crm/follow-up-record/delete
 export async function deleteFollowUpRecord(
   params: API.deleteFollowUpRecordParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteFollowUpRecord(
   })
 }
 
-/** 获取跟进记录 GET /crm/follow-up-record/get */
+// 获取跟进记录 GET /crm/follow-up-record/get
 export async function getFollowUpRecord(
   params: API.getFollowUpRecordParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function getFollowUpRecord(
   })
 }
 
-/** 获取跟进记录分页列表 GET /crm/follow-up-record/page */
+// 获取跟进记录分页列表 GET /crm/follow-up-record/page
 export async function getFollowUpRecordPage(
   params: API.getFollowUpRecordPageParams,
   options?: { [key: string]: any }

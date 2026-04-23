@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建角色 POST /system/role/create */
+// 创建角色 POST /system/role/create
 export async function createRole(body: API.SystemRoleSaveReqVO, options?: { [key: string]: any }) {
   return request<API.CommonResultLong>('/system/role/create', {
     method: 'POST',
@@ -12,7 +12,7 @@ export async function createRole(body: API.SystemRoleSaveReqVO, options?: { [key
   })
 }
 
-/** 删除角色 DELETE /system/role/delete */
+// 删除角色 DELETE /system/role/delete
 export async function deleteRole(params: API.deleteRoleParams, options?: { [key: string]: any }) {
   return request<API.CommonResultBoolean>('/system/role/delete', {
     method: 'DELETE',
@@ -23,7 +23,7 @@ export async function deleteRole(params: API.deleteRoleParams, options?: { [key:
   })
 }
 
-/** 导出角色 GET /system/role/export-excel */
+// 导出角色 GET /system/role/export-excel
 export async function exportUsingGet(
   params: API.exportUsingGETParams,
   options?: { [key: string]: any }
@@ -40,7 +40,7 @@ export async function exportUsingGet(
   })
 }
 
-/** 获取角色信息 GET /system/role/get */
+// 获取角色信息 GET /system/role/get
 export async function getRole(params: API.getRoleParams, options?: { [key: string]: any }) {
   return request<API.CommonResultSystemRoleRespVO>('/system/role/get', {
     method: 'GET',
@@ -51,7 +51,7 @@ export async function getRole(params: API.getRoleParams, options?: { [key: strin
   })
 }
 
-/** 获取角色精简信息列表 只包含被开启的角色，主要用于前端的下拉选项 GET /system/role/list-all-simple */
+// 获取角色精简信息列表 只包含被开启的角色，主要用于前端的下拉选项 GET /system/role/list-all-simple
 export async function getSimpleRoleList(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemRoleRespVO>('/system/role/list-all-simple', {
     method: 'GET',
@@ -59,7 +59,7 @@ export async function getSimpleRoleList(options?: { [key: string]: any }) {
   })
 }
 
-/** 获取角色分页列表 GET /system/role/page */
+// 获取角色分页列表 GET /system/role/page
 export async function getRolePage(params: API.getRolePageParams, options?: { [key: string]: any }) {
   return request<API.CommonResultPageResultSystemRoleRespVO>('/system/role/page', {
     method: 'GET',
@@ -70,7 +70,7 @@ export async function getRolePage(params: API.getRolePageParams, options?: { [ke
   })
 }
 
-/** 获取角色精简信息列表 只包含被开启的角色，主要用于前端的下拉选项 GET /system/role/simple-list */
+// 获取角色精简信息列表 只包含被开启的角色，主要用于前端的下拉选项 GET /system/role/simple-list
 export async function getSimpleRoleList1(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemRoleRespVO>('/system/role/simple-list', {
     method: 'GET',
@@ -78,7 +78,7 @@ export async function getSimpleRoleList1(options?: { [key: string]: any }) {
   })
 }
 
-/** 修改角色 PUT /system/role/update */
+// 修改角色 PUT /system/role/update
 export async function updateRole(body: API.SystemRoleSaveReqVO, options?: { [key: string]: any }) {
   return request<API.CommonResultBoolean>('/system/role/update', {
     method: 'PUT',

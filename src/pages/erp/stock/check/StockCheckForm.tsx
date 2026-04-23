@@ -218,7 +218,6 @@ const StockCheckForm: React.FC<StockCheckFormProps> = ({ visible, setVisible, on
         }
       }}
     >
-      {/* --- 顶部基础信息 --- */}
       <ProFormText
         name="no"
         label="盘点单号"

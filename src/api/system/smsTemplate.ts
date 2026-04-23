@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建短信模板 POST /system/sms-template/create */
+// 创建短信模板 POST /system/sms-template/create
 export async function createSmsTemplate(
   body: API.SystemSmsTemplateSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createSmsTemplate(
   })
 }
 
-/** 删除短信模板 DELETE /system/sms-template/delete */
+// 删除短信模板 DELETE /system/sms-template/delete
 export async function deleteSmsTemplate(
   params: API.deleteSmsTemplateParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteSmsTemplate(
   })
 }
 
-/** 导出短信模板 GET /system/sms-template/export-excel */
+// 导出短信模板 GET /system/sms-template/export-excel
 export async function exportSmsTemplateExcel(
   params: API.exportSmsTemplateExcelParams,
   options?: { [key: string]: any }
@@ -46,7 +46,7 @@ export async function exportSmsTemplateExcel(
   })
 }
 
-/** 获取短信模板 GET /system/sms-template/get */
+// 获取短信模板 GET /system/sms-template/get
 export async function getSmsTemplate(
   params: API.getSmsTemplateParams,
   options?: { [key: string]: any }
@@ -60,7 +60,7 @@ export async function getSmsTemplate(
   })
 }
 
-/** 获取短信模板分页列表 GET /system/sms-template/page */
+// 获取短信模板分页列表 GET /system/sms-template/page
 export async function getSmsTemplatePage(
   params: API.getSmsTemplatePageParams,
   options?: { [key: string]: any }
@@ -76,7 +76,7 @@ export async function getSmsTemplatePage(
   })
 }
 
-/** 发送短信 POST /system/sms-template/send-sms */
+// 发送短信 POST /system/sms-template/send-sms
 export async function sendSms(
   body: API.SystemSmsTemplateSendReqVO,
   options?: { [key: string]: any }
@@ -91,7 +91,7 @@ export async function sendSms(
   })
 }
 
-/** 更新短信模板 PUT /system/sms-template/update */
+// 更新短信模板 PUT /system/sms-template/update
 export async function updateSmsTemplate(
   body: API.SystemSmsTemplateSaveReqVO,
   options?: { [key: string]: any }

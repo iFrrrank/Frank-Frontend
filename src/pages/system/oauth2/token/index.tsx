@@ -7,7 +7,7 @@ import { deleteAccessToken, getAccessTokenPage } from '@/api/system/oAuth2Token'
 import { textConst } from '@/locales/zh-CN'
 import { deleteTextStyle } from '@/styles/common.style'
 
-/** 用户类型枚举 */
+// 用户类型枚举
 const USER_TYPE_MAP: Record<number, { text: string; color: string }> = {
   1: { text: '管理员', color: 'blue' },
   2: { text: '会员', color: 'green' }

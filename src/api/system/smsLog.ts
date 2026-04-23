@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 导出短信日志 GET /system/sms-log/export-excel */
+// 导出短信日志 GET /system/sms-log/export-excel
 export async function exportSmsLogExcel(
   params: API.exportSmsLogExcelParams,
   options?: { [key: string]: any }
@@ -17,7 +17,7 @@ export async function exportSmsLogExcel(
   })
 }
 
-/** 获取短信日志分页列表 GET /system/sms-log/page */
+// 获取短信日志分页列表 GET /system/sms-log/page
 export async function getSmsLogPage(
   params: API.getSmsLogPageParams,
   options?: { [key: string]: any }

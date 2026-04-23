@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 获取待审核回款数量 GET /crm/receivable/audit-count */
+// 获取待审核回款数量 GET /crm/receivable/audit-count
 export async function getAuditReceivableCount(options?: { [key: string]: any }) {
   return request<API.CommonResultLong>('/crm/receivable/audit-count', {
     method: 'GET',
@@ -8,7 +8,7 @@ export async function getAuditReceivableCount(options?: { [key: string]: any }) 
   })
 }
 
-/** 创建回款 POST /crm/receivable/create */
+// 创建回款 POST /crm/receivable/create
 export async function createReceivable(
   body: API.CrmReceivableSaveReqVO,
   options?: { [key: string]: any }
@@ -23,7 +23,7 @@ export async function createReceivable(
   })
 }
 
-/** 删除回款 DELETE /crm/receivable/delete */
+// 删除回款 DELETE /crm/receivable/delete
 export async function deleteReceivable(
   params: API.deleteReceivableParams,
   options?: { [key: string]: any }
@@ -37,7 +37,7 @@ export async function deleteReceivable(
   })
 }
 
-/** 导出回款 Excel GET /crm/receivable/export-excel */
+// 导出回款 Excel GET /crm/receivable/export-excel
 export async function exportReceivableExcel(
   params: API.exportReceivableExcelParams,
   options?: { [key: string]: any }
@@ -54,7 +54,7 @@ export async function exportReceivableExcel(
   })
 }
 
-/** 获取回款 GET /crm/receivable/get */
+// 获取回款 GET /crm/receivable/get
 export async function getReceivable(
   params: API.getReceivableParams,
   options?: { [key: string]: any }
@@ -68,7 +68,7 @@ export async function getReceivable(
   })
 }
 
-/** 获取回款分页列表 GET /crm/receivable/page */
+// 获取回款分页列表 GET /crm/receivable/page
 export async function getReceivablePage(
   params: API.getReceivablePageParams,
   options?: { [key: string]: any }
@@ -84,7 +84,7 @@ export async function getReceivablePage(
   })
 }
 
-/** 基于指定客户获取回款分页列表 GET /crm/receivable/page-by-customer */
+// 基于指定客户获取回款分页列表 GET /crm/receivable/page-by-customer
 export async function getReceivablePageByCustomer(
   params: API.getReceivablePageByCustomerParams,
   options?: { [key: string]: any }
@@ -103,7 +103,7 @@ export async function getReceivablePageByCustomer(
   )
 }
 
-/** 提交回款审批 PUT /crm/receivable/submit */
+// 提交回款审批 PUT /crm/receivable/submit
 export async function submitContract(
   params: API.submitContractParams,
   options?: { [key: string]: any }
@@ -117,7 +117,7 @@ export async function submitContract(
   })
 }
 
-/** 更新回款 PUT /crm/receivable/update */
+// 更新回款 PUT /crm/receivable/update
 export async function updateReceivable(
   body: API.CrmReceivableSaveReqVO,
   options?: { [key: string]: any }

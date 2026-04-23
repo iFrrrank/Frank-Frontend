@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建商机 POST /crm/business/create */
+// 创建商机 POST /crm/business/create
 export async function createBusiness(
   body: API.CrmBusinessSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createBusiness(
   })
 }
 
-/** 删除商机 DELETE /crm/business/delete */
+// 删除商机 DELETE /crm/business/delete
 export async function deleteBusiness(
   params: API.deleteBusinessParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteBusiness(
   })
 }
 
-/** 导出商机 Excel GET /crm/business/export-excel */
+// 导出商机 Excel GET /crm/business/export-excel
 export async function exportBusinessExcel(
   params: API.exportBusinessExcelParams,
   options?: { [key: string]: any }
@@ -46,7 +46,7 @@ export async function exportBusinessExcel(
   })
 }
 
-/** 获取商机详情 GET /crm/business/get */
+// 获取商机详情 GET /crm/business/get
 export async function getBusiness(params: API.getBusinessParams, options?: { [key: string]: any }) {
   return request<API.CommonResultCrmBusinessRespVO>('/crm/business/get', {
     method: 'GET',
@@ -57,7 +57,7 @@ export async function getBusiness(params: API.getBusinessParams, options?: { [ke
   })
 }
 
-/** 获取商机分页列表 GET /crm/business/page */
+// 获取商机分页列表 GET /crm/business/page
 export async function getBusinessPage(
   params: API.getBusinessPageParams,
   options?: { [key: string]: any }
@@ -73,7 +73,7 @@ export async function getBusinessPage(
   })
 }
 
-/** 获取联系人的商机分页列表 GET /crm/business/page-by-contact */
+// 获取联系人的商机分页列表 GET /crm/business/page-by-contact
 export async function getBusinessContactPage(
   params: API.getBusinessContactPageParams,
   options?: { [key: string]: any }
@@ -89,7 +89,7 @@ export async function getBusinessContactPage(
   })
 }
 
-/** 基于指定客户获取商机分页列表 GET /crm/business/page-by-customer */
+// 基于指定客户获取商机分页列表 GET /crm/business/page-by-customer
 export async function getBusinessPageByCustomer(
   params: API.getBusinessPageByCustomerParams,
   options?: { [key: string]: any }
@@ -105,7 +105,7 @@ export async function getBusinessPageByCustomer(
   })
 }
 
-/** 获取商机的精简列表 GET /crm/business/simple-all-list */
+// 获取商机的精简列表 GET /crm/business/simple-all-list
 export async function getSimpleContactList1(options?: { [key: string]: any }) {
   return request<API.CommonResultListCrmBusinessRespVO>('/crm/business/simple-all-list', {
     method: 'GET',
@@ -113,7 +113,7 @@ export async function getSimpleContactList1(options?: { [key: string]: any }) {
   })
 }
 
-/** 商机转移 PUT /crm/business/transfer */
+// 商机转移 PUT /crm/business/transfer
 export async function transferBusiness(
   body: API.CrmBusinessTransferReqVO,
   options?: { [key: string]: any }
@@ -128,7 +128,7 @@ export async function transferBusiness(
   })
 }
 
-/** 更新商机 PUT /crm/business/update */
+// 更新商机 PUT /crm/business/update
 export async function updateBusiness(
   body: API.CrmBusinessSaveReqVO,
   options?: { [key: string]: any }
@@ -143,7 +143,7 @@ export async function updateBusiness(
   })
 }
 
-/** 更新商机状态 PUT /crm/business/update-status */
+// 更新商机状态 PUT /crm/business/update-status
 export async function updateBusinessStatus(
   body: API.CrmBusinessUpdateStatusReqVO,
   options?: { [key: string]: any }

@@ -16,12 +16,12 @@ import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const { Dragger } = Upload
 
-/** 允许的文件类型 */
+// 允许的文件类型
 const ACCEPT_TYPES = ['image/jpeg', 'image/png', 'image/gif']
 const ACCEPT_EXTENSIONS = '.jpg,.jpeg,.png,.gif'
 const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
 
-/** 格式化文件大小 */
+// 格式化文件大小
 const formatFileSize = (bytes?: number): string => {
   if (bytes === undefined || bytes === null) return '-'
   if (bytes < 1024) return `${bytes} B`
@@ -38,7 +38,7 @@ const FileListPage: React.FC = () => {
   const [uploadFileList, setUploadFileList] = useState<UploadFile[]>([])
   const [uploading, setUploading] = useState(false)
 
-  /** 复制链接 */
+  // 复制链接
   const handleCopyLink = (url?: string) => {
     if (!url) {
       message.warning('文件链接为空')
@@ -50,13 +50,13 @@ const FileListPage: React.FC = () => {
       .catch(() => message.error(textConst.msg.copyError))
   }
 
-  /** 打开上传弹窗 */
+  // 打开上传弹窗
   const handleOpenUpload = () => {
     setUploadFileList([])
     setUploadModalVisible(true)
   }
 
-  /** 确认上传 */
+  // 确认上传
   const handleUploadConfirm = async () => {
     if (uploadFileList.length === 0) {
       message.warning('请先选择文件')

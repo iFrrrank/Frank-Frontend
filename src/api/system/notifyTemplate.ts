@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建站内信模版 POST /system/notify-template/create */
+// 创建站内信模版 POST /system/notify-template/create
 export async function createNotifyTemplate(
   body: API.SystemNotifyTemplateSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createNotifyTemplate(
   })
 }
 
-/** 删除站内信模版 DELETE /system/notify-template/delete */
+// 删除站内信模版 DELETE /system/notify-template/delete
 export async function deleteNotifyTemplate(
   params: API.deleteNotifyTemplateParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteNotifyTemplate(
   })
 }
 
-/** 获取站内信模版 GET /system/notify-template/get */
+// 获取站内信模版 GET /system/notify-template/get
 export async function getNotifyTemplate(
   params: API.getNotifyTemplateParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function getNotifyTemplate(
   })
 }
 
-/** 获取站内信模版分页列表 GET /system/notify-template/page */
+// 获取站内信模版分页列表 GET /system/notify-template/page
 export async function getNotifyTemplatePage(
   params: API.getNotifyTemplatePageParams,
   options?: { [key: string]: any }
@@ -62,7 +62,7 @@ export async function getNotifyTemplatePage(
   )
 }
 
-/** 发送站内信 POST /system/notify-template/send-notify */
+// 发送站内信 POST /system/notify-template/send-notify
 export async function sendNotify(
   body: API.SystemNotifyTemplateSendReqVO,
   options?: { [key: string]: any }
@@ -77,7 +77,7 @@ export async function sendNotify(
   })
 }
 
-/** 更新站内信模版 PUT /system/notify-template/update */
+// 更新站内信模版 PUT /system/notify-template/update
 export async function updateNotifyTemplate(
   body: API.SystemNotifyTemplateSaveReqVO,
   options?: { [key: string]: any }

@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 导出登录日志 GET /system/login-log/export */
+// 导出登录日志 GET /system/login-log/export
 export async function exportLoginLog(
   params: API.exportLoginLogParams,
   options?: { [key: string]: any }
@@ -17,7 +17,7 @@ export async function exportLoginLog(
   })
 }
 
-/** 获取登录日志分页列表 GET /system/login-log/page */
+// 获取登录日志分页列表 GET /system/login-log/page
 export async function getLoginLogPage(
   params: API.getLoginLogPageParams,
   options?: { [key: string]: any }

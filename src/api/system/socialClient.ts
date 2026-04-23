@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建社交客户端 POST /system/social-client/create */
+// 创建社交客户端 POST /system/social-client/create
 export async function createSocialClient(
   body: API.SystemSocialClientSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createSocialClient(
   })
 }
 
-/** 删除社交客户端 DELETE /system/social-client/delete */
+// 删除社交客户端 DELETE /system/social-client/delete
 export async function deleteSocialClient(
   params: API.deleteSocialClientParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteSocialClient(
   })
 }
 
-/** 获取社交客户端 GET /system/social-client/get */
+// 获取社交客户端 GET /system/social-client/get
 export async function getSocialClient(
   params: API.getSocialClientParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function getSocialClient(
   })
 }
 
-/** 获取社交客户端分页列表 GET /system/social-client/page */
+// 获取社交客户端分页列表 GET /system/social-client/page
 export async function getSocialClientPage(
   params: API.getSocialClientPageParams,
   options?: { [key: string]: any }
@@ -59,7 +59,7 @@ export async function getSocialClientPage(
   })
 }
 
-/** 更新社交客户端 PUT /system/social-client/update */
+// 更新社交客户端 PUT /system/social-client/update
 export async function updateSocialClient(
   body: API.SystemSocialClientSaveReqVO,
   options?: { [key: string]: any }

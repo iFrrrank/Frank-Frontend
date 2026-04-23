@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 获取客户公海规则设置 GET /crm/customer-pool-config/get */
+// 获取客户公海规则设置 GET /crm/customer-pool-config/get
 export async function getCustomerPoolConfig(options?: { [key: string]: any }) {
   return request<API.CommonResultCrmCustomerPoolConfigRespVO>('/crm/customer-pool-config/get', {
     method: 'GET',
@@ -8,7 +8,7 @@ export async function getCustomerPoolConfig(options?: { [key: string]: any }) {
   })
 }
 
-/** 更新客户公海规则设置 PUT /crm/customer-pool-config/save */
+// 更新客户公海规则设置 PUT /crm/customer-pool-config/save
 export async function updateCustomerPoolConfig(
   body: API.CrmCustomerPoolConfigSaveReqVO,
   options?: { [key: string]: any }

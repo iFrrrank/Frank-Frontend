@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 获取站内信 GET /system/notify-message/get */
+// 获取站内信 GET /system/notify-message/get
 export async function getNotifyMessage(
   params: API.getNotifyMessageParams,
   options?: { [key: string]: any }
@@ -14,7 +14,7 @@ export async function getNotifyMessage(
   })
 }
 
-/** 获取当前用户的未读站内信数量 GET /system/notify-message/get-unread-count */
+// 获取当前用户的未读站内信数量 GET /system/notify-message/get-unread-count
 export async function getUnreadNotifyMessageCount(options?: { [key: string]: any }) {
   return request<API.CommonResultLong>('/system/notify-message/get-unread-count', {
     method: 'GET',
@@ -22,7 +22,7 @@ export async function getUnreadNotifyMessageCount(options?: { [key: string]: any
   })
 }
 
-/** 获取当前用户的最新站内信列表，默认 10 条 GET /system/notify-message/get-unread-list */
+// 获取当前用户的最新站内信列表，默认 10 条 GET /system/notify-message/get-unread-list
 export async function getUnreadNotifyMessageList(
   params: API.getUnreadNotifyMessageListParams,
   options?: { [key: string]: any }
@@ -41,7 +41,7 @@ export async function getUnreadNotifyMessageList(
   )
 }
 
-/** 获取我的站内信分页列表 GET /system/notify-message/my-page */
+// 获取我的站内信分页列表 GET /system/notify-message/my-page
 export async function getMyMyNotifyMessagePage(
   params: API.getMyMyNotifyMessagePageParams,
   options?: { [key: string]: any }
@@ -60,7 +60,7 @@ export async function getMyMyNotifyMessagePage(
   )
 }
 
-/** 获取站内信分页列表 GET /system/notify-message/page */
+// 获取站内信分页列表 GET /system/notify-message/page
 export async function getNotifyMessagePage(
   params: API.getNotifyMessagePageParams,
   options?: { [key: string]: any }
@@ -79,7 +79,7 @@ export async function getNotifyMessagePage(
   )
 }
 
-/** 标记所有站内信为已读 PUT /system/notify-message/update-all-read */
+// 标记所有站内信为已读 PUT /system/notify-message/update-all-read
 export async function updateAllNotifyMessageRead(options?: { [key: string]: any }) {
   return request<API.CommonResultBoolean>('/system/notify-message/update-all-read', {
     method: 'PUT',
@@ -87,7 +87,7 @@ export async function updateAllNotifyMessageRead(options?: { [key: string]: any 
   })
 }
 
-/** 标记站内信为已读 PUT /system/notify-message/update-read */
+// 标记站内信为已读 PUT /system/notify-message/update-read
 export async function updateNotifyMessageRead(
   params: API.updateNotifyMessageReadParams,
   options?: { [key: string]: any }

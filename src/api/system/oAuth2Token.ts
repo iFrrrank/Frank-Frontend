@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 删除访问令牌 DELETE /system/oauth2-token/delete */
+// 删除访问令牌 DELETE /system/oauth2-token/delete
 export async function deleteAccessToken(
   params: API.deleteAccessTokenParams,
   options?: { [key: string]: any }
@@ -14,7 +14,7 @@ export async function deleteAccessToken(
   })
 }
 
-/** 获取访问令牌分页列表 只返回有效期内的 GET /system/oauth2-token/page */
+// 获取访问令牌分页列表 只返回有效期内的 GET /system/oauth2-token/page
 export async function getAccessTokenPage(
   params: API.getAccessTokenPageParams,
   options?: { [key: string]: any }

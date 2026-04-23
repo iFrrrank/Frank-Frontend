@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建字典类型 POST /system/dict-type/create */
+// 创建字典类型 POST /system/dict-type/create
 export async function createDictType(
   body: API.SystemDictTypeSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createDictType(
   })
 }
 
-/** 删除字典类型 DELETE /system/dict-type/delete */
+// 删除字典类型 DELETE /system/dict-type/delete
 export async function deleteDictType(
   params: API.deleteDictTypeParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteDictType(
   })
 }
 
-/** 导出字典类型 GET /system/dict-type/export */
+// 导出字典类型 GET /system/dict-type/export
 export async function export2(params: API.export2Params, options?: { [key: string]: any }) {
   return request<any>('/system/dict-type/export', {
     method: 'GET',
@@ -43,7 +43,7 @@ export async function export2(params: API.export2Params, options?: { [key: strin
   })
 }
 
-/** 获取字典类型详情况 GET /system/dict-type/get */
+// 获取字典类型详情况 GET /system/dict-type/get
 export async function getDictType(params: API.getDictTypeParams, options?: { [key: string]: any }) {
   return request<API.CommonResultSystemDictTypeRespVO>('/system/dict-type/get', {
     method: 'GET',
@@ -54,7 +54,7 @@ export async function getDictType(params: API.getDictTypeParams, options?: { [ke
   })
 }
 
-/** 获取全部字典类型列表 包括开启 + 禁用的字典类型，主要用于前端的下拉选项 GET /system/dict-type/list-all-simple */
+// 获取全部字典类型列表 包括开启 + 禁用的字典类型，主要用于前端的下拉选项 GET /system/dict-type/list-all-simple
 export async function getSimpleDictTypeList(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemDictTypeSimpleRespVO>(
     '/system/dict-type/list-all-simple',
@@ -65,7 +65,7 @@ export async function getSimpleDictTypeList(options?: { [key: string]: any }) {
   )
 }
 
-/** 获取字典类型的分页列表 GET /system/dict-type/page */
+// 获取字典类型的分页列表 GET /system/dict-type/page
 export async function pageDictTypes(
   params: API.pageDictTypesParams,
   options?: { [key: string]: any }
@@ -81,7 +81,7 @@ export async function pageDictTypes(
   })
 }
 
-/** 获取全部字典类型列表 包括开启 + 禁用的字典类型，主要用于前端的下拉选项 GET /system/dict-type/simple-list */
+// 获取全部字典类型列表 包括开启 + 禁用的字典类型，主要用于前端的下拉选项 GET /system/dict-type/simple-list
 export async function getSimpleDictTypeList1(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemDictTypeSimpleRespVO>('/system/dict-type/simple-list', {
     method: 'GET',
@@ -89,7 +89,7 @@ export async function getSimpleDictTypeList1(options?: { [key: string]: any }) {
   })
 }
 
-/** 修改字典类型 PUT /system/dict-type/update */
+// 修改字典类型 PUT /system/dict-type/update
 export async function updateDictType(
   body: API.SystemDictTypeSaveReqVO,
   options?: { [key: string]: any }

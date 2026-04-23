@@ -5,7 +5,7 @@ import { ProTable } from '@ant-design/pro-components'
 import { getSocialUserPage } from '@/api/system/socialUser'
 import { textConst } from '@/locales/zh-CN'
 
-/** 社交平台类型枚举 */
+// 社交平台类型枚举
 const SOCIAL_TYPE_MAP: Record<number, string> = {
   5: 'Gitee',
   10: '钉钉',

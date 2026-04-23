@@ -50,7 +50,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
     const searchParams = new URLSearchParams({
       redirect: pathname + search
     })
-    /** 此方法会跳转到 redirect 参数所在的位置 */
+    // 此方法会跳转到 redirect 参数所在的位置
     const redirect = urlParams.get('redirect')
     // Note: There may be security issues, please note
     if (window.location.pathname !== '/user/login' && !redirect) {
@@ -101,20 +101,20 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
   const menuItems = [
     ...(menu
       ? [
-        {
-          key: 'center',
-          icon: <UserOutlined />,
-          label: '个人中心'
-        },
-        {
-          key: 'settings',
-          icon: <SettingOutlined />,
-          label: '个人设置'
-        },
-        {
-          type: 'divider' as const
-        }
-      ]
+          {
+            key: 'center',
+            icon: <UserOutlined />,
+            label: '个人中心'
+          },
+          {
+            key: 'settings',
+            icon: <SettingOutlined />,
+            label: '个人设置'
+          },
+          {
+            type: 'divider' as const
+          }
+        ]
       : []),
     {
       key: 'logout',
