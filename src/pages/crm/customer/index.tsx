@@ -1,43 +1,32 @@
 import React, { useRef, useState } from 'react'
-import type { ActionType, ProColumns } from '@ant-design/pro-components'
+import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import { Button, Modal, message } from 'antd'
-import {
-  PlusOutlined,
-  DownloadOutlined,
-  UploadOutlined,
-  ExclamationCircleFilled
-} from '@ant-design/icons'
+import { Button } from 'antd'
+import { PlusOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons'
 import { getCustomerPage, exportCustomerExcel } from '@/api/crm/customer'
 import { SCENE_TYPE } from '@/utils/constantsValue'
 import { textConst } from '@/locales/zh-CN'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
-import download from '@/utils/download'
 import CustomerForm from './CustomerForm'
 import CustomerImportForm from './CustomerImportForm'
 import { INDUSTRY_LIST, CUSTOMER_LEVEL, CUSTOMER_SOURCE } from '@/utils/constantsValue'
+import { handleExport } from '@/components/Export'
 
 const CustomerList: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [sceneType, setSceneType] = useState<number>(1)
   const [formVisible, setFormVisible] = useState<boolean>(false)
   const [formId, setFormId] = useState<number | undefined>(undefined)
   const [importVisible, setImportVisible] = useState<boolean>(false)
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleFilled style={{ color: '#faad14' }} />,
-      content: '是否确认导出数据项？',
-      onOk: async () => {
-        try {
-          const res = await exportCustomerExcel({ sceneType } as any)
-          download.excel(res, '客户数据.xls')
-          message.success('导出成功')
-        } catch (e) {
-          message.error('导出失败')
-        }
-      }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportCustomerExcel,
+      exportParams: { ...formValues },
+      fileName: '客户数据.xlsx'
     })
   }
 
@@ -222,7 +211,7 @@ const CustomerList: React.FC = () => {
               color="volcano"
               variant="outlined"
               icon={<DownloadOutlined />}
-              onClick={handleExport}
+              onClick={handleExportBtnClick}
             >
               {textConst.action.export}
             </Button>

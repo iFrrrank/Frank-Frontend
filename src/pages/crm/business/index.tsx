@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import type { ActionType, ProColumns } from '@ant-design/pro-components'
+import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { Button, Modal, message } from 'antd'
 import { PlusOutlined, DownloadOutlined, ExclamationCircleFilled } from '@ant-design/icons'
@@ -8,29 +8,23 @@ import { getBusinessStatusSimpleList } from '@/api/crm/businessStatus'
 import { SCENE_TYPE } from '@/utils/constantsValue'
 import { textConst } from '@/locales/zh-CN'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
-import download from '@/utils/download'
 import BusinessForm from './BusinessForm'
+import { handleExport } from '@/components/Export'
 
 const BusinessList: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [sceneType, setSceneType] = useState<number>(1)
   const [formVisible, setFormVisible] = useState<boolean>(false)
   const [formId, setFormId] = useState<number | undefined>(undefined)
 
-  const handleExport = () => {
-    Modal.confirm({
-      title: '系统提示',
-      icon: <ExclamationCircleFilled style={{ color: '#faad14' }} />,
-      content: '是否确认导出数据项？',
-      onOk: async () => {
-        try {
-          const res = await exportBusinessExcel({ sceneType } as any)
-          download.excel(res, '商机数据.xls')
-          message.success(textConst.msg.createSuccess)
-        } catch (e) {
-          message.error(textConst.error.operationFail)
-        }
-      }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportBusinessExcel,
+      exportParams: { ...formValues },
+      fileName: '商机数据.xlsx'
     })
   }
 
@@ -212,7 +206,7 @@ const BusinessList: React.FC = () => {
               color="volcano"
               variant="outlined"
               icon={<DownloadOutlined />}
-              onClick={handleExport}
+              onClick={handleExportBtnClick}
             >
               {textConst.action.export}
             </Button>

@@ -1,17 +1,19 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Popconfirm } from 'antd'
+import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
-import { getReceivablePage, deleteReceivable } from '@/api/crm/receivable'
+import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
+import { getReceivablePage, deleteReceivable, exportReceivableExcel } from '@/api/crm/receivable'
 import { getCustomerSimpleList } from '@/api/crm/customer'
 import ReceivableForm from './ReceivableForm'
 import { SCENE_TYPE } from '@/utils/constantsValue'
 import { textConst } from '@/locales/zh-CN'
-import { tableActionStyle, deleteTextStyle, emptyTextStyle } from '@/styles/common.style'
+import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { handleDelete } from '@/components/Delete'
+import { handleExport } from '@/components/Export'
 
 const ReceivableManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [formVisible, setFormVisible] = useState<boolean>(false)
   const [currentId, setCurrentId] = useState<number | undefined>(undefined)
   const [sceneType, setSceneType] = useState<string>('1')
@@ -36,13 +38,14 @@ const ReceivableManagement: React.FC = () => {
   //     }
   //   }
 
-  const handleExport = async () => {
-    try {
-      message.loading({ content: '正在导出...', key: 'export' })
-      message.success({ content: '导出成功', key: 'export' })
-    } catch (e) {
-      message.error({ content: '导出失败', key: 'export' })
-    }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportReceivableExcel,
+      exportParams: { ...formValues },
+      fileName: '回款列表.xlsx'
+    })
   }
 
   const columns: ProColumns<API.CrmReceivableRespVO>[] = [
@@ -237,7 +240,7 @@ const ReceivableManagement: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>
