@@ -295,6 +295,12 @@ export default [
             name: '钱包余额',
             icon: 'shoppingCart',
             component: './pay/wallet/balance'
+          },
+          {
+            path: '/pay/wallet/recharge-package',
+            name: '充值套餐',
+            icon: 'shoppingCart',
+            component: './pay/wallet/package'
           }
         ]
       }
