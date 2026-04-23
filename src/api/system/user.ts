@@ -35,6 +35,7 @@ export async function exportUserList(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }

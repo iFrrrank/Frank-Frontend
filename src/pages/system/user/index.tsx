@@ -139,15 +139,14 @@ const SystemUser: React.FC = () => {
     actionRef.current?.reload()
   }
 
-  // 导出用户
   const handleExportBtnClick = () => {
+    // 获取表单当前的值
     const formValues = formRef.current?.getFieldsValue?.() || {}
-    handleExport(
-      exportUserList,
-      { exportReqVO: { ...formValues, deptId: selectedDeptId } },
-      '用户数据.xlsx',
-      textConst.msg.exportMsg
-    )
+    handleExport({
+      exportApi: exportUserList,
+      exportParams: { ...formValues, deptId: selectedDeptId },
+      fileName: '用户数据.xlsx'
+    })
   }
 
   return (
