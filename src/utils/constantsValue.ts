@@ -29,7 +29,12 @@ import {
   AfterSaleTypeEnum,
   PayOrderStatusEnum,
   BrokerageRecordStatusEnum,
-  BrokerageWithdrawStatusEnum
+  BrokerageWithdrawStatusEnum,
+  PayRefundStatusEnum,
+  PayTransferStatusEnum,
+  UserTypeEnum,
+  PayNotifyTypeEnum,
+  PayNotifyStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -687,3 +692,81 @@ export const BANK_TYPE: SelectValueItem = {
   5: { text: '招商银行' },
   6: { text: '交通银行' }
 }
+
+export const GATEWAY_TYPE: OptionItem[] = [
+  { label: '线上环境', value: 'online' },
+  { label: '沙箱环境', value: 'sandbox' }
+]
+
+export const PUBLICKEY_TYPE: OptionItem[] = [
+  { label: '公钥模式', value: 'publicKey' },
+  { label: '证书模式', value: 'certificate' }
+]
+
+export const ENCRYPT_TYPE: OptionItem[] = [
+  { label: '无加密', value: 'none' },
+  { label: 'AES', value: 'AES' }
+]
+
+export const API_VERSION_TYPE: OptionItem[] = [
+  { label: 'v2', value: 'v2' },
+  { label: 'v3', value: 'v3' }
+]
+
+export const PAY_REFUND_STATUS: SelectValueItem = Object.values(PayRefundStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 0 ? 'Processing' : item.status === 10 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const PAY_TRANSFER_STATUS: SelectValueItem = Object.values(PayTransferStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 0 || 5 ? 'Processing' : item.status === 10 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const PAY_TRANSFER_TYPE: SelectValueItem = {
+  1: { text: '支付宝余额' },
+  2: { text: '微信余额' },
+  3: { text: '银行卡' }
+}
+
+export const USER_TYPE: SelectValueItem = Object.values(UserTypeEnum).reduce((acc, item) => {
+  acc[item.value] = {
+    text: item.name,
+    status: ''
+  }
+  return acc
+}, {} as SelectValueItem)
+
+export const PAY_NOTIFY_TYPE: SelectValueItem = Object.values(PayNotifyTypeEnum).reduce(
+  (acc, item) => {
+    acc[item.type] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const PAY_NOTIFY_STATUS: SelectValueItem = Object.values(PayNotifyStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)

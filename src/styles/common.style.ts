@@ -69,3 +69,13 @@ export const combinateRecordNumber = {
   fontWeight: 'bold',
   lineHeight: 1
 }
+
+export const enablePayApp = {
+  color: '#52c41a',
+  fontSize: 18
+}
+
+export const disablePayApp = {
+  color: '#ff4d4f',
+  fontSize: 18
+}

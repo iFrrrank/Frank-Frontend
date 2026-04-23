@@ -257,6 +257,62 @@ export default [
     ]
   },
   {
+    path: '/pay',
+    name: '支付管理',
+    icon: 'user',
+    routes: [
+      {
+        path: '/pay/app',
+        name: '应用中心',
+        icon: 'shoppingCart',
+        component: './pay/app'
+      },
+      {
+        path: '/pay/order',
+        name: '支付订单',
+        icon: 'shoppingCart',
+        component: './pay/order'
+      },
+      {
+        path: '/pay/refund',
+        name: '退款订单',
+        icon: 'shoppingCart',
+        component: './pay/refund'
+      },
+      {
+        path: '/pay/transfer',
+        name: '转账订单',
+        icon: 'shoppingCart',
+        component: './pay/transfer'
+      },
+      {
+        path: '/pay/wallet',
+        name: '钱包管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/pay/wallet/balance',
+            name: '钱包余额',
+            icon: 'shoppingCart',
+            component: './pay/wallet/balance'
+          },
+          {
+            path: '/pay/wallet/recharge-package',
+            name: '充值套餐',
+            icon: 'shoppingCart',
+            component: './pay/wallet/package'
+          }
+        ]
+      },
+      {
+        path: '/pay/notify',
+        name: '回调通知',
+        icon: 'shoppingCart',
+        component: './pay/notify'
+      }
+    ]
+  },
+  {
     path: '/mall',
     name: '商城系统',
     icon: 'user',
