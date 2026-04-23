@@ -1,14 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Button, message, Select } from 'antd'
+import { Button, Select } from 'antd'
 import { DownloadOutlined } from '@ant-design/icons'
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
+import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
 import { textConst } from '@/locales/zh-CN'
 import { getStockPage } from '@/api/erp/stock/stock'
 import { getProductSimpleList } from '@/api/erp/product/product'
-import { getWarehouseSimpleList } from '@/api/erp/stock/warehouse'
+import { getWarehouseSimpleList, exportWarehouseExcel } from '@/api/erp/stock/warehouse'
+import { handleExport } from '@/components/Export'
 
 const StockManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [productList, setProductList] = useState<API.ErpProductRespVO[]>([])
   const [warehouseList, setWarehouseList] = useState<API.ErpWarehouseRespVO[]>([])
 
@@ -21,13 +23,14 @@ const StockManagement: React.FC = () => {
     })
   }, [])
 
-  const handleExportBtnClick = async () => {
-    try {
-      message.loading({ content: '正在导出...', key: 'export' })
-      message.success({ content: '导出成功', key: 'export' })
-    } catch (e) {
-      message.error({ content: '导出失败', key: 'export' })
-    }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportWarehouseExcel,
+      exportParams: { ...formValues },
+      fileName: '产品库存.xlsx'
+    })
   }
 
   const columns: ProColumns<API.ErpStockRespVO>[] = [

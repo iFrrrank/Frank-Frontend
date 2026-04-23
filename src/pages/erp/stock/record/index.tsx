@@ -1,21 +1,24 @@
 import React, { useRef } from 'react'
-import { Button, message } from 'antd'
+import { Button } from 'antd'
 import { DownloadOutlined } from '@ant-design/icons'
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
-import { getStockRecordPage } from '@/api/erp/stock/record'
+import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
+import { getStockRecordPage, exportStockRecordExcel } from '@/api/erp/stock/record'
 import { textConst } from '@/locales/zh-CN'
 import { BIZ_TYPE } from '@/utils/constantsValue'
+import { handleExport } from '@/components/Export'
 
 const StockRecordManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
 
-  const handleExportBtnClick = async () => {
-    try {
-      message.loading({ content: '正在导出...', key: 'export' })
-      message.success({ content: '导出成功', key: 'export' })
-    } catch (e) {
-      message.error({ content: '导出失败', key: 'export' })
-    }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportStockRecordExcel,
+      exportParams: { ...formValues },
+      fileName: '出入库明细.xlsx'
+    })
   }
 
   const columns: ProColumns<API.ErpStockRecordRespVO>[] = [
