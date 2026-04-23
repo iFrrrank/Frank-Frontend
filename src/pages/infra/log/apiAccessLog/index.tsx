@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { Button, Descriptions, Drawer, message, Modal, Tag, Typography } from 'antd'
-import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
+import { Button, Descriptions, Drawer, message, Tag, Typography } from 'antd'
+import { DownloadOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { exportApiAccessLogExcel, getApiAccessLogPage } from '@/api/infra/apiAccessLog'
@@ -13,6 +13,16 @@ const ApiAccessLogPage: React.FC = () => {
 
   const [detailsDrawerVisible, setDetailsDrawerVisible] = useState(false)
   const [selectedRecord, setSelectedRecord] = useState<API.InfraApiAccessLogRespVO | null>(null)
+
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportApiAccessLogExcel,
+      exportParams: { ...formValues },
+      fileName: '访问日志.xlsx'
+    })
+  }
 
   const columns: ProColumns<API.InfraApiAccessLogRespVO>[] = [
     {
@@ -168,21 +178,6 @@ const ApiAccessLogPage: React.FC = () => {
     }
   ]
 
-  const handleExportClick = () => {
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-    if (formValues.beginTime && formValues.beginTime.length === 2) {
-      formValues.beginTimeStr = formValues.beginTime[0] + ' 00:00:00'
-      formValues.endTimeStr = formValues.beginTime[1] + ' 23:59:59'
-    }
-    delete formValues.beginTime
-    handleExport(
-      exportApiAccessLogExcel,
-      formValues,
-      'API访问日志.xlsx',
-      '确认导出所有访问日志数据项？'
-    )
-  }
-
   return (
     <>
       <ProTable<API.InfraApiAccessLogRespVO>
@@ -244,7 +239,7 @@ const ApiAccessLogPage: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>

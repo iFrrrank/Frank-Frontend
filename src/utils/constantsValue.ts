@@ -76,6 +76,11 @@ export const BOOLEAN_OPTIONS: OptionItem[] = [
   { label: '否', value: 0 }
 ]
 
+export const JOB_LOG_STATUS: SelectValueItem = {
+  1: { text: '成功', status: 'Success' },
+  0: { text: '失败', status: 'Error' }
+}
+
 export const SEX_OPTIONS: OptionItem[] = [
   { label: '男', value: 1 },
   { label: '女', value: 2 }
