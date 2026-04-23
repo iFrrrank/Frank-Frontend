@@ -272,6 +272,12 @@ export default [
         name: '支付订单',
         icon: 'shoppingCart',
         component: './pay/order'
+      },
+      {
+        path: '/pay/refund',
+        name: '退款订单',
+        icon: 'shoppingCart',
+        component: './pay/refund'
       }
     ]
   },

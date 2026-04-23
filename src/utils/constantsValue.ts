@@ -29,7 +29,8 @@ import {
   AfterSaleTypeEnum,
   PayOrderStatusEnum,
   BrokerageRecordStatusEnum,
-  BrokerageWithdrawStatusEnum
+  BrokerageWithdrawStatusEnum,
+  PayRefundStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -707,3 +708,14 @@ export const API_VERSION_TYPE: OptionItem[] = [
   { label: 'v2', value: 'v2' },
   { label: 'v3', value: 'v3' }
 ]
+
+export const PAY_REFUND_STATUS: SelectValueItem = Object.values(PayRefundStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 0 ? 'Processing' : item.status === 10 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
