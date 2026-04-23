@@ -266,6 +266,12 @@ export default [
         name: '应用中心',
         icon: 'shoppingCart',
         component: './pay/app'
+      },
+      {
+        path: '/pay/order',
+        name: '支付订单',
+        icon: 'shoppingCart',
+        component: './pay/order'
       }
     ]
   },

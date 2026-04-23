@@ -50,8 +50,7 @@ export async function getOrderPage(
     method: 'GET',
     params: {
       ...params,
-      pageVO: undefined,
-      ...params['pageVO']
+      pageVO: undefined
     },
     ...(options || {})
   })
