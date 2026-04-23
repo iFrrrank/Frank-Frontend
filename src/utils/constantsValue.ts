@@ -32,7 +32,9 @@ import {
   BrokerageWithdrawStatusEnum,
   PayRefundStatusEnum,
   PayTransferStatusEnum,
-  UserTypeEnum
+  UserTypeEnum,
+  PayNotifyTypeEnum,
+  PayNotifyStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -746,3 +748,25 @@ export const USER_TYPE: SelectValueItem = Object.values(UserTypeEnum).reduce((ac
   }
   return acc
 }, {} as SelectValueItem)
+
+export const PAY_NOTIFY_TYPE: SelectValueItem = Object.values(PayNotifyTypeEnum).reduce(
+  (acc, item) => {
+    acc[item.type] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const PAY_NOTIFY_STATUS: SelectValueItem = Object.values(PayNotifyStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: ''
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)

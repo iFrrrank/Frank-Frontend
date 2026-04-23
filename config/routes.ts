@@ -303,6 +303,12 @@ export default [
             component: './pay/wallet/package'
           }
         ]
+      },
+      {
+        path: '/pay/notify',
+        name: '回调通知',
+        icon: 'shoppingCart',
+        component: './pay/notify'
       }
     ]
   },
