@@ -6,6 +6,8 @@ import {
   updateWalletRechargePackage,
   getWalletRechargePackage
 } from '@/api/pay/wallet/package'
+import { textConst } from '@/locales/zh-CN'
+import { COMMON_STATUS_OPTIONS } from '@/utils/constantsValue'
 
 interface WalletRechargePackageFormProps {
   visible: boolean
@@ -25,7 +27,7 @@ const WalletRechargePackageForm: React.FC<WalletRechargePackageFormProps> = ({
 
   return (
     <ModalForm
-      title={isUpdate ? `编辑充值套餐` : `新增`}
+      title={isUpdate ? textConst.action.update : textConst.action.create}
       open={visible}
       onOpenChange={(val) => {
         setVisible(val)
@@ -34,11 +36,12 @@ const WalletRechargePackageForm: React.FC<WalletRechargePackageFormProps> = ({
         }
       }}
       form={form}
+      colon={false}
       layout="horizontal"
       labelAlign="right"
-      labelCol={{ span: 5 }}
-      wrapperCol={{ span: 17 }}
-      width={600}
+      labelCol={{ span: 4 }}
+      wrapperCol={{ span: 20 }}
+      width={500}
       modalProps={{
         destroyOnClose: true,
         maskClosable: false
@@ -48,17 +51,15 @@ const WalletRechargePackageForm: React.FC<WalletRechargePackageFormProps> = ({
           const resp = await getWalletRechargePackage({ id } as any)
           const data = resp.data as Record<string, any>
 
-          // 💡 将后端的“分”转换为前端表单展示的“元”
           if (data.payPrice) data.payPrice = data.payPrice / 100
           if (data.bonusPrice) data.bonusPrice = data.bonusPrice / 100
 
           return data
         }
-        return { status: 0 } // 默认状态为开启
+        return { status: 0 }
       }}
       onFinish={async (values) => {
         try {
-          // 💡 将前端表单收集的“元”转换为后端存储所需的“分”
           const submitData = { ...values }
           if (submitData.payPrice !== undefined)
             submitData.payPrice = Math.round(submitData.payPrice * 100)
@@ -67,48 +68,44 @@ const WalletRechargePackageForm: React.FC<WalletRechargePackageFormProps> = ({
 
           if (isUpdate) {
             await updateWalletRechargePackage({ id, ...submitData } as any)
-            message.success('更新成功')
+            message.success(textConst.msg.updateSuccess)
           } else {
             await createWalletRechargePackage(submitData as any)
-            message.success('新增成功')
+            message.success(textConst.msg.createSuccess)
           }
           onSuccess()
           return true
         } catch (e) {
-          message.error('操作失败')
+          message.error(textConst.error.operationFail)
           return false
         }
       }}
     >
       <ProFormText
         name="name"
-        label="套餐名"
-        rules={[{ required: true, message: '请输入套餐名' }]}
-        placeholder="请输入套餐名"
+        label="套餐名称"
+        rules={[{ required: true, message: '套餐名称是必填项！' }]}
+        placeholder="请输入套餐名称"
       />
-
       <ProFormDigit
         name="payPrice"
-        label="支付金额(元)"
-        rules={[{ required: true, message: '请输入支付金额' }]}
-        fieldProps={{ precision: 2, min: 0 }}
+        label="支付金额"
+        placeholder="请输入支付金额"
+        rules={[{ required: true, message: '支付金额是必填项！' }]}
+        fieldProps={{ precision: 2, min: 0, addonAfter: '元' }}
       />
-
       <ProFormDigit
         name="bonusPrice"
-        label="赠送金额(元)"
-        rules={[{ required: true, message: '请输入赠送金额' }]}
-        fieldProps={{ precision: 2, min: 0 }}
+        label="赠送金额"
+        placeholder="请输入赠送金额"
+        rules={[{ required: true, message: '赠送金额是必填项！' }]}
+        fieldProps={{ precision: 2, min: 0, addonAfter: '元' }}
       />
-
       <ProFormRadio.Group
         name="status"
-        label="开启状态"
-        rules={[{ required: true, message: '请选择开启状态' }]}
-        options={[
-          { label: '开启', value: 0 },
-          { label: '关闭', value: 1 }
-        ]}
+        label="套餐状态"
+        rules={[{ required: true, message: '请选择套餐状态' }]}
+        options={COMMON_STATUS_OPTIONS}
       />
     </ModalForm>
   )
