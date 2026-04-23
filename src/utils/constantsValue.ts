@@ -30,7 +30,8 @@ import {
   PayOrderStatusEnum,
   BrokerageRecordStatusEnum,
   BrokerageWithdrawStatusEnum,
-  PayRefundStatusEnum
+  PayRefundStatusEnum,
+  PayTransferStatusEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -719,3 +720,20 @@ export const PAY_REFUND_STATUS: SelectValueItem = Object.values(PayRefundStatusE
   },
   {} as SelectValueItem
 )
+
+export const PAY_TRANSFER_STATUS: SelectValueItem = Object.values(PayTransferStatusEnum).reduce(
+  (acc, item) => {
+    acc[item.status] = {
+      text: item.name,
+      status: item.status === 0 || 5 ? 'Processing' : item.status === 10 ? 'Success' : 'Error'
+    }
+    return acc
+  },
+  {} as SelectValueItem
+)
+
+export const PAY_TRANSFER_TYPE: SelectValueItem = {
+  1: { text: '支付宝余额' },
+  2: { text: '微信余额' },
+  3: { text: '银行卡' }
+}

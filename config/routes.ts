@@ -278,6 +278,12 @@ export default [
         name: '退款订单',
         icon: 'shoppingCart',
         component: './pay/refund'
+      },
+      {
+        path: '/pay/transfer',
+        name: '转账订单',
+        icon: 'shoppingCart',
+        component: './pay/transfer'
       }
     ]
   },
