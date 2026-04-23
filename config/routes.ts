@@ -284,6 +284,19 @@ export default [
         name: '转账订单',
         icon: 'shoppingCart',
         component: './pay/transfer'
+      },
+      {
+        path: '/pay/wallet',
+        name: '钱包管理',
+        icon: 'shoppingCart',
+        routes: [
+          {
+            path: '/pay/wallet/balance',
+            name: '钱包余额',
+            icon: 'shoppingCart',
+            component: './pay/wallet/balance'
+          }
+        ]
       }
     ]
   },
