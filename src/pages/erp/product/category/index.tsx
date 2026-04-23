@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Button, message } from 'antd'
+import { Button } from 'antd'
 import {
   PlusOutlined,
   DownloadOutlined,
@@ -7,17 +7,23 @@ import {
   CaretDownOutlined,
   CaretRightOutlined
 } from '@ant-design/icons'
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
+import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
 import ProductCategoryForm from './ProductCategoryForm'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/Delete'
-import { getProductCategoryList, deleteProductCategory } from '@/api/erp/product/category'
+import {
+  getProductCategoryList,
+  deleteProductCategory,
+  exportProductCategoryExcel
+} from '@/api/erp/product/category'
 import { COMMON_STATUS } from '@/utils/constantsValue'
 import { handleTreeData } from '@/utils/tree'
+import { handleExport } from '@/components/Export'
 
 const ProductCategoryManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [formVisible, setFormVisible] = useState<boolean>(false)
   const [currentId, setCurrentId] = useState<number | undefined>(undefined)
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.Key[]>([])
@@ -37,13 +43,14 @@ const ProductCategoryManagement: React.FC = () => {
     }
   }
 
-  const handleExportBtnClick = async () => {
-    try {
-      message.loading({ content: '正在导出...', key: 'export' })
-      message.success({ content: '导出成功', key: 'export' })
-    } catch (e) {
-      message.error({ content: '导出失败', key: 'export' })
-    }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportProductCategoryExcel,
+      exportParams: { ...formValues },
+      fileName: '产品分类列表.xlsx'
+    })
   }
 
   const columns: ProColumns<any>[] = [

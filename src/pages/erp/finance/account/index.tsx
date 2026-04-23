@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Button, message, Switch } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
+import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
 import AccountForm from './AccountForm'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
@@ -9,22 +9,26 @@ import { handleDelete } from '@/components/Delete'
 import {
   getAccountPage,
   deleteAccount,
-  updateAccountDefaultStatus
+  updateAccountDefaultStatus,
+  exportAccountExcel
 } from '@/api/erp/finance/account'
 import { COMMON_STATUS } from '@/utils/constantsValue'
+import { handleExport } from '@/components/Export'
 
 const AccountManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [formVisible, setFormVisible] = useState<boolean>(false)
   const [currentId, setCurrentId] = useState<number | undefined>(undefined)
 
-  const handleExportBtnClick = async () => {
-    try {
-      message.loading({ content: '正在导出...', key: 'export' })
-      message.success({ content: '导出成功', key: 'export' })
-    } catch (e) {
-      message.error({ content: '导出失败', key: 'export' })
-    }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportAccountExcel,
+      exportParams: { ...formValues },
+      fileName: '结算账户列表.xlsx'
+    })
   }
 
   const handleDefaultStatusChange = async (checked: boolean, record: any) => {

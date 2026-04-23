@@ -1,20 +1,28 @@
 import React, { useRef, useState } from 'react'
-import { Button, message } from 'antd'
+import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons'
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
+import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
 import PurchaseInForm from './PurchaseInForm'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete, handleBatchDelete } from '@/components/Delete'
-import { getPurchaseInPage, deletePurchaseIn } from '@/api/erp/purchase/in'
+import { getPurchaseInPage, deletePurchaseIn, exportPurchaseInExcel } from '@/api/erp/purchase/in'
+import { handleExport } from '@/components/Export'
 
 const PurchaseInFormManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [formVisible, setFormVisible] = useState<boolean>(false)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   const handleExportBtnClick = () => {
-    message.info('导出成功')
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportPurchaseInExcel,
+      exportParams: { ...formValues },
+      fileName: '采购入库列表.xlsx'
+    })
   }
 
   const columns: ProColumns<API.ErpPurchaseInRespVO>[] = [
