@@ -41,6 +41,7 @@ export async function exportCustomerExcel(
       pageReqVO: undefined,
       ...params['pageVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -94,4 +95,3 @@ export async function updateCustomer(
     ...(options || {})
   })
 }
-

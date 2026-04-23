@@ -12,6 +12,7 @@ export async function exportOperateLog(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }

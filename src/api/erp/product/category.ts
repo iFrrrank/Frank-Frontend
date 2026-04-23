@@ -41,6 +41,7 @@ export async function exportProductCategoryExcel(
       listReqVO: undefined,
       ...params['listReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -100,4 +101,3 @@ export async function updateProductCategory(
     ...(options || {})
   })
 }
-

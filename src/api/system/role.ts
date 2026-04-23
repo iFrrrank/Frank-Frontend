@@ -35,6 +35,7 @@ export async function exportUsingGet(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }

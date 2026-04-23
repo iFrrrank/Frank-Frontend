@@ -12,6 +12,7 @@ export async function exportApiErrorLogExcel(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }

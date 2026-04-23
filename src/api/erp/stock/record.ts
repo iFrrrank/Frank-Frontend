@@ -12,6 +12,7 @@ export async function exportStockRecordExcel(
       pageReqVO: undefined,
       ...params['pageReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -45,4 +46,3 @@ export async function getStockRecordPage(
     ...(options || {})
   })
 }
-

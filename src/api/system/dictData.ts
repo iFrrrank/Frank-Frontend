@@ -38,6 +38,7 @@ export async function export3(params: API.export3Params, options?: { [key: strin
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }

@@ -41,6 +41,7 @@ export async function exportSupplierExcel(
       pageReqVO: undefined,
       ...params['pageReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -94,4 +95,3 @@ export async function updateSupplier(
     ...(options || {})
   })
 }
-

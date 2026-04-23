@@ -56,6 +56,7 @@ export async function exportCustomerExcel(
       pageVO: undefined,
       ...params['pageVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }

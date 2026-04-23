@@ -12,6 +12,7 @@ export async function exportOrderExcel(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -70,4 +71,3 @@ export async function submitPayOrder(
     ...(options || {})
   })
 }
-

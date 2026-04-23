@@ -41,6 +41,7 @@ export async function exportReceivablePlanExcel(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }

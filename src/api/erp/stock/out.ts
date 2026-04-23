@@ -41,6 +41,7 @@ export async function exportStockOutExcel(
       pageReqVO: undefined,
       ...params['pageReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -100,4 +101,3 @@ export async function updateStockOutStatus(
     ...(options || {})
   })
 }
-

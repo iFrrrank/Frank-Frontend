@@ -41,6 +41,7 @@ export async function exportFinanceReceiptExcel(
       pageReqVO: undefined,
       ...params['pageReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -103,4 +104,3 @@ export async function updateFinanceReceiptStatus(
     ...(options || {})
   })
 }
-

@@ -12,6 +12,7 @@ export async function exportLoginLog(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }

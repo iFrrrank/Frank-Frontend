@@ -41,6 +41,7 @@ export async function exportSmsTemplateExcel(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
