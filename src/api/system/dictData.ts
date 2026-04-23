@@ -30,7 +30,10 @@ export async function deleteDictData(
 }
 
 // 导出字典数据 GET /system/dict-data/export
-export async function export3(params: API.export3Params, options?: { [key: string]: any }) {
+export async function exportDictDataExcel(
+  params: API.export3Params,
+  options?: { [key: string]: any }
+) {
   return request<any>('/system/dict-data/export', {
     method: 'GET',
     params: {

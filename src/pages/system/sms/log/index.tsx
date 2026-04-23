@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, message, Modal, Tag, Typography } from 'antd'
-import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
+import { Button, Tag, Typography } from 'antd'
+import { DownloadOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { exportSmsLogExcel, getSmsLogPage } from '@/api/system/smsLog'
@@ -14,7 +14,6 @@ const SmsLogConfig: React.FC = () => {
 
   const [channelOptions, setChannelOptions] = useState<{ label: string; value: number }[]>([])
 
-  // ===== 加载短信渠道下拉列表 =====
   useEffect(() => {
     const fetchChannels = async () => {
       try {
@@ -33,6 +32,16 @@ const SmsLogConfig: React.FC = () => {
     fetchChannels()
   }, [])
 
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportSmsLogExcel,
+      exportParams: { ...formValues },
+      fileName: '短信日志.xlsx'
+    })
+  }
+
   // 状态常量映射
   const sendStatusEnum = {
     0: { text: '初始化', status: 'Default' },
@@ -47,7 +56,6 @@ const SmsLogConfig: React.FC = () => {
     20: { text: '失败', status: 'Error' }
   }
 
-  // ===== 数据列定义 =====
   const columns: ProColumns<API.SystemSmsLogRespVO>[] = [
     {
       title: 'ID',
@@ -166,23 +174,6 @@ const SmsLogConfig: React.FC = () => {
     }
   ]
 
-  const handleExportClick = () => {
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-
-    if (formValues.sendTime && formValues.sendTime.length === 2) {
-      formValues.beginSendTime = formValues.sendTime[0] + ' 00:00:00'
-      formValues.endSendTime = formValues.sendTime[1] + ' 23:59:59'
-    }
-    if (formValues.receiveTime && formValues.receiveTime.length === 2) {
-      formValues.beginReceiveTime = formValues.receiveTime[0] + ' 00:00:00'
-      formValues.endReceiveTime = formValues.receiveTime[1] + ' 23:59:59'
-    }
-    delete formValues.sendTime
-    delete formValues.receiveTime
-
-    handleExport(exportSmsLogExcel, formValues, '短信日志数据.xlsx', '确认导出所有短信日志数据项?')
-  }
-
   return (
     <>
       <ProTable<API.SystemSmsLogRespVO>
@@ -263,7 +254,7 @@ const SmsLogConfig: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>

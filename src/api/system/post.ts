@@ -24,7 +24,7 @@ export async function deletePost(params: API.deletePostParams, options?: { [key:
 }
 
 // 导出岗位 GET /system/post/export
-export async function export1(params: API.export1Params, options?: { [key: string]: any }) {
+export async function exportPostExcel(params: API.export1Params, options?: { [key: string]: any }) {
   return request<any>('/system/post/export', {
     method: 'GET',
     params: {

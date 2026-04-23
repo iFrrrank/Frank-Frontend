@@ -24,7 +24,7 @@ export async function deleteRole(params: API.deleteRoleParams, options?: { [key:
 }
 
 // 导出角色 GET /system/role/export-excel
-export async function exportUsingGet(
+export async function exportRoleExcel(
   params: API.exportUsingGETParams,
   options?: { [key: string]: any }
 ) {

@@ -30,7 +30,10 @@ export async function deleteDictType(
 }
 
 // 导出字典类型 GET /system/dict-type/export
-export async function export2(params: API.export2Params, options?: { [key: string]: any }) {
+export async function exportDictTypeExcel(
+  params: API.export2Params,
+  options?: { [key: string]: any }
+) {
   return request<any>('/system/dict-type/export', {
     method: 'GET',
     params: {

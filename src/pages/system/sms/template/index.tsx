@@ -1,11 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, message, Modal, Tag, Typography } from 'antd'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { Button, Tag, Typography } from 'antd'
+import { DeleteOutlined, DownloadOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import {
@@ -21,7 +16,6 @@ import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { handleExport } from '@/components/Export'
-
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const SmsTemplateConfig: React.FC = () => {
@@ -30,6 +24,13 @@ const SmsTemplateConfig: React.FC = () => {
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [channelOptions, setChannelOptions] = useState<{ label: string; value: number }[]>([])
+
+  // 短信类型枚举
+  const smsTypeEnum = {
+    1: { text: '验证码', color: 'blue' },
+    2: { text: '通知', color: 'green' },
+    3: { text: '营销', color: 'orange' }
+  }
 
   // ===== 加载短信渠道下拉列表 =====
   useEffect(() => {
@@ -50,11 +51,14 @@ const SmsTemplateConfig: React.FC = () => {
     fetchChannels()
   }, [])
 
-  // 短信类型枚举
-  const smsTypeEnum = {
-    1: { text: '验证码', color: 'blue' },
-    2: { text: '通知', color: 'green' },
-    3: { text: '营销', color: 'orange' }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportSmsTemplateExcel,
+      exportParams: { ...formValues },
+      fileName: '短信模板.xlsx'
+    })
   }
 
   // ===== 数据列定义 =====
@@ -232,21 +236,6 @@ const SmsTemplateConfig: React.FC = () => {
     }
   ]
 
-  const handleExportClick = () => {
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-    if (formValues.createTime && formValues.createTime.length === 2) {
-      formValues.beginCreateTime = formValues.createTime[0] + ' 00:00:00'
-      formValues.endCreateTime = formValues.createTime[1] + ' 23:59:59'
-      delete formValues.createTime
-    }
-    handleExport(
-      exportSmsTemplateExcel,
-      formValues,
-      '短信模板数据.xlsx',
-      '确认导出所有短信模板数据项?'
-    )
-  }
-
   return (
     <>
       <ProTable<API.SystemSmsTemplateRespVO>
@@ -340,7 +329,7 @@ const SmsTemplateConfig: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>
