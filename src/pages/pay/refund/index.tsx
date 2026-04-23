@@ -13,13 +13,13 @@ const PayRefundManagement: React.FC = () => {
   const formRef = useRef<ProFormInstance>(undefined)
 
   const handleExportBtnClick = () => {
+    // 获取表单当前的值
     const formValues = formRef.current?.getFieldsValue?.() || {}
-    handleExport(
-      exportRefundExcel,
-      { exportReqVO: { ...formValues } },
-      '退款订单数据.xlsx',
-      textConst.msg.exportMsg
-    )
+    handleExport({
+      exportApi: exportRefundExcel,
+      exportParams: { ...formValues },
+      fileName: '退款订单.xlsx'
+    })
   }
 
   const columns: ProColumns<API.PayRefundPageItemRespVO>[] = [
