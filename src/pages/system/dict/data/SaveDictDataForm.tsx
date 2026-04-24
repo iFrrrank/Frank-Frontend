@@ -46,13 +46,13 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
       initialValues={
         editingDictData?.id
           ? {
-            ...editingDictData
-          }
+              ...editingDictData
+            }
           : {
-            dictType: editingDictData?.dictType || '',
-            status: 0,
-            sort: 0
-          }
+              dictType: editingDictData?.dictType || '',
+              status: 0,
+              sort: 0
+            }
       }
       layout="horizontal"
       labelCol={{ span: 5 }}
@@ -60,7 +60,9 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
       colon={false}
       modalProps={{
         destroyOnHidden: true,
-        bodyStyle: { paddingBottom: 0 }
+        styles: {
+          body: { paddingBottom: 0 }
+        }
       }}
       onFinish={async (values) => {
         try {
@@ -79,7 +81,7 @@ const SaveDictDataForm: React.FC<SaveDictDataModalProps> = ({ onSuccess }) => {
           } else {
             message.error(
               resp.msg ||
-              (editingDictData?.id ? textConst.msg.updateError : textConst.msg.createError)
+                (editingDictData?.id ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }

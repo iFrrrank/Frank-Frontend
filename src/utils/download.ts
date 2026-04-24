@@ -1,21 +1,26 @@
 const downloadBase = (data: Blob, fileName: string, mineType: string) => {
   // 创建 blob
-  const blob = new Blob([data], { type: mineType })
-  // 创建 href 超链接，点击进行下载
-  window.URL = window.URL || window.webkitURL
-  const href = URL.createObjectURL(blob)
-  const downA = document.createElement('a')
-  downA.href = href
-  downA.download = fileName
-  downA.click()
+  const blob = new Blob([data], {
+    type: mineType
+  })
+  // 创建超链接，点击进行下载
+  const url = window.URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = fileName
+  link.click()
   // 销毁超连接
-  window.URL.revokeObjectURL(href)
+  window.URL.revokeObjectURL(url)
 }
 
 const download = {
   // 下载 Excel 方法
   excel: (data: Blob, fileName: string) => {
-    downloadBase(data, fileName, 'application/vnd.ms-excel')
+    downloadBase(
+      data,
+      fileName,
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
   },
   // 下载 Word 方法
   word: (data: Blob, fileName: string) => {

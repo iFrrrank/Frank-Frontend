@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Button, Drawer, message, Modal, Space, Tag, Typography } from 'antd'
+import { Button, Drawer, message, Modal, Tag, Typography } from 'antd'
 import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
@@ -40,6 +40,16 @@ const ApiErrorLogPage: React.FC = () => {
           message.error(textConst.error.operationFail)
         }
       }
+    })
+  }
+
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportApiErrorLogExcel,
+      exportParams: { ...formValues },
+      fileName: '错误日志.xlsx'
     })
   }
 
@@ -197,21 +207,6 @@ const ApiErrorLogPage: React.FC = () => {
     }
   ]
 
-  const handleExportClick = () => {
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-    if (formValues.exceptionTime && formValues.exceptionTime.length === 2) {
-      formValues.beginTimeStr = formValues.exceptionTime[0] + ' 00:00:00'
-      formValues.endTimeStr = formValues.exceptionTime[1] + ' 23:59:59'
-    }
-    delete formValues.exceptionTime
-    handleExport(
-      exportApiErrorLogExcel,
-      formValues,
-      'API错误日志.xlsx',
-      '确认导出所有API错误日志？'
-    )
-  }
-
   return (
     <>
       <ProTable<API.InfraApiErrorLogRespVO>
@@ -278,7 +273,7 @@ const ApiErrorLogPage: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>

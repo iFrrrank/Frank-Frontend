@@ -12,6 +12,7 @@ export async function exportRefundExcel(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -42,4 +43,3 @@ export async function getRefundPage(
     ...(options || {})
   })
 }
-

@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
-import { Button, Drawer, message, Modal, Space, Typography, Descriptions } from 'antd'
-import { DownloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
+import { Button, Drawer, message, Typography, Descriptions } from 'antd'
+import { DownloadOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import { exportLoginLog, getLoginLogPage } from '@/api/system/loginLog'
+import { exportLoginLogExcel, getLoginLogPage } from '@/api/system/loginLog'
 import { textConst } from '@/locales/zh-CN'
 import { handleExport } from '@/components/Export'
 
@@ -22,6 +22,16 @@ const LoginLogPage: React.FC = () => {
   const resultMap: Record<number, string> = {
     0: '成功',
     1: '失败'
+  }
+
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportLoginLogExcel,
+      exportParams: { ...formValues },
+      fileName: '登录日志.xlsx'
+    })
   }
 
   const columns: ProColumns<API.SystemLoginLogRespVO>[] = [
@@ -131,16 +141,6 @@ const LoginLogPage: React.FC = () => {
     }
   ]
 
-  const handleExportClick = () => {
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-    if (formValues.createTime && formValues.createTime.length === 2) {
-      formValues.beginCreateTime = formValues.createTime[0] + ' 00:00:00'
-      formValues.endCreateTime = formValues.createTime[1] + ' 23:59:59'
-    }
-    delete formValues.createTime
-    handleExport(exportLoginLog, formValues, '登录日志数据.xlsx', '确认导出所有登录日志数据项?')
-  }
-
   return (
     <>
       <ProTable<API.SystemLoginLogRespVO>
@@ -207,7 +207,7 @@ const LoginLogPage: React.FC = () => {
             icon={<DownloadOutlined />}
             color="volcano"
             variant="outlined"
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>

@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 赋予角色数据权限 POST /system/permission/assign-role-data-scope */
+// 赋予角色数据权限 POST /system/permission/assign-role-data-scope
 export async function assignRoleDataScope(
   body: API.SystemPermissionAssignRoleDataScopeReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function assignRoleDataScope(
   })
 }
 
-/** 赋予角色菜单 POST /system/permission/assign-role-menu */
+// 赋予角色菜单 POST /system/permission/assign-role-menu
 export async function assignRoleMenu(
   body: API.SystemPermissionAssignRoleMenuReqVO,
   options?: { [key: string]: any }
@@ -30,7 +30,7 @@ export async function assignRoleMenu(
   })
 }
 
-/** 赋予用户角色 POST /system/permission/assign-user-role */
+// 赋予用户角色 POST /system/permission/assign-user-role
 export async function assignUserRole(
   body: API.SystemPermissionAssignUserRoleReqVO,
   options?: { [key: string]: any }
@@ -45,7 +45,7 @@ export async function assignUserRole(
   })
 }
 
-/** 获取角色拥有的菜单编号 GET /system/permission/list-role-menus */
+// 获取角色拥有的菜单编号 GET /system/permission/list-role-menus
 export async function getRoleMenuList(
   params: API.getRoleMenuListParams,
   options?: { [key: string]: any }
@@ -59,7 +59,7 @@ export async function getRoleMenuList(
   })
 }
 
-/** 获取管理员拥有的角色 Id 列表 GET /system/permission/list-user-roles */
+// 获取管理员拥有的角色 Id 列表 GET /system/permission/list-user-roles
 export async function listAdminRoles(
   params: API.listAdminRolesParams,
   options?: { [key: string]: any }

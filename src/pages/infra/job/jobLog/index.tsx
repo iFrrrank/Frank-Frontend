@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, message, Space } from 'antd'
+import { Button, message } from 'antd'
 import {
   type ActionType,
   type ProColumns,
@@ -12,11 +12,7 @@ import { textConst } from '@/locales/zh-CN'
 import { DownloadOutlined } from '@ant-design/icons'
 import JobLogDetail from '@/pages/infra/job/jobLog/JobLogDetail'
 import { handleExport } from '@/components/Export'
-
-export const JOB_LOG_STATUS_OPTIONS = [
-  { label: '成功', value: 0 },
-  { label: '失败', value: 1 }
-]
+import { JOB_LOG_STATUS } from '@/utils/constantsValue'
 
 const JobLogPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -25,7 +21,6 @@ const JobLogPage: React.FC = () => {
 
   const [detailVisible, setDetailVisible] = useState(false)
   const [detailId, setDetailId] = useState<number | undefined>(undefined)
-
   const [jobId, setJobId] = useState<number | undefined>(undefined)
 
   useEffect(() => {
@@ -41,14 +36,14 @@ const JobLogPage: React.FC = () => {
     setDetailVisible(true)
   }
 
-  const handleExportClick = () => {
-    const formVals = formRef.current?.getFieldsValue() || {}
-    handleExport(
-      exportJobLog,
-      { ...formVals, pageNo: '1', pageSize: '100' },
-      '定时任务日志.xlsx',
-      '确定要导出定时任务日志吗？'
-    )
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportJobLog,
+      exportParams: { ...formValues },
+      fileName: '定时任务日志.xlsx'
+    })
   }
 
   const columns: ProColumns<JobLogVO>[] = [
@@ -114,13 +109,7 @@ const JobLogPage: React.FC = () => {
       dataIndex: 'status',
       align: 'center',
       valueType: 'select',
-      valueEnum: JOB_LOG_STATUS_OPTIONS.reduce(
-        (acc, cur) => {
-          acc[cur.value] = { text: cur.label, status: cur.value === 0 ? 'Success' : 'Error' }
-          return acc
-        },
-        {} as Record<string, any>
-      ),
+      valueEnum: JOB_LOG_STATUS,
       fieldProps: { placeholder: '请输入任务状态' }
     },
     {
@@ -182,7 +171,7 @@ const JobLogPage: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>

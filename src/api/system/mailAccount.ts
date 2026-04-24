@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建邮箱账号 POST /system/mail-account/create */
+// 创建邮箱账号 POST /system/mail-account/create
 export async function createMailAccount(
   body: API.SystemMailAccountSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createMailAccount(
   })
 }
 
-/** 删除邮箱账号 DELETE /system/mail-account/delete */
+// 删除邮箱账号 DELETE /system/mail-account/delete
 export async function deleteMailAccount(
   params: API.deleteMailAccountParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteMailAccount(
   })
 }
 
-/** 获取邮箱账号 GET /system/mail-account/get */
+// 获取邮箱账号 GET /system/mail-account/get
 export async function getMailAccount(
   params: API.getMailAccountParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function getMailAccount(
   })
 }
 
-/** 获取邮箱账号精简列表 GET /system/mail-account/list-all-simple */
+// 获取邮箱账号精简列表 GET /system/mail-account/list-all-simple
 export async function getSimpleMailAccountList(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemMailAccountSimpleRespVO>(
     '/system/mail-account/list-all-simple',
@@ -54,7 +54,7 @@ export async function getSimpleMailAccountList(options?: { [key: string]: any })
   )
 }
 
-/** 获取邮箱账号分页列表 GET /system/mail-account/page */
+// 获取邮箱账号分页列表 GET /system/mail-account/page
 export async function getMailAccountPage(
   params: API.getMailAccountPageParams,
   options?: { [key: string]: any }
@@ -70,7 +70,7 @@ export async function getMailAccountPage(
   })
 }
 
-/** 获取邮箱账号精简列表 GET /system/mail-account/simple-list */
+// 获取邮箱账号精简列表 GET /system/mail-account/simple-list
 export async function getSimpleMailAccountList1(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemMailAccountSimpleRespVO>(
     '/system/mail-account/simple-list',
@@ -81,7 +81,7 @@ export async function getSimpleMailAccountList1(options?: { [key: string]: any }
   )
 }
 
-/** 修改邮箱账号 PUT /system/mail-account/update */
+// 修改邮箱账号 PUT /system/mail-account/update
 export async function updateMailAccount(
   body: API.SystemMailAccountSaveReqVO,
   options?: { [key: string]: any }

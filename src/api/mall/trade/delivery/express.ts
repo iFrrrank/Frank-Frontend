@@ -41,6 +41,7 @@ export async function exportDeliveryExpressExcel(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -100,4 +101,3 @@ export async function updateDeliveryExpress(
     ...(options || {})
   })
 }
-

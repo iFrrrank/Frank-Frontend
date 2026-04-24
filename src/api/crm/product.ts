@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建产品 POST /crm/product/create */
+// 创建产品 POST /crm/product/create
 export async function createProduct(
   body: API.CrmProductSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createProduct(
   })
 }
 
-/** 删除产品 DELETE /crm/product/delete */
+// 删除产品 DELETE /crm/product/delete
 export async function deleteProduct(
   params: API.deleteProductParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteProduct(
   })
 }
 
-/** 导出产品 Excel GET /crm/product/export-excel */
+// 导出产品 Excel GET /crm/product/export-excel
 export async function exportProductExcel(
   params: API.exportProductExcelParams,
   options?: { [key: string]: any }
@@ -41,11 +41,12 @@ export async function exportProductExcel(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
 
-/** 获取产品 GET /crm/product/get */
+// 获取产品 GET /crm/product/get
 export async function getProduct(params: API.getProductParams, options?: { [key: string]: any }) {
   return request<API.CommonResultCrmProductRespVO>('/crm/product/get', {
     method: 'GET',
@@ -56,7 +57,7 @@ export async function getProduct(params: API.getProductParams, options?: { [key:
   })
 }
 
-/** 获取产品分页列表 GET /crm/product/page */
+// 获取产品分页列表 GET /crm/product/page
 export async function getProductPage(
   params: API.getProductPageParams,
   options?: { [key: string]: any }
@@ -72,7 +73,7 @@ export async function getProductPage(
   })
 }
 
-/** 获取产品精简列表 只包含被开启的产品，主要用于前端的下拉选项 GET /crm/product/simple-list */
+// 获取产品精简列表 只包含被开启的产品，主要用于前端的下拉选项 GET /crm/product/simple-list
 export async function getProductSimpleList(options?: { [key: string]: any }) {
   return request<API.CommonResultListCrmProductRespVO>('/crm/product/simple-list', {
     method: 'GET',
@@ -80,7 +81,7 @@ export async function getProductSimpleList(options?: { [key: string]: any }) {
   })
 }
 
-/** 更新产品 PUT /crm/product/update */
+// 更新产品 PUT /crm/product/update
 export async function updateProduct(
   body: API.CrmProductSaveReqVO,
   options?: { [key: string]: any }

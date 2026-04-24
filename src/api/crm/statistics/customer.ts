@@ -1,6 +1,6 @@
-import {request} from '@umijs/max'
+import { request } from '@umijs/max'
 
-/** 获取客户的首次合同、回款信息列表 用于【客户转化率】页面 GET /crm/statistics-customer/get-contract-summary */
+// 获取客户的首次合同、回款信息列表 用于【客户转化率】页面 GET /crm/statistics-customer/get-contract-summary
 export async function getContractSummary(
   params: API.getContractSummaryParams,
   options?: { [key: string]: any }
@@ -19,7 +19,7 @@ export async function getContractSummary(
   )
 }
 
-/** 获取客户成交周期（按地区） GET /crm/statistics-customer/get-customer-deal-cycle-by-area */
+// 获取客户成交周期（按地区） GET /crm/statistics-customer/get-customer-deal-cycle-by-area
 export async function getCustomerDealCycleByArea(
   params: API.getCustomerDealCycleByAreaParams,
   options?: { [key: string]: any }
@@ -38,7 +38,7 @@ export async function getCustomerDealCycleByArea(
   )
 }
 
-/** 获取客户成交周期（按日期） GET /crm/statistics-customer/get-customer-deal-cycle-by-date */
+// 获取客户成交周期（按日期） GET /crm/statistics-customer/get-customer-deal-cycle-by-date
 export async function getCustomerDealCycleByDate(
   params: API.getCustomerDealCycleByDateParams,
   options?: { [key: string]: any }
@@ -57,7 +57,7 @@ export async function getCustomerDealCycleByDate(
   )
 }
 
-/** 获取客户成交周期（按产品） GET /crm/statistics-customer/get-customer-deal-cycle-by-product */
+// 获取客户成交周期（按产品） GET /crm/statistics-customer/get-customer-deal-cycle-by-product
 export async function getCustomerDealCycleByProduct(
   params: API.getCustomerDealCycleByProductParams,
   options?: { [key: string]: any }
@@ -76,7 +76,7 @@ export async function getCustomerDealCycleByProduct(
   )
 }
 
-/** 获取客户成交周期（按用户） GET /crm/statistics-customer/get-customer-deal-cycle-by-user */
+// 获取客户成交周期（按用户） GET /crm/statistics-customer/get-customer-deal-cycle-by-user
 export async function getCustomerDealCycleByUser(
   params: API.getCustomerDealCycleByUserParams,
   options?: { [key: string]: any }
@@ -95,7 +95,7 @@ export async function getCustomerDealCycleByUser(
   )
 }
 
-/** 获取客户总量分析（按日期） GET /crm/statistics-customer/get-customer-summary-by-date */
+// 获取客户总量分析（按日期） GET /crm/statistics-customer/get-customer-summary-by-date
 export async function getCustomerSummaryByDate(
   params: API.getCustomerSummaryByDateParams,
   options?: { [key: string]: any }
@@ -114,7 +114,7 @@ export async function getCustomerSummaryByDate(
   )
 }
 
-/** 获取客户总量分析（按用户） GET /crm/statistics-customer/get-customer-summary-by-user */
+// 获取客户总量分析（按用户） GET /crm/statistics-customer/get-customer-summary-by-user
 export async function getCustomerSummaryByUser(
   params: API.getCustomerSummaryByUserParams,
   options?: { [key: string]: any }
@@ -133,7 +133,7 @@ export async function getCustomerSummaryByUser(
   )
 }
 
-/** 获取客户跟进次数分析（按日期） GET /crm/statistics-customer/get-follow-up-summary-by-date */
+// 获取客户跟进次数分析（按日期） GET /crm/statistics-customer/get-follow-up-summary-by-date
 export async function getFollowupSummaryByDate(
   params: API.getFollowupSummaryByDateParams,
   options?: { [key: string]: any }
@@ -152,7 +152,7 @@ export async function getFollowupSummaryByDate(
   )
 }
 
-/** 获取客户跟进次数分析（按类型） GET /crm/statistics-customer/get-follow-up-summary-by-type */
+// 获取客户跟进次数分析（按类型） GET /crm/statistics-customer/get-follow-up-summary-by-type
 export async function getFollowUpSummaryByType(
   params: API.getFollowUpSummaryByTypeParams,
   options?: { [key: string]: any }
@@ -171,7 +171,7 @@ export async function getFollowUpSummaryByType(
   )
 }
 
-/** 获取客户跟进次数分析（按用户） GET /crm/statistics-customer/get-follow-up-summary-by-user */
+// 获取客户跟进次数分析（按用户） GET /crm/statistics-customer/get-follow-up-summary-by-user
 export async function getFollowUpSummaryByUser(
   params: API.getFollowUpSummaryByUserParams,
   options?: { [key: string]: any }
@@ -190,7 +190,7 @@ export async function getFollowUpSummaryByUser(
   )
 }
 
-/** 获取公海客户分析（按日期） GET /crm/statistics-customer/get-pool-summary-by-date */
+// 获取公海客户分析（按日期） GET /crm/statistics-customer/get-pool-summary-by-date
 export async function getPoolSummaryByDate(
   params: API.getPoolSummaryByDateParams,
   options?: { [key: string]: any }
@@ -209,7 +209,7 @@ export async function getPoolSummaryByDate(
   )
 }
 
-/** 获取公海客户分析（按用户） GET /crm/statistics-customer/get-pool-summary-by-user */
+// 获取公海客户分析（按用户） GET /crm/statistics-customer/get-pool-summary-by-user
 export async function getPoolSummaryByUser(
   params: API.getPoolSummaryByUserParams,
   options?: { [key: string]: any }

@@ -5,28 +5,19 @@ import { useParams } from '@umijs/max'
 import { getSimpleDictTypeList } from '@/api/system/dictType'
 import { textConst } from '@/locales/zh-CN'
 import SaveDictDataForm, { handleCreateDictData, handleEditDictData } from './SaveDictDataForm'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
-import { deleteDictData, export3, getDictTypePage } from '@/api/system/dictData'
-import { Button, message, Modal } from 'antd'
+import { DeleteOutlined, DownloadOutlined, PlusOutlined } from '@ant-design/icons'
+import { deleteDictData, exportDictDataExcel, getDictTypePage } from '@/api/system/dictData'
+import { Button } from 'antd'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { handleExport } from '@/components/Export'
-
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DictDataList: React.FC = () => {
   const params = useParams<{ dictType: string }>()
-  const defaultDictType = params.dictType || ''
-
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
-
+  const defaultDictType = params.dictType || ''
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
-
   const [dictTypeOptions, setDictTypeOptions] = useState<{ label: string; value: string }[]>([])
 
   // ===== 加载字典类型下拉列表 =====
@@ -48,8 +39,18 @@ const DictDataList: React.FC = () => {
     fetchDictTypes()
   }, [])
 
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportDictDataExcel,
+      exportParams: { ...formValues },
+      fileName: '字典数据列表.xlsx'
+    })
+  }
+
   // ===== 数据列定义 =====
-  const columns: ProColumns<any>[] = [
+  const columns: ProColumns<API.SystemDictDataRespVO>[] = [
     {
       title: '字典名称',
       dataIndex: 'dictType',
@@ -160,18 +161,9 @@ const DictDataList: React.FC = () => {
     }
   ]
 
-  const handleExportClick = () => {
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-    // 填补隐藏/默认的 dictType
-    if (!formValues.dictType && defaultDictType) {
-      formValues.dictType = defaultDictType
-    }
-    handleExport(export3, formValues, '字典数据.xlsx', '确认导出所有字典数据项？')
-  }
-
   return (
     <>
-      <ProTable<any>
+      <ProTable<API.SystemDictDataRespVO>
         headerTitle="字典数据管理"
         columns={columns}
         scroll={{ x: 'max-content' }}
@@ -229,7 +221,7 @@ const DictDataList: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>,

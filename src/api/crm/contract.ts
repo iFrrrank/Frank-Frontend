@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 获取待审核合同数量 GET /crm/contract/audit-count */
+// 获取待审核合同数量 GET /crm/contract/audit-count
 export async function getAuditContractCount(options?: { [key: string]: any }) {
   return request<API.CommonResultLong>('/crm/contract/audit-count', {
     method: 'GET',
@@ -8,7 +8,7 @@ export async function getAuditContractCount(options?: { [key: string]: any }) {
   })
 }
 
-/** 创建合同 POST /crm/contract/create */
+// 创建合同 POST /crm/contract/create
 export async function createContract(
   body: API.CrmContractSaveReqVO,
   options?: { [key: string]: any }
@@ -23,7 +23,7 @@ export async function createContract(
   })
 }
 
-/** 删除合同 DELETE /crm/contract/delete */
+// 删除合同 DELETE /crm/contract/delete
 export async function deleteContract(
   params: API.deleteContractParams,
   options?: { [key: string]: any }
@@ -37,7 +37,7 @@ export async function deleteContract(
   })
 }
 
-/** 导出合同 Excel GET /crm/contract/export-excel */
+// 导出合同 Excel GET /crm/contract/export-excel
 export async function exportContractExcel(
   params: API.exportContractExcelParams,
   options?: { [key: string]: any }
@@ -49,11 +49,12 @@ export async function exportContractExcel(
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
 
-/** 获取合同 GET /crm/contract/get */
+// 获取合同 GET /crm/contract/get
 export async function getContract(params: API.getContractParams, options?: { [key: string]: any }) {
   return request<API.CommonResultCrmContractRespVO>('/crm/contract/get', {
     method: 'GET',
@@ -64,7 +65,7 @@ export async function getContract(params: API.getContractParams, options?: { [ke
   })
 }
 
-/** 获取合同分页列表 GET /crm/contract/page */
+// 获取合同分页列表 GET /crm/contract/page
 export async function getContractPage(
   params: API.getContractPageParams,
   options?: { [key: string]: any }
@@ -80,7 +81,7 @@ export async function getContractPage(
   })
 }
 
-/** 获取指定商机的合同分页列表 GET /crm/contract/page-by-business */
+// 获取指定商机的合同分页列表 GET /crm/contract/page-by-business
 export async function getContractPageByBusiness(
   params: API.getContractPageByBusinessParams,
   options?: { [key: string]: any }
@@ -96,7 +97,7 @@ export async function getContractPageByBusiness(
   })
 }
 
-/** 获取指定客户的合同分页列表 GET /crm/contract/page-by-customer */
+// 获取指定客户的合同分页列表 GET /crm/contract/page-by-customer
 export async function getContractPageByCustomer(
   params: API.getContractPageByCustomerParams,
   options?: { [key: string]: any }
@@ -112,7 +113,7 @@ export async function getContractPageByCustomer(
   })
 }
 
-/** 获取即将到期（提醒）的合同数量 GET /crm/contract/remind-count */
+// 获取即将到期（提醒）的合同数量 GET /crm/contract/remind-count
 export async function getRemindContractCount(options?: { [key: string]: any }) {
   return request<API.CommonResultLong>('/crm/contract/remind-count', {
     method: 'GET',
@@ -120,7 +121,7 @@ export async function getRemindContractCount(options?: { [key: string]: any }) {
   })
 }
 
-/** 获取合同精简列表 只包含的合同，主要用于前端的下拉选项 GET /crm/contract/simple-list */
+// 获取合同精简列表 只包含的合同，主要用于前端的下拉选项 GET /crm/contract/simple-list
 export async function getContractSimpleList(
   params: API.getContractSimpleListParams,
   options?: { [key: string]: any }
@@ -134,7 +135,7 @@ export async function getContractSimpleList(
   })
 }
 
-/** 提交合同审批 PUT /crm/contract/submit */
+// 提交合同审批 PUT /crm/contract/submit
 export async function submitContract1(
   params: API.submitContract1Params,
   options?: { [key: string]: any }
@@ -148,7 +149,7 @@ export async function submitContract1(
   })
 }
 
-/** 合同转移 PUT /crm/contract/transfer */
+// 合同转移 PUT /crm/contract/transfer
 export async function transferContract(
   body: API.CrmContractTransferReqVO,
   options?: { [key: string]: any }
@@ -163,7 +164,7 @@ export async function transferContract(
   })
 }
 
-/** 更新合同 PUT /crm/contract/update */
+// 更新合同 PUT /crm/contract/update
 export async function updateContract(
   body: API.CrmContractSaveReqVO,
   options?: { [key: string]: any }

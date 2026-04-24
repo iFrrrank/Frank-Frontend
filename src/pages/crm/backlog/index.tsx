@@ -42,7 +42,7 @@ const Backlog: React.FC = () => {
   return (
     <Layout style={layoutStyle}>
       <Sider width={170} theme="light" style={siderStyle}>
-        <Card bordered={false} bodyStyle={{ padding: 0 }}>
+        <Card variant="borderless" styles={{ body: { padding: 0 } }}>
           <Menu
             mode="inline"
             selectedKeys={[activeKey]}
@@ -52,7 +52,7 @@ const Backlog: React.FC = () => {
         </Card>
       </Sider>
       <Content>
-        <Card bordered={false} bodyStyle={{ padding: 0 }}>
+        <Card variant="borderless" styles={{ body: { padding: 0 } }}>
           {renderContent()}
         </Card>
       </Content>

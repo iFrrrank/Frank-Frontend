@@ -41,6 +41,7 @@ export async function exportStockMoveExcel(
       pageReqVO: undefined,
       ...params['pageReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }

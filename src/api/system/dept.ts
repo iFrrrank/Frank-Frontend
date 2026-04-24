@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建部门 POST /system/dept/create */
+// 创建部门 POST /system/dept/create
 export async function createDept(body: API.SystemDeptSaveReqVO, options?: { [key: string]: any }) {
   return request<API.CommonResultLong>('/system/dept/create', {
     method: 'POST',
@@ -12,7 +12,7 @@ export async function createDept(body: API.SystemDeptSaveReqVO, options?: { [key
   })
 }
 
-/** 删除部门 DELETE /system/dept/delete */
+// 删除部门 DELETE /system/dept/delete
 export async function deleteDept(params: API.deleteDeptParams, options?: { [key: string]: any }) {
   return request<API.CommonResultBoolean>('/system/dept/delete', {
     method: 'DELETE',
@@ -23,7 +23,7 @@ export async function deleteDept(params: API.deleteDeptParams, options?: { [key:
   })
 }
 
-/** 获取部门信息 GET /system/dept/get */
+// 获取部门信息 GET /system/dept/get
 export async function getDept(params: API.getDeptParams, options?: { [key: string]: any }) {
   return request<API.CommonResultSystemDeptRespVO>('/system/dept/get', {
     method: 'GET',
@@ -34,7 +34,7 @@ export async function getDept(params: API.getDeptParams, options?: { [key: strin
   })
 }
 
-/** 获取部门列表 GET /system/dept/list */
+// 获取部门列表 GET /system/dept/list
 export async function getDeptList(params: API.getDeptListParams, options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemDeptRespVO>('/system/dept/list', {
     method: 'GET',
@@ -45,7 +45,7 @@ export async function getDeptList(params: API.getDeptListParams, options?: { [ke
   })
 }
 
-/** 获取部门精简信息列表 只包含被开启的部门，主要用于前端的下拉选项 GET /system/dept/simple-list */
+// 获取部门精简信息列表 只包含被开启的部门，主要用于前端的下拉选项 GET /system/dept/simple-list
 export async function getSimpleDeptList(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemDeptSimpleRespVO>('/system/dept/simple-list', {
     method: 'GET',
@@ -53,7 +53,7 @@ export async function getSimpleDeptList(options?: { [key: string]: any }) {
   })
 }
 
-/** 更新部门 PUT /system/dept/update */
+// 更新部门 PUT /system/dept/update
 export async function updateDept(body: API.SystemDeptSaveReqVO, options?: { [key: string]: any }) {
   return request<API.CommonResultBoolean>('/system/dept/update', {
     method: 'PUT',

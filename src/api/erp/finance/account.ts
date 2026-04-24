@@ -41,6 +41,7 @@ export async function exportAccountExcel(
       pageReqVO: undefined,
       ...params['pageReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -108,4 +109,3 @@ export async function updateAccountDefaultStatus(
     ...(options || {})
   })
 }
-

@@ -1,29 +1,31 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal } from 'antd'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { Button } from 'antd'
+import { DeleteOutlined, DownloadOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import { deleteRole, exportUsingGet, getRolePage } from '@/api/system/role'
-
+import { deleteRole, exportRoleExcel, getRolePage } from '@/api/system/role'
 import SaveRoleForm, { handleCreateRole, handleEditRole } from './SaveRoleForm'
 import AssignMenuForm, { handleOpenMenuAssign } from './AssignMenuForm'
 import AssignDataScopeForm, { handleOpenDataScope } from './AssignDataScopeForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { handleExport } from '@/components/Export'
-
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const Role: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
-
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportRoleExcel,
+      exportParams: { ...formValues },
+      fileName: '角色列表.xlsx'
+    })
+  }
 
   // 数据列定义
   const columns: ProColumns<API.SystemRoleRespVO>[] = [
@@ -155,22 +157,6 @@ const Role: React.FC = () => {
     }
   ]
 
-  const handleExportClick = () => {
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-    // 处理时间范围
-    if (formValues.createTime && formValues.createTime.length === 2) {
-      formValues.beginTime = formValues.createTime[0] + ' 00:00:00'
-      formValues.endTime = formValues.createTime[1] + ' 23:59:59'
-      delete formValues.createTime
-    }
-    handleExport(
-      exportUsingGet,
-      { exportReqVO: formValues },
-      '角色数据.xlsx',
-      '确定要导出角色数据吗？'
-    )
-  }
-
   return (
     <>
       <ProTable<API.SystemRoleRespVO>
@@ -233,7 +219,7 @@ const Role: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>,

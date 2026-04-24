@@ -13,13 +13,13 @@ const PayOrderManagement: React.FC = () => {
   const formRef = useRef<ProFormInstance>(undefined)
 
   const handleExportBtnClick = () => {
+    // 获取表单当前的值
     const formValues = formRef.current?.getFieldsValue?.() || {}
-    handleExport(
-      exportOrderExcel,
-      { exportReqVO: { ...formValues } },
-      '订单数据.xlsx',
-      textConst.msg.exportMsg
-    )
+    handleExport({
+      exportApi: exportOrderExcel,
+      exportParams: { ...formValues },
+      fileName: '支付订单.xlsx'
+    })
   }
 
   const columns: ProColumns<any>[] = [

@@ -1,3 +1,5 @@
+import { importTemplate } from '@/api/system/user'
+
 export const textConst = {
   common: {
     loginOut: '退出系统',
@@ -56,12 +58,14 @@ export const textConst = {
     delDataMsg: '是否删除所选中的数据？',
     delOneMsg: '是否删除该条数据？',
     delNoData: '请选择需要删除的数据',
-    exportMsg: '是否确认导出数据项？',
-    importMsg: '是否确认导入数据项？',
+    exportMsg: '确认导出所有数据项吗？',
+    importMsg: '确认导入所有数据项吗？',
     exportSuccess: '导出成功',
     exportError: '导出失败',
     importSuccess: '导入成功',
     importError: '导入失败',
+    importTemplateSuccess: '获取导入模板成功',
+    importTemplateError: '获取导入模板失败',
     resetPwdSuccess: '重置密码成功',
     resetPwdError: '重置密码失败',
     copySuccess: '复制成功',

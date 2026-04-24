@@ -10,6 +10,7 @@ export async function exportTransfer(
     params: {
       ...params
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -43,4 +44,3 @@ export async function getTransferPage(
     ...(options || {})
   })
 }
-

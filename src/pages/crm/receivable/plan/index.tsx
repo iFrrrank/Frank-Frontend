@@ -1,17 +1,23 @@
 import React, { useRef, useState } from 'react'
-import { Button, message } from 'antd'
+import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
-import { getReceivablePlanPage, deleteReceivablePlan } from '@/api/crm/receivablePlan'
+import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
+import {
+  getReceivablePlanPage,
+  deleteReceivablePlan,
+  exportReceivablePlanExcel
+} from '@/api/crm/receivablePlan'
 import { getCustomerSimpleList } from '@/api/crm/customer'
 import ReceivablePlanForm from './ReceivablePlanForm'
 import { textConst } from '@/locales/zh-CN'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { handleDelete } from '@/components/Delete'
 import { SCENE_TYPE } from '@/utils/constantsValue'
+import { handleExport } from '@/components/Export'
 
 const ReceivablePlanManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [formVisible, setFormVisible] = useState<boolean>(false)
   const [currentId, setCurrentId] = useState<number | undefined>(undefined)
   const [sceneType, setSceneType] = useState<string>('1')
@@ -26,13 +32,14 @@ const ReceivablePlanManagement: React.FC = () => {
     setFormVisible(true)
   }
 
-  const handleExport = async () => {
-    try {
-      message.loading({ content: '正在导出...', key: 'export' })
-      message.success({ content: '导出成功', key: 'export' })
-    } catch (e) {
-      message.error({ content: '导出失败', key: 'export' })
-    }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportReceivablePlanExcel,
+      exportParams: { ...formValues },
+      fileName: '回款计划列表.xlsx'
+    })
   }
 
   const columns: ProColumns<API.CrmReceivablePlanRespVO>[] = [
@@ -198,7 +205,7 @@ const ReceivablePlanManagement: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>

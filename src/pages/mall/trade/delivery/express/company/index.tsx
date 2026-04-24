@@ -1,26 +1,33 @@
 import React, { useRef, useState } from 'react'
-import { Button, message } from 'antd'
+import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
+import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
 import ExpressForm from './ExpressForm'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/Delete'
-import { getDeliveryExpressPage, deleteDeliveryExpress } from '@/api/mall/trade/delivery/express'
+import {
+  getDeliveryExpressPage,
+  deleteDeliveryExpress,
+  exportDeliveryExpressExcel
+} from '@/api/mall/trade/delivery/express'
 import { COMMON_STATUS } from '@/utils/constantsValue'
+import { handleExport } from '@/components/Export'
 
 const DeliveryExpressManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [formVisible, setFormVisible] = useState<boolean>(false)
   const [currentId, setCurrentId] = useState<number | undefined>(undefined)
 
-  const handleExport = async () => {
-    try {
-      message.loading({ content: '正在导出中...', key: 'export' })
-      message.success({ content: '导出成功', key: 'export' })
-    } catch (error) {
-      message.error({ content: '导出失败', key: 'export' })
-    }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportDeliveryExpressExcel,
+      exportParams: { ...formValues },
+      fileName: '快递公司列表.xlsx'
+    })
   }
 
   const columns: ProColumns<API.DeliveryExpressRespVO>[] = [
@@ -146,7 +153,7 @@ const DeliveryExpressManagement: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExport}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>

@@ -1,11 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal, Space, Tag } from 'antd'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { Button, message, Tag } from 'antd'
+import { DeleteOutlined, DownloadOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteConfig, deleteConfigList, exportConfig, getConfigPage } from '@/api/infra/config'
@@ -14,12 +9,7 @@ import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { handleExport } from '@/components/Export'
-
-/** 系统内置选项 */
-const CONFIG_TYPE_OPTIONS = [
-  { label: '是', value: 1 },
-  { label: '否', value: 2 }
-]
+import { BOOLEAN_OPTIONS } from '@/utils/constantsValue'
 
 const ConfigPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -39,25 +29,14 @@ const ConfigPage: React.FC = () => {
     setFormVisible(true)
   }
 
-  const handleExportClick = () => {
-    const params = formRef.current?.getFieldsValue() || {}
-    const { createTime, ...rest } = params
-    let beginTimeStr, endTimeStr
-    if (createTime && createTime.length === 2) {
-      beginTimeStr = createTime[0] + ' 00:00:00'
-      endTimeStr = createTime[1] + ' 23:59:59'
-    }
-    handleExport(
-      exportConfig,
-      {
-        ...(beginTimeStr && endTimeStr ? { createTime: [beginTimeStr, endTimeStr] } : {}),
-        ...rest,
-        pageNo: '1',
-        pageSize: '100'
-      },
-      '参数配置.xlsx',
-      '确定要导出参数配置吗？'
-    )
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportConfig,
+      exportParams: { ...formValues },
+      fileName: '参数配置列表.xlsx'
+    })
   }
 
   const columns: ProColumns<API.InfraConfigRespVO>[] = [
@@ -82,7 +61,7 @@ const ConfigPage: React.FC = () => {
       valueType: 'select',
       fieldProps: {
         placeholder: '请输入系统内置',
-        options: CONFIG_TYPE_OPTIONS
+        options: BOOLEAN_OPTIONS
       },
       hideInTable: true
     },
@@ -246,7 +225,7 @@ const ConfigPage: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>

@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建字典数据 POST /system/dict-data/create */
+// 创建字典数据 POST /system/dict-data/create
 export async function createDictData(
   body: API.SystemDictDataSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createDictData(
   })
 }
 
-/** 删除字典数据 DELETE /system/dict-data/delete */
+// 删除字典数据 DELETE /system/dict-data/delete
 export async function deleteDictData(
   params: API.deleteDictDataParams,
   options?: { [key: string]: any }
@@ -29,8 +29,11 @@ export async function deleteDictData(
   })
 }
 
-/** 导出字典数据 GET /system/dict-data/export */
-export async function export3(params: API.export3Params, options?: { [key: string]: any }) {
+// 导出字典数据 GET /system/dict-data/export
+export async function exportDictDataExcel(
+  params: API.export3Params,
+  options?: { [key: string]: any }
+) {
   return request<any>('/system/dict-data/export', {
     method: 'GET',
     params: {
@@ -38,11 +41,12 @@ export async function export3(params: API.export3Params, options?: { [key: strin
       exportReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
 
-/** 获取字典数据详情 GET /system/dict-data/get */
+// 获取字典数据详情 GET /system/dict-data/get
 export async function getDictData(params: API.getDictDataParams, options?: { [key: string]: any }) {
   return request<API.CommonResultSystemDictDataRespVO>('/system/dict-data/get', {
     method: 'GET',
@@ -53,7 +57,7 @@ export async function getDictData(params: API.getDictDataParams, options?: { [ke
   })
 }
 
-/** 获取全部字典数据列表 一般用于管理后台缓存字典数据在本地 GET /system/dict-data/list-all-simple */
+// 获取全部字典数据列表 一般用于管理后台缓存字典数据在本地 GET /system/dict-data/list-all-simple
 export async function getSimpleDictDataList(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemDictDataSimpleRespVO>(
     '/system/dict-data/list-all-simple',
@@ -64,7 +68,7 @@ export async function getSimpleDictDataList(options?: { [key: string]: any }) {
   )
 }
 
-/** 获取字典数据分页列表 GET /system/dict-data/page */
+// 获取字典数据分页列表 GET /system/dict-data/page
 export async function getDictTypePage(
   params: API.getDictTypePageParams,
   options?: { [key: string]: any }
@@ -80,7 +84,7 @@ export async function getDictTypePage(
   })
 }
 
-/** 获取全部字典数据列表 一般用于管理后台缓存字典数据在本地 GET /system/dict-data/simple-list */
+// 获取全部字典数据列表 一般用于管理后台缓存字典数据在本地 GET /system/dict-data/simple-list
 export async function getSimpleDictDataList1(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemDictDataSimpleRespVO>('/system/dict-data/simple-list', {
     method: 'GET',
@@ -88,7 +92,7 @@ export async function getSimpleDictDataList1(options?: { [key: string]: any }) {
   })
 }
 
-/** 修改字典数据 PUT /system/dict-data/update */
+// 修改字典数据 PUT /system/dict-data/update
 export async function updateDictData(
   body: API.SystemDictDataSaveReqVO,
   options?: { [key: string]: any }

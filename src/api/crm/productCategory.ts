@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建产品分类 POST /crm/product-category/create */
+// 创建产品分类 POST /crm/product-category/create
 export async function createProductCategory(
   body: API.CrmProductCategoryCreateReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createProductCategory(
   })
 }
 
-/** 删除产品分类 DELETE /crm/product-category/delete */
+// 删除产品分类 DELETE /crm/product-category/delete
 export async function deleteProductCategory(
   params: API.deleteProductCategoryParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteProductCategory(
   })
 }
 
-/** 获取产品分类 GET /crm/product-category/get */
+// 获取产品分类 GET /crm/product-category/get
 export async function getProductCategory(
   params: API.getProductCategoryParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function getProductCategory(
   })
 }
 
-/** 获取产品分类列表 GET /crm/product-category/list */
+// 获取产品分类列表 GET /crm/product-category/list
 export async function getProductCategoryList(
   params: API.getProductCategoryListParams,
   options?: { [key: string]: any }
@@ -59,7 +59,7 @@ export async function getProductCategoryList(
   })
 }
 
-/** 更新产品分类 PUT /crm/product-category/update */
+// 更新产品分类 PUT /crm/product-category/update
 export async function updateProductCategory(
   body: API.CrmProductCategoryCreateReqVO,
   options?: { [key: string]: any }

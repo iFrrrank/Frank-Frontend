@@ -38,6 +38,7 @@ export async function exportProductExcel(
       pageReqVO: undefined,
       ...params['exportReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -88,4 +89,3 @@ export async function updateProduct(body: API.ProductSaveReqVO, options?: { [key
     ...(options || {})
   })
 }
-

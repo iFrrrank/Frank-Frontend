@@ -1,27 +1,29 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal } from 'antd'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { Button } from 'antd'
+import { DeleteOutlined, DownloadOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import { deletePost, export1, getPostPage } from '@/api/system/post'
-
+import { deletePost, exportPostExcel, getPostPage } from '@/api/system/post'
 import SavePostForm, { handleCreatePost, handleEditPost } from './SavePostForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { handleExport } from '@/components/Export'
-
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const PostManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
-
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportPostExcel,
+      exportParams: { ...formValues },
+      fileName: '岗位列表.xlsx'
+    })
+  }
 
   // ===== 数据列定义 =====
   const columns: ProColumns<API.SystemPostRespVO>[] = [
@@ -119,16 +121,6 @@ const PostManagement: React.FC = () => {
     }
   ]
 
-  const handleExportClick = () => {
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-    if (formValues.createTime && formValues.createTime.length === 2) {
-      formValues.beginTime = formValues.createTime[0] + ' 00:00:00'
-      formValues.endTime = formValues.createTime[1] + ' 23:59:59'
-      delete formValues.createTime
-    }
-    handleExport(export1, formValues, '岗位数据.xlsx', '确认导出所有岗位数据项?')
-  }
-
   return (
     <>
       <ProTable<API.SystemPostRespVO>
@@ -191,7 +183,7 @@ const PostManagement: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>,

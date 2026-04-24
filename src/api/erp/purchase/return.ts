@@ -41,6 +41,7 @@ export async function exportPurchaseReturnExcel(
       pageReqVO: undefined,
       ...params['pageReqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -103,4 +104,3 @@ export async function updatePurchaseReturnStatus(
     ...(options || {})
   })
 }
-

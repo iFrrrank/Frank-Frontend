@@ -8,7 +8,7 @@ import {
   PlusOutlined,
   UnorderedListOutlined
 } from '@ant-design/icons'
-import type { ActionType, ProColumns } from '@ant-design/pro-components'
+import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { history } from '@umijs/max'
 import {
@@ -25,6 +25,7 @@ import { textConst } from '@/locales/zh-CN'
 import { handleExport } from '@/components/Export'
 import { handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import { JOB_LOG_STATUS } from '@/utils/constantsValue'
 
 export const JOB_STATUS_OPTIONS = [
   { label: '正常', value: 0 },
@@ -33,10 +34,10 @@ export const JOB_STATUS_OPTIONS = [
 
 const JobPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
 
   const [formVisible, setFormVisible] = useState(false)
   const [currentId, setCurrentId] = useState<number | undefined>(undefined)
-
   const [detailVisible, setDetailVisible] = useState(false)
   const [detailId, setDetailId] = useState<number | undefined>(undefined)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
@@ -111,13 +112,14 @@ const JobPage: React.FC = () => {
     ]
   })
 
-  const handleExportClick = () => {
-    handleExport(
-      exportJob,
-      { pageNo: '1', pageSize: '100' },
-      '定时任务.xlsx',
-      '确定要导出定时任务吗？'
-    )
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportJob,
+      exportParams: { ...formValues },
+      fileName: '定时任务列表.xlsx'
+    })
   }
 
   const columns: ProColumns<JobVO>[] = [
@@ -138,13 +140,7 @@ const JobPage: React.FC = () => {
       dataIndex: 'status',
       align: 'center',
       valueType: 'select',
-      valueEnum: JOB_STATUS_OPTIONS.reduce(
-        (acc, cur) => {
-          acc[cur.value] = { text: cur.label, status: cur.value === 0 ? 'Success' : 'Error' }
-          return acc
-        },
-        {} as Record<string, any>
-      ),
+      valueEnum: JOB_LOG_STATUS,
       fieldProps: { placeholder: '请输入任务状态' },
       render: (_, record) => (
         <Switch
@@ -260,7 +256,7 @@ const JobPage: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>,

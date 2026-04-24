@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 校验验证码 POST /system/captcha/check */
+// 校验验证码 POST /system/captcha/check
 export async function check(body: API.CaptchaVO, options?: { [key: string]: any }) {
   return request<API.ResponseModel>('/system/captcha/check', {
     method: 'POST',
@@ -12,7 +12,7 @@ export async function check(body: API.CaptchaVO, options?: { [key: string]: any 
   })
 }
 
-/** 获取验证码 POST /system/captcha/get */
+// 获取验证码 POST /system/captcha/get
 export async function get(body: API.CaptchaVO, options?: { [key: string]: any }) {
   return request<API.ResponseModel>('/system/captcha/get', {
     method: 'POST',

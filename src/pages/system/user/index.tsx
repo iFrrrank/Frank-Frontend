@@ -13,24 +13,47 @@ import {
 } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
-import { deleteUser, exportUserList, getUser, getUserPage } from '@/api/system/user'
-import DeptTree from '@/pages/system/user/DeptTree'
+import {
+  deleteUser,
+  exportUserList,
+  getUser,
+  getUserPage,
+  importExcel,
+  importTemplate
+} from '@/api/system/user'
+import DeptTree from './DeptTree'
 import { COMMON_STATUS } from '@/utils/constantsValue'
-import ResetPwdForm, { handleResetPwd } from '@/pages/system/user/ResetPwdForm'
-import AssignRoleForm, { handleAssignRole } from '@/pages/system/user/AssignRoleForm'
-import ImportUserForm, { handleImportUser } from '@/pages/system/user/ImportUserForm'
-import SaveUserForm, { handleCreateUser, handleEditUser } from '@/pages/system/user/SaveUserForm'
+import ResetPwdForm, { handleResetPwd } from './ResetPwdForm'
+import AssignRoleForm, { handleAssignRole } from './AssignRoleForm'
+import SaveUserForm, { handleCreateUser, handleEditUser } from './SaveUserForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { handleExport } from '@/components/Export'
-import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import ImportModal from '@/components/Import'
+import { tableActionStyle } from '@/styles/common.style'
 
 const SystemUser: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
   const [selectedDeptId, setSelectedDeptId] = useState<number | undefined>(undefined)
-
+  const [importModalVisible, setImportModalVisible] = useState(false)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+
+  // 部门选中回调
+  const handleDeptSelect = (deptId: number | undefined) => {
+    setSelectedDeptId(deptId)
+    actionRef.current?.reload()
+  }
+
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportUserList,
+      exportParams: { ...formValues, deptId: selectedDeptId },
+      fileName: '用户数据.xlsx'
+    })
+  }
 
   // 列定义
   const columns: ProColumns<API.SystemUserRespVO>[] = [
@@ -132,23 +155,6 @@ const SystemUser: React.FC = () => {
       }
     }
   ]
-
-  // 部门选中回调
-  const handleDeptSelect = (deptId: number | undefined) => {
-    setSelectedDeptId(deptId)
-    actionRef.current?.reload()
-  }
-
-  // 导出用户
-  const handleExportBtnClick = () => {
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-    handleExport(
-      exportUserList,
-      { exportReqVO: { ...formValues, deptId: selectedDeptId } },
-      '用户数据.xlsx',
-      textConst.msg.exportMsg
-    )
-  }
 
   return (
     <Row gutter={16}>
@@ -260,7 +266,7 @@ const SystemUser: React.FC = () => {
               color="green"
               variant="outlined"
               icon={<UploadOutlined />}
-              onClick={() => handleImportUser()}
+              onClick={() => setImportModalVisible(true)}
             >
               {textConst.action.import}
             </Button>,
@@ -283,7 +289,21 @@ const SystemUser: React.FC = () => {
 
       <AssignRoleForm />
 
-      <ImportUserForm />
+      <ImportModal
+        title="导入用户"
+        open={importModalVisible}
+        accept=".xls,.xlsx"
+        onCancel={() => setImportModalVisible(false)}
+        onSuccess={() => {
+          setImportModalVisible(false)
+          // 导入成功后刷新表格
+          actionRef.current?.reload()
+        }}
+        importApi={importExcel}
+        templateApi={importTemplate}
+        templateName="用户导入模板.xlsx"
+        showUpdateSupport={true}
+      />
     </Row>
   )
 }

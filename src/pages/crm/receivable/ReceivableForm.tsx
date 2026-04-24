@@ -166,8 +166,6 @@ const ReceivableForm: React.FC<ReceivableFormProps> = ({ visible, setVisible, on
         placeholder="请选择回款方式"
         options={RECEIVABLE_RETURN_TYPE}
       />
-
-      {/* 第四行 */}
       <ProFormDigit
         name="price"
         label="回款金额"

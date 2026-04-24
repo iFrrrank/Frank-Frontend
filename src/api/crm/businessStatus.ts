@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建商机状态 POST /crm/business-status/create */
+// 创建商机状态 POST /crm/business-status/create
 export async function createBusinessStatus(
   body: API.CrmBusinessStatusSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createBusinessStatus(
   })
 }
 
-/** 删除商机状态 DELETE /crm/business-status/delete */
+// 删除商机状态 DELETE /crm/business-status/delete
 export async function deleteBusinessStatusType(
   params: API.deleteBusinessStatusTypeParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteBusinessStatusType(
   })
 }
 
-/** 获取商机状态 GET /crm/business-status/get */
+// 获取商机状态 GET /crm/business-status/get
 export async function getBusinessStatusType(
   params: API.getBusinessStatusTypeParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function getBusinessStatusType(
   })
 }
 
-/** 获取商机状态分页列表 GET /crm/business-status/page */
+// 获取商机状态分页列表 GET /crm/business-status/page
 export async function getBusinessStatusPage(
   params: API.getBusinessStatusPageParams,
   options?: { [key: string]: any }
@@ -59,7 +59,7 @@ export async function getBusinessStatusPage(
   })
 }
 
-/** 获取商机状态列表 GET /crm/business-status/status-simple-list */
+// 获取商机状态列表 GET /crm/business-status/status-simple-list
 export async function getBusinessStatusSimpleList(
   params: API.getBusinessStatusSimpleListParams,
   options?: { [key: string]: any }
@@ -73,7 +73,7 @@ export async function getBusinessStatusSimpleList(
   })
 }
 
-/** 获取商机状态组列表 GET /crm/business-status/type-simple-list */
+// 获取商机状态组列表 GET /crm/business-status/type-simple-list
 export async function getBusinessStatusTypeSimpleList(options?: { [key: string]: any }) {
   return request<API.CommonResultListCrmBusinessStatusRespVO>(
     '/crm/business-status/type-simple-list',
@@ -84,7 +84,7 @@ export async function getBusinessStatusTypeSimpleList(options?: { [key: string]:
   )
 }
 
-/** 更新商机状态 PUT /crm/business-status/update */
+// 更新商机状态 PUT /crm/business-status/update
 export async function updateBusinessStatus(
   body: API.CrmBusinessStatusSaveReqVO,
   options?: { [key: string]: any }

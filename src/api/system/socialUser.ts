@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 社交绑定，使用 code 授权码 POST /system/social-user/bind */
+// 社交绑定，使用 code 授权码 POST /system/social-user/bind
 export async function socialBind(
   body: API.SystemSocialUserBindReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function socialBind(
   })
 }
 
-/** 获取社交用户 GET /system/social-user/get */
+// 获取社交用户 GET /system/social-user/get
 export async function getSocialUser(
   params: API.getSocialUserParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function getSocialUser(
   })
 }
 
-/** 获取社交用户分页列表 GET /system/social-user/page */
+// 获取社交用户分页列表 GET /system/social-user/page
 export async function getSocialUserPage(
   params: API.getSocialUserPageParams,
   options?: { [key: string]: any }
@@ -45,7 +45,7 @@ export async function getSocialUserPage(
   })
 }
 
-/** 取消社交绑定 DELETE /system/social-user/unbind */
+// 取消社交绑定 DELETE /system/social-user/unbind
 export async function socialUnbind(
   body: API.SystemSocialUserUnbindReqVO,
   options?: { [key: string]: any }

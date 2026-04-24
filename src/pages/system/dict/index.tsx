@@ -1,27 +1,30 @@
 import React, { useRef, useState } from 'react'
-import { Button, message, Modal } from 'antd'
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  ExclamationCircleOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { Button } from 'antd'
+import { DeleteOutlined, DownloadOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { history } from '@umijs/max'
-import { deleteDictType, export2, pageDictTypes } from '@/api/system/dictType'
+import { deleteDictType, exportDictTypeExcel, pageDictTypes } from '@/api/system/dictType'
 import SaveDictTypeForm, { handleCreateDictType, handleEditDictType } from './SaveDictTypeForm'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { handleExport } from '@/components/Export'
-
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 
 const DictTypeConfig: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
-
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportDictTypeExcel,
+      exportParams: { ...formValues },
+      fileName: '字典管理.xlsx'
+    })
+  }
 
   const columns: ProColumns<API.SystemDictTypeRespVO>[] = [
     {
@@ -114,16 +117,6 @@ const DictTypeConfig: React.FC = () => {
     }
   ]
 
-  const handleExportClick = () => {
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-    if (formValues.createTime && formValues.createTime.length === 2) {
-      formValues.beginTime = formValues.createTime[0] + ' 00:00:00'
-      formValues.endTime = formValues.createTime[1] + ' 23:59:59'
-      delete formValues.createTime
-    }
-    handleExport(export2, formValues, '字典类型数据.xlsx', '确认导出所有字典类型数据项?')
-  }
-
   // ===== 字典数据维护页 =====
   const handleData = (record: API.SystemDictTypeRespVO) => {
     history.push(`/system/dict/data/${record.type}`)
@@ -191,7 +184,7 @@ const DictTypeConfig: React.FC = () => {
             color="volcano"
             variant="outlined"
             icon={<DownloadOutlined />}
-            onClick={handleExportClick}
+            onClick={handleExportBtnClick}
           >
             {textConst.action.export}
           </Button>,

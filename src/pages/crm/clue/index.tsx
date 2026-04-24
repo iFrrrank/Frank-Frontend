@@ -1,16 +1,28 @@
 import React, { useRef, useState } from 'react'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
+import { ProTable, ProFormInstance } from '@ant-design/pro-components'
 import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
-import { getCluePage } from '@/api/crm/clue'
+import { getCluePage, exportClueExcel } from '@/api/crm/clue'
 import { CLUE_TRANSFER_STATUS, SCENE_TYPE } from '@/utils/constantsValue'
 import { textConst } from '@/locales/zh-CN'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import { handleExport } from '@/components/Export'
 
 const ClueList: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [sceneType, setSceneType] = useState<number>(1)
+
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportClueExcel,
+      exportParams: { ...formValues },
+      fileName: '线索.xlsx'
+    })
+  }
 
   const columns: ProColumns<API.CrmClueRespVO>[] = [
     {
@@ -137,7 +149,13 @@ const ClueList: React.FC = () => {
           <Button key="add" type="primary" icon={<PlusOutlined />}>
             {textConst.action.create}
           </Button>,
-          <Button key="export" color="volcano" variant="outlined" icon={<DownloadOutlined />}>
+          <Button
+            key="export"
+            color="volcano"
+            variant="outlined"
+            icon={<DownloadOutlined />}
+            onClick={handleExportBtnClick}
+          >
             {textConst.action.export}
           </Button>
         ],

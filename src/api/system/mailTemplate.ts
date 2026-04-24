@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建邮件模版 POST /system/mail-template/create */
+// 创建邮件模版 POST /system/mail-template/create
 export async function createMailTemplate(
   body: API.SystemMailTemplateSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createMailTemplate(
   })
 }
 
-/** 删除邮件模版 DELETE /system/mail-template/delete */
+// 删除邮件模版 DELETE /system/mail-template/delete
 export async function deleteMailTemplate(
   params: API.deleteMailTemplateParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteMailTemplate(
   })
 }
 
-/** 获取邮件模版 GET /system/mail-template/get */
+// 获取邮件模版 GET /system/mail-template/get
 export async function getMailTemplate(
   params: API.getMailTemplateParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function getMailTemplate(
   })
 }
 
-/** 获取邮件模版精简列表 GET /system/mail-template/list-all-simple */
+// 获取邮件模版精简列表 GET /system/mail-template/list-all-simple
 export async function getSimpleTemplateList(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemMailTemplateSimpleRespVO>(
     '/system/mail-template/list-all-simple',
@@ -54,7 +54,7 @@ export async function getSimpleTemplateList(options?: { [key: string]: any }) {
   )
 }
 
-/** 获取邮件模版分页列表 GET /system/mail-template/page */
+// 获取邮件模版分页列表 GET /system/mail-template/page
 export async function getMailTemplatePage(
   params: API.getMailTemplatePageParams,
   options?: { [key: string]: any }
@@ -70,7 +70,7 @@ export async function getMailTemplatePage(
   })
 }
 
-/** 发送邮件 POST /system/mail-template/send-mail */
+// 发送邮件 POST /system/mail-template/send-mail
 export async function sendMail(
   body: API.SystemMailTemplateSendReqVO,
   options?: { [key: string]: any }
@@ -85,7 +85,7 @@ export async function sendMail(
   })
 }
 
-/** 获取邮件模版精简列表 GET /system/mail-template/simple-list */
+// 获取邮件模版精简列表 GET /system/mail-template/simple-list
 export async function getSimpleTemplateList1(options?: { [key: string]: any }) {
   return request<API.CommonResultListSystemMailTemplateSimpleRespVO>(
     '/system/mail-template/simple-list',
@@ -96,7 +96,7 @@ export async function getSimpleTemplateList1(options?: { [key: string]: any }) {
   )
 }
 
-/** 修改邮件模版 PUT /system/mail-template/update */
+// 修改邮件模版 PUT /system/mail-template/update
 export async function updateMailTemplate(
   body: API.SystemMailTemplateSaveReqVO,
   options?: { [key: string]: any }

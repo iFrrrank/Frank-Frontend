@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建客户限制配置 POST /crm/customer-limit-config/create */
+// 创建客户限制配置 POST /crm/customer-limit-config/create
 export async function createCustomerLimitConfig(
   body: API.CrmCustomerLimitConfigSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createCustomerLimitConfig(
   })
 }
 
-/** 删除客户限制配置 DELETE /crm/customer-limit-config/delete */
+// 删除客户限制配置 DELETE /crm/customer-limit-config/delete
 export async function deleteCustomerLimitConfig(
   params: API.deleteCustomerLimitConfigParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteCustomerLimitConfig(
   })
 }
 
-/** 获取客户限制配置 GET /crm/customer-limit-config/get */
+// 获取客户限制配置 GET /crm/customer-limit-config/get
 export async function getCustomerLimitConfig(
   params: API.getCustomerLimitConfigParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function getCustomerLimitConfig(
   })
 }
 
-/** 获取客户限制配置分页列表 GET /crm/customer-limit-config/page */
+// 获取客户限制配置分页列表 GET /crm/customer-limit-config/page
 export async function getCustomerLimitConfigPage(
   params: API.getCustomerLimitConfigPageParams,
   options?: { [key: string]: any }
@@ -62,7 +62,7 @@ export async function getCustomerLimitConfigPage(
   )
 }
 
-/** 更新客户限制配置 PUT /crm/customer-limit-config/update */
+// 更新客户限制配置 PUT /crm/customer-limit-config/update
 export async function updateCustomerLimitConfig(
   body: API.CrmCustomerLimitConfigSaveReqVO,
   options?: { [key: string]: any }

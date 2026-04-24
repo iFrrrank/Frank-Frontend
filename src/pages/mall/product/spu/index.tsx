@@ -1,22 +1,28 @@
 import React, { useRef, useState } from 'react'
 import { Button, message } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
+import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
 import { useNavigate } from '@umijs/max'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { PRODUCT_SPU_TYPE, SPU_STATUS } from '@/utils/constantsValue'
+import { handleExport } from '@/components/Export'
+import { exportSpuList } from '@/api/mall/product/spu'
 
 const ProductSpuManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<string>('0')
 
   const handleExportBtnClick = () => {
-    message.loading({ content: '正在导出...', key: 'export' })
-    setTimeout(() => {
-      message.success({ content: '导出成功', key: 'export' })
-    }, 1000)
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportSpuList,
+      exportParams: { ...formValues },
+      fileName: '商品 SPU.xlsx'
+    })
   }
 
   const columns: ProColumns<any>[] = [

@@ -1,44 +1,22 @@
 import React, { useRef, useState } from 'react'
-import type { UploadFile } from 'antd'
-import { Button, message, Modal, Space, Typography, Upload } from 'antd'
-import {
-  DeleteOutlined,
-  ExclamationCircleOutlined,
-  InboxOutlined,
-  UploadOutlined
-} from '@ant-design/icons'
+import { Button, message, Typography } from 'antd'
+import { DeleteOutlined, UploadOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteFile, deleteFileList, getFilePage, uploadFile } from '@/api/infra/fileList'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
-
-const { Dragger } = Upload
-
-/** 允许的文件类型 */
-const ACCEPT_TYPES = ['image/jpeg', 'image/png', 'image/gif']
-const ACCEPT_EXTENSIONS = '.jpg,.jpeg,.png,.gif'
-const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
-
-/** 格式化文件大小 */
-const formatFileSize = (bytes?: number): string => {
-  if (bytes === undefined || bytes === null) return '-'
-  if (bytes < 1024) return `${bytes} B`
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KB`
-  if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(2)} MB`
-  return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`
-}
+import ImportModal from '@/components/Import'
+import { formatFileSize } from '@/utils/file'
 
 const FileListPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
   const formRef = useRef<ProFormInstance>(undefined)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
-  const [uploadModalVisible, setUploadModalVisible] = useState(false)
-  const [uploadFileList, setUploadFileList] = useState<UploadFile[]>([])
-  const [uploading, setUploading] = useState(false)
+  const [importVisible, setImportVisible] = useState<boolean>(false)
 
-  /** 复制链接 */
+  // 复制链接
   const handleCopyLink = (url?: string) => {
     if (!url) {
       message.warning('文件链接为空')
@@ -48,39 +26,6 @@ const FileListPage: React.FC = () => {
       .writeText(url)
       .then(() => message.success(textConst.msg.copySuccess))
       .catch(() => message.error(textConst.msg.copyError))
-  }
-
-  /** 打开上传弹窗 */
-  const handleOpenUpload = () => {
-    setUploadFileList([])
-    setUploadModalVisible(true)
-  }
-
-  /** 确认上传 */
-  const handleUploadConfirm = async () => {
-    if (uploadFileList.length === 0) {
-      message.warning('请先选择文件')
-      return
-    }
-    const file = uploadFileList[0]?.originFileObj
-    if (!file) {
-      message.warning('请先选择文件')
-      return
-    }
-    setUploading(true)
-    try {
-      const formData = new FormData()
-      formData.append('file', file)
-      await uploadFile(formData as any)
-      message.success('上传成功')
-      setUploadModalVisible(false)
-      setUploadFileList([])
-      actionRef.current?.reload()
-    } catch {
-      message.error('上传失败')
-    } finally {
-      setUploading(false)
-    }
   }
 
   const columns: ProColumns<API.InfraFileRespVO>[] = [
@@ -267,7 +212,12 @@ const FileListPage: React.FC = () => {
         options={false}
         pagination={{ align: 'center', showSizeChanger: true }}
         toolBarRender={() => [
-          <Button key="upload" type="primary" icon={<UploadOutlined />} onClick={handleOpenUpload}>
+          <Button
+            key="upload"
+            type="primary"
+            icon={<UploadOutlined />}
+            onClick={() => setImportVisible(true)}
+          >
             {textConst.action.uploadFile}
           </Button>,
           <Button
@@ -290,50 +240,19 @@ const FileListPage: React.FC = () => {
         ]}
       />
 
-      {/* 上传文件弹窗 */}
-      <Modal
+      <ImportModal
         title="上传文件"
-        open={uploadModalVisible}
-        onOk={handleUploadConfirm}
-        onCancel={() => {
-          setUploadModalVisible(false)
-          setUploadFileList([])
+        open={importVisible}
+        accept=".jpg,.png,.gif"
+        onCancel={() => setImportVisible(false)}
+        onSuccess={() => {
+          setImportVisible(false)
+          // 导入成功后刷新表格
+          actionRef.current?.reload()
         }}
-        okText={textConst.common.ok}
-        cancelText={textConst.common.cancel}
-        confirmLoading={uploading}
-      >
-        <Dragger
-          accept={ACCEPT_EXTENSIONS}
-          maxCount={1}
-          fileList={uploadFileList}
-          beforeUpload={(file) => {
-            // 校验文件类型
-            if (!ACCEPT_TYPES.includes(file.type)) {
-              message.error('仅允许上传 jpg、png、gif 格式文件！')
-              return Upload.LIST_IGNORE
-            }
-            // 校验文件大小
-            if (file.size > MAX_FILE_SIZE) {
-              message.error('文件大小不能超过 2MB！')
-              return Upload.LIST_IGNORE
-            }
-            return false // 阻止自动上传
-          }}
-          onChange={({ fileList }) => setUploadFileList(fileList)}
-          onRemove={() => setUploadFileList([])}
-        >
-          <p className="ant-upload-drag-icon">
-            <InboxOutlined />
-          </p>
-          <p className="ant-upload-text">
-            将文件拖到此处，或 <a>点击上传</a>
-          </p>
-        </Dragger>
-        <div style={{ color: '#ff4d4f', marginTop: 8, fontSize: 13 }}>
-          提示：仅允许导入 jpg、png、gif 格式文件！
-        </div>
-      </Modal>
+        importApi={uploadFile}
+        draggerHint="仅允许导入 jpg、png、gif 格式文件"
+      />
     </>
   )
 }

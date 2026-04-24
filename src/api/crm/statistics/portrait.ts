@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 获取客户地区统计数据 用于【城市分布分析】页面 GET /crm/statistics-portrait/get-customer-area-summary */
+// 获取客户地区统计数据 用于【城市分布分析】页面 GET /crm/statistics-portrait/get-customer-area-summary
 export async function getCustomerAreaSummary(
   params: API.getCustomerAreaSummaryParams,
   options?: { [key: string]: any }
@@ -19,7 +19,7 @@ export async function getCustomerAreaSummary(
   )
 }
 
-/** 获取客户行业统计数据 用于【客户行业分析】页面 GET /crm/statistics-portrait/get-customer-industry-summary */
+// 获取客户行业统计数据 用于【客户行业分析】页面 GET /crm/statistics-portrait/get-customer-industry-summary
 export async function getCustomerIndustrySummary(
   params: API.getCustomerIndustrySummaryParams,
   options?: { [key: string]: any }
@@ -38,7 +38,7 @@ export async function getCustomerIndustrySummary(
   )
 }
 
-/** 获取客户级别统计数据 用于【客户级别分析】页面 GET /crm/statistics-portrait/get-customer-level-summary */
+// 获取客户级别统计数据 用于【客户级别分析】页面 GET /crm/statistics-portrait/get-customer-level-summary
 export async function getCustomerLevelSummary(
   params: API.getCustomerLevelSummaryParams,
   options?: { [key: string]: any }
@@ -57,7 +57,7 @@ export async function getCustomerLevelSummary(
   )
 }
 
-/** 获取客户来源统计数据 用于【客户来源分析】页面 GET /crm/statistics-portrait/get-customer-source-summary */
+// 获取客户来源统计数据 用于【客户来源分析】页面 GET /crm/statistics-portrait/get-customer-source-summary
 export async function getCustomerSourceSummary(
   params: API.getCustomerSourceSummaryParams,
   options?: { [key: string]: any }

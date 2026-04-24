@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建参数配置 POST /infra/config/create */
+// 创建参数配置 POST /infra/config/create
 export async function createConfig(
   body: API.InfraConfigSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createConfig(
   })
 }
 
-/** 删除参数配置 DELETE /infra/config/delete */
+// 删除参数配置 DELETE /infra/config/delete
 export async function deleteConfig(
   params: API.deleteConfigParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteConfig(
   })
 }
 
-/** 批量删除参数配置 DELETE /infra/config/delete-list */
+// 批量删除参数配置 DELETE /infra/config/delete-list
 export async function deleteConfigList(
   params: API.deleteConfigListParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function deleteConfigList(
   })
 }
 
-/** 导出参数配置 GET /infra/config/export-excel */
+// 导出参数配置 GET /infra/config/export-excel
 export async function exportConfig(
   params: API.exportConfigParams,
   options?: { [key: string]: any }
@@ -53,11 +53,12 @@ export async function exportConfig(
     params: {
       ...params
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
 
-/** 获取参数配置 GET /infra/config/get */
+// 获取参数配置 GET /infra/config/get
 export async function getConfig(params: API.getConfigParams, options?: { [key: string]: any }) {
   return request<API.CommonResultInfraConfigRespVO>('/infra/config/get', {
     method: 'GET',
@@ -68,7 +69,7 @@ export async function getConfig(params: API.getConfigParams, options?: { [key: s
   })
 }
 
-/** 根据参数键名查询参数值 不可见的配置，不允许返回给前端 GET /infra/config/get-value-by-key */
+// 根据参数键名查询参数值 不可见的配置，不允许返回给前端 GET /infra/config/get-value-by-key
 export async function getConfigKey(
   params: API.getConfigKeyParams,
   options?: { [key: string]: any }
@@ -82,7 +83,7 @@ export async function getConfigKey(
   })
 }
 
-/** 获取参数配置分页列表 GET /infra/config/page */
+// 获取参数配置分页列表 GET /infra/config/page
 export async function getConfigPage(
   params: API.getConfigPageParams,
   options?: { [key: string]: any }
@@ -98,7 +99,7 @@ export async function getConfigPage(
   })
 }
 
-/** 修改参数配置 PUT /infra/config/update */
+// 修改参数配置 PUT /infra/config/update
 export async function updateConfig(
   body: API.InfraConfigSaveReqVO,
   options?: { [key: string]: any }

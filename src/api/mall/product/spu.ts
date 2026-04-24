@@ -38,6 +38,7 @@ export async function exportSpuList(
       reqVO: undefined,
       ...params['reqVO']
     },
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -122,4 +123,3 @@ export async function updateStatus(
     ...(options || {})
   })
 }
-

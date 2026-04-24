@@ -1,26 +1,33 @@
 import React, { useRef, useState } from 'react'
-import { Button, message } from 'antd'
+import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons'
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
+import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
 import PurchaseReturnForm from './PurchaseReturnForm'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete, handleBatchDelete } from '@/components/Delete'
-import { getPurchaseReturnPage, deletePurchaseReturn } from '@/api/erp/purchase/return'
+import {
+  getPurchaseReturnPage,
+  deletePurchaseReturn,
+  exportPurchaseReturnExcel
+} from '@/api/erp/purchase/return'
+import { handleExport } from '@/components/Export'
 
 const PurchaseReturnManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
+  const formRef = useRef<ProFormInstance>(undefined)
   const [formVisible, setFormVisible] = useState<boolean>(false)
   const [currentId, setCurrentId] = useState<number | undefined>(undefined)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
-  const handleExportBtnClick = async () => {
-    try {
-      message.loading({ content: '正在导出...', key: 'export' })
-      message.success({ content: '导出成功', key: 'export' })
-    } catch (e) {
-      message.error({ content: '导出失败', key: 'export' })
-    }
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportPurchaseReturnExcel,
+      exportParams: { ...formValues },
+      fileName: '采购退货.xlsx'
+    })
   }
 
   const columns: ProColumns<API.ErpPurchaseReturnRespVO>[] = [

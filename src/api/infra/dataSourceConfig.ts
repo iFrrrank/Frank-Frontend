@@ -1,6 +1,6 @@
 import { request } from '@umijs/max'
 
-/** 创建数据源配置 POST /infra/data-source-config/create */
+// 创建数据源配置 POST /infra/data-source-config/create
 export async function createDataSourceConfig(
   body: API.InfraDataSourceConfigSaveReqVO,
   options?: { [key: string]: any }
@@ -15,7 +15,7 @@ export async function createDataSourceConfig(
   })
 }
 
-/** 删除数据源配置 DELETE /infra/data-source-config/delete */
+// 删除数据源配置 DELETE /infra/data-source-config/delete
 export async function deleteDataSourceConfig(
   params: API.deleteDataSourceConfigParams,
   options?: { [key: string]: any }
@@ -29,7 +29,7 @@ export async function deleteDataSourceConfig(
   })
 }
 
-/** 批量删除数据源配置 DELETE /infra/data-source-config/delete-list */
+// 批量删除数据源配置 DELETE /infra/data-source-config/delete-list
 export async function deleteDataSourceConfigList(
   params: API.deleteDataSourceConfigListParams,
   options?: { [key: string]: any }
@@ -43,7 +43,7 @@ export async function deleteDataSourceConfigList(
   })
 }
 
-/** 获取数据源配置 GET /infra/data-source-config/get */
+// 获取数据源配置 GET /infra/data-source-config/get
 export async function getDataSourceConfig(
   params: API.getDataSourceConfigParams,
   options?: { [key: string]: any }
@@ -57,7 +57,7 @@ export async function getDataSourceConfig(
   })
 }
 
-/** 获取数据源配置列表 GET /infra/data-source-config/list */
+// 获取数据源配置列表 GET /infra/data-source-config/list
 export async function getDataSourceConfigList(options?: { [key: string]: any }) {
   return request<API.CommonResultListInfraDataSourceConfigRespVO>(
     '/infra/data-source-config/list',
@@ -68,7 +68,7 @@ export async function getDataSourceConfigList(options?: { [key: string]: any }) 
   )
 }
 
-/** 更新数据源配置 PUT /infra/data-source-config/update */
+// 更新数据源配置 PUT /infra/data-source-config/update
 export async function updateDataSourceConfig(
   body: API.InfraDataSourceConfigSaveReqVO,
   options?: { [key: string]: any }
