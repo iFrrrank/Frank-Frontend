@@ -84,21 +84,29 @@ export async function getCustomer(params: API.getCustomerParams, options?: { [ke
 export async function importTemplate(options?: { [key: string]: any }) {
   return request<any>('/crm/customer/get-import-template', {
     method: 'GET',
+    responseType: 'blob',
     ...(options || {})
   })
 }
 
 // 导入客户 POST /crm/customer/import
 export async function importExcel(
-  body: API.CrmCustomerImportReqVO,
+  params: API.CrmCustomerImportReqVO,
+  file: File, // 直接接收 File 对象
   options?: { [key: string]: any }
 ) {
+  // 使用 FormData 来包装文件
+  const formData = new FormData()
+  formData.append('file', file)
+  formData.append('updateSupport', String(params.updateSupport))
+
   return request<API.CommonResultCrmCustomerImportRespVO>('/crm/customer/import', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
+    params: {
+      ...params,
+      updateSupport: params.updateSupport
     },
-    data: body,
+    data: formData,
     ...(options || {})
   })
 }

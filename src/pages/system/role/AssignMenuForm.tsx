@@ -128,7 +128,7 @@ const AssignMenuForm: React.FC = () => {
       confirmLoading={menuSubmitLoading}
       okText={textConst.common.ok}
       cancelText={textConst.common.cancel}
-      bodyStyle={{ paddingTop: 16 }}
+      styles={{ body: { paddingTop: 16 } }}
     >
       <div style={{ paddingBottom: 16, borderBottom: '1px solid #f0f0f0', marginBottom: 16 }}>
         <Space size={32}>

@@ -61,17 +61,17 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
       initialValues={
         editingMenu?.id
           ? {
-            ...editingMenu
-          }
+              ...editingMenu
+            }
           : {
-            parentId: editingMenu?.parentId || 0,
-            type: 1, // 默认菜单
-            sort: 0,
-            status: 0,
-            visible: true,
-            alwaysShow: true,
-            keepAlive: true
-          }
+              parentId: editingMenu?.parentId || 0,
+              type: 1, // 默认菜单
+              sort: 0,
+              status: 0,
+              visible: true,
+              alwaysShow: true,
+              keepAlive: true
+            }
       }
       layout="horizontal"
       labelCol={{ span: 5 }}
@@ -80,7 +80,9 @@ const SaveMenuForm: React.FC<SaveMenuModalProps> = ({ onSuccess }) => {
       rowProps={{ gutter: [16, 0] }}
       modalProps={{
         destroyOnHidden: true,
-        bodyStyle: { paddingBottom: 0 }
+        styles: {
+          body: { paddingBottom: 0 }
+        }
       }}
       colon={false}
       onFinish={async (values) => {

@@ -43,11 +43,12 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       title={editingClient ? textConst.action.update : textConst.action.create}
       width={550}
       modalProps={{
-        // 1. 设置内容区高度（推荐）
-        bodyStyle: {
-          height: '700px', // 固定高度
-          maxHeight: '70vh', // 最大高度（推荐，响应式）
-          overflowY: 'auto' // 内容溢出自动滚动
+        styles: {
+          body: {
+            height: '700px', // 固定高度
+            maxHeight: '70vh', // 最大高度（推荐，响应式）
+            overflowY: 'auto' // 内容溢出自动滚动
+          }
         },
         // 其他 Modal 配置
         centered: true, // 垂直居中
@@ -63,29 +64,29 @@ const SaveOAuth2ClientForm: React.FC<SaveOAuth2ClientModalProps> = ({ onSuccess 
       initialValues={
         editingClient
           ? {
-            id: editingClient.id,
-            clientId: editingClient.clientId,
-            secret: editingClient.secret,
-            name: editingClient.name,
-            logo: editingClient.logo,
-            description: editingClient.description,
-            status: editingClient.status,
-            accessTokenValiditySeconds: editingClient.accessTokenValiditySeconds,
-            refreshTokenValiditySeconds: editingClient.refreshTokenValiditySeconds,
-            redirectUris: editingClient.redirectUris || [],
-            authorizedGrantTypes: editingClient.authorizedGrantTypes?.[0] || 'authorization_code',
-            scopes: editingClient.scopes || [],
-            autoApproveScopes: editingClient.autoApproveScopes || [],
-            authorities: editingClient.authorities || [],
-            resourceIds: editingClient.resourceIds || [],
-            additionalInformation: editingClient.additionalInformation
-          }
+              id: editingClient.id,
+              clientId: editingClient.clientId,
+              secret: editingClient.secret,
+              name: editingClient.name,
+              logo: editingClient.logo,
+              description: editingClient.description,
+              status: editingClient.status,
+              accessTokenValiditySeconds: editingClient.accessTokenValiditySeconds,
+              refreshTokenValiditySeconds: editingClient.refreshTokenValiditySeconds,
+              redirectUris: editingClient.redirectUris || [],
+              authorizedGrantTypes: editingClient.authorizedGrantTypes?.[0] || 'authorization_code',
+              scopes: editingClient.scopes || [],
+              autoApproveScopes: editingClient.autoApproveScopes || [],
+              authorities: editingClient.authorities || [],
+              resourceIds: editingClient.resourceIds || [],
+              additionalInformation: editingClient.additionalInformation
+            }
           : {
-            status: 0,
-            accessTokenValiditySeconds: 3600,
-            refreshTokenValiditySeconds: 86400,
-            authorizedGrantTypes: ['authorization_code', 'refresh_token']
-          }
+              status: 0,
+              accessTokenValiditySeconds: 3600,
+              refreshTokenValiditySeconds: 86400,
+              authorizedGrantTypes: ['authorization_code', 'refresh_token']
+            }
       }
       layout="horizontal"
       labelCol={{ span: 6 }}

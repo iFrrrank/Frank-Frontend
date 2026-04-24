@@ -45,8 +45,8 @@ const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
       initialValues={
         editingPost
           ? {
-            ...editingPost
-          }
+              ...editingPost
+            }
           : { sort: 0, status: 0 }
       }
       layout="horizontal"
@@ -55,7 +55,9 @@ const SavePostForm: React.FC<SavePostModalProps> = ({ onSuccess }) => {
       colon={false}
       modalProps={{
         destroyOnHidden: true,
-        bodyStyle: { paddingBottom: 0 }
+        styles: {
+          body: { paddingBottom: 0 }
+        }
       }}
       onFinish={async (values) => {
         try {
