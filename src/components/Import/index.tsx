@@ -10,6 +10,7 @@ export interface ImportModalProps {
   title?: string
   open: boolean
   accept?: string // 限制上传的格式，如 '.xlsx,.xls' 或 '.jpg,.png'
+  maxSize?: number // 文件大小限制（单位：MB），如果不传则不限制
   onCancel: () => void
   onSuccess: () => void
   importApi: (params: any, file: File) => Promise<any>
@@ -28,6 +29,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
   title = '导入',
   open,
   accept,
+  maxSize = 5,
   onCancel,
   onSuccess,
   importApi,
@@ -35,7 +37,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
   templateName = '导入模板.xlsx',
   showUpdateSupport = false,
   draggerTitle = '点击或拖拽文件到此区域上传',
-  draggerHint = '支持 .xlsx 或 .xls 格式的 Excel 文件',
+  draggerHint = `支持 .xlsx 或 .xls 格式的 Excel 文件，不超过 ${maxSize} MB`,
   topContent,
   bottomContent
 }) => {
@@ -44,7 +46,6 @@ const ImportModal: React.FC<ImportModalProps> = ({
   const [updateSupport, setUpdateSupport] = useState(false)
 
   const downloadTemplate = async () => {
-    // 1. 明确的类型校验和拦截
     if (!templateApi) {
       return
     }
@@ -123,6 +124,17 @@ const ImportModal: React.FC<ImportModalProps> = ({
         accept={accept}
         maxCount={1}
         beforeUpload={(file) => {
+          if (maxSize) {
+            // file.size 的单位是字节（Bytes），除以两次 1024 得到 MB
+            const isLtMaxSize = file.size / 1024 / 1024 < maxSize
+
+            if (!isLtMaxSize) {
+              message.error(`文件大小不能超过 ${maxSize} MB！`)
+              // 彻底拒绝该文件，不会显示在文件列表
+              return Upload.LIST_IGNORE
+            }
+          }
+
           setImportFile(file)
           // 阻止自动上传，手动进行触发
           return false
