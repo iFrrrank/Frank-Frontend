@@ -8,20 +8,7 @@ import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import ImportModal from '@/components/Import'
-
-// 允许的文件类型
-const ACCEPT_TYPES = ['image/jpeg', 'image/png', 'image/gif']
-const ACCEPT_EXTENSIONS = '.jpg,.jpeg,.png,.gif'
-const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
-
-// 格式化文件大小
-const formatFileSize = (bytes?: number): string => {
-  if (bytes === undefined || bytes === null) return '-'
-  if (bytes < 1024) return `${bytes} B`
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KB`
-  if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(2)} MB`
-  return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`
-}
+import { formatFileSize } from '@/utils/file'
 
 const FileListPage: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
