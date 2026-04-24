@@ -9,31 +9,47 @@ const { Dragger } = Upload
 export interface ImportModalProps {
   title?: string
   open: boolean
+  accept?: string // 限制上传的格式，如 '.xlsx,.xls' 或 '.jpg,.png'
   onCancel: () => void
   onSuccess: () => void
   importApi: (params: any, file: File) => Promise<any>
-  templateApi: () => Promise<any>
+  templateApi?: () => Promise<any>
   templateName?: string
   showUpdateSupport?: boolean // 是否显示“覆盖更新”开关
+  // UI 文本定制
+  draggerTitle?: React.ReactNode // 拖拽区主标题
+  draggerHint?: React.ReactNode // 拖拽区副标题
+  // 扩展插槽
+  topContent?: React.ReactNode // 拖拽区上方的扩展内容
+  bottomContent?: React.ReactNode // 拖拽区下方的扩展内容
 }
 
 const ImportModal: React.FC<ImportModalProps> = ({
   title = '导入',
   open,
+  accept,
   onCancel,
   onSuccess,
   importApi,
   templateApi,
   templateName = '导入模板.xlsx',
-  showUpdateSupport = false
+  showUpdateSupport = false,
+  draggerTitle = '点击或拖拽文件到此区域上传',
+  draggerHint = '支持 .xlsx 或 .xls 格式的 Excel 文件',
+  topContent,
+  bottomContent
 }) => {
   const [importFile, setImportFile] = useState<File | null>(null)
   const [importLoading, setImportLoading] = useState(false)
   const [updateSupport, setUpdateSupport] = useState(false)
 
-  const handleExportBtnClick = async () => {
+  const downloadTemplate = async () => {
+    // 1. 明确的类型校验和拦截
+    if (!templateApi) {
+      return
+    }
     try {
-      const resp = await templateApi()
+      const resp = await templateApi?.()
       download.excel(resp, templateName)
       message.success(textConst.msg.importTemplateSuccess)
     } catch (err: any) {
@@ -102,11 +118,9 @@ const ImportModal: React.FC<ImportModalProps> = ({
       confirmLoading={importLoading}
       destroyOnHidden
     >
-      <div style={{ marginBottom: 16 }}>
-        <a onClick={handleExportBtnClick}>下载导入模板</a>
-      </div>
+      {topContent && <div style={{ marginBottom: 16 }}>{topContent}</div>}
       <Dragger
-        accept=".xlsx,.xls"
+        accept={accept}
         maxCount={1}
         beforeUpload={(file) => {
           setImportFile(file)
@@ -118,16 +132,29 @@ const ImportModal: React.FC<ImportModalProps> = ({
         <p className="ant-upload-drag-icon">
           <InboxOutlined />
         </p>
-        <p className="ant-upload-text">点击或拖拽文件到此区域上传</p>
-        <p className="ant-upload-hint">支持 .xlsx 或 .xls 格式的 Excel 文件</p>
+        <p className="ant-upload-text">{draggerTitle}</p>
+        {draggerHint && <p className="ant-upload-hint">{draggerHint}</p>}
       </Dragger>
 
-      {showUpdateSupport && (
-        <div style={{ marginTop: 16 }}>
-          <span style={{ marginRight: 8 }}>是否覆盖更新已有数据</span>
-          <Switch checked={updateSupport} onChange={setUpdateSupport} />
-        </div>
-      )}
+      {
+        bottomContent ? (
+          // 1：父组件传入了特定的 bottomContent，优先渲染自定义内容
+          <div style={{ marginTop: 10 }}>{bottomContent}</div>
+        ) : showUpdateSupport ? (
+          // 2：没传 bottomContent，但要求显示开关或有下载接口，则渲染默认结构
+          <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
+            {showUpdateSupport && (
+              <>
+                <span style={{ marginRight: 8 }}>是否覆盖更新已有数据</span>
+                <Switch checked={updateSupport} onChange={setUpdateSupport} />{' '}
+                <a style={{ marginLeft: 'auto' }} onClick={downloadTemplate}>
+                  下载导入模板
+                </a>
+              </>
+            )}
+          </div>
+        ) : null // 3：如果都没传，彻底不渲染底部元素
+      }
     </Modal>
   )
 }

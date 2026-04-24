@@ -39,6 +39,22 @@ const SystemUser: React.FC = () => {
   const [importModalVisible, setImportModalVisible] = useState(false)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
+  // 部门选中回调
+  const handleDeptSelect = (deptId: number | undefined) => {
+    setSelectedDeptId(deptId)
+    actionRef.current?.reload()
+  }
+
+  const handleExportBtnClick = () => {
+    // 获取表单当前的值
+    const formValues = formRef.current?.getFieldsValue?.() || {}
+    handleExport({
+      exportApi: exportUserList,
+      exportParams: { ...formValues, deptId: selectedDeptId },
+      fileName: '用户数据.xlsx'
+    })
+  }
+
   // 列定义
   const columns: ProColumns<API.SystemUserRespVO>[] = [
     {
@@ -139,22 +155,6 @@ const SystemUser: React.FC = () => {
       }
     }
   ]
-
-  // 部门选中回调
-  const handleDeptSelect = (deptId: number | undefined) => {
-    setSelectedDeptId(deptId)
-    actionRef.current?.reload()
-  }
-
-  const handleExportBtnClick = () => {
-    // 获取表单当前的值
-    const formValues = formRef.current?.getFieldsValue?.() || {}
-    handleExport({
-      exportApi: exportUserList,
-      exportParams: { ...formValues, deptId: selectedDeptId },
-      fileName: '用户数据.xlsx'
-    })
-  }
 
   return (
     <Row gutter={16}>
@@ -292,6 +292,7 @@ const SystemUser: React.FC = () => {
       <ImportModal
         title="导入用户"
         open={importModalVisible}
+        accept=".xls,.xlsx"
         onCancel={() => setImportModalVisible(false)}
         onSuccess={() => {
           setImportModalVisible(false)

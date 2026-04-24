@@ -1,16 +1,25 @@
 import React, { useRef, useState } from 'react'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
-import { ProTable } from '@ant-design/pro-components'
+import { ProTable, ProFormSelect } from '@ant-design/pro-components'
 import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons'
-import { getCustomerPage, exportCustomerExcel } from '@/api/crm/customer'
+import {
+  getCustomerPage,
+  exportCustomerExcel,
+  importTemplate,
+  importExcel
+} from '@/api/crm/customer'
 import { SCENE_TYPE } from '@/utils/constantsValue'
 import { textConst } from '@/locales/zh-CN'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import CustomerForm from './CustomerForm'
-import CustomerImportForm from './CustomerImportForm'
 import { INDUSTRY_LIST, CUSTOMER_LEVEL, CUSTOMER_SOURCE } from '@/utils/constantsValue'
 import { handleExport } from '@/components/Export'
+import ImportModal from '@/components/Import'
+import { getSimpleUserList } from '@/api/system/user'
+
+// 用户列表缓存
+let userOptionsCache: any[] | null = null
 
 const CustomerList: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -262,16 +271,39 @@ const CustomerList: React.FC = () => {
         />
       )}
 
-      {importVisible && (
-        <CustomerImportForm
-          visible={importVisible}
-          setVisible={setImportVisible}
-          onSuccess={() => {
-            setImportVisible(false)
-            actionRef.current?.reload()
-          }}
-        />
-      )}
+      <ImportModal
+        title="导入客户"
+        open={importVisible}
+        accept=".xls,.xlsx"
+        onCancel={() => setImportVisible(false)}
+        onSuccess={() => {
+          setImportVisible(false)
+          // 导入成功后刷新表格
+          actionRef.current?.reload()
+        }}
+        importApi={importExcel}
+        templateApi={importTemplate}
+        templateName="客户导入模板.xlsx"
+        showUpdateSupport={true}
+        topContent={
+          <ProFormSelect
+            name="ownerUserId"
+            label="负责人"
+            colon={false}
+            rules={[{ required: true, message: '负责人是必选项！' }]}
+            placeholder="请选择负责人"
+            showSearch
+            request={async () => {
+              if (userOptionsCache) return userOptionsCache
+              const res = await getSimpleUserList()
+              if (res.data) {
+                userOptionsCache = res.data.map((u: any) => ({ label: u.nickname, value: u.id }))
+              }
+              return userOptionsCache || []
+            }}
+          />
+        }
+      />
     </>
   )
 }
