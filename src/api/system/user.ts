@@ -55,6 +55,7 @@ export async function getUser(params: API.getUserParams, options?: { [key: strin
 export async function importTemplate(options?: { [key: string]: any }) {
   return request<any>('/system/user/get-import-template', {
     method: 'GET',
+    responseType: 'blob',
     ...(options || {})
   })
 }
@@ -62,18 +63,21 @@ export async function importTemplate(options?: { [key: string]: any }) {
 // 导入用户 POST /system/user/import
 export async function importExcel(
   params: API.importExcelParams,
-  body: {},
+  file: File, // 直接接收 File 对象
   options?: { [key: string]: any }
 ) {
+  // 使用 FormData 来包装文件
+  const formData = new FormData()
+  formData.append('file', file)
+  formData.append('updateSupport', String(params.updateSupport))
+
   return request<API.CommonResultSystemUserImportRespVO>('/system/user/import', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
     params: {
-      ...params
+      ...params,
+      updateSupport: params.updateSupport
     },
-    data: body,
+    data: formData,
     ...(options || {})
   })
 }
