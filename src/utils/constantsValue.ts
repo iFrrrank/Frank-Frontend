@@ -34,7 +34,11 @@ import {
   PayTransferStatusEnum,
   UserTypeEnum,
   PayNotifyTypeEnum,
-  PayNotifyStatusEnum
+  PayNotifyStatusEnum,
+  HrmRecruitCandidateStatusEnum,
+  HrmRecruitCandidateEducationEnum,
+  HrmRecruitInterviewTypeEnum,
+  HrmRecruitInterviewResultEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -775,3 +779,72 @@ export const PAY_NOTIFY_STATUS: SelectValueItem = Object.values(PayNotifyStatusE
   },
   {} as SelectValueItem
 )
+
+// ========== HRM 招聘模块 ==========
+export const RECRUIT_CANDIDATE_STATUS: SelectValueItem = {
+  [HrmRecruitCandidateStatusEnum.NEW.status]: {
+    text: HrmRecruitCandidateStatusEnum.NEW.name,
+    status: 'Default'
+  },
+  [HrmRecruitCandidateStatusEnum.PRIMARY_PASS.status]: {
+    text: HrmRecruitCandidateStatusEnum.PRIMARY_PASS.name,
+    status: 'Processing'
+  },
+  [HrmRecruitCandidateStatusEnum.INTERVIEW.status]: {
+    text: HrmRecruitCandidateStatusEnum.INTERVIEW.name,
+    status: 'Warning'
+  },
+  [HrmRecruitCandidateStatusEnum.INTERVIEW_PASS.status]: {
+    text: HrmRecruitCandidateStatusEnum.INTERVIEW_PASS.name,
+    status: 'Processing'
+  },
+  [HrmRecruitCandidateStatusEnum.OFFER_SENT.status]: {
+    text: HrmRecruitCandidateStatusEnum.OFFER_SENT.name,
+    status: 'Success'
+  },
+  [HrmRecruitCandidateStatusEnum.PENDING_ENTRY.status]: {
+    text: HrmRecruitCandidateStatusEnum.PENDING_ENTRY.name,
+    status: 'Success'
+  },
+  [HrmRecruitCandidateStatusEnum.ELIMINATED.status]: {
+    text: HrmRecruitCandidateStatusEnum.ELIMINATED.name,
+    status: 'Error'
+  },
+  [HrmRecruitCandidateStatusEnum.JOINED.status]: {
+    text: HrmRecruitCandidateStatusEnum.JOINED.name,
+    status: 'Success'
+  }
+}
+
+export const RECRUIT_CANDIDATE_EDUCATION: SelectValueItem = Object.values(
+  HrmRecruitCandidateEducationEnum
+).reduce((acc, item) => {
+  acc[item.education] = { text: item.name }
+  return acc
+}, {} as SelectValueItem)
+
+export const RECRUIT_CANDIDATE_EDUCATION_OPTIONS: OptionItem[] = Object.values(
+  HrmRecruitCandidateEducationEnum
+).map((item) => ({ label: item.name, value: item.education }))
+
+export const RECRUIT_INTERVIEW_TYPE: SelectValueItem = Object.values(
+  HrmRecruitInterviewTypeEnum
+).reduce((acc, item) => {
+  acc[item.type] = { text: item.name }
+  return acc
+}, {} as SelectValueItem)
+
+export const RECRUIT_INTERVIEW_RESULT: SelectValueItem = Object.values(
+  HrmRecruitInterviewResultEnum
+).reduce((acc, item) => {
+  acc[item.result] = { text: item.name }
+  return acc
+}, {} as SelectValueItem)
+
+// 允许「一键清理」的候选人状态
+export const RECRUIT_CANDIDATE_CLEAN_STATUSES: number[] = [
+  HrmRecruitCandidateStatusEnum.NEW.status,
+  HrmRecruitCandidateStatusEnum.PRIMARY_PASS.status,
+  HrmRecruitCandidateStatusEnum.INTERVIEW.status,
+  HrmRecruitCandidateStatusEnum.INTERVIEW_PASS.status
+]

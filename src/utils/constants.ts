@@ -2049,3 +2049,129 @@ export const BrokerageBindModeEnum = {
     name: '覆盖绑定'
   }
 }
+
+// ========== HRM 招聘模块 ==========
+
+// 招聘候选人状态枚举
+export const HrmRecruitCandidateStatusEnum = {
+  NEW: {
+    status: 1,
+    name: '新候选人'
+  },
+  PRIMARY_PASS: {
+    status: 2,
+    name: '初选通过'
+  },
+  INTERVIEW: {
+    status: 3,
+    name: '安排面试'
+  },
+  INTERVIEW_PASS: {
+    status: 4,
+    name: '面试通过'
+  },
+  OFFER_SENT: {
+    status: 5,
+    name: '已发 offer'
+  },
+  PENDING_ENTRY: {
+    status: 6,
+    name: '待入职'
+  },
+  ELIMINATED: {
+    status: 7,
+    name: '已淘汰'
+  },
+  JOINED: {
+    status: 8,
+    name: '已入职'
+  }
+}
+
+// 招聘候选人学历枚举
+export const HrmRecruitCandidateEducationEnum = {
+  PRIMARY_SCHOOL: {
+    education: 1,
+    name: '小学'
+  },
+  JUNIOR_HIGH_SCHOOL: {
+    education: 2,
+    name: '初中'
+  },
+  SECONDARY_TECHNICAL_SCHOOL: {
+    education: 3,
+    name: '中专'
+  },
+  SECONDARY_VOCATIONAL_SCHOOL: {
+    education: 4,
+    name: '中职'
+  },
+  TECHNICAL_SCHOOL: {
+    education: 5,
+    name: '技校'
+  },
+  HIGH_SCHOOL: {
+    education: 6,
+    name: '高中'
+  },
+  COLLEGE: {
+    education: 7,
+    name: '大专'
+  },
+  BACHELOR: {
+    education: 8,
+    name: '本科'
+  },
+  MASTER: {
+    education: 9,
+    name: '硕士'
+  },
+  DOCTOR: {
+    education: 10,
+    name: '博士'
+  },
+  POSTDOCTORAL: {
+    education: 11,
+    name: '博士后'
+  },
+  OTHER: {
+    education: 12,
+    name: '其他'
+  }
+}
+
+// 招聘面试方式枚举
+export const HrmRecruitInterviewTypeEnum = {
+  ONSITE: {
+    type: 1,
+    name: '现场面试'
+  },
+  PHONE: {
+    type: 2,
+    name: '电话面试'
+  },
+  VIDEO: {
+    type: 3,
+    name: '视频面试'
+  }
+}
+
+// 招聘面试结果枚举
+export const HrmRecruitInterviewResultEnum = {
+  UNFINISHED: {
+    result: 1,
+    name: '面试未完成'
+  },
+  PASS: {
+    result: 2,
+    name: '面试通过'
+  },
+  NOT_PASS: {
+    result: 3,
+    name: '面试未通过'
+  },
+  CANCEL: {
+    result: 4,
+    name: '面试取消'
+  }
+}

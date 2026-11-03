@@ -910,6 +910,26 @@ export default [
       }
     ]
   },
+  {
+    path: '/hrm',
+    name: 'HRM系统',
+    icon: 'team',
+    routes: [
+      {
+        path: '/hrm/recruit',
+        name: '招聘管理',
+        icon: 'user',
+        routes: [
+          {
+            path: '/hrm/recruit/candidate',
+            name: '候选人管理',
+            icon: 'user',
+            component: './hrm/recruit/candidate'
+          }
+        ]
+      }
+    ]
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]
