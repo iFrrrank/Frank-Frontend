@@ -42,9 +42,9 @@ const SaveMailAccountForm: React.FC<SaveMailAccountModalProps> = ({ onSuccess })
         editingMailAccount
           ? { ...editingMailAccount }
           : {
-            sslEnable: true,
-            starttlsEnable: false
-          }
+              sslEnable: true,
+              starttlsEnable: false
+            }
       }
       layout="horizontal"
       labelCol={{ span: 8 }}
@@ -72,7 +72,7 @@ const SaveMailAccountForm: React.FC<SaveMailAccountModalProps> = ({ onSuccess })
           } else {
             message.error(
               resp.msg ||
-              (editingMailAccount ? textConst.msg.updateError : textConst.msg.createError)
+                (editingMailAccount ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }

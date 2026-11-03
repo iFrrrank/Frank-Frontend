@@ -416,4 +416,3 @@ const BusinessForm: React.FC<BusinessFormProps> = ({ visible, setVisible, onSucc
 }
 
 export default BusinessForm
-

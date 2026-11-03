@@ -8,10 +8,10 @@ export async function getSalarySlip(
   return request<API.CommonResultHrmSalarySlipRespVO>('/hrm/salary/slip/get', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取工资条分页列表 GET /hrm/salary/slip/page
@@ -23,23 +23,24 @@ export async function getSalarySlipPage(
     method: 'GET',
     params: {
       ...params,
-      'reqVO': undefined,
-      ...params['reqVO'],
+      reqVO: undefined,
+      ...params['reqVO']
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 修改工资条备注 PUT /hrm/salary/slip/remark
-export async function updateSalarySlipRemark(body: API.HrmSalarySlipRemarkReqVO,
+export async function updateSalarySlipRemark(
+  body: API.HrmSalarySlipRemarkReqVO,
   options?: { [key: string]: any }
 ) {
   return request<API.CommonResultBoolean>('/hrm/salary/slip/remark', {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     data: body,
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }

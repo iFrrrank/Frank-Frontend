@@ -8,10 +8,10 @@ export async function deleteEmployeeSalaryCard(
   return request<API.CommonResultBoolean>('/hrm/employee/salary-card/delete', {
     method: 'DELETE',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取员工工资卡 GET /hrm/employee/salary-card/get
@@ -22,22 +22,23 @@ export async function getEmployeeSalaryCard(
   return request<API.CommonResultHrmEmployeeSalaryCardRespVO>('/hrm/employee/salary-card/get', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 保存员工工资卡 PUT /hrm/employee/salary-card/save
-export async function saveEmployeeSalaryCard(body: API.HrmEmployeeSalaryCardSaveReqVO,
+export async function saveEmployeeSalaryCard(
+  body: API.HrmEmployeeSalaryCardSaveReqVO,
   options?: { [key: string]: any }
 ) {
   return request<API.CommonResultLong>('/hrm/employee/salary-card/save', {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     data: body,
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }

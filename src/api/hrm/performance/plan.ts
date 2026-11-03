@@ -8,24 +8,25 @@ export async function archivePerformancePlan(
   return request<API.CommonResultBoolean>('/hrm/performance/plan/archive', {
     method: 'POST',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 创建绩效计划 POST /hrm/performance/plan/create
-export async function createPerformancePlan(body: API.HrmPerformancePlanSaveReqVO,
+export async function createPerformancePlan(
+  body: API.HrmPerformancePlanSaveReqVO,
   options?: { [key: string]: any }
 ) {
   return request<API.CommonResultLong>('/hrm/performance/plan/create', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     data: body,
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 删除绩效计划 DELETE /hrm/performance/plan/delete
@@ -36,10 +37,10 @@ export async function deletePerformancePlan(
   return request<API.CommonResultBoolean>('/hrm/performance/plan/delete', {
     method: 'DELETE',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取绩效计划 GET /hrm/performance/plan/get
@@ -50,10 +51,10 @@ export async function getPerformancePlan(
   return request<API.CommonResultHrmPerformancePlanRespVO>('/hrm/performance/plan/get', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取绩效结果等级统计 GET /hrm/performance/plan/level-count
@@ -61,13 +62,16 @@ export async function getPerformancePlanLevelCount(
   params: API.getPerformancePlanLevelCountParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultListHrmPerformancePlanResultLevelCountRespVO>('/hrm/performance/plan/level-count', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
+  return request<API.CommonResultListHrmPerformancePlanResultLevelCountRespVO>(
+    '/hrm/performance/plan/level-count',
+    {
+      method: 'GET',
+      params: {
+        ...params
+      },
+      ...(options || {})
+    }
+  )
 }
 
 // 开启绩效评分 POST /hrm/performance/plan/open-scoring
@@ -78,10 +82,10 @@ export async function openPerformancePlanScoring(
   return request<API.CommonResultBoolean>('/hrm/performance/plan/open-scoring', {
     method: 'POST',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取绩效计划分页列表 GET /hrm/performance/plan/page
@@ -93,11 +97,11 @@ export async function getPerformancePlanPage(
     method: 'GET',
     params: {
       ...params,
-      'reqVO': undefined,
-      ...params['reqVO'],
+      reqVO: undefined,
+      ...params['reqVO']
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取绩效计划阶段统计 GET /hrm/performance/plan/stage-count
@@ -105,13 +109,16 @@ export async function getPerformancePlanStageCount(
   params: API.getPerformancePlanStageCountParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultListHrmPerformancePlanStageCountRespVO>('/hrm/performance/plan/stage-count', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
+  return request<API.CommonResultListHrmPerformancePlanStageCountRespVO>(
+    '/hrm/performance/plan/stage-count',
+    {
+      method: 'GET',
+      params: {
+        ...params
+      },
+      ...(options || {})
+    }
+  )
 }
 
 // 启动绩效计划 POST /hrm/performance/plan/start
@@ -122,10 +129,10 @@ export async function startPerformancePlan(
   return request<API.CommonResultBoolean>('/hrm/performance/plan/start', {
     method: 'POST',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 发起绩效面谈 POST /hrm/performance/plan/start-interview
@@ -136,10 +143,10 @@ export async function startPerformancePlanInterview(
   return request<API.CommonResultBoolean>('/hrm/performance/plan/start-interview', {
     method: 'POST',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取绩效计划状态统计 GET /hrm/performance/plan/status-count
@@ -151,11 +158,11 @@ export async function getPerformancePlanStatusCount(
     method: 'GET',
     params: {
       ...params,
-      'reqVO': undefined,
-      ...params['reqVO'],
+      reqVO: undefined,
+      ...params['reqVO']
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 终止绩效计划 POST /hrm/performance/plan/terminate
@@ -166,22 +173,23 @@ export async function terminatePerformancePlan(
   return request<API.CommonResultBoolean>('/hrm/performance/plan/terminate', {
     method: 'POST',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 更新绩效计划 PUT /hrm/performance/plan/update
-export async function updatePerformancePlan(body: API.HrmPerformancePlanSaveReqVO,
+export async function updatePerformancePlan(
+  body: API.HrmPerformancePlanSaveReqVO,
   options?: { [key: string]: any }
 ) {
   return request<API.CommonResultBoolean>('/hrm/performance/plan/update', {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     data: body,
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }

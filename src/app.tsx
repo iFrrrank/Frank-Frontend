@@ -26,7 +26,7 @@ export async function getInitialState(): Promise<{
   const fetchUserInfo = async () => {
     try {
       const resp = await getUser({
-        id: 1024
+        id: 1035
       })
       return resp.data
     } catch (_error) {

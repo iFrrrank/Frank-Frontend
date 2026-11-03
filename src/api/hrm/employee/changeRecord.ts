@@ -5,11 +5,14 @@ export async function getEmployeeChangeRecordList(
   params: API.getEmployeeChangeRecordListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultListHrmEmployeeChangeRecordRespVO>('/hrm/employee/change-record/list', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
+  return request<API.CommonResultListHrmEmployeeChangeRecordRespVO>(
+    '/hrm/employee/change-record/list',
+    {
+      method: 'GET',
+      params: {
+        ...params
+      },
+      ...(options || {})
+    }
+  )
 }

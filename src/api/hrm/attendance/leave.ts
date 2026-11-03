@@ -9,11 +9,11 @@ export async function exportAttendanceLeave(
     method: 'GET',
     params: {
       ...params,
-      'exportReqVO': undefined,
-      ...params['exportReqVO'],
+      exportReqVO: undefined,
+      ...params['exportReqVO']
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 申请请假 GET /hrm/attendance/leave/get
@@ -24,10 +24,10 @@ export async function getAttendanceLeave(
   return request<API.CommonResultHrmAttendanceLeaveRespVO>('/hrm/attendance/leave/get', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取请假分页列表 GET /hrm/attendance/leave/page
@@ -39,9 +39,9 @@ export async function getAttendanceLeavePage(
     method: 'GET',
     params: {
       ...params,
-      'pageReqVO': undefined,
-      ...params['pageReqVO'],
+      pageReqVO: undefined,
+      ...params['pageReqVO']
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }

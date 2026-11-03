@@ -15,7 +15,7 @@ module.exports = {
   htmlWhitespaceSensitivity: 'strict', // 指定HTML文件的全局空格敏感度，可选 css | strict | ignore
   vueIndentScriptAndStyle: false, // 是否缩进 Vue 文件中的<script>和<style>标记内的代码
   rangeStart: 0, // 这两个选项可用于格式化以给定字符偏移量（分别包括和不包括）开始和结束的代码
-  rangeEnd: 'Infinity',
+  rangeEnd: Infinity,
   useEditorConfig: false, // 是否使用 editorconfig 中的配置
   endOfLine: 'crlf' // 文件结束符，可选 lf | crlf | cr | auto
 }

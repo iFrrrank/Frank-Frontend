@@ -8,9 +8,9 @@ export async function cancelSalaryChangeRecord(
   return request<API.CommonResultBoolean>('/hrm/salary/change-record/cancel', {
     method: 'PUT',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
+    ...(options || {})
   })
 }
 
@@ -22,9 +22,9 @@ export async function deleteSalaryChangeRecord(
   return request<API.CommonResultBoolean>('/hrm/salary/change-record/delete', {
     method: 'DELETE',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
+    ...(options || {})
   })
 }
 
@@ -36,10 +36,10 @@ export async function getSalaryChangeRecord(
   return request<API.CommonResultHrmSalaryChangeRecordRespVO>('/hrm/salary/change-record/get', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取定薪/调薪记录列表 GET /hrm/salary/change-record/list
@@ -47,11 +47,14 @@ export async function getSalaryChangeRecordList(
   params: API.getSalaryChangeRecordListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultListHrmSalaryChangeRecordRespVO>('/hrm/salary/change-record/list', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
+  return request<API.CommonResultListHrmSalaryChangeRecordRespVO>(
+    '/hrm/salary/change-record/list',
+    {
+      method: 'GET',
+      params: {
+        ...params
+      },
+      ...(options || {})
+    }
+  )
 }

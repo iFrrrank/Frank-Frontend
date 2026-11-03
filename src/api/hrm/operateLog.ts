@@ -9,9 +9,9 @@ export async function getOperateLogPage(
     method: 'GET',
     params: {
       ...params,
-      'pageReqVO': undefined,
-      ...params['pageReqVO'],
+      pageReqVO: undefined,
+      ...params['pageReqVO']
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }

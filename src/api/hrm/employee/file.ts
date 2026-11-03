@@ -8,22 +8,23 @@ export async function getEmployeeFileList(
   return request<API.CommonResultListHrmEmployeeFileRespVO>('/hrm/employee/file/list', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 保存员工材料附件 PUT /hrm/employee/file/save
-export async function saveEmployeeFiles(body: API.HrmEmployeeFileSaveReqVO,
+export async function saveEmployeeFiles(
+  body: API.HrmEmployeeFileSaveReqVO,
   options?: { [key: string]: any }
 ) {
   return request<API.CommonResultBoolean>('/hrm/employee/file/save', {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     data: body,
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }

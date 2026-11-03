@@ -8,10 +8,10 @@ export async function computeMonthRecord(
   return request<API.CommonResultBoolean>('/hrm/salary/month-record/compute', {
     method: 'POST',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 带导入文件核算工资表 POST /hrm/salary/month-record/compute-import
@@ -23,7 +23,7 @@ export async function computeMonthRecordWithImport(
   cumulativeTaxFile?: File,
   options?: { [key: string]: any }
 ) {
-  const formData = new FormData();
+  const formData = new FormData()
 
   if (attendanceFile) {
     formData.append('attendanceFile', attendanceFile)
@@ -37,42 +37,40 @@ export async function computeMonthRecordWithImport(
     formData.append('cumulativeTaxFile', cumulativeTaxFile)
   }
 
-  Object.keys(body).forEach(ele => {
-    const item = (body as any)[ele];
+  Object.keys(body).forEach((ele) => {
+    const item = (body as any)[ele]
     if (item !== undefined && item !== null) {
       if (typeof item === 'object' && !(item instanceof File)) {
         if (item instanceof Array) {
-          item.forEach((f) => formData.append(ele, f || ''));
+          item.forEach((f) => formData.append(ele, f || ''))
         } else {
-          formData.append(ele, new Blob([JSON.stringify(item)], { type: 'application/json' }));
+          formData.append(ele, new Blob([JSON.stringify(item)], { type: 'application/json' }))
         }
       } else {
-        formData.append(ele, item);
+        formData.append(ele, item)
       }
     }
-  });
+  })
 
   return request<API.CommonResultBoolean>('/hrm/salary/month-record/compute-import', {
     method: 'POST',
     params: {
       // syncInsuranceData has a default value: true
       syncInsuranceData: 'true',
-      ...params,
+      ...params
     },
     data: formData,
     requestType: 'form',
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 创建下月工资表 POST /hrm/salary/month-record/create-next
-export async function createNextMonthRecord(
-  options?: { [key: string]: any }
-) {
+export async function createNextMonthRecord(options?: { [key: string]: any }) {
   return request<API.CommonResultLong>('/hrm/salary/month-record/create-next', {
     method: 'POST',
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 删除月度工资表 DELETE /hrm/salary/month-record/delete
@@ -83,10 +81,10 @@ export async function deleteMonthRecord(
   return request<API.CommonResultBoolean>('/hrm/salary/month-record/delete', {
     method: 'DELETE',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取月度工资表 GET /hrm/salary/month-record/get
@@ -97,10 +95,10 @@ export async function getMonthRecord(
   return request<API.CommonResultHrmSalaryMonthRecordRespVO>('/hrm/salary/month-record/get', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取工资表专项附加扣除导入模板 GET /hrm/salary/month-record/get-additional-deduction-import-template
@@ -111,10 +109,10 @@ export async function getAdditionalDeductionImportTemplate(
   return request<any>('/hrm/salary/month-record/get-additional-deduction-import-template', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取工资表考勤导入模板 GET /hrm/salary/month-record/get-attendance-import-template
@@ -125,10 +123,10 @@ export async function getAttendanceImportTemplate(
   return request<any>('/hrm/salary/month-record/get-attendance-import-template', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取工资表上月个税累计导入模板 GET /hrm/salary/month-record/get-cumulative-tax-import-template
@@ -139,20 +137,18 @@ export async function getCumulativeTaxImportTemplate(
   return request<any>('/hrm/salary/month-record/get-cumulative-tax-import-template', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取最近月度工资表 GET /hrm/salary/month-record/last
-export async function getLastMonthRecord(
-  options?: { [key: string]: any }
-) {
+export async function getLastMonthRecord(options?: { [key: string]: any }) {
   return request<API.CommonResultHrmSalaryMonthRecordRespVO>('/hrm/salary/month-record/last', {
     method: 'GET',
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }
 
 // 获取工资项汇总 GET /hrm/salary/month-record/option-summary
@@ -160,15 +156,18 @@ export async function getMonthOptionSummary(
   params: API.getMonthOptionSummaryParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultListHrmSalaryOptionValueVO>('/hrm/salary/month-record/option-summary', {
-    method: 'GET',
-    params: {
-      ...params,
-      'reqVO': undefined,
-      ...params['reqVO'],
-    },
-    ...(options || {}),
-  });
+  return request<API.CommonResultListHrmSalaryOptionValueVO>(
+    '/hrm/salary/month-record/option-summary',
+    {
+      method: 'GET',
+      params: {
+        ...params,
+        reqVO: undefined,
+        ...params['reqVO']
+      },
+      ...(options || {})
+    }
+  )
 }
 
 // 获取月度工资表分页列表 GET /hrm/salary/month-record/page
@@ -176,15 +175,18 @@ export async function getMonthRecordPage(
   params: API.getMonthRecordPageParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultPageResultHrmSalaryMonthRecordRespVO>('/hrm/salary/month-record/page', {
-    method: 'GET',
-    params: {
-      ...params,
-      'reqVO': undefined,
-      ...params['reqVO'],
-    },
-    ...(options || {}),
-  });
+  return request<API.CommonResultPageResultHrmSalaryMonthRecordRespVO>(
+    '/hrm/salary/month-record/page',
+    {
+      method: 'GET',
+      params: {
+        ...params,
+        reqVO: undefined,
+        ...params['reqVO']
+      },
+      ...(options || {})
+    }
+  )
 }
 
 // 获取工资核算准备情况 GET /hrm/salary/month-record/payroll-readiness
@@ -192,11 +194,14 @@ export async function getPayrollReadiness(
   params: API.getPayrollReadinessParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultHrmSalaryPayrollReadinessRespVO>('/hrm/salary/month-record/payroll-readiness', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
+  return request<API.CommonResultHrmSalaryPayrollReadinessRespVO>(
+    '/hrm/salary/month-record/payroll-readiness',
+    {
+      method: 'GET',
+      params: {
+        ...params
+      },
+      ...(options || {})
+    }
+  )
 }

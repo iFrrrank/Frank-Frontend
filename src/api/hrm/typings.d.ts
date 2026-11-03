@@ -1,5543 +1,5541 @@
 declare namespace API {
-
   type archivePerformancePlanParams = {
     // 绩效计划 Id
-    id: number;
+    id: number
   }
 
   type AssessmentConfig = {
     // 模板名称
-    name: string;
+    name: string
     // 计分方式
-    scoreCalculation: number;
+    scoreCalculation: number
     // 分数上限类型
-    upperLimitType: number;
+    upperLimitType: number
     // 分数上限
-    upperLimitScore: number;
+    upperLimitScore: number
     // 考核维度配置
-    dimensions: Dimension[];
+    dimensions: Dimension[]
   }
 
   type cancelSalaryChangeRecordParams = {
     // 定薪/调薪记录 Id
-    id: number;
+    id: number
   }
 
   type checkAttendanceHolidayParams = {
     // 待检查日期
-    day: string;
+    day: string
   }
 
   type CommonResultBoolean = {
-    code?: number;
-    data?: boolean;
-    msg?: string;
+    code?: number
+    data?: boolean
+    msg?: string
   }
 
   type CommonResultHrmAttendanceClockRespVO = {
-    code?: number;
-    data?: HrmAttendanceClockRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmAttendanceClockRespVO
+    msg?: string
   }
 
   type CommonResultHrmAttendanceClockShiftRespVO = {
-    code?: number;
-    data?: HrmAttendanceClockShiftRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmAttendanceClockShiftRespVO
+    msg?: string
   }
 
   type CommonResultHrmAttendanceDailyDetailRespVO = {
-    code?: number;
-    data?: HrmAttendanceDailyDetailRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmAttendanceDailyDetailRespVO
+    msg?: string
   }
 
   type CommonResultHrmAttendanceGroupRespVO = {
-    code?: number;
-    data?: HrmAttendanceGroupRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmAttendanceGroupRespVO
+    msg?: string
   }
 
   type CommonResultHrmAttendanceHolidayRespVO = {
-    code?: number;
-    data?: HrmAttendanceHolidayRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmAttendanceHolidayRespVO
+    msg?: string
   }
 
   type CommonResultHrmAttendanceLeaveRespVO = {
-    code?: number;
-    data?: HrmAttendanceLeaveRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmAttendanceLeaveRespVO
+    msg?: string
   }
 
   type CommonResultHrmAttendanceMonthDetailRespVO = {
-    code?: number;
-    data?: HrmAttendanceMonthDetailRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmAttendanceMonthDetailRespVO
+    msg?: string
   }
 
-
   type CommonResultHrmEmployeeImportRespVO = {
-    code?: number;
-    data?: HrmEmployeeImportRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeImportRespVO
+    msg?: string
   }
 
   type CommonResultHrmEmployeeNotifyRespVO = {
-    code?: number;
-    data?: HrmEmployeeNotifyRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeNotifyRespVO
+    msg?: string
   }
 
   type CommonResultHrmEmployeeQuitInfoRespVO = {
-    code?: number;
-    data?: HrmEmployeeQuitInfoRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeQuitInfoRespVO
+    msg?: string
   }
 
   type CommonResultHrmEmployeeRespVO = {
-    code?: number;
-    data?: HrmEmployeeRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeRespVO
+    msg?: string
   }
 
   type CommonResultHrmEmployeeSalaryCardRespVO = {
-    code?: number;
-    data?: HrmEmployeeSalaryCardRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeSalaryCardRespVO
+    msg?: string
   }
 
   type CommonResultHrmInsuranceEmployeeInfoRespVO = {
-    code?: number;
-    data?: HrmInsuranceEmployeeInfoRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmInsuranceEmployeeInfoRespVO
+    msg?: string
   }
 
   type CommonResultHrmInsuranceMonthEmployeeRecordRespVO = {
-    code?: number;
-    data?: HrmInsuranceMonthEmployeeRecordRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmInsuranceMonthEmployeeRecordRespVO
+    msg?: string
   }
 
   type CommonResultHrmInsuranceMonthRecordRespVO = {
-    code?: number;
-    data?: HrmInsuranceMonthRecordRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmInsuranceMonthRecordRespVO
+    msg?: string
   }
 
   type CommonResultHrmInsuranceSchemeRespVO = {
-    code?: number;
-    data?: HrmInsuranceSchemeRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmInsuranceSchemeRespVO
+    msg?: string
   }
 
   type CommonResultHrmPerformanceAssessmentRespVO = {
-    code?: number;
-    data?: HrmPerformanceAssessmentRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmPerformanceAssessmentRespVO
+    msg?: string
   }
 
   type CommonResultHrmPerformanceAssessmentTemplateRespVO = {
-    code?: number;
-    data?: HrmPerformanceAssessmentTemplateRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmPerformanceAssessmentTemplateRespVO
+    msg?: string
   }
 
   type CommonResultHrmPerformancePlanRespVO = {
-    code?: number;
-    data?: HrmPerformancePlanRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmPerformancePlanRespVO
+    msg?: string
   }
 
   type CommonResultHrmPerformanceResultTemplateRespVO = {
-    code?: number;
-    data?: HrmPerformanceResultTemplateRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmPerformanceResultTemplateRespVO
+    msg?: string
   }
 
   type CommonResultHrmRecruitCandidateRespVO = {
-    code?: number;
-    data?: HrmRecruitCandidateRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmRecruitCandidateRespVO
+    msg?: string
   }
 
   type CommonResultHrmRecruitChannelRespVO = {
-    code?: number;
-    data?: HrmRecruitChannelRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmRecruitChannelRespVO
+    msg?: string
   }
 
   type CommonResultHrmRecruitInterviewRespVO = {
-    code?: number;
-    data?: HrmRecruitInterviewRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmRecruitInterviewRespVO
+    msg?: string
   }
 
   type CommonResultHrmRecruitPostRespVO = {
-    code?: number;
-    data?: HrmRecruitPostRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmRecruitPostRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalaryChangeRecordRespVO = {
-    code?: number;
-    data?: HrmSalaryChangeRecordRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalaryChangeRecordRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalaryChangeTemplateRespVO = {
-    code?: number;
-    data?: HrmSalaryChangeTemplateRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalaryChangeTemplateRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalaryConfigRespVO = {
-    code?: number;
-    data?: HrmSalaryConfigRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalaryConfigRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalaryEmployeeInfoImportRespVO = {
-    code?: number;
-    data?: HrmSalaryEmployeeInfoImportRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalaryEmployeeInfoImportRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalaryEmployeeInfoRespVO = {
-    code?: number;
-    data?: HrmSalaryEmployeeInfoRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalaryEmployeeInfoRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalaryEmployeeInfoUpdateListRespVO = {
-    code?: number;
-    data?: HrmSalaryEmployeeInfoUpdateListRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalaryEmployeeInfoUpdateListRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalaryGroupRespVO = {
-    code?: number;
-    data?: HrmSalaryGroupRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalaryGroupRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalaryMonthRecordRespVO = {
-    code?: number;
-    data?: HrmSalaryMonthRecordRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalaryMonthRecordRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalaryPayrollReadinessRespVO = {
-    code?: number;
-    data?: HrmSalaryPayrollReadinessRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalaryPayrollReadinessRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalarySlipRespVO = {
-    code?: number;
-    data?: HrmSalarySlipRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalarySlipRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalarySlipSendRecordRespVO = {
-    code?: number;
-    data?: HrmSalarySlipSendRecordRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalarySlipSendRecordRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalarySlipTemplateRespVO = {
-    code?: number;
-    data?: HrmSalarySlipTemplateRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalarySlipTemplateRespVO
+    msg?: string
   }
 
   type CommonResultHrmSalaryTaxRuleRespVO = {
-    code?: number;
-    data?: HrmSalaryTaxRuleRespVO;
-    msg?: string;
+    code?: number
+    data?: HrmSalaryTaxRuleRespVO
+    msg?: string
   }
 
   type CommonResultListHrmAttendanceGroupRespVO = {
-    code?: number;
-    data?: HrmAttendanceGroupRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmAttendanceGroupRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeCertificateRespVO = {
-    code?: number;
-    data?: HrmEmployeeCertificateRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeCertificateRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeChangeRecordRespVO = {
-    code?: number;
-    data?: HrmEmployeeChangeRecordRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeChangeRecordRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeContactRespVO = {
-    code?: number;
-    data?: HrmEmployeeContactRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeContactRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeContractRespVO = {
-    code?: number;
-    data?: HrmEmployeeContractRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeContractRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeDeptStatisticsRespVO = {
-    code?: number;
-    data?: HrmEmployeeDeptStatisticsRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeDeptStatisticsRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeEducationExperienceRespVO = {
-    code?: number;
-    data?: HrmEmployeeEducationExperienceRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeEducationExperienceRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeFieldConfigRespVO = {
-    code?: number;
-    data?: HrmEmployeeFieldConfigRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeFieldConfigRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeFileRespVO = {
-    code?: number;
-    data?: HrmEmployeeFileRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeFileRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeRespVO = {
-    code?: number;
-    data?: HrmEmployeeRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeStatusCountRespVO = {
-    code?: number;
-    data?: HrmEmployeeStatusCountRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeStatusCountRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeTrainingExperienceRespVO = {
-    code?: number;
-    data?: HrmEmployeeTrainingExperienceRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeTrainingExperienceRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmEmployeeWorkExperienceRespVO = {
-    code?: number;
-    data?: HrmEmployeeWorkExperienceRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmEmployeeWorkExperienceRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmInsuranceMonthRecordRespVO = {
-    code?: number;
-    data?: HrmInsuranceMonthRecordRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmInsuranceMonthRecordRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmInsuranceSchemeRespVO = {
-    code?: number;
-    data?: HrmInsuranceSchemeRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmInsuranceSchemeRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmInsuranceStandardProjectRespVO = {
-    code?: number;
-    data?: HrmInsuranceStandardProjectRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmInsuranceStandardProjectRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmInsuranceStandardTypeRespVO = {
-    code?: number;
-    data?: HrmInsuranceStandardTypeRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmInsuranceStandardTypeRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmPerformanceAssessmentTemplateRespVO = {
-    code?: number;
-    data?: HrmPerformanceAssessmentTemplateRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmPerformanceAssessmentTemplateRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmPerformancePlanRespVO = {
-    code?: number;
-    data?: HrmPerformancePlanRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmPerformancePlanRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmPerformancePlanResultLevelCountRespVO = {
-    code?: number;
-    data?: HrmPerformancePlanResultLevelCountRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmPerformancePlanResultLevelCountRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmPerformancePlanStageCountRespVO = {
-    code?: number;
-    data?: HrmPerformancePlanStageCountRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmPerformancePlanStageCountRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmPerformanceProcessRecordRespVO = {
-    code?: number;
-    data?: HrmPerformanceProcessRecordRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmPerformanceProcessRecordRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmPerformanceResultTemplateRespVO = {
-    code?: number;
-    data?: HrmPerformanceResultTemplateRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmPerformanceResultTemplateRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmRecruitChannelRespVO = {
-    code?: number;
-    data?: HrmRecruitChannelRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmRecruitChannelRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmRecruitInterviewRespVO = {
-    code?: number;
-    data?: HrmRecruitInterviewRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmRecruitInterviewRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmRecruitPostRespVO = {
-    code?: number;
-    data?: HrmRecruitPostRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmRecruitPostRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmRecruitPostTypeRespVO = {
-    code?: number;
-    data?: HrmRecruitPostTypeRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmRecruitPostTypeRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmRecruitStatusCountRespVO = {
-    code?: number;
-    data?: HrmRecruitStatusCountRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmRecruitStatusCountRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmSalaryChangeRecordRespVO = {
-    code?: number;
-    data?: HrmSalaryChangeRecordRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmSalaryChangeRecordRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmSalaryChangeTemplateRespVO = {
-    code?: number;
-    data?: HrmSalaryChangeTemplateRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmSalaryChangeTemplateRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmSalaryGroupRespVO = {
-    code?: number;
-    data?: HrmSalaryGroupRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmSalaryGroupRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmSalaryMonthEmployeeRecordRespVO = {
-    code?: number;
-    data?: HrmSalaryMonthEmployeeRecordRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmSalaryMonthEmployeeRecordRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmSalaryOptionRespVO = {
-    code?: number;
-    data?: HrmSalaryOptionRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmSalaryOptionRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmSalaryOptionValueVO = {
-    code?: number;
-    data?: HrmSalaryOptionValueVO[];
-    msg?: string;
+    code?: number
+    data?: HrmSalaryOptionValueVO[]
+    msg?: string
   }
 
   type CommonResultListHrmSalarySlipTemplateRespVO = {
-    code?: number;
-    data?: HrmSalarySlipTemplateRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmSalarySlipTemplateRespVO[]
+    msg?: string
   }
 
   type CommonResultListHrmSalaryTaxRuleRespVO = {
-    code?: number;
-    data?: HrmSalaryTaxRuleRespVO[];
-    msg?: string;
+    code?: number
+    data?: HrmSalaryTaxRuleRespVO[]
+    msg?: string
   }
 
   type CommonResultListLong = {
-    code?: number;
-    data?: number[];
-    msg?: string;
+    code?: number
+    data?: number[]
+    msg?: string
   }
 
   type CommonResultListString = {
-    code?: number;
-    data?: string[];
-    msg?: string;
+    code?: number
+    data?: string[]
+    msg?: string
   }
 
   type CommonResultLocalDate = {
-    code?: number;
-    data?: string;
-    msg?: string;
+    code?: number
+    data?: string
+    msg?: string
   }
 
   type CommonResultLong = {
-    code?: number;
-    data?: number;
-    msg?: string;
+    code?: number
+    data?: number
+    msg?: string
   }
 
   type CommonResultMapIntegerLong = {
-    code?: number;
-    data?: Record<string, any>;
-    msg?: string;
+    code?: number
+    data?: Record<string, any>
+    msg?: string
   }
 
   type CommonResultMapLongBigDecimal = {
-    code?: number;
-    data?: Record<string, any>;
-    msg?: string;
+    code?: number
+    data?: Record<string, any>
+    msg?: string
   }
 
   type CommonResultPageResultHrmAttendanceClockRespVO = {
-    code?: number;
-    data?: PageResultHrmAttendanceClockRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmAttendanceClockRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmAttendanceGroupRespVO = {
-    code?: number;
-    data?: PageResultHrmAttendanceGroupRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmAttendanceGroupRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmAttendanceHolidayRespVO = {
-    code?: number;
-    data?: PageResultHrmAttendanceHolidayRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmAttendanceHolidayRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmAttendanceLeaveRespVO = {
-    code?: number;
-    data?: PageResultHrmAttendanceLeaveRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmAttendanceLeaveRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmAttendanceMonthDailyOverviewRespVO = {
-    code?: number;
-    data?: PageResultHrmAttendanceMonthDailyOverviewRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmAttendanceMonthDailyOverviewRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmAttendanceMonthRecordRespVO = {
-    code?: number;
-    data?: PageResultHrmAttendanceMonthRecordRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmAttendanceMonthRecordRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmEmployeeRespVO = {
-    code?: number;
-    data?: PageResultHrmEmployeeRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmEmployeeRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmInsuranceMonthEmployeeRecordRespVO = {
-    code?: number;
-    data?: PageResultHrmInsuranceMonthEmployeeRecordRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmInsuranceMonthEmployeeRecordRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmOperateLogRespVO = {
-    code?: number;
-    data?: PageResultHrmOperateLogRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmOperateLogRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmPerformanceArchiveEmployeeRespVO = {
-    code?: number;
-    data?: PageResultHrmPerformanceArchiveEmployeeRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmPerformanceArchiveEmployeeRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmPerformanceAssessmentRespVO = {
-    code?: number;
-    data?: PageResultHrmPerformanceAssessmentRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmPerformanceAssessmentRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmPerformanceAssessmentTemplateRespVO = {
-    code?: number;
-    data?: PageResultHrmPerformanceAssessmentTemplateRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmPerformanceAssessmentTemplateRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmPerformancePlanRespVO = {
-    code?: number;
-    data?: PageResultHrmPerformancePlanRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmPerformancePlanRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmPerformanceResultTemplateRespVO = {
-    code?: number;
-    data?: PageResultHrmPerformanceResultTemplateRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmPerformanceResultTemplateRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmRecruitCandidateRespVO = {
-    code?: number;
-    data?: PageResultHrmRecruitCandidateRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmRecruitCandidateRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmRecruitChannelRespVO = {
-    code?: number;
-    data?: PageResultHrmRecruitChannelRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmRecruitChannelRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmRecruitPostRespVO = {
-    code?: number;
-    data?: PageResultHrmRecruitPostRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmRecruitPostRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmSalaryEmployeeInfoRespVO = {
-    code?: number;
-    data?: PageResultHrmSalaryEmployeeInfoRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmSalaryEmployeeInfoRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmSalaryGroupRespVO = {
-    code?: number;
-    data?: PageResultHrmSalaryGroupRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmSalaryGroupRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmSalaryMonthEmployeeRecordRespVO = {
-    code?: number;
-    data?: PageResultHrmSalaryMonthEmployeeRecordRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmSalaryMonthEmployeeRecordRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmSalaryMonthRecordRespVO = {
-    code?: number;
-    data?: PageResultHrmSalaryMonthRecordRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmSalaryMonthRecordRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmSalarySlipRespVO = {
-    code?: number;
-    data?: PageResultHrmSalarySlipRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmSalarySlipRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmSalarySlipSendEmployeeRespVO = {
-    code?: number;
-    data?: PageResultHrmSalarySlipSendEmployeeRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmSalarySlipSendEmployeeRespVO
+    msg?: string
   }
 
   type CommonResultPageResultHrmSalarySlipSendRecordRespVO = {
-    code?: number;
-    data?: PageResultHrmSalarySlipSendRecordRespVO;
-    msg?: string;
+    code?: number
+    data?: PageResultHrmSalarySlipSendRecordRespVO
+    msg?: string
   }
 
   type computeMonthRecordParams = {
     // 工资表 Id
-    id: number;
+    id: number
   }
 
   type computeMonthRecordWithImportParams = {
     // 工资表编号
-    id: number;
+    id: number
     // 是否同步社保数据
-    syncInsuranceData?: boolean;
+    syncInsuranceData?: boolean
     // 是否同步考勤数据
-    syncAttendanceData?: boolean;
+    syncAttendanceData?: boolean
     // 考勤数据文件
-    attendanceFile?: any;
+    attendanceFile?: any
     // 专项附加扣除数据文件
-    additionalDeductionFile?: any;
+    additionalDeductionFile?: any
     // 上月个税累计数据文件
-    cumulativeTaxFile?: any;
+    cumulativeTaxFile?: any
   }
 
   type DeductRule = {
     // 迟到扣款方式
-    lateMethod: number;
+    lateMethod: number
     // 迟到扣款金额
-    lateDeductMoney: number;
+    lateDeductMoney: number
     // 早退扣款方式
-    earlyMethod: number;
+    earlyMethod: number
     // 早退扣款金额
-    earlyDeductMoney: number;
+    earlyDeductMoney: number
     // 旷工扣款方式
-    absenteeismMethod: number;
+    absenteeismMethod: number
     // 旷工扣款金额
-    absenteeismDeductMoney: number;
+    absenteeismDeductMoney: number
     // 缺卡扣款方式
-    missCardMethod: number;
+    missCardMethod: number
     // 缺卡扣款金额
-    missCardDeductMoney: number;
+    missCardDeductMoney: number
   }
 
   type deleteAttendanceClockListParams = {
     // 打卡记录 Ids
-    ids: number[];
+    ids: number[]
   }
 
   type deleteAttendanceClockParams = {
     // 打卡记录 Id
-    id: number;
+    id: number
   }
 
   type deleteAttendanceGroupParams = {
     // 考勤组 Id
-    id: number;
+    id: number
   }
 
   type deleteAttendanceHolidayParams = {
     // 考勤节假日 Id
-    id: number;
+    id: number
   }
 
   type deleteCertificateParams = {
     // 证书 Id
-    id: number;
+    id: number
   }
 
   type deleteContactParams = {
     // 联系人 Id
-    id: number;
+    id: number
   }
 
   type deleteContractParams = {
     // 员工合同 Id
-    id: number;
+    id: number
   }
 
   type deleteEducationExperienceParams = {
     // 教育经历 Id
-    id: number;
+    id: number
   }
 
   type deleteEmployeeListParams = {
     // 员工档案 Ids
-    ids: number[];
+    ids: number[]
   }
 
   type deleteEmployeeParams = {
     // 员工档案 Id
-    id: number;
+    id: number
   }
 
   type deleteEmployeeSalaryCardParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type deleteMonthRecord1Params = {
     // 社保表 Id
-    id: number;
+    id: number
   }
 
   type deleteMonthRecordParams = {
     // 月度工资表 Id
-    id: number;
+    id: number
   }
 
   type deletePerformanceArchiveEmployeeRecordsParams = {
     // 员工 Ids
-    employeeIds: number[];
+    employeeIds: number[]
   }
 
   type deletePerformanceArchiveRecordsParams = {
     // 绩效归档记录 Ids
-    ids: number[];
+    ids: number[]
   }
 
   type deletePerformanceAssessmentTemplateListParams = {
     // 绩效考核模板 Ids
-    ids: number[];
+    ids: number[]
   }
 
   type deletePerformanceAssessmentTemplateParams = {
     // 绩效考核模板 Id
-    id: number;
+    id: number
   }
 
   type deletePerformancePlanParams = {
     // 绩效计划 Id
-    id: number;
+    id: number
   }
 
   type deletePerformanceResultTemplateListParams = {
     // 绩效结果模板 Ids
-    ids: number[];
+    ids: number[]
   }
 
   type deletePerformanceResultTemplateParams = {
     // 绩效结果模板 Id
-    id: number;
+    id: number
   }
 
   type deletePersonalNoteParams = {
     // 员工个人备忘 Id
-    id: number;
+    id: number
   }
 
   type deleteRecruitCandidateParams = {
     // 候选人 Id
-    id: number;
+    id: number
   }
 
   type deleteRecruitInterviewParams = {
     // 面试编号
-    id: number;
+    id: number
   }
 
   type deleteSalaryChangeRecordParams = {
     // 定薪/调薪记录 Id
-    id: number;
+    id: number
   }
 
   type deleteSalaryChangeTemplateParams = {
     // 调薪模板 Id
-    id: number;
+    id: number
   }
 
   type deleteSalaryGroupParams = {
     // 薪资组 Id
-    id: number;
+    id: number
   }
 
   type deleteSalaryOptionParams = {
     // 薪资项 Id
-    id: number;
+    id: number
   }
 
   type deleteSalarySlipSendRecordParams = {
     // 工资条发放记录 Id
-    id: number;
+    id: number
   }
 
   type deleteSalarySlipTemplateParams = {
     // 工资条模板 Id
-    id: number;
+    id: number
   }
 
   type deleteSalaryTaxRuleParams = {
     // 计税规则 Id
-    id: number;
+    id: number
   }
 
   type deleteSchemeParams = {
     // 社保方案 Id
-    id: number;
+    id: number
   }
 
   type deleteTrainingExperienceParams = {
     // 员工培训经历 Id
-    id: number;
+    id: number
   }
 
   type deleteWorkExperienceParams = {
     // 工作经历 Id
-    id: number;
+    id: number
   }
 
   type Dimension = {
     // 维度名称
-    name: string;
+    name: string
     // 指标类型
-    quotaType: number;
+    quotaType: number
     // 维度权重
-    weight: number;
+    weight: number
     // 备注
-    remark?: string;
+    remark?: string
     // 是否允许员工编辑
-    allowEdit: boolean;
+    allowEdit: boolean
     // 考核指标列表
-    quotas: Quota[];
+    quotas: Quota[]
   }
 
   type Employee = {
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 入职状态
-    entryStatus?: number;
+    entryStatus?: number
     // 员工状态
-    status?: number;
+    status?: number
     // 入职时间
-    entryTime?: string;
+    entryTime?: string
   }
 
   type exportAttendanceClockParams = {
-    exportReqVO: HrmAttendanceClockPageReqVO;
+    exportReqVO: HrmAttendanceClockPageReqVO
   }
 
   type exportAttendanceLeaveParams = {
-    exportReqVO: HrmAttendanceLeavePageReqVO;
+    exportReqVO: HrmAttendanceLeavePageReqVO
   }
 
   type exportAttendanceMonthDailyOverviewParams = {
-    exportReqVO: HrmAttendanceMonthRecordPageReqVO;
+    exportReqVO: HrmAttendanceMonthRecordPageReqVO
   }
 
   type exportAttendanceMonthRecordParams = {
-    exportReqVO: HrmAttendanceMonthRecordPageReqVO;
+    exportReqVO: HrmAttendanceMonthRecordPageReqVO
   }
 
   type exportEmployeeParams = {
-    exportReqVO: HrmEmployeePageReqVO;
+    exportReqVO: HrmEmployeePageReqVO
   }
 
   type findByIdParams = {
-    targetClass: string;
-    id: string;
-    uniqueField: string;
-    targetFields: string;
+    targetClass: string
+    id: string
+    uniqueField: string
+    targetFields: string
   }
 
   type findByIdsParams = {
-    targetClass: string;
+    targetClass: string
   }
 
   type FindByIdsQueryPayload = {
-    ids?: string[];
-    uniqueField?: string;
-    targetFields?: string[];
+    ids?: string[]
+    uniqueField?: string
+    targetFields?: string[]
   }
 
   type getAdditionalDeductionImportTemplateParams = {
     // 月度工资表 Id
-    monthRecordId?: number;
+    monthRecordId?: number
   }
 
   type getAttendanceClockPageParams = {
-    pageReqVO: HrmAttendanceClockPageReqVO;
+    pageReqVO: HrmAttendanceClockPageReqVO
   }
 
   type getAttendanceClockParams = {
     // 打卡记录 Id
-    id: number;
+    id: number
   }
 
   type getAttendanceClockShiftParams = {
-    reqVO: HrmAttendanceClockShiftReqVO;
+    reqVO: HrmAttendanceClockShiftReqVO
   }
 
   type getAttendanceDailyDetailParams = {
-    reqVO: HrmAttendanceDailyDetailReqVO;
+    reqVO: HrmAttendanceDailyDetailReqVO
   }
 
   type getAttendanceGroupPageParams = {
-    pageReqVO: HrmAttendanceGroupPageReqVO;
+    pageReqVO: HrmAttendanceGroupPageReqVO
   }
 
   type getAttendanceGroupParams = {
     // 考勤组 Id
-    id: number;
+    id: number
   }
 
   type getAttendanceHolidayPageParams = {
-    pageReqVO: HrmAttendanceHolidayPageReqVO;
+    pageReqVO: HrmAttendanceHolidayPageReqVO
   }
 
   type getAttendanceHolidayParams = {
     // 考勤节假日 Id
-    id: number;
+    id: number
   }
 
   type getAttendanceImportTemplateParams = {
     // 月度工资表 Id
-    monthRecordId?: number;
+    monthRecordId?: number
   }
 
   type getAttendanceLeavePageParams = {
-    pageReqVO: HrmAttendanceLeavePageReqVO;
+    pageReqVO: HrmAttendanceLeavePageReqVO
   }
 
   type getAttendanceLeaveParams = {
     // 请假记录 Id
-    id: number;
+    id: number
   }
 
   type getAttendanceMonthDailyOverviewPageParams = {
-    reqVO: HrmAttendanceMonthRecordPageReqVO;
+    reqVO: HrmAttendanceMonthRecordPageReqVO
   }
 
   type getAttendanceMonthDetailParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 年份
-    year: number;
+    year: number
     // 月份
-    month: number;
+    month: number
   }
 
   type getAttendanceMonthRecordPageParams = {
-    reqVO: HrmAttendanceMonthRecordPageReqVO;
+    reqVO: HrmAttendanceMonthRecordPageReqVO
   }
 
   type getCertificateListParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getCleanRecruitCandidateIdListParams = {
-    reqVO: HrmRecruitCandidateCleanReqVO;
+    reqVO: HrmRecruitCandidateCleanReqVO
   }
 
   type getContactListParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getContractListParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getCumulativeTaxImportTemplateParams = {
     // 月度工资表 Id
-    monthRecordId?: number;
+    monthRecordId?: number
   }
 
   type getEducationExperienceListParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getEmployeeChangeRecordListParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getEmployeeCreateFieldConfigListParams = {
     // 入职状态：1 在职，2 待入职
-    entryStatus: number;
+    entryStatus: number
   }
 
   type getEmployeeFileListParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getEmployeeListParams = {
     // 员工 Ids
-    ids: number[];
+    ids: number[]
   }
 
   type getEmployeeMonthRecordPageParams = {
-    reqVO: HrmSalaryEmployeeMonthRecordPageReqVO;
+    reqVO: HrmSalaryEmployeeMonthRecordPageReqVO
   }
 
   type getEmployeePageParams = {
-    pageReqVO: HrmEmployeePageReqVO;
+    pageReqVO: HrmEmployeePageReqVO
   }
 
   type getEmployeeParams = {
     // 员工档案 Id
-    id: number;
+    id: number
   }
 
   type getEmployeeSalaryCardParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getEmployeeSimplePageParams = {
-    pageReqVO: HrmEmployeePageReqVO;
+    pageReqVO: HrmEmployeePageReqVO
   }
 
   type getEmployeeStatusCountParams = {
-    pageReqVO: HrmEmployeePageReqVO;
+    pageReqVO: HrmEmployeePageReqVO
   }
 
   type getInsuranceEmployeeInfoParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getMonthEmployeeChangeCountParams = {
-    reqVO: HrmSalaryMonthEmployeeRecordPageReqVO;
+    reqVO: HrmSalaryMonthEmployeeRecordPageReqVO
   }
 
   type getMonthEmployeeRecordListParams = {
-    reqVO: HrmSalaryMonthEmployeeRecordListReqVO;
+    reqVO: HrmSalaryMonthEmployeeRecordListReqVO
   }
 
   type getMonthEmployeeRecordPage1Params = {
-    reqVO: HrmInsuranceMonthEmployeeRecordPageReqVO;
+    reqVO: HrmInsuranceMonthEmployeeRecordPageReqVO
   }
 
   type getMonthEmployeeRecordPageParams = {
-    reqVO: HrmSalaryMonthEmployeeRecordPageReqVO;
+    reqVO: HrmSalaryMonthEmployeeRecordPageReqVO
   }
 
   type getMonthEmployeeRecordParams = {
     // 员工月度社保记录 Id
-    id: number;
+    id: number
   }
 
   type getMonthOptionSummaryParams = {
-    reqVO: HrmSalaryMonthEmployeeRecordListReqVO;
+    reqVO: HrmSalaryMonthEmployeeRecordListReqVO
   }
 
   type getMonthRecord1Params = {
     // 月度社保表 Id
-    id: number;
+    id: number
   }
 
   type getMonthRecordListParams = {
     // 年份
-    year?: number;
+    year?: number
   }
 
   type getMonthRecordPageParams = {
-    reqVO: HrmSalaryMonthRecordPageReqVO;
+    reqVO: HrmSalaryMonthRecordPageReqVO
   }
 
   type getMonthRecordParams = {
     // 月度工资表 Id
-    id: number;
+    id: number
   }
 
   type getMyAttendanceGroupParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getOperateLogPageParams = {
-    pageReqVO: HrmOperateLogPageReqVO;
+    pageReqVO: HrmOperateLogPageReqVO
   }
 
   type getPayrollReadinessParams = {
     // 月度工资表 Id
-    monthRecordId?: number;
+    monthRecordId?: number
   }
 
   type getPerformanceArchiveEmployeePageParams = {
-    reqVO: HrmPerformanceArchiveEmployeePageReqVO;
+    reqVO: HrmPerformanceArchiveEmployeePageReqVO
   }
 
   type getPerformanceAssessmentArchivePageParams = {
-    reqVO: HrmPerformanceArchivePageReqVO;
+    reqVO: HrmPerformanceArchivePageReqVO
   }
 
   type getPerformanceAssessmentArchiveParams = {
     // 员工绩效考核 Id
-    id: number;
+    id: number
   }
 
   type getPerformanceAssessmentArchiveProcessRecordListParams = {
     // 员工绩效考核 Id
-    id: number;
+    id: number
   }
 
   type getPerformanceAssessmentPageParams = {
-    reqVO: HrmPerformanceAssessmentPageReqVO;
+    reqVO: HrmPerformanceAssessmentPageReqVO
   }
 
   type getPerformanceAssessmentParams = {
     // 员工绩效考核 Id
-    id: number;
+    id: number
   }
 
   type getPerformanceAssessmentProcessRecordListParams = {
     // 员工绩效考核 Id
-    id: number;
+    id: number
   }
 
   type getPerformanceAssessmentTemplatePageParams = {
-    pageReqVO: HrmPerformanceAssessmentTemplatePageReqVO;
+    pageReqVO: HrmPerformanceAssessmentTemplatePageReqVO
   }
 
   type getPerformanceAssessmentTemplateParams = {
     // 绩效考核模板 Id
-    id: number;
+    id: number
   }
 
   type getPerformancePlanLevelCountParams = {
     // 绩效计划 Id
-    planId: number;
+    planId: number
   }
 
   type getPerformancePlanPageParams = {
-    reqVO: HrmPerformancePlanPageReqVO;
+    reqVO: HrmPerformancePlanPageReqVO
   }
 
   type getPerformancePlanParams = {
     // 绩效计划 Id
-    id: number;
+    id: number
   }
 
   type getPerformancePlanStageCountParams = {
     // 绩效计划 Id
-    planId: number;
+    planId: number
   }
 
   type getPerformancePlanStatusCountParams = {
-    reqVO: HrmPerformancePlanPageReqVO;
+    reqVO: HrmPerformancePlanPageReqVO
   }
 
   type getPerformancePlanUnassignedEmployeeIdListParams = {
     // 绩效计划 Id
-    planId: number;
+    planId: number
   }
 
   type getPerformanceResultTemplatePageParams = {
-    pageReqVO: HrmPerformanceResultTemplatePageReqVO;
+    pageReqVO: HrmPerformanceResultTemplatePageReqVO
   }
 
   type getPerformanceResultTemplateParams = {
     // 绩效结果模板 Id
-    id: number;
+    id: number
   }
 
   type getPerformanceResultTemplateSimpleListParams = {
     // 状态
-    status?: number;
+    status?: number
   }
 
   type getQuitInfoParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getRecruitCandidatePageParams = {
-    pageReqVO: HrmRecruitCandidatePageReqVO;
+    pageReqVO: HrmRecruitCandidatePageReqVO
   }
 
   type getRecruitCandidateParams = {
     // 候选人 Id
-    id: number;
+    id: number
   }
 
   type getRecruitCandidateStatusCountParams = {
-    pageReqVO: HrmRecruitCandidatePageReqVO;
+    pageReqVO: HrmRecruitCandidatePageReqVO
   }
 
   type getRecruitChannelPageParams = {
-    pageReqVO: HrmRecruitChannelPageReqVO;
+    pageReqVO: HrmRecruitChannelPageReqVO
   }
 
   type getRecruitChannelParams = {
     // 招聘渠道 Id
-    id: number;
+    id: number
   }
 
   type getRecruitInterviewListByCandidateParams = {
     // 候选人 Id
-    candidateId: number;
+    candidateId: number
   }
 
   type getRecruitInterviewParams = {
     // 面试编号
-    id: number;
+    id: number
   }
 
   type getRecruitPostPageParams = {
-    pageReqVO: HrmRecruitPostPageReqVO;
+    pageReqVO: HrmRecruitPostPageReqVO
   }
 
   type getRecruitPostParams = {
     // 招聘职位 Id
-    id: number;
+    id: number
   }
 
   type getRecruitPostStatusCountParams = {
-    pageReqVO: HrmRecruitPostPageReqVO;
+    pageReqVO: HrmRecruitPostPageReqVO
   }
 
   type getRecruitPostTypeListParams = {
     // 状态
-    status?: number;
+    status?: number
   }
 
   type getSalaryChangeRecordListParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getSalaryChangeRecordParams = {
     // 定薪/调薪记录 Id
-    id: number;
+    id: number
   }
 
   type getSalaryChangeTemplateParams = {
     // 调薪模板 Id
-    id: number;
+    id: number
   }
 
   type getSalaryEmployeeInfoPageParams = {
-    reqVO: HrmSalaryEmployeeInfoPageReqVO;
+    reqVO: HrmSalaryEmployeeInfoPageReqVO
   }
 
   type getSalaryEmployeeInfoParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getSalaryEmployeeInfoStatusCountParams = {
-    reqVO: HrmSalaryEmployeeInfoPageReqVO;
+    reqVO: HrmSalaryEmployeeInfoPageReqVO
   }
 
   type getSalaryGroupPageParams = {
-    reqVO: HrmSalaryGroupPageReqVO;
+    reqVO: HrmSalaryGroupPageReqVO
   }
 
   type getSalaryGroupParams = {
     // 薪资组 Id
-    id: number;
+    id: number
   }
 
   type getSalaryOptionSimpleListParams = {
     // 是否可调薪
-    adjustable?: boolean;
+    adjustable?: boolean
   }
 
   type getSalarySlipPageParams = {
-    reqVO: HrmSalarySlipPageReqVO;
+    reqVO: HrmSalarySlipPageReqVO
   }
 
   type getSalarySlipParams = {
     // 工资条 Id
-    id: number;
+    id: number
   }
 
   type getSalarySlipSendEmployeePageParams = {
-    reqVO: HrmSalarySlipSendEmployeeReqVO;
+    reqVO: HrmSalarySlipSendEmployeeReqVO
   }
 
   type getSalarySlipSendRecordPageParams = {
-    reqVO: HrmSalarySlipSendRecordPageReqVO;
+    reqVO: HrmSalarySlipSendRecordPageReqVO
   }
 
   type getSalarySlipSendRecordParams = {
     // 工资条发放记录 Id
-    id: number;
+    id: number
   }
 
   type getSalarySlipTemplateParams = {
     // 工资条模板 Id
-    id: number;
+    id: number
   }
 
   type getSalaryTaxRuleParams = {
     // 计税规则 Id
-    id: number;
+    id: number
   }
 
   type getSchemeParams = {
     // 社保方案 Id
-    id: number;
+    id: number
   }
 
   type getStandardProjectListParams = {
-    reqVO: HrmInsuranceStandardProjectListReqVO;
+    reqVO: HrmInsuranceStandardProjectListReqVO
   }
 
   type getStandardTypeListParams = {
-    reqVO: HrmInsuranceStandardTypeListReqVO;
+    reqVO: HrmInsuranceStandardTypeListReqVO
   }
 
   type getTrainingExperienceListParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type getUninsuredEmployeeListParams = {
     // 社保表 Id
-    monthRecordId: number;
+    monthRecordId: number
   }
 
   type getWorkExperienceListParams = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type HandlerStage = {
     // 处理人类型
-    type: number;
+    type: number
     // 上级或部门层级
-    level?: number;
+    level?: number
     // 指定处理员工 Id
-    employeeId?: number;
+    employeeId?: number
   }
 
   type HrmAttendanceClockPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 员工姓名或工号，模糊匹配
-    search?: string;
+    search?: string
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 部门 Ids
-    deptIds?: number[];
+    deptIds?: number[]
     // 考勤打卡类型
-    type?: number;
+    type?: number
     // 考勤打卡状态
-    status?: number;
+    status?: number
     // 来源类型数组
-    sourceTypes?: number[];
+    sourceTypes?: number[]
     // 打卡地点，模糊匹配
-    address?: string;
+    address?: string
     // 上班日期范围
-    attendanceTime?: string[];
+    attendanceTime?: string[]
     // 实际打卡时间范围
-    clockTime?: string[];
+    clockTime?: string[]
   }
 
   type HrmAttendanceClockRespVO = {
     // 打卡记录 Id
-    id?: number;
+    id?: number
     // 打卡员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 打卡时间
-    clockTime?: string;
+    clockTime?: string
     // 打卡类型
-    type?: number;
+    type?: number
     // 应打卡时间
-    attendanceTime?: string;
+    attendanceTime?: string
     // 打卡来源
-    sourceType?: number;
+    sourceType?: number
     // 打卡状态
-    status?: number;
+    status?: number
     // 打卡阶段
-    stage?: number;
+    stage?: number
     // 打卡地址
-    address?: string;
+    address?: string
     // 经度
-    longitude?: number;
+    longitude?: number
     // 纬度
-    latitude?: number;
+    latitude?: number
     // WiFi 名称
-    ssid?: string;
+    ssid?: string
     // WiFi MAC 地址
-    mac?: string;
+    mac?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmAttendanceClockSaveReqVO = {
     // 打卡记录 Id
-    id?: number;
+    id?: number
     // 打卡员工 Id
-    employeeId: number;
+    employeeId: number
     // 打卡时间
-    clockTime: string;
+    clockTime: string
     // 打卡类型
-    type: number;
+    type: number
     // 应打卡时间
-    attendanceTime: string;
+    attendanceTime: string
     // 打卡地址
-    address?: string;
+    address?: string
     // 经度
-    longitude?: number;
+    longitude?: number
     // 纬度
-    latitude?: number;
+    latitude?: number
     // WiFi 名称
-    ssid?: string;
+    ssid?: string
     // WiFi MAC 地址
-    mac?: string;
+    mac?: string
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmAttendanceClockShiftReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 考勤时间
-    attendanceTime: string;
+    attendanceTime: string
   }
 
   type HrmAttendanceClockShiftRespVO = {
     // 上班时间
-    startTime?: string;
+    startTime?: string
     // 下班时间
-    endTime?: string;
+    endTime?: string
     // 上班打卡开始时间
-    clockInStartTime?: string;
+    clockInStartTime?: string
     // 上班打卡结束时间
-    clockInEndTime?: string;
+    clockInEndTime?: string
     // 下班打卡开始时间
-    clockOutStartTime?: string;
+    clockOutStartTime?: string
     // 下班打卡结束时间
-    clockOutEndTime?: string;
+    clockOutEndTime?: string
   }
 
   type HrmAttendanceDailyDetailReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 考勤日期
-    attendanceTime: string;
+    attendanceTime: string
   }
 
   type HrmAttendanceDailyDetailRespVO = {
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 日期
-    attendanceTime?: string;
+    attendanceTime?: string
     // 班次
-    shiftName?: string;
+    shiftName?: string
     // 是否排班
-    scheduled?: boolean;
+    scheduled?: boolean
     // 应打卡次数
-    requiredClockCount?: number;
+    requiredClockCount?: number
     // 排班分钟数
-    scheduledMinutes?: number;
+    scheduledMinutes?: number
     // 缺卡次数
-    missCardCount?: number;
+    missCardCount?: number
     // 是否旷工
-    absenteeism?: boolean;
+    absenteeism?: boolean
     // 旷工分钟数
-    absenteeismMinutes?: number;
+    absenteeismMinutes?: number
     // 旷工天数
-    absenteeismDays?: number;
+    absenteeismDays?: number
     // 是否请假
-    leaveStatus?: boolean;
+    leaveStatus?: boolean
     // 请假分钟数
-    leaveMinutes?: number;
+    leaveMinutes?: number
     // 请假天数
-    leaveDays?: number;
+    leaveDays?: number
     // 考勤结果
-    attendanceResult?: string;
+    attendanceResult?: string
     // 打卡次数
-    clockCount?: number;
+    clockCount?: number
     // 迟到次数
-    lateCount?: number;
+    lateCount?: number
     // 迟到分钟
-    lateMinutes?: number;
+    lateMinutes?: number
     // 早退次数
-    earlyCount?: number;
+    earlyCount?: number
     // 早退分钟
-    earlyMinutes?: number;
+    earlyMinutes?: number
     // 打卡列表
-    clockList?: HrmAttendanceClockRespVO[];
+    clockList?: HrmAttendanceClockRespVO[]
   }
 
   type HrmAttendanceDailyOverviewRespVO = {
     // 打卡记录
-    clocks?: HrmAttendanceClockRespVO[];
+    clocks?: HrmAttendanceClockRespVO[]
     // 考勤结果
-    attendanceResult?: string;
+    attendanceResult?: string
     // 打卡概况展示项
-    overviews?: OverviewItem[];
+    overviews?: OverviewItem[]
   }
 
   type HrmAttendanceGroupPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 考勤组名称
-    name?: string;
+    name?: string
     // 是否默认考勤组
-    defaultStatus?: boolean;
+    defaultStatus?: boolean
   }
 
   type HrmAttendanceGroupRespVO = {
     // 考勤组 Id
-    id?: number;
+    id?: number
     // 名称
-    name?: string;
+    name?: string
     // 是否启用 WiFi 打卡
-    openWifiCard?: boolean;
+    openWifiCard?: boolean
     // 是否启用定位打卡
-    openPointCard?: boolean;
+    openPointCard?: boolean
     // 是否法定节假日休息
-    rest?: boolean;
+    rest?: boolean
     // 是否默认配置
-    defaultStatus?: boolean;
+    defaultStatus?: boolean
     // 特殊日期设置数组
-    specialDates?: SpecialDate[];
+    specialDates?: SpecialDate[]
     // 部门范围
-    deptIds?: number[];
+    deptIds?: number[]
     // 适用部门名称
-    deptNames?: string[];
+    deptNames?: string[]
     // 员工范围
-    employeeIds?: number[];
+    employeeIds?: number[]
     // 适用员工名称
-    employeeNames?: string[];
+    employeeNames?: string[]
     // 班次配置
-    shifts?: Shift[];
+    shifts?: Shift[]
     // 打卡地点
-    points?: Point[];
+    points?: Point[]
     // 打卡 WiFi
-    wifis?: Wifi[];
-    deductRule?: DeductRule;
+    wifis?: Wifi[]
+    deductRule?: DeductRule
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmAttendanceGroupSaveReqVO = {
     // 考勤组 Id
-    id?: number;
+    id?: number
     // 名称
-    name: string;
+    name: string
     // 是否启用 WiFi 打卡
-    openWifiCard: boolean;
+    openWifiCard: boolean
     // 是否启用定位打卡
-    openPointCard: boolean;
+    openPointCard: boolean
     // 是否法定节假日休息
-    rest: boolean;
+    rest: boolean
     // 特殊日期设置数组
-    specialDates: SpecialDate[];
+    specialDates: SpecialDate[]
     // 部门范围
-    deptIds: number[];
+    deptIds: number[]
     // 员工范围
-    employeeIds: number[];
+    employeeIds: number[]
     // 班次配置
-    shifts: Shift[];
+    shifts: Shift[]
     // 打卡地点
-    points: Point[];
+    points: Point[]
     // 打卡 WiFi
-    wifis: Wifi[];
-    deductRule: DeductRule;
+    wifis: Wifi[]
+    deductRule: DeductRule
   }
 
   type HrmAttendanceHolidayPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 日期范围
-    date?: string[];
+    date?: string[]
     // 节假日类型
-    type?: number;
+    type?: number
   }
 
   type HrmAttendanceHolidayRespVO = {
     // 节假日 Id
-    id?: number;
+    id?: number
     // 日期
-    date?: string;
+    date?: string
     // 考勤假期类型
-    type?: number;
+    type?: number
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmAttendanceHolidaySaveReqVO = {
     // 节假日 Id
-    id?: number;
+    id?: number
     // 日期
-    date: string;
+    date: string
     // 节假日类型
-    type: number;
+    type: number
   }
 
   type HrmAttendanceLeavePageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 排序字段
-    sortingFields?: SortingField[];
+    sortingFields?: SortingField[]
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 部门 Id 数组
-    deptIds?: number[];
+    deptIds?: number[]
     // 员工姓名或工号
-    employeeKeyword?: string;
+    employeeKeyword?: string
     // 请假类型数组
-    types?: string[];
+    types?: string[]
     // 开始时间
-    startTime?: string[];
+    startTime?: string[]
     // 审批状态
-    approvalStatus?: number;
+    approvalStatus?: number
   }
 
   type HrmAttendanceLeaveRespVO = {
     // 请假记录 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 请假类型
-    type: string;
+    type: string
     // 开始时间
-    startTime: string;
+    startTime: string
     // 结束时间
-    endTime: string;
+    endTime: string
     // 请假天数
-    day: number;
+    day: number
     // 请假事由
-    reason?: string;
+    reason?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 创建时间
-    createTime: string;
+    createTime: string
     // 审批状态
-    approvalStatus?: number;
+    approvalStatus?: number
     // 流程实例 Id
-    processInstanceId?: string;
+    processInstanceId?: string
     // 审批时间
-    approvalTime?: string;
+    approvalTime?: string
     // 审批意见
-    approvalReason?: string;
+    approvalReason?: string
   }
 
   type HrmAttendanceMonthDailyOverviewRespVO = {
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 年份
-    year?: number;
+    year?: number
     // 月份
-    month?: number;
+    month?: number
     // 每日打卡概况，Key 为日期
-    dailyClockMap?: Record<string, any>;
+    dailyClockMap?: Record<string, any>
   }
 
   type HrmAttendanceMonthDetailRespVO = {
-    summary?: HrmAttendanceMonthRecordRespVO;
+    summary?: HrmAttendanceMonthRecordRespVO
     // 每日打卡明细
-    dailyDetails?: HrmAttendanceDailyDetailRespVO[];
+    dailyDetails?: HrmAttendanceDailyDetailRespVO[]
     // 请假记录
-    leaves?: HrmAttendanceLeaveRespVO[];
+    leaves?: HrmAttendanceLeaveRespVO[]
   }
 
   type HrmAttendanceMonthRecordPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 员工姓名或工号，模糊匹配
-    search?: string;
+    search?: string
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 部门 Ids
-    deptIds?: number[];
+    deptIds?: number[]
     // 年份
-    year: number;
+    year: number
     // 月份
-    month: number;
+    month: number
     // 是否全勤
-    fullAttendance?: boolean;
+    fullAttendance?: boolean
   }
 
   type HrmAttendanceMonthRecordRespVO = {
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 考勤组名称
-    attendanceGroupName?: string;
+    attendanceGroupName?: string
     // 入职时间
-    entryTime?: string;
+    entryTime?: string
     // 员工状态
-    employeeStatus?: number;
+    employeeStatus?: number
     // 工作城市
-    workCity?: string;
+    workCity?: string
     // 年份
-    year?: number;
+    year?: number
     // 月份
-    month?: number;
+    month?: number
     // 应出勤天数
-    attendDays?: number;
+    attendDays?: number
     // 实际出勤天数
-    actualDays?: number;
+    actualDays?: number
     // 迟到时长（分钟）
-    lateMinute?: number;
+    lateMinute?: number
     // 迟到次数
-    lateCount?: number;
+    lateCount?: number
     // 早退时长（分钟）
-    earlyMinute?: number;
+    earlyMinute?: number
     // 早退次数
-    earlyCount?: number;
+    earlyCount?: number
     // 缺卡次数
-    missCardCount?: number;
+    missCardCount?: number
     // 旷工天数
-    absenteeismDays?: number;
+    absenteeismDays?: number
     // 旷工时长（分钟）
-    absenteeismMinutes?: number;
+    absenteeismMinutes?: number
     // 请假天数
-    leaveDays?: number;
+    leaveDays?: number
     // 请假时长（分钟）
-    leaveMinutes?: number;
+    leaveMinutes?: number
     // 迟到扣款
-    lateDeductAmount?: number;
+    lateDeductAmount?: number
     // 早退扣款
-    earlyDeductAmount?: number;
+    earlyDeductAmount?: number
     // 缺卡扣款
-    missCardDeductAmount?: number;
+    missCardDeductAmount?: number
     // 旷工扣款
-    absenteeismDeductAmount?: number;
+    absenteeismDeductAmount?: number
     // 考勤扣款合计
-    attendanceDeductAmount?: number;
+    attendanceDeductAmount?: number
     // 是否全勤
-    fullAttendance?: boolean;
+    fullAttendance?: boolean
   }
 
   type HrmEmployeeArchiveFieldConfigSaveReqVO = {
     // 字段配置列表
-    fields: HrmEmployeeFieldConfigSaveReqVO[];
+    fields: HrmEmployeeFieldConfigSaveReqVO[]
   }
 
   type HrmEmployeeCancelQuitReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 取消原因
-    reason: string;
+    reason: string
   }
 
   type HrmEmployeeCertificateRespVO = {
     // 证书 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 证书名称
-    name?: string;
+    name?: string
     // 证书级别
-    level?: string;
+    level?: string
     // 证书 Id
-    no?: string;
+    no?: string
     // 有效起始日期
-    startTime?: string;
+    startTime?: string
     // 有效结束日期
-    endTime?: string;
+    endTime?: string
     // 发证机构
-    issuingAuthority?: string;
+    issuingAuthority?: string
     // 发证日期
-    issuingTime?: string;
+    issuingTime?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 排序
-    sort?: number;
+    sort?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeCertificateSaveReqVO = {
     // 证书 Id
-    id?: number;
+    id?: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 证书名称
-    name: string;
+    name: string
     // 证书级别
-    level?: string;
+    level?: string
     // 证书 Id
-    no?: string;
+    no?: string
     // 有效起始日期
-    startTime?: string;
+    startTime?: string
     // 有效结束日期
-    endTime?: string;
+    endTime?: string
     // 发证机构
-    issuingAuthority?: string;
+    issuingAuthority?: string
     // 发证日期
-    issuingTime?: string;
+    issuingTime?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 排序
-    sort?: number;
+    sort?: number
   }
 
   type HrmEmployeeChangeRecordRespVO = {
     // 异动 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 变动类型
-    type?: number;
+    type?: number
     // 异动原因
-    reason?: number;
+    reason?: number
     // 原部门 Id
-    oldDeptId?: number;
+    oldDeptId?: number
     // 原部门名称
-    oldDeptName?: string;
+    oldDeptName?: string
     // 新部门 Id
-    newDeptId?: number;
+    newDeptId?: number
     // 新部门名称
-    newDeptName?: string;
+    newDeptName?: string
     // 原岗位名称
-    oldPostName?: string;
+    oldPostName?: string
     // 新岗位名称
-    newPostName?: string;
+    newPostName?: string
     // 原职级
-    oldPostLevel?: string;
+    oldPostLevel?: string
     // 新职级
-    newPostLevel?: string;
+    newPostLevel?: string
     // 原工作地点
-    oldWorkAddress?: string;
+    oldWorkAddress?: string
     // 新工作地点
-    newWorkAddress?: string;
+    newWorkAddress?: string
     // 原直属上级员工 Id
-    oldLeaderEmployeeId?: number;
+    oldLeaderEmployeeId?: number
     // 原直属上级员工姓名
-    oldLeaderEmployeeName?: string;
+    oldLeaderEmployeeName?: string
     // 新直属上级员工 Id
-    newLeaderEmployeeId?: number;
+    newLeaderEmployeeId?: number
     // 新直属上级员工姓名
-    newLeaderEmployeeName?: string;
+    newLeaderEmployeeName?: string
     // 试用期，单位月
-    probation?: number;
+    probation?: number
     // 生效日期
-    effectTime?: string;
+    effectTime?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeConfirmEntryReqVO = {
     // 员工档案 Id
-    id?: number;
+    id?: number
     // 员工姓名
-    name: string;
+    name: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 系统用户 Id
-    userId?: number;
+    userId?: number
     // 手机号
-    mobile: string;
+    mobile: string
     // 国家地区
-    country?: string;
+    country?: string
     // 民族
-    nation?: string;
+    nation?: string
     // 证件类型
-    idType?: number;
+    idType?: number
     // 证件号码
-    idNumber?: string;
+    idNumber?: string
     // 性别
-    sex?: number;
+    sex?: number
     // 邮箱
-    email?: string;
+    email?: string
     // 籍贯
-    nativePlace?: string;
+    nativePlace?: string
     // 出生时间
-    birthday?: string;
+    birthday?: string
     // 年龄
-    age?: number;
+    age?: number
     // 户籍地址
-    address?: string;
+    address?: string
     // 最高学历
-    highestEducation?: number;
+    highestEducation?: number
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 直属上级员工 Id
-    leaderEmployeeId?: number;
+    leaderEmployeeId?: number
     // 入职状态
-    entryStatus: number;
+    entryStatus: number
     // 员工状态
-    status?: number;
+    status?: number
     // 聘用形式
-    type: number;
+    type: number
     // 入职时间
-    entryTime: string;
+    entryTime: string
     // 试用期，单位月；0 表示无试用期
-    probation?: number;
+    probation?: number
     // 转正时间
-    regularTime?: string;
+    regularTime?: string
     // 离职时间
-    leaveTime?: string;
+    leaveTime?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 岗位职级
-    postLevel?: string;
+    postLevel?: string
     // 工作城市
-    workCity?: string;
+    workCity?: string
     // 工作地址
-    workAddress?: string;
+    workAddress?: string
     // 工作详细地址
-    workDetailAddress?: string;
+    workDetailAddress?: string
     // 招聘渠道 Id
-    channelId?: number;
+    channelId?: number
     // 司龄开始时间
-    companyAgeStartTime?: string;
+    companyAgeStartTime?: string
     // 司龄，单位年
-    companyAge?: number;
+    companyAge?: number
     // 关联招聘候选人 Id
-    candidateId?: number;
+    candidateId?: number
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmEmployeeContactRespVO = {
     // 联系人 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 联系人名称
-    name?: string;
+    name?: string
     // 关系
-    relation?: string;
+    relation?: string
     // 联系人电话
-    phone?: string;
+    phone?: string
     // 联系人工作单位
-    workUnit?: string;
+    workUnit?: string
     // 联系人职务
-    postName?: string;
+    postName?: string
     // 联系人地址
-    address?: string;
+    address?: string
     // 排序
-    sort?: number;
+    sort?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeContactSaveReqVO = {
     // 联系人 Id
-    id?: number;
+    id?: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 联系人名称
-    name: string;
+    name: string
     // 关系
-    relation?: string;
+    relation?: string
     // 联系人电话
-    phone?: string;
+    phone?: string
     // 联系人工作单位
-    workUnit?: string;
+    workUnit?: string
     // 联系人职务
-    postName?: string;
+    postName?: string
     // 联系人地址
-    address?: string;
+    address?: string
     // 排序
-    sort?: number;
+    sort?: number
   }
 
   type HrmEmployeeContractRespVO = {
     // 合同 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 合同 Id
-    no?: string;
+    no?: string
     // 合同类型
-    type?: number;
+    type?: number
     // 合同开始日期
-    startTime?: string;
+    startTime?: string
     // 合同结束日期
-    endTime?: string;
+    endTime?: string
     // 期限
-    term?: number;
+    term?: number
     // 合同状态
-    status?: number;
+    status?: number
     // 签约公司
-    signCompany?: string;
+    signCompany?: string
     // 合同签订日期
-    signTime?: string;
+    signTime?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 是否到期提醒
-    expireRemind?: boolean;
+    expireRemind?: boolean
     // 附件地址数组
-    fileUrls?: string[];
+    fileUrls?: string[]
     // 排序
-    sort?: number;
+    sort?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeContractSaveReqVO = {
     // 合同 Id
-    id?: number;
+    id?: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 合同 Id
-    no?: string;
+    no?: string
     // 合同类型
-    type: number;
+    type: number
     // 合同开始日期
-    startTime: string;
+    startTime: string
     // 合同结束日期
-    endTime: string;
+    endTime: string
     // 期限，单位：年
-    term?: number;
+    term?: number
     // 合同状态
-    status: number;
+    status: number
     // 签约公司
-    signCompany?: string;
+    signCompany?: string
     // 合同签订日期
-    signTime: string;
+    signTime: string
     // 备注
-    remark?: string;
+    remark?: string
     // 是否到期提醒
-    expireRemind?: boolean;
+    expireRemind?: boolean
     // 附件地址数组
-    fileUrls?: string[];
+    fileUrls?: string[]
     // 排序
-    sort?: number;
+    sort?: number
   }
 
   type HrmEmployeeConvertToFullTimeReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 异动原因
-    reason: number;
+    reason: number
     // 试用期，单位：月；0 表示无试用期
-    probation: number;
+    probation: number
     // 新部门 Id；未填写表示不变
-    newDeptId?: number;
+    newDeptId?: number
     // 新岗位名称；未填写表示不变
-    newPostName?: string;
+    newPostName?: string
     // 新职级；未填写表示不变
-    newPostLevel?: string;
+    newPostLevel?: string
     // 新工作地点；未填写表示不变
-    newWorkAddress?: string;
+    newWorkAddress?: string
     // 新直属上级员工 Id；未填写表示不变
-    newLeaderEmployeeId?: number;
+    newLeaderEmployeeId?: number
     // 生效日期
-    effectTime: string;
+    effectTime: string
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmEmployeeCreateFieldConfigSaveReqVO = {
     // 入职状态
-    entryStatus: number;
+    entryStatus: number
     // 字段配置列表
-    fields: HrmEmployeeFieldConfigSaveReqVO[];
+    fields: HrmEmployeeFieldConfigSaveReqVO[]
   }
 
   type HrmEmployeeCreateFromUserReqVO = {
     // 后台用户 Id
-    userId: number;
+    userId: number
     // 工号
-    jobNumber: string;
+    jobNumber: string
     // 员工手机号
-    mobile: string;
+    mobile: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 直属上级员工 Id
-    leaderEmployeeId?: number;
+    leaderEmployeeId?: number
     // 聘用形式
-    type: number;
+    type: number
     // 员工状态；非正式员工必填
-    status?: number;
+    status?: number
     // 入职时间
-    entryTime: string;
+    entryTime: string
     // 试用期，单位：月；正式员工必填
-    probation?: number;
+    probation?: number
     // 职位名称
-    postName?: string;
+    postName?: string
     // 岗位职级
-    postLevel?: string;
+    postLevel?: string
     // 工作城市
-    workCity?: string;
+    workCity?: string
     // 工作地点
-    workAddress?: string;
+    workAddress?: string
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmEmployeeDemoteReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 异动原因
-    reason: number;
+    reason: number
     // 新部门 Id
-    newDeptId?: number;
+    newDeptId?: number
     // 新岗位名称
-    newPostName?: string;
+    newPostName?: string
     // 新职级
-    newPostLevel?: string;
+    newPostLevel?: string
     // 新工作地点
-    newWorkAddress?: string;
+    newWorkAddress?: string
     // 新直属上级员工 Id
-    newLeaderEmployeeId?: number;
+    newLeaderEmployeeId?: number
     // 生效日期
-    effectTime: string;
+    effectTime: string
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmEmployeeDeptStatisticsRespVO = {
     // 部门 Id
-    deptId: number;
+    deptId: number
     // 在职员工人数
-    activeCount: number;
+    activeCount: number
     // 全职员工人数
-    fullTimeCount: number;
+    fullTimeCount: number
     // 非全职员工人数
-    nonFullTimeCount: number;
+    nonFullTimeCount: number
   }
 
   type HrmEmployeeEducationExperienceRespVO = {
     // 教育经历 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 学历
-    education?: number;
+    education?: number
     // 毕业院校
-    graduateSchool?: string;
+    graduateSchool?: string
     // 专业
-    major?: string;
+    major?: string
     // 入学日期
-    admissionTime?: string;
+    admissionTime?: string
     // 毕业日期
-    graduationTime?: string;
+    graduationTime?: string
     // 教学方式
-    teachingMethods?: number;
+    teachingMethods?: number
     // 是否第一学历
-    firstDegree?: boolean;
+    firstDegree?: boolean
     // 排序
-    sort?: number;
+    sort?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeEducationExperienceSaveReqVO = {
     // 教育经历 Id
-    id?: number;
+    id?: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 学历
-    education: number;
+    education: number
     // 毕业院校
-    graduateSchool: string;
+    graduateSchool: string
     // 专业
-    major: string;
+    major: string
     // 入学日期
-    admissionTime?: string;
+    admissionTime?: string
     // 毕业日期
-    graduationTime?: string;
+    graduationTime?: string
     // 教学方式
-    teachingMethods?: number;
+    teachingMethods?: number
     // 是否第一学历
-    firstDegree?: boolean;
+    firstDegree?: boolean
     // 排序
-    sort?: number;
+    sort?: number
   }
 
   type HrmEmployeeFieldConfigRespVO = {
     // 字段名称
-    name: string;
+    name: string
     // 字段标题
-    title: string;
+    title: string
     // 字段分组名称
-    groupName: string;
+    groupName: string
     // 是否显示
-    visible: boolean;
+    visible: boolean
     // 是否允许员工编辑
-    editable?: boolean;
+    editable?: boolean
     // 是否锁定显示
-    visibleLocked: boolean;
+    visibleLocked: boolean
     // 是否锁定编辑
-    editableLocked: boolean;
+    editableLocked: boolean
   }
 
   type HrmEmployeeFieldConfigSaveReqVO = {
     // 字段名称
-    name: string;
+    name: string
     // 是否显示
-    visible: boolean;
+    visible: boolean
     // 是否允许员工编辑
-    editable?: boolean;
+    editable?: boolean
   }
 
   type HrmEmployeeFileRespVO = {
     // 附件 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 附件类型
-    type: number;
+    type: number
     // 附件地址
-    url: string;
+    url: string
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeFileSaveReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 附件类型
-    type: number;
+    type: number
     // 附件地址数组
-    fileUrls: string[];
+    fileUrls: string[]
   }
 
   type HrmEmployeeImportRespVO = {
     // 创建成功的工号数组
-    createJobNumbers: string[];
+    createJobNumbers: string[]
     // 更新成功的工号数组
-    updateJobNumbers: string[];
+    updateJobNumbers: string[]
     // 因重复而跳过的工号数组
-    skipJobNumbers: string[];
+    skipJobNumbers: string[]
     // 导入失败的员工集合，key 为原始行号和员工标识，value 为失败原因
-    failureJobNumbers: Record<string, any>;
+    failureJobNumbers: Record<string, any>
   }
 
   type HrmEmployeeNotifyRespVO = {
     // 发送成功数量
-    successCount?: number;
+    successCount?: number
     // 无后台账号跳过数量
-    skippedCount?: number;
+    skippedCount?: number
     // 发送失败数量
-    failureCount?: number;
+    failureCount?: number
   }
 
   type HrmEmployeePageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 排序字段
-    sortingFields?: SortingField[];
+    sortingFields?: SortingField[]
     // 员工 Id 列表
-    ids?: number[];
+    ids?: number[]
     // 员工姓名、工号或手机号，模糊匹配
-    search?: string;
+    search?: string
     // 员工姓名，模糊匹配
-    name?: string;
+    name?: string
     // 工号，模糊匹配
-    jobNumber?: string;
+    jobNumber?: string
     // 手机号，模糊匹配
-    mobile?: string;
-    // 部门 Id 
-    deptId?: number;
+    mobile?: string
+    // 部门 Id
+    deptId?: number
     // 部门 Id 数组
-    deptIds?: number[];
-    // 直属上级员工 Id 
-    leaderEmployeeId?: number;
+    deptIds?: number[]
+    // 直属上级员工 Id
+    leaderEmployeeId?: number
     // 性别
-    sex?: number;
+    sex?: number
     // 入职时间范围
-    entryTime?: string[];
+    entryTime?: string[]
     // 职位名称，模糊匹配
-    postName?: string;
+    postName?: string
     // 转正时间范围
-    regularTime?: string[];
+    regularTime?: string[]
     // 工作地点，模糊匹配
-    workAddress?: string;
-    // 招聘渠道 Id 
-    channelId?: number;
+    workAddress?: string
+    // 招聘渠道 Id
+    channelId?: number
     // 聘用形式
-    type?: number;
+    type?: number
     // 入职状态
-    entryStatus?: number;
+    entryStatus?: number
     // 员工状态
-    status?: number;
+    status?: number
     // 员工状态分类
-    statusCategory?: number;
+    statusCategory?: number
     // 首页人事概况筛选类型
-    surveyType?: number;
+    surveyType?: number
     // 首页待办筛选类型
-    todoType?: number;
+    todoType?: number
   }
 
   type HrmEmployeePersonalNoteCreateReqVO = {
     // 备忘内容
-    content: string;
+    content: string
     // 提醒时间
-    reminderTime: string;
+    reminderTime: string
   }
 
   type HrmEmployeePromoteReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 异动原因
-    reason: number;
+    reason: number
     // 新部门 Id
-    newDeptId?: number;
+    newDeptId?: number
     // 新岗位名称
-    newPostName?: string;
+    newPostName?: string
     // 新职级
-    newPostLevel?: string;
+    newPostLevel?: string
     // 新工作地点
-    newWorkAddress?: string;
+    newWorkAddress?: string
     // 新直属上级员工 Id
-    newLeaderEmployeeId?: number;
+    newLeaderEmployeeId?: number
     // 生效日期
-    effectTime: string;
+    effectTime: string
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmEmployeeQuitInfoRespVO = {
     // 离职信息 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 计划离职时间
-    planQuitTime?: string;
+    planQuitTime?: string
     // 申请离职时间
-    applyQuitTime?: string;
+    applyQuitTime?: string
     // 薪资结算时间
-    salarySettlementTime?: string;
+    salarySettlementTime?: string
     // 离职类型
-    type?: number;
+    type?: number
     // 离职原因
-    reason?: number;
+    reason?: number
     // 备注
-    remark?: string;
+    remark?: string
     // 离职前员工状态
-    oldEmployeeStatus?: number;
+    oldEmployeeStatus?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeQuitReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 计划离职时间
-    planQuitTime: string;
+    planQuitTime: string
     // 申请离职时间
-    applyQuitTime: string;
+    applyQuitTime: string
     // 薪资结算时间
-    salarySettlementTime: string;
+    salarySettlementTime: string
     // 离职类型
-    type: number;
+    type: number
     // 离职原因
-    reason?: number;
+    reason?: number
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmEmployeeRegularReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 异动原因
-    reason: number;
+    reason: number
     // 新部门 Id；未填写表示不变
-    newDeptId?: number;
+    newDeptId?: number
     // 新岗位名称；未填写表示不变
-    newPostName?: string;
+    newPostName?: string
     // 新职级；未填写表示不变
-    newPostLevel?: string;
+    newPostLevel?: string
     // 新工作地点；未填写表示不变
-    newWorkAddress?: string;
+    newWorkAddress?: string
     // 新直属上级员工 Id；未填写表示不变
-    newLeaderEmployeeId?: number;
+    newLeaderEmployeeId?: number
     // 生效日期
-    effectTime: string;
+    effectTime: string
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmEmployeeRehireReqVO = {
     // 员工档案 Id
-    id?: number;
+    id?: number
     // 员工姓名
-    name: string;
+    name: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 系统用户 Id
-    userId?: number;
+    userId?: number
     // 手机号
-    mobile: string;
+    mobile: string
     // 国家地区
-    country?: string;
+    country?: string
     // 民族
-    nation?: string;
+    nation?: string
     // 证件类型
-    idType?: number;
+    idType?: number
     // 证件号码
-    idNumber?: string;
+    idNumber?: string
     // 性别
-    sex?: number;
+    sex?: number
     // 邮箱
-    email?: string;
+    email?: string
     // 籍贯
-    nativePlace?: string;
+    nativePlace?: string
     // 出生时间
-    birthday?: string;
+    birthday?: string
     // 年龄
-    age?: number;
+    age?: number
     // 户籍地址
-    address?: string;
+    address?: string
     // 最高学历
-    highestEducation?: number;
+    highestEducation?: number
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 直属上级员工 Id
-    leaderEmployeeId?: number;
+    leaderEmployeeId?: number
     // 入职状态
-    entryStatus: number;
+    entryStatus: number
     // 员工状态
-    status?: number;
+    status?: number
     // 聘用形式
-    type: number;
+    type: number
     // 入职时间
-    entryTime: string;
+    entryTime: string
     // 试用期，单位月；0 表示无试用期
-    probation?: number;
+    probation?: number
     // 转正时间
-    regularTime?: string;
+    regularTime?: string
     // 离职时间
-    leaveTime?: string;
+    leaveTime?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 岗位职级
-    postLevel?: string;
+    postLevel?: string
     // 工作城市
-    workCity?: string;
+    workCity?: string
     // 工作地址
-    workAddress?: string;
+    workAddress?: string
     // 工作详细地址
-    workDetailAddress?: string;
+    workDetailAddress?: string
     // 招聘渠道 Id
-    channelId?: number;
+    channelId?: number
     // 司龄开始时间
-    companyAgeStartTime?: string;
+    companyAgeStartTime?: string
     // 司龄，单位年
-    companyAge?: number;
+    companyAge?: number
     // 关联招聘候选人 Id
-    candidateId?: number;
+    candidateId?: number
     // 备注
-    remark?: string;
+    remark?: string
     // 员工 Id
-    employeeId: number;
+    employeeId: number
   }
 
   type HrmEmployeeRespVO = {
     // 员工档案 Id
-    id: number;
+    id: number
     // 员工姓名
-    name: string;
+    name: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 系统用户 Id
-    userId?: number;
+    userId?: number
     // 后台用户昵称
-    userNickname?: string;
+    userNickname?: string
     // 手机号
-    mobile?: string;
+    mobile?: string
     // 国家地区
-    country?: string;
+    country?: string
     // 民族
-    nation?: string;
+    nation?: string
     // 证件类型
-    idType?: number;
+    idType?: number
     // 证件号码
-    idNumber?: string;
+    idNumber?: string
     // 性别
-    sex?: number;
+    sex?: number
     // 邮箱
-    email?: string;
+    email?: string
     // 籍贯
-    nativePlace?: string;
+    nativePlace?: string
     // 出生时间
-    birthday?: string;
+    birthday?: string
     // 年龄
-    age?: number;
+    age?: number
     // 户籍地址
-    address?: string;
+    address?: string
     // 最高学历
-    highestEducation?: number;
+    highestEducation?: number
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 直属上级员工 Id
-    leaderEmployeeId?: number;
+    leaderEmployeeId?: number
     // 直属上级员工姓名
-    leaderEmployeeName?: string;
+    leaderEmployeeName?: string
     // 入职状态
-    entryStatus?: number;
+    entryStatus?: number
     // 员工状态
-    status?: number;
+    status?: number
     // 聘用形式
-    type?: number;
+    type?: number
     // 入职时间
-    entryTime?: string;
+    entryTime?: string
     // 试用期，单位月；0 表示无试用期
-    probation?: number;
+    probation?: number
     // 转正时间
-    regularTime?: string;
+    regularTime?: string
     // 离职时间
-    leaveTime?: string;
+    leaveTime?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 岗位职级
-    postLevel?: string;
+    postLevel?: string
     // 工作城市
-    workCity?: string;
+    workCity?: string
     // 工作地址
-    workAddress?: string;
+    workAddress?: string
     // 工作详细地址
-    workDetailAddress?: string;
+    workDetailAddress?: string
     // 招聘渠道 Id
-    channelId?: number;
+    channelId?: number
     // 招聘渠道名称
-    channelName?: string;
+    channelName?: string
     // 司龄开始时间
-    companyAgeStartTime?: string;
+    companyAgeStartTime?: string
     // 司龄，单位：年
-    companyAge?: number;
+    companyAge?: number
     // 关联招聘候选人 Id
-    candidateId?: number;
+    candidateId?: number
     // 银行卡号
-    salaryCardNumber?: string;
+    salaryCardNumber?: string
     // 开户地区 Id
-    salaryCardAreaId?: number;
+    salaryCardAreaId?: number
     // 开户地区名称
-    salaryCardAreaName?: string;
+    salaryCardAreaName?: string
     // 银行名称
-    salaryCardBankName?: string;
+    salaryCardBankName?: string
     // 开户支行名称
-    salaryCardBankBranchName?: string;
+    salaryCardBankBranchName?: string
     // 个人社保账号
-    socialSecurityNumber?: string;
+    socialSecurityNumber?: string
     // 个人公积金账号
-    accumulationFundNumber?: string;
+    accumulationFundNumber?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeSalaryCardRespVO = {
     // 工资卡 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 银行卡号
-    bankCardNumber?: string;
+    bankCardNumber?: string
     // 开户地区 Id
-    bankAreaId?: number;
+    bankAreaId?: number
     // 开户地区名称
-    bankAreaName?: string;
+    bankAreaName?: string
     // 银行名称
-    bankName?: string;
+    bankName?: string
     // 开户支行名称
-    bankBranchName?: string;
+    bankBranchName?: string
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeSalaryCardSaveReqVO = {
     // 工资卡 Id
-    id?: number;
+    id?: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 银行卡号
-    bankCardNumber: string;
+    bankCardNumber: string
     // 开户地区 Id
-    bankAreaId?: number;
+    bankAreaId?: number
     // 银行名称
-    bankName?: string;
+    bankName?: string
     // 开户支行名称
-    bankBranchName?: string;
+    bankBranchName?: string
   }
 
   type HrmEmployeeSaveReqVO = {
     // 员工档案 Id
-    id?: number;
+    id?: number
     // 员工姓名
-    name: string;
+    name: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 系统用户 Id
-    userId?: number;
+    userId?: number
     // 手机号
-    mobile: string;
+    mobile: string
     // 国家地区
-    country?: string;
+    country?: string
     // 民族
-    nation?: string;
+    nation?: string
     // 证件类型
-    idType?: number;
+    idType?: number
     // 证件号码
-    idNumber?: string;
+    idNumber?: string
     // 性别
-    sex?: number;
+    sex?: number
     // 邮箱
-    email?: string;
+    email?: string
     // 籍贯
-    nativePlace?: string;
+    nativePlace?: string
     // 出生时间
-    birthday?: string;
+    birthday?: string
     // 年龄
-    age?: number;
+    age?: number
     // 户籍地址
-    address?: string;
+    address?: string
     // 最高学历
-    highestEducation?: number;
+    highestEducation?: number
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 直属上级员工 Id
-    leaderEmployeeId?: number;
+    leaderEmployeeId?: number
     // 入职状态
-    entryStatus: number;
+    entryStatus: number
     // 员工状态
-    status?: number;
+    status?: number
     // 聘用形式
-    type: number;
+    type: number
     // 入职时间
-    entryTime: string;
+    entryTime: string
     // 试用期，单位月；0 表示无试用期
-    probation?: number;
+    probation?: number
     // 转正时间
-    regularTime?: string;
+    regularTime?: string
     // 离职时间
-    leaveTime?: string;
+    leaveTime?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 岗位职级
-    postLevel?: string;
+    postLevel?: string
     // 工作城市
-    workCity?: string;
+    workCity?: string
     // 工作地址
-    workAddress?: string;
+    workAddress?: string
     // 工作详细地址
-    workDetailAddress?: string;
+    workDetailAddress?: string
     // 招聘渠道 Id
-    channelId?: number;
+    channelId?: number
     // 司龄开始时间
-    companyAgeStartTime?: string;
+    companyAgeStartTime?: string
     // 司龄，单位年
-    companyAge?: number;
+    companyAge?: number
     // 关联招聘候选人 Id
-    candidateId?: number;
+    candidateId?: number
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmEmployeeStatusCountRespVO = {
     // 状态页签
-    status: number;
+    status: number
     // 数量
-    count: number;
+    count: number
   }
 
   type HrmEmployeeTrainingExperienceRespVO = {
     // 培训经历 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 培训课程
-    course?: string;
+    course?: string
     // 培训机构名称
-    organizationName?: string;
+    organizationName?: string
     // 培训开始日期
-    startTime?: string;
+    startTime?: string
     // 培训结束日期
-    endTime?: string;
+    endTime?: string
     // 培训时长
-    duration?: string;
+    duration?: string
     // 培训成绩
-    result?: string;
+    result?: string
     // 培训证书名称
-    certificateName?: string;
+    certificateName?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 排序
-    sort?: number;
+    sort?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeTrainingExperienceSaveReqVO = {
     // 培训经历 Id
-    id?: number;
+    id?: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 培训课程
-    course: string;
+    course: string
     // 培训机构名称
-    organizationName?: string;
+    organizationName?: string
     // 培训开始日期
-    startTime?: string;
+    startTime?: string
     // 培训结束日期
-    endTime?: string;
+    endTime?: string
     // 培训时长
-    duration?: string;
+    duration?: string
     // 培训成绩
-    result?: string;
+    result?: string
     // 培训证书名称
-    certificateName?: string;
+    certificateName?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 排序
-    sort?: number;
+    sort?: number
   }
 
   type HrmEmployeeTransferReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 异动原因
-    reason: number;
+    reason: number
     // 新部门 Id
-    newDeptId?: number;
+    newDeptId?: number
     // 新岗位名称
-    newPostName?: string;
+    newPostName?: string
     // 新职级
-    newPostLevel?: string;
+    newPostLevel?: string
     // 新工作地点
-    newWorkAddress?: string;
+    newWorkAddress?: string
     // 新直属上级员工 Id
-    newLeaderEmployeeId?: number;
+    newLeaderEmployeeId?: number
     // 生效日期
-    effectTime: string;
+    effectTime: string
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmEmployeeWorkExperienceRespVO = {
     // 工作经历 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 工作单位
-    workUnit?: string;
+    workUnit?: string
     // 职务
-    postName?: string;
+    postName?: string
     // 工作开始日期
-    startTime?: string;
+    startTime?: string
     // 工作结束日期
-    endTime?: string;
+    endTime?: string
     // 离职原因
-    reason?: string;
+    reason?: string
     // 证明人
-    witnessName?: string;
+    witnessName?: string
     // 证明人手机号
-    witnessPhone?: string;
+    witnessPhone?: string
     // 工作备注
-    remark?: string;
+    remark?: string
     // 排序
-    sort?: number;
+    sort?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmEmployeeWorkExperienceSaveReqVO = {
     // 工作经历 Id
-    id?: number;
+    id?: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 工作单位
-    workUnit: string;
+    workUnit: string
     // 职务
-    postName: string;
+    postName: string
     // 工作开始日期
-    startTime?: string;
+    startTime?: string
     // 工作结束日期
-    endTime?: string;
+    endTime?: string
     // 离职原因
-    reason?: string;
+    reason?: string
     // 证明人
-    witnessName?: string;
+    witnessName?: string
     // 证明人手机号
-    witnessPhone?: string;
+    witnessPhone?: string
     // 工作备注
-    remark?: string;
+    remark?: string
     // 排序
-    sort?: number;
+    sort?: number
   }
 
   type HrmInsuranceEmployeeInfoRespVO = {
     // 员工参保信息 Id
-    id: number;
+    id: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 是否本地首次缴纳社保
-    firstSocialSecurity?: boolean;
+    firstSocialSecurity?: boolean
     // 是否本地首次缴纳公积金
-    firstAccumulationFund?: boolean;
+    firstAccumulationFund?: boolean
     // 社保账号
-    socialSecurityNumber?: string;
+    socialSecurityNumber?: string
     // 公积金账号
-    accumulationFundNumber?: string;
+    accumulationFundNumber?: string
     // 社保起缴月份
-    socialSecurityStartMonth?: string;
+    socialSecurityStartMonth?: string
     // 社保方案 Id
-    schemeId?: number;
+    schemeId?: number
     // 社保方案名称
-    schemeName?: string;
+    schemeName?: string
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmInsuranceEmployeeInfoSaveReqVO = {
     // 员工参保信息 Id
-    id?: number;
+    id?: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 是否本地首次缴纳社保
-    firstSocialSecurity: boolean;
+    firstSocialSecurity: boolean
     // 是否本地首次缴纳公积金
-    firstAccumulationFund: boolean;
+    firstAccumulationFund: boolean
     // 社保账号
-    socialSecurityNumber?: string;
+    socialSecurityNumber?: string
     // 公积金账号
-    accumulationFundNumber?: string;
+    accumulationFundNumber?: string
     // 社保起缴月份
-    socialSecurityStartMonth?: string;
+    socialSecurityStartMonth?: string
     // 社保方案 Id
-    schemeId?: number;
+    schemeId?: number
   }
 
   type HrmInsuranceEmployeeInfoUpdateSchemeReqVO = {
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 社保方案 Id
-    schemeId: number;
+    schemeId: number
   }
 
   type HrmInsuranceMonthEmployeeProjectRespVO = {
     // 来源社保方案项目 Id
-    schemeProjectId?: number;
+    schemeProjectId?: number
     // 项目类型
-    type: number;
+    type: number
     // 项目名称
-    name: string;
+    name: string
     // 缴纳基数
-    baseAmount?: number;
+    baseAmount?: number
     // 公司缴纳比例
-    corporateRate?: number;
+    corporateRate?: number
     // 个人缴纳比例
-    personalRate?: number;
+    personalRate?: number
     // 公司缴纳金额
-    corporateAmount?: number;
+    corporateAmount?: number
     // 个人缴纳金额
-    personalAmount?: number;
+    personalAmount?: number
   }
 
   type HrmInsuranceMonthEmployeeProjectUpdateReqVO = {
     // 社保方案项目 Id
-    schemeProjectId: number;
+    schemeProjectId: number
     // 缴纳基数
-    baseAmount?: number;
+    baseAmount?: number
     // 公司缴纳金额
-    corporateAmount?: number;
+    corporateAmount?: number
     // 个人缴纳金额
-    personalAmount?: number;
+    personalAmount?: number
   }
 
   type HrmInsuranceMonthEmployeeRecordCreateListReqVO = {
     // 月度社保表 Id
-    monthRecordId: number;
+    monthRecordId: number
     // 员工 Id 列表
-    employeeIds: number[];
+    employeeIds: number[]
   }
 
   type HrmInsuranceMonthEmployeeRecordPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 月度社保表 Id
-    monthRecordId: number;
+    monthRecordId: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 社保方案 Id
-    schemeId?: number;
+    schemeId?: number
     // 参保地区 Id
-    areaId?: number;
+    areaId?: number
     // 参保状态
-    status?: number;
+    status?: number
   }
 
   type HrmInsuranceMonthEmployeeRecordRespVO = {
     // 记录 Id
-    id?: number;
+    id?: number
     // 社保表 Id
-    monthRecordId?: number;
+    monthRecordId?: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 手机号
-    mobile?: string;
+    mobile?: string
     // 身份证号
-    idNumber?: string;
+    idNumber?: string
     // 性别
-    sex?: number;
+    sex?: number
     // 年龄
-    age?: number;
+    age?: number
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门
-    deptName?: string;
+    deptName?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 入职状态
-    entryStatus?: number;
+    entryStatus?: number
     // 员工状态
-    employeeStatus?: number;
+    employeeStatus?: number
     // 入职时间
-    entryTime?: string;
+    entryTime?: string
     // 社保方案 Id
-    schemeId?: number;
+    schemeId?: number
     // 社保方案
-    schemeName?: string;
+    schemeName?: string
     // 参保地区
-    areaName?: string;
+    areaName?: string
     // 参保地区 Id
-    areaId?: number;
+    areaId?: number
     // 户籍类型
-    houseType?: string;
+    houseType?: string
     // 社保方案类型
-    schemeType?: number;
+    schemeType?: number
     // 个人社保号
-    socialSecurityNumber?: string;
+    socialSecurityNumber?: string
     // 个人公积金号
-    accumulationFundNumber?: string;
+    accumulationFundNumber?: string
     // 年份
-    year?: number;
+    year?: number
     // 月份
-    month?: number;
+    month?: number
     // 个人社保
-    personalInsuranceAmount?: number;
+    personalInsuranceAmount?: number
     // 个人公积金
-    personalProvidentFundAmount?: number;
+    personalProvidentFundAmount?: number
     // 公司社保
-    corporateInsuranceAmount?: number;
+    corporateInsuranceAmount?: number
     // 公司公积金
-    corporateProvidentFundAmount?: number;
+    corporateProvidentFundAmount?: number
     // 参保状态
-    status?: number;
+    status?: number
     // 社保项目列表
-    socialSecurityProjectList?: HrmInsuranceMonthEmployeeProjectRespVO[];
+    socialSecurityProjectList?: HrmInsuranceMonthEmployeeProjectRespVO[]
     // 公积金项目列表
-    providentFundProjectList?: HrmInsuranceMonthEmployeeProjectRespVO[];
+    providentFundProjectList?: HrmInsuranceMonthEmployeeProjectRespVO[]
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmInsuranceMonthEmployeeRecordStopListReqVO = {
     // 员工月度社保记录 Id 列表
-    ids: number[];
+    ids: number[]
   }
 
   type HrmInsuranceMonthEmployeeRecordUpdateReqVO = {
     // 员工月度社保记录 Id
-    id: number;
+    id: number
     // 社保方案 Id
-    schemeId: number;
+    schemeId: number
     // 社保项目列表
-    projects: HrmInsuranceMonthEmployeeProjectUpdateReqVO[];
+    projects: HrmInsuranceMonthEmployeeProjectUpdateReqVO[]
   }
 
   type HrmInsuranceMonthRecordCreateReqVO = {
     // 年份
-    year: number;
+    year: number
     // 月份
-    month: number;
+    month: number
   }
 
   type HrmInsuranceMonthRecordRespVO = {
     // 月度社保表 Id
-    id: number;
+    id: number
     // 年份
-    year: number;
+    year: number
     // 月份
-    month: number;
+    month: number
     // 标题
-    title?: string;
+    title?: string
     // 参保人数
-    insuredEmployeeCount: number;
+    insuredEmployeeCount: number
     // 停保人数
-    stoppedEmployeeCount: number;
+    stoppedEmployeeCount: number
     // 状态
-    status: number;
+    status: number
     // 个人社保金额
-    personalInsuranceAmount: number;
+    personalInsuranceAmount: number
     // 个人公积金金额
-    personalProvidentFundAmount: number;
+    personalProvidentFundAmount: number
     // 企业社保金额
-    corporateInsuranceAmount: number;
+    corporateInsuranceAmount: number
     // 企业公积金金额
-    corporateProvidentFundAmount: number;
+    corporateProvidentFundAmount: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmInsuranceSchemeProjectRespVO = {
     // 社保方案项目 Id
-    id: number;
+    id: number
     // 社保方案 Id
-    schemeId?: number;
+    schemeId?: number
     // 项目类型
-    type: number;
+    type: number
     // 项目名称
-    name: string;
+    name: string
     // 缴纳基数
-    baseAmount?: number;
+    baseAmount?: number
     // 公司缴纳比例
-    corporateRate?: number;
+    corporateRate?: number
     // 个人缴纳比例
-    personalRate?: number;
+    personalRate?: number
     // 公司缴纳金额
-    corporateAmount?: number;
+    corporateAmount?: number
     // 个人缴纳金额
-    personalAmount?: number;
+    personalAmount?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmInsuranceSchemeProjectSaveReqVO = {
     // 社保方案项目 Id
-    id?: number;
+    id?: number
     // 项目类型
-    type: number;
+    type: number
     // 项目名称
-    name: string;
+    name: string
     // 缴纳基数
-    baseAmount?: number;
+    baseAmount?: number
     // 公司缴纳比例
-    corporateRate?: number;
+    corporateRate?: number
     // 个人缴纳比例
-    personalRate?: number;
+    personalRate?: number
     // 公司缴纳金额
-    corporateAmount?: number;
+    corporateAmount?: number
     // 个人缴纳金额
-    personalAmount?: number;
+    personalAmount?: number
   }
 
   type HrmInsuranceSchemeRespVO = {
     // 社保方案 Id
-    id: number;
+    id: number
     // 方案名称
-    name: string;
+    name: string
     // 参保地区 Id
-    areaId?: number;
+    areaId?: number
     // 参保地区
-    areaName?: string;
+    areaName?: string
     // 户籍类型
-    householdType?: string;
+    householdType?: string
     // 方案类型
-    type: number;
+    type: number
     // 全部社保项目
-    projectList?: HrmInsuranceSchemeProjectRespVO[];
+    projectList?: HrmInsuranceSchemeProjectRespVO[]
     // 社保项目
-    socialSecurityProjectList?: HrmInsuranceSchemeProjectRespVO[];
+    socialSecurityProjectList?: HrmInsuranceSchemeProjectRespVO[]
     // 公积金项目
-    providentFundProjectList?: HrmInsuranceSchemeProjectRespVO[];
+    providentFundProjectList?: HrmInsuranceSchemeProjectRespVO[]
     // 个人社保金额
-    personalInsuranceAmount?: number;
+    personalInsuranceAmount?: number
     // 公司社保金额
-    corporateInsuranceAmount?: number;
+    corporateInsuranceAmount?: number
     // 个人公积金金额
-    personalProvidentFundAmount?: number;
+    personalProvidentFundAmount?: number
     // 公司公积金金额
-    corporateProvidentFundAmount?: number;
+    corporateProvidentFundAmount?: number
     // 使用人数
-    useCount?: number;
+    useCount?: number
     // 历史月记录数
-    monthRecordCount?: number;
+    monthRecordCount?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmInsuranceSchemeSaveReqVO = {
     // 社保方案 Id
-    id?: number;
+    id?: number
     // 方案名称
-    name: string;
+    name: string
     // 参保地区 Id
-    areaId: number;
+    areaId: number
     // 户籍类型
-    householdType?: string;
+    householdType?: string
     // 方案类型
-    type: number;
+    type: number
     // 社保项目列表
-    projectList: HrmInsuranceSchemeProjectSaveReqVO[];
+    projectList: HrmInsuranceSchemeProjectSaveReqVO[]
   }
 
   type HrmInsuranceStandardProjectListReqVO = {
     // 参保地区 Id
-    areaId: number;
+    areaId: number
     // 参保方案编码
-    typeCode: string;
+    typeCode: string
   }
 
   type HrmInsuranceStandardProjectRespVO = {
     // 项目类型
-    type: number;
+    type: number
     // 项目名称
-    name: string;
+    name: string
     // 缴纳基数
-    baseAmount?: number;
+    baseAmount?: number
     // 公司缴纳比例
-    corporateRate?: number;
+    corporateRate?: number
     // 个人缴纳比例
-    personalRate?: number;
+    personalRate?: number
     // 公司缴纳金额
-    corporateAmount?: number;
+    corporateAmount?: number
     // 个人缴纳金额
-    personalAmount?: number;
+    personalAmount?: number
   }
 
   type HrmInsuranceStandardTypeListReqVO = {
     // 参保地区 Id
-    areaId: number;
+    areaId: number
   }
 
   type HrmInsuranceStandardTypeRespVO = {
     // 参保方案编码
-    code: string;
+    code: string
     // 参保方案名称
-    name: string;
+    name: string
   }
 
   type HrmOperateLogPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 业务类型
-    bizType: number;
+    bizType: number
     // 业务编号
-    bizId: number;
+    bizId: number
   }
 
   type HrmOperateLogRespVO = {
     // 日志 Id
-    id: number;
+    id: number
     // 操作用户 Id
-    userId: number;
+    userId: number
     // 操作用户名称
-    userName: string;
+    userName: string
     // 操作用户类型
-    userType: number;
+    userType: number
     // 日志类型
-    type: string;
+    type: string
     // 日志子类型
-    subType: string;
+    subType: string
     // 业务 Id
-    bizId: number;
+    bizId: number
     // 操作内容
-    action: string;
+    action: string
     // 拓展字段
-    extra?: string;
+    extra?: string
     // 操作时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmPerformanceArchiveEmployeePageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 员工姓名或工号，模糊匹配
-    search?: string;
+    search?: string
   }
 
   type HrmPerformanceArchiveEmployeeRespVO = {
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 手机号码
-    mobile?: string;
+    mobile?: string
     // 员工状态
-    employeeStatus?: number;
+    employeeStatus?: number
     // 聘用形式
-    employeeType?: number;
+    employeeType?: number
     // 最近考核 Id
-    latestAssessmentId?: number;
+    latestAssessmentId?: number
     // 最近考核计划
-    latestPlanName?: string;
+    latestPlanName?: string
     // 最近绩效评分
-    latestScore?: number;
+    latestScore?: number
     // 最近绩效等级
-    latestResultLevel?: string;
+    latestResultLevel?: string
     // 考核次数
-    assessmentCount?: number;
+    assessmentCount?: number
   }
 
   type HrmPerformanceArchivePageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 绩效计划 Id
-    planId?: number;
+    planId?: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工 Ids
-    employeeIds?: number[];
+    employeeIds?: number[]
   }
 
   type HrmPerformanceAssessmentBatchReqVO = {
     // 绩效计划 Id
-    planId: number;
+    planId: number
     // 员工 Ids
-    employeeIds: number[];
+    employeeIds: number[]
   }
 
   type HrmPerformanceAssessmentDimensionRespVO = {
     // 维度 Id
-    id?: number;
+    id?: number
     // 员工绩效考核 Id
-    assessmentId?: number;
+    assessmentId?: number
     // 维度名称
-    name?: string;
+    name?: string
     // 指标类型
-    quotaType?: number;
+    quotaType?: number
     // 维度权重
-    weight?: number;
+    weight?: number
     // 备注
-    remark?: string;
+    remark?: string
     // 是否允许编辑
-    allowEdit?: boolean;
+    allowEdit?: boolean
     // 排序
-    sort?: number;
+    sort?: number
   }
 
   type HrmPerformanceAssessmentPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 绩效计划 Id
-    planId?: number;
+    planId?: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工编号列表
-    employeeIds?: number[];
+    employeeIds?: number[]
     // 员工姓名或工号
-    search?: string;
+    search?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 聘用形式
-    employeeType?: number;
+    employeeType?: number
     // 员工状态
-    employeeStatus?: number;
+    employeeStatus?: number
     // 考核状态
-    status?: number;
+    status?: number
     // 阶段状态
-    stageType?: number;
+    stageType?: number
     // 申诉状态
-    appealStatus?: number;
+    appealStatus?: number
     // 结果等级
-    resultLevel?: string;
+    resultLevel?: string
     // 结果等级是否为空
-    resultLevelEmpty?: boolean;
+    resultLevelEmpty?: boolean
   }
 
   type HrmPerformanceAssessmentQuotaRespVO = {
     // Id
-    id?: number;
+    id?: number
     // 员工绩效考核 Id
-    assessmentId?: number;
+    assessmentId?: number
     // 员工绩效维度 Id
-    dimensionId?: number;
+    dimensionId?: number
     // 是否允许编辑
-    allowEdit?: boolean;
+    allowEdit?: boolean
     // 预设值
-    preset?: boolean;
+    preset?: boolean
     // 维度名称
-    dimensionName?: string;
+    dimensionName?: string
     // 指标名称
-    name?: string;
+    name?: string
     // 指标说明
-    description?: string;
+    description?: string
     // 标准值
-    standard?: string;
+    standard?: string
     // 维度权重
-    dimensionWeight?: number;
+    dimensionWeight?: number
     // 指标权重
-    weight?: number;
+    weight?: number
     // 分数类型
-    scoreType?: number;
+    scoreType?: number
     // 目标值
-    targetValue?: string;
+    targetValue?: string
     // 实际值
-    actualValue?: string;
+    actualValue?: string
     // 自评分数
-    selfScore?: number;
+    selfScore?: number
     // 评分人得分
-    reviewerScore?: number;
+    reviewerScore?: number
     // 最终得分
-    finalScore?: number;
+    finalScore?: number
     // 说明
-    comment?: string;
+    comment?: string
     // 排序
-    sort?: number;
+    sort?: number
   }
 
   type HrmPerformanceAssessmentQuotaScoreRespVO = {
     // Id
-    id?: number;
+    id?: number
     // 员工评分阶段 Id
-    assessmentStageId?: number;
+    assessmentStageId?: number
     // 员工绩效指标 Id
-    assessmentQuotaId?: number;
+    assessmentQuotaId?: number
     // 得分
-    score?: number;
+    score?: number
     // 说明
-    comment?: string;
+    comment?: string
   }
 
   type HrmPerformanceAssessmentRespVO = {
     // Id
-    id?: number;
+    id?: number
     // 绩效计划 Id
-    planId?: number;
+    planId?: number
     // 绩效计划名称
-    name?: string;
+    name?: string
     // 考核周期类型
-    cycleType?: number;
+    cycleType?: number
     // 考核周期
-    cycle?: string;
+    cycle?: string
     // 开始日期
-    startTime?: string;
+    startTime?: string
     // 结束日期
-    endTime?: string;
+    endTime?: string
     // 单项评分上限
-    upperLimitScore?: number;
+    upperLimitScore?: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 手机号
-    mobile?: string;
+    mobile?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 聘用形式
-    employeeType?: number;
+    employeeType?: number
     // 员工状态
-    employeeStatus?: number;
+    employeeStatus?: number
     // 当前处理人
-    currentHandlerName?: string;
+    currentHandlerName?: string
     // 考核状态
-    status?: number;
+    status?: number
     // 激活状态
-    processStatus?: number;
+    processStatus?: number
     // 阶段状态
-    stageType?: number;
+    stageType?: number
     // 阶段排序
-    stageSort?: number;
+    stageSort?: number
     // 得分
-    score?: number;
+    score?: number
     // 结果等级
-    resultLevel?: string;
+    resultLevel?: string
     // 绩效系数
-    coefficient?: number;
+    coefficient?: number
     // 目标确认员工姓名
-    targetConfirmationEmployeeName?: string;
+    targetConfirmationEmployeeName?: string
     // 目标确认结果
-    targetConfirmationResult?: number;
+    targetConfirmationResult?: number
     // 目标确认意见
-    targetConfirmationComment?: string;
+    targetConfirmationComment?: string
     // 目标确认时间
-    targetConfirmationTime?: string;
+    targetConfirmationTime?: string
     // 是否可确认目标
-    canConfirmTarget?: boolean;
+    canConfirmTarget?: boolean
     // 自评说明
-    selfComment?: string;
+    selfComment?: string
     // 评分人说明
-    reviewerComment?: string;
+    reviewerComment?: string
     // 结果说明
-    resultComment?: string;
+    resultComment?: string
     // 结果确认时间
-    resultConfirmationTime?: string;
+    resultConfirmationTime?: string
     // 结果审核状态
-    resultAuditStatus?: number;
+    resultAuditStatus?: number
     // 结果审核时间
-    resultAuditTime?: string;
+    resultAuditTime?: string
     // 结果审核意见
-    resultAuditReason?: string;
+    resultAuditReason?: string
     // 申诉原因
-    appealReason?: string;
+    appealReason?: string
     // 申诉附件地址列表
-    appealFileUrls?: string[];
+    appealFileUrls?: string[]
     // 申诉退回评分阶段编号列表
-    appealReviewStageIds?: number[];
+    appealReviewStageIds?: number[]
     // 申诉提交时间
-    appealSubmitTime?: string;
+    appealSubmitTime?: string
     // 申诉状态
-    appealStatus?: number;
+    appealStatus?: number
     // 申诉处理时间
-    appealTime?: string;
+    appealTime?: string
     // 申诉处理意见
-    appealComment?: string;
+    appealComment?: string
     // 归档时间
-    archiveTime?: string;
+    archiveTime?: string
     // 创建时间
-    createTime?: string;
+    createTime?: string
     // 指标维度列表
-    dimensions?: HrmPerformanceAssessmentDimensionRespVO[];
+    dimensions?: HrmPerformanceAssessmentDimensionRespVO[]
     // 指标列表
-    quotas?: HrmPerformanceAssessmentQuotaRespVO[];
+    quotas?: HrmPerformanceAssessmentQuotaRespVO[]
     // 评分阶段列表
-    reviewStages?: HrmPerformanceAssessmentStageRespVO[];
-    currentReviewStage?: HrmPerformanceAssessmentStageRespVO;
+    reviewStages?: HrmPerformanceAssessmentStageRespVO[]
+    currentReviewStage?: HrmPerformanceAssessmentStageRespVO
     // 运行阶段列表
-    stages?: HrmPerformanceAssessmentStageRespVO[];
-    currentStage?: HrmPerformanceAssessmentStageRespVO;
+    stages?: HrmPerformanceAssessmentStageRespVO[]
+    currentStage?: HrmPerformanceAssessmentStageRespVO
   }
 
   type HrmPerformanceAssessmentStageRespVO = {
     // Id
-    id?: number;
+    id?: number
     // 员工绩效考核 Id
-    assessmentId?: number;
+    assessmentId?: number
     // 阶段类型
-    type?: number;
+    type?: number
     // 处理员工 Id
-    handlerEmployeeId?: number;
+    handlerEmployeeId?: number
     // 处理人姓名
-    handlerName?: string;
+    handlerName?: string
     // 阶段名称
-    name?: string;
+    name?: string
     // 评分人类型
-    raterType?: number;
+    raterType?: number
     // 权重
-    weight?: number;
+    weight?: number
     // 评分类型
-    scoringType?: number;
+    scoringType?: number
     // 可见内容
-    visibleContent?: number;
+    visibleContent?: number
     // 是否必填
-    requiredSetting?: boolean;
+    requiredSetting?: boolean
     // 驳回权限
-    rejectAuthority?: boolean;
+    rejectAuthority?: boolean
     // 排序
-    sort?: number;
+    sort?: number
     // 绩效员工评审阶段状态
-    status?: number;
+    status?: number
     // 得分
-    score?: number;
+    score?: number
     // 结果等级
-    resultLevel?: string;
+    resultLevel?: string
     // 说明
-    comment?: string;
+    comment?: string
     // 驳回原因
-    rejectReason?: string;
+    rejectReason?: string
     // 提交时间
-    submitTime?: string;
+    submitTime?: string
     // 截止时间
-    deadlineTime?: string;
+    deadlineTime?: string
     // 是否可处理
-    canHandle?: boolean;
+    canHandle?: boolean
     // 是否可评分
-    canScore?: boolean;
+    canScore?: boolean
     // 指标评分列表
-    quotaScoreList?: HrmPerformanceAssessmentQuotaScoreRespVO[];
+    quotaScoreList?: HrmPerformanceAssessmentQuotaScoreRespVO[]
   }
 
   type HrmPerformanceAssessmentTemplatePageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 模板名称，模糊匹配
-    name?: string;
+    name?: string
   }
 
   type HrmPerformanceAssessmentTemplateRespVO = {
     // 模板 Id
-    id?: number;
+    id?: number
     // 模板名称
-    name?: string;
+    name?: string
     // 模板说明
-    illustrate?: string;
+    illustrate?: string
     // 计分方式
-    scoreCalculation?: number;
+    scoreCalculation?: number
     // 分数上限类型
-    upperLimitType?: number;
+    upperLimitType?: number
     // 分数上限
-    upperLimitScore?: number;
+    upperLimitScore?: number
     // 维度数量
-    dimensionCount?: number;
+    dimensionCount?: number
     // 指标数量
-    quotaCount?: number;
+    quotaCount?: number
     // 状态
-    status?: number;
+    status?: number
     // 考核维度列表
-    dimensions?: Dimension[];
+    dimensions?: Dimension[]
     // 创建人
-    creator?: string;
+    creator?: string
     // 创建人名称
-    creatorName?: string;
+    creatorName?: string
     // 创建时间
-    createTime?: string;
+    createTime?: string
     // 更新时间
-    updateTime?: string;
+    updateTime?: string
   }
 
   type HrmPerformanceAssessmentTemplateSaveReqVO = {
     // 模板 Id
-    id?: number;
+    id?: number
     // 模板名称
-    name: string;
+    name: string
     // 模板说明
-    illustrate?: string;
+    illustrate?: string
     // 计分方式
-    scoreCalculation: number;
+    scoreCalculation: number
     // 分数上限类型
-    upperLimitType: number;
+    upperLimitType: number
     // 分数上限
-    upperLimitScore: number;
+    upperLimitScore: number
     // 考核维度列表
-    dimensions: Dimension[];
+    dimensions: Dimension[]
   }
 
   type HrmPerformancePlanPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 绩效计划名称
-    name?: string;
+    name?: string
     // 绩效计划状态
-    status?: number;
+    status?: number
     // 阶段状态
-    stageType?: number;
+    stageType?: number
   }
 
   type HrmPerformancePlanRespVO = {
     // 编号
-    id?: number;
+    id?: number
     // 绩效计划名称
-    name?: string;
+    name?: string
     // 考核周期类型
-    cycleType?: number;
+    cycleType?: number
     // 考核周期
-    cycle?: string;
+    cycle?: string
     // 季度
-    quarter?: number;
+    quarter?: number
     // 开始日期
-    startTime?: string;
+    startTime?: string
     // 结束日期
-    endTime?: string;
+    endTime?: string
     // 考核说明
-    description?: string;
+    description?: string
     // 考评范围列表
-    scopes?: Scope[];
+    scopes?: Scope[]
     // 考核模板编号
-    assessmentTemplateId?: number;
-    assessmentConfig?: AssessmentConfig;
+    assessmentTemplateId?: number
+    assessmentConfig?: AssessmentConfig
     // 结果模板编号
-    resultTemplateId?: number;
-    resultConfig?: ResultConfig;
+    resultTemplateId?: number
+    resultConfig?: ResultConfig
     // 指标设置类型
-    quotaSettingType?: number;
+    quotaSettingType?: number
     // 是否需要目标确认
-    targetConfirmation?: boolean;
-    targetConfirmationStage?: HandlerStage;
+    targetConfirmation?: boolean
+    targetConfirmationStage?: HandlerStage
     // 评分阶段列表
-    reviewStages?: ReviewStage[];
+    reviewStages?: ReviewStage[]
     // 是否需要结果审核
-    resultAudit?: boolean;
+    resultAudit?: boolean
     // 结果审核节点列表
-    resultAuditStages?: HandlerStage[];
+    resultAuditStages?: HandlerStage[]
     // 是否需要结果确认
-    resultConfirmation?: boolean;
+    resultConfirmation?: boolean
     // 申诉处理节点列表
-    appealStages?: HandlerStage[];
+    appealStages?: HandlerStage[]
     // 申诉超期天数
-    appealTimeoutDays?: number;
+    appealTimeoutDays?: number
     // 申诉超期处理方式
-    appealTimeoutAction?: number;
+    appealTimeoutAction?: number
     // 是否同步薪资
-    syncToSalary?: boolean;
+    syncToSalary?: boolean
     // 计薪月份
-    paidForMonth?: string;
+    paidForMonth?: string
     // 各阶段员工数量
-    stageCountMap?: Record<string, any>;
+    stageCountMap?: Record<string, any>
     // 阶段状态
-    stageType?: number;
+    stageType?: number
     // 绩效计划状态
-    status?: number;
+    status?: number
     // 当前操作阶段
-    operationType?: number;
+    operationType?: number
     // 终止时间
-    terminateTime?: string;
+    terminateTime?: string
     // 考核模板名称
-    assessmentTemplateName?: string;
+    assessmentTemplateName?: string
     // 结果模板名称
-    resultTemplateName?: string;
+    resultTemplateName?: string
     // 员工数量
-    employeeCount?: number;
+    employeeCount?: number
     // 已完成数量
-    finishedCount?: number;
+    finishedCount?: number
     // 是否可开始评分
-    scoringReady?: boolean;
+    scoringReady?: boolean
     // 是否可开始面谈
-    interviewReady?: boolean;
+    interviewReady?: boolean
     // 是否可归档
-    archiveReady?: boolean;
+    archiveReady?: boolean
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmPerformancePlanResultLevelCountRespVO = {
     // 等级名称
-    levelName?: string;
+    levelName?: string
     // 数量
-    count?: number;
+    count?: number
   }
 
   type HrmPerformancePlanSaveReqVO = {
     // Id
-    id?: number;
+    id?: number
     // 绩效计划名称
-    name: string;
+    name: string
     // 考核周期类型
-    cycleType: number;
+    cycleType: number
     // 考核周期
-    cycle?: string;
+    cycle?: string
     // 季度
-    quarter?: number;
+    quarter?: number
     // 开始日期
-    startTime?: string;
+    startTime?: string
     // 结束日期
-    endTime?: string;
+    endTime?: string
     // 考核说明
-    description?: string;
+    description?: string
     // 考评范围列表
-    scopes: Scope[];
+    scopes: Scope[]
     // 考核模板 Id
-    assessmentTemplateId: number;
-    assessmentConfig: AssessmentConfig;
+    assessmentTemplateId: number
+    assessmentConfig: AssessmentConfig
     // 指标设置类型
-    quotaSettingType: number;
+    quotaSettingType: number
     // 是否需要目标确认
-    targetConfirmation: boolean;
-    targetConfirmationStage?: HandlerStage;
+    targetConfirmation: boolean
+    targetConfirmationStage?: HandlerStage
     // 评分阶段列表
-    reviewStages: ReviewStage[];
+    reviewStages: ReviewStage[]
     // 是否需要结果审核
-    resultAudit: boolean;
+    resultAudit: boolean
     // 结果审核节点列表
-    resultAuditStages?: HandlerStage[];
+    resultAuditStages?: HandlerStage[]
     // 是否需要结果确认
-    resultConfirmation: boolean;
+    resultConfirmation: boolean
     // 申诉处理节点列表
-    appealStages?: HandlerStage[];
+    appealStages?: HandlerStage[]
     // 申诉超期天数
-    appealTimeoutDays: number;
+    appealTimeoutDays: number
     // 申诉超期处理方式
-    appealTimeoutAction: number;
+    appealTimeoutAction: number
     // 结果模板 Id
-    resultTemplateId: number;
-    resultConfig: ResultConfig;
+    resultTemplateId: number
+    resultConfig: ResultConfig
     // 是否同步薪资
-    syncToSalary: boolean;
+    syncToSalary: boolean
     // 计薪月份
-    paidForMonth?: string;
+    paidForMonth?: string
   }
 
   type HrmPerformancePlanStageCountRespVO = {
     // 阶段状态
-    stageType?: number;
+    stageType?: number
     // 数量
-    count?: number;
+    count?: number
   }
 
   type HrmPerformanceProcessRecordRespVO = {
     // 标题
-    title?: string;
+    title?: string
     // 内容
-    content?: string;
+    content?: string
     // 来源
-    source?: string;
+    source?: string
     // 绩效流程记录状态
-    status?: number;
+    status?: number
     // 操作人姓名
-    operatorName?: string;
+    operatorName?: string
     // 操作时间
-    operateTime?: string;
+    operateTime?: string
     // 附件地址列表
-    fileUrls?: string[];
+    fileUrls?: string[]
   }
 
   type HrmPerformanceResultTemplatePageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 结果模板名称，模糊匹配
-    name?: string;
+    name?: string
   }
 
   type HrmPerformanceResultTemplateRespVO = {
     // 结果模板 Id
-    id?: number;
+    id?: number
     // 结果模板名称
-    name?: string;
+    name?: string
     // 状态
-    status?: number;
+    status?: number
     // 结果等级列表
-    levels?: Level[];
+    levels?: Level[]
     // 创建人
-    creator?: string;
+    creator?: string
     // 创建人名称
-    creatorName?: string;
+    creatorName?: string
     // 创建时间
-    createTime?: string;
+    createTime?: string
     // 更新时间
-    updateTime?: string;
+    updateTime?: string
   }
 
   type HrmPerformanceResultTemplateSaveReqVO = {
     // 结果模板 Id
-    id?: number;
+    id?: number
     // 结果模板名称
-    name: string;
+    name: string
     // 结果等级列表
-    levels: Level[];
+    levels: Level[]
   }
 
   type HrmRecruitCandidateCleanReqVO = {
     // 候选人状态数组
-    statuses: number[];
+    statuses: number[]
     // 状态持续天数
-    days: number;
+    days: number
   }
 
   type HrmRecruitCandidateEntryReqVO = {
     // 员工档案 Id
-    id?: number;
+    id?: number
     // 员工姓名
-    name: string;
+    name: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 系统用户 Id
-    userId?: number;
+    userId?: number
     // 手机号
-    mobile: string;
+    mobile: string
     // 国家地区
-    country?: string;
+    country?: string
     // 民族
-    nation?: string;
+    nation?: string
     // 证件类型
-    idType?: number;
+    idType?: number
     // 证件号码
-    idNumber?: string;
+    idNumber?: string
     // 性别
-    sex?: number;
+    sex?: number
     // 邮箱
-    email?: string;
+    email?: string
     // 籍贯
-    nativePlace?: string;
+    nativePlace?: string
     // 出生时间
-    birthday?: string;
+    birthday?: string
     // 年龄
-    age?: number;
+    age?: number
     // 户籍地址
-    address?: string;
+    address?: string
     // 最高学历
-    highestEducation?: number;
+    highestEducation?: number
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 直属上级员工 Id
-    leaderEmployeeId?: number;
+    leaderEmployeeId?: number
     // 入职状态
-    entryStatus: number;
+    entryStatus: number
     // 员工状态
-    status?: number;
+    status?: number
     // 聘用形式
-    type: number;
+    type: number
     // 入职时间
-    entryTime: string;
+    entryTime: string
     // 试用期，单位月；0 表示无试用期
-    probation?: number;
+    probation?: number
     // 转正时间
-    regularTime?: string;
+    regularTime?: string
     // 离职时间
-    leaveTime?: string;
+    leaveTime?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 岗位职级
-    postLevel?: string;
+    postLevel?: string
     // 工作城市
-    workCity?: string;
+    workCity?: string
     // 工作地址
-    workAddress?: string;
+    workAddress?: string
     // 工作详细地址
-    workDetailAddress?: string;
+    workDetailAddress?: string
     // 招聘渠道 Id
-    channelId?: number;
+    channelId?: number
     // 司龄开始时间
-    companyAgeStartTime?: string;
+    companyAgeStartTime?: string
     // 司龄，单位年
-    companyAge?: number;
+    companyAge?: number
     // 关联招聘候选人 Id
-    candidateId?: number;
+    candidateId?: number
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmRecruitCandidatePageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 姓名、手机号码或邮箱，模糊匹配
-    search?: string;
+    search?: string
     // 职位编号
-    postId?: number;
+    postId?: number
     // 招聘负责人员工 Id
-    ownerEmployeeId?: number;
+    ownerEmployeeId?: number
     // 性别
-    sex?: number;
+    sex?: number
     // 最小年龄
-    minAge?: number;
+    minAge?: number
     // 最大年龄
-    maxAge?: number;
+    maxAge?: number
     // 最小工作年限
-    minWorkTime?: number;
+    minWorkTime?: number
     // 最大工作年限
-    maxWorkTime?: number;
+    maxWorkTime?: number
     // 学历
-    education?: number;
+    education?: number
     // 毕业院校，模糊匹配
-    graduateSchool?: string;
+    graduateSchool?: string
     // 最近工作单位，模糊匹配
-    latestWorkPlace?: string;
+    latestWorkPlace?: string
     // 渠道编号
-    channelId?: number;
+    channelId?: number
     // 面试官员工 Id
-    interviewEmployeeId?: number;
+    interviewEmployeeId?: number
     // 面试时间
-    interviewTime?: string[];
+    interviewTime?: string[]
     // 创建人用户 Id
-    creator?: number;
+    creator?: number
     // 候选人状态
-    status?: number;
+    status?: number
     // 创建时间
-    createTime?: string[];
+    createTime?: string[]
   }
 
   type HrmRecruitCandidateRespVO = {
     // 候选人 Id
-    id?: number;
+    id?: number
     // 候选人姓名
-    name?: string;
+    name?: string
     // 手机号码
-    mobile?: string;
+    mobile?: string
     // 性别
-    sex?: number;
+    sex?: number
     // 年龄
-    age?: number;
+    age?: number
     // 邮箱
-    email?: string;
+    email?: string
     // 应聘职位 Id
-    postId?: number;
+    postId?: number
     // 应聘职位名称
-    postName?: string;
+    postName?: string
     // 应聘职位状态
-    postStatus?: number;
+    postStatus?: number
     // 用人部门 Id
-    deptId?: number;
+    deptId?: number
     // 用人部门名称
-    deptName?: string;
+    deptName?: string
     // 招聘负责人员工 Id
-    ownerEmployeeId?: number;
+    ownerEmployeeId?: number
     // 招聘负责人姓名
-    ownerEmployeeName?: string;
+    ownerEmployeeName?: string
     // 面试轮次
-    stageNumber?: number;
+    stageNumber?: number
     // 工作年限
-    workTime?: number;
+    workTime?: number
     // 学历
-    education?: number;
+    education?: number
     // 毕业院校
-    graduateSchool?: string;
+    graduateSchool?: string
     // 最近工作单位
-    latestWorkPlace?: string;
+    latestWorkPlace?: string
     // 招聘渠道编号
-    channelId?: number;
+    channelId?: number
     // 招聘渠道名称
-    channelName?: string;
+    channelName?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 候选人状态
-    status?: number;
+    status?: number
     // 淘汰原因
-    eliminate?: string;
+    eliminate?: string
     // 状态更新时间
-    statusUpdateTime?: string;
+    statusUpdateTime?: string
     // 入职时间
-    entryTime?: string;
+    entryTime?: string
     // 简历附件地址数组
-    resumeUrls?: string[];
+    resumeUrls?: string[]
     // 当前面试编号
-    interviewId?: number;
+    interviewId?: number
     // 面试方式
-    interviewType?: number;
+    interviewType?: number
     // 主面试官员工编号
-    interviewEmployeeId?: number;
+    interviewEmployeeId?: number
     // 主面试官姓名
-    interviewEmployeeName?: string;
+    interviewEmployeeName?: string
     // 其他面试官员工编号数组
-    otherInterviewEmployeeIds?: number[];
+    otherInterviewEmployeeIds?: number[]
     // 其他面试官姓名数组
-    otherInterviewEmployeeNames?: string[];
+    otherInterviewEmployeeNames?: string[]
     // 面试时间
-    interviewTime?: string;
+    interviewTime?: string
     // 面试地址
-    interviewAddress?: string;
+    interviewAddress?: string
     // 面试结果
-    interviewResult?: number;
+    interviewResult?: number
     // 转入的员工编号
-    employeeId?: number;
+    employeeId?: number
     // 创建人
-    creator?: string;
+    creator?: string
     // 创建人名称
-    creatorName?: string;
+    creatorName?: string
     // 创建时间
-    createTime?: string;
+    createTime?: string
     // 更新时间
-    updateTime?: string;
+    updateTime?: string
   }
 
   type HrmRecruitCandidateSaveReqVO = {
     // 候选人 Id
-    id?: number;
+    id?: number
     // 候选人姓名
-    name: string;
+    name: string
     // 手机号码
-    mobile: string;
+    mobile: string
     // 性别
-    sex: number;
+    sex: number
     // 年龄
-    age?: number;
+    age?: number
     // 邮箱
-    email?: string;
+    email?: string
     // 应聘职位 Id
-    postId: number;
+    postId: number
     // 工作年限
-    workTime?: number;
+    workTime?: number
     // 学历
-    education: number;
+    education: number
     // 毕业院校
-    graduateSchool?: string;
+    graduateSchool?: string
     // 最近工作单位
-    latestWorkPlace?: string;
+    latestWorkPlace?: string
     // 招聘渠道 Id
-    channelId?: number;
+    channelId?: number
     // 备注
-    remark?: string;
+    remark?: string
     // 简历附件地址数组
-    resumeUrls?: string[];
+    resumeUrls?: string[]
   }
 
   type HrmRecruitCandidateUpdateChannelReqVO = {
     // 候选人 Id
-    id: number;
+    id: number
     // 招聘渠道编号
-    channelId: number;
+    channelId: number
   }
 
   type HrmRecruitCandidateUpdateEliminateReqVO = {
     // 候选人 Id
-    id: number;
+    id: number
     // 淘汰原因
-    eliminate: string;
+    eliminate: string
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmRecruitCandidateUpdatePostReqVO = {
     // 候选人 Id
-    id: number;
+    id: number
     // 职位编号
-    postId: number;
+    postId: number
   }
 
   type HrmRecruitCandidateUpdateStatusReqVO = {
     // 候选人 Id
-    id: number;
+    id: number
     // 候选人状态
-    status: number;
+    status: number
   }
 
   type HrmRecruitChannelDeleteReqVO = {
     // 待删除招聘渠道编号
-    id: number;
+    id: number
     // 承接招聘渠道编号
-    transferChannelId: number;
+    transferChannelId: number
   }
 
   type HrmRecruitChannelPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 渠道名称，模糊匹配
-    name?: string;
+    name?: string
     // 状态
-    status?: number;
+    status?: number
   }
 
   type HrmRecruitChannelRespVO = {
     // 招聘渠道编号
-    id: number;
+    id: number
     // 是否系统内置
-    systemFlag: boolean;
+    systemFlag: boolean
     // 状态
-    status: number;
+    status: number
     // 渠道名称
-    name: string;
+    name: string
     // 显示顺序
-    sort: number;
+    sort: number
     // 备注
-    remark?: string;
+    remark?: string
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmRecruitChannelSaveReqVO = {
     // 招聘渠道编号
-    id?: number;
+    id?: number
     // 渠道名称
-    name: string;
+    name: string
     // 显示顺序
-    sort: number;
+    sort: number
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmRecruitChannelStatusReqVO = {
     // 招聘渠道编号
-    id: number;
+    id: number
     // 状态
-    status: number;
+    status: number
   }
 
   type HrmRecruitEliminateReasonSaveReqVO = {
     // 淘汰原因列表
-    reasons: string[];
+    reasons: string[]
   }
 
   type HrmRecruitInterviewRespVO = {
     // 面试编号
-    id?: number;
+    id?: number
     // 候选人编号
-    candidateId?: number;
+    candidateId?: number
     // 面试方式
-    type?: number;
+    type?: number
     // 面试轮次
-    stageNumber?: number;
+    stageNumber?: number
     // 主面试官员工编号
-    interviewEmployeeId?: number;
+    interviewEmployeeId?: number
     // 主面试官姓名
-    interviewEmployeeName?: string;
+    interviewEmployeeName?: string
     // 其他面试官员工编号数组
-    otherInterviewEmployeeIds?: number[];
+    otherInterviewEmployeeIds?: number[]
     // 其他面试官姓名数组
-    otherInterviewEmployeeNames?: string[];
+    otherInterviewEmployeeNames?: string[]
     // 面试时间
-    interviewTime?: string;
+    interviewTime?: string
     // 面试地址
-    address?: string;
+    address?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 面试结果
-    result?: number;
+    result?: number
     // 评价
-    evaluate?: string;
+    evaluate?: string
     // 取消原因
-    cancelReason?: string;
+    cancelReason?: string
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmRecruitInterviewResultReqVO = {
     // 面试编号
-    id: number;
+    id: number
     // 面试结果
-    result: number;
+    result: number
     // 评价
-    evaluate?: string;
+    evaluate?: string
     // 取消原因
-    cancelReason?: string;
+    cancelReason?: string
   }
 
   type HrmRecruitInterviewSaveReqVO = {
     // 面试编号
-    id?: number;
+    id?: number
     // 候选人编号
-    candidateId: number;
+    candidateId: number
     // 面试方式
-    type: number;
+    type: number
     // 面试轮次
-    stageNumber?: number;
+    stageNumber?: number
     // 主面试官员工编号
-    interviewEmployeeId: number;
+    interviewEmployeeId: number
     // 其他面试官员工编号数组
-    otherInterviewEmployeeIds?: number[];
+    otherInterviewEmployeeIds?: number[]
     // 面试时间
-    interviewTime: string;
+    interviewTime: string
     // 面试地址
-    address?: string;
+    address?: string
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmRecruitPostPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 职位名称，模糊匹配
-    postName?: string;
+    postName?: string
     // 工作性质
-    jobNature?: number;
+    jobNature?: number
     // 工作城市地区编号
-    areaId?: number;
+    areaId?: number
     // 部门编号
-    deptId?: number;
+    deptId?: number
     // 招聘负责人员工编号
-    ownerEmployeeId?: number;
+    ownerEmployeeId?: number
     // 职位类型编号
-    postTypeId?: number;
+    postTypeId?: number
     // 职位状态
-    status?: number;
+    status?: number
     // 创建时间
-    createTime?: string[];
+    createTime?: string[]
   }
 
   type HrmRecruitPostRespVO = {
     // 招聘职位编号
-    id?: number;
+    id?: number
     // 职位名称
-    postName?: string;
+    postName?: string
     // 部门编号
-    deptId?: number;
+    deptId?: number
     // 用人部门名称
-    deptName?: string;
+    deptName?: string
     // 工作性质
-    jobNature?: number;
+    jobNature?: number
     // 工作城市地区编号
-    areaId?: number;
+    areaId?: number
     // 工作城市地区名称
-    areaName?: string;
+    areaName?: string
     // 招聘人数
-    recruitNum?: number;
+    recruitNum?: number
     // 招聘原因
-    reason?: string;
+    reason?: string
     // 工作经验
-    workTime?: number;
+    workTime?: number
     // 学历要求
-    educationRequire?: number;
+    educationRequire?: number
     // 最低薪资
-    minSalary?: number;
+    minSalary?: number
     // 最高薪资
-    maxSalary?: number;
+    maxSalary?: number
     // 薪资单位
-    salaryUnit?: number;
+    salaryUnit?: number
     // 最小年龄
-    minAge?: number;
+    minAge?: number
     // 最大年龄
-    maxAge?: number;
+    maxAge?: number
     // 最迟到岗时间
-    latestEntryTime?: string;
+    latestEntryTime?: string
     // 招聘负责人员工编号
-    ownerEmployeeId?: number;
+    ownerEmployeeId?: number
     // 招聘负责人姓名
-    ownerEmployeeName?: string;
+    ownerEmployeeName?: string
     // 面试官员工编号数组
-    interviewEmployeeIds?: number[];
+    interviewEmployeeIds?: number[]
     // 面试官姓名数组
-    interviewEmployeeNames?: string[];
+    interviewEmployeeNames?: string[]
     // 职位描述
-    description?: string;
+    description?: string
     // 紧急程度
-    emergencyLevel?: number;
+    emergencyLevel?: number
     // 职位类型编号
-    postTypeId?: number;
+    postTypeId?: number
     // 职位类型名称
-    postTypeName?: string;
+    postTypeName?: string
     // 职位状态
-    status?: number;
+    status?: number
     // 停止原因
-    stopReason?: string;
+    stopReason?: string
     // 已入职人数
-    hasEntryNum?: number;
+    hasEntryNum?: number
     // 招聘进度百分比
-    recruitSchedule?: number;
+    recruitSchedule?: number
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmRecruitPostSaveReqVO = {
     // 招聘职位编号
-    id?: number;
+    id?: number
     // 职位名称
-    postName: string;
+    postName: string
     // 部门编号
-    deptId?: number;
+    deptId?: number
     // 工作性质
-    jobNature: number;
+    jobNature: number
     // 工作城市地区编号
-    areaId?: number;
+    areaId?: number
     // 招聘人数
-    recruitNum?: number;
+    recruitNum?: number
     // 招聘原因
-    reason?: string;
+    reason?: string
     // 工作经验
-    workTime?: number;
+    workTime?: number
     // 学历要求
-    educationRequire?: number;
+    educationRequire?: number
     // 最低薪资
-    minSalary?: number;
+    minSalary?: number
     // 最高薪资
-    maxSalary?: number;
+    maxSalary?: number
     // 薪资单位
-    salaryUnit?: number;
+    salaryUnit?: number
     // 最小年龄
-    minAge?: number;
+    minAge?: number
     // 最大年龄
-    maxAge?: number;
+    maxAge?: number
     // 最迟到岗时间
-    latestEntryTime?: string;
+    latestEntryTime?: string
     // 负责人员工编号
-    ownerEmployeeId?: number;
+    ownerEmployeeId?: number
     // 面试官员工编号数组
-    interviewEmployeeIds?: number[];
+    interviewEmployeeIds?: number[]
     // 职位描述
-    description?: string;
+    description?: string
     // 紧急程度
-    emergencyLevel?: number;
+    emergencyLevel?: number
     // 职位类型编号
-    postTypeId?: number;
+    postTypeId?: number
   }
 
   type HrmRecruitPostStatusReqVO = {
     // 招聘职位编号
-    id: number;
+    id: number
     // 职位状态
-    status: number;
+    status: number
     // 停止原因
-    stopReason?: string;
+    stopReason?: string
   }
 
   type HrmRecruitPostTypeRespVO = {
     // 职位类型编号
-    id?: number;
+    id?: number
     // 类型名称
-    name?: string;
+    name?: string
     // 父类型编号
-    parentId?: number;
+    parentId?: number
     // 排序
-    sort?: number;
+    sort?: number
     // 状态，参见 common_status
-    status?: number;
+    status?: number
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmRecruitStatusCountRespVO = {
     // 状态
-    status?: number;
+    status?: number
     // 数量
-    count?: number;
+    count?: number
   }
 
   type HrmSalaryChangeOptionVO = {
     // 薪资项名称
-    name?: string;
+    name?: string
     // 薪资项编码
-    code: number;
+    code: number
   }
 
   type HrmSalaryChangeRecordRespVO = {
     // 记录编号
-    id?: number;
+    id?: number
     // 员工编号
-    employeeId?: number;
+    employeeId?: number
     // 记录类型
-    recordType?: number;
+    recordType?: number
     // 记录类型
-    recordTypeName?: string;
+    recordTypeName?: string
     // 调整原因
-    changeReason?: number;
+    changeReason?: number
     // 生效日期
-    effectTime?: string;
+    effectTime?: string
     // 调整前正式工资
-    beforeTotal?: number;
+    beforeTotal?: number
     // 调整后正式工资
-    afterTotal?: number;
+    afterTotal?: number
     // 调整前试用期工资
-    probationBeforeTotal?: number;
+    probationBeforeTotal?: number
     // 调整后试用期工资
-    probationAfterTotal?: number;
+    probationAfterTotal?: number
     // 状态
-    status?: number;
+    status?: number
     // 备注
-    remark?: string;
+    remark?: string
     // 薪资项列表
-    salaryOptions?: HrmSalaryOptionValueVO[];
+    salaryOptions?: HrmSalaryOptionValueVO[]
     // 试用期薪资项列表
-    probationSalaryOptions?: HrmSalaryOptionValueVO[];
+    probationSalaryOptions?: HrmSalaryOptionValueVO[]
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmSalaryChangeTemplateRespVO = {
     // 调薪模板编号
-    id: number;
+    id: number
     // 模板名称
-    name: string;
+    name: string
     // 是否默认模板
-    defaultStatus: boolean;
+    defaultStatus: boolean
     // 调薪项配置
-    options?: HrmSalaryChangeOptionVO[];
+    options?: HrmSalaryChangeOptionVO[]
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmSalaryChangeTemplateSaveReqVO = {
     // 调薪模板编号
-    id?: number;
+    id?: number
     // 模板名称
-    name: string;
+    name: string
     // 是否默认模板
-    defaultStatus: boolean;
+    defaultStatus: boolean
     // 调薪项配置
-    options: HrmSalaryChangeOptionVO[];
+    options: HrmSalaryChangeOptionVO[]
   }
 
   type HrmSalaryConfigCreateReqVO = {
     // 计薪周期开始日
-    cycleStartDay: number;
+    cycleStartDay: number
     // 社保对应月份类型
-    socialSecurityMonthType: number;
+    socialSecurityMonthType: number
     // 工资开始年份
-    startYear: number;
+    startYear: number
     // 工资开始月份
-    startMonth: number;
+    startMonth: number
   }
 
   type HrmSalaryConfigRespVO = {
     // 配置编号
-    id: number;
+    id: number
     // 计薪周期开始日
-    cycleStartDay: number;
+    cycleStartDay: number
     // 计薪周期结束日
-    cycleEndDay: number;
+    cycleEndDay: number
     // 社保对应月份类型
-    socialSecurityMonthType: number;
+    socialSecurityMonthType: number
     // 工资开始年份
-    startYear: number;
+    startYear: number
     // 工资开始月份
-    startMonth: number;
+    startMonth: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmSalaryConfigUpdateReqVO = {
     // 社保对应月份类型
-    socialSecurityMonthType: number;
+    socialSecurityMonthType: number
   }
 
   type HrmSalaryEmployeeInfoImportRespVO = {
     // 导入成功的工号数组
-    successJobNumbers: string[];
+    successJobNumbers: string[]
     // 导入失败的员工集合，key 为工号或行号，value 为失败原因
-    failureJobNumbers: Record<string, any>;
+    failureJobNumbers: Record<string, any>
   }
 
   type HrmSalaryEmployeeInfoPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工 Ids
-    employeeIds?: number[];
+    employeeIds?: number[]
     // 调整类型
-    changeType?: number;
+    changeType?: number
     // 员工姓名或工号
-    search?: string;
+    search?: string
     // 部门编号
-    deptId?: number;
+    deptId?: number
     // 岗位名称
-    postName?: string;
+    postName?: string
     // 员工状态
-    status?: number;
+    status?: number
     // 入职状态
-    entryStatus?: number;
+    entryStatus?: number
     // 员工状态页签
-    statusCategory?: number;
+    statusCategory?: number
   }
 
   type HrmSalaryEmployeeInfoRespVO = {
     // 员工薪资编号
-    id?: number;
+    id?: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 手机号
-    mobile?: string;
+    mobile?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 岗位名称
-    postName?: string;
+    postName?: string
     // 入职状态
-    entryStatus?: number;
+    entryStatus?: number
     // 员工状态
-    status?: number;
+    status?: number
     // 入职时间
-    entryTime?: string;
+    entryTime?: string
     // 转正时间
-    regularTime?: string;
+    regularTime?: string
     // 调整原因
-    changeReason?: number;
+    changeReason?: number
     // 生效日期
-    effectTime?: string;
+    effectTime?: string
     // 薪资状态
-    changeType?: number;
+    changeType?: number
     // 试用期工资
-    probationSalary?: number;
+    probationSalary?: number
     // 正式工资
-    regularSalary?: number;
+    regularSalary?: number
     // 备注
-    remark?: string;
+    remark?: string
     // 薪资项列表
-    salaryOptions?: HrmSalaryOptionValueVO[];
+    salaryOptions?: HrmSalaryOptionValueVO[]
     // 试用期薪资项列表
-    probationSalaryOptions?: HrmSalaryOptionValueVO[];
+    probationSalaryOptions?: HrmSalaryOptionValueVO[]
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmSalaryEmployeeInfoUpdateListReqVO = {
     // 员工 Ids
-    employeeIds?: number[];
+    employeeIds?: number[]
     // 部门 Ids
-    deptIds?: number[];
+    deptIds?: number[]
     // 调薪方式
-    type: number;
+    type: number
     // 调整原因
-    changeReason: number;
+    changeReason: number
     // 生效日期
-    effectTime: string;
+    effectTime: string
     // 备注
-    remark?: string;
+    remark?: string
     // 薪资项列表
-    salaryOptions: HrmSalaryOptionValueVO[];
+    salaryOptions: HrmSalaryOptionValueVO[]
   }
 
   type HrmSalaryEmployeeInfoUpdateListRespVO = {
     // 成功员工 Ids
-    successEmployeeIds?: number[];
+    successEmployeeIds?: number[]
     // 失败员工及原因
-    failureEmployeeReasons?: Record<string, any>;
+    failureEmployeeReasons?: Record<string, any>
   }
 
   type HrmSalaryEmployeeInfoUpdateReqVO = {
     // 定薪/调薪记录编号；编辑待生效或已取消记录时传入
-    id?: number;
+    id?: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 记录类型
-    recordType: number;
+    recordType: number
     // 调整原因
-    changeReason: number;
+    changeReason: number
     // 生效日期
-    effectTime?: string;
+    effectTime?: string
     // 备注
-    remark?: string;
+    remark?: string
     // 薪资项列表
-    salaryOptions?: HrmSalaryOptionValueVO[];
+    salaryOptions?: HrmSalaryOptionValueVO[]
     // 试用期薪资项列表
-    probationSalaryOptions?: HrmSalaryOptionValueVO[];
+    probationSalaryOptions?: HrmSalaryOptionValueVO[]
   }
 
   type HrmSalaryEmployeeMonthRecordPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 月度工资表状态
-    monthRecordStatus?: number;
+    monthRecordStatus?: number
   }
 
   type HrmSalaryGroupPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 薪资组名称
-    name?: string;
+    name?: string
     // 计税规则编号
-    taxRuleId?: number;
+    taxRuleId?: number
   }
 
   type HrmSalaryGroupRespVO = {
     // 薪资组编号
-    id: number;
+    id: number
     // 薪资组名称
-    name: string;
+    name: string
     // 月计薪标准
-    salaryStandard?: number;
+    salaryStandard?: number
     // 转正、调薪月规则
-    changeRule?: string;
+    changeRule?: string
     // 计税规则编号
-    taxRuleId?: number;
+    taxRuleId?: number
     // 计税规则名称
-    taxRuleName?: string;
+    taxRuleName?: string
     // 适用部门编号列表
-    deptIds?: number[];
+    deptIds?: number[]
     // 适用部门名称列表
-    deptNames?: string[];
+    deptNames?: string[]
     // 适用员工编号列表
-    employeeIds?: number[];
+    employeeIds?: number[]
     // 适用员工名称列表
-    employeeNames?: string[];
+    employeeNames?: string[]
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmSalaryGroupSaveReqVO = {
     // 薪资组编号
-    id?: number;
+    id?: number
     // 薪资组名称
-    name: string;
+    name: string
     // 计税规则编号
-    taxRuleId: number;
+    taxRuleId: number
     // 适用部门编号列表
-    deptIds?: number[];
+    deptIds?: number[]
     // 适用员工编号列表
-    employeeIds?: number[];
+    employeeIds?: number[]
   }
 
   type HrmSalaryMonthEmployeeRecordListReqVO = {
     // 工资表编号
-    monthRecordId: number;
+    monthRecordId: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 员工异动类型
-    employeeChangeType?: number;
+    employeeChangeType?: number
   }
 
   type HrmSalaryMonthEmployeeRecordPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 工资表编号
-    monthRecordId: number;
+    monthRecordId: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 员工异动类型
-    employeeChangeType?: number;
+    employeeChangeType?: number
     // 员工编号列表
-    employeeIds?: number[];
+    employeeIds?: number[]
   }
 
   type HrmSalaryMonthEmployeeRecordRespVO = {
     // 编号
-    id?: number;
+    id?: number
     // 工资表编号
-    monthRecordId?: number;
+    monthRecordId?: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 年份
-    year?: number;
+    year?: number
     // 月份
-    month?: number;
+    month?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 部门编号
-    deptId?: number;
+    deptId?: number
     // 部门
-    deptName?: string;
+    deptName?: string
     // 职位名称
-    postName?: string;
+    postName?: string
     // 计薪出勤天数
-    actualWorkDay?: number;
+    actualWorkDay?: number
     // 应出勤天数
-    needWorkDay?: number;
+    needWorkDay?: number
     // 应发工资
-    expectedPaySalary?: number;
+    expectedPaySalary?: number
     // 应税工资
-    taxableSalary?: number;
+    taxableSalary?: number
     // 个人所得税
-    personalTax?: number;
+    personalTax?: number
     // 实发工资
-    realPaySalary?: number;
+    realPaySalary?: number
     // 绩效系数
-    performanceCoefficient?: number;
+    performanceCoefficient?: number
     // 薪资项值列表
-    optionValues?: HrmSalaryOptionValueVO[];
+    optionValues?: HrmSalaryOptionValueVO[]
   }
 
   type HrmSalaryMonthEmployeeRecordUpdateReqVO = {
     // 员工月度工资记录编号
-    id: number;
+    id: number
     // 薪资项值列表
-    optionValues?: HrmSalaryOptionValueVO[];
+    optionValues?: HrmSalaryOptionValueVO[]
   }
 
   type HrmSalaryMonthRecordPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 年份
-    year?: number;
+    year?: number
     // 月份
-    month?: number;
+    month?: number
     // 核算状态
-    status?: number;
+    status?: number
   }
 
   type HrmSalaryMonthRecordRespVO = {
     // 编号
-    id: number;
+    id: number
     // 年份
-    year: number;
+    year: number
     // 月份
-    month: number;
+    month: number
     // 标题
-    title: string;
+    title: string
     // 开始日期
-    startTime?: string;
+    startTime?: string
     // 结束日期
-    endTime?: string;
+    endTime?: string
     // 员工数量
-    employeeCount?: number;
+    employeeCount?: number
     // 应发工资
-    expectedPaySalary?: number;
+    expectedPaySalary?: number
     // 个人社保金额
-    personalInsuranceAmount?: number;
+    personalInsuranceAmount?: number
     // 个人公积金金额
-    personalProvidentFundAmount?: number;
+    personalProvidentFundAmount?: number
     // 个人所得税
-    personalTax?: number;
+    personalTax?: number
     // 实发工资
-    realPaySalary?: number;
+    realPaySalary?: number
     // 公司社保金额
-    corporateInsuranceAmount?: number;
+    corporateInsuranceAmount?: number
     // 公司公积金金额
-    corporateProvidentFundAmount?: number;
+    corporateProvidentFundAmount?: number
     // 核算状态
-    status?: number;
+    status?: number
     // 薪资项表头
-    optionHeaders?: HrmSalaryOptionNodeRespVO[];
+    optionHeaders?: HrmSalaryOptionNodeRespVO[]
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmSalaryOptionNodeRespVO = {
     // 薪资项编号
-    id: number;
+    id: number
     // 薪资项编码
-    code: number;
+    code: number
     // 父薪资项编码
-    parentCode?: number;
+    parentCode?: number
     // 薪资项名称
-    name: string;
+    name: string
     // 备注
-    remark?: string;
+    remark?: string
     // 是否系统默认项
-    systemFlag: boolean;
+    systemFlag: boolean
     // 薪资项类型
-    type: number;
+    type: number
     // 是否计税
-    taxEnabled: boolean;
+    taxEnabled: boolean
     // 是否显示
-    visible: boolean;
+    visible: boolean
     // 是否参与计算
-    calculateEnabled: boolean;
+    calculateEnabled: boolean
     // 是否启用
-    enabled: boolean;
+    enabled: boolean
     // 标准薪资项目录编号
-    templateId?: number;
+    templateId?: number
     // 创建时间
-    createTime: string;
+    createTime: string
     // 子薪资项
-    children?: HrmSalaryOptionNodeRespVO[];
+    children?: HrmSalaryOptionNodeRespVO[]
   }
 
   type HrmSalaryOptionRespVO = {
     // 薪资项编号
-    id: number;
+    id: number
     // 薪资项编码
-    code: number;
+    code: number
     // 父薪资项编码
-    parentCode?: number;
+    parentCode?: number
     // 薪资项名称
-    name: string;
+    name: string
     // 备注
-    remark?: string;
+    remark?: string
     // 是否系统默认项
-    systemFlag: boolean;
+    systemFlag: boolean
     // 薪资项类型
-    type: number;
+    type: number
     // 是否计税
-    taxEnabled: boolean;
+    taxEnabled: boolean
     // 是否显示
-    visible: boolean;
+    visible: boolean
     // 是否参与计算
-    calculateEnabled: boolean;
+    calculateEnabled: boolean
     // 是否启用
-    enabled: boolean;
+    enabled: boolean
     // 标准薪资项目录编号
-    templateId?: number;
+    templateId?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmSalaryOptionSaveReqVO = {
     // 父薪资项编码
-    parentCode: number;
+    parentCode: number
     // 薪资项名称
-    name: string;
+    name: string
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmSalaryOptionUpdateEnabledReqVO = {
     // 薪资项编号
-    id: number;
+    id: number
     // 是否启用
-    enabled: boolean;
+    enabled: boolean
   }
 
   type HrmSalaryOptionUpdateVisibleReqVO = {
     // 薪资项编号
-    id: number;
+    id: number
     // 是否显示
-    visible: boolean;
+    visible: boolean
   }
 
   type HrmSalaryOptionValueVO = {
     // 编码
-    code: number;
+    code: number
     // 薪资选项值名称
-    name?: string;
+    name?: string
     // 值
-    value: number;
+    value: number
   }
 
   type HrmSalaryPayrollReadinessRespVO = {
     // 工资表编号
-    monthRecordId?: number;
+    monthRecordId?: number
     // 标题
-    title?: string;
+    title?: string
     // 年份
-    year?: number;
+    year?: number
     // 月份
-    month?: number;
+    month?: number
     // 开始日期
-    startTime?: string;
+    startTime?: string
     // 结束日期
-    endTime?: string;
+    endTime?: string
     // 社保年月
-    socialSecurityYearMonth?: string;
+    socialSecurityYearMonth?: string
     // 计薪员工人数
-    payrollEmployeeCount?: number;
+    payrollEmployeeCount?: number
     // 已定薪员工人数
-    salaryEmployeeCount?: number;
+    salaryEmployeeCount?: number
     // 未定薪员工人数
-    noSalaryEmployeeCount?: number;
+    noSalaryEmployeeCount?: number
     // 未分配薪资组员工人数
-    noSalaryGroupEmployeeCount?: number;
+    noSalaryGroupEmployeeCount?: number
     // 异动员工人数
-    changeEmployeeCount?: number;
+    changeEmployeeCount?: number
     // 变更类型数量映射
-    changeTypeCountMap?: Record<string, any>;
+    changeTypeCountMap?: Record<string, any>
     // 未定薪员工列表
-    noSalaryEmployees?: Employee[];
+    noSalaryEmployees?: Employee[]
     // 未分配薪资组员工列表
-    noSalaryGroupEmployees?: Employee[];
+    noSalaryGroupEmployees?: Employee[]
   }
 
   type HrmSalaryPerformanceCoefficientReqVO = {
     // 年份
-    year: number;
+    year: number
     // 月份
-    month: number;
+    month: number
     // 员工编号列表
-    employeeIds?: number[];
+    employeeIds?: number[]
   }
 
   type HrmSalarySlipOptionRespVO = {
     // 薪资工资条选项名称
-    name?: string;
+    name?: string
     // 薪资工资条选项类型
-    type?: number;
+    type?: number
     // 编码
-    code?: number;
+    code?: number
     // 值
-    value?: number;
+    value?: number
     // 备注
-    remark?: string;
+    remark?: string
     // 排序
-    sort?: number;
+    sort?: number
     // 子工资条项
-    children?: HrmSalarySlipOptionRespVO[];
+    children?: HrmSalarySlipOptionRespVO[]
   }
 
   type HrmSalarySlipPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 工资条记录编号
-    sendRecordId?: number;
+    sendRecordId?: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工编号列表
-    employeeIds?: number[];
+    employeeIds?: number[]
     // 搜索关键字
-    search?: string;
+    search?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 已读状态
-    readStatus?: number;
+    readStatus?: number
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmSalarySlipRemarkReqVO = {
     // 工资条编号
-    id: number;
+    id: number
     // 备注
-    remark?: string;
+    remark?: string
   }
 
   type HrmSalarySlipRespVO = {
     // 编号
-    id?: number;
+    id?: number
     // 工资条记录编号
-    sendRecordId?: number;
+    sendRecordId?: number
     // 员工工资记录编号
-    monthEmployeeRecordId?: number;
+    monthEmployeeRecordId?: number
     // 员工 Id
-    employeeId?: number;
+    employeeId?: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 手机号码
-    mobile?: string;
+    mobile?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 岗位名称
-    postName?: string;
+    postName?: string
     // 年份
-    year?: number;
+    year?: number
     // 月份
-    month?: number;
+    month?: number
     // 已读状态
-    readStatus?: number;
+    readStatus?: number
     // 实际工资
-    realPaySalary?: number;
+    realPaySalary?: number
     // 备注
-    remark?: string;
+    remark?: string
     // 选项列表
-    options?: HrmSalarySlipOptionRespVO[];
+    options?: HrmSalarySlipOptionRespVO[]
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmSalarySlipSendEmployeeReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 月度工资表编号
-    monthRecordId: number;
+    monthRecordId: number
     // 员工姓名、工号或手机号
-    search?: string;
+    search?: string
     // 部门编号
-    deptId?: number;
+    deptId?: number
     // 是否已发送
-    sent?: boolean;
+    sent?: boolean
   }
 
   type HrmSalarySlipSendEmployeeRespVO = {
     // 员工月度工资记录编号
-    monthEmployeeRecordId: number;
+    monthEmployeeRecordId: number
     // 员工 Id
-    employeeId: number;
+    employeeId: number
     // 员工姓名
-    employeeName?: string;
+    employeeName?: string
     // 工号
-    jobNumber?: string;
+    jobNumber?: string
     // 手机号码
-    mobile?: string;
+    mobile?: string
     // 部门 Id
-    deptId?: number;
+    deptId?: number
     // 部门名称
-    deptName?: string;
+    deptName?: string
     // 岗位名称
-    postName?: string;
+    postName?: string
     // 应发工资
-    expectedPaySalary?: number;
+    expectedPaySalary?: number
     // 实发工资
-    realPaySalary?: number;
+    realPaySalary?: number
     // 是否已发送
-    sent?: boolean;
+    sent?: boolean
   }
 
   type HrmSalarySlipSendRecordPageReqVO = {
     // 页码，从 1 开始
-    pageNo: number;
+    pageNo: number
     // 每页条数，最大值为 100
-    pageSize: number;
+    pageSize: number
     // 年份
-    year?: number;
+    year?: number
     // 月份
-    month?: number;
+    month?: number
   }
 
   type HrmSalarySlipSendRecordRespVO = {
     // 编号
-    id?: number;
+    id?: number
     // 工资表编号
-    monthRecordId?: number;
+    monthRecordId?: number
     // 计薪人数
-    employeeCount?: number;
+    employeeCount?: number
     // 发薪人数
-    sendEmployeeCount?: number;
+    sendEmployeeCount?: number
     // 已读人数
-    readCount?: number;
+    readCount?: number
     // 年份
-    year?: number;
+    year?: number
     // 月份
-    month?: number;
+    month?: number
     // 创建人编号
-    creator?: string;
+    creator?: string
     // 创建人姓名
-    creatorName?: string;
+    creatorName?: string
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmSalarySlipSendReqVO = {
     // 工资表编号
-    monthRecordId: number;
+    monthRecordId: number
     // 是否隐藏空值项
-    hideEmpty: boolean;
+    hideEmpty: boolean
     // 工资条模板项列表
-    options?: HrmSalarySlipTemplateOptionVO[];
+    options?: HrmSalarySlipTemplateOptionVO[]
     // 是否发放全部筛选结果
-    all: boolean;
+    all: boolean
     // 员工编号列表
-    employeeIds?: number[];
+    employeeIds?: number[]
     // 员工姓名、工号或手机号
-    search?: string;
+    search?: string
     // 部门编号
-    deptId?: number;
+    deptId?: number
     // 是否已发送
-    sent?: boolean;
+    sent?: boolean
   }
 
   type HrmSalarySlipTemplateOptionVO = {
     // 薪资工资条模板选项名称
-    name: string;
+    name: string
     // 薪资工资条模板选项类型
-    type?: number;
+    type?: number
     // 编码
-    code?: number;
+    code?: number
     // 备注
-    remark?: string;
+    remark?: string
     // 父级编码
-    parentCode?: number;
+    parentCode?: number
     // 是否隐藏
-    hidden?: boolean;
+    hidden?: boolean
     // 排序
-    sort?: number;
+    sort?: number
   }
 
   type HrmSalarySlipTemplateRespVO = {
     // 编号
-    id?: number;
+    id?: number
     // 模板名称
-    name?: string;
+    name?: string
     // 是否隐藏空值项
-    hideEmpty?: boolean;
+    hideEmpty?: boolean
     // 是否默认选项
-    defaultStatus?: boolean;
+    defaultStatus?: boolean
     // 选项列表
-    options?: HrmSalarySlipTemplateOptionVO[];
+    options?: HrmSalarySlipTemplateOptionVO[]
     // 创建时间
-    createTime?: string;
+    createTime?: string
   }
 
   type HrmSalarySlipTemplateSaveReqVO = {
     // 编号
-    id?: number;
+    id?: number
     // 模板名称
-    name: string;
+    name: string
     // 是否隐藏空值项
-    hideEmpty?: boolean;
+    hideEmpty?: boolean
     // 选项列表
-    options?: HrmSalarySlipTemplateOptionVO[];
+    options?: HrmSalarySlipTemplateOptionVO[]
   }
 
   type HrmSalaryTaxRuleRespVO = {
     // 计税规则编号
-    id: number;
+    id: number
     // 计税规则名称
-    name: string;
+    name: string
     // 计税类型
-    type?: number;
+    type?: number
     // 是否计税
-    taxEnabled?: boolean;
+    taxEnabled?: boolean
     // 起征阈值
-    threshold?: number;
+    threshold?: number
     // 小数位数
-    decimalScale?: number;
+    decimalScale?: number
     // 计税周期类型
-    cycleType?: number;
+    cycleType?: number
     // 使用该规则的薪资组数量
-    usedGroupCount?: number;
+    usedGroupCount?: number
     // 创建时间
-    createTime: string;
+    createTime: string
   }
 
   type HrmSalaryTaxRuleSaveReqVO = {
     // 计税规则编号
-    id?: number;
+    id?: number
     // 计税规则名称
-    name: string;
+    name: string
     // 计税类型
-    type: number;
+    type: number
     // 是否计税
-    taxEnabled: boolean;
+    taxEnabled: boolean
     // 起征阈值
-    threshold?: number;
+    threshold?: number
     // 小数位数
-    decimalScale?: number;
+    decimalScale?: number
     // 计税周期类型
-    cycleType?: number;
+    cycleType?: number
   }
 
   type importChangeExcelParams = {
     // Excel 文件
-    file: any;
+    file: any
   }
 
   type importExcelParams = {
     // 重复员工处理策略：1 跳过，2 覆盖，3 判失败
-    duplicateStrategy?: number;
+    duplicateStrategy?: number
     // Excel 文件
-    file: any;
+    file: any
   }
 
   type importFixExcelParams = {
     // Excel 文件
-    file: any;
+    file: any
   }
 
   type Level = {
     // 等级名称
-    name: string;
+    name: string
     // 最低分数
-    minScore: number;
+    minScore: number
     // 最高分数
-    maxScore: number;
+    maxScore: number
     // 绩效系数
-    coefficient: number;
+    coefficient: number
   }
 
   type LocalTime = {
-    hour?: number;
-    minute?: number;
-    second?: number;
-    nano?: number;
+    hour?: number
+    minute?: number
+    second?: number
+    nano?: number
   }
 
   type openPerformancePlanScoringParams = {
     // 绩效计划 Id
-    id: number;
+    id: number
   }
 
   type OverviewItem = {
     // 打卡类型
-    type?: string;
+    type?: string
     // 打卡时间
-    time?: string;
+    time?: string
     // 打卡状态
-    status?: string;
+    status?: string
     // 考勤结果
-    text?: string;
+    text?: string
   }
 
   type PageResultHrmAttendanceClockRespVO = {
     // 数据
-    list: HrmAttendanceClockRespVO[];
+    list: HrmAttendanceClockRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmAttendanceGroupRespVO = {
     // 数据
-    list: HrmAttendanceGroupRespVO[];
+    list: HrmAttendanceGroupRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmAttendanceHolidayRespVO = {
     // 数据
-    list: HrmAttendanceHolidayRespVO[];
+    list: HrmAttendanceHolidayRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmAttendanceLeaveRespVO = {
     // 数据
-    list: HrmAttendanceLeaveRespVO[];
+    list: HrmAttendanceLeaveRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmAttendanceMonthDailyOverviewRespVO = {
     // 数据
-    list: HrmAttendanceMonthDailyOverviewRespVO[];
+    list: HrmAttendanceMonthDailyOverviewRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmAttendanceMonthRecordRespVO = {
     // 数据
-    list: HrmAttendanceMonthRecordRespVO[];
+    list: HrmAttendanceMonthRecordRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmEmployeeRespVO = {
     // 数据
-    list: HrmEmployeeRespVO[];
+    list: HrmEmployeeRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmInsuranceMonthEmployeeRecordRespVO = {
     // 数据
-    list: HrmInsuranceMonthEmployeeRecordRespVO[];
+    list: HrmInsuranceMonthEmployeeRecordRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmOperateLogRespVO = {
     // 数据
-    list: HrmOperateLogRespVO[];
+    list: HrmOperateLogRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmPerformanceArchiveEmployeeRespVO = {
     // 数据
-    list: HrmPerformanceArchiveEmployeeRespVO[];
+    list: HrmPerformanceArchiveEmployeeRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmPerformanceAssessmentRespVO = {
     // 数据
-    list: HrmPerformanceAssessmentRespVO[];
+    list: HrmPerformanceAssessmentRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmPerformanceAssessmentTemplateRespVO = {
     // 数据
-    list: HrmPerformanceAssessmentTemplateRespVO[];
+    list: HrmPerformanceAssessmentTemplateRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmPerformancePlanRespVO = {
     // 数据
-    list: HrmPerformancePlanRespVO[];
+    list: HrmPerformancePlanRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmPerformanceResultTemplateRespVO = {
     // 数据
-    list: HrmPerformanceResultTemplateRespVO[];
+    list: HrmPerformanceResultTemplateRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmRecruitCandidateRespVO = {
     // 数据
-    list: HrmRecruitCandidateRespVO[];
+    list: HrmRecruitCandidateRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmRecruitChannelRespVO = {
     // 数据
-    list: HrmRecruitChannelRespVO[];
+    list: HrmRecruitChannelRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmRecruitPostRespVO = {
     // 数据
-    list: HrmRecruitPostRespVO[];
+    list: HrmRecruitPostRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmSalaryEmployeeInfoRespVO = {
     // 数据
-    list: HrmSalaryEmployeeInfoRespVO[];
+    list: HrmSalaryEmployeeInfoRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmSalaryGroupRespVO = {
     // 数据
-    list: HrmSalaryGroupRespVO[];
+    list: HrmSalaryGroupRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmSalaryMonthEmployeeRecordRespVO = {
     // 数据
-    list: HrmSalaryMonthEmployeeRecordRespVO[];
+    list: HrmSalaryMonthEmployeeRecordRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmSalaryMonthRecordRespVO = {
     // 数据
-    list: HrmSalaryMonthRecordRespVO[];
+    list: HrmSalaryMonthRecordRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmSalarySlipRespVO = {
     // 数据
-    list: HrmSalarySlipRespVO[];
+    list: HrmSalarySlipRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmSalarySlipSendEmployeeRespVO = {
     // 数据
-    list: HrmSalarySlipSendEmployeeRespVO[];
+    list: HrmSalarySlipSendEmployeeRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type PageResultHrmSalarySlipSendRecordRespVO = {
     // 数据
-    list: HrmSalarySlipSendRecordRespVO[];
+    list: HrmSalarySlipSendRecordRespVO[]
     // 总量
-    total: number;
+    total: number
   }
 
   type Point = {
     // 地点名称
-    name: string;
+    name: string
     // 定位地址
-    address: string;
+    address: string
     // 纬度
-    latitude: number;
+    latitude: number
     // 经度
-    longitude: number;
+    longitude: number
     // 有效打卡半径，单位：米
-    radius: number;
+    radius: number
   }
 
   type Quota = {
     // 指标名称
-    name: string;
+    name: string
     // 指标说明
-    illustrate?: string;
+    illustrate?: string
     // 评分标准
-    standard: string;
+    standard: string
     // 指标权重
-    weight: number;
+    weight: number
     // 评分类型
-    scoreType: number;
+    scoreType: number
   }
 
   type ResultConfig = {
     // 模板名称
-    name: string;
+    name: string
     // 结果等级配置
-    levels: Level[];
+    levels: Level[]
   }
 
   type ReviewStage = {
     // 评分阶段名称
-    name: string;
-    rater: HandlerStage;
+    name: string
+    rater: HandlerStage
     // 评分权重
-    weight: number;
+    weight: number
     // 评分方式
-    scoringType: number;
+    scoringType: number
     // 评分内容可见范围
-    visibleContent: number;
+    visibleContent: number
     // 评语是否必填
-    requiredSetting: boolean;
+    requiredSetting: boolean
     // 是否允许驳回
-    rejectAuthority: boolean;
+    rejectAuthority: boolean
   }
 
   type Scope = {
     // 范围类型
-    type: number;
+    type: number
     // 员工 Ids
-    employeeIds?: number[];
+    employeeIds?: number[]
     // 部门 Ids
-    deptIds?: number[];
+    deptIds?: number[]
     // 聘用形式
-    employeeType?: number;
+    employeeType?: number
     // 员工状态列表
-    employeeStatuses?: number[];
+    employeeStatuses?: number[]
   }
 
   type sendEmployeeProfileFillMessageParams = {
     // 员工 Ids
-    ids: number[];
+    ids: number[]
   }
 
   type Shift = {
     // 工作日数组
-    weeks: number[];
-    startTime: LocalTime;
-    endTime: LocalTime;
-    clockInStartTime: LocalTime;
-    clockInEndTime: LocalTime;
-    clockOutStartTime: LocalTime;
-    clockOutEndTime: LocalTime;
-    restStartTime: LocalTime;
-    restEndTime: LocalTime;
+    weeks: number[]
+    startTime: LocalTime
+    endTime: LocalTime
+    clockInStartTime: LocalTime
+    clockInEndTime: LocalTime
+    clockOutStartTime: LocalTime
+    clockOutEndTime: LocalTime
+    restStartTime: LocalTime
+    restEndTime: LocalTime
     // 休息时间是否不计入工作时长
-    excludeRestTime: boolean;
+    excludeRestTime: boolean
   }
 
   type SortingField = {
-    field?: string;
-    order?: string;
+    field?: string
+    order?: string
   }
 
   type SpecialDate = {
     // 日期类型
-    type: number;
+    type: number
     // 特殊日期
-    date: string;
+    date: string
   }
 
   type startPerformancePlanInterviewParams = {
     // 绩效计划 Id
-    id: number;
+    id: number
   }
 
   type startPerformancePlanParams = {
     // 绩效计划 Id
-    id: number;
+    id: number
   }
 
   type terminatePerformancePlanParams = {
     // 绩效计划 Id
-    id: number;
+    id: number
   }
 
   type Wifi = {
     // WiFi 名称
-    ssid: string;
+    ssid: string
     // MAC 地址
-    mac: string;
+    mac: string
   }
 }

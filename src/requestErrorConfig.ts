@@ -1,7 +1,7 @@
-import type { RequestOptions } from '@@/plugin-request/request';
-import type { RequestConfig } from '@umijs/max';
-import { message, notification } from 'antd';
-import { ApiEncrypt } from '@/utils/encrypt'; // Added encrypt module
+import type { RequestOptions } from '@@/plugin-request/request'
+import type { RequestConfig } from '@umijs/max'
+import { message, notification } from 'antd'
+import { ApiEncrypt } from '@/utils/encrypt' // Added encrypt module
 
 // 错误处理方案： 错误类型
 enum ErrorShowType {
@@ -32,12 +32,12 @@ export const errorConfig: RequestConfig = {
     // 错误抛出
     errorThrower: (res) => {
       const { success, data, errorCode, errorMessage, showType } =
-        res as unknown as ResponseStructure;
+        res as unknown as ResponseStructure
       if (!success) {
         const error: any = new Error(errorMessage)
         error.name = 'BizError'
         error.info = { errorCode, errorMessage, showType, data }
-        throw error; // 抛出自制的错误
+        throw error // 抛出自制的错误
       }
     },
     // 错误接收及处理
@@ -54,14 +54,14 @@ export const errorConfig: RequestConfig = {
               break
             case ErrorShowType.WARN_MESSAGE:
               message.warning(errorMessage)
-              break;
+              break
             case ErrorShowType.ERROR_MESSAGE:
               message.error(errorMessage)
               break
             case ErrorShowType.NOTIFICATION:
               notification.open({
                 description: errorMessage,
-                message: errorCode,
+                message: errorCode
               })
               break
             case ErrorShowType.REDIRECT:
@@ -145,16 +145,17 @@ export const errorConfig: RequestConfig = {
       // 检查是否需要解密响应数据
       const headers = (response as any).headers || {}
       const encryptHeader = ApiEncrypt.getEncryptHeader()
-      const isEncryptResponse = headers[encryptHeader] === 'true' || headers[encryptHeader.toLowerCase()] === 'true'
+      const isEncryptResponse =
+        headers[encryptHeader] === 'true' || headers[encryptHeader.toLowerCase()] === 'true'
 
       if (isEncryptResponse && typeof data === 'string') {
         try {
           // 解密响应数据
-          data = ApiEncrypt.decryptResponse(data);
-          (response as any).data = data;
+          data = ApiEncrypt.decryptResponse(data)
+          ;(response as any).data = data
         } catch (error) {
-          console.error('响应数据解密失败:', error);
-          throw new Error('响应数据解密失败: ' + (error as Error).message);
+          console.error('响应数据解密失败:', error)
+          throw new Error('响应数据解密失败: ' + (error as Error).message)
         }
       }
 

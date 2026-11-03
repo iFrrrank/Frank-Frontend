@@ -8,8 +8,8 @@ export async function getRecruitPostTypeList(
   return request<API.CommonResultListHrmRecruitPostTypeRespVO>('/hrm/recruit/post-type/list', {
     method: 'GET',
     params: {
-      ...params,
+      ...params
     },
-    ...(options || {}),
-  });
+    ...(options || {})
+  })
 }

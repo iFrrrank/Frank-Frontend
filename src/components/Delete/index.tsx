@@ -24,7 +24,9 @@ export const handleBatchDelete = async (
     cancelText: textConst.common.cancel,
     onOk: async () => {
       try {
-        await Promise.all(selectedRowKeys.map((id) => deleteApi({ id: Number(id), ids: [Number(id)] })))
+        await Promise.all(
+          selectedRowKeys.map((id) => deleteApi({ id: Number(id), ids: [Number(id)] }))
+        )
         message.success(textConst.msg.batchDelSuccess)
         clearSelected()
         reload()
