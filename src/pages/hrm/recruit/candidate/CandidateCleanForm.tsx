@@ -1,12 +1,12 @@
 import React from 'react'
 import { Form, InputNumber, message } from 'antd'
 import { ModalForm, ProFormSelect } from '@ant-design/pro-components'
-import { getCleanRecruitCandidateIdList, eliminateRecruitCandidate } from '@/api/hrm/recruit/candidate'
-import { textConst } from '@/locales/zh-CN'
 import {
-  RECRUIT_CANDIDATE_CLEAN_STATUSES,
-  RECRUIT_CANDIDATE_STATUS
-} from '@/utils/constantsValue'
+  getCleanRecruitCandidateIdList,
+  eliminateRecruitCandidate
+} from '@/api/hrm/recruit/candidate'
+import { textConst } from '@/locales/zh-CN'
+import { RECRUIT_CANDIDATE_CLEAN_STATUSES, RECRUIT_CANDIDATE_STATUS } from '@/utils/constantsValue'
 
 interface CandidateCleanFormProps {
   visible: boolean

@@ -3,6 +3,7 @@ import { Card, Modal, Tabs, message } from 'antd'
 import type { MenuProps } from 'antd'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
+import { history } from '@umijs/max'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import {
   deleteRecruitCandidate,
@@ -10,10 +11,7 @@ import {
   getRecruitCandidateStatusCount
 } from '@/api/hrm/recruit/candidate'
 import { getRecruitInterview } from '@/api/hrm/recruit/interview'
-import {
-  HrmRecruitCandidateStatusEnum,
-  HrmRecruitInterviewResultEnum
-} from '@/utils/constants'
+import { HrmRecruitCandidateStatusEnum, HrmRecruitInterviewResultEnum } from '@/utils/constants'
 import {
   RECRUIT_CANDIDATE_EDUCATION,
   RECRUIT_CANDIDATE_STATUS,
@@ -294,7 +292,12 @@ const RecruitCandidatePage: React.FC = () => {
       align: 'center',
       width: 110,
       fixed: 'left',
-      hideInSearch: true
+      hideInSearch: true,
+      render: (_, record) => (
+        <a onClick={() => history.push('/hrm/recruit/candidate/detail?id=' + record.id)}>
+          {record.name}
+        </a>
+      )
     },
     {
       title: '应聘职位',
@@ -318,7 +321,8 @@ const RecruitCandidatePage: React.FC = () => {
       hideInSearch: true,
       valueEnum: RECRUIT_CANDIDATE_STATUS,
       render: (_, record) => {
-        const statusText = record.status !== undefined ? RECRUIT_CANDIDATE_STATUS[record.status]?.text : '-'
+        const statusText =
+          record.status !== undefined ? RECRUIT_CANDIDATE_STATUS[record.status]?.text : '-'
         const interviewResult = record.interviewResult
         const showResult =
           record.status === HrmRecruitCandidateStatusEnum.INTERVIEW.status &&
@@ -460,12 +464,11 @@ const RecruitCandidatePage: React.FC = () => {
           <a key="edit" onClick={() => handleUpdate(record.id)}>
             {textConst.action.update}
           </a>
-          {record.status !== undefined &&
-            INTERVIEW_STATUSES.includes(record.status) && (
-              <a key="interview" onClick={() => handleOpenInterview(record)}>
-                安排面试
-              </a>
-            )}
+          {record.status !== undefined && INTERVIEW_STATUSES.includes(record.status) && (
+            <a key="interview" onClick={() => handleOpenInterview(record)}>
+              安排面试
+            </a>
+          )}
           {record.status !== undefined && ELIMINATE_STATUSES.includes(record.status) && (
             <a key="eliminate" onClick={() => handleEliminate(record)}>
               淘汰

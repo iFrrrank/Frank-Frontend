@@ -2175,3 +2175,342 @@ export const HrmRecruitInterviewResultEnum = {
     name: '面试取消'
   }
 }
+
+// 招聘职位状态枚举
+export const HrmRecruitPostStatusEnum = {
+  STOPPED: {
+    status: 0,
+    name: '停止招聘'
+  },
+  RECRUITING: {
+    status: 1,
+    name: '招聘中'
+  }
+}
+
+// 招聘工作性质枚举
+export const HrmRecruitJobNatureEnum = {
+  FULL_TIME: {
+    jobNature: 1,
+    name: '全职'
+  },
+  INTERNSHIP: {
+    jobNature: 2,
+    name: '实习'
+  },
+  PART_TIME: {
+    jobNature: 3,
+    name: '兼职'
+  }
+}
+
+// 招聘工作经验枚举
+export const HrmRecruitWorkTimeEnum = {
+  UNLIMITED: {
+    workTime: 1,
+    name: '不限'
+  },
+  LESS_THAN_ONE_YEAR: {
+    workTime: 2,
+    name: '1 年以下'
+  },
+  ONE_TO_THREE_YEARS: {
+    workTime: 3,
+    name: '1-3 年'
+  },
+  THREE_TO_FIVE_YEARS: {
+    workTime: 4,
+    name: '3-5 年'
+  },
+  FIVE_TO_TEN_YEARS: {
+    workTime: 5,
+    name: '5-10 年'
+  },
+  MORE_THAN_TEN_YEARS: {
+    workTime: 6,
+    name: '10 年以上'
+  }
+}
+
+// 招聘职位学历要求枚举
+export const HrmRecruitPostEducationEnum = {
+  UNLIMITED: {
+    educationRequire: 1,
+    name: '不限'
+  },
+  HIGH_SCHOOL_AND_ABOVE: {
+    educationRequire: 2,
+    name: '高中及以上'
+  },
+  COLLEGE_AND_ABOVE: {
+    educationRequire: 3,
+    name: '大专及以上'
+  },
+  BACHELOR_AND_ABOVE: {
+    educationRequire: 4,
+    name: '本科及以上'
+  },
+  MASTER_AND_ABOVE: {
+    educationRequire: 5,
+    name: '硕士及以上'
+  },
+  DOCTOR: {
+    educationRequire: 6,
+    name: '博士'
+  }
+}
+
+// 招聘薪资单位枚举
+export const HrmRecruitSalaryUnitEnum = {
+  MONTH: {
+    salaryUnit: 1,
+    name: '元/月'
+  },
+  YEAR: {
+    salaryUnit: 2,
+    name: '元/年'
+  }
+}
+
+// 招聘紧急程度枚举
+export const HrmRecruitEmergencyLevelEnum = {
+  URGENT: {
+    emergencyLevel: 1,
+    name: '紧急'
+  },
+  NORMAL: {
+    emergencyLevel: 2,
+    name: '一般'
+  }
+}
+
+// 薪资面议值（对齐后端 HrmRecruitPostDO.SALARY_NEGOTIABLE_VALUE）
+export const RECRUIT_SALARY_NEGOTIABLE_VALUE = -1
+
+// 薪资面议单位值（对齐后端 HrmRecruitPostDO.SALARY_NEGOTIABLE_UNIT_VALUE）
+export const RECRUIT_SALARY_NEGOTIABLE_UNIT_VALUE = -1
+
+// 年龄不限值（对齐后端 HrmRecruitPostDO.AGE_UNLIMITED_VALUE）
+export const RECRUIT_AGE_UNLIMITED_VALUE = -1
+
+// 员工入职状态枚举
+export const HrmEmployeeEntryStatusEnum = {
+  ACTIVE: {
+    entryStatus: 1,
+    name: '在职'
+  },
+  PENDING_ENTRY: {
+    entryStatus: 2,
+    name: '待入职'
+  },
+  PENDING_LEAVE: {
+    entryStatus: 3,
+    name: '待离职'
+  },
+  LEFT: {
+    entryStatus: 4,
+    name: '已离职'
+  }
+}
+
+// 员工状态枚举
+export const HrmEmployeeStatusEnum = {
+  REGULAR: {
+    status: 1,
+    name: '正式'
+  },
+  PROBATION: {
+    status: 2,
+    name: '试用'
+  },
+  INTERN: {
+    status: 3,
+    name: '实习'
+  },
+  PART_TIME: {
+    status: 4,
+    name: '兼职'
+  },
+  LABOR: {
+    status: 5,
+    name: '劳务'
+  },
+  CONSULTANT: {
+    status: 6,
+    name: '顾问'
+  },
+  REHIRE: {
+    status: 7,
+    name: '返聘'
+  },
+  OUTSOURCE: {
+    status: 8,
+    name: '外包'
+  }
+}
+
+// 员工聘用形式枚举
+export const HrmEmployeeTypeEnum = {
+  FORMAL: {
+    type: 1,
+    name: '正式'
+  },
+  INFORMAL: {
+    type: 2,
+    name: '非正式'
+  }
+}
+
+// 员工状态页签枚举（对齐后端 HrmEmployeeStatusTabEnum）
+export const HrmEmployeeStatusTabEnum = {
+  ACTIVE: { statusCategory: 11, name: '在职' },
+  FULL_TIME: { statusCategory: 12, name: '全职' },
+  PENDING_ENTRY: { statusCategory: 13, name: '待入职' },
+  PENDING_LEAVE: { statusCategory: 14, name: '待离职' },
+  LEFT: { statusCategory: 15, name: '已离职' }
+}
+
+// 员工异动类型枚举
+export const HrmEmployeeChangeTypeEnum = {
+  REGULAR: { type: 4, name: '转正' },
+  TRANSFER: { type: 5, name: '调岗' },
+  PROMOTION: { type: 6, name: '晋升' },
+  DEMOTION: { type: 7, name: '降级' },
+  FULL_TIME: { type: 8, name: '转为全职' },
+  REHIRE: { type: 9, name: '再入职' }
+}
+
+// 员工异动原因枚举
+export const HrmEmployeeChangeReasonEnum = {
+  ORGANIZATION_ADJUSTMENT: { reason: 1, name: '组织架构调整' },
+  PERSONAL_APPLICATION: { reason: 2, name: '个人申请' },
+  WORK_ARRANGEMENT: { reason: 3, name: '工作安排' },
+  VIOLATION: { reason: 4, name: '违规违纪' },
+  UNDERPERFORMANCE: { reason: 5, name: '绩效不达标' },
+  HEALTH_REASON: { reason: 6, name: '个人身体原因' },
+  UNSUITABLE_POSITION: { reason: 7, name: '不适应当前岗位' }
+}
+
+// 员工离职类型枚举
+export const HrmEmployeeQuitTypeEnum = {
+  VOLUNTARY: { type: 1, name: '主动离职' },
+  INVOLUNTARY: { type: 2, name: '被动离职' },
+  RETIREMENT: { type: 3, name: '退休' }
+}
+
+// 员工离职原因枚举
+export const HrmEmployeeQuitReasonEnum = {
+  FAMILY: { reason: 1, name: '家庭原因' },
+  HEALTH: { reason: 2, name: '身体原因' },
+  SALARY: { reason: 3, name: '薪资原因' },
+  INCONVENIENT_TRAFFIC: { reason: 4, name: '交通不便' },
+  WORK_PRESSURE: { reason: 5, name: '工作压力' },
+  MANAGEMENT_ISSUE: { reason: 6, name: '管理问题' },
+  NO_PROMOTION_OPPORTUNITY: { reason: 7, name: '无晋升机会' },
+  CAREER_PLANNING: { reason: 8, name: '职业规划' },
+  GIVE_UP_RENEWAL: { reason: 9, name: '合同到期放弃续签' },
+  OTHER_PERSONAL_REASON: { reason: 10, name: '其他个人原因' },
+  TRIAL_PERIOD_DISMISSAL: { reason: 11, name: '试用期内辞退' },
+  VIOLATION: { reason: 12, name: '违反公司条例' },
+  LAYOFF: { reason: 13, name: '组织调整/裁员' },
+  UNDERPERFORMANCE: { reason: 14, name: '绩效不达标辞退' },
+  CONTRACT_NOT_RENEWED: { reason: 15, name: '合同到期不续签' },
+  OTHER_INVOLUNTARY_REASON: { reason: 16, name: '其他原因' }
+}
+
+// 员工证件类型枚举
+export const HrmEmployeeIdTypeEnum = {
+  ID_CARD: { idType: 1, name: '身份证' },
+  HONG_KONG_MACAO_PASS: { idType: 2, name: '港澳通行证' },
+  TAIWAN_PASS: { idType: 3, name: '台湾通行证' },
+  PASSPORT: { idType: 4, name: '护照' },
+  OTHER: { idType: 5, name: '其他' }
+}
+
+// 员工教学方式枚举
+export const HrmEmployeeTeachingMethodEnum = {
+  FULL_TIME: { teachingMethod: 1, name: '全日制' },
+  PART_TIME: { teachingMethod: 2, name: '非全日制' },
+  SELF_STUDY: { teachingMethod: 3, name: '自学' },
+  OTHER: { teachingMethod: 4, name: '其他' }
+}
+
+// 员工合同类型枚举
+export const HrmEmployeeContractTypeEnum = {
+  LABOR: { type: 1, name: '劳动合同' },
+  LABOR_DISPATCH: { type: 2, name: '劳务派遣' },
+  INTERNSHIP: { type: 3, name: '实习协议' },
+  CONSULTANT: { type: 4, name: '顾问协议' },
+  OTHER: { type: 5, name: '其他' }
+}
+
+// 员工合同状态枚举
+export const HrmEmployeeContractStatusEnum = {
+  ON_SIGNING: { status: 1, name: '待签署' },
+  EFFECTIVE: { status: 2, name: '履行中' },
+  EXPIRED: { status: 3, name: '已到期' },
+  TERMINATED: { status: 4, name: '已终止' },
+  CANCELLED: { status: 5, name: '已作废' }
+}
+
+// 员工附件类型枚举
+export const HrmEmployeeFileTypeEnum = {
+  ID_CARD_FRONT: { type: 1, name: '身份证正面' },
+  ID_CARD_BACK: { type: 2, name: '身份证反面' },
+  DEGREE_CERTIFICATE: { type: 3, name: '学历证书' },
+  LABOR_CONTRACT: { type: 4, name: '劳动合同' },
+  OTHER: { type: 5, name: '其他附件' }
+}
+
+// 考勤打卡来源枚举
+export const HrmAttendanceClockSourceEnum = {
+  MOBILE: { source: 1, name: '手机端' },
+  MANUAL: { source: 2, name: '手工录入' }
+}
+
+// 考勤打卡类型枚举
+export const HrmAttendanceClockTypeEnum = {
+  ON_DUTY: { type: 1, name: '上班打卡' },
+  OFF_DUTY: { type: 2, name: '下班打卡' }
+}
+
+// 考勤打卡状态枚举
+export const HrmAttendanceClockStatusEnum = {
+  NORMAL: { status: 1, name: '正常' },
+  LATE: { status: 2, name: '迟到' },
+  EARLY: { status: 3, name: '早退' },
+  ABSENTEEISM: { status: 4, name: '旷工' },
+  MISS_CARD: { status: 5, name: '缺卡' }
+}
+
+// 考勤节假日类型枚举
+export const HrmAttendanceHolidayTypeEnum = {
+  WORK: { type: 1, name: '上班' },
+  REST: { type: 2, name: '休息' }
+}
+
+// 考勤迟到早退扣款方式枚举
+export const HrmAttendanceLateEarlyDeductMethodEnum = {
+  FIXED_MONTH: { method: 1, name: '每月固定扣款' },
+  BY_MINUTE: { method: 2, name: '按分钟扣款' },
+  BY_COUNT: { method: 3, name: '按次数扣款' }
+}
+
+// 考勤旷工扣款方式枚举
+export const HrmAttendanceAbsenteeismDeductMethodEnum = {
+  BY_DAY: { method: 1, name: '按旷工天数扣款' }
+}
+
+// 考勤缺卡扣款方式枚举
+export const HrmAttendanceMisscardDeductMethodEnum = {
+  BY_COUNT: { method: 1, name: '按缺卡次数扣款' }
+}
+
+// 员工入职状态（新增员工时可选）选项
+export const HRM_EMPLOYEE_CREATE_ENTRY_STATUS_VALUES: number[] = [
+  HrmEmployeeEntryStatusEnum.ACTIVE.entryStatus,
+  HrmEmployeeEntryStatusEnum.PENDING_ENTRY.entryStatus
+]
+
+// 无试用期的月数
+export const HRM_EMPLOYEE_NO_PROBATION_MONTHS = 0

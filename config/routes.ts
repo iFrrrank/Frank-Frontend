@@ -925,6 +925,214 @@ export default [
             name: '候选人管理',
             icon: 'user',
             component: './hrm/recruit/candidate'
+          },
+          {
+            path: '/hrm/recruit/candidate/detail',
+            name: '候选人详情',
+            hideInMenu: true,
+            component: './hrm/recruit/candidate/detail'
+          },
+          {
+            path: '/hrm/recruit/post',
+            name: '招聘职位',
+            component: './hrm/recruit/post'
+          },
+          {
+            path: '/hrm/recruit/post/detail',
+            name: '职位详情',
+            hideInMenu: true,
+            component: './hrm/recruit/post/detail'
+          },
+          {
+            path: '/hrm/recruit/channel',
+            name: '招聘渠道',
+            component: './hrm/recruit/channel'
+          },
+          {
+            path: '/hrm/recruit/setting/eliminate',
+            name: '淘汰原因设置',
+            component: './hrm/recruit/setting/eliminate'
+          }
+        ]
+      },
+      {
+        path: '/hrm/dept',
+        name: '组织架构',
+        icon: 'cluster',
+        routes: [
+          {
+            path: '/hrm/dept',
+            name: '架构总览',
+            component: './hrm/dept'
+          },
+          {
+            path: '/hrm/dept/detail',
+            name: '部门详情',
+            hideInMenu: true,
+            component: './hrm/dept/detail'
+          }
+        ]
+      },
+      {
+        path: '/hrm/employee',
+        name: '员工管理',
+        icon: 'solution',
+        routes: [
+          {
+            path: '/hrm/employee',
+            name: '员工花名册',
+            component: './hrm/employee'
+          },
+          {
+            path: '/hrm/employee/config',
+            name: '员工字段设置',
+            component: './hrm/employee/config'
+          }
+        ]
+      },
+      {
+        path: '/hrm/attendance',
+        name: '考勤管理',
+        icon: 'schedule',
+        routes: [
+          {
+            path: '/hrm/attendance/clock',
+            name: '考勤打卡',
+            component: './hrm/attendance/clock'
+          },
+          {
+            path: '/hrm/attendance/leave',
+            name: '请假记录',
+            component: './hrm/attendance/leave'
+          },
+          {
+            path: '/hrm/attendance/month',
+            name: '月度考勤',
+            component: './hrm/attendance/month'
+          },
+          {
+            path: '/hrm/attendance/month/detail',
+            name: '月度考勤详情',
+            hideInMenu: true,
+            component: './hrm/attendance/month/detail'
+          }
+        ]
+      },
+      {
+        path: '/hrm/salary',
+        name: '薪资管理',
+        icon: 'pay-circle',
+        routes: [
+          {
+            path: '/hrm/salary/month-record',
+            name: '月度工资表',
+            component: './hrm/salary/month-record'
+          },
+          {
+            path: '/hrm/salary/month-record/history',
+            name: '历史工资表',
+            component: './hrm/salary/month-record/history'
+          },
+          {
+            path: '/hrm/salary/month-record/detail',
+            name: '工资表详情',
+            hideInMenu: true,
+            component: './hrm/salary/month-record/detail'
+          },
+          {
+            path: '/hrm/salary/employee-info',
+            name: '员工薪资档案',
+            component: './hrm/salary/employee-info'
+          },
+          {
+            path: '/hrm/salary/employee-info/detail',
+            name: '薪资档案详情',
+            hideInMenu: true,
+            component: './hrm/salary/employee-info/detail'
+          },
+          {
+            path: '/hrm/salary/slip/send-record',
+            name: '工资条发放记录',
+            component: './hrm/salary/slip/send-record'
+          },
+          {
+            path: '/hrm/salary/slip/send-record/detail',
+            name: '工资条发放详情',
+            hideInMenu: true,
+            component: './hrm/salary/slip/send-record/detail'
+          },
+          {
+            path: '/hrm/salary/config/config',
+            name: '薪资配置',
+            component: './hrm/salary/config/config'
+          },
+          {
+            path: '/hrm/salary/config/group',
+            name: '薪资组',
+            component: './hrm/salary/config/group'
+          },
+          {
+            path: '/hrm/salary/config/option',
+            name: '薪资项',
+            component: './hrm/salary/config/option'
+          },
+          {
+            path: '/hrm/salary/config/tax-rule',
+            name: '计税规则',
+            component: './hrm/salary/config/tax-rule'
+          },
+          {
+            path: '/hrm/salary/config/change-template',
+            name: '调薪模板',
+            component: './hrm/salary/config/change-template'
+          }
+        ]
+      },
+      {
+        path: '/hrm/portal',
+        name: '员工工作台',
+        icon: 'user',
+        routes: [
+          {
+            path: '/hrm/portal/home',
+            name: '个人工作台',
+            component: './hrm/portal/home'
+          },
+          {
+            path: '/hrm/portal/opening-guide',
+            name: '员工端开通引导',
+            hideInMenu: true,
+            component: './hrm/portal/opening-guide'
+          },
+          {
+            path: '/hrm/portal/employee',
+            name: '我的档案',
+            component: './hrm/portal/employee'
+          },
+          {
+            path: '/hrm/portal/salary/slip',
+            name: '我的工资条',
+            component: './hrm/portal/salary/slip'
+          },
+          {
+            path: '/hrm/portal/insurance/record',
+            name: '我的社保',
+            component: './hrm/portal/insurance/record'
+          },
+          {
+            path: '/hrm/portal/attendance/report',
+            name: '考勤报表',
+            component: './hrm/portal/attendance/report'
+          },
+          {
+            path: '/hrm/portal/performance/assessment',
+            name: '我的绩效',
+            component: './hrm/portal/performance/assessment'
+          },
+          {
+            path: '/hrm/portal/performance/assessment/history',
+            name: '绩效档案',
+            component: './hrm/portal/performance/assessment/history'
           }
         ]
       }

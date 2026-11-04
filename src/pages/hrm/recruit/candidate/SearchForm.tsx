@@ -1,5 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, DatePicker, Dropdown, Form, Input, InputNumber, Row, Select, Space } from 'antd'
+import {
+  Button,
+  Col,
+  DatePicker,
+  Dropdown,
+  Form,
+  Input,
+  InputNumber,
+  Row,
+  Select,
+  Space
+} from 'antd'
 import type { MenuProps } from 'antd'
 import {
   ClearOutlined,
@@ -285,7 +296,10 @@ const CandidateSearchForm: React.FC<CandidateSearchFormProps> = ({
         </Button>
         <Dropdown
           disabled={batchDisabled}
-          menu={{ items: batchMenuItems, onClick: ({ key }) => onBatchCommand(key as BatchCommand) }}
+          menu={{
+            items: batchMenuItems,
+            onClick: ({ key }) => onBatchCommand(key as BatchCommand)
+          }}
         >
           <Button type="primary" ghost disabled={batchDisabled} icon={<SlidersOutlined />}>
             批量操作

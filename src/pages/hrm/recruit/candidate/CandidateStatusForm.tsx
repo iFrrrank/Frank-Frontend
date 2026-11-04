@@ -61,9 +61,7 @@ const CandidateStatusForm: React.FC<CandidateStatusFormProps> = ({
       onFinish={async (values) => {
         try {
           await Promise.all(
-            ids.map((id) =>
-              updateRecruitCandidateStatus({ id, status: values.status as number })
-            )
+            ids.map((id) => updateRecruitCandidateStatus({ id, status: values.status as number }))
           )
           message.success(`已流转 ${ids.length} 位候选人`)
           onSuccess()
