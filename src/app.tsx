@@ -1,6 +1,7 @@
 import { AvatarDropdown, AvatarName } from '@/components/RightContent/AvatarDropdown'
 import { Question } from '@/components/RightContent'
 import { Footer } from '@/components/Footer'
+import FmsAccountSetSwitch from '@/pages/fms/components/account-set/FmsAccountSetSwitch'
 import { getUser } from '@/api/system/user'
 import { LinkOutlined } from '@ant-design/icons'
 import type { Settings as LayoutSettings } from '@ant-design/pro-components'
@@ -26,7 +27,7 @@ export async function getInitialState(): Promise<{
   const fetchUserInfo = async () => {
     try {
       const resp = await getUser({
-        id: 1024
+        id: 1035
       })
       return resp.data
     } catch (_error) {
@@ -53,7 +54,7 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
-    actionsRender: () => [<Question key="doc" />],
+    actionsRender: () => [<FmsAccountSetSwitch key="fmsSwitch" />, <Question key="doc" />],
     avatarProps: {
       src: initialState?.currentUser?.avatar,
       title: <AvatarName />,

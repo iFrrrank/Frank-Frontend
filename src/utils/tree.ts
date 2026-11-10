@@ -58,3 +58,92 @@ export const getParentKey = (key: React.Key, tree: TreeDataNode[]): React.Key =>
   }
   return parentKey!
 }
+
+/**
+ * 构造树型结构数据
+ * @param data 数据源
+ * @param id id字段 默认 'id'
+ * @param parentId 父节点字段 默认 'parentId'
+ * @param children 孩子节点字段 默认 'children'
+ */
+export const handleTree = (
+  data: any[],
+  id: string = 'id',
+  parentId: string = 'parentId',
+  children: string = 'children'
+): any[] => {
+  if (!Array.isArray(data)) {
+    return []
+  }
+  const childrenListMap: Record<string, any[]> = {}
+  const nodeIds: Record<string, any> = {}
+  const tree: any[] = []
+
+  for (const d of data) {
+    const pId = d[parentId]
+    if (childrenListMap[pId] == null) {
+      childrenListMap[pId] = []
+    }
+    nodeIds[d[id]] = d
+    childrenListMap[pId].push(d)
+  }
+
+  for (const d of data) {
+    const pId = d[parentId]
+    if (nodeIds[pId] == null) {
+      tree.push(d)
+    }
+  }
+
+  function adaptToChildrenList(o: any) {
+    if (childrenListMap[o[id]] != null) {
+      o[children] = childrenListMap[o[id]]
+    }
+    if (o[children]) {
+      for (const c of o[children]) {
+        adaptToChildrenList(c)
+      }
+    }
+  }
+
+  for (const t of tree) {
+    adaptToChildrenList(t)
+  }
+
+  return tree
+}
+
+/**
+ * 将树结构拍平为数组
+ */
+export const treeToList = <T = any>(
+  tree: any[],
+  config: { id?: string; children?: string; pid?: string } = {}
+): T => {
+  const childrenKey = config.children || 'children'
+  const result: any[] = Array.isArray(tree) ? [...tree] : []
+  for (let i = 0; i < result.length; i++) {
+    if (!result[i]?.[childrenKey]) continue
+    result.splice(i + 1, 0, ...result[i][childrenKey])
+  }
+  return result as unknown as T
+}
+
+/**
+ * 在树结构中查找符合条件的第一个节点
+ */
+export const findNode = <T = any>(
+  tree: any[],
+  func: (node: any) => boolean,
+  config: { id?: string; children?: string; pid?: string } = {}
+): T | null => {
+  const childrenKey = config.children || 'children'
+  const list: any[] = Array.isArray(tree) ? [...tree] : []
+  for (const node of list) {
+    if (func(node)) return node
+    if (node?.[childrenKey]) {
+      list.push(...node[childrenKey])
+    }
+  }
+  return null
+}
