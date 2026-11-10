@@ -286,4 +286,3 @@ const FmsMultiColumnLedger: React.FC = () => {
 }
 
 export default FmsMultiColumnLedger
-

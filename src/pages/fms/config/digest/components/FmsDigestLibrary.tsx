@@ -141,7 +141,7 @@ const FmsDigestLibrary = forwardRef<FmsDigestLibraryRef, FmsDigestLibraryProps>(
         render: (_, record) => (
           <div style={tableActionStyle}>
             <a onClick={() => handleSelect(record)}>选择</a>
-            {fmsStore.isAccountSetWritable && hasPermi('fms:digest:update') && (
+            {fmsStore.isAccountSetWritable && hasPermi('fms:config:digest:update') && (
               <a
                 onClick={() => {
                   setEditingId(record.id)
@@ -151,7 +151,7 @@ const FmsDigestLibrary = forwardRef<FmsDigestLibraryRef, FmsDigestLibraryProps>(
                 编辑
               </a>
             )}
-            {fmsStore.isAccountSetWritable && hasPermi('fms:digest:delete') && (
+            {fmsStore.isAccountSetWritable && hasPermi('fms:config:digest:delete') && (
               <a style={deleteTextStyle} onClick={() => handleDelete(record)}>
                 删除
               </a>
@@ -171,7 +171,7 @@ const FmsDigestLibrary = forwardRef<FmsDigestLibraryRef, FmsDigestLibraryProps>(
         destroyOnHidden
       >
         {fmsStore.isAccountSetWritable && (
-          <HasPermi value={['fms:digest:create', 'fms:digest:update']}>
+          <HasPermi value={['fms:config:digest:create', 'fms:config:digest:update']}>
             <div style={{ marginBottom: 14 }}>
               <Input.TextArea
                 value={content}
@@ -232,4 +232,3 @@ const FmsDigestLibrary = forwardRef<FmsDigestLibraryRef, FmsDigestLibraryProps>(
 FmsDigestLibrary.displayName = 'FmsDigestLibrary'
 
 export default FmsDigestLibrary
-

@@ -125,7 +125,7 @@ const FmsVoucherTemplateCategoryManage = forwardRef<
       width: 140,
       render: (_, record) => (
         <div style={tableActionStyle}>
-          {hasPermi('fms:voucher-template-category:update') && (
+          {hasPermi('fms:config:voucher-template-category:update') && (
             <a
               onClick={() => {
                 setEditingId(record.id)
@@ -135,7 +135,7 @@ const FmsVoucherTemplateCategoryManage = forwardRef<
               编辑
             </a>
           )}
-          {hasPermi('fms:voucher-template-category:delete') && (
+          {hasPermi('fms:config:voucher-template-category:delete') && (
             <a style={deleteTextStyle} onClick={() => handleDelete(record)}>
               删除
             </a>
@@ -156,8 +156,8 @@ const FmsVoucherTemplateCategoryManage = forwardRef<
     >
       <HasPermi
         value={[
-          'fms:voucher-template-category:create',
-          'fms:voucher-template-category:update'
+          'fms:config:voucher-template-category:create',
+          'fms:config:voucher-template-category:update'
         ]}
       >
         <div style={{ display: 'flex', gap: 8, marginBottom: 14 }}>
@@ -203,4 +203,3 @@ const FmsVoucherTemplateCategoryManage = forwardRef<
 FmsVoucherTemplateCategoryManage.displayName = 'FmsVoucherTemplateCategoryManage'
 
 export default FmsVoucherTemplateCategoryManage
-

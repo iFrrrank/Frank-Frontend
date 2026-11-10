@@ -27,6 +27,10 @@ const FmsAccountSetSwitch: React.FC = () => {
 
   const handleSelect = (item: API.FmsAccountSetRespVO) => {
     setOpen(false)
+    if (!item.initialized) {
+      message.warning(`账套“${item.companyName}”尚未初始化，请先在账套管理中点击【开始记账】`)
+      return
+    }
     if (item.id === currentAccountSet?.id) return
     fmsStore.setAccountSet({
       id: item.id,
@@ -158,4 +162,3 @@ const FmsAccountSetSwitch: React.FC = () => {
 }
 
 export default FmsAccountSetSwitch
-

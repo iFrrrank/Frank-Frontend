@@ -86,4 +86,3 @@ const FmsAuxiliaryTypeSelect: React.FC<FmsAuxiliaryTypeSelectProps> = ({
 }
 
 export default FmsAuxiliaryTypeSelect
-

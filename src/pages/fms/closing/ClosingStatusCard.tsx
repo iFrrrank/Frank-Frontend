@@ -31,4 +31,3 @@ const ClosingStatusCard: React.FC<ClosingStatusCardProps> = ({
 }
 
 export default ClosingStatusCard
-

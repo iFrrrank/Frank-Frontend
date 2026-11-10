@@ -103,7 +103,7 @@ const AuxiliaryPage: React.FC = () => {
           variant="borderless"
           extra={
             fmsStore.isAccountSetWritable && (
-              <HasPermi value="fms:auxiliary-type:create">
+              <HasPermi value="fms:config:auxiliary:create">
                 <Button
                   type="primary"
                   size="small"
@@ -158,7 +158,7 @@ const AuxiliaryPage: React.FC = () => {
                     </Space>
                     {fmsStore.isAccountSetWritable && item.type === FMS_AUXILIARY_TYPE.CUSTOM && (
                       <Space size={4} onClick={(e) => e.stopPropagation()}>
-                        {hasPermi('fms:auxiliary-type:update') && (
+                        {hasPermi('fms:config:auxiliary:update') && (
                           <Button
                             type="text"
                             size="small"
@@ -169,7 +169,7 @@ const AuxiliaryPage: React.FC = () => {
                             }}
                           />
                         )}
-                        {hasPermi('fms:auxiliary-type:delete') && (
+                        {hasPermi('fms:config:auxiliary:delete') && (
                           <Button
                             type="text"
                             size="small"
@@ -209,4 +209,3 @@ const AuxiliaryPage: React.FC = () => {
 }
 
 export default AuxiliaryPage
-

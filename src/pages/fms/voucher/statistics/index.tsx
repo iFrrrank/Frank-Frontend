@@ -335,4 +335,3 @@ const FmsVoucherStatistics: React.FC = () => {
 }
 
 export default FmsVoucherStatistics
-

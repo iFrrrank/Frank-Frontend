@@ -341,7 +341,7 @@ const SubjectPage: React.FC = () => {
       render: (_, record) => (
         <Switch
           checked={record.status === FMS_SUBJECT_STATUS.ENABLED}
-          disabled={!fmsStore.isAccountSetWritable || !hasPermi('fms:subject:update')}
+          disabled={!fmsStore.isAccountSetWritable || !hasPermi('fms:config:subject:update')}
           onChange={(checked) => handleStatusChange(record, checked)}
         />
       )
@@ -356,7 +356,7 @@ const SubjectPage: React.FC = () => {
             width: 200,
             render: (_: any, record: SubjectTreeRecord) => (
               <div style={tableActionStyle}>
-                {record.level < FMS_SUBJECT_LEVEL_MAX && hasPermi('fms:subject:create') && (
+                {record.level < FMS_SUBJECT_LEVEL_MAX && hasPermi('fms:config:subject:create') && (
                   <a
                     onClick={() => {
                       setEditId(undefined)
@@ -367,7 +367,7 @@ const SubjectPage: React.FC = () => {
                     新增下级
                   </a>
                 )}
-                {hasPermi('fms:subject:update') && (
+                {hasPermi('fms:config:subject:update') && (
                   <a
                     onClick={() => {
                       setEditId(record.id)
@@ -378,7 +378,7 @@ const SubjectPage: React.FC = () => {
                     {textConst.action.update}
                   </a>
                 )}
-                {canDeleteRow(record) && hasPermi('fms:subject:delete') && (
+                {canDeleteRow(record) && hasPermi('fms:config:subject:delete') && (
                   <a style={deleteTextStyle} onClick={() => handleDelete(record)}>
                     {textConst.action.delete}
                   </a>
@@ -434,7 +434,7 @@ const SubjectPage: React.FC = () => {
                 {textConst.action.reset}
               </Button>
               {fmsStore.isAccountSetWritable && (
-                <HasPermi value="fms:subject:create">
+                <HasPermi value="fms:config:subject:create">
                   <Button
                     type="primary"
                     icon={<PlusOutlined />}
@@ -449,7 +449,7 @@ const SubjectPage: React.FC = () => {
                 </HasPermi>
               )}
               {fmsStore.isAccountSetWritable && (
-                <HasPermi value="fms:subject:import">
+                <HasPermi value="fms:config:subject:import">
                   <Button
                     color="green"
                     variant="outlined"
@@ -460,7 +460,7 @@ const SubjectPage: React.FC = () => {
                   </Button>
                 </HasPermi>
               )}
-              <HasPermi value="fms:subject:export">
+              <HasPermi value="fms:config:subject:export">
                 <Button
                   color="volcano"
                   variant="outlined"
@@ -472,7 +472,7 @@ const SubjectPage: React.FC = () => {
                 </Button>
               </HasPermi>
               {fmsStore.isAccountSetWritable && (
-                <HasPermi value="fms:subject:delete">
+                <HasPermi value="fms:config:subject:delete">
                   <Button
                     danger
                     type="primary"

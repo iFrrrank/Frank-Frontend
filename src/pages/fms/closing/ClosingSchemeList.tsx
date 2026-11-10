@@ -409,4 +409,3 @@ const ClosingSchemeList: React.FC<ClosingSchemeListProps> = ({
 }
 
 export default ClosingSchemeList
-

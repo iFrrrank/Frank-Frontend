@@ -390,7 +390,7 @@ const FmsAuxiliaryItemPanel: React.FC<FmsAuxiliaryItemPanelProps> = ({
         hideInTable: !fmsStore.isAccountSetWritable,
         render: (_, record) => (
           <div style={tableActionStyle}>
-            {hasPermi('fms:auxiliary-item:update') && (
+            {hasPermi('fms:config:auxiliary:update') && (
               <a
                 onClick={() => {
                   setEditId(record.id)
@@ -400,7 +400,7 @@ const FmsAuxiliaryItemPanel: React.FC<FmsAuxiliaryItemPanelProps> = ({
                 {textConst.action.update}
               </a>
             )}
-            {hasPermi('fms:auxiliary-item:delete') && (
+            {hasPermi('fms:config:auxiliary:delete') && (
               <a style={deleteTextStyle} onClick={() => handleDelete(record)}>
                 {textConst.action.delete}
               </a>
@@ -455,7 +455,7 @@ const FmsAuxiliaryItemPanel: React.FC<FmsAuxiliaryItemPanelProps> = ({
         }}
         toolBarRender={() => [
           fmsStore.isAccountSetWritable && (
-            <HasPermi key="create" value="fms:auxiliary-item:create">
+            <HasPermi key="create" value="fms:config:auxiliary:create">
               <Button
                 type="primary"
                 icon={<PlusOutlined />}
@@ -470,7 +470,7 @@ const FmsAuxiliaryItemPanel: React.FC<FmsAuxiliaryItemPanelProps> = ({
             </HasPermi>
           ),
           fmsStore.isAccountSetWritable && (
-            <HasPermi key="import" value="fms:auxiliary-item:import">
+            <HasPermi key="import" value="fms:config:auxiliary:import">
               <Button
                 color="green"
                 variant="outlined"
@@ -482,7 +482,7 @@ const FmsAuxiliaryItemPanel: React.FC<FmsAuxiliaryItemPanelProps> = ({
               </Button>
             </HasPermi>
           ),
-          <HasPermi key="export" value="fms:auxiliary-item:export">
+          <HasPermi key="export" value="fms:config:auxiliary:export">
             <Button
               color="volcano"
               variant="outlined"
@@ -495,7 +495,7 @@ const FmsAuxiliaryItemPanel: React.FC<FmsAuxiliaryItemPanelProps> = ({
             </Button>
           </HasPermi>,
           fmsStore.isAccountSetWritable && (
-            <HasPermi key="batchDelete" value="fms:auxiliary-item:delete">
+            <HasPermi key="batchDelete" value="fms:config:auxiliary:delete">
               <Button
                 danger
                 type="primary"
@@ -536,4 +536,3 @@ const FmsAuxiliaryItemPanel: React.FC<FmsAuxiliaryItemPanelProps> = ({
 }
 
 export default FmsAuxiliaryItemPanel
-

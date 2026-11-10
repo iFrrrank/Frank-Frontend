@@ -117,4 +117,3 @@ const FmsReportPeriodBar: React.FC<FmsReportPeriodBarProps> = ({
 }
 
 export default FmsReportPeriodBar
-

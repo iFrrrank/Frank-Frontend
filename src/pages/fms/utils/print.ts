@@ -78,4 +78,3 @@ export function escapeHtml(value: string) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
 }
-

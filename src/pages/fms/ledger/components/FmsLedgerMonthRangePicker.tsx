@@ -39,4 +39,3 @@ const FmsLedgerMonthRangePicker: React.FC<FmsLedgerMonthRangePickerProps> = ({
 }
 
 export default FmsLedgerMonthRangePicker
-

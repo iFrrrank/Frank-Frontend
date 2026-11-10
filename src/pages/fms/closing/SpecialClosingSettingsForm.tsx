@@ -266,4 +266,3 @@ const SpecialClosingSettingsForm = forwardRef<
 SpecialClosingSettingsForm.displayName = 'SpecialClosingSettingsForm'
 
 export default SpecialClosingSettingsForm
-

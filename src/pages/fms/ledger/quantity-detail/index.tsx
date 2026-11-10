@@ -299,4 +299,3 @@ const FmsQuantityDetailLedger: React.FC = () => {
 }
 
 export default FmsQuantityDetailLedger
-

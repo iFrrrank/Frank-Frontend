@@ -117,13 +117,18 @@ export async function loadAccountSetList(): Promise<API.FmsAccountSetRespVO[]> {
       const matched =
         list.find((item) => item.id === state.accountSet?.id && item.initialized) ||
         list.find((item) => item.defaultStatus && item.initialized) ||
-        list.find((item) => item.initialized) ||
-        list[0]
-      if (state.accountSet?.id !== matched.id) {
+        list.find((item) => item.initialized)
+      if (matched) {
+        if (state.accountSet?.id !== matched.id) {
+          nextCurrentMonth = ''
+        }
+        nextAccountSet = toAccountSetInfo(matched)
+        wsCache.set(FMS_ACCOUNT_SET_KEY, nextAccountSet)
+      } else {
+        nextAccountSet = null
         nextCurrentMonth = ''
+        wsCache.delete(FMS_ACCOUNT_SET_KEY)
       }
-      nextAccountSet = toAccountSetInfo(matched)
-      wsCache.set(FMS_ACCOUNT_SET_KEY, nextAccountSet)
     }
 
     state = {
@@ -167,4 +172,3 @@ export function useFmsStore() {
     loadAccountSetList
   }
 }
-

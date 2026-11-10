@@ -1066,7 +1066,7 @@ const VoucherCreatePage: React.FC = () => {
             {canSave && (
               <Button onClick={() => handleSave(false)}>保存</Button>
             )}
-            {!readOnly && hasPermi('fms:voucher-template:query') && (
+            {!readOnly && hasPermi('fms:config:voucher-template:query') && (
               <Button
                 onClick={() => {
                   if (fmsStore.accountSetId) {
@@ -1138,16 +1138,16 @@ const VoucherCreatePage: React.FC = () => {
             )}
             {(!readOnly || Boolean(voucherId)) &&
               hasPermi([
-                'fms:voucher-template:create',
-                'fms:voucher-template:query'
+                'fms:config:voucher-template:create',
+                'fms:config:voucher-template:query'
               ]) && (
                 <Dropdown
                   menu={{
                     items: [
-                      ...(hasPermi('fms:voucher-template:create')
+                      ...(hasPermi('fms:config:voucher-template:create')
                         ? [{ key: 'saveTemplate', label: '存为模板' }]
                         : []),
-                      ...(!readOnly && hasPermi('fms:voucher-template:query')
+                      ...(!readOnly && hasPermi('fms:config:voucher-template:query')
                         ? [{ key: 'applyTemplate', label: '套用模板' }]
                         : [])
                     ],
@@ -1535,7 +1535,7 @@ const VoucherCreatePage: React.FC = () => {
                               }))
                             }
                           />
-                          {hasPermi('fms:digest:query') && (
+                          {hasPermi('fms:config:digest:query') && (
                             <Button
                               type="link"
                               size="small"
@@ -1628,7 +1628,7 @@ const VoucherCreatePage: React.FC = () => {
                                   />
                                 </div>
                                 {menu}
-                                {hasPermi('fms:subject:create') && (
+                                {hasPermi('fms:config:subject:create') && (
                                   <div
                                     style={{
                                       borderTop: '1px solid #f0f0f0',
@@ -1693,7 +1693,7 @@ const VoucherCreatePage: React.FC = () => {
                                       <div>
                                         {menu}
                                         {hasPermi(
-                                          'fms:auxiliary-item:create'
+                                          'fms:config:auxiliary:create'
                                         ) && (
                                           <div
                                             style={{
@@ -2060,4 +2060,3 @@ const VoucherCreatePage: React.FC = () => {
 }
 
 export default VoucherCreatePage
-

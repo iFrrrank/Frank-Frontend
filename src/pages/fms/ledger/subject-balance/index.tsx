@@ -289,4 +289,3 @@ const FmsSubjectBalance: React.FC = () => {
 }
 
 export default FmsSubjectBalance
-

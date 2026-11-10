@@ -312,7 +312,7 @@ const VoucherTemplatePage: React.FC = () => {
             width: 100,
             render: (_: any, record: API.FmsVoucherTemplateRespVO) => (
               <div style={tableActionStyle}>
-                {hasPermi('fms:voucher-template:delete') && (
+                {hasPermi('fms:config:voucher-template:delete') && (
                   <a
                     style={deleteTextStyle}
                     onClick={() => handleDeleteTemplate(record)}
@@ -336,7 +336,7 @@ const VoucherTemplatePage: React.FC = () => {
           variant="borderless"
           extra={
             fmsStore.isAccountSetWritable && (
-              <HasPermi value="fms:voucher-template-category:create">
+              <HasPermi value="fms:config:voucher-template-category:create">
                 <Button
                   type="primary"
                   size="small"
@@ -403,7 +403,7 @@ const VoucherTemplatePage: React.FC = () => {
                     <span>{item.name}</span>
                     {fmsStore.isAccountSetWritable && (
                       <Space size={4} onClick={(e) => e.stopPropagation()}>
-                        {hasPermi('fms:voucher-template-category:update') && (
+                        {hasPermi('fms:config:voucher-template-category:update') && (
                           <Button
                             type="text"
                             size="small"
@@ -414,7 +414,7 @@ const VoucherTemplatePage: React.FC = () => {
                             }}
                           />
                         )}
-                        {hasPermi('fms:voucher-template-category:delete') && (
+                        {hasPermi('fms:config:voucher-template-category:delete') && (
                           <Button
                             type="text"
                             size="small"
@@ -458,7 +458,7 @@ const VoucherTemplatePage: React.FC = () => {
               {textConst.action.reset}
             </Button>
             {fmsStore.isAccountSetWritable && (
-              <HasPermi value="fms:voucher-template:delete">
+              <HasPermi value="fms:config:voucher-template:delete">
                 <Button
                   danger
                   type="primary"

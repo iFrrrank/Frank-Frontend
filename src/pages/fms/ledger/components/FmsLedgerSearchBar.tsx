@@ -282,4 +282,3 @@ const FmsLedgerSearchBar: React.FC<FmsLedgerSearchBarProps> = ({
 }
 
 export default FmsLedgerSearchBar
-

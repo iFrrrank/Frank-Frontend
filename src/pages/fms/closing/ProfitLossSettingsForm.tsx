@@ -221,4 +221,3 @@ const ProfitLossSettingsForm = forwardRef<
 ProfitLossSettingsForm.displayName = 'ProfitLossSettingsForm'
 
 export default ProfitLossSettingsForm
-

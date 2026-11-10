@@ -144,4 +144,3 @@ export function getMonthRange(month: string): [string, string] {
     d.endOf('month').format('YYYY-MM-DD 23:59:59')
   ]
 }
-

@@ -117,7 +117,7 @@ const FmsVoucherTemplateSaveForm = forwardRef<FmsVoucherTemplateSaveFormRef>((_,
                   style={{ flex: 1 }}
                 />
               </Form.Item>
-              <HasPermi value="fms:voucher-template-category:query">
+              <HasPermi value="fms:config:voucher-template-category:query">
                 <Button
                   type="link"
                   icon={<SettingOutlined />}
@@ -152,4 +152,3 @@ const FmsVoucherTemplateSaveForm = forwardRef<FmsVoucherTemplateSaveFormRef>((_,
 FmsVoucherTemplateSaveForm.displayName = 'FmsVoucherTemplateSaveForm'
 
 export default FmsVoucherTemplateSaveForm
-

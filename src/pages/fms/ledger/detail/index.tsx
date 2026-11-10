@@ -327,4 +327,3 @@ const FmsDetailLedger: React.FC = () => {
 }
 
 export default FmsDetailLedger
-

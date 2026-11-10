@@ -312,4 +312,3 @@ const FmsAuxiliaryBalance: React.FC = () => {
 }
 
 export default FmsAuxiliaryBalance
-
