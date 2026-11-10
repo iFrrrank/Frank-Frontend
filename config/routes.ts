@@ -1138,6 +1138,204 @@ export default [
       }
     ]
   },
+  {
+    path: '/fms',
+    name: '财务系统',
+    icon: 'accountBook',
+    routes: [
+      {
+        path: '/fms/home',
+        name: '财务首页',
+        icon: 'dashboard',
+        component: './fms/home'
+      },
+      {
+        path: '/fms/voucher',
+        name: '凭证管理',
+        icon: 'fileText',
+        routes: [
+          {
+            path: '/fms/voucher/create',
+            name: '新增凭证',
+            icon: 'plusSquare',
+            component: './fms/voucher/create'
+          },
+          {
+            path: '/fms/voucher/list',
+            name: '凭证列表',
+            icon: 'unorderedList',
+            component: './fms/voucher/list'
+          },
+          {
+            path: '/fms/voucher/statistics',
+            name: '凭证汇总',
+            icon: 'barChart',
+            component: './fms/voucher/statistics'
+          }
+        ]
+      },
+      {
+        path: '/fms/closing',
+        name: '期末结账',
+        icon: 'carryOut',
+        routes: [
+          {
+            path: '/fms/closing/period',
+            name: '结转与结账',
+            icon: 'schedule',
+            component: './fms/closing'
+          }
+        ]
+      },
+      {
+        path: '/fms/ledger',
+        name: '账簿管理',
+        icon: 'book',
+        routes: [
+          {
+            path: '/fms/ledger/general',
+            name: '总账',
+            icon: 'table',
+            component: './fms/ledger/general'
+          },
+          {
+            path: '/fms/ledger/detail',
+            name: '明细账',
+            icon: 'profile',
+            component: './fms/ledger/detail'
+          },
+          {
+            path: '/fms/ledger/subject-balance',
+            name: '科目余额表',
+            icon: 'fund',
+            component: './fms/ledger/subject-balance'
+          },
+          {
+            path: '/fms/ledger/multi-column',
+            name: '多栏账',
+            icon: 'insertRowAbove',
+            component: './fms/ledger/multi-column'
+          },
+          {
+            path: '/fms/ledger/quantity-general',
+            name: '数量金额总账',
+            icon: 'calculator',
+            component: './fms/ledger/quantity-general'
+          },
+          {
+            path: '/fms/ledger/quantity-detail',
+            name: '数量金额明细账',
+            icon: 'orderedList',
+            component: './fms/ledger/quantity-detail'
+          },
+          {
+            path: '/fms/ledger/auxiliary-balance',
+            name: '核算项目余额表',
+            icon: 'cluster',
+            component: './fms/ledger/auxiliary-balance'
+          },
+          {
+            path: '/fms/ledger/auxiliary-detail',
+            name: '核算项目明细账',
+            icon: 'partition',
+            component: './fms/ledger/auxiliary-detail'
+          }
+        ]
+      },
+      {
+        path: '/fms/report',
+        name: '财务报表',
+        icon: 'areaChart',
+        routes: [
+          {
+            path: '/fms/report/balance-sheet',
+            name: '资产负债表',
+            icon: 'fileDone',
+            component: './fms/report/balance-sheet'
+          },
+          {
+            path: '/fms/report/income-statement',
+            name: '利润表',
+            icon: 'lineChart',
+            component: './fms/report/income-statement'
+          },
+          {
+            path: '/fms/report/cash-flow-statement',
+            name: '现金流量表',
+            icon: 'transaction',
+            component: './fms/report/cash-flow-statement'
+          }
+        ]
+      },
+      {
+        path: '/fms/config',
+        name: '财务设置',
+        icon: 'setting',
+        routes: [
+          {
+            path: '/fms/config/account-set',
+            name: '账套管理',
+            icon: 'database',
+            component: './fms/config/account-set'
+          },
+          {
+            path: '/fms/config/subject',
+            name: '会计科目',
+            icon: 'apartment',
+            component: './fms/config/subject'
+          },
+          {
+            path: '/fms/config/auxiliary',
+            name: '辅助核算',
+            icon: 'appstore',
+            component: './fms/config/auxiliary'
+          },
+          {
+            path: '/fms/config/initial-balance',
+            name: '财务初始余额',
+            icon: 'dollar',
+            component: './fms/config/initial-balance'
+          },
+          {
+            path: '/fms/config/currency',
+            name: '币别设置',
+            icon: 'payCircle',
+            component: './fms/config/currency'
+          },
+          {
+            path: '/fms/config/voucher-word',
+            name: '凭证字设置',
+            icon: 'fontColors',
+            component: './fms/config/voucher-word'
+          },
+          {
+            path: '/fms/config/digest',
+            name: '常用摘要',
+            icon: 'snippets',
+            component: './fms/config/digest'
+          },
+          {
+            path: '/fms/config/voucher-template',
+            name: '凭证模板',
+            icon: 'copy',
+            component: './fms/config/voucher-template'
+          },
+          {
+            path: '/fms/config/finance-parameter',
+            name: '财务参数',
+            icon: 'sliders',
+            component: './fms/config/finance-parameter'
+          },
+          {
+            path: '/fms/config/finance-indicator',
+            name: '财务指标配置',
+            icon: 'radarChart',
+            component: './fms/config/finance-indicator'
+          }
+        ]
+      }
+    ]
+  },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' }
 ]
