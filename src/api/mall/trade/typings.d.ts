@@ -1618,4 +1618,3 @@ declare namespace API {
     avatar?: string
   }
 }
-

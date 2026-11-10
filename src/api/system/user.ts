@@ -60,9 +60,16 @@ export async function importTemplate(options?: { [key: string]: any }) {
   })
 }
 
+export interface SystemUserImportExcelParams {
+  // 是否支持更新，默认为 false
+  updateSupport?: boolean
+  // Excel 文件
+  file?: any
+}
+
 // 导入用户 POST /system/user/import
 export async function importExcel(
-  params: API.importExcelParams,
+  params: SystemUserImportExcelParams,
   file: File, // 直接接收 File 对象
   options?: { [key: string]: any }
 ) {

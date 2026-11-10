@@ -34,7 +34,37 @@ import {
   PayTransferStatusEnum,
   UserTypeEnum,
   PayNotifyTypeEnum,
-  PayNotifyStatusEnum
+  PayNotifyStatusEnum,
+  HrmRecruitCandidateStatusEnum,
+  HrmRecruitCandidateEducationEnum,
+  HrmRecruitInterviewTypeEnum,
+  HrmRecruitInterviewResultEnum,
+  HrmRecruitPostStatusEnum,
+  HrmRecruitJobNatureEnum,
+  HrmRecruitWorkTimeEnum,
+  HrmRecruitPostEducationEnum,
+  HrmRecruitSalaryUnitEnum,
+  HrmRecruitEmergencyLevelEnum,
+  HrmEmployeeEntryStatusEnum,
+  HrmEmployeeStatusEnum,
+  HrmEmployeeTypeEnum,
+  HrmEmployeeStatusTabEnum,
+  HrmEmployeeChangeTypeEnum,
+  HrmEmployeeChangeReasonEnum,
+  HrmEmployeeQuitTypeEnum,
+  HrmEmployeeQuitReasonEnum,
+  HrmEmployeeIdTypeEnum,
+  HrmEmployeeTeachingMethodEnum,
+  HrmEmployeeContractTypeEnum,
+  HrmEmployeeContractStatusEnum,
+  HrmEmployeeFileTypeEnum,
+  HrmAttendanceClockSourceEnum,
+  HrmAttendanceClockTypeEnum,
+  HrmAttendanceClockStatusEnum,
+  HrmAttendanceHolidayTypeEnum,
+  HrmAttendanceLateEarlyDeductMethodEnum,
+  HrmAttendanceAbsenteeismDeductMethodEnum,
+  HrmAttendanceMisscardDeductMethodEnum
 } from './constants'
 import { ProSchemaValueEnumType } from '@ant-design/pro-components'
 import type { MenuProps } from 'antd'
@@ -45,6 +75,25 @@ type SelectValueItem = Record<string | number, ProSchemaValueEnumType>
 export interface OptionItem {
   label: string
   value: string | number
+}
+
+/**
+ * 把「单字段枚举」转成 ProTable / ProForm 使用的 valueEnum
+ * 例：{ MONTH: { salaryUnit: 1, name: '元/月' } } → { 1: { text: '元/月' } }
+ */
+const toValueEnum = (enumObject: Record<string, any>, key: string): SelectValueItem => {
+  return Object.values(enumObject).reduce((acc, item) => {
+    acc[item[key]] = { text: item.name }
+    return acc
+  }, {} as SelectValueItem)
+}
+
+/**
+ * 把「单字段枚举」转成 Select 使用的 options
+ * 例：{ MONTH: { salaryUnit: 1, name: '元/月' } } → [{ label: '元/月', value: 1 }]
+ */
+const toOptions = (enumObject: Record<string, any>, key: string): OptionItem[] => {
+  return Object.values(enumObject).map((item) => ({ label: item.name, value: item[key] }))
 }
 
 export const AUTO_APPROVE_SCOPES: OptionItem[] = [
@@ -775,3 +824,194 @@ export const PAY_NOTIFY_STATUS: SelectValueItem = Object.values(PayNotifyStatusE
   },
   {} as SelectValueItem
 )
+
+// ========== HRM 招聘模块 ==========
+export const RECRUIT_CANDIDATE_STATUS: SelectValueItem = {
+  [HrmRecruitCandidateStatusEnum.NEW.status]: {
+    text: HrmRecruitCandidateStatusEnum.NEW.name,
+    status: 'Default'
+  },
+  [HrmRecruitCandidateStatusEnum.PRIMARY_PASS.status]: {
+    text: HrmRecruitCandidateStatusEnum.PRIMARY_PASS.name,
+    status: 'Processing'
+  },
+  [HrmRecruitCandidateStatusEnum.INTERVIEW.status]: {
+    text: HrmRecruitCandidateStatusEnum.INTERVIEW.name,
+    status: 'Warning'
+  },
+  [HrmRecruitCandidateStatusEnum.INTERVIEW_PASS.status]: {
+    text: HrmRecruitCandidateStatusEnum.INTERVIEW_PASS.name,
+    status: 'Processing'
+  },
+  [HrmRecruitCandidateStatusEnum.OFFER_SENT.status]: {
+    text: HrmRecruitCandidateStatusEnum.OFFER_SENT.name,
+    status: 'Success'
+  },
+  [HrmRecruitCandidateStatusEnum.PENDING_ENTRY.status]: {
+    text: HrmRecruitCandidateStatusEnum.PENDING_ENTRY.name,
+    status: 'Success'
+  },
+  [HrmRecruitCandidateStatusEnum.ELIMINATED.status]: {
+    text: HrmRecruitCandidateStatusEnum.ELIMINATED.name,
+    status: 'Error'
+  },
+  [HrmRecruitCandidateStatusEnum.JOINED.status]: {
+    text: HrmRecruitCandidateStatusEnum.JOINED.name,
+    status: 'Success'
+  }
+}
+
+export const RECRUIT_CANDIDATE_EDUCATION: SelectValueItem = Object.values(
+  HrmRecruitCandidateEducationEnum
+).reduce((acc, item) => {
+  acc[item.education] = { text: item.name }
+  return acc
+}, {} as SelectValueItem)
+
+export const RECRUIT_CANDIDATE_EDUCATION_OPTIONS: OptionItem[] = Object.values(
+  HrmRecruitCandidateEducationEnum
+).map((item) => ({ label: item.name, value: item.education }))
+
+export const RECRUIT_INTERVIEW_TYPE: SelectValueItem = Object.values(
+  HrmRecruitInterviewTypeEnum
+).reduce((acc, item) => {
+  acc[item.type] = { text: item.name }
+  return acc
+}, {} as SelectValueItem)
+
+export const RECRUIT_INTERVIEW_RESULT: SelectValueItem = Object.values(
+  HrmRecruitInterviewResultEnum
+).reduce((acc, item) => {
+  acc[item.result] = { text: item.name }
+  return acc
+}, {} as SelectValueItem)
+
+// 允许「一键清理」的候选人状态
+export const RECRUIT_CANDIDATE_CLEAN_STATUSES: number[] = [
+  HrmRecruitCandidateStatusEnum.NEW.status,
+  HrmRecruitCandidateStatusEnum.PRIMARY_PASS.status,
+  HrmRecruitCandidateStatusEnum.INTERVIEW.status,
+  HrmRecruitCandidateStatusEnum.INTERVIEW_PASS.status
+]
+
+export const RECRUIT_POST_STATUS: SelectValueItem = {
+  [HrmRecruitPostStatusEnum.STOPPED.status]: {
+    text: HrmRecruitPostStatusEnum.STOPPED.name,
+    status: 'Error'
+  },
+  [HrmRecruitPostStatusEnum.RECRUITING.status]: {
+    text: HrmRecruitPostStatusEnum.RECRUITING.name,
+    status: 'Success'
+  }
+}
+
+export const RECRUIT_JOB_NATURE: SelectValueItem = toValueEnum(HrmRecruitJobNatureEnum, 'jobNature')
+export const RECRUIT_JOB_NATURE_OPTIONS = toOptions(HrmRecruitJobNatureEnum, 'jobNature')
+export const RECRUIT_WORK_TIME: SelectValueItem = toValueEnum(HrmRecruitWorkTimeEnum, 'workTime')
+export const RECRUIT_WORK_TIME_OPTIONS = toOptions(HrmRecruitWorkTimeEnum, 'workTime')
+export const RECRUIT_POST_EDUCATION: SelectValueItem = toValueEnum(
+  HrmRecruitPostEducationEnum,
+  'educationRequire'
+)
+export const RECRUIT_POST_EDUCATION_OPTIONS = toOptions(
+  HrmRecruitPostEducationEnum,
+  'educationRequire'
+)
+export const RECRUIT_SALARY_UNIT: SelectValueItem = toValueEnum(HrmRecruitSalaryUnitEnum, 'salaryUnit')
+export const RECRUIT_SALARY_UNIT_OPTIONS = toOptions(HrmRecruitSalaryUnitEnum, 'salaryUnit')
+export const RECRUIT_EMERGENCY_LEVEL: SelectValueItem = toValueEnum(
+  HrmRecruitEmergencyLevelEnum,
+  'emergencyLevel'
+)
+export const RECRUIT_EMERGENCY_LEVEL_OPTIONS = toOptions(
+  HrmRecruitEmergencyLevelEnum,
+  'emergencyLevel'
+)
+
+// ========== HRM 员工模块 ==========
+export const EMPLOYEE_ENTRY_STATUS: SelectValueItem = toValueEnum(
+  HrmEmployeeEntryStatusEnum,
+  'entryStatus'
+)
+export const EMPLOYEE_ENTRY_STATUS_OPTIONS = toOptions(HrmEmployeeEntryStatusEnum, 'entryStatus')
+export const EMPLOYEE_STATUS: SelectValueItem = toValueEnum(HrmEmployeeStatusEnum, 'status')
+export const EMPLOYEE_STATUS_OPTIONS = toOptions(HrmEmployeeStatusEnum, 'status')
+export const EMPLOYEE_TYPE: SelectValueItem = toValueEnum(HrmEmployeeTypeEnum, 'type')
+export const EMPLOYEE_TYPE_OPTIONS = toOptions(HrmEmployeeTypeEnum, 'type')
+export const EMPLOYEE_ID_TYPE_OPTIONS = toOptions(HrmEmployeeIdTypeEnum, 'idType')
+export const EMPLOYEE_TEACHING_METHOD_OPTIONS = toOptions(
+  HrmEmployeeTeachingMethodEnum,
+  'teachingMethod'
+)
+export const EMPLOYEE_CONTRACT_TYPE: SelectValueItem = toValueEnum(
+  HrmEmployeeContractTypeEnum,
+  'type'
+)
+export const EMPLOYEE_CONTRACT_TYPE_OPTIONS = toOptions(HrmEmployeeContractTypeEnum, 'type')
+export const EMPLOYEE_CONTRACT_STATUS: SelectValueItem = toValueEnum(
+  HrmEmployeeContractStatusEnum,
+  'status'
+)
+export const EMPLOYEE_CHANGE_TYPE: SelectValueItem = toValueEnum(HrmEmployeeChangeTypeEnum, 'type')
+export const EMPLOYEE_CHANGE_REASON_OPTIONS = toOptions(
+  HrmEmployeeChangeReasonEnum,
+  'reason'
+)
+export const EMPLOYEE_QUIT_TYPE_OPTIONS = toOptions(HrmEmployeeQuitTypeEnum, 'type')
+export const EMPLOYEE_QUIT_REASON_OPTIONS = toOptions(HrmEmployeeQuitReasonEnum, 'reason')
+export const EMPLOYEE_FILE_TYPE_OPTIONS = toOptions(HrmEmployeeFileTypeEnum, 'type')
+
+// 员工状态页签（在职 / 全职 / 待入职 / 待离职 / 已离职）
+export const EMPLOYEE_STATUS_TABS = Object.values(HrmEmployeeStatusTabEnum).map((item) => ({
+  label: item.name,
+  value: item.statusCategory
+}))
+
+// ========== HRM 考勤模块 ==========
+export const ATTENDANCE_CLOCK_TYPE: SelectValueItem = toValueEnum(
+  HrmAttendanceClockTypeEnum,
+  'type'
+)
+export const ATTENDANCE_CLOCK_TYPE_OPTIONS = toOptions(HrmAttendanceClockTypeEnum, 'type')
+export const ATTENDANCE_CLOCK_SOURCE: SelectValueItem = toValueEnum(
+  HrmAttendanceClockSourceEnum,
+  'source'
+)
+export const ATTENDANCE_CLOCK_SOURCE_OPTIONS = toOptions(HrmAttendanceClockSourceEnum, 'source')
+export const ATTENDANCE_CLOCK_STATUS: SelectValueItem = toValueEnum(
+  HrmAttendanceClockStatusEnum,
+  'status'
+)
+export const ATTENDANCE_HOLIDAY_TYPE: SelectValueItem = toValueEnum(
+  HrmAttendanceHolidayTypeEnum,
+  'type'
+)
+export const ATTENDANCE_HOLIDAY_TYPE_OPTIONS = toOptions(HrmAttendanceHolidayTypeEnum, 'type')
+export const ATTENDANCE_LATE_EARLY_DEDUCT_METHOD_OPTIONS = toOptions(
+  HrmAttendanceLateEarlyDeductMethodEnum,
+  'method'
+)
+export const ATTENDANCE_ABSENTEEISM_DEDUCT_METHOD_OPTIONS = toOptions(
+  HrmAttendanceAbsenteeismDeductMethodEnum,
+  'method'
+)
+export const ATTENDANCE_MISSCARD_DEDUCT_METHOD_OPTIONS = toOptions(
+  HrmAttendanceMisscardDeductMethodEnum,
+  'method'
+)
+
+// 考勤地点有效打卡半径
+export const ATTENDANCE_POINT_RADIUS_OPTIONS: OptionItem[] = [
+  100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000
+].map((radius) => ({ label: `${radius} 米`, value: radius }))
+
+// 星期选项
+export const WEEK_OPTIONS: OptionItem[] = [
+  { label: '周一', value: 1 },
+  { label: '周二', value: 2 },
+  { label: '周三', value: 3 },
+  { label: '周四', value: 4 },
+  { label: '周五', value: 5 },
+  { label: '周六', value: 6 },
+  { label: '周日', value: 7 }
+]

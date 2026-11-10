@@ -76,7 +76,7 @@ const SaveMailTemplateForm: React.FC<SaveMailTemplateModalProps> = ({
           } else {
             message.error(
               resp.msg ||
-              (editingMailTemplate ? textConst.msg.updateError : textConst.msg.createError)
+                (editingMailTemplate ? textConst.msg.updateError : textConst.msg.createError)
             )
             return false
           }

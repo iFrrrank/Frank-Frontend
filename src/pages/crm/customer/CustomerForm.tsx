@@ -95,11 +95,7 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ visible, setVisible, onSucc
         valueEnum={CUSTOMER_SOURCE}
         placeholder="请选择客户来源"
       />
-      <ProFormText
-        name="mobile"
-        label="手机"
-        placeholder="请输入手机"
-      />
+      <ProFormText name="mobile" label="手机" placeholder="请输入手机" />
       <ProFormSelect
         name="ownerUserId"
         label="负责人"
@@ -115,26 +111,10 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ visible, setVisible, onSucc
           return userOptionsCache || []
         }}
       />
-      <ProFormText
-        name="telephone"
-        label="电话"
-        placeholder="请输入电话"
-      />
-      <ProFormText
-        name="email"
-        label="邮箱"
-        placeholder="请输入邮箱"
-      />
-      <ProFormText
-        name="wechat"
-        label="微信"
-        placeholder="请输入微信"
-      />
-      <ProFormText
-        name="qq"
-        label="QQ"
-        placeholder="请输入 QQ"
-      />
+      <ProFormText name="telephone" label="电话" placeholder="请输入电话" />
+      <ProFormText name="email" label="邮箱" placeholder="请输入邮箱" />
+      <ProFormText name="wechat" label="微信" placeholder="请输入微信" />
+      <ProFormText name="qq" label="QQ" placeholder="请输入 QQ" />
       <ProFormSelect
         name="industryId"
         label="客户行业"
@@ -163,11 +143,7 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ visible, setVisible, onSucc
           showSearch: true
         }}
       />
-      <ProFormText
-        name="detailAddress"
-        label="详细地址"
-        placeholder="请输入详细地址"
-      />
+      <ProFormText name="detailAddress" label="详细地址" placeholder="请输入详细地址" />
       <ProFormDateTimePicker
         name="contactNextTime"
         label="下次联系时间"

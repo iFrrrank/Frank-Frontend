@@ -117,47 +117,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ visible, setVisible, onSucces
           return customerOptionsCache || []
         }}
       />
-      <ProFormText
-        name="mobile"
-        label="手机"
-        placeholder="请输入手机"
-      />
-      <ProFormText
-        name="telephone"
-        label="电话"
-        placeholder="请输入电话"
-      />
-      <ProFormText
-        name="email"
-        label="邮箱"
-        placeholder="请输入邮箱"
-      />
-      <ProFormText
-        name="wechat"
-        label="微信"
-        placeholder="请输入微信"
-      />
-      <ProFormText
-        name="qq"
-        label="QQ"
-        placeholder="请输入 QQ"
-      />
-      <ProFormText
-        name="post"
-        label="职位"
-        placeholder="请输入职位"
-      />
-      <ProFormRadio.Group
-        name="master"
-        label="关键决策人"
-        options={BOOLEAN_OPTIONS}
-      />
-      <ProFormSelect
-        name="sex"
-        label="性别"
-        placeholder="请选择性别"
-        options={SEX_OPTIONS}
-      />
+      <ProFormText name="mobile" label="手机" placeholder="请输入手机" />
+      <ProFormText name="telephone" label="电话" placeholder="请输入电话" />
+      <ProFormText name="email" label="邮箱" placeholder="请输入邮箱" />
+      <ProFormText name="wechat" label="微信" placeholder="请输入微信" />
+      <ProFormText name="qq" label="QQ" placeholder="请输入 QQ" />
+      <ProFormText name="post" label="职位" placeholder="请输入职位" />
+      <ProFormRadio.Group name="master" label="关键决策人" options={BOOLEAN_OPTIONS} />
+      <ProFormSelect name="sex" label="性别" placeholder="请选择性别" options={SEX_OPTIONS} />
       <ProFormSelect
         name="parentId"
         label="直属上级"
@@ -186,11 +153,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ visible, setVisible, onSucces
         }}
         fieldProps={{ showSearch: true }}
       />
-      <ProFormText
-        name="detailAddress"
-        label="详细地址"
-        placeholder="请输入详细地址"
-      />
+      <ProFormText name="detailAddress" label="详细地址" placeholder="请输入详细地址" />
       <ProFormDateTimePicker
         name="contactNextTime"
         label="下次联系时间"

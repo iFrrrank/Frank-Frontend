@@ -34,7 +34,8 @@ const RedisMonitorPage: React.FC = () => {
     { label: 'Redis版本', value: info.redis_version },
     {
       label: '运行模式',
-      value: info.redis_mode === 'standalone' ? '单机' : info.redis_mode === 'cluster' ? '集群' : '哨兵'
+      value:
+        info.redis_mode === 'standalone' ? '单机' : info.redis_mode === 'cluster' ? '集群' : '哨兵'
     },
     { label: '端口', value: info.tcp_port },
     { label: '客户端数', value: info.connected_clients },
@@ -94,8 +95,8 @@ const RedisMonitorPage: React.FC = () => {
   }
 
   // 计算内存使用率 (假定有 maxmemory，或者用 fixed value 50 作为最大值用于演示)
-  const usedMemory = parseFloat((info.used_memory || '0')) / 1024 / 1024 // 转成 MB
-  let maxMemory = parseFloat((info.maxmemory || '0')) / 1024 / 1024
+  const usedMemory = parseFloat(info.used_memory || '0') / 1024 / 1024 // 转成 MB
+  let maxMemory = parseFloat(info.maxmemory || '0') / 1024 / 1024
   if (maxMemory === 0) {
     maxMemory = usedMemory > 50 ? usedMemory * 2 : 50 // 如果没限制或者限制是0，做个假定最大值
   }
@@ -140,7 +141,11 @@ const RedisMonitorPage: React.FC = () => {
   return (
     <Spin spinning={loading}>
       <Card title="基本信息" bordered={false} style={{ marginBottom: 16 }}>
-        <Descriptions column={{ xxl: 6, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }} bordered={false} size="small">
+        <Descriptions
+          column={{ xxl: 6, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
+          bordered={false}
+          size="small"
+        >
           {basicInfo.map((item, index) => (
             <Descriptions.Item key={index} label={item.label}>
               {item.value}
