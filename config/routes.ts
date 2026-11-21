@@ -235,6 +235,86 @@ export default [
             name: 'Redis 监控',
             icon: 'fund',
             component: './infra/monitors/redis'
+          },
+          {
+            path: '/infra/monitors/druid',
+            name: 'Druid 监控',
+            icon: 'database',
+            component: './infra/monitors/druid'
+          },
+          {
+            path: '/infra/monitors/server',
+            name: '服务监控',
+            icon: 'cloudServer',
+            component: './infra/monitors/server'
+          },
+          {
+            path: '/infra/monitors/skywalking',
+            name: '链路追踪',
+            icon: 'shareAlt',
+            component: './infra/monitors/skywalking'
+          }
+        ]
+      },
+      {
+        path: '/infra/codegen',
+        name: '代码生成',
+        icon: 'code',
+        component: './infra/codegen'
+      },
+      {
+        path: '/infra/codegen/edit',
+        name: '代码生成配置',
+        hideInMenu: true,
+        component: './infra/codegen/EditTable'
+      },
+      {
+        path: '/infra/build',
+        name: '表单构建',
+        icon: 'form',
+        component: './infra/build'
+      },
+      {
+        path: '/infra/swagger',
+        name: '接口文档',
+        icon: 'api',
+        component: './infra/swagger'
+      },
+      {
+        path: '/infra/web-socket',
+        name: 'WebSocket 示例',
+        icon: 'message',
+        component: './infra/webSocket'
+      },
+      {
+        path: '/infra/demo',
+        name: '演示示例',
+        icon: 'experiment',
+        routes: [
+          {
+            path: '/infra/demo/demo01',
+            name: '单表示例',
+            component: './infra/demo/demo01'
+          },
+          {
+            path: '/infra/demo/demo02',
+            name: '树表示例',
+            component: './infra/demo/demo02'
+          },
+          {
+            path: '/infra/demo/demo03/erp',
+            name: '主子表示例（ERP）',
+            component: './infra/demo/demo03/erp'
+          },
+          {
+            path: '/infra/demo/demo03/inner',
+            name: '主子表示例（内嵌）',
+            component: './infra/demo/demo03/inner'
+          },
+          {
+            path: '/infra/demo/demo03/normal',
+            name: '主子表示例（普通）',
+            component: './infra/demo/demo03/normal'
           }
         ]
       },

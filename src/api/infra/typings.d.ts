@@ -982,4 +982,19 @@ declare namespace API {
     id: number
   }
 
+
+  type CommonResultInfraCodegenUpdateReqVO = {
+    code?: number
+    data?: InfraCodegenUpdateReqVO
+    msg?: string
+  }
+
+  type tableIdParams = {
+    tableId: number
+  }
+
+  type deleteCodegenTableListByTableIdsParams = {
+    tableIds: string
+  }
+
 }

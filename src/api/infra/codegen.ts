@@ -35,12 +35,12 @@ export async function getCodegenTablePage(
   })
 }
 
-// 查询代码生成表详情 GET /infra/codegen/table/get
+// 查询代码生成详情（表 + 字段） GET /infra/codegen/detail
 export async function getCodegenTable(
-  params: API.getCodegenTableParams,
+  params: API.tableIdParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultInfraCodegenTableVO>('/infra/codegen/table/get', {
+  return request<API.CommonResultInfraCodegenUpdateReqVO>('/infra/codegen/detail', {
     method: 'GET',
     params: {
       ...params
@@ -49,12 +49,12 @@ export async function getCodegenTable(
   })
 }
 
-// 更新代码生成表定义 PUT /infra/codegen/table/update
+// 更新代码生成表定义 PUT /infra/codegen/update
 export async function updateCodegenTable(
   body: API.InfraCodegenUpdateReqVO,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultBoolean>('/infra/codegen/table/update', {
+  return request<API.CommonResultBoolean>('/infra/codegen/update', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -64,13 +64,13 @@ export async function updateCodegenTable(
   })
 }
 
-// 同步代码生成表结构 POST /infra/codegen/table/sync-from-db
+// 同步代码生成表结构 PUT /infra/codegen/sync-from-db
 export async function syncCodegenFromDB(
-  params: API.syncCodegenFromDBParams,
+  params: API.tableIdParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultBoolean>('/infra/codegen/table/sync-from-db', {
-    method: 'POST',
+  return request<API.CommonResultBoolean>('/infra/codegen/sync-from-db', {
+    method: 'PUT',
     params: {
       ...params
     },
@@ -80,7 +80,7 @@ export async function syncCodegenFromDB(
 
 // 预览代码生成结果 GET /infra/codegen/preview
 export async function previewCodegen(
-  params: API.previewCodegenParams,
+  params: API.tableIdParams,
   options?: { [key: string]: any }
 ) {
   return request<API.CommonResultListInfraCodegenPreviewVO>('/infra/codegen/preview', {
@@ -94,7 +94,7 @@ export async function previewCodegen(
 
 // 下载代码生成结果 GET /infra/codegen/download
 export async function downloadCodegen(
-  params: API.downloadCodegenParams,
+  params: API.tableIdParams,
   options?: { [key: string]: any }
 ) {
   return request('/infra/codegen/download', {
@@ -121,12 +121,12 @@ export async function getSchemaTableList(
   })
 }
 
-// 导入代码生成表定义 POST /infra/codegen/table/create-list
+// 导入代码生成表定义 POST /infra/codegen/create-list
 export async function createCodegenList(
   body: { dataSourceConfigId: number; tableNames: string[] },
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultBoolean>('/infra/codegen/table/create-list', {
+  return request<API.CommonResultBoolean>('/infra/codegen/create-list', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -136,12 +136,12 @@ export async function createCodegenList(
   })
 }
 
-// 删除代码生成表定义 DELETE /infra/codegen/table/delete
+// 删除代码生成表定义 DELETE /infra/codegen/delete
 export async function deleteCodegenTable(
-  params: API.deleteCodegenTableParams,
+  params: API.tableIdParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultBoolean>('/infra/codegen/table/delete', {
+  return request<API.CommonResultBoolean>('/infra/codegen/delete', {
     method: 'DELETE',
     params: {
       ...params
@@ -150,15 +150,15 @@ export async function deleteCodegenTable(
   })
 }
 
-// 批量删除代码生成表定义 DELETE /infra/codegen/table/delete-list
+// 批量删除代码生成表定义 DELETE /infra/codegen/delete-list
 export async function deleteCodegenTableList(
-  params: API.deleteCodegenTableListParams,
+  params: API.deleteCodegenTableListByTableIdsParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.CommonResultBoolean>('/infra/codegen/table/delete-list', {
+  return request<API.CommonResultBoolean>('/infra/codegen/delete-list', {
     method: 'DELETE',
     params: {
-      ids: params.ids.join(',')
+      ...params
     },
     ...(options || {})
   })
