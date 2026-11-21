@@ -6,7 +6,7 @@ import { ModalForm, PageContainer, ProFormText } from '@ant-design/pro-component
 import { getAreaByIp, getAreaTree } from '@/api/system/area'
 import { textConst } from '@/locales/zh-CN'
 
-// 地区管理：上方是 IP 查询入口，下方是地区树（与 yudao 页面结构一致）
+// 地区管理：上方是 IP 查询入口，下方是地区树
 const AreaManagement: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const [treeData, setTreeData] = useState<API.SystemAreaNodeRespVO[]>([])

@@ -15,6 +15,7 @@ export default [
       { path: '/system/dept', name: '部门管理', icon: 'apartment', component: './system/dept' },
       { path: '/system/menu', name: '菜单管理', icon: 'menu', component: './system/menu' },
       { path: '/system/post', name: '岗位管理', icon: 'solution', component: './system/post' },
+      { path: '/system/area', name: '地区管理', icon: 'global', component: './system/area' },
       { path: '/system/dict', name: '字典管理', icon: 'book', component: './system/dict' },
       {
         path: '/system/dict/data/:dictType',

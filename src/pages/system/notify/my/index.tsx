@@ -27,7 +27,7 @@ const MyNotifyMessage: React.FC = () => {
     3: { text: '会议消息', color: 'purple' }
   }
 
-  // ===== 查看详情：未读消息打开详情时，自动标记为已读（与 yudao 行为一致） =====
+  // ===== 查看详情：未读消息打开详情时，自动标记为已读 =====
   const handleView = async (record: API.SystemNotifyMessageRespVO) => {
     try {
       const resp = await getNotifyMessage({ id: record.id })

@@ -12,6 +12,7 @@ import SaveSmsTemplateForm, {
   handleCreateSmsTemplate,
   handleEditSmsTemplate
 } from './SaveSmsTemplateForm'
+import SendSmsTemplateForm, { handleTestSmsTemplate } from './SendSmsTemplateForm'
 import { getSimpleSmsChannelList } from '@/api/system/smsChannel'
 import { textConst } from '@/locales/zh-CN'
 import { handleBatchDelete, handleDelete } from '@/components/Delete'
@@ -222,6 +223,9 @@ const SmsTemplateConfig: React.FC = () => {
           <a key="edit" onClick={() => handleEditSmsTemplate(record)}>
             {textConst.action.update}
           </a>
+          <a key="test" onClick={() => handleTestSmsTemplate(record)}>
+            测试
+          </a>
           <a
             key="delete"
             style={deleteTextStyle}
@@ -340,6 +344,7 @@ const SmsTemplateConfig: React.FC = () => {
         onSuccess={() => actionRef.current?.reload()}
         channelOptions={channelOptions}
       />
+      <SendSmsTemplateForm />
     </>
   )
 }

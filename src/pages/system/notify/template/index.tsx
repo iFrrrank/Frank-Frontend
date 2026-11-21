@@ -4,6 +4,7 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-de
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable } from '@ant-design/pro-components'
 import { deleteNotifyTemplate, getNotifyTemplatePage } from '@/api/system/notifyTemplate'
+import SendNotifyTemplateForm, { handleTestNotifyTemplate } from './SendNotifyTemplateForm'
 import SaveNotifyTemplateForm, {
   handleCreateNotifyTemplate,
   handleEditNotifyTemplate
@@ -129,6 +130,9 @@ const NotifyTemplateConfig: React.FC = () => {
           <a key="edit" onClick={() => handleEditNotifyTemplate(record)}>
             {textConst.action.update}
           </a>
+          <a key="test" onClick={() => handleTestNotifyTemplate(record)}>
+            测试
+          </a>
           <a
             key="delete"
             style={deleteTextStyle}
@@ -224,6 +228,7 @@ const NotifyTemplateConfig: React.FC = () => {
       />
 
       <SaveNotifyTemplateForm onSuccess={() => actionRef.current?.reload()} />
+      <SendNotifyTemplateForm />
     </>
   )
 }
