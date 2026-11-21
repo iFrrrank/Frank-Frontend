@@ -20,6 +20,7 @@ import {
 } from '@/api/mall/promotion/rewardActivity'
 import ProductSelectModal from '@/pages/mall/promotion/coupon/list/ProductSelectModal'
 import CouponSelectModal from './CouponSelectModal'
+import { getCategoryList } from '@/api/mall/product/category'
 import { textConst } from '@/locales/zh-CN'
 import { COUPON_TYPE_OPTIONS, PROMOTION_CONDITION_TYPE } from '@/utils/constantsValue'
 import { emptyTextStyle, tableActionStyle, deleteTextStyle } from '@/styles/common.style'
@@ -131,7 +132,12 @@ const RewardActivityForm: React.FC<RewardActivityFormProps> = ({
               key={c.id}
               closable
               onClose={() => {
-                // TODO: 删除逻辑
+                const next = selectedCoupons.filter((item) => item.id !== c.id)
+                setSelectedCoupons(next)
+                form.setFieldValue(
+                  'couponIds',
+                  next.map((item) => item.id)
+                )
               }}
             >
               {c.name}
@@ -173,6 +179,8 @@ const RewardActivityForm: React.FC<RewardActivityFormProps> = ({
         if (!val) {
           form.resetFields()
           setSelectedProducts([])
+          setSelectedCoupons([])
+          setDataSource([])
           setEditableRowKeys([])
         }
       }}
@@ -198,19 +206,43 @@ const RewardActivityForm: React.FC<RewardActivityFormProps> = ({
           }
 
           if (data.rules) {
-            data.rules = data.rules.map((rule: any, index: number) => ({ ...rule, key: index }))
+            const rules = data.rules.map((rule: any, index: number) => ({
+              ...rule,
+              id: rule.id ? String(rule.id) : `rule_${index}`
+            }))
+            setDataSource(rules)
+            data.rules = rules
           }
           return data
         }
         return { conditionType: 10, productScope: 1, rules: [] }
       }}
       onFinish={async (values) => {
+        if (editableKeys.length > 0) {
+          message.warning('请先保存优惠设置中正在编辑的行！')
+          return false
+        }
+        if (dataSource.length === 0) {
+          message.warning('请至少添加一条优惠规则！')
+          return false
+        }
         try {
           if (values.activityTime && values.activityTime.length === 2) {
             values.startTime = values.activityTime[0]
             values.endTime = values.activityTime[1]
             delete values.activityTime
           }
+          // 规则数据在受控表格状态中，提交前合并；优惠券为全局选择，写入每条规则
+          const couponIds = selectedCoupons.map((c) => c.id)
+          values.rules = dataSource.map((rule) => {
+            const { id: _rowId, couponId: _legacy, ...rest } = rule
+            return {
+              ...rest,
+              giveCouponIds: couponIds,
+              giveCouponCounts: Object.fromEntries(couponIds.map((cid: number) => [cid, 1]))
+            }
+          })
+          delete values.couponIds
 
           if (isUpdate) {
             await updateRewardActivity({ id, ...values } as any)
@@ -278,11 +310,7 @@ const RewardActivityForm: React.FC<RewardActivityFormProps> = ({
                 return Promise.reject('error') // 抛出 reject 阻止表格行保存
               }
 
-              // 校验2：未选优惠券时提示
-              if (!record.couponId) {
-                message.warning('未选优惠券时无法设置优惠！')
-                return Promise.reject('error')
-              }
+              // 校验2：本行无任何优惠内容时提示（减免金额已由列必填校验，此处校验积分/优惠券至少其一的补充场景由后端兜底）
 
               // 如果通过所有校验，正常保存
               return Promise.resolve()
@@ -335,7 +363,9 @@ const RewardActivityForm: React.FC<RewardActivityFormProps> = ({
                   mode: 'multiple'
                 }}
                 request={async () => {
-                  return []
+                  const resp = await getCategoryList({} as any)
+                  const list = (resp.data as any[]) || []
+                  return list.map((item: any) => ({ label: item.name, value: item.id }))
                 }}
               />
             )

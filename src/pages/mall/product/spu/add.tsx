@@ -14,6 +14,7 @@ import {
   ProColumns
 } from '@ant-design/pro-components'
 import { DISTRIBUTE_TYPE, SPEC_TYPE, DELIVERY_TYPE_OPTIONS } from '@/utils/constantsValue'
+import Editor from '@/components/Editor/Editor'
 
 const AddProductSpu: React.FC = () => {
   const navigate = useNavigate()
@@ -234,14 +235,13 @@ const AddProductSpu: React.FC = () => {
 
         {/* Step 4: 商品详情 */}
         <StepsForm.StepForm title="商品详情" name="detail">
-          {/* TODO: WangEditor */}
-          <ProFormTextArea
+          <ProForm.Item
             name="detailHtml"
             label="商品详情"
-            rules={[{ required: true }]}
-            placeholder="请输入商品图文详情..."
-            fieldProps={{ rows: 15 }}
-          />
+            rules={[{ required: true, message: '请输入商品详情' }]}
+          >
+            <Editor />
+          </ProForm.Item>
         </StepsForm.StepForm>
 
         {/* Step 5: 其它设置 */}
