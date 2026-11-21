@@ -2435,4 +2435,220 @@ declare namespace API {
     // 成交状态
     dealStatus: boolean
   }
+
+  type CrmPerformanceConfigRespVO = {
+    // 编号
+    id: number
+    // 对象编号（部门或用户）
+    objectId: number
+    // 对象名称
+    objectName?: string
+    // 对象类型：2 部门，3 用户
+    objectType: number
+    // 年份
+    year: number
+    // 一月目标金额，单位：元
+    januaryTargetPrice?: number
+    // 二月目标金额，单位：元
+    februaryTargetPrice?: number
+    // 三月目标金额，单位：元
+    marchTargetPrice?: number
+    // 四月目标金额，单位：元
+    aprilTargetPrice?: number
+    // 五月目标金额，单位：元
+    mayTargetPrice?: number
+    // 六月目标金额，单位：元
+    juneTargetPrice?: number
+    // 七月目标金额，单位：元
+    julyTargetPrice?: number
+    // 八月目标金额，单位：元
+    augustTargetPrice?: number
+    // 九月目标金额，单位：元
+    septemberTargetPrice?: number
+    // 十月目标金额，单位：元
+    octoberTargetPrice?: number
+    // 十一月目标金额，单位：元
+    novemberTargetPrice?: number
+    // 十二月目标金额，单位：元
+    decemberTargetPrice?: number
+    // 业务类型
+    bizType: number
+    // 年度目标金额，单位：元
+    yearTargetPrice?: number
+    // 创建时间
+    createTime?: string
+  }
+
+  type CrmPerformanceConfigSaveReqVO = {
+    // 编号
+    id?: number
+    // 对象编号（部门或用户）
+    objectId: number
+    // 对象类型：2 部门，3 用户
+    objectType: number
+    // 年份
+    year: number
+    januaryTargetPrice?: number
+    februaryTargetPrice?: number
+    marchTargetPrice?: number
+    aprilTargetPrice?: number
+    mayTargetPrice?: number
+    juneTargetPrice?: number
+    julyTargetPrice?: number
+    augustTargetPrice?: number
+    septemberTargetPrice?: number
+    octoberTargetPrice?: number
+    novemberTargetPrice?: number
+    decemberTargetPrice?: number
+    // 业务类型
+    bizType: number
+  }
+
+  type CrmPerformanceConfigPageReqVO = {
+    // 页码，从 1 开始
+    pageNo: number
+    // 每页条数，最大值为 100
+    pageSize: number
+    // 对象类型
+    objectType?: number
+    // 年份
+    year?: number
+    // 业务类型
+    bizType?: number
+  }
+
+  type PageResultCrmPerformanceConfigRespVO = {
+    // 数据
+    list: CrmPerformanceConfigRespVO[]
+    // 总量
+    total: number
+  }
+
+  type CommonResultPageResultCrmPerformanceConfigRespVO = {
+    code?: number
+    data?: PageResultCrmPerformanceConfigRespVO
+    msg?: string
+  }
+
+  type CommonResultCrmPerformanceConfigRespVO = {
+    code?: number
+    data?: CrmPerformanceConfigRespVO
+    msg?: string
+  }
+
+  type getPerformanceConfigParams = {
+    id: number
+  }
+
+  type getPerformanceConfigPageParams = {
+    pageVO: CrmPerformanceConfigPageReqVO
+  }
+
+  type deletePerformanceConfigParams = {
+    id: number
+  }
+
+  type CrmStatisticsPerformanceTargetRespVO = {
+    // 月份
+    month: number
+    // 目标金额，单位：元
+    targetPrice: number
+    // 完成金额，单位：元
+    currentPrice: number
+    // 完成率，百分比
+    completionRate: number
+  }
+
+  type CommonResultListCrmStatisticsPerformanceTargetRespVO = {
+    code?: number
+    data?: CrmStatisticsPerformanceTargetRespVO[]
+    msg?: string
+  }
+
+  type getPerformanceTargetSummaryParams = {
+    // 年份
+    year: number
+    // 业务类型
+    bizType?: number
+    // 部门 Id
+    deptId?: number
+    // 负责人用户 Id
+    userId?: number
+  }
+
+  type CrmStatisticsProductSalesRespVO = {
+    // 产品分类编号
+    categoryId: number
+    // 产品分类名称
+    categoryName: string
+    // 产品编号
+    productId: number
+    // 产品名称
+    productName: string
+    // 合同编号
+    contractId: number
+    // 合同编号（单号）
+    contractNo: string
+    // 合同名称
+    contractName: string
+    // 负责人编号
+    ownerUserId: number
+    // 负责人
+    ownerUserName: string
+    // 客户编号
+    customerId: number
+    // 客户名称
+    customerName: string
+    // 产品单价，单位：元
+    productPrice: number
+    // 产品数量
+    productCount: number
+    // 产品总价，单位：元
+    productTotalPrice: number
+  }
+
+  type CrmStatisticsProductCategorySummaryRespVO = {
+    // 产品分类编号
+    categoryId: number
+    // 产品分类名称
+    categoryName: string
+    // 合同数量
+    contractCount: number
+    // 产品数量
+    productCount: number
+    // 产品总价，单位：元
+    productTotalPrice: number
+  }
+
+  type CommonResultListCrmStatisticsProductSalesRespVO = {
+    code?: number
+    data?: CrmStatisticsProductSalesRespVO[]
+    msg?: string
+  }
+
+  type CommonResultListCrmStatisticsProductCategorySummaryRespVO = {
+    code?: number
+    data?: CrmStatisticsProductCategorySummaryRespVO[]
+    msg?: string
+  }
+
+  type CrmStatisticsProductReqVO = {
+    // 部门 Id
+    deptId?: number
+    // 负责人用户 Id
+    userId?: number
+    // 时间范围
+    times: string[]
+    // 产品分类 Id
+    categoryId?: number
+  }
+
+  type getProductSalesListParams = {
+    reqVO: CrmStatisticsProductReqVO
+  }
+
+  type getProductCategorySummaryParams = {
+    reqVO: CrmStatisticsProductReqVO
+  }
+
 }

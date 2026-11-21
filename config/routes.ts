@@ -811,6 +811,12 @@ export default [
         ]
       },
       {
+        path: '/crm/performance/config',
+        name: '业绩目标配置',
+        icon: 'user',
+        component: './crm/performance/config'
+      },
+      {
         path: '/crm/statistics',
         name: '数据统计',
         icon: 'shoppingCart',
@@ -820,6 +826,42 @@ export default [
             name: '客户分析',
             icon: 'user',
             component: './crm/statistics/customer'
+          },
+          {
+            path: '/crm/statistics/funnel',
+            name: '销售漏斗分析',
+            icon: 'user',
+            component: './crm/statistics/funnel'
+          },
+          {
+            path: '/crm/statistics/portrait',
+            name: '客户画像分析',
+            icon: 'user',
+            component: './crm/statistics/portrait'
+          },
+          {
+            path: '/crm/statistics/performance',
+            name: '员工业绩分析',
+            icon: 'user',
+            component: './crm/statistics/performance'
+          },
+          {
+            path: '/crm/statistics/performance-target',
+            name: '业绩目标完成',
+            icon: 'user',
+            component: './crm/statistics/performanceTarget'
+          },
+          {
+            path: '/crm/statistics/product',
+            name: '产品分析',
+            icon: 'user',
+            component: './crm/statistics/product'
+          },
+          {
+            path: '/crm/statistics/rank',
+            name: '数据排行榜',
+            icon: 'user',
+            component: './crm/statistics/rank'
           }
         ]
       }
