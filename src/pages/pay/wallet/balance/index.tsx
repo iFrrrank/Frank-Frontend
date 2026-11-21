@@ -10,6 +10,7 @@ import {
 } from '@ant-design/pro-components'
 import { tableActionStyle } from '@/styles/common.style'
 import { getWalletPage, updateWalletBalance } from '@/api/pay/wallet/balance'
+import WalletTransactionList, { handleOpenWalletTransaction } from './WalletTransactionList'
 import { USER_TYPE } from '@/utils/constantsValue'
 
 const WalletManagement: React.FC = () => {
@@ -113,7 +114,7 @@ const WalletManagement: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <Space size="small" style={tableActionStyle}>
-          <a onClick={() => message.info('跳转查看钱包明细')}>明细</a>
+          <a onClick={() => handleOpenWalletTransaction(record)}>明细</a>
           <a
             onClick={() => {
               setCurrentWallet(record)
@@ -195,6 +196,8 @@ const WalletManagement: React.FC = () => {
           fieldProps={{ min: 0.01, precision: 2, addonAfter: '元' }}
         />
       </ModalForm>
+
+      <WalletTransactionList />
     </>
   )
 }
