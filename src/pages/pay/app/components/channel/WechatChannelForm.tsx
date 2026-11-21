@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { message, Form } from 'antd'
-import { ModalForm, ProFormText, ProFormRadio, ProFormDigit } from '@ant-design/pro-components'
+import {
+  ModalForm,
+  ProFormText,
+  ProFormTextArea,
+  ProFormRadio,
+  ProFormDigit,
+  ProFormDependency
+} from '@ant-design/pro-components'
 import { textConst } from '@/locales/zh-CN'
 import { COMMON_STATUS_OPTIONS, API_VERSION_TYPE } from '@/utils/constantsValue'
+import { createChannel, getChannel, updateChannel } from '@/api/pay/channel'
 
 interface WechatChannelFormProps {
   visible: boolean
@@ -18,6 +26,8 @@ const WechatChannelForm: React.FC<WechatChannelFormProps> = ({
   onSuccess
 }) => {
   const [form] = Form.useForm()
+  // 已配置过的渠道编号：有值走更新，无值走创建
+  const [channelId, setChannelId] = useState<number>()
 
   if (!channelInfo || !channelInfo.channelCode.startsWith('wx_')) return null
   const { appId, channelCode } = channelInfo
@@ -39,13 +49,42 @@ const WechatChannelForm: React.FC<WechatChannelFormProps> = ({
       wrapperCol={{ span: 19 }}
       modalProps={{ destroyOnClose: true, maskClosable: false }}
       request={async () => {
-        // TODO: 获取渠道 API
+        try {
+          const resp = await getChannel({ appId, code: channelCode } as any)
+          if (resp.code === 0 && resp.data) {
+            setChannelId(resp.data.id)
+            // 渠道配置是 JSON 字符串，解析后回填到表单字段（字段名与配置键一致）
+            const config = JSON.parse(resp.data.config || '{}')
+            return {
+              status: resp.data.status,
+              feeRate: resp.data.feeRate,
+              remark: resp.data.remark,
+              ...config
+            }
+          }
+        } catch {
+          // 渠道尚未配置时按新建处理
+        }
+        setChannelId(undefined)
         return { status: 0, apiVersion: 'v2' }
       }}
       onFinish={async (values) => {
         try {
-          // TODO: 保存配置 API
-          console.log('提交的微信数据：', { appId, channelCode, ...values })
+          const { status, feeRate, remark, ...configFields } = values
+          const base = {
+            appId,
+            code: channelCode,
+            status,
+            feeRate,
+            remark,
+            // 配置字段整体序列化为 JSON 字符串提交
+            config: JSON.stringify(configFields)
+          }
+          if (channelId) {
+            await updateChannel({ id: channelId, ...base } as any)
+          } else {
+            await createChannel(base as any)
+          }
           message.success('配置保存成功')
           onSuccess()
           return true
@@ -104,6 +143,59 @@ const WechatChannelForm: React.FC<WechatChannelFormProps> = ({
         rules={[{ required: true }]}
         options={API_VERSION_TYPE}
       />
+      <ProFormDependency name={['apiVersion']}>
+        {({ apiVersion }) =>
+          apiVersion === 'v3' ? (
+            <>
+              <ProFormText
+                name="apiV3Key"
+                label="API V3 密钥"
+                placeholder={'请输入 API V3 密钥'}
+                rules={[{ required: true, message: 'API V3 密钥是必填项！' }]}
+              />
+              <ProFormText
+                name="certSerialNo"
+                label="证书序列号"
+                placeholder={'请输入证书序列号'}
+                rules={[{ required: true, message: '证书序列号是必填项！' }]}
+              />
+              <ProFormTextArea
+                name="privateKeyContent"
+                label="商户私钥"
+                placeholder={'请粘贴商户私钥内容（apiclient_key.pem）'}
+                rules={[{ required: true, message: '商户私钥是必填项！' }]}
+                fieldProps={{ rows: 3 }}
+              />
+              <ProFormTextArea
+                name="publicKeyContent"
+                label="微信支付公钥"
+                placeholder={'请粘贴微信支付公钥内容'}
+                fieldProps={{ rows: 3 }}
+              />
+              <ProFormText
+                name="publicKeyId"
+                label="公钥编号"
+                placeholder={'请输入微信支付公钥编号'}
+              />
+            </>
+          ) : (
+            <>
+              <ProFormText
+                name="mchKey"
+                label="商户密钥"
+                placeholder={'请输入商户密钥（API 密钥）'}
+                rules={[{ required: true, message: '商户密钥是必填项！' }]}
+              />
+              <ProFormTextArea
+                name="keyContent"
+                label="商户 P12 证书"
+                placeholder={'请粘贴商户 P12 证书内容（Base64）'}
+                fieldProps={{ rows: 3 }}
+              />
+            </>
+          )
+        }
+      </ProFormDependency>
       <ProFormText name="remark" label="备注" placeholder={'请输入备注'} />
     </ModalForm>
   )

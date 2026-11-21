@@ -4,6 +4,7 @@ import { message, Space } from 'antd'
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
 import { tableActionStyle } from '@/styles/common.style'
 import { getNotifyTaskPage } from '@/api/pay/notify'
+import { getAppList } from '@/api/pay/app'
 import { PAY_NOTIFY_TYPE, PAY_NOTIFY_STATUS } from '@/utils/constantsValue'
 import { textConst } from '@/locales/zh-CN'
 
@@ -18,8 +19,8 @@ const PayNotifyManagement: React.FC = () => {
       align: 'center',
       fieldProps: { placeholder: '请选择应用信息' },
       request: async () => {
-        // TODO
-        return []
+        const resp = await getAppList()
+        return resp.data?.map((item: any) => ({ label: item.name, value: item.id })) || []
       }
     },
     {

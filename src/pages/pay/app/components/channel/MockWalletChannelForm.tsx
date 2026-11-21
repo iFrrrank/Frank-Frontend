@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { message, Form } from 'antd'
 import { ModalForm, ProFormText, ProFormRadio } from '@ant-design/pro-components'
 import { textConst } from '@/locales/zh-CN'
 import { COMMON_STATUS_OPTIONS } from '@/utils/constantsValue'
+import { createChannel, getChannel, updateChannel } from '@/api/pay/channel'
 
 interface MockWalletChannelFormProps {
   visible: boolean
@@ -18,6 +19,8 @@ const MockWalletChannelForm: React.FC<MockWalletChannelFormProps> = ({
   onSuccess
 }) => {
   const [form] = Form.useForm()
+  // 已配置过的渠道编号：有值走更新，无值走创建
+  const [channelId, setChannelId] = useState<number>()
 
   if (!channelInfo || (channelInfo.channelCode !== 'mock' && channelInfo.channelCode !== 'wallet'))
     return null
@@ -41,13 +44,34 @@ const MockWalletChannelForm: React.FC<MockWalletChannelFormProps> = ({
       wrapperCol={{ span: 20 }}
       modalProps={{ destroyOnClose: true, maskClosable: false }}
       request={async () => {
-        // TODO: 获取渠道 API
+        try {
+          const resp = await getChannel({ appId, code: channelCode } as any)
+          if (resp.code === 0 && resp.data) {
+            setChannelId(resp.data.id)
+            return { status: resp.data.status, remark: resp.data.remark }
+          }
+        } catch {
+          // 渠道尚未配置时按新建处理
+        }
+        setChannelId(undefined)
         return { status: 0 }
       }}
       onFinish={async (values) => {
         try {
-          // TODO: 保存配置 API
-          console.log('提交的钱包/模拟数据：', { appId, channelCode, ...values })
+          // 模拟/钱包渠道无额外配置，config 为空对象
+          const base = {
+            appId,
+            code: channelCode,
+            status: values.status,
+            remark: values.remark,
+            feeRate: 0,
+            config: '{}'
+          }
+          if (channelId) {
+            await updateChannel({ id: channelId, ...base } as any)
+          } else {
+            await createChannel(base as any)
+          }
           message.success('配置保存成功')
           onSuccess()
           return true

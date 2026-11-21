@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { message, Form, Upload, Button } from 'antd'
 import {
   ModalForm,
@@ -16,6 +16,7 @@ import {
   PUBLICKEY_TYPE,
   ENCRYPT_TYPE
 } from '@/utils/constantsValue'
+import { createChannel, getChannel, updateChannel } from '@/api/pay/channel'
 
 interface AlipayChannelFormProps {
   visible: boolean
@@ -31,6 +32,8 @@ const AlipayChannelForm: React.FC<AlipayChannelFormProps> = ({
   onSuccess
 }) => {
   const [form] = Form.useForm()
+  // 已配置过的渠道编号：有值走更新，无值走创建
+  const [channelId, setChannelId] = useState<number>()
 
   const handleCertUpload = (file: File, fieldName: string) => {
     const reader = new FileReader()
@@ -66,13 +69,65 @@ const AlipayChannelForm: React.FC<AlipayChannelFormProps> = ({
         styles: { body: { maxHeight: '60vh', overflowY: 'auto', overflowX: 'hidden' } }
       }}
       request={async () => {
-        // TODO: 获取渠道配置详情 API
+        try {
+          const resp = await getChannel({ appId, code: channelCode } as any)
+          if (resp.code === 0 && resp.data) {
+            setChannelId(resp.data.id)
+            // 渠道配置是 JSON 字符串，解析后映射回表单字段
+            const config = JSON.parse(resp.data.config || '{}')
+            return {
+              status: resp.data.status,
+              feeRate: resp.data.feeRate,
+              remark: resp.data.remark,
+              appId: config.appId,
+              gateway: config.serverUrl,
+              signType: config.signType || 'RSA2',
+              // 后端 mode：1 公钥模式，2 证书模式
+              publicKeyType: config.mode === 2 ? 'certificate' : 'publicKey',
+              privateKey: config.privateKey,
+              alipayPublicKey: config.alipayPublicKey,
+              merchantCert: config.appCertContent,
+              alipayCert: config.alipayPublicCertContent,
+              rootCert: config.rootCertContent,
+              encryptType: config.encryptType || 'none',
+              encryptKey: config.encryptKey
+            }
+          }
+        } catch {
+          // 渠道尚未配置时按新建处理
+        }
+        setChannelId(undefined)
         return { status: 0, signType: 'RSA2', encryptType: 'none' }
       }}
       onFinish={async (values) => {
         try {
-          // TODO: 保存配置 API
-          console.log('提交的支付宝数据：', { appId, channelCode, ...values })
+          // 表单字段映射为后端渠道配置的 JSON 结构
+          const config = {
+            appId: values.appId,
+            serverUrl: values.gateway,
+            signType: values.signType,
+            mode: values.publicKeyType === 'certificate' ? 2 : 1,
+            privateKey: values.privateKey,
+            alipayPublicKey: values.alipayPublicKey,
+            appCertContent: values.merchantCert,
+            alipayPublicCertContent: values.alipayCert,
+            rootCertContent: values.rootCert,
+            encryptType: values.encryptType,
+            encryptKey: values.encryptKey
+          }
+          const base = {
+            appId,
+            code: channelCode,
+            status: values.status,
+            feeRate: values.feeRate,
+            remark: values.remark,
+            config: JSON.stringify(config)
+          }
+          if (channelId) {
+            await updateChannel({ id: channelId, ...base } as any)
+          } else {
+            await createChannel(base as any)
+          }
           message.success('配置保存成功')
           onSuccess()
           return true

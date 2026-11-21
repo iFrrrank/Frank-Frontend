@@ -5,6 +5,7 @@ import { DownloadOutlined } from '@ant-design/icons'
 import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
 import { tableActionStyle } from '@/styles/common.style'
 import { getRefundPage, exportRefundExcel } from '@/api/pay/refund'
+import { getAppList } from '@/api/pay/app'
 import { PAY_CHANNEL, PAY_REFUND_STATUS } from '@/utils/constantsValue'
 import { textConst } from '@/locales/zh-CN'
 import { handleExport } from '@/components/Export'
@@ -31,8 +32,8 @@ const PayRefundManagement: React.FC = () => {
       hideInTable: true,
       fieldProps: { placeholder: '请选择应用信息' },
       request: async () => {
-        // TODO
-        return []
+        const resp = await getAppList()
+        return resp.data?.map((item: any) => ({ label: item.name, value: item.id })) || []
       }
     },
     {

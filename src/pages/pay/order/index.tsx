@@ -5,6 +5,7 @@ import { DownloadOutlined } from '@ant-design/icons'
 import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
 import { tableActionStyle } from '@/styles/common.style'
 import { getOrderPage, exportOrderExcel } from '@/api/pay/order'
+import { getAppList } from '@/api/pay/app'
 import { textConst } from '@/locales/zh-CN'
 import { handleExport } from '@/components/Export'
 import { PAY_CHANNEL, PAY_ORDER_STATUS } from '@/utils/constantsValue'
@@ -31,8 +32,8 @@ const PayOrderManagement: React.FC = () => {
       hideInTable: true,
       fieldProps: { placeholder: '请选择应用信息' },
       request: async () => {
-        // TODO
-        return []
+        const resp = await getAppList()
+        return resp.data?.map((item: any) => ({ label: item.name, value: item.id })) || []
       }
     },
     {
