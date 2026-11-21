@@ -1,4 +1,10 @@
 import React, { useRef, useState } from 'react'
+import AfterSaleDetail, { handleOpenAfterSaleDetail } from './AfterSaleDetail'
+import AfterSaleActions, {
+  handleAuditAfterSale,
+  handleReceiveAfterSale,
+  handleRefundAfterSale
+} from './AfterSaleActions'
 import { message, Space } from 'antd'
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
 import { tableActionStyle } from '@/styles/common.style'
@@ -128,10 +134,10 @@ const AfterSaleManagement: React.FC = () => {
 
         return (
           <Space size="small" style={tableActionStyle}>
-            <a onClick={() => message.info(`查看详情：${record.id}`)}>详情</a>
-            {isPending && <a onClick={() => message.info('打开同意/拒绝弹窗')}>审核</a>}
-            {isReceiving && <a onClick={() => message.info('打开确认收货弹窗')}>收货</a>}
-            {isRefunding && <a onClick={() => message.info('打开确认退款弹窗')}>退款</a>}
+            <a onClick={() => handleOpenAfterSaleDetail(record)}>详情</a>
+            {isPending && <a onClick={() => handleAuditAfterSale(record, () => actionRef.current?.reload())}>审核</a>}
+            {isReceiving && <a onClick={() => handleReceiveAfterSale(record, () => actionRef.current?.reload())}>收货</a>}
+            {isRefunding && <a onClick={() => handleRefundAfterSale(record, () => actionRef.current?.reload())}>退款</a>}
           </Space>
         )
       }
@@ -139,7 +145,8 @@ const AfterSaleManagement: React.FC = () => {
   ]
 
   return (
-    <ProTable<any>
+    <>
+      <ProTable<any>
       headerTitle="售后退款列表"
       actionRef={actionRef}
       rowKey="id"
@@ -169,7 +176,11 @@ const AfterSaleManagement: React.FC = () => {
         }
       }}
       pagination={{ align: 'center', showSizeChanger: true }}
-    />
+      />
+
+      <AfterSaleDetail />
+      <AfterSaleActions />
+    </>
   )
 }
 
