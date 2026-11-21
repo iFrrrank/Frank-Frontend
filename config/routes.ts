@@ -1329,6 +1329,57 @@ export default [
         ]
       },
       {
+        path: '/hrm/performance',
+        name: '绩效管理',
+        icon: 'fund',
+        routes: [
+          {
+            path: '/hrm/performance/plan',
+            name: '绩效计划',
+            component: './hrm/performance/plan'
+          },
+          {
+            path: '/hrm/performance/plan/form',
+            name: '绩效计划表单',
+            hideInMenu: true,
+            component: './hrm/performance/plan/form'
+          },
+          {
+            path: '/hrm/performance/plan/detail',
+            name: '绩效计划详情',
+            hideInMenu: true,
+            component: './hrm/performance/plan/detail'
+          },
+          {
+            path: '/hrm/performance/assessment',
+            name: '绩效档案',
+            component: './hrm/performance/assessment'
+          },
+          {
+            path: '/hrm/performance/assessment/employee',
+            name: '员工考核记录',
+            hideInMenu: true,
+            component: './hrm/performance/assessment/employee'
+          },
+          {
+            path: '/hrm/performance/assessment/detail',
+            name: '绩效考核详情',
+            hideInMenu: true,
+            component: './hrm/performance/assessment/detail'
+          },
+          {
+            path: '/hrm/performance/config/assessment-template',
+            name: '考核模板',
+            component: './hrm/performance/config/assessment-template'
+          },
+          {
+            path: '/hrm/performance/config/result-template',
+            name: '结果模板',
+            component: './hrm/performance/config/result-template'
+          }
+        ]
+      },
+      {
         path: '/hrm/portal',
         name: '员工工作台',
         icon: 'user',
