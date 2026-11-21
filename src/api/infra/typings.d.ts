@@ -703,4 +703,283 @@ declare namespace API {
     // 消息内容
     messageContent: string
   }
+
+  type InfraCodegenTableVO = {
+    id?: number
+    dataSourceConfigId?: number
+    scene?: number
+    tableName?: string
+    tableComment?: string
+    remark?: string
+    moduleName?: string
+    businessName?: string
+    className?: string
+    classComment?: string
+    author?: string
+    templateType?: number
+    parentMenuId?: number
+    createTime?: string
+    updateTime?: string
+  }
+
+  type InfraCodegenTableSaveReqVO = InfraCodegenTableVO & {
+    frontType?: number
+    genPath?: string
+    genType?: string
+    masterTableId?: number
+    subJoinColumnId?: number
+    subJoinMany?: boolean
+    treeParentColumnId?: number
+    treeNameColumnId?: number
+  }
+
+  type InfraCodegenColumnVO = {
+    id?: number
+    tableId?: number
+    columnName?: string
+    dataType?: string
+    columnComment?: string
+    nullable?: boolean
+    primaryKey?: boolean
+    ordinalPosition?: number
+    javaType?: string
+    javaField?: string
+    dictType?: string
+    example?: string
+    createOperation?: boolean
+    updateOperation?: boolean
+    listOperation?: boolean
+    listOperationCondition?: string
+    listOperationResult?: boolean
+    htmlType?: string
+  }
+
+  type InfraCodegenUpdateReqVO = {
+    table: InfraCodegenTableSaveReqVO
+    columns: InfraCodegenColumnVO[]
+  }
+
+  type InfraDatabaseTableVO = {
+    name?: string
+    comment?: string
+  }
+
+  type InfraCodegenPreviewVO = {
+    filePath?: string
+    code?: string
+  }
+
+  type CommonResultInfraCodegenTableVO = {
+    code?: number
+    data?: InfraCodegenTableVO
+    msg?: string
+  }
+
+  type CommonResultListInfraCodegenTableVO = {
+    code?: number
+    data?: InfraCodegenTableVO[]
+    msg?: string
+  }
+
+  type CommonResultPageResultInfraCodegenTableVO = {
+    code?: number
+    data?: PageResultInfraCodegenTableVO
+    msg?: string
+  }
+
+  type PageResultInfraCodegenTableVO = {
+    list?: InfraCodegenTableVO[]
+    total?: number
+  }
+
+  type CommonResultListInfraDatabaseTableVO = {
+    code?: number
+    data?: InfraDatabaseTableVO[]
+    msg?: string
+  }
+
+  type CommonResultListInfraCodegenPreviewVO = {
+    code?: number
+    data?: InfraCodegenPreviewVO[]
+    msg?: string
+  }
+
+  type getCodegenTableParams = {
+    id: number
+  }
+
+  type getCodegenTableListParams = {
+    dataSourceConfigId: number
+  }
+
+  type syncCodegenFromDBParams = {
+    id: number
+  }
+
+  type previewCodegenParams = {
+    id: number
+  }
+
+  type downloadCodegenParams = {
+    id: number
+  }
+
+  type deleteCodegenTableParams = {
+    id: number
+  }
+
+  type deleteCodegenTableListParams = {
+    ids: number[]
+  }
+
+  type Demo01ContactVO = {
+    id?: number
+    name?: string
+    sex?: number
+    birthday?: string
+    description?: string
+    avatar?: string
+    createTime?: string
+  }
+
+  type CommonResultDemo01ContactVO = {
+    code?: number
+    data?: Demo01ContactVO
+    msg?: string
+  }
+
+  type CommonResultPageResultDemo01ContactVO = {
+    code?: number
+    data?: PageResultDemo01ContactVO
+    msg?: string
+  }
+
+  type PageResultDemo01ContactVO = {
+    list?: Demo01ContactVO[]
+    total?: number
+  }
+
+  type getDemo01ContactParams = {
+    id: number
+  }
+
+  type deleteDemo01ContactParams = {
+    id: number
+  }
+
+  type deleteDemo01ContactListParams = {
+    ids: number[]
+  }
+
+  type Demo02CategoryVO = {
+    id?: number
+    name?: string
+    parentId?: number
+    createTime?: string
+  }
+
+  type CommonResultDemo02CategoryVO = {
+    code?: number
+    data?: Demo02CategoryVO
+    msg?: string
+  }
+
+  type CommonResultListDemo02CategoryVO = {
+    code?: number
+    data?: Demo02CategoryVO[]
+    msg?: string
+  }
+
+  type getDemo02CategoryParams = {
+    id: number
+  }
+
+  type deleteDemo02CategoryParams = {
+    id: number
+  }
+
+  type Demo03StudentVO = {
+    id?: number
+    name?: string
+    sex?: number
+    birthday?: string
+    description?: string
+    createTime?: string
+  }
+
+  type Demo03CourseVO = {
+    id?: number
+    studentId?: number
+    name?: string
+    score?: number
+    createTime?: string
+  }
+
+  type Demo03GradeVO = {
+    id?: number
+    studentId?: number
+    name?: string
+    teacher?: string
+    createTime?: string
+  }
+
+  type CommonResultDemo03StudentVO = {
+    code?: number
+    data?: Demo03StudentVO
+    msg?: string
+  }
+
+  type CommonResultPageResultDemo03StudentVO = {
+    code?: number
+    data?: PageResultDemo03StudentVO
+    msg?: string
+  }
+
+  type PageResultDemo03StudentVO = {
+    list?: Demo03StudentVO[]
+    total?: number
+  }
+
+  type CommonResultPageResultDemo03CourseVO = {
+    code?: number
+    data?: PageResultDemo03CourseVO
+    msg?: string
+  }
+
+  type PageResultDemo03CourseVO = {
+    list?: Demo03CourseVO[]
+    total?: number
+  }
+
+  type CommonResultPageResultDemo03GradeVO = {
+    code?: number
+    data?: PageResultDemo03GradeVO
+    msg?: string
+  }
+
+  type PageResultDemo03GradeVO = {
+    list?: Demo03GradeVO[]
+    total?: number
+  }
+
+  type getDemo03StudentParams = {
+    id: number
+  }
+
+  type deleteDemo03StudentParams = {
+    id: number
+  }
+
+  type deleteDemo03StudentListParams = {
+    ids: number[]
+  }
+
+  type deleteDemo03CourseParams = {
+    id: number
+  }
+
+  type deleteDemo03GradeParams = {
+    id: number
+  }
+
 }
