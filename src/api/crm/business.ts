@@ -106,7 +106,7 @@ export async function getBusinessPageByCustomer(
 }
 
 // 获取商机的精简列表 GET /crm/business/simple-all-list
-export async function getSimpleContactList1(options?: { [key: string]: any }) {
+export async function getSimpleBusinessList(options?: { [key: string]: any }) {
   return request<API.CommonResultListCrmBusinessRespVO>('/crm/business/simple-all-list', {
     method: 'GET',
     ...(options || {})

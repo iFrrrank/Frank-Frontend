@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { message, Form } from 'antd'
 import {
   ModalForm,
@@ -13,6 +13,7 @@ import { createReceivable, updateReceivable, getReceivable } from '@/api/crm/rec
 import { getCustomerSimpleList } from '@/api/crm/customer'
 import { getSimpleUserList } from '@/api/system/user'
 import { getContractSimpleList } from '@/api/crm/contract'
+import { getReceivablePlanPage } from '@/api/crm/receivablePlan'
 import { textConst } from '@/locales/zh-CN'
 import { RECEIVABLE_RETURN_TYPE } from '@/utils/constantsValue'
 
@@ -29,6 +30,8 @@ let customerOptionsCache: any[] | null = null
 const ReceivableForm: React.FC<ReceivableFormProps> = ({ visible, setVisible, onSuccess, id }) => {
   const isUpdate = id !== undefined
   const [form] = Form.useForm()
+  // 当前合同的回款计划缓存：期数选中后据此回填 planId
+  const planListRef = useRef<any[]>([])
 
   return (
     <ModalForm
@@ -76,6 +79,7 @@ const ReceivableForm: React.FC<ReceivableFormProps> = ({ visible, setVisible, on
         }
       }}
     >
+      <ProFormText name="planId" label="回款计划" hidden />
       <ProFormText name="no" label="回款编号" placeholder="保存时自动生成" disabled />
       <ProFormSelect
         name="ownerUserId"
@@ -146,14 +150,29 @@ const ReceivableForm: React.FC<ReceivableFormProps> = ({ visible, setVisible, on
               rules={[{ required: true, message: '请选择回款期数' }]}
               placeholder={canSelectPeriod ? '请选择回款期数' : '请先选择合同'}
               disabled={!canSelectPeriod}
+              fieldProps={{
+                onChange: (value: number) => {
+                  // 期数确定后同步回填对应的回款计划编号
+                  const plan = planListRef.current.find((p) => p.period === value)
+                  form.setFieldValue('planId', plan?.id)
+                }
+              }}
               request={async () => {
                 if (!canSelectPeriod) return []
-                // TODO
-                return [
-                  { label: '第一期', value: 1 },
-                  { label: '第二期', value: 2 },
-                  { label: '尾款', value: 3 }
-                ]
+                // 期数来自所选合同的回款计划（已回款完成的期数不再可选）
+                const resp = await getReceivablePlanPage({
+                  pageNo: 1,
+                  pageSize: 100,
+                  contractId
+                } as any)
+                const plans = (resp.data?.list || []).filter(
+                  (p: any) => p.receivableId === undefined || p.receivableId === null
+                )
+                planListRef.current = plans
+                return plans.map((p: any) => ({
+                  label: `第 ${p.period} 期（￥${(p.price || 0).toFixed(2)}，${p.returnTime || ''}）`,
+                  value: p.period
+                }))
               }}
             />
           )

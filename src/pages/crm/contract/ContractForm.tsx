@@ -12,10 +12,10 @@ import {
   ProColumns
 } from '@ant-design/pro-components'
 import { createContract, updateContract, getContract } from '@/api/crm/contract'
+import { getSimpleBusinessList } from '@/api/crm/business'
 import { getCustomerSimpleList } from '@/api/crm/customer'
 import { getSimpleUserList } from '@/api/system/user'
 import { getProductSimpleList } from '@/api/crm/product'
-import { request } from '@umijs/max'
 import { textConst } from '@/locales/zh-CN'
 import { emptyTextStyle } from '@/styles/common.style'
 
@@ -315,8 +315,7 @@ const ContractForm: React.FC<ContractFormProps> = ({ visible, setVisible, onSucc
         placeholder="请选择商机名称"
         showSearch
         request={async () => {
-          // TODO: 替换为真实的商机列表 API
-          const res = await request<any>('/crm/business/simple-list', { method: 'GET' })
+          const res = await getSimpleBusinessList()
           return res.data?.map((item: any) => ({ label: item.name, value: item.id })) || []
         }}
       />
