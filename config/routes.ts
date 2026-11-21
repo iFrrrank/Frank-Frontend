@@ -93,6 +93,12 @@ export default [
                 name: '消息记录',
                 icon: 'message',
                 component: './system/notify/message'
+              },
+              {
+                path: '/system/messages/notify/my',
+                name: '我的站内信',
+                icon: 'mail',
+                component: './system/notify/my'
               }
             ]
           },
