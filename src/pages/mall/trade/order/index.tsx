@@ -1,4 +1,6 @@
 import React, { useRef } from 'react'
+import OrderDetail, { handleOpenOrderDetail } from './OrderDetail'
+import OrderDeliveryForm, { handleOpenOrderDelivery } from './OrderDeliveryForm'
 import { message } from 'antd'
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
 import { tableActionStyle } from '@/styles/common.style'
@@ -144,15 +146,20 @@ const OrderManagement: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <div style={tableActionStyle}>
-          <a onClick={() => message.info('跳转详情页逻辑')}>详情</a>
-          {record.status === 10 && <a onClick={() => message.info('触发发货弹窗')}>发货</a>}
+          <a onClick={() => handleOpenOrderDetail(record)}>详情</a>
+          {record.status === 10 && (
+            <a onClick={() => handleOpenOrderDelivery(record, () => actionRef.current?.reload())}>
+              发货
+            </a>
+          )}
         </div>
       )
     }
   ]
 
   return (
-    <ProTable<any>
+    <>
+      <ProTable<any>
       headerTitle="订单列表"
       actionRef={actionRef}
       rowKey="id"
@@ -182,7 +189,11 @@ const OrderManagement: React.FC = () => {
         }
       }}
       pagination={{ align: 'center', showSizeChanger: true }}
-    />
+      />
+
+      <OrderDetail />
+      <OrderDeliveryForm />
+    </>
   )
 }
 
