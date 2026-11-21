@@ -603,6 +603,19 @@ export default [
             ]
           },
           {
+            name: '积分商城',
+            path: '/mall/promotion/point',
+            icon: 'schedule',
+            routes: [
+              {
+                name: '积分商品',
+                path: '/mall/promotion/point/activity',
+                icon: 'schedule',
+                component: './mall/promotion/point/activity'
+              }
+            ]
+          },
+          {
             name: '商城装修',
             path: '/mall/promotion/diy',
             icon: 'schedule',

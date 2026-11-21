@@ -2316,4 +2316,112 @@ declare namespace API {
     // 数量
     count: number
   }
+  type PointProductRespVO = {
+    // 积分商城商品编号
+    id?: number
+    // 活动编号
+    activityId?: number
+    // 商品 SPU 编号
+    spuId?: number
+    // 商品 SKU 编号
+    skuId: number
+    // 可兑换数量
+    count: number
+    // 兑换积分
+    point: number
+    // 兑换金额，单位：分
+    price: number
+    // 积分商城商品库存
+    stock: number
+  }
+
+  type PointActivityRespVO = {
+    // 积分商城活动编号
+    id: number
+    // 活动商品 SPU 编号
+    spuId: number
+    // 活动状态
+    status: number
+    // 活动库存
+    stock: number
+    // 活动总库存
+    totalStock: number
+    // 备注
+    remark?: string
+    // 排序
+    sort: number
+    // 创建时间
+    createTime: string
+    // 积分商城商品列表
+    products: PointProductRespVO[]
+    // 商品名称
+    spuName: string
+    // 商品主图
+    picUrl: string
+    // 商品市场价，单位：分
+    marketPrice: number
+    // 兑换积分（最少）
+    point: number
+    // 兑换金额，单位：分（最少）
+    price: number
+  }
+
+  type PointActivitySaveReqVO = {
+    // 积分商城活动编号
+    id?: number
+    // 活动商品 SPU 编号
+    spuId: number
+    // 备注
+    remark?: string
+    // 排序
+    sort: number
+    // 积分商城商品列表
+    products: PointProductRespVO[]
+  }
+
+  type PageResultPointActivityRespVO = {
+    // 数据
+    list: PointActivityRespVO[]
+    // 总量
+    total: number
+  }
+
+  type CommonResultPageResultPointActivityRespVO = {
+    code?: number
+    data?: PageResultPointActivityRespVO
+    msg?: string
+  }
+
+  type CommonResultPointActivityRespVO = {
+    code?: number
+    data?: PointActivityRespVO
+    msg?: string
+  }
+
+  type CommonResultListPointActivityRespVO = {
+    code?: number
+    data?: PointActivityRespVO[]
+    msg?: string
+  }
+
+  type getPointActivityParams = {
+    id: number
+  }
+
+  type getPointActivityPageParams = {
+    pageReqVO: PageParam & {
+      spuName?: string
+      status?: number
+      createTime?: string[]
+    }
+  }
+
+  type deletePointActivityParams = {
+    id: number
+  }
+
+  type closePointActivityParams = {
+    id: number
+  }
+
 }
