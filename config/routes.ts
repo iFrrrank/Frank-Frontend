@@ -1166,6 +1166,12 @@ export default [
             path: '/hrm/employee/config',
             name: '员工字段设置',
             component: './hrm/employee/config'
+          },
+          {
+            path: '/hrm/employee/detail',
+            name: '员工详情',
+            hideInMenu: true,
+            component: './hrm/employee/detail'
           }
         ]
       },
@@ -1194,6 +1200,56 @@ export default [
             name: '月度考勤详情',
             hideInMenu: true,
             component: './hrm/attendance/month/detail'
+          },
+          {
+            path: '/hrm/attendance/config/group',
+            name: '考勤组配置',
+            component: './hrm/attendance/config/group'
+          },
+          {
+            path: '/hrm/attendance/config/holiday',
+            name: '节假日配置',
+            component: './hrm/attendance/config/holiday'
+          }
+        ]
+      },
+      {
+        path: '/hrm/insurance',
+        name: '社保管理',
+        icon: 'safety',
+        routes: [
+          {
+            path: '/hrm/insurance/scheme',
+            name: '参保方案',
+            component: './hrm/insurance/scheme'
+          },
+          {
+            path: '/hrm/insurance/month-record',
+            name: '社保月记录',
+            component: './hrm/insurance/month-record'
+          },
+          {
+            path: '/hrm/insurance/month-record/detail',
+            name: '社保月记录详情',
+            hideInMenu: true,
+            component: './hrm/insurance/month-record/detail'
+          }
+        ]
+      },
+      {
+        path: '/hrm/home',
+        name: '人事首页',
+        icon: 'home',
+        routes: [
+          {
+            path: '/hrm/home/hr',
+            name: 'HR 工作台',
+            component: './hrm/home/hr'
+          },
+          {
+            path: '/hrm/home/team',
+            name: '团队工作台',
+            component: './hrm/home/team'
           }
         ]
       },
@@ -1239,6 +1295,11 @@ export default [
             name: '工资条发放详情',
             hideInMenu: true,
             component: './hrm/salary/slip/send-record/detail'
+          },
+          {
+            path: '/hrm/salary/slip/template',
+            name: '工资条模板',
+            component: './hrm/salary/slip/template'
           },
           {
             path: '/hrm/salary/config/config',

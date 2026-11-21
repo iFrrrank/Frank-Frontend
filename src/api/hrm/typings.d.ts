@@ -5538,4 +5538,62 @@ declare namespace API {
     // MAC 地址
     mac: string
   }
+
+  type HrmInsuranceEmployeeInfoRespVO = {
+    // 编号
+    id?: number
+    // 员工编号
+    employeeId?: number
+    // 是否本地首次缴纳社保
+    firstSocialSecurity?: boolean
+    // 是否本地首次缴纳公积金
+    firstAccumulationFund?: boolean
+    // 社保账号
+    socialSecurityNumber?: string
+    // 公积金账号
+    accumulationFundNumber?: string
+    // 社保起缴月份（yyyyMM）
+    socialSecurityStartMonth?: number
+    // 社保方案编号
+    schemeId?: number
+    // 社保方案名称
+    schemeName?: string
+    // 创建时间
+    createTime?: string
+  }
+
+  type HrmInsuranceEmployeeInfoSaveReqVO = {
+    // 编号
+    id?: number
+    // 员工编号
+    employeeId?: number
+    // 是否本地首次缴纳社保
+    firstSocialSecurity?: boolean
+    // 是否本地首次缴纳公积金
+    firstAccumulationFund?: boolean
+    // 社保账号
+    socialSecurityNumber?: string
+    // 公积金账号
+    accumulationFundNumber?: string
+    // 社保起缴月份（yyyyMM）
+    socialSecurityStartMonth?: number
+    // 社保方案编号
+    schemeId?: number
+  }
+
+  type CommonResultHrmInsuranceEmployeeInfoRespVO = {
+    code?: number
+    data?: HrmInsuranceEmployeeInfoRespVO
+    msg?: string
+  }
+
+  type getInsuranceEmployeeInfoParams = {
+    employeeId: number
+  }
+
+  type updateEmployeeSchemeParams = {
+    employeeId: number
+    schemeId: number
+  }
+
 }
