@@ -316,6 +316,32 @@ export default [
         name: '回调通知',
         icon: 'shoppingCart',
         component: './pay/notify'
+      },
+      {
+        path: '/pay/demo',
+        name: '示例功能',
+        icon: 'experiment',
+        routes: [
+          {
+            path: '/pay/demo/order',
+            name: '示例订单',
+            icon: 'shoppingCart',
+            component: './pay/demo/order'
+          },
+          {
+            path: '/pay/demo/withdraw',
+            name: '示例提现',
+            icon: 'shoppingCart',
+            component: './pay/demo/withdraw'
+          }
+        ]
+      },
+      {
+        // 收银台为独立页面（从示例订单等处跳转进入），不显示在菜单中
+        path: '/pay/cashier',
+        name: '收银台',
+        component: './pay/cashier',
+        hideInMenu: true
       }
     ]
   },

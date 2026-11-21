@@ -1320,4 +1320,122 @@ declare namespace API {
     // 充值套餐 Id
     id: number
   }
+
+  type PayDemoOrderRespVO = {
+    // 订单编号
+    id: number
+    // 用户编号
+    userId: number
+    // 商品编号
+    spuId: number
+    // 商品名字
+    spuName: string
+    // 支付价格（单位：分）
+    price: number
+    // 是否支付
+    payStatus: boolean
+    // 支付单号
+    payOrderId?: number
+    // 支付时间
+    payTime?: string
+    // 支付渠道编码
+    payChannelCode?: string
+    // 退款金额（单位：分）
+    refundPrice?: number
+    // 退款时间
+    refundTime?: string
+    // 创建时间
+    createTime: string
+  }
+
+  type PayDemoOrderCreateReqVO = {
+    // 商品编号
+    spuId: number
+  }
+
+  type PageResultPayDemoOrderRespVO = {
+    list: PayDemoOrderRespVO[]
+    total: number
+  }
+
+  type CommonResultPageResultPayDemoOrderRespVO = {
+    code?: number
+    msg?: string
+    data?: PageResultPayDemoOrderRespVO
+  }
+
+  type getDemoOrderPageParams = {
+    // 页码，从 1 开始
+    pageNo: number
+    // 每页条数，最大值为 100
+    pageSize: number
+  }
+
+  type refundDemoOrderParams = {
+    // 订单编号
+    id: number
+  }
+
+  type PayDemoWithdrawRespVO = {
+    // 提现单编号
+    id: number
+    // 提现标题
+    subject: string
+    // 提现金额（单位：分）
+    price: number
+    // 收款人姓名
+    userName: string
+    // 收款人账号
+    userAccount: string
+    // 提现类型：1 支付宝 2 微信余额 3 钱包余额
+    type: number
+    // 提现状态：0 等待转账/转账中 10 转账成功 20 转账失败
+    status: number
+    // 转账单号
+    payTransferId?: number
+    // 转账渠道编码
+    transferChannelCode?: string
+    // 转账时间
+    transferTime?: string
+    // 转账失败原因
+    transferErrorMsg?: string
+    // 创建时间
+    createTime: string
+  }
+
+  type PayDemoWithdrawCreateReqVO = {
+    // 提现标题
+    subject: string
+    // 提现金额（单位：分）
+    price: number
+    // 收款人姓名
+    userName: string
+    // 收款人账号
+    userAccount: string
+    // 提现类型：1 支付宝 2 微信余额 3 钱包余额
+    type: number
+  }
+
+  type PageResultPayDemoWithdrawRespVO = {
+    list: PayDemoWithdrawRespVO[]
+    total: number
+  }
+
+  type CommonResultPageResultPayDemoWithdrawRespVO = {
+    code?: number
+    msg?: string
+    data?: PageResultPayDemoWithdrawRespVO
+  }
+
+  type getDemoWithdrawPageParams = {
+    // 页码，从 1 开始
+    pageNo: number
+    // 每页条数，最大值为 100
+    pageSize: number
+  }
+
+  type transferDemoWithdrawParams = {
+    // 提现单编号
+    id: number
+  }
 }
