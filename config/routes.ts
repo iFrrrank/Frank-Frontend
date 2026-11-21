@@ -1424,6 +1424,12 @@ export default [
             path: '/hrm/portal/performance/assessment/history',
             name: '绩效档案',
             component: './hrm/portal/performance/assessment/history'
+          },
+          {
+            path: '/hrm/portal/performance/assessment/detail',
+            name: '绩效详情',
+            hideInMenu: true,
+            component: './hrm/portal/performance/assessment/detail'
           }
         ]
       }
