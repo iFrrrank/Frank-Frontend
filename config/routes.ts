@@ -781,6 +781,12 @@ export default [
     icon: 'user',
     routes: [
       {
+        path: '/erp/home',
+        name: 'ERP首页',
+        icon: 'home',
+        component: './erp/home'
+      },
+      {
         path: '/erp/purchase',
         name: '采购管理',
         icon: 'shoppingCart',
