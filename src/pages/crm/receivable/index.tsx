@@ -1,3 +1,4 @@
+import { history } from '@umijs/max'
 import React, { useRef, useState } from 'react'
 import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
@@ -54,7 +55,10 @@ const ReceivableManagement: React.FC = () => {
       dataIndex: 'no',
       width: 140,
       align: 'center',
-      fieldProps: { placeholder: '请输入回款编号' }
+      fieldProps: { placeholder: '请输入回款编号' },
+      render: (_, record) => (
+        <a onClick={() => history.push('/crm/receivable/detail?id=' + record.id)}>{record.no}</a>
+      )
     },
     {
       title: '客户名称',

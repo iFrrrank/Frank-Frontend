@@ -811,6 +811,54 @@ export default [
         ]
       },
       {
+        path: '/crm/customer/detail',
+        name: '客户详情',
+        hideInMenu: true,
+        component: './crm/customer/detail'
+      },
+      {
+        path: '/crm/clue/detail',
+        name: '线索详情',
+        hideInMenu: true,
+        component: './crm/clue/detail'
+      },
+      {
+        path: '/crm/contact/detail',
+        name: '联系人详情',
+        hideInMenu: true,
+        component: './crm/contact/detail'
+      },
+      {
+        path: '/crm/business/detail',
+        name: '商机详情',
+        hideInMenu: true,
+        component: './crm/business/detail'
+      },
+      {
+        path: '/crm/contract/detail',
+        name: '合同详情',
+        hideInMenu: true,
+        component: './crm/contract/detail'
+      },
+      {
+        path: '/crm/receivable/detail',
+        name: '回款详情',
+        hideInMenu: true,
+        component: './crm/receivable/detail'
+      },
+      {
+        path: '/crm/receivable/plan/detail',
+        name: '回款计划详情',
+        hideInMenu: true,
+        component: './crm/receivable/plan/detail'
+      },
+      {
+        path: '/crm/product/detail',
+        name: '产品详情',
+        hideInMenu: true,
+        component: './crm/product/detail'
+      },
+      {
         path: '/crm/performance/config',
         name: '业绩目标配置',
         icon: 'user',

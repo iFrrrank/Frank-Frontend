@@ -1,3 +1,4 @@
+import { history } from '@umijs/max'
 import React, { useRef, useState } from 'react'
 import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
@@ -42,7 +43,10 @@ const ProductManagement: React.FC = () => {
       dataIndex: 'name',
       align: 'center',
       width: 160,
-      fieldProps: { placeholder: '请输入产品名称' }
+      fieldProps: { placeholder: '请输入产品名称' },
+      render: (_, record) => (
+        <a onClick={() => history.push('/crm/product/detail?id=' + record.id)}>{record.name}</a>
+      )
     },
     {
       title: '状态',

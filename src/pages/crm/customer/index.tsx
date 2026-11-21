@@ -1,3 +1,4 @@
+import { history } from '@umijs/max'
 import React, { useRef, useState } from 'react'
 import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components'
 import { ProTable, ProFormSelect } from '@ant-design/pro-components'
@@ -46,7 +47,10 @@ const CustomerList: React.FC = () => {
       align: 'center',
       fieldProps: {
         placeholder: '请输入客户名称'
-      }
+      },
+      render: (_, record) => (
+        <a onClick={() => history.push('/crm/customer/detail?id=' + record.id)}>{record.name}</a>
+      )
     },
     {
       title: '手机',

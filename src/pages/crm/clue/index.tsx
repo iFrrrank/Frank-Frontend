@@ -1,3 +1,4 @@
+import { history } from '@umijs/max'
 import React, { useRef, useState } from 'react'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { ProTable, ProFormInstance } from '@ant-design/pro-components'
@@ -31,7 +32,10 @@ const ClueList: React.FC = () => {
       align: 'center',
       fieldProps: {
         placeholder: '请输入线索名称'
-      }
+      },
+      render: (_, record) => (
+        <a onClick={() => history.push('/crm/clue/detail?id=' + record.id)}>{record.name}</a>
+      )
     },
     {
       title: '转化状态',

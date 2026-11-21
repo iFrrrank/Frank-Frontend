@@ -1,3 +1,4 @@
+import { history } from '@umijs/max'
 import React, { useRef, useState } from 'react'
 import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
@@ -68,7 +69,12 @@ const ReceivablePlanManagement: React.FC = () => {
       dataIndex: 'period',
       width: 100,
       align: 'center',
-      hideInSearch: true
+      hideInSearch: true,
+      render: (_, record) => (
+        <a onClick={() => history.push('/crm/receivable/plan/detail?id=' + record.id)}>
+          第 {record.period} 期
+        </a>
+      )
     },
     {
       title: '计划回款金额（元）',

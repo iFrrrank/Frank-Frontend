@@ -1,3 +1,4 @@
+import { history } from '@umijs/max'
 import React, { useRef, useState } from 'react'
 import { Button } from 'antd'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons'
@@ -65,7 +66,10 @@ const ContractManagement: React.FC = () => {
       align: 'center',
       fieldProps: {
         placeholder: '请输入合同名称'
-      }
+      },
+      render: (_, record) => (
+        <a onClick={() => history.push('/crm/contract/detail?id=' + record.id)}>{record.name}</a>
+      )
     },
     {
       title: '客户',
