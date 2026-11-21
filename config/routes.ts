@@ -351,6 +351,37 @@ export default [
     icon: 'user',
     routes: [
       {
+        path: '/mall/home',
+        name: '商城首页',
+        icon: 'home',
+        component: './mall/home'
+      },
+      {
+        path: '/mall/statistics',
+        name: '数据统计',
+        icon: 'barChart',
+        routes: [
+          {
+            name: '交易统计',
+            path: '/mall/statistics/trade',
+            icon: 'barChart',
+            component: './mall/statistics/trade'
+          },
+          {
+            name: '会员统计',
+            path: '/mall/statistics/member',
+            icon: 'barChart',
+            component: './mall/statistics/member'
+          },
+          {
+            name: '商品统计',
+            path: '/mall/statistics/product',
+            icon: 'barChart',
+            component: './mall/statistics/product'
+          }
+        ]
+      },
+      {
         path: '/mall/product',
         name: '商品管理',
         icon: 'shoppingCart',
