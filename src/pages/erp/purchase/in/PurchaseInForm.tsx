@@ -12,7 +12,12 @@ import {
   ProColumns
 } from '@ant-design/pro-components'
 import PurchaseOrderSelectModal from './PurchaseOrderSelectModal'
-import {} from '@/api/erp/purchase/in'
+import { createPurchaseIn, getPurchaseIn, updatePurchaseIn } from '@/api/erp/purchase/in'
+import { getPurchaseOrder } from '@/api/erp/purchase/order'
+import { getSupplierSimpleList } from '@/api/erp/purchase/supplier'
+import { getProductSimpleList } from '@/api/erp/product/product'
+import { getWarehouseSimpleList } from '@/api/erp/stock/warehouse'
+import { getAccountSimpleList } from '@/api/erp/finance/account'
 import { textConst } from '@/locales/zh-CN'
 import {
   emptyTextStyle,
@@ -79,12 +84,27 @@ const PurchaseInForm: React.FC<PurchaseInboundFormProps> = ({
     calculateFooterTotal(dataSource)
   }
 
-  const handleOrderSelect = (record: any) => {
+  const handleOrderSelect = async (record: any) => {
     form.setFieldsValue({
       orderNo: record.no,
       orderId: record.id,
       supplierId: record.supplierId
     })
+    // 加载采购订单明细，按“订单数量 - 已入库数量”生成待入库清单
+    try {
+      const resp = await getPurchaseOrder({ id: record.id } as any)
+      const items = ((resp.data as any)?.items || [])
+        .map((item: any) => ({
+          ...item,
+          id: item.id?.toString(),
+          orderItemId: item.id,
+          count: Number(item.count || 0) - Number(item.inCount || 0)
+        }))
+        .filter((item: any) => item.count > 0)
+      handleItemChange(items)
+    } catch {
+      // 明细加载失败时不阻断关联订单本身
+    }
     message.success(`已关联采购订单：${record.no}`)
   }
 
@@ -107,7 +127,10 @@ const PurchaseInForm: React.FC<PurchaseInboundFormProps> = ({
         placeholder: '请选择仓库',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getWarehouseSimpleList()
+        return res.data?.map((item: any) => ({ label: item.name, value: item.id })) || []
+      }
     },
     {
       title: '产品名称',
@@ -119,7 +142,10 @@ const PurchaseInForm: React.FC<PurchaseInboundFormProps> = ({
         placeholder: '请选择产品',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getProductSimpleList()
+        return res.data?.map((item: any) => ({ label: item.name, value: item.id })) || []
+      }
     },
     {
       title: '库存',
@@ -249,11 +275,50 @@ const PurchaseInForm: React.FC<PurchaseInboundFormProps> = ({
             handleFooterValueChange()
           }
         }}
+        request={async () => {
+          // 修改时加载入库单详情回填表单与清单
+          if (isUpdate && id) {
+            const resp = await getPurchaseIn({ id } as any)
+            if (resp.data) {
+              const items = ((resp.data as any).items || []).map((i: any) => ({
+                ...i,
+                id: i.id?.toString()
+              }))
+              setDataSource(items)
+              return resp.data as Record<string, any>
+            }
+          }
+          return {}
+        }}
         onFinish={async (values) => {
-          // TODO
-          message.success('保存成功')
-          onSuccess()
-          return true
+          if (editableKeys.length > 0) {
+            message.warning('请先保存清单中正在编辑的行！')
+            return false
+          }
+          if (dataSource.length === 0) {
+            message.warning('请至少添加一条入库产品！')
+            return false
+          }
+          try {
+            // 清单行提交时去掉前端临时行 id，避免与后端明细编号混淆
+            const items = dataSource.map((item) => {
+              const { id: _rowId, ...rest } = item
+              return { ...rest, id: typeof item.id === 'number' ? item.id : undefined }
+            })
+            const submitData = { ...values, items }
+            if (isUpdate) {
+              await updatePurchaseIn({ id, ...submitData } as any)
+              message.success(textConst.msg.updateSuccess)
+            } else {
+              await createPurchaseIn(submitData as any)
+              message.success(textConst.msg.createSuccess)
+            }
+            onSuccess()
+            return true
+          } catch (e) {
+            message.error(textConst.error.operationFail)
+            return false
+          }
         }}
       >
         <ProFormText
@@ -292,7 +357,10 @@ const PurchaseInForm: React.FC<PurchaseInboundFormProps> = ({
           rules={[{ required: true }]}
           colProps={{ span: 8 }}
           placeholder="请选择供应商"
-          request={async () => []}
+          request={async () => {
+            const res = await getSupplierSimpleList()
+            return res.data?.map((item: any) => ({ label: item.name, value: item.id })) || []
+          }}
         />
         {/* @ts-ignore */}
         <ProFormUploadButton
@@ -405,7 +473,10 @@ const PurchaseInForm: React.FC<PurchaseInboundFormProps> = ({
           label="结算账户"
           colProps={{ span: 8 }}
           fieldProps={{ placeholder: '请选择结算账户' }}
-          request={async () => []}
+          request={async () => {
+            const res = await getAccountSimpleList()
+            return res.data?.map((item: any) => ({ label: item.name, value: item.id })) || []
+          }}
         />
         <ProFormDigit
           name="payableAmount"

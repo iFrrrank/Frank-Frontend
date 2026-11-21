@@ -12,6 +12,7 @@ import {
   ProColumns
 } from '@ant-design/pro-components'
 import PurchaseOrderSelectModal from './PurchaseOrderSelectModal'
+import { getAccountSimpleList } from '@/api/erp/finance/account'
 import {
   createPurchaseReturn,
   updatePurchaseReturn,
@@ -430,8 +431,10 @@ const PurchaseReturnForm: React.FC<PurchaseReturnFormProps> = ({
           label="结算账户"
           colProps={{ span: 8 }}
           fieldProps={{ placeholder: '请选择结算账户' }}
-          // TODO
-          request={async () => []}
+          request={async () => {
+            const res = await getAccountSimpleList()
+            return res.data?.map((item: any) => ({ label: item.name, value: item.id })) || []
+          }}
         />
         <ProFormDigit
           name="payableAmount"
