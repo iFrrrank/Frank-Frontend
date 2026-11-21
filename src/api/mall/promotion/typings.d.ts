@@ -2424,4 +2424,98 @@ declare namespace API {
     id: number
   }
 
+
+  type KeFuConversationRespVO = {
+    // 编号
+    id: number
+    // 会话所属用户编号
+    userId: number
+    // 会话所属用户头像
+    userAvatar: string
+    // 会话所属用户昵称
+    userNickname: string
+    // 最后聊天时间
+    lastMessageTime: string
+    // 最后聊天内容
+    lastMessageContent: string
+    // 最后发送的消息类型
+    lastMessageContentType: number
+    // 管理端置顶
+    adminPinned: boolean
+    // 管理员未读消息数
+    adminUnreadMessageCount: number
+    // 创建时间
+    createTime?: string
+  }
+
+  type KeFuMessageRespVO = {
+    // 编号
+    id: number
+    // 会话编号
+    conversationId: number
+    // 发送人编号
+    senderId: number
+    // 发送人头像
+    senderAvatar: string
+    // 发送人类型：1 会员，2 管理员
+    senderType: number
+    // 接收人编号
+    receiverId: number
+    // 接收人类型
+    receiverType: number
+    // 消息类型：1 文本，2 图片，3 语音，4 视频，5 商品，6 订单
+    contentType: number
+    // 消息内容（图片/商品/订单为 JSON 字符串）
+    content: string
+    // 是否已读
+    readStatus: boolean
+    // 创建时间
+    createTime: string
+  }
+
+  type KeFuMessageSendReqVO = {
+    // 会话编号
+    conversationId: number
+    // 消息类型
+    contentType: number
+    // 消息内容
+    content: string
+  }
+
+  type CommonResultListKeFuConversationRespVO = {
+    code?: number
+    data?: KeFuConversationRespVO[]
+    msg?: string
+  }
+
+  type CommonResultKeFuConversationRespVO = {
+    code?: number
+    data?: KeFuConversationRespVO
+    msg?: string
+  }
+
+  type CommonResultListKeFuMessageRespVO = {
+    code?: number
+    data?: KeFuMessageRespVO[]
+    msg?: string
+  }
+
+  type getKeFuConversationParams = {
+    id: number
+  }
+
+  type deleteKeFuConversationParams = {
+    id: number
+  }
+
+  type getKeFuMessageListParams = {
+    conversationId: number
+    // 最大消息编号（加载更早消息时传当前最小编号）
+    maxId?: number
+  }
+
+  type updateKeFuMessageReadStatusParams = {
+    conversationId: number
+  }
+
 }

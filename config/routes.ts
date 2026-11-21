@@ -634,6 +634,12 @@ export default [
             ]
           },
           {
+            name: '客服中心',
+            path: '/mall/promotion/kefu',
+            icon: 'customerService',
+            component: './mall/promotion/kefu'
+          },
+          {
             name: '积分商城',
             path: '/mall/promotion/point',
             icon: 'schedule',
