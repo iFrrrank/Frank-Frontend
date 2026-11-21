@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import NotifyDetail, { handleOpenNotifyDetail } from './NotifyDetail'
 import { message, Space } from 'antd'
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
 import { tableActionStyle } from '@/styles/common.style'
@@ -118,7 +119,7 @@ const PayNotifyManagement: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <Space size="small" style={tableActionStyle}>
-          <a onClick={() => message.info(`查看通知明细：${record.id}`)}>
+          <a onClick={() => handleOpenNotifyDetail(record)}>
             {textConst.action.detail}
           </a>
         </Space>
@@ -127,7 +128,8 @@ const PayNotifyManagement: React.FC = () => {
   ]
 
   return (
-    <ProTable<API.PayNotifyTaskRespVO>
+    <>
+      <ProTable<API.PayNotifyTaskRespVO>
       headerTitle="回调通知"
       actionRef={actionRef}
       rowKey="id"
@@ -158,7 +160,10 @@ const PayNotifyManagement: React.FC = () => {
         }
       }}
       pagination={{ align: 'center', showSizeChanger: true }}
-    />
+      />
+
+      <NotifyDetail />
+    </>
   )
 }
 

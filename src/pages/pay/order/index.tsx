@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import OrderDetail, { handleOpenOrderDetail } from './OrderDetail'
 import { message, Button, Space } from 'antd'
 import { DownloadOutlined } from '@ant-design/icons'
 import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
@@ -148,14 +149,15 @@ const PayOrderManagement: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <Space size="small" style={tableActionStyle}>
-          <a onClick={() => message.info(`查看详情：${record.id}`)}>{textConst.action.detail}</a>
+          <a onClick={() => handleOpenOrderDetail(record)}>{textConst.action.detail}</a>
         </Space>
       )
     }
   ]
 
   return (
-    <ProTable<any>
+    <>
+      <ProTable<any>
       headerTitle="支付订单"
       actionRef={actionRef}
       rowKey="id"
@@ -200,7 +202,10 @@ const PayOrderManagement: React.FC = () => {
         }
       }}
       pagination={{ align: 'center', showSizeChanger: true }}
-    />
+      />
+
+      <OrderDetail />
+    </>
   )
 }
 

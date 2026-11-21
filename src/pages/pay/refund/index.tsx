@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import RefundDetail, { handleOpenRefundDetail } from './RefundDetail'
 import { message, Button, Space } from 'antd'
 import { DownloadOutlined } from '@ant-design/icons'
 import { ActionType, ProColumns, ProTable, ProFormInstance } from '@ant-design/pro-components'
@@ -145,7 +146,7 @@ const PayRefundManagement: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <Space size="small" style={tableActionStyle}>
-          <a onClick={() => message.info(`查看退款详情：${record.id}`)}>
+          <a onClick={() => handleOpenRefundDetail(record)}>
             {textConst.action.detail}
           </a>
         </Space>
@@ -154,7 +155,8 @@ const PayRefundManagement: React.FC = () => {
   ]
 
   return (
-    <ProTable<API.PayRefundPageItemRespVO>
+    <>
+      <ProTable<API.PayRefundPageItemRespVO>
       headerTitle="退款订单"
       actionRef={actionRef}
       rowKey="id"
@@ -199,7 +201,10 @@ const PayRefundManagement: React.FC = () => {
         }
       }}
       pagination={{ align: 'center', showSizeChanger: true }}
-    />
+      />
+
+      <RefundDetail />
+    </>
   )
 }
 

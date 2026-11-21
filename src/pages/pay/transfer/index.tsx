@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import TransferDetail, { handleOpenTransferDetail } from './TransferDetail'
 import { message, Space } from 'antd'
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
 import { tableActionStyle } from '@/styles/common.style'
@@ -125,14 +126,15 @@ const PayTransferManagement: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <Space size="small" style={tableActionStyle}>
-          <a onClick={() => message.info(`查看详情：${record.id}`)}>详情</a>
+          <a onClick={() => handleOpenTransferDetail(record)}>详情</a>
         </Space>
       )
     }
   ]
 
   return (
-    <ProTable<API.PayTransferRespVO>
+    <>
+      <ProTable<API.PayTransferRespVO>
       headerTitle="转账订单"
       actionRef={actionRef}
       rowKey="id"
@@ -166,7 +168,10 @@ const PayTransferManagement: React.FC = () => {
         }
       }}
       pagination={{ align: 'center', showSizeChanger: true }}
-    />
+      />
+
+      <TransferDetail />
+    </>
   )
 }
 
