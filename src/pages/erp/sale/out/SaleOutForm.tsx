@@ -16,6 +16,11 @@ import SaleOrderSelectModal from './SaleOrderSelectModal'
 import { createSaleOut, updateSaleOut, getSaleOut } from '@/api/erp/sale/out'
 import { textConst } from '@/locales/zh-CN'
 import {
+import { getAccountSimpleList } from '@/api/erp/finance/account'
+import { getCustomerSimpleList } from '@/api/erp/sale/customer'
+import { getProductSimpleList } from '@/api/erp/product/product'
+import { getSimpleUserList } from '@/api/system/user'
+import { getWarehouseSimpleList } from '@/api/erp/stock/warehouse'
   emptyTextStyle,
   tableActionStyle,
   deleteTextStyle,
@@ -103,7 +108,10 @@ const SaleOutForm: React.FC<SaleOutFormProps> = ({ visible, setVisible, onSucces
         placeholder: '请选择仓库',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getWarehouseSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '产品名称',
@@ -115,7 +123,10 @@ const SaleOutForm: React.FC<SaleOutFormProps> = ({ visible, setVisible, onSucces
         placeholder: '请选择产品',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getProductSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '库存',
@@ -316,14 +327,20 @@ const SaleOutForm: React.FC<SaleOutFormProps> = ({ visible, setVisible, onSucces
           rules={[{ required: true }]}
           colProps={{ span: 8 }}
           placeholder="请选择客户"
-          request={async () => []}
+          request={async () => {
+        const res = await getCustomerSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
         />
         <ProFormSelect
           name="salesmanId"
           label="销售人员"
           colProps={{ span: 8 }}
           placeholder="请选择销售人员"
-          request={async () => []}
+          request={async () => {
+        const res = await getSimpleUserList()
+        return (res.data || []).map((item: any) => ({ label: item.nickname, value: item.id }))
+      }}
         />
         {/* @ts-ignore */}
         <ProFormUploadButton
@@ -434,7 +451,10 @@ const SaleOutForm: React.FC<SaleOutFormProps> = ({ visible, setVisible, onSucces
           label="结算账户"
           colProps={{ span: 8 }}
           fieldProps={{ placeholder: '请选择结算账户' }}
-          request={async () => []}
+          request={async () => {
+        const res = await getAccountSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
         />
         <ProFormDigit
           name="receivableAmount"

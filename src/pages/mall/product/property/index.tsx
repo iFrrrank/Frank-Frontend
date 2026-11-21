@@ -3,6 +3,7 @@ import { Button, message } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
 import PropertyForm from './PropertyForm'
+import PropertyValueList, { handleOpenPropertyValueList } from './PropertyValueList'
 import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/Delete'
@@ -54,12 +55,7 @@ const ProductPropertyManagement: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <div style={tableActionStyle}>
-          <a
-            key="values"
-            onClick={() => {
-              message.info('点击了属性值，可在此处弹出一个抽屉(Drawer)或弹窗管理属性值')
-            }}
-          >
+          <a key="values" onClick={() => handleOpenPropertyValueList(record)}>
             属性值
           </a>
           <a
@@ -137,6 +133,7 @@ const ProductPropertyManagement: React.FC = () => {
           actionRef.current?.reload()
         }}
       />
+      <PropertyValueList />
     </>
   )
 }

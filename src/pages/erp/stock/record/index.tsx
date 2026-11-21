@@ -6,6 +6,8 @@ import { getStockRecordPage, exportStockRecordExcel } from '@/api/erp/stock/reco
 import { textConst } from '@/locales/zh-CN'
 import { BIZ_TYPE } from '@/utils/constantsValue'
 import { handleExport } from '@/components/Export'
+import { getProductSimpleList } from '@/api/erp/product/product'
+import { getWarehouseSimpleList } from '@/api/erp/stock/warehouse'
 
 const StockRecordManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -30,7 +32,10 @@ const StockRecordManagement: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: { placeholder: '请选择产品' },
-      request: async () => []
+      request: async () => {
+        const res = await getProductSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '仓库',
@@ -40,7 +45,10 @@ const StockRecordManagement: React.FC = () => {
       align: 'center',
       width: 150,
       fieldProps: { placeholder: '请选择仓库' },
-      request: async () => []
+      request: async () => {
+        const res = await getWarehouseSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '产品名称',

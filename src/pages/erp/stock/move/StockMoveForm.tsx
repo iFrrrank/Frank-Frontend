@@ -13,6 +13,8 @@ import {
 import { createStockMove, updateStockMove, getStockMove } from '@/api/erp/stock/move'
 import { textConst } from '@/locales/zh-CN'
 import { emptyTextStyle, tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import { getProductSimpleList } from '@/api/erp/product/product'
+import { getWarehouseSimpleList } from '@/api/erp/stock/warehouse'
 
 interface StockMoveFormProps {
   visible: boolean
@@ -61,7 +63,10 @@ const StockMoveForm: React.FC<StockMoveFormProps> = ({ visible, setVisible, onSu
         placeholder: '请选择调出仓库',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getWarehouseSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '调入仓库',
@@ -73,7 +78,10 @@ const StockMoveForm: React.FC<StockMoveFormProps> = ({ visible, setVisible, onSu
         placeholder: '请选择调入仓库',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getWarehouseSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '产品名称',
@@ -85,7 +93,10 @@ const StockMoveForm: React.FC<StockMoveFormProps> = ({ visible, setVisible, onSu
         placeholder: '请选择产品',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getProductSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '库存',

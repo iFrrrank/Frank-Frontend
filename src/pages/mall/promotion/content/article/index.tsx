@@ -7,6 +7,7 @@ import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/Delete'
 import { getArticlePage, deleteArticle } from '@/api/mall/promotion/article/article'
+import { getSimpleDeptList as getArticleCategorySimpleList } from '@/api/mall/promotion/article/category'
 import { COMMON_STATUS } from '@/utils/constantsValue'
 
 const ArticleManagement: React.FC = () => {
@@ -40,7 +41,10 @@ const ArticleManagement: React.FC = () => {
       width: 120,
       align: 'center',
       fieldProps: { placeholder: '全部' },
-      request: async () => []
+      request: async () => {
+        const resp = await getArticleCategorySimpleList()
+        return (resp.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '封面',

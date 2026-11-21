@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { Modal, message } from 'antd'
 import { ProTable, ProColumns, ActionType } from '@ant-design/pro-components'
 import { emptyTextStyle } from '@/styles/common.style'
+import { getCategoryList } from '@/api/mall/product/category'
 
 interface ProductSelectModalProps {
   visible: boolean
@@ -58,7 +59,10 @@ const ProductSelectForm: React.FC<ProductSelectModalProps> = ({
       order: 2,
       width: 180,
       fieldProps: { placeholder: '请选择商品分类' },
-      request: async () => []
+      request: async () => {
+        const res = await getCategoryList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '创建时间',

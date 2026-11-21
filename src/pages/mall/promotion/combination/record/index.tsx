@@ -3,6 +3,7 @@ import { Card, Row, Col, message } from 'antd'
 import { UserOutlined, TeamOutlined, UsergroupAddOutlined } from '@ant-design/icons'
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
 import { textConst } from '@/locales/zh-CN'
+import CombinationRecordDetail, { handleOpenCombinationRecordDetail } from './CombinationRecordDetail'
 import { tableActionStyle } from '@/styles/common.style'
 import {
   getCombinationRecordPage,
@@ -162,7 +163,7 @@ const CombinationRecordManagement: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <div style={tableActionStyle}>
-          <a key="detail" onClick={() => message.info('查看详情逻辑，如需弹窗请在此接入')}>
+          <a key="detail" onClick={() => handleOpenCombinationRecordDetail(record)}>
             {textConst.action.detail}
           </a>
         </div>
@@ -218,6 +219,7 @@ const CombinationRecordManagement: React.FC = () => {
         }}
         pagination={{ align: 'center', showSizeChanger: true }}
       />
+          <CombinationRecordDetail />
     </>
   )
 }

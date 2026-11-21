@@ -10,6 +10,8 @@ import { getProductPage, deleteProduct, exportProductExcel } from '@/api/erp/pro
 import { COMMON_STATUS } from '@/utils/constantsValue'
 
 import { handleExport } from '@/components/Export'
+import { getProductCategorySimpleList } from '@/api/erp/product/category'
+import { getProductUnitSimpleList } from '@/api/erp/product/unit'
 
 const ProductManagement: React.FC = () => {
   const actionRef = useRef<ActionType>(undefined)
@@ -40,7 +42,10 @@ const ProductManagement: React.FC = () => {
       align: 'center',
       valueType: 'select',
       fieldProps: { placeholder: '请选择产品分类' },
-      request: async () => []
+      request: async () => {
+        const res = await getProductCategorySimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '条码',
@@ -63,7 +68,10 @@ const ProductManagement: React.FC = () => {
       width: 150,
       valueType: 'select',
       hideInSearch: true,
-      request: async () => []
+      request: async () => {
+        const res = await getProductUnitSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '采购价格',

@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react'
 import { Modal, message } from 'antd'
 import { ProTable, ProColumns, ActionType } from '@ant-design/pro-components'
 import { emptyTextStyle } from '@/styles/common.style'
+import { getSpuPage } from '@/api/mall/product/spu'
+import { getCategoryList } from '@/api/mall/product/category'
 
 interface ProductSelectModalProps {
   visible: boolean
@@ -57,7 +59,10 @@ const ProductSelectForm: React.FC<ProductSelectModalProps> = ({
       align: 'center',
       width: 130,
       fieldProps: { placeholder: '请选择商品分类' },
-      request: async () => []
+      request: async () => {
+        const resp = await getCategoryList()
+        return (resp.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '商品图',
@@ -137,10 +142,11 @@ const ProductSelectForm: React.FC<ProductSelectModalProps> = ({
             ...rest
           }
           try {
+            const resp = await getSpuPage(req as any)
             return {
-              data: [],
+              data: resp.data?.list || [],
               success: true,
-              total: 0
+              total: resp.data?.total || 0
             }
           } catch (error) {
             return { data: [], success: false, total: 0 }

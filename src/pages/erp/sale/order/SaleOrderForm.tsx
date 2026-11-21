@@ -15,6 +15,10 @@ import {
 import { createSaleOrder, updateSaleOrder, getSaleOrder } from '@/api/erp/sale/order'
 import { textConst } from '@/locales/zh-CN'
 import { emptyTextStyle, tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import { getAccountSimpleList } from '@/api/erp/finance/account'
+import { getCustomerSimpleList } from '@/api/erp/sale/customer'
+import { getProductSimpleList } from '@/api/erp/product/product'
+import { getSimpleUserList } from '@/api/system/user'
 
 interface SaleOrderFormProps {
   visible: boolean
@@ -83,7 +87,10 @@ const SaleOrderForm: React.FC<SaleOrderFormProps> = ({ visible, setVisible, onSu
         placeholder: '请选择产品',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getProductSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '数量',
@@ -255,7 +262,10 @@ const SaleOrderForm: React.FC<SaleOrderFormProps> = ({ visible, setVisible, onSu
         rules={[{ required: true }]}
         colProps={{ span: 8 }}
         placeholder="请选择客户"
-        request={async () => []}
+        request={async () => {
+        const res = await getCustomerSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
       />
 
       <ProFormSelect
@@ -263,7 +273,10 @@ const SaleOrderForm: React.FC<SaleOrderFormProps> = ({ visible, setVisible, onSu
         label="销售人员"
         colProps={{ span: 8 }}
         placeholder="请选择销售人员"
-        request={async () => []}
+        request={async () => {
+        const res = await getSimpleUserList()
+        return (res.data || []).map((item: any) => ({ label: item.nickname, value: item.id }))
+      }}
       />
       {/* @ts-ignore */}
       <ProFormUploadButton
@@ -367,7 +380,10 @@ const SaleOrderForm: React.FC<SaleOrderFormProps> = ({ visible, setVisible, onSu
         label="结算账户"
         colProps={{ span: 8 }}
         fieldProps={{ placeholder: '请选择结算账户' }}
-        request={async () => []}
+        request={async () => {
+        const res = await getAccountSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
       />
       <ProFormDigit
         name="depositPrice"

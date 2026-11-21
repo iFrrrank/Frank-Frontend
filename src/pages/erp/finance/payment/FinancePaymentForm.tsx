@@ -19,6 +19,9 @@ import {
 } from '@/api/erp/finance/payment'
 import { textConst } from '@/locales/zh-CN'
 import { emptyTextStyle, tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import { getAccountSimpleList } from '@/api/erp/finance/account'
+import { getSimpleUserList } from '@/api/system/user'
+import { getSupplierSimpleList } from '@/api/erp/purchase/supplier'
 
 interface FinancePaymentFormProps {
   visible: boolean
@@ -228,14 +231,20 @@ const FinancePaymentForm: React.FC<FinancePaymentFormProps> = ({
         rules={[{ required: true }]}
         colProps={{ span: 8 }}
         placeholder="请选择供应商"
-        request={async () => []}
+        request={async () => {
+        const res = await getSupplierSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
       />
       <ProFormSelect
         name="financeId"
         label="财务人员"
         colProps={{ span: 8 }}
         placeholder="请选择财务人员"
-        request={async () => []}
+        request={async () => {
+        const res = await getSimpleUserList()
+        return (res.data || []).map((item: any) => ({ label: item.nickname, value: item.id }))
+      }}
       />
       {/* @ts-ignore */}
       <ProFormUploadButton
@@ -293,7 +302,10 @@ const FinancePaymentForm: React.FC<FinancePaymentFormProps> = ({
         label="付款账户"
         colProps={{ span: 8 }}
         fieldProps={{ placeholder: '请选择结算账户' }}
-        request={async () => []}
+        request={async () => {
+        const res = await getAccountSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
       />
       <ProFormDigit
         name="totalPrice"

@@ -14,6 +14,9 @@ import { createStockIn, updateStockIn, getStockIn } from '@/api/erp/stock/in'
 import { textConst } from '@/locales/zh-CN'
 import { emptyTextStyle, tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { text } from 'node:stream/consumers'
+import { getProductSimpleList } from '@/api/erp/product/product'
+import { getSupplierSimpleList } from '@/api/erp/purchase/supplier'
+import { getWarehouseSimpleList } from '@/api/erp/stock/warehouse'
 
 interface StockInFormProps {
   visible: boolean
@@ -60,7 +63,10 @@ const StockInForm: React.FC<StockInFormProps> = ({ visible, setVisible, onSucces
         placeholder: '请选择仓库',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getWarehouseSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '产品名称',
@@ -72,7 +78,10 @@ const StockInForm: React.FC<StockInFormProps> = ({ visible, setVisible, onSucces
         placeholder: '请选择产品',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getProductSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '库存',
@@ -216,7 +225,10 @@ const StockInForm: React.FC<StockInFormProps> = ({ visible, setVisible, onSucces
         label="供应商"
         colProps={{ span: 8 }}
         placeholder="请选择供应商"
-        request={async () => []}
+        request={async () => {
+        const res = await getSupplierSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
       />
       {/* @ts-ignore */}
       <ProFormUploadButton

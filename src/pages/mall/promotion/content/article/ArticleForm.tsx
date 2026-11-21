@@ -10,6 +10,7 @@ import {
   ProFormTextArea
 } from '@ant-design/pro-components'
 import { createArticle, updateArticle, getArticle } from '@/api/mall/promotion/article/article'
+import { getSimpleDeptList as getArticleCategorySimpleList } from '@/api/mall/promotion/article/category'
 import { textConst } from '@/locales/zh-CN'
 import { BOOLEAN_OPTIONS, COMMON_STATUS_OPTIONS } from '@/utils/constantsValue'
 import { Editor } from '@/components/Editor'
@@ -82,7 +83,10 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ visible, setVisible, onSucces
         label="文章分类"
         rules={[{ required: true }]}
         placeholder="请选择文章分类"
-        request={async () => []}
+        request={async () => {
+          const resp = await getArticleCategorySimpleList()
+          return (resp.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+        }}
         colProps={{ span: 12 }}
       />
       <ProFormText

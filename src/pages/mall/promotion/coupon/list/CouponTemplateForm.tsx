@@ -25,6 +25,7 @@ import {
   COUPON_TAKE_TYPE_OPTIONS
 } from '@/utils/constantsValue'
 import ProductSelectModal from './ProductSelectModal'
+import { getCategoryList } from '@/api/mall/product/category'
 
 interface CouponTemplateFormProps {
   visible: boolean
@@ -140,7 +141,10 @@ const CouponTemplateForm: React.FC<CouponTemplateFormProps> = ({
                 label="分类"
                 rules={[{ required: true, message: '请选择商品分类' }]}
                 placeholder="请选择商品分类"
-                request={async () => []}
+                request={async () => {
+        const res = await getCategoryList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
               />
             )
           }

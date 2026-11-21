@@ -13,6 +13,8 @@ import {
 import { createStockCheck, updateStockCheck, getStockCheck } from '@/api/erp/stock/check'
 import { textConst } from '@/locales/zh-CN'
 import { emptyTextStyle, tableActionStyle, deleteTextStyle } from '@/styles/common.style'
+import { getProductSimpleList } from '@/api/erp/product/product'
+import { getWarehouseSimpleList } from '@/api/erp/stock/warehouse'
 
 interface StockCheckFormProps {
   visible: boolean
@@ -64,7 +66,10 @@ const StockCheckForm: React.FC<StockCheckFormProps> = ({ visible, setVisible, on
         placeholder: '请选择仓库',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getWarehouseSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '产品名称',
@@ -76,7 +81,10 @@ const StockCheckForm: React.FC<StockCheckFormProps> = ({ visible, setVisible, on
         placeholder: '请选择产品',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getProductSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '账面库存',

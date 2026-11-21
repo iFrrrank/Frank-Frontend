@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { message } from 'antd'
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components'
+import BargainRecordDetail, { handleOpenBargainRecordDetail } from './BargainRecordDetail'
 import { tableActionStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { getBargainRecordPage } from '@/api/mall/promotion/bargain/record'
@@ -110,7 +111,7 @@ const BargainRecordManagement: React.FC = () => {
       fixed: 'right',
       render: (_, record) => (
         <div style={tableActionStyle}>
-          <a key="detail" onClick={() => message.info('查看详情（如有需要可在此对接弹窗）')}>
+          <a key="detail" onClick={() => handleOpenBargainRecordDetail(record)}>
             {textConst.action.detail}
           </a>
         </div>
@@ -119,6 +120,7 @@ const BargainRecordManagement: React.FC = () => {
   ]
 
   return (
+    <>
     <ProTable<any>
       headerTitle="砍价记录列表"
       actionRef={actionRef}
@@ -148,6 +150,8 @@ const BargainRecordManagement: React.FC = () => {
       }}
       pagination={{ align: 'center', showSizeChanger: true }}
     />
+      <BargainRecordDetail />
+    </>
   )
 }
 

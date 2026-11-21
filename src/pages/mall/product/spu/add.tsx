@@ -15,6 +15,8 @@ import {
 } from '@ant-design/pro-components'
 import { DISTRIBUTE_TYPE, SPEC_TYPE, DELIVERY_TYPE_OPTIONS } from '@/utils/constantsValue'
 import Editor from '@/components/Editor/Editor'
+import { getCategoryList } from '@/api/mall/product/category'
+import { getBrandList } from '@/api/mall/product/brand'
 
 const AddProductSpu: React.FC = () => {
   const navigate = useNavigate()
@@ -136,14 +138,20 @@ const AddProductSpu: React.FC = () => {
             label="商品分类"
             rules={[{ required: true, message: '商品分类是必填项！' }]}
             placeholder="请选择商品分类"
-            request={async () => []}
+            request={async () => {
+              const res = await getCategoryList()
+              return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+            }}
           />
           <ProFormSelect
             name="brandId"
             label="商品品牌"
             rules={[{ required: true, message: '商品品牌是必填项！' }]}
             placeholder="请选择商品品牌"
-            request={async () => []}
+            request={async () => {
+              const res = await getBrandList({} as any)
+              return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+            }}
           />
           <ProFormText
             name="keyword"

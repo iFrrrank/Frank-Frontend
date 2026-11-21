@@ -20,6 +20,9 @@ import {
 } from '@/api/erp/purchase/return'
 import { textConst } from '@/locales/zh-CN'
 import {
+import { getProductSimpleList } from '@/api/erp/product/product'
+import { getSupplierSimpleList } from '@/api/erp/purchase/supplier'
+import { getWarehouseSimpleList } from '@/api/erp/stock/warehouse'
   emptyTextStyle,
   tableActionStyle,
   deleteTextStyle,
@@ -112,7 +115,10 @@ const PurchaseReturnForm: React.FC<PurchaseReturnFormProps> = ({
         placeholder: '请选择仓库',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getWarehouseSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '产品名称',
@@ -124,7 +130,10 @@ const PurchaseReturnForm: React.FC<PurchaseReturnFormProps> = ({
         placeholder: '请选择产品',
         style: { width: '100%', textAlign: 'left' }
       },
-      request: async () => []
+      request: async () => {
+        const res = await getProductSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }
     },
     {
       title: '库存',
@@ -323,7 +332,10 @@ const PurchaseReturnForm: React.FC<PurchaseReturnFormProps> = ({
           rules={[{ required: true }]}
           colProps={{ span: 8 }}
           placeholder="请选择供应商"
-          request={async () => []}
+          request={async () => {
+        const res = await getSupplierSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
         />
         {/* @ts-ignore */}
         <ProFormUploadButton

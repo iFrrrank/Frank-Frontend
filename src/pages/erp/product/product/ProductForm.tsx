@@ -11,6 +11,8 @@ import {
 import { createProduct, updateProduct, getProduct } from '@/api/erp/product/product'
 import { textConst } from '@/locales/zh-CN'
 import { COMMON_STATUS_OPTIONS } from '@/utils/constantsValue'
+import { getProductCategorySimpleList } from '@/api/erp/product/category'
+import { getProductUnitSimpleList } from '@/api/erp/product/unit'
 
 interface ProductFormProps {
   visible: boolean
@@ -83,14 +85,20 @@ const ProductForm: React.FC<ProductFormProps> = ({ visible, setVisible, onSucces
         label="分类"
         rules={[{ required: true, message: '请选择产品分类' }]}
         placeholder="请选择产品分类"
-        request={async () => []}
+        request={async () => {
+        const res = await getProductCategorySimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
       />
       <ProFormSelect
         name="unitId"
         label="单位"
         rules={[{ required: true, message: '请选择产品单位' }]}
         placeholder="请选择产品单位"
-        request={async () => []}
+        request={async () => {
+        const res = await getProductUnitSimpleList()
+        return (res.data || []).map((item: any) => ({ label: item.name, value: item.id }))
+      }}
       />
       <ProFormRadio.Group
         name="status"
