@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import { message } from 'antd'
+import { Form, message } from 'antd'
 import {
   ModalForm,
   ProFormDigit,
   ProFormRadio,
-  ProFormText,
-  useWatch
+  ProFormText
 } from '@ant-design/pro-components'
-import { Form } from 'antd'
 import { createDemoWithdraw } from '@/api/pay/demo/withdraw'
 import { textConst } from '@/locales/zh-CN'
 
@@ -35,7 +33,7 @@ const CreateDemoWithdrawForm: React.FC<CreateDemoWithdrawModalProps> = ({ onSucc
   const [createModalVisible, setCreateModalVisible] = useState(false)
   const [form] = Form.useForm()
   // 监听提现类型，用于切换收款人账号的输入提示
-  const withdrawType = useWatch('type', form)
+  const withdrawType = Form.useWatch('type', form)
 
   handleCreateDemoWithdraw = () => {
     setCreateModalVisible(true)

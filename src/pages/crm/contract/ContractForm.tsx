@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { request } from '@umijs/max'
 import { message, Form, Col, Select, Space, Popconfirm } from 'antd'
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import {
