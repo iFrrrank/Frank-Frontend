@@ -33,3 +33,7 @@ functions/*
 screenshot
 .firebase
 build
+
+# 例外：表单构建页目录名为 build，不能被上面的构建产物规则误伤
+!src/pages/infra/build/
+!src/pages/infra/build/**

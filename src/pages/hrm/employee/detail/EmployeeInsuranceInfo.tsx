@@ -11,7 +11,7 @@ import {
   getInsuranceEmployeeInfo,
   saveInsuranceEmployeeInfo
 } from '@/api/hrm/insurance/employeeInfo'
-import InsuranceSchemeSelect from '../../../insurance/components/InsuranceSchemeSelect'
+import InsuranceSchemeSelect from '../../insurance/scheme/components/InsuranceSchemeSelect'
 import { textConst } from '@/locales/zh-CN'
 import dayjs from 'dayjs'
 

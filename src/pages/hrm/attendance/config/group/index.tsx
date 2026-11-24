@@ -7,7 +7,7 @@ import { tableActionStyle, deleteTextStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { handleDelete } from '@/components/Delete'
 import { deleteAttendanceGroup, getAttendanceGroupPage } from '@/api/hrm/attendance/group'
-import { formatWeeks } from '../../../utils'
+import { formatWeeks } from '../../utils'
 
 // 考勤组配置列表：班次概览、参与范围与打卡方式
 const AttendanceGroupManagement: React.FC = () => {
