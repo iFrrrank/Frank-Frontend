@@ -5,6 +5,8 @@ name: build-web
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -43,7 +45,7 @@ jobs:
         with:
           context: .
           file: Dockerfile
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ghcr.io/ifrrrank/frank-web:latest
             ghcr.io/ifrrrank/frank-web:${{ github.sha }}
