@@ -8,8 +8,8 @@ import {
   getMonthEmployeeRecordPage1,
   stopMonthEmployeeRecordList
 } from '@/api/hrm/insurance/monthEmployeeRecord'
-import InsuranceSchemeSelect from '../../../scheme/components/InsuranceSchemeSelect'
-import AreaSelect from '../../../components/AreaSelect'
+import InsuranceSchemeSelect from '../../scheme/components/InsuranceSchemeSelect'
+import AreaSelect from '../../components/AreaSelect'
 import InsuranceAddEmployeeForm from './InsuranceAddEmployeeForm'
 import InsuranceEmployeeRecordForm from './InsuranceEmployeeRecordForm'
 import InsuranceBatchEmployeeRecordForm from './InsuranceBatchEmployeeRecordForm'
@@ -17,8 +17,8 @@ import InsuranceMonthEmployeeDetail from './InsuranceMonthEmployeeDetail'
 import {
   HRM_INSURANCE_EMP_STATUS_LABELS,
   HrmInsuranceMonthStatus
-} from '../../../constants'
-import { formatHrmMoney } from '../../../utils'
+} from '../../constants'
+import { formatHrmMoney } from '../../utils'
 import { tableActionStyle } from '@/styles/common.style'
 import { textConst } from '@/locales/zh-CN'
 import { Modal } from 'antd'

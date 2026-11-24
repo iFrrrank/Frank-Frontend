@@ -19,10 +19,10 @@ import {
   getPurchaseReturn
 } from '@/api/erp/purchase/return'
 import { textConst } from '@/locales/zh-CN'
-import {
 import { getProductSimpleList } from '@/api/erp/product/product'
 import { getSupplierSimpleList } from '@/api/erp/purchase/supplier'
 import { getWarehouseSimpleList } from '@/api/erp/stock/warehouse'
+import {
   emptyTextStyle,
   tableActionStyle,
   deleteTextStyle,

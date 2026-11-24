@@ -1175,6 +1175,31 @@ export default [
     icon: 'team',
     routes: [
       {
+        path: '/hrm/home/hr',
+        name: 'HR 工作台',
+        icon: 'setting',
+        component: './hrm/home/hr'
+      },
+      {
+        path: '/hrm/home/team',
+        name: '团队工作台',
+        icon: 'setting',
+        component: './hrm/home/team'
+      },
+      {
+        path: '/hrm/dept',
+        name: '架构总览',        
+        icon: 'setting',
+        component: './hrm/dept'
+      },
+      {
+        path: '/hrm/dept/detail',
+        name: '部门详情',
+        icon: 'setting',
+        hideInMenu: true,
+        component: './hrm/dept/detail'
+      },
+      {
         path: '/hrm/recruit',
         name: '招聘管理',
         icon: 'user',
@@ -1203,32 +1228,21 @@ export default [
             component: './hrm/recruit/post/detail'
           },
           {
-            path: '/hrm/recruit/channel',
-            name: '招聘渠道',
-            component: './hrm/recruit/channel'
-          },
-          {
-            path: '/hrm/recruit/setting/eliminate',
-            name: '淘汰原因设置',
-            component: './hrm/recruit/setting/eliminate'
-          }
-        ]
-      },
-      {
-        path: '/hrm/dept',
-        name: '组织架构',
-        icon: 'cluster',
-        routes: [
-          {
-            path: '/hrm/dept',
-            name: '架构总览',
-            component: './hrm/dept'
-          },
-          {
-            path: '/hrm/dept/detail',
-            name: '部门详情',
-            hideInMenu: true,
-            component: './hrm/dept/detail'
+            path: '/hrm/recruit',
+            name: '招聘管理',
+            icon: 'user',
+            routes: [
+              {
+                path: '/hrm/recruit/channel',
+                name: '招聘渠道',
+                component: './hrm/recruit/channel'
+              },
+              {
+                path: '/hrm/recruit/setting/eliminate',
+                name: '淘汰原因设置',
+                component: './hrm/recruit/setting/eliminate'
+              }
+            ]
           }
         ]
       },
@@ -1239,12 +1253,12 @@ export default [
         routes: [
           {
             path: '/hrm/employee',
-            name: '员工花名册',
+            name: '员工档案',
             component: './hrm/employee'
           },
           {
             path: '/hrm/employee/config',
-            name: '员工字段设置',
+            name: '员工设置',
             component: './hrm/employee/config'
           },
           {
@@ -1262,7 +1276,7 @@ export default [
         routes: [
           {
             path: '/hrm/attendance/clock',
-            name: '考勤打卡',
+            name: '打卡记录',
             component: './hrm/attendance/clock'
           },
           {
@@ -1272,7 +1286,7 @@ export default [
           },
           {
             path: '/hrm/attendance/month',
-            name: '月度考勤',
+            name: '月度汇总',
             component: './hrm/attendance/month'
           },
           {
@@ -1282,14 +1296,21 @@ export default [
             component: './hrm/attendance/month/detail'
           },
           {
-            path: '/hrm/attendance/config/group',
-            name: '考勤组配置',
-            component: './hrm/attendance/config/group'
-          },
-          {
-            path: '/hrm/attendance/config/holiday',
-            name: '节假日配置',
-            component: './hrm/attendance/config/holiday'
+            path: '/hrm/attendance',
+            name: '考勤设置',
+            icon: 'user',
+            routes: [
+              {
+                path: '/hrm/attendance/config/group',
+                name: '考勤组配置',
+                component: './hrm/attendance/config/group'
+              },
+              {
+                path: '/hrm/attendance/config/holiday',
+                name: '节假日配置',
+                component: './hrm/attendance/config/holiday'
+              }
+            ]
           }
         ]
       },
@@ -1298,38 +1319,21 @@ export default [
         name: '社保管理',
         icon: 'safety',
         routes: [
+           {
+            path: '/hrm/insurance/month-record',
+            name: '社保表',
+            component: './hrm/insurance/month-record'
+          },
           {
             path: '/hrm/insurance/scheme',
             name: '参保方案',
             component: './hrm/insurance/scheme'
           },
           {
-            path: '/hrm/insurance/month-record',
-            name: '社保月记录',
-            component: './hrm/insurance/month-record'
-          },
-          {
             path: '/hrm/insurance/month-record/detail',
-            name: '社保月记录详情',
+            name: '社保表详情',
             hideInMenu: true,
             component: './hrm/insurance/month-record/detail'
-          }
-        ]
-      },
-      {
-        path: '/hrm/home',
-        name: '人事首页',
-        icon: 'home',
-        routes: [
-          {
-            path: '/hrm/home/hr',
-            name: 'HR 工作台',
-            component: './hrm/home/hr'
-          },
-          {
-            path: '/hrm/home/team',
-            name: '团队工作台',
-            component: './hrm/home/team'
           }
         ]
       },
@@ -1356,7 +1360,7 @@ export default [
           },
           {
             path: '/hrm/salary/employee-info',
-            name: '员工薪资档案',
+            name: '薪资档案',
             component: './hrm/salary/employee-info'
           },
           {
@@ -1367,7 +1371,7 @@ export default [
           },
           {
             path: '/hrm/salary/slip/send-record',
-            name: '工资条发放记录',
+            name: '发放记录',
             component: './hrm/salary/slip/send-record'
           },
           {
@@ -1377,34 +1381,41 @@ export default [
             component: './hrm/salary/slip/send-record/detail'
           },
           {
-            path: '/hrm/salary/slip/template',
-            name: '工资条模板',
-            component: './hrm/salary/slip/template'
-          },
-          {
-            path: '/hrm/salary/config/config',
-            name: '薪资配置',
-            component: './hrm/salary/config/config'
-          },
-          {
-            path: '/hrm/salary/config/group',
-            name: '薪资组',
-            component: './hrm/salary/config/group'
-          },
-          {
-            path: '/hrm/salary/config/option',
-            name: '薪资项',
-            component: './hrm/salary/config/option'
-          },
-          {
-            path: '/hrm/salary/config/tax-rule',
-            name: '计税规则',
-            component: './hrm/salary/config/tax-rule'
-          },
-          {
-            path: '/hrm/salary/config/change-template',
-            name: '调薪模板',
-            component: './hrm/salary/config/change-template'
+            path: '/hrm/salary',
+            name: '薪资设置',
+            icon: 'user',
+            routes: [
+              {
+                path: '/hrm/salary/config/group',
+                name: '薪资组设置',
+                component: './hrm/salary/config/group'
+              },
+              {
+                path: '/hrm/salary/config/tax-rule',
+                name: '计税规则',
+                component: './hrm/salary/config/tax-rule'
+              },
+              {
+                path: '/hrm/salary/slip/template',
+                name: '工资条模板',
+                component: './hrm/salary/slip/template'
+              },
+              {
+                path: '/hrm/salary/config/config',
+                name: '薪资配置',
+                component: './hrm/salary/config/config'
+              },
+              {
+                path: '/hrm/salary/config/option',
+                name: '薪资项',
+                component: './hrm/salary/config/option'
+              },
+              {
+                path: '/hrm/salary/config/change-template',
+                name: '调薪模板',
+                component: './hrm/salary/config/change-template'
+              }
+            ]
           }
         ]
       },
@@ -1448,20 +1459,27 @@ export default [
             component: './hrm/performance/assessment/detail'
           },
           {
-            path: '/hrm/performance/config/assessment-template',
-            name: '考核模板',
-            component: './hrm/performance/config/assessment-template'
-          },
-          {
-            path: '/hrm/performance/config/result-template',
-            name: '结果模板',
-            component: './hrm/performance/config/result-template'
+            path: '/hrm/performance/config',
+            name: '考核设置',
+            icon: 'user',
+            routes: [
+              {
+                path: '/hrm/performance/config/assessment-template',
+                name: '考核模板',
+                component: './hrm/performance/config/assessment-template'
+              },
+              {
+                path: '/hrm/performance/config/result-template',
+                name: '考核结果',
+                component: './hrm/performance/config/result-template'
+              }
+            ]
           }
         ]
       },
       {
         path: '/hrm/portal',
-        name: '员工工作台',
+        name: 'HRM 员工端',
         icon: 'user',
         routes: [
           {
@@ -1496,20 +1514,27 @@ export default [
             component: './hrm/portal/attendance/report'
           },
           {
-            path: '/hrm/portal/performance/assessment',
-            name: '我的绩效',
-            component: './hrm/portal/performance/assessment'
-          },
-          {
-            path: '/hrm/portal/performance/assessment/history',
-            name: '绩效档案',
-            component: './hrm/portal/performance/assessment/history'
-          },
-          {
-            path: '/hrm/portal/performance/assessment/detail',
-            name: '绩效详情',
-            hideInMenu: true,
-            component: './hrm/portal/performance/assessment/detail'
+            path: '/hrm/portal/performance',
+            name: '绩效管理',
+            icon: 'user',
+            routes: [
+              {
+                path: '/hrm/portal/performance/assessment',
+                name: '绩效考核',
+                component: './hrm/portal/performance/assessment'
+              },
+              {
+                path: '/hrm/portal/performance/assessment/history',
+                name: '绩效档案',
+                component: './hrm/portal/performance/assessment/history'
+              },
+              {
+                path: '/hrm/portal/performance/assessment/detail',
+                name: '绩效详情',
+                hideInMenu: true,
+                component: './hrm/portal/performance/assessment/detail'
+              }
+            ]
           }
         ]
       }

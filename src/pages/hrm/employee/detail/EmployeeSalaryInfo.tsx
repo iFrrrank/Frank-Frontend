@@ -8,8 +8,8 @@ import {
   getEmployeeSalaryCard,
   saveEmployeeSalaryCard
 } from '@/api/hrm/salary/salaryCard'
-import AreaSelect from '../../../insurance/components/AreaSelect'
-import { formatHrmMoney } from '../../utils'
+import AreaSelect from '../../insurance/components/AreaSelect'
+import { formatHrmMoney } from '@/pages/hrm/utils/format'
 import { textConst } from '@/locales/zh-CN'
 import dayjs from 'dayjs'
 

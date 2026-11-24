@@ -96,7 +96,7 @@ const CodegenManagement: React.FC = () => {
                 title: '确认同步该表的数据库结构吗？',
                 onOk: async () => {
                   await syncCodegenFromDB({ tableId: record.id })
-                  message.success(textConst.msg.operationSuccess)
+                  message.success('同步成功')
                   reload()
                 }
               })
@@ -112,7 +112,7 @@ const CodegenManagement: React.FC = () => {
                 content: textConst.msg.delDataMsg,
                 onOk: async () => {
                   await deleteCodegenTable({ tableId: record.id })
-                  message.success(textConst.msg.deleteSuccess)
+                  message.success(textConst.msg.delSuccess)
                   reload()
                 }
               })

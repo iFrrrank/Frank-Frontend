@@ -3,6 +3,7 @@ import { message, Button, Form, Space } from 'antd'
 import { useNavigate } from '@umijs/max'
 import {
   StepsForm,
+  ProForm,
   ProFormText,
   ProFormSelect,
   ProFormTextArea,

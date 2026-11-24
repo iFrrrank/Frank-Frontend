@@ -14,8 +14,8 @@ import {
   getAttendanceGroup,
   updateAttendanceGroup
 } from '@/api/hrm/attendance/group'
-import DeptTreeSelect from '../../../components/DeptTreeSelect'
-import HrmEmployeeSelect from '../../../../employee/components/HrmEmployeeSelect'
+import DeptTreeSelect from '../../components/DeptTreeSelect'
+import HrmEmployeeSelect from '../../../employee/components/HrmEmployeeSelect'
 import AttendanceGroupShiftForm from './AttendanceGroupShiftForm'
 import AttendanceGroupWifiForm from './AttendanceGroupWifiForm'
 import AttendanceGroupPointForm from './AttendanceGroupPointForm'
@@ -28,7 +28,7 @@ import {
   type AttendanceShift,
   type AttendanceSpecialDate,
   type AttendanceWifi
-} from '../../../utils'
+} from '../../utils'
 import { textConst } from '@/locales/zh-CN'
 import dayjs from 'dayjs'
 
